@@ -1,18 +1,18 @@
 <article class="blog{{#if is_blog_post}} is-blog-post{{/if}}">
     {{#unless is_blog_post}}
-        <div class="blog-post-figure">
-            {{#if post.thumbnail}}
-                <figure class="blog-thumbnail">
-                    <a href="{{post.url}}">
-                        {{> components/common/responsive-img
-                            image=post.thumbnail
-                            fallback_size=theme_settings.blog_size
-                            lazyload=theme_settings.lazyload_mode
-                        }}
-                    </a>
-                </figure>
-            {{/if}}
-        </div>
+    <div class="blog-post-figure">
+        {{#if post.thumbnail}}
+        <figure class="blog-thumbnail">
+            <a href="{{post.url}}">
+                {{> components/common/responsive-img
+                image=post.thumbnail
+                fallback_size=theme_settings.blog_size
+                lazyload=theme_settings.lazyload_mode
+                }}
+            </a>
+        </figure>
+        {{/if}}
+    </div>
     {{/unless}}
 
     <div class="blog-post-body">
@@ -23,57 +23,123 @@
         </header>
 
         {{#if is_blog_post}}
-            <div class="blog-info">
-                {{>components/common/share url=post.url}}
-                <p class="blog-date">{{#if post.author}}<span class="blog-author">{{post.author}}</span>{{/if}}{{post.date_published}}</p>
-            </div>
+        <div class="blog-info">
+            {{>components/common/share url=post.url}}
+            <p class="blog-date">{{#if post.author}}<span
+                    class="blog-author">{{post.author}}</span>{{/if}}{{post.date_published}}</p>
+        </div>
         {{/if}}
 
         <div class="blog-post">
             {{#if post.body}}
-                {{{post.body}}}
+            <div class="content">
+            {{{post.body}}}
+            </div>
+             <nav class="toc" id="toc">
+        <h3>Table of Contents</h3>
+        <ul id="toc-list"></ul>
+        </nav>
+        <p><button class="toc-toggle" id="toc-toggle">☰ ToC</button></p>
             {{else}}
-                {{{post.summary}}}&hellip;
+            {{{post.summary}}}&hellip;
             {{/if}}
-        </div> 
+        </div>
         {{#unless is_blog_post}}
-            {{#if post.thumbnail}}
-                <figure class="blog-thumbnail-mobile">
-                    <a href="{{post.url}}">
-                        {{> components/common/responsive-img
-                            image=post.thumbnail
-                            fallback_size=theme_settings.blog_size
-                            lazyload=theme_settings.lazyload_mode
-                        }}
-                    </a>
-                </figure>
-            {{/if}}
+        {{#if post.thumbnail}}
+        <figure class="blog-thumbnail-mobile">
+            <a href="{{post.url}}">
+                {{> components/common/responsive-img
+                image=post.thumbnail
+                fallback_size=theme_settings.blog_size
+                lazyload=theme_settings.lazyload_mode
+                }}
+            </a>
+        </figure>
+        {{/if}}
         {{/unless}}
 
         <div class="blog-post-footer">
             {{#if post.body}}
             {{else}}
-                {{#if post.show_read_more}}
-                    <a href="{{url}}" class="read-more" aria-label="{{post.title}} {{lang 'blog.read_more'}}">{{lang 'blog.read_more'}}
-                        <i class="icon" aria-hidden="true"><svg><use href="#icon-arrow-right-long"/></svg></i>
-                    </a>
-                {{/if}}
+            {{#if post.show_read_more}}
+            <a href="{{url}}" class="read-more" aria-label="{{post.title}} {{lang 'blog.read_more'}}">{{lang
+                'blog.read_more'}}
+                <i class="icon" aria-hidden="true"><svg>
+                        <use href="#icon-arrow-right-long" />
+                    </svg></i>
+            </a>
+            {{/if}}
             {{/if}}
             {{#unless is_blog_post}}
-                <p class="blog-date">{{#if post.author}}<span class="blog-author">{{post.author}}</span>{{/if}}{{post.date_published}}</p>
+            <p class="blog-date">{{#if post.author}}<span
+                    class="blog-author">{{post.author}}</span>{{/if}}{{post.date_published}}</p>
             {{/unless}}
 
             {{#if show_tags}}
-                {{#if post.tags}}
-                    <ul class="tags">
-                        {{#each post.tags}}
-                            <li class="tag">
-                                <a href="{{url}}">#{{name}}</a>
-                            </li>
-                        {{/each}}
-                    </ul>
-                {{/if}}
+            {{#if post.tags}}
+            <ul class="tags">
+                {{#each post.tags}}
+                <li class="tag">
+                    <a href="{{url}}">#{{name}}</a>
+                </li>
+                {{/each}}
+            </ul>
+            {{/if}}
             {{/if}}
         </div>
     </div>
 </article>
+<script>
+    // Generate TOC from h2 and h3
+    const tocList = document.getElementById('toc-list');
+    const headers = document.querySelectorAll('.content h2, .content h3');
+
+    headers.forEach((header, index) => {
+        const id = "section-" + index;
+        header.setAttribute("id", id);
+
+        const li = document.createElement("li");
+        li.style.marginLeft = header.tagName === "H3" ? "15px" : "0";
+
+        const link = document.createElement("a");
+        link.href = "#" + id;
+        link.textContent = header.textContent;
+
+        li.appendChild(link);
+        tocList.appendChild(li);
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('.toc a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+            // Close TOC on mobile after click
+            document.getElementById('toc').classList.remove('open');
+        });
+    });
+
+    // Highlight active section
+    window.addEventListener("scroll", () => {
+        let fromTop = window.scrollY + 120;
+
+        document.querySelectorAll(".toc a").forEach(link => {
+            let section = document.querySelector(link.hash);
+            if (
+                section.offsetTop <= fromTop &&
+                section.offsetTop + section.offsetHeight > fromTop
+            ) {
+                link.classList.add("active");
+            } else {
+                link.classList.remove("active");
+            }
+        });
+    });
+
+    // TOC toggle for mobile
+    document.getElementById('toc-toggle').addEventListener('click', () => {
+        document.getElementById('toc').classList.toggle('open');
+    });
+</script>

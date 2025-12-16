@@ -17,18 +17,128 @@ blog:
 {{#partial "page"}}
 
 {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
-
 <main class="page blog-wrapper">
     {{#unless theme_settings.hide_blog_page_heading }}
         <h1 class="page-heading">{{ blog.name }}</h1>
     {{/unless}}
+
+    <div class="blog-filter-box" id="blog-filter">
+        <h2>Blog Topics & Categories</h2>
+
+        <div id="blog-filter-content"></div>
+    </div>
 
     {{#each blog.posts}}
         {{> components/blog/post post=this theme_settings=../theme_settings}}
     {{/each}}
 
     {{> components/common/paginator pagination.blog}}
+    <p><button class="toc-toggle" id="blog-filter-toggle">☰ Blog Topics & Categories</button></p>
 </main>
 
 {{/partial}}
 {{> layout/base}}
+
+<script>
+//Blog filters for tag pages
+window.blogFilters = {
+  "Industry": ["Automotive", "Police", "EMS", "Fire", "Construction", "Field Work", "Field-Experiences"],
+  "Panasonic Toughbook": {
+    "Semi-Rugged": ["CF-53", "CF-54"],
+    "Fully-Rugged": ["CF-31", "CF-33", "CF-18", "CF-19", "FZ-G1", "FZ-G2"]
+  },
+  "Getac": ["V120", "V110", "S410"],
+  "Dell": ["Dell"],
+  "Buying Guides": ["Buying-Guide"],
+  "Support": {
+    "Tech Support": ["Tech-Support"],
+    "Maintenance": ["Maintenance"],
+    "Software": ["Linux", "Windows 11"],
+    "BIOS": ["BIOS"],
+    "Ingress Protection Ratings": ["IP+Ratings"]
+  }
+};
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const root = document.getElementById("blog-filter-content");
+  const data = window.blogFilters;
+
+  function createCollapsible(title, tags) {
+    const container = document.createElement("div");
+    const heading = document.createElement("h3");
+    heading.classList.add("filter-heading");
+    heading.style.cursor = "pointer";
+
+    const content = document.createElement("div");
+    content.classList.add("filter-content");
+    content.style.display = "none";
+
+    if (Array.isArray(tags) && tags.length === 1) {
+      // Make the heading a direct link if only one tag
+      const link = document.createElement("a");
+      link.href = `/blog/tag/${tags[0].replace(/ /g, "-")}`;
+      link.textContent = title;
+      heading.appendChild(link);
+      container.appendChild(heading);
+      // No collapsible content needed
+    } else {
+      heading.textContent = title;
+      heading.addEventListener("click", () => {
+        content.style.display = content.style.display === "none" ? "block" : "none";
+      });
+      container.appendChild(heading);
+      container.appendChild(content);
+
+      if (Array.isArray(tags)) {
+        const ul = document.createElement("ul");
+        tags.forEach(tag => {
+          const li = document.createElement("li");
+          li.innerHTML = `<a href="/blog/tag/${tag.replace(/ /g, "-")}">${tag}</a>`;
+          ul.appendChild(li);
+        });
+        content.appendChild(ul);
+      } else {
+        Object.keys(tags).forEach(sub => {
+          const { container: subContainer, content: subContent } = createCollapsible(sub, tags[sub]);
+          content.appendChild(subContainer);
+        });
+      }
+    }
+
+    return { container, content };
+  }
+
+  Object.keys(data).forEach(section => {
+    const { container } = createCollapsible(section, data[section]);
+    root.appendChild(container);
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  const toggleButton = document.getElementById("toggleFilters");
+  const filterBox = document.querySelector(".blog-filter-box");
+
+  toggleButton.addEventListener("click", () => {
+    const isOpen = filterBox.classList.toggle("open");
+    toggleButton.textContent = isOpen ? "Hide Filters" : "Show Filters";
+  });
+});
+
+// Smooth scroll
+    document.querySelectorAll('.toc a').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+        // Close TOC on mobile after click
+        document.getElementById('blog-filter').classList.remove('open');
+      });
+    });
+
+    // TOC toggle for mobile
+    document.getElementById('blog-filter-toggle').addEventListener('click', () => {
+      document.getElementById('blog-filter').classList.toggle('open');
+    });
+</script>
