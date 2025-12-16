@@ -1,0 +1,28 @@
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.account.js' resourceHint='preload' as='script'}}" as="script">
+{{/partial}}
+
+{{#partial "page"}}
+
+<main class="account">
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    <h1 class="page-heading">{{lang 'account.messages.heading' }}</h1>
+    {{> components/account/navigation account_page='messages'}}
+    <div class="account-body">
+        {{#if forms.inbox.error}}
+            {{> components/common/alert/alert-error forms.inbox.error}}
+        {{/if}}
+        {{#if forms.inbox.success}}
+            {{> components/common/alert/alert-success forms.inbox.success}}
+        {{/if}}
+        <section class="eyeva__account-messages">
+            {{> components/account/messages-list messages=customer.inbox.messages}}
+        </section>
+        <div class="eyeva__account-send-message">
+            {{> components/account/messages-form}}
+        </div>
+    </div>
+</main>
+
+{{/partial}}
+{{> layout/base}}

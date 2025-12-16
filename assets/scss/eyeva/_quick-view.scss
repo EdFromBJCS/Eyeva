@@ -1,0 +1,136 @@
+.modal--quickView {
+    @include eyeva-screen-mobile-tablet {
+        bottom: 0;
+        height: calc(100% - 50px);
+        max-height: calc(100% - 50px);
+        max-width: 100%;
+        top: auto !important;
+        transform: translateX(-50%);
+    }
+
+    .modal-content {
+        @include eyeva-screen-mobile-tablet {
+            height: 100%;
+        }
+    }
+}
+
+.modal-body.quickView {
+    @include eyeva-screen-mobile-tablet {
+        max-height: 100% !important;
+        padding: spacing("base");
+    }
+
+    @include breakpoint("medium") {
+        padding: spacing("base") * 2;
+    }
+}
+
+.modal {
+    .productView {
+        @include eyeva-screen-mobile-tablet {
+            margin: 0;
+        }
+
+        @include breakpoint("medium") {
+            gap: spacing("base") * 2;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        ._eyeva-sticky-col {
+            @include eyeva-screen-mobile-tablet {
+                padding: 0;
+            }
+        }
+
+        ._eyeva-sticky-box {
+            @include eyeva-screen-mobile-tablet {
+                box-shadow: none;
+                padding: 0;
+                position: static;
+            }
+        }
+    }
+
+    .productView-product {
+        @include eyeva-screen-mobile-tablet {
+            display: grid;
+            grid-template:
+                "image sku" auto
+                "image badges" auto
+                "image prices" auto
+                "info info" auto / auto 1fr;
+        }
+
+        ._eyeva-quickview-image {
+            @include lazy-loaded-padding("productthumb_size");
+            align-self: start;
+            grid-area: image;
+            margin-right: spacing("base");
+            position: relative;
+            width: get-width(stencilString("productthumb_size"));
+            @include eyeva-screen-mobile-tablet {
+                display: block;
+            }
+        }
+
+        ._eyeva-quickview-img {
+            @include lazy-loaded-img;
+            height: 100%;
+            object-fit: contain;
+            width: 100%;
+        }
+
+        ._eyeva-product-info-top {
+            grid-area: sku;
+        }
+
+        ._eyeva-badges {
+            grid-area: badges;
+        }
+
+        ._group-price-bulk-rating {
+            grid-area: prices;
+        }
+
+        .productView-info {
+            grid-area: info;
+        }
+
+    }
+
+    .productView-images {
+        @include eyeva-screen-mobile-tablet {
+            display: none;
+        }
+    }
+
+    .productView-title {
+        @include eyeva-screen-mobile-tablet {
+            display: none;
+        }
+    }
+
+    .productView-share {
+        @include eyeva-screen-mobile-tablet {
+            display: none;
+        }
+    }
+
+    .productView-description {
+        @include eyeva-screen-mobile-tablet {
+            display: none;
+        }
+    }
+
+    .button-wishlist-icon {
+        @include eyeva-screen-mobile-tablet {
+            display: none;
+        }
+    }
+}
+
+// override Cornerstone theme
+.productView--quickView .productView-details {
+    position: static;
+}

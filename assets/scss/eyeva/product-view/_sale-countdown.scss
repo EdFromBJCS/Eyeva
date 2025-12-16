@@ -1,0 +1,172 @@
+$_include_countdown_css: if(stencilColor("card_show_countdown"), true, false);
+
+@mixin _sr-only {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    // sr-only
+    position: absolute;
+    width: 1px;
+}
+
+@mixin _card-countdown {
+    .sale-flag-side {
+        display: flex;
+        flex-wrap: wrap;
+
+        &:has(.card-countdown._active) {
+            flex-wrap: nowrap;
+            gap: spacing("quarter");
+            max-width: 100%;
+            // overflow: hidden;
+            padding-right: spacing("half");
+            white-space: nowrap;
+        }
+
+        // &:has(.card-countdown._saleEnded) {
+        //     display: none;
+        // }
+    }
+
+    .card-countdown {
+        display: inline;
+        height: 0;
+
+        &._active {
+            align-items: center;
+            display: inline-flex;
+            gap: spacing("eighth");
+            height: auto;
+            text-transform: uppercase;
+        }
+
+        &._saleEnded {
+            display: none;
+        }
+
+        .icon {
+            @include square(fontSize("smallest"));
+
+            svg {
+                fill: stencilColor("color_text_product_sale_badges");
+            }
+        }
+
+        ._end {
+            @include _sr-only;
+        }
+
+        ._day,
+        ._hour,
+        ._minute,
+        ._second {
+            align-items: center;
+            background-color: stencilColor("color_badge_product_sale_badges");
+            border-radius: 1px;
+            color: stencilColor("color_text_product_sale_badges");
+            display: flex;
+            font-size: fontSize("smallest");
+            font-weight: fontWeight("bold");
+            justify-content: center;
+            line-height: 1;
+            // min-width: remCalc(18px);
+            text-align: center;
+
+            ._label {
+                // @include _sr-only;
+                font-size: 80%;
+                font-weight: fontWeight("normal");
+            }
+        }
+
+        ._hide {
+            display: none;
+        }
+    }
+}
+
+@if $_include_countdown_css {
+    @include _card-countdown;
+}
+
+.productView-saleCountdown {
+    color: $color-textSecondary;
+    display: flex;
+    font-size: fontSize("smaller");
+    gap: spacing("base");
+    padding-top: spacing("third");
+
+    @include breakpoint("medium") {
+        font-size: inherit;
+        padding-top: spacing("base");
+    }
+
+    &:has(._countdown._saleEnded) {
+        display: none;
+    }
+
+    .icon {
+        align-items: center;
+        display: flex;
+        flex-shrink: 0;
+        height: fontSize("smaller") * $eyeva-body-line-height;
+        width: remCalc(24px);
+    }
+
+    ._label {
+        color: $color-textBase;
+        font-weight: $eyeva-body-font-bold;
+        line-height: 1;
+    }
+
+    ._salePercent {
+        color: $color-primary;
+        font-size: fontSize("base");
+        font-weight: $eyeva-body-font-bold;
+        line-height: 1;
+
+        @include breakpoint("medium") {
+            font-size: fontSize("small");
+        }
+    }
+
+    ._countdown {
+        align-items: baseline;
+        display: inline-flex;
+        gap: spacing("quarter");
+        line-height: 1;
+
+        &._saleEnded {
+            display: none;
+        }
+
+        .icon {
+            display: none;
+        }
+
+        ._day,
+        ._hour,
+        ._minute,
+        ._second {
+            display: inline-block;
+            text-align: right;
+
+            &._hide {
+                display: none;
+            }
+
+            ._value {
+                color: $color-textBase;
+                font-weight: $eyeva-body-font-bold;
+            }
+
+            ._label {
+                color: $color-textSecondary;
+                font-size: fontSize("smallest");
+            }
+        }
+    }
+}

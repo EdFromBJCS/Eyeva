@@ -1,0 +1,86 @@
+.papathemes__notifications {
+    align-items: end;
+    display: flex;
+    flex-direction: column;
+    gap: spacing("third");
+    left: spacing("single");
+    margin-inline-end: 0;
+    margin-inline-start: auto;
+    position: fixed;
+    right: spacing("single");
+    top: spacing("single");
+    width: auto;
+    z-index: 1015; // higher than modal
+}
+
+.papathemes__notifications-item {
+    align-items: center;
+    background: container("fill");
+    border-radius: $eyeva-container-radius;
+    box-shadow: $eyeva-shadow-panel;
+    display: flex;
+    font-size: fontSize("smaller");
+    font-weight: $eyeva-body-font-bold;
+    gap: spacing("half");
+    opacity: 0;
+    padding: spacing("half") spacing("base");
+    transform: translateY(30px);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+
+    @include breakpoint("medium") {
+        font-size: fontSize("base");
+        padding: spacing("base") spacing("single");
+
+        .icon {
+            @include square(20px);
+        }
+    }
+
+    &._info {
+        background-color: $color-info;
+        color: $color-infoLight;
+
+        svg {
+            fill: $color-infoLight;
+        }
+    }
+
+    &._error {
+        background-color: $color-error;
+        color: $color-errorLight;
+
+        svg {
+            fill: $color-errorLight;
+        }
+    }
+
+    &._showing {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .icon {
+        @include square(18px);
+        flex-shrink: 0;
+    }
+
+    strong {
+        font-style: italic;
+        text-decoration: underline;
+    }
+}
+
+.papathemes__notifications-close {
+    font-size: 0;
+    padding: 0;
+
+    .icon {
+        @include square(12px);
+        opacity: 0.5;
+
+        @include breakpoint("medium") {
+            @include square(14px);
+        }
+    }
+
+}

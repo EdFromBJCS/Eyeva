@@ -1,0 +1,59 @@
+---
+brand:
+    products:
+        limit: {{theme_settings.brandpage_products_per_page}}
+---
+{{inject "brandProductsPerPage" theme_settings.brandpage_products_per_page}}
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.brand.js' resourceHint='preload' as='script'}}" as="script">
+    {{#if pagination.brand.previous}}
+        <link rel="prev" href="{{{pagination.brand.previous}}}">
+    {{/if}}
+    {{#if pagination.brand.next}}
+        <link rel="next" href="{{{pagination.brand.next}}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+
+<div class="plp-page">
+    <div class="plp-page-header is-open" id="page-sidebar-header">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        <h1 class="plp-page-title">{{brand.name}}</h1>
+
+        {{#if brand.image}}
+            <div class="plp-main-image _brand">
+                {{> components/common/responsive-img
+                    image=brand.image
+                    fallback_size=theme_settings.thumb_size
+                    lazyload='disabled'
+                    class="brand-header-image"
+                }}
+            </div>
+        {{/if}}
+
+        {{{region name="brand_below_header"}}}
+    </div>
+
+    {{> components/brand/page-sidebar}}
+
+    <main class="plp-page-main" id="product-listing-container">
+        {{#if brand.search_error }}
+            <p>{{lang 'search.errorMessage'}}</p>
+        {{else}}
+            {{#if brand.products}}
+                {{> components/brand/product-listing}}
+            {{else}}
+                <p>{{lang 'brands.no_products'}}</p>
+            {{/if}}
+        {{/if}}
+    </main>
+
+    <div class="plp-page-region">
+        {{{region name="brand_below_content"}}}
+        {{{region name="brand_below_content--global"}}}
+    </div>
+</div>
+
+{{/partial}}
+{{> layout/base}}

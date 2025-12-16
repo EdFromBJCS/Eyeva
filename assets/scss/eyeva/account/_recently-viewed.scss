@@ -1,0 +1,7 @@
+.account-recentItems {
+    .productGrid {
+        @include eyeva-screen-mobile-tablet {
+            grid-template-columns: repeat(floor(stencilNumber("product_col_md", "")), 1fr);
+        }
+    }
+}

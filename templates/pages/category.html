@@ -1,0 +1,72 @@
+---
+category:
+    products:
+        limit: {{theme_settings.categorypage_products_per_page}}
+---
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.category.js' resourceHint='preload' as='script'}}" as="script">
+    {{#if pagination.category.previous}}
+        <link rel="prev" href="{{{pagination.category.previous}}}">
+    {{/if}}
+    {{#if pagination.category.next}}
+        <link rel="next" href="{{{pagination.category.next}}}">
+    {{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+
+<div class="plp-page">
+    <div class="plp-page-header is-open" id="page-sidebar-header">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        {{#unless theme_settings.hide_category_page_heading }}
+            <h1 class="plp-page-title">{{category.name}}</h1>
+        {{/unless}}
+
+        {{#if category.image}}
+            <div class="plp-main-image _category">
+                {{> components/common/responsive-img
+                    image=category.image
+                    fallback_size=theme_settings.zoom_size
+                    lazyload=theme_settings.lazyload_mode
+                    class="category-header-image"
+                }}
+            </div>
+        {{/if}}
+
+        {{#if category.description}}
+            <div class="plp-description" id="plp-description" data-text-collapsible>
+                {{{category.description}}}
+
+                <div class="plp-description-more" data-text-collapsible-toggle-container>
+                    <button class="button button--plain" type="button" data-text-collapsible-toggle>
+                        <span class="_title _off">{{lang 'search.faceted.show-more'}}</span>
+                        <span class="_title _on">{{lang 'search.faceted.show-less'}}</span>
+                    </button>
+                </div>
+            </div>
+        {{/if}}
+
+        {{{region name="category_below_header"}}}
+    </div>
+
+    {{#if category.faceted_search_enabled}}
+        {{> components/category/page-sidebar}}
+    {{else if category.subcategories}}
+        {{> components/category/page-sidebar}}
+    {{else if theme_settings.shop_by_price_visibility}}
+        {{> components/category/page-sidebar}}
+    {{/if}}
+
+    <main class="plp-page-main" id="product-listing-container">
+        {{> components/category/product-listing}}
+    </main>
+
+    <div class="plp-page-region">
+        {{{region name="category_below_content"}}}
+        {{{region name="category_below_content--global"}}}
+    </div>
+</div>
+
+{{/partial}}
+{{> layout/base}}

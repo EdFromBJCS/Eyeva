@@ -1,0 +1,109 @@
+.eyeva__account-messages {
+    @extend %eyeva-panel;
+    background: container("fill");
+    flex: 1;
+    gap: spacing("base");
+    margin: 0;
+    max-width: 100%;
+    padding-block: spacing("base") * 2;
+
+    @include eyeva-size-mobile-tablet {
+        padding: spacing("base");
+    }
+
+    .page-heading {
+        margin: 0;
+        text-align: center;
+
+        @include eyeva-screen-mobile {
+            font-size: $eyeva-font-18;
+            text-align: start;
+        }
+    }
+}
+
+.eyeva__account-messages-list {
+    display: block;
+    list-style: none;
+    margin: 0;
+}
+
+.eyeva__account-messages-listItem {
+    display: flex;
+    flex-direction: column;
+    padding: spacing("base") 0;
+
+    + .eyeva__account-messages-listItem {
+        border-top: container("border");
+    }
+}
+
+.eyeva__account-send-message {
+    @extend %eyeva-panel;
+    background: container("fill");
+    gap: spacing("base") * 2;
+    margin: 0;
+    max-width: 100%;
+    padding-block: spacing("base") * 2;
+    width: #{"min(500px, 33.3333%)"};
+
+    @include eyeva-size-mobile-tablet {
+        gap: spacing("base");
+        padding: spacing("base");
+        width: 100%;
+    }
+
+    .page-heading {
+        margin: 0;
+        text-align: center;
+
+        @include eyeva-screen-mobile {
+            font-size: $eyeva-font-18;
+            text-align: start;
+        }
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: spacing("base");
+        margin: 0;
+    }
+
+    .form-field {
+        margin: 0;
+    }
+
+    .form-actions {
+        display: flex;
+        gap: spacing("base");
+        justify-content: center;
+        margin: 0;
+
+        &::before,
+        &::after {
+            display: none;
+        }
+
+        .button {
+            margin: 0;
+        }
+    }
+}
+
+.account-message {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("third");
+
+    &:not(.is-read) {
+        border-left: 3px solid $color-primary;
+        font-weight: $eyeva-body-font-bold;
+        padding-left: spacing("base");
+    }
+
+    ._status {
+        color: $color-textSecondary;
+        font-size: fontSize("smaller");
+    }
+}

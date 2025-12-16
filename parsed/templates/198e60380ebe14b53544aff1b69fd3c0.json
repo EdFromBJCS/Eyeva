@@ -1,0 +1,3 @@
+{
+  "components/papathemes/preload": "<link rel=\"preload\" href=\"{{cdn 'assets/dist/theme-bundle.main.js' resourceHint='preload' as='script'}}\" as=\"script\">\n<link rel=\"preload\" href=\"{{cdn 'assets/dist/theme-bundle.chunk.global.js' resourceHint='preload' as='script'}}\" as=\"script\">\n{{#if theme_settings.shipping_countdown}}\n    <link rel=\"preload\" href=\"{{cdn 'assets/dist/theme-bundle.chunk.shipping-countdown.js' resourceHint='preload' as='script'}}\" as=\"script\">\n{{/if}}\n"
+}

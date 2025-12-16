@@ -1,0 +1,35 @@
+<div class="papathemes-cartSuggestedProducts" data-cart-suggested-products="{{theme_settings.product_col}}">
+    <h2 class="section-heading">{{lang 'cart.added_to_cart.you_might_also_like'}}</h2>
+
+    {{#if region_name}}
+        {{{region name=region_name}}}
+    {{/if}}
+
+    {{#if display_type '==' 'carousel'}}
+        {{> components/products/carousel is_placeholder=true}}
+    {{else}}
+        <div class="productGrid-container">
+            <ul class="productGrid productGrid--hscroll" {{#if settings.data_tag_enabled}} data-list-name="Cart Suggested Products" {{/if}}>
+                {{#for 1 (floor theme_settings.product_col)}}
+                    <li class="product">
+                        {{> components/products/card-placeholder
+                            show_compare=../show_compare
+                            show_rating=../settings.show_product_rating
+                            settings=../settings
+                            theme_settings=../theme_settings
+                            customer=../customer
+                            event="list" position=(add @index 1)}}
+                    </li>
+                {{/for}}
+            </ul>
+        </div>
+        <div class="section-footer">
+            <button type="button" class="button button--outline loadMore" style="display: none;">
+                {{lang 'common.load_more'}}
+            </button>
+            <button type="button" class="button button--outline collapse" style="display: none;">
+                {{lang 'common.collapse'}}
+            </button>
+        </div>
+    {{/if}}
+</div>

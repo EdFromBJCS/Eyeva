@@ -1,0 +1,24 @@
+<aside class="plp-page-sidebar {{#if forms.search.section '!=' 'product'}} u-hiddenVisually{{/if}}" id="page-sidebar">
+    <div class="plp-page-sidebar-modal">
+        <button class="plp-page-sidebar-modal-close" type="button" title="{{lang 'common.close'}}" data-collapsible="page-sidebar">
+            <span class="aria-description--hidden">{{lang 'common.close'}}</span>
+            <span class="icon" aria-hidden="true">
+                <svg><use href="#icon-xmark-large"></use></svg>
+            </span>
+        </button>
+        <div class="plp-page-sidebar-modal-header">
+            {{#if product_results.faceted_search_enabled}}
+                {{lang 'search.faceted.filters'}}
+            {{else}}
+                {{lang 'forms.search.title'}}
+            {{/if}}
+        </div>
+        <div class="faceted-search-container" id="faceted-search-container">
+            {{#if product_results.faceted_search_enabled}}
+                {{> components/search/sidebar}}
+            {{else}}
+                {{> components/search/advanced-search}}
+            {{/if}}
+        </div>
+    </div>
+</aside>

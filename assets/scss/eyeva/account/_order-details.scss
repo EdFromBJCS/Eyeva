@@ -1,0 +1,354 @@
+.account-body {
+    align-items: flex-start;
+    background: container("fill", "dark");
+    display: flex;
+    flex-direction: column;
+    font-size: fontSize("smaller");
+    gap: spacing("base");
+    margin: 0;
+
+    @include breakpoint("medium") {
+        background: none;
+        flex-direction: row;
+        font-size: inherit;
+        gap: spacing("base") * 2;
+    }
+
+    &::before,
+    &::after {
+        display: none;
+    }
+
+    .container & {
+        @include eyeva-screen-mobile-tablet {
+            margin-inline: -(spacing("base"));
+        }
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.account-content {
+    background: container("fill");
+    border-bottom: container("border");
+    flex: 1;
+    padding: 0;
+    width: auto;
+
+    @include breakpoint("medium") {
+        border: container("border");
+        border-radius: $eyeva-container-radius;
+        box-shadow: $eyeva-shadow-panel;
+    }
+}
+
+.account-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+    max-width: 100%;
+    padding: 0;
+    width: 100%;
+
+    @include breakpoint("medium") {
+        width: 400px;
+        width: #{"min(400px, 33.3333%)"};
+    }
+}
+
+.eyeva__account-order-details {
+    border-bottom: container("border");
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+}
+
+.eyeva__account-order-details-item {
+    align-items: center;
+    display: grid;
+    gap: spacing("base");
+    grid-template-columns: minmax($checkRadio-label-spacing, max-content) auto 1fr;
+    padding: spacing("base");
+
+    .account-product-figure {
+        align-self: auto;
+        grid-area: auto;
+    }
+
+    + .eyeva__account-order-details-item {
+        padding-top: 0;
+    }
+}
+
+.account-listShipping {
+    padding: spacing("base");
+
+    @include breakpoint("medium") {
+        padding-inline: spacing("single");
+    }
+
+    ~ .account-listShipping {
+        border-top: container("border");
+    }
+}
+
+.account-listShipping-title {
+    font: inherit;
+    font-weight: $eyeva-body-font-bold;
+}
+
+.eyeva__account-order-details-product-body {
+    display: grid;
+    grid-gap: spacing("third") / 2 spacing("base");
+    grid-template:
+        "title title" auto
+        "desc qty" auto
+        "review price" auto / 1fr auto;
+
+    &::before,
+    &::after {
+        display: none;
+    }
+
+    ._title {
+        font: inherit;
+        font-weight: $eyeva-body-font-bold;
+        grid-area: title;
+        margin: 0;
+        text-transform: none;
+
+        a {
+            color: inherit;
+
+            &:hover,
+            &:focus {
+                color: $color-textLink-hover;
+            }
+
+            &:active {
+                color: $color-textLink-active;
+            }
+        }
+    }
+
+    ._desc {
+        font-size: fontSize("smaller");
+        grid-area: desc;
+    }
+
+    ._qty {
+        color: $color-textSecondary;
+        font-size: fontSize("smaller");
+        grid-area: qty;
+        justify-self: end;
+        margin: 0;
+        vertical-align: baseline;
+    }
+
+    ._review {
+        font-size: fontSize("smaller");
+        grid-area: review;
+        margin: 0;
+    }
+
+    ._price {
+        grid-area: price;
+        justify-self: end;
+        margin: 0;
+    }
+
+    .definitionList {
+        color: $color-textSecondary;
+        margin: 0;
+    }
+}
+
+.eyeva__account-order-footer {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+    padding: spacing("base");
+
+    @include breakpoint("medium") {
+        align-items: flex-start;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+.eyeva__account-order-actions {
+    display: flex;
+    gap: spacing("base");
+
+    @include breakpoint("medium") {
+        flex-wrap: wrap;
+    }
+
+    .account-reorder-form {
+        flex: 1 1 50%;
+
+        @include breakpoint("medium") {
+            flex: 0;
+        }
+
+        .button {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    .button {
+        flex: 1 1 50%;
+        margin: 0;
+
+        @include breakpoint("medium") {
+            flex: 0;
+        }
+    }
+}
+
+.account-orderTotal {
+    display: grid;
+    gap: spacing("third");
+    grid-template-columns: 1fr 1fr;
+    margin: 0;
+    width: 100%;
+
+    @include breakpoint("medium") {
+        column-gap: spacing("single");
+        grid-template-columns: auto auto;
+        width: auto;
+    }
+}
+
+.account-orderTotal-key,
+.account-orderTotal-value {
+    border: 0;
+    padding: 0;
+}
+
+.account-orderTotal-key:last-of-type,
+.account-orderTotal-value:last-child {
+    color: $color-textBase;
+    font-size: fontSize("base");
+    font-weight: $eyeva-body-font-bold;
+    position: static;
+}
+
+.account-sidebar-block {
+    background: container("fill");
+    border-block: container("border");
+
+    @include breakpoint("medium") {
+        border: container("border");
+        border-radius: $eyeva-container-radius;
+        box-shadow: $eyeva-shadow-panel;
+    }
+
+    + .account-sidebar-block {
+        margin: 0;
+    }
+
+    .definitionList {
+        display: grid;
+        gap: spacing("third") spacing("base");
+        grid-template-columns: auto auto;
+        margin: 0;
+        padding: spacing("base");
+
+        @include breakpoint("medium") {
+            padding-inline: spacing("single");
+        }
+
+        &::before,
+        &::after {
+            display: none;
+        }
+    }
+
+    .definitionList-value {
+        text-align: end;
+    }
+
+    ._comments {
+        padding: spacing("base");
+
+        @include breakpoint("medium") {
+            padding-inline: spacing("single");
+        }
+    }
+}
+
+.account-sidebar-heading {
+    align-items: center;
+    border-bottom: container("border");
+    display: flex;
+    font: inherit;
+    font-size: fontSize("base");
+    font-weight: $eyeva-body-font-bold;
+    gap: spacing("base");
+    justify-content: space-between;
+    margin: 0;
+    padding: spacing("base");
+
+    @include breakpoint("medium") {
+        padding-inline: spacing("single");
+    }
+
+    * + & {
+        border-top: container("border");
+    }
+
+    .button {
+        margin: 0;
+    }
+}
+
+.account-order-address {
+    color: $color-textSecondary;
+    display: flex;
+    flex-direction: column;
+    gap: spacing("third") / 2;
+    margin: 0;
+    padding: spacing("base");
+
+    @include breakpoint("medium") {
+        padding-inline: spacing("single");
+    }
+
+    ._name {
+        color: $color-textBase;
+        font-size: fontSize("base");
+    }
+
+    ._phone {
+        margin-left: spacing("third") / 2;
+
+        &::before {
+            color: container("borderColor");
+            content: "-";
+            margin-right: spacing("third") / 2;
+        }
+    }
+
+    ._multi {
+        color: $color-textBase;
+        font-style: italic;
+        font-weight: $eyeva-body-font-bold;
+        margin-top: spacing("third");
+    }
+}
+
+.order-payments-description {
+    font-weight: $eyeva-body-font-bold;
+    grid-column: 1 / -1;
+    margin: 0;
+}
+
+.order-payments-value {
+    grid-column: 1 / -1;
+    margin: 0;
+}

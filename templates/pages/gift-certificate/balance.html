@@ -1,0 +1,36 @@
+{{#partial "page"}}
+<main class="page">
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    <h1 class="page-heading">{{lang 'gift_certificate.heading' }}</h1>
+    {{> components/gift-certificate/navigation gift_page='balance'}}
+
+    <main class="eyeva__panel _balance">
+        <h3 class="page-heading">{{lang 'gift_certificate.balance.heading'}}</h3>
+
+        <p>{{lang 'gift_certificate.balance.intro' }}</p>
+
+        {{#if gift_certificate}}
+            {{#if gift_certificate.error}}
+                {{> components/common/alert/alert-error gift_certificate.error}}
+            {{else}}
+                <h3 class="page-heading">{{gift_certificate.balance.formatted}}</h3>
+                <h3 class="page-heading">{{gift_certificate.code}}</h3>
+            {{/if}}
+        {{/if}}
+
+        <form class="form check-balance-form" id="gift-certificate-balance" method="get">
+            <input type="hidden" name="action" value="balance">
+            <div class="form-field _modern">
+                <label class="form-label" for="giftcertificatecode">
+                    {{lang 'forms.gift_certificate.balance.code' }}
+                </label>
+                <input class="form-input" id="giftcertificatecode" name="giftcertificatecode">
+            </div>
+            <div class="form-actions">
+                <input type="submit" class="button button--primary form-prefixPostfix-button--postfix" value="{{lang 'forms.gift_certificate.balance.submit_value' }}">
+            </div>
+        </form>
+    </main>
+</main>
+{{/partial}}
+{{> layout/base}}

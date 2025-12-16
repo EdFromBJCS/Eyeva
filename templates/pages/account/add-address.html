@@ -1,0 +1,48 @@
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.account.js' resourceHint='preload' as='script'}}" as="script">
+{{/partial}}
+
+{{#partial "page"}}
+
+<div class="account">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+        <h2 class="page-heading">{{lang 'account.addresses.heading' }}</h2>
+
+        {{> components/account/navigation account_page='addresses'}}
+
+        {{#if forms.address.error}}
+            {{> components/common/alert/alert-error forms.address.error}}
+        {{/if}}
+
+        <div class="eyeva__panel _addressEdit">
+            {{#if forms.address.address_id}}
+                <h2 class="page-heading">{{lang 'forms.address.edit.heading'}}</h2>
+            {{else}}
+                <h2 class="page-heading">{{lang 'forms.address.add.heading'}}</h2>
+            {{/if}}
+
+            <form action="{{forms.address.action}}" data-address-form class="form" method="post">
+                {{#if forms.address.address_id }}
+                    <input type="hidden" name="shipid" value="{{forms.address.address_id}}">
+                {{/if}}
+                <fieldset class="form-fieldset">
+                    <div class="form-row form-row--grid-2">
+                        {{#each forms.address.shipping_fields }}
+                            {{{dynamicComponent 'components/common/forms'}}}
+                        {{/each}}
+                    </div>
+                </fieldset>
+                <div class="form-actions">
+                    <input type="submit" class="button button--primary" value="{{lang 'forms.address.submit_value'}}">
+                    <a href="{{urls.account.addresses}}" class="button button--outline">{{lang 'common.cancel'}}</a>
+                    {{inject 'required' (lang 'common.required')}}
+                    {{inject 'state_error' (lang 'errors.state_error')}}
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+{{/partial}}
+{{> layout/base}}

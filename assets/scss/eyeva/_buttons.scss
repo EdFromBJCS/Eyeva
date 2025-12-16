@@ -1,0 +1,142 @@
+.button {
+    align-items: center;
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    min-height: $eyeva-button-height;
+
+    svg {
+        fill: $buttonStyle-default-color;
+    }
+
+    &:hover,
+    &:focus {
+        svg {
+            fill: $buttonStyle-default-colorHover;
+        }
+    }
+
+    &:active {
+        svg {
+            fill: $buttonStyle-default-colorActive;
+        }
+    }
+
+    .icon--left {
+        margin-left: -(spacing("half"));
+        margin-right: spacing("half");
+    }
+
+    .icon--right {
+        margin-left: spacing("half");
+        margin-right: -(spacing("half"));
+    }
+}
+
+.button--small {
+    border-radius: $eyeva-small-button-radius;
+    min-height: $eyeva-small-button-height;
+}
+
+.button--plain {
+    background: none;
+    border: 0;
+    color: inherit;
+    line-height: inherit;
+    margin: 0;
+    min-height: auto;
+    padding: 0;
+
+    svg {
+        fill: $color-textBase;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        background: none;
+        border: 0;
+        color: $color-textLink-hover;
+
+        svg {
+            fill: $color-textLink-hover;
+        }
+    }
+}
+
+.button--primary {
+    svg {
+        fill: $buttonStyle-primary-color;
+    }
+
+    &:hover,
+    &:focus {
+        svg {
+            fill: $buttonStyle-primary-colorHover;
+        }
+    }
+
+    &:active {
+        svg {
+            fill: $buttonStyle-primary-colorActive;
+        }
+    }
+}
+
+.button--outline {
+    background-color: transparent;
+    border: container("border");
+    color: $color-textBase;
+
+    svg {
+        fill: $color-textBase;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: transparent;
+        border-color: $color-primary;
+        color: $color-primary;
+
+        svg {
+            fill: $color-primary;
+        }
+    }
+
+    &:disabled {
+        background-color: transparent;
+        border-color: rgba(container("borderColor"), 0.8);
+        color: rgba(container("borderColor"), 0.8);
+
+        svg {
+            fill: rgba(container("borderColor"), 0.8);
+        }
+    }
+}
+
+.button--checkbox {
+    @include square($checkRadio-baseDimension);
+    background-color: $checkRadio-bg;
+    border: 1px solid $checkRadio-borderColor;
+    border-radius: $check-radius;
+    margin: 0 spacing("third") 0 0;
+    min-height: auto;
+    padding: 0;
+
+    &:hover,
+    &:focus,
+    &:active {
+        background-color: $checkRadio-bg;
+        border-color: stencilColor("input-border-color-active");
+    }
+
+    &._checked {
+        background-color: stencilColor("input-border-color-active");
+        background-image: $check-pip-backgroundImage-active;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: remCalc(14px);
+        border-color: stencilColor("input-border-color-active");
+    }
+}

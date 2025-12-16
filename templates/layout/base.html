@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html class="no-js {{#if in_development}}_dev-mode{{/if}}" lang="{{ locale_name }}">
+    <head>
+        <title>{{ head.title }}</title>
+        {{{ resourceHints }}}
+        {{> components/papathemes/preload}}
+        {{{ head.meta_tags }}}
+        {{{ head.config }}}
+        {{#block "head"}} {{/block}}
+
+        <link href="{{{ head.favicon }}}" rel="shortcut icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <script nonce="{{nonce}}">
+            {{!-- Change document class from no-js to js so we can detect this in css --}}
+            document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+        </script>
+
+        {{> components/common/polyfill-script }}
+        <script nonce="{{nonce}}">window.consentManagerTranslations = `{{{langJson 'consent_manager'}}}`;</script>
+
+        {{!-- Load Lazysizes script ASAP so images will appear --}}
+        <script nonce="{{nonce}}">
+            {{!-- Only load visible elements until the onload event fires, after which preload nearby elements. --}}
+            window.lazySizesConfig = window.lazySizesConfig || {};
+            window.lazySizesConfig.loadMode = 1;
+        </script>
+        <script nonce="{{nonce}}" async src="{{cdn 'assets/dist/theme-bundle.head_async.js' resourceHint='preload' as='script'}}"></script>
+
+        {{getFontsCollection font-display='block'}}
+
+        <script nonce="{{nonce}}" async src="{{cdn 'assets/dist/theme-bundle.font.js' resourceHint='preload' as='script'}}"></script>
+
+        {{{stylesheet '/assets/css/theme.css'}}}
+
+        {{{head.scripts}}}
+
+        {{!-- theme settinsg --}}
+        {{~inject 'zoomSize' theme_settings.zoom_size}}
+        {{~inject 'productSize' theme_settings.product_size}}
+        {{~inject 'thumbSize' theme_settings.productview_thumb_size}}
+        {{~inject 'card_show_swatches' theme_settings.card_show_swatches}}
+        {{~inject 'card_swatch_name' theme_settings.card_swatch_name}}
+        {{~inject 'card_swatch_limit' theme_settings.card_swatch_limit}}
+        {{~inject 'card_show_qty' theme_settings.card_show_qty}}
+        {{~inject 'card_show_button' theme_settings.card_show_button}}
+        {{~inject 'card_show_compare' theme_settings.card_show_compare}}
+        {{~inject 'card_show_swatches' theme_settings.card_show_swatches}}
+        {{~inject 'card_show_countdown' theme_settings.card_show_countdown}}
+        {{~inject 'card_show_gallery' theme_settings.card_show_gallery}}
+        {{~inject 'card_show_video' theme_settings.card_show_video}}
+        {{~inject 'card_custom_fields' theme_settings.card_custom_fields}}
+        {{~inject 'card_style' theme_settings.card_style}}
+        {{~inject 'productgallery_size' theme_settings.productgallery_size}}
+        {{~inject 'show_product_quick_view' theme_settings.show_product_quick_view}}
+        {{~inject 'ajax_add_to_cart' theme_settings.ajax_add_to_cart}}
+        {{~inject 'product_sale_badges' theme_settings.product_sale_badges}}
+        {{~inject 'product_sale_label' theme_settings.product_sale_label}}
+        {{~inject 'product_custom_badges' theme_settings.product_custom_badges}}
+        {{~inject 'price_ranges' theme_settings.price_ranges}}
+        {{~inject 'pdp_price_label' theme_settings.pdp-price-label}}
+        {{~inject 'pdp_sale_price_label' theme_settings.pdp-sale-price-label}}
+        {{~inject 'pdp_non_sale_price_label' theme_settings.pdp-non-sale-price-label}}
+        {{~inject 'pdp_starting_price_label' theme_settings.pdp-starting-price-label}}
+        {{~inject 'pdp_retail_price_label' theme_settings.pdp-retail-price-label}}
+        {{~inject 'pdp_sold_out_label' (default theme_settings.pdp_sold_out_label (lang "page_builder.pdp_sold_out_label"))}}
+        {{~inject 'shipping_countdown' theme_settings.shipping_countdown}}
+        {{~inject 'shipping_tz' theme_settings.shipping_tz}}
+        {{~inject 'menu_editing' theme_settings.menu_editing}}
+        {{!-- // --}}
+        {{~inject 'genericError' (lang 'common.generic_error')}}
+        {{~inject 'urls' urls}}
+        {{~inject 'secureBaseUrl' settings.secure_base_url}}
+        {{~inject 'cartId' cart_id}}
+        {{~inject 'template' template}}
+        {{~inject 'validationDictionaryJSON' (langJson 'validation_messages')}}
+        {{~inject 'validationFallbackDictionaryJSON' (langJson 'validation_fallback_messages')}}
+        {{~inject 'validationDefaultDictionaryJSON' (langJson 'validation_default_messages')}}
+        {{~inject 'carouselArrowAndDotAriaLabel' (lang 'carousel.arrow_and_dot_aria_label')}}
+        {{~inject 'carouselActiveDotAriaLabel' (lang 'carousel.active_dot_aria_label')}}
+        {{~inject 'carouselContentAnnounceMessage' (lang 'carousel.content_announce_message')}}
+        {{~inject 'graphQLToken' settings.storefront_api.token}}
+        {{~inject 'active_currency_code' currency_selector.active_currency_code}}
+        {{~inject 'default_currency_code' currency_selector.default_currency_code}}
+        {{~inject 'txtPriceFree' (lang 'products.price_free')}}
+        {{~inject 'txtSubtotal' (lang 'cart.checkout.subtotal')}}
+        {{~inject 'txtContinue' (lang 'common.continue')}}
+        {{~inject 'txtReviewSelections' (lang 'products.review_selections')}}
+        {{~inject 'compareAddonLang_compare' (lang 'common.compare')}}
+        {{~inject 'compareAddonLang_quick_view' (lang 'products.quick_view')}}
+        {{~inject 'compareAddonLang_remove' (lang 'compare.remove')}}
+        {{~inject 'compareAddonLang_clear_all' (lang 'compare.clear_all')}}
+        {{!-- recently viewed variables --}}
+        {{~inject 'customerRecentlyViewedProductIds' (pluck customer.recently_viewed_products.items 'id')}}
+        {{~inject 'customerId' customer.id}}
+        {{~inject 'hidePriceFromGuests' settings.hide_price_from_guests}}
+        {{~inject 'showProductRating' settings.show_product_rating}}
+        {{~inject 'showWishlist' settings.show_wishlist}}
+        {{~inject 'defaultProductImage' (cdn theme_settings.default_image_product)}}
+        {{~inject 'txtPriceWithTax' (lang 'products.price_with_tax' tax_label=settings.tax_label)}}
+        {{~inject 'txtPriceWithoutTax' (lang 'products.price_without_tax' tax_label=settings.tax_label)}}
+        {{~inject 'txtQuickView' (lang 'products.quick_view')}}
+        {{~inject 'txtCompare' (lang 'products.compare')}}
+        {{~inject 'txtChooseOptions' (lang 'products.choose_options')}}
+        {{~inject 'txtPreOrder' (lang 'products.pre_order')}}
+        {{~inject 'txtAddToCart' (lang 'products.add_to_cart')}}
+        {{~inject 'txtQuantity' (lang 'products.quantity')}}
+        {{~inject 'txtQuantityDecrease' (lang 'products.quantity_decrease')}}
+        {{~inject 'txtQuantityIncrease' (lang 'products.quantity_increase')}}
+        {{!-- card swatches & card image gallery --}}
+        {{~inject 'txtVideosLabel' (lang 'products.videos.header')}}
+        {{~inject 'txtImages360Label' (lang 'products.image360')}}
+        {{~inject 'txtImagesLabel' (lang 'products.images')}}
+        {{!-- wishlist --}}
+        {{~inject 'txtAddedItemWishlist' (lang 'account.wishlists.added_item_wishlist' name='{name}')}}
+        {{~inject 'txtDeletedItemWishlist' (lang 'account.wishlists.deleted_item_wishlist' name='{name}')}}
+        {{~inject 'txtEmptyWishlist' (lang 'account.wishlists.empty_wishlist')}}
+        {{~inject 'txtWishlistViewHeading' (lang 'account.wishlists.view_heading' name='{name}')}}
+        {{~inject 'txtLoadMore' (lang 'common.load_more')}}
+        {{~inject 'txtCollapse' (lang 'common.collapse')}}
+        {{!-- sale countdown --}}
+        {{~inject 'txtSaleCountdownJSON' (langJson 'sale_countdown')}}
+        {{!-- banner carousel --}}
+        {{~inject 'txtClose' (lang 'common.close')}}
+        {{~inject 'txtPrevious' (lang 'common.previous')}}
+        {{~inject 'txtNext' (lang 'common.next')}}
+        {{~inject 'txtPlay' (lang 'carousel.play_pause_button_play')}}
+        {{~inject 'txtPause' (lang 'carousel.play_pause_button_pause')}}
+        {{!-- cart drawer --}}
+        {{~inject 'page_type' page_type}}
+    </head>
+    <body class="page-type-{{page_type}}">
+        <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
+
+        {{> components/common/header }}
+        {{> components/common/body }}
+        {{> components/common/footer }}
+
+        <script nonce="{{nonce}}">window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
+        <script nonce="{{nonce}}">window.__webpack_nonce__ = "{{nonce}}";</script>
+        <script nonce="{{nonce}}">
+            {{!-- Exported in app.js --}}
+            function onThemeBundleMain() {
+                window.stencilBootstrap("{{page_type}}", {{jsContext}}).load();
+
+                function browserSupportsFormData() {
+                    return typeof FormData !== 'undefined'
+                        && !!FormData.prototype.keys;
+                }
+                function loadFormDataPolyfillScript(src) {
+                    var formDataPolyfillScript = document.createElement('script');
+                    formDataPolyfillScript.src = src;
+                    formDataPolyfillScript.nonce = '{{nonce}}';
+                    formDataPolyfillScript.onerror = function () {
+                        console.error('Failed to load formData polyfill script ' + src);
+                    };
+                    document.body.appendChild(formDataPolyfillScript);
+                }
+
+                if (!browserSupportsFormData()) {
+                    loadFormDataPolyfillScript('{{cdn 'assets/dist/theme-bundle.polyfill_form_data.js'}}');
+                }
+            }
+        </script>
+        <script nonce="{{nonce}}" async defer src="{{cdn 'assets/dist/theme-bundle.main.js' resourceHint='preload' as='script'}}" onload="onThemeBundleMain()"></script>
+
+        <script nonce="{{nonce}}">
+            window.PapaThemesWidgetCustomerReviewsExtraSettings = {
+                slidesToShow: 4
+            };
+        </script>
+
+        {{{footer.scripts}}}
+    </body>
+</html>

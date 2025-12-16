@@ -1,0 +1,59 @@
+{{> components/eyeva/faceted-search/init-image-color}}
+<div class="modal-body">
+    <h1 class="facet-quick-heading">
+        {{#if facet_title}}
+            {{facet_title}}
+        {{else}}
+            {{all_facets}}
+        {{/if}}
+    </h1>
+    <div class="form-field" id="facetedSearch-filterItems">
+        <input class="form-input" type="search" placeholder="{{lang 'forms.search.search'}}">
+    </div>
+    <ul class="navList facetedSearch-optionColumns">
+        {{#each facets}}
+            {{#if facet '===' ../all_facets}}
+                {{#inArray ../theme_settings.facet_img_arr (lowercase facet)}}
+                    {{#if (merge this isFacetImg=true)}}{{/if}}
+                {{/inArray}}
+                {{#inArray ../theme_settings.facet_color_arr (lowercase facet)}}
+                    {{#if (merge this isFacetColor=true)}}{{/if}}
+                {{/inArray}}
+                {{#each items}}
+                    <li class="eyeva__faceted-list-item" data-facet-more-item>
+                        <a
+                            href="{{url}}"
+                            class="eyeva__faceted-list-action{{#if selected}} is-selected{{/if}}"
+                            rel="nofollow"
+                            data-id="{{id}}"
+                            data-faceted-search-facet>
+                            {{#if ../isFacetImg}}
+                                <span class="_img" data-faceted-search-facet-image>
+                                    <img
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                                        data-src="{{getImageManagerImage (multiConcat (dashcase ../facet) '-' (dashcase id) '.png') width=(getVar 'facet_img_size_width')}}"
+                                        data-srcset="{{getImageManagerImageSrcset (multiConcat (dashcase ../facet) '-' (dashcase id) '.png')}}"
+                                        data-sizes="auto"
+                                        alt="{{{sanitize title}}}">
+                                </span>
+                            {{else if ../isFacetColor}}
+                                <span class="_color" data-faceted-search-facet-color>
+                                    <img
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                                        data-src="{{getImageManagerImage (multiConcat (dashcase ../facet) '-' (dashcase id) '.png') width=(getVar 'facet_color_size_width')}}"
+                                        data-srcset="{{getImageManagerImageSrcset (multiConcat (dashcase ../facet) '-' (dashcase id) '.png')}}"
+                                        data-sizes="auto"
+                                        alt="{{{sanitize title}}}">
+                                </span>
+                            {{/if}}
+                            <span class="_text">{{{sanitize title}}}</span>
+                            {{#if ../show_product_counts}}
+                                <span class="_count">({{count}})</span>
+                            {{/if}}
+                        </a>
+                    </li>
+                {{/each}}
+            {{/if}}
+        {{/each}}
+    </ul>
+</div>

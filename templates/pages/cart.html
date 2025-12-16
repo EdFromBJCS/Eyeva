@@ -1,0 +1,102 @@
+---
+cart: true
+---
+{{inject 'cancelButtonText' (lang 'common.cancel')}}
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.cart.js' resourceHint='preload' as='script'}}" as="script">
+{{/partial}}
+{{#partial "page"}}
+{{inject 'invalidEntryMessage' (lang 'cart.invalid_entry_message')}}
+<div class="page" data-cart>
+
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+    {{> components/cart/page-title}}
+
+    <div class="eyeva__cart-layout">
+        <div class="eyeva__cart-layout-main">
+            <div class="cart-alerts" data-cart-status>
+                {{> components/cart/status-messages}}
+            </div>
+
+            {{#if cart.items.length}}
+                <div class="loadingOverlay"></div>
+
+                <div data-cart-content>
+                    {{> components/cart/content}}
+                </div>
+            {{else}}
+                <h3 tabindex="0">{{lang 'cart.checkout.empty_cart'}}</h3>
+            {{/if}}
+        </div><!-- .eyeva__cart-layout-main -->
+
+        <div class="eyeva__cart-layout-side">
+            {{#if cart.items.length}}
+                {{{region name="cart_above_totals"}}}
+
+                <div data-cart-totals>
+                    {{> components/cart/totals}}
+                </div>
+
+                {{{region name="cart_below_totals"}}}
+
+                <div class="cart-actions-wrapper">
+                    {{#or customer (unless settings.hide_price_from_guests)}}
+                        {{#if cart.show_primary_checkout_button}}
+                            <div class="cart-actions">
+                                <a
+                                    class="button button--primary"
+                                    href="{{urls.checkout.single_address}}"
+                                    title="{{lang 'cart.checkout.title'}}"
+                                    data-primary-checkout-now-action
+                                >
+                                    {{lang 'cart.checkout.button'}}
+                                </a>
+                                {{#if cart.show_multiple_address_shipping}}
+                                    <a class="button checkoutMultiple" href="{{urls.checkout.multiple_address}}">
+                                        {{lang 'cart.preview.checkout_multiple'}}
+                                    </a>
+                                {{/if}}
+                            </div>
+                        {{else}}
+                            <div class="cart-actions">
+                                <a class="button" href="{{urls.home}}" title="{{lang 'cart.continue_shopping'}}">{{lang 'cart.continue_shopping'}}</a>
+                            </div>
+                        {{/if}}
+
+                        {{#if cart.additional_checkout_buttons}}
+                            <div data-cart-additional-checkout-buttons class="cart-additionalCheckoutButtons">
+                                {{> components/cart/additional-checkout-buttons}}
+                            </div>
+                        {{/if}}
+                    {{else}}
+                        <div class="cart-actions">
+                            <a class="button" href="{{urls.auth.login}}" title="{{lang 'cart.login_to_checkout'}}">{{lang 'cart.login_to_checkout'}}</a>
+                        </div>
+                    {{/or}}
+                </div>
+
+                <div class="cart-payments">
+                    <div class="cart-payments-label">
+                        {{lang 'cart.checkout.we_accept'}}
+                    </div>
+                    {{> components/common/payment-icons}}
+                </div>
+            {{/if}}
+        </div><!-- .eyeva__cart-layout-side -->
+    </div>
+</div>
+{{/partial}}
+
+{{#partial "page-bottom"}}
+    <div class="container _fill">
+        <div class="section section--cartSuggested">
+            {{> components/products/cart-suggested display_type='grid'}}
+        </div>
+
+        <div class="section section--recentlyViewed">
+            {{> components/products/recentviewed display_type='carousel'}}
+        </div>
+    </div>
+{{/partial}}
+{{> layout/base}}

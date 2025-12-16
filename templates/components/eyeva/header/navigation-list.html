@@ -1,0 +1,48 @@
+{{#if children}}
+    {{#unless id}}
+        {{#if (merge this id=(concat 'page-' (incrementVar 'incrementId')))}}{{/if}}
+    {{/unless}}
+    <a class="navPages-action {{#if is_active}} activePage{{/if}} {{#if is_page}}_webpage{{/if}}" href="{{url}}"
+        data-collapsible="navPages-subMenu-{{id}}"
+        data-collapsible-disabled-breakpoint="medium"
+        data-collapsible-disabled-state="close"
+        data-collapsible-enabled-state="close"
+        aria-controls="navPages-subMenu-{{id}}"
+        aria-expanded="false"
+    >
+        <span class="navPages-label">{{name}}</span>
+    </a>
+    <button class="navPages-subMenu-toggle _depth-{{depth}}" type="button"
+        data-collapsible="navPages-subMenu-{{id}}"
+        aria-controls="navPages-subMenu-{{id}}"
+        aria-expanded="false"
+        aria-label="Toggle sub-menu"
+    >
+        <span class="is-srOnly">Toggle sub-menu</span>
+        <i class="icon hide-desktop" aria-hidden="true"><svg><use href="#icon-arrow-right-long"></use></svg></i>
+        <i class="icon hide-mobile-tablet" aria-hidden="true"><svg><use href="#icon-chevron-down"></use></svg></i>
+    </button>
+    <div class="navPages-subMenu" id="navPages-subMenu-{{id}}" aria-hidden="true" data-menu-dropdown>
+        <ul class="navPages-childList">
+            <li class="navPages-childList-item _parent _depth-{{depth}}">
+                <a class="navPages-childList-action  _parent _depth-{{depth}} {{#if is_page}}_webpage{{/if}}" href="{{url}}"
+                    data-collapsible="navPages-subMenu-{{id}}"
+                    aria-controls="navPages-subMenu-{{id}}"
+                    aria-expanded="false"
+                >
+                    <i class="icon" aria-hidden="true"><svg><use href="#icon-arrow-left-long"></use></svg></i>
+                    <span class="navPages-childList-label">{{name}}</span>
+                </a>
+            </li>
+            {{#each children}}
+                <li class="navPages-childList-item">
+                    {{> components/eyeva/header/navigation-child-list depth=(add ../depth 1)}}
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+{{else}}
+    <a class="navPages-action {{#if is_active}} activePage{{/if}} {{#if is_page}}_webpage{{/if}}" href="{{url}}">
+        <span class="navPages-label">{{name}}</span>
+    </a>
+{{/if}}

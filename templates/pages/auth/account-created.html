@@ -1,0 +1,11 @@
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.auth.js' resourceHint='preload' as='script'}}" as="script">
+{{/partial}}
+{{#partial "page"}}
+    <main class="account-created">
+        <h1 class="page-heading">{{lang 'create_account.created.heading'}}</h1>
+        <p>{{lang 'create_account.created.intro' store_name=settings.store_name email=customer.email}}</p>
+        <p><a class="button button--primary" href="{{create_account.continue_url}}">{{lang 'create_account.created.continue'}}</a></p>
+    </main>
+{{/partial}}
+{{> layout/base}}

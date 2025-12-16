@@ -1,0 +1,379 @@
+@mixin eyeva-screen-mobile-tablet {
+    @media (max-width: (screenSize("medium") - 1px)) {
+        @content;
+    }
+}
+
+@mixin eyeva-screen-mobile {
+    @media (max-width: (screenSize("small") - 1px)) {
+        @content;
+    }
+}
+
+@mixin eyeva-screen-tablet {
+    @media (min-width: screenSize("small")) and (max-width: (screenSize("medium") - 1px)) {
+        @content;
+    }
+}
+
+@mixin eyeva-screen-medium-down {
+    @media (max-width: (screenSize("medium") - 1px)) {
+        @content;
+    }
+}
+
+@mixin eyeva-screen-large-down {
+    @media (max-width: (screenSize("large") - 1px)) {
+        @content;
+    }
+}
+
+@mixin eyeva-screen-xlarge-down {
+    @media (max-width: (screenSize("xlarge") - 1px)) {
+        @content;
+    }
+}
+
+@mixin eyeva-screen-xxlarge-down {
+    @media (max-width: (screenSize("xxlarge") - 1px)) {
+        @content;
+    }
+}
+
+@mixin eyeva-screen-xxxlarge-down {
+    @media (max-width: (screenSize("xxxlarge") - 1px)) {
+        @content;
+    }
+}
+
+@mixin eyeva-container-mobile-tablet {
+    // stylelint-disable-next-line
+    @container (max-width: #{screenSize("medium") - 1px}) {
+        @content;
+    }
+}
+
+@mixin eyeva-container-mobile {
+    // stylelint-disable-next-line
+    @container (max-width: #{screenSize("small") - 1px}) {
+        @content;
+    }
+}
+
+@mixin eyeva-container-medium-up {
+    // stylelint-disable-next-line
+    @container (min-width: #{screenSize("medium")}) {
+        @content;
+    }
+}
+
+@mixin eyeva-container-tablet {
+    // stylelint-disable-next-line
+    @container (min-width: #{screenSize("small")}) and (max-width: #{screenSize("medium") - 1px}) {
+        @content;
+    }
+}
+
+@mixin eyeva-container-medium-down {
+    // stylelint-disable-next-line
+    @container (max-width: #{screenSize("medium") - 1px}) {
+        @content;
+    }
+}
+
+@mixin eyeva-container-large-down {
+    // stylelint-disable-next-line
+    @container (max-width: #{screenSize("large") - 1px}) {
+        @content;
+    }
+}
+
+@mixin eyeva-container-xlarge-down {
+    // stylelint-disable-next-line
+    @container (max-width: #{screenSize("xlarge") - 1px}) {
+        @content;
+    }
+}
+
+@mixin eyeva-container-xxlarge-down {
+    // stylelint-disable-next-line
+    @container (max-width: #{screenSize("xxlarge") - 1px}) {
+        @content;
+    }
+}
+
+@mixin eyeva-container-xxxlarge-down {
+    // stylelint-disable-next-line
+    @container (max-width: #{screenSize("xxxlarge") - 1px}) {
+        @content;
+    }
+}
+
+@mixin eyeva-size-mobile-tablet {
+    @include eyeva-screen-mobile-tablet {
+        @content;
+    }
+    @include eyeva-container-mobile-tablet {
+        @content;
+    }
+}
+
+@mixin eyeva-size-mobile {
+    @include eyeva-screen-mobile {
+        @content;
+    }
+    @include eyeva-container-mobile {
+        @content;
+    }
+}
+
+@mixin eyeva-size-medium-up {
+    @include breakpoint("medium") {
+        @content;
+    }
+
+    // stylelint-disable-next-line
+    @include eyeva-container-medium-up {
+        @content;
+    }
+}
+
+@mixin eyeva-size-tablet {
+    @include eyeva-screen-tablet {
+        @content;
+    }
+    @include eyeva-container-tablet {
+        @content;
+    }
+}
+
+@mixin eyeva-size-medium-down {
+    @include eyeva-screen-medium-down {
+        @content;
+    }
+    @include eyeva-container-medium-down {
+        @content;
+    }
+}
+
+@mixin eyeva-size-large-down {
+    @include eyeva-screen-large-down {
+        @content;
+    }
+    @include eyeva-container-large-down {
+        @content;
+    }
+}
+
+@mixin eyeva-size-xlarge-down {
+    @include eyeva-screen-xlarge-down {
+        @content;
+    }
+    @include eyeva-container-xlarge-down {
+        @content;
+    }
+}
+
+@mixin eyeva-size-xxlarge-down {
+    @include eyeva-screen-xxlarge-down {
+        @content;
+    }
+    @include eyeva-container-xxlarge-down {
+        @content;
+    }
+}
+
+@mixin eyeva-size-xxxlarge-down {
+    @include eyeva-screen-xxxlarge-down {
+        @content;
+    }
+    @include eyeva-container-xxxlarge-down {
+        @content;
+    }
+}
+
+/**
+* Should not call this mixin directly.
+* Use `%papathemes__modal-close` or `%papathemes__modal-back` instead
+*/
+@mixin eyeva-modal-close-back-button {
+    @include square($eyeva-small-button-height);
+    align-items: center;
+    background: container("fill");
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    position: absolute;
+
+    .icon {
+        @include square(18px);
+
+        svg {
+            fill: stencilColor("icon-color");
+        }
+    }
+
+    &:hover {
+        .icon svg {
+            fill: stencilColor("icon-color-hover");
+        }
+    }
+}
+
+/**
+* Should not call this mixin directly.
+* Use `%papathemes__modal-close` instead
+*/
+@mixin eyeva-modal-close-button {
+    @include eyeva-modal-close-back-button;
+    right: spacing("third");
+    top: spacing("third");
+}
+
+/**
+* Should not call this mixin directly.
+* Use `%papathemes__modal-close` instead
+*/
+@mixin eyeva-modal-back-button {
+    @include eyeva-modal-close-back-button;
+    left: spacing("third");
+    top: spacing("third");
+}
+
+
+/**
+* Should not call this mixin directly.
+* Use `%papathemes__modal` instead
+*/
+@mixin eyeva-modal-overlay {
+    align-items: center;
+    background-color: rgba(color("greys", "darkest"), 0.8);
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: zIndex("higher");
+}
+
+@mixin eyeva-text-collapsible (
+    $fontSizeRem: remCalc(fontSize("smaller")),
+    $mediumFontSizeRem: fontSize("base"),
+    $lineHeight: $eyeva-body-line-height,
+    $visibleLineCount: 4,
+    $buttonGapRem: spacing("third") / 2,
+) {
+    font-size: $fontSizeRem;
+    max-height: $fontSizeRem * $lineHeight * $visibleLineCount + $buttonGapRem;
+    overflow: hidden;
+
+    @include breakpoint("medium") {
+        font-size: $mediumFontSizeRem;
+        max-height: $mediumFontSizeRem * $lineHeight * $visibleLineCount + $buttonGapRem;
+    }
+
+    &.is-open {
+        max-height: none;
+    }
+
+    &._collapsible {
+        position: relative;
+
+        [data-text-collapsible-toggle-container] {
+            display: block;
+        }
+
+        &:not(.is-open) [data-text-collapsible-toggle-container] {
+            $h: $fontSizeRem * $lineHeight;
+            background: linear-gradient(transparent 0%, container("fill") $h, container("fill") 100%);
+            bottom: 0;
+            left: 0;
+            padding-top: $h;
+            position: absolute;
+            right: 0;
+
+            @include breakpoint("medium") {
+                $h: $mediumFontSizeRem * $lineHeight;
+                background: linear-gradient(transparent 0%, container("fill") $h, container("fill") 100%);
+                padding-top: $h;
+            }
+        }
+    }
+
+    [data-text-collapsible-toggle-container] {
+        display: none;
+    }
+
+    [data-text-collapsible-toggle] {
+        &.is-open ._off {
+            display: none;
+        }
+
+        &:not(.is-open) ._on {
+            display: none;
+        }
+    }
+}
+
+@mixin eyeva__grid-table(
+    $grid-template-columns: repeat(4, 1fr),
+    $grid-template-columns-mobile: 1fr,
+    $max-width: remCalc(1200px)
+) {
+    background: container("fill");
+    border: container("border");
+    border-radius: $eyeva-container-radius;
+    box-shadow: $eyeva-shadow-panel;
+    display: grid;
+    gap: 0 spacing("base") * 2;
+    grid-template-columns: $grid-template-columns;
+    margin-inline: auto;
+    max-width: $max-width;
+    padding: spacing("base") spacing("base") * 2;
+    width: 100%;
+
+    @include eyeva-size-mobile-tablet {
+        background: container("fill", "dark");
+        border: 0;
+        border-bottom: container("border");
+        border-radius: 0;
+        box-shadow: none;
+        gap: spacing("base") / 2 spacing("base");
+        grid-template-columns: $grid-template-columns-mobile;
+        margin-inline: -(spacing("base"));
+        padding: 0 0 spacing("base") / 2;
+        width: auto;
+    }
+}
+
+@mixin eyeva__grid-table-container {
+    container-type: inline-size; // stylelint-disable-line
+}
+
+@mixin eyeva__grid-table-row {
+    align-items: center;
+    border-bottom: container("border");
+    display: grid;
+    gap: inherit;
+    grid-column: 1 / -1;
+    grid-template-columns: inherit; // for backwards compatibility
+    grid-template-columns: subgrid;
+    padding-block: spacing("base");
+
+    @include eyeva-size-mobile-tablet {
+        background: container("fill");
+        padding: spacing("base");
+
+        + * {
+            border-top: container("border");
+        }
+    }
+
+    &:last-child {
+        @include breakpoint("medium") {
+            border-bottom: 0;
+        }
+    }
+}

@@ -1,0 +1,1109 @@
+@mixin _facetedSearch-countPill {
+    background-color: stencilColor("pdp-badge-bgColor");
+    border-radius: 10px;
+    color: stencilColor("pdp-badge-color");
+    font-size: fontSize("smallest");
+    min-height: 20px;
+    min-width: 20px;
+    text-align: center;
+}
+
+body:has(.plp-page-sidebar.is-open) {
+    @include eyeva-screen-mobile-tablet {
+        @include papathemes__body-modal-opened;
+    }
+}
+
+.plp-page {
+    margin-bottom: spacing("double");
+
+    @include breakpoint("medium") {
+        column-gap: spacing("single");
+        display: grid;
+        grid-gap: spacing("base");
+        grid-template:
+            "header main" max-content
+            "sidebar main" auto
+            "sidebar bottom-region" 1fr / clamp(0%, 25%, 400px) 1fr;
+        row-gap: 0;
+
+        transition: grid-template-columns 0.3s ease-out;
+
+        &:has(.plp-page-header[aria-hidden="true"]) {
+            grid-template-columns: 0 1fr;
+        }
+
+        &:not(:has(.plp-page-header)):not(:has(.plp-page-sidebar)) {
+            grid-template-columns: 0 1fr;
+        }
+    }
+
+    @include breakpoint("large") {
+        column-gap: spacing("double");
+    }
+
+    // hide the left column on desktop, hide filter button, on mobile. when all:
+    // - no description
+    // - no image
+    // - empty widget regions
+    // - empty sidebar
+    &:not(:has(.plp-description)):not(:has(.plp-main-image)):not(:has(.plp-page-sidebar)) {
+        // category & brand page
+        &:has([data-content-region="category_below_header"]:empty),
+        &:has([data-content-region="brand_below_header"]:empty) {
+            @include eyeva-screen-mobile-tablet {
+                .facetedSearch-selected {
+                    display: none;
+                }
+            }
+
+            @include breakpoint("medium") {
+                column-gap: 0;
+                grid-template-columns: 0 1fr;
+
+                .plp-page-header {
+                    display: none;
+                }
+
+                .plp-page-main-header {
+                    ._left .breadcrumbs {
+                        display: block;
+                    }
+
+                    ._plp-name {
+                        font-size: fontSize("larger");
+                        opacity: 1;
+                    }
+                }
+
+                .eyeva__sidebar-toggle {
+                    display: none;
+                }
+            }
+        }
+
+        // search page
+        &:not(:has([data-content-region="category_below_header"])):not(:has([data-content-region="brand_below_header"])) {
+            @include eyeva-screen-mobile-tablet {
+                .facetedSearch-selected {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    // hide filter button on mobile when there is no sidebar or faceted filters
+    &:not(:has(.plp-page-sidebar .sidebarBlock)):not(:has(.plp-page-sidebar .facetedSearch-navList)) {
+        .facetedSearch-selected {
+            gap: 0;
+        }
+
+        .plp-page-sidebar-toggle {
+            display: none;
+        }
+    }
+}
+
+
+.plp-page-header {
+    grid-area: header;
+
+    @include breakpoint("medium") {
+        animation-name: eyeva__opacity-1;
+
+        ._animation-on & {
+            animation-duration: 0.6s;
+        }
+
+        &[aria-hidden="true"] {
+            display: none;
+
+            ~ .plp-page-sidebar {
+                display: none;
+            }
+        }
+
+        &:has(.plp-description) {
+            border-bottom: container("border");
+        }
+    }
+
+    &:has(.plp-main-image._brand) {
+        .plp-page-title {
+            @include u-hidden("visually");
+        }
+    }
+}
+
+.plp-page-sidebar {
+    grid-area: sidebar;
+
+    @include eyeva-screen-mobile-tablet {
+        @include papathemes__modal-overlay($position: "bottom");
+        display: none;
+
+        &[aria-hidden="false"] {
+            display: flex;
+        }
+    }
+
+    @include breakpoint("medium") {
+        animation-name: eyeva__opacity-1;
+        display: block;
+
+        ._animation-on & {
+            animation-duration: 0.6s;
+        }
+    }
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        gap: spacing("base");
+    }
+}
+
+.plp-page-sidebar-modal {
+    @include eyeva-screen-mobile-tablet {
+        @include papathemes__modal($position: "bottom");
+    }
+}
+
+.plp-page-sidebar-modal-close {
+    display: none;
+
+    @include eyeva-screen-mobile-tablet {
+        @include papathemes__modal-close($height: $eyeva-button-height - 1px);
+    }
+}
+
+.plp-page-sidebar-modal-header {
+    display: none;
+
+    @include eyeva-screen-mobile-tablet {
+        @include papathemes__modal-header;
+    }
+}
+
+.faceted-search-container {
+    @include eyeva-screen-mobile-tablet {
+        @include papathemes__modal-body;
+        padding-bottom: spacing("base") * 2 + remCalc($eyeva-button-height);
+    }
+}
+
+.faceted-search-container-nav-footer {
+    @include eyeva-screen-mobile-tablet {
+        background: container("fill");
+        bottom: 0;
+        box-shadow: $eyeva-shadow-panel;
+        display: flex;
+        gap: spacing("base");
+        left: 0;
+        padding: spacing("base");
+        position: absolute;
+        right: 0;
+
+        .button {
+            margin: 0;
+        }
+
+        .button--primary {
+            flex: 1;
+        }
+    }
+    @include breakpoint("medium") {
+        display: none;
+    }
+}
+
+.plp-page-main {
+    grid-area: main;
+
+    @include breakpoint("medium") {
+        padding-top: spacing("base");
+    }
+
+    .plp-page:has(.plp-page-header.is-open) & {
+        .productGrid {
+            @include breakpoint("medium") {
+                grid-template-columns: repeat(floor(stencilNumber("product_col", "")) - 1, 1fr);
+            }
+
+            @include breakpoint("large") {
+                grid-template-columns: repeat(floor(stencilNumber("product_col_l", "")) - 1, 1fr);
+            }
+
+            @include breakpoint("xlarge") {
+                grid-template-columns: repeat(floor(stencilNumber("product_col_xl", "")) - 1, 1fr);
+            }
+        }
+    }
+}
+
+.plp-page-title {
+    font-size: fontSize("larger");
+    margin: 0 0 spacing("base");
+}
+
+.plp-main-image {
+    margin-bottom: spacing("base");
+    max-width: 100%;
+
+    &._category,
+    &._brand {
+        @include lazy-loaded-padding("brand_size");
+        position: relative;
+
+        img {
+            @include lazy-loaded-img;
+            margin-block-start: 0;
+            margin-inline-start: 0;
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+    }
+
+    &._category {
+        @include lazy-loaded-padding("category_size");
+    }
+
+    &._brand {
+        @include lazy-loaded-padding("brand_size");
+    }
+}
+
+.plp-description {
+    @include eyeva-text-collapsible(
+        $mediumFontSizeRem: remCalc(fontSize("smaller"))
+    );
+
+    color: $color-textSecondary;
+    margin-bottom: spacing("base");
+}
+
+.plp-description-more {
+    .button {
+        font-size: fontSize("smaller");
+        margin: 0;
+    }
+}
+
+
+.sidebarBlock {
+    margin: 0;
+    padding: 0;
+
+    + .sidebarBlock {
+        margin: 0;
+    }
+}
+
+
+%sidebarBlock-heading {
+    font-family: $body-font-family;
+    font-size: fontSize("smaller");
+    font-weight: $eyeva-body-font-bold;
+    margin: 0;
+    padding: spacing("base") 0;
+
+    @include breakpoint("medium") {
+        font-size: fontSize("base");
+    }
+}
+
+%sidebarBlock-heading-button {
+    border: 0;
+    font-size: inherit;
+    gap: spacing("base");
+    justify-content: flex-start;
+    padding: 0;
+    width: 100%;
+
+    ._title {
+        margin-inline: 0 auto;
+    }
+
+    ._count {
+        @include _facetedSearch-countPill;
+        margin-right: spacing("third") + remCalc(36px);
+
+        @include breakpoint("medium") {
+            margin-right: 0;
+
+        }
+    }
+
+    .icon {
+        @include square(36px);
+        border: container("border");
+        border-radius: 50%;
+        padding: remCalc(10px);
+
+        svg {
+            fill: $color-textBase;
+        }
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: $color-primary;
+
+        .icon {
+            border-color: $color-primary;
+
+            svg {
+                fill: $color-primary;
+            }
+        }
+    }
+
+    &[aria-expanded="false"] {
+        .icon {
+            transform: rotate(-180deg);
+        }
+    }
+}
+
+.sidebarBlock-heading {
+    @extend %sidebarBlock-heading;
+
+    .button {
+        @extend %sidebarBlock-heading-button;
+    }
+}
+
+%sidebarBlock-list {
+    --animation-duration: 200;
+
+    display: grid;
+    gap: spacing("third");
+    grid-auto-rows: max-content;
+    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, calc(50% - #{spacing("third") / 2}));
+    list-style: none;
+    margin: 0;
+
+    &[aria-hidden="true"] {
+        display: none;
+    }
+
+    &._animating {
+        display: grid;
+    }
+
+    &._flex {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
+
+.sidebarBlock-list {
+    @extend %sidebarBlock-list;
+}
+
+%sidebarBlock-list-item {
+    display: contents;
+    margin: 0;
+}
+
+.sidebarBlock-list-item {
+    @extend %sidebarBlock-list-item;
+}
+
+%sidebarBlock-list-action {
+    background-color: container("fill");
+    border: container("border");
+    border-radius: $eyeva-medium-radius;
+    color: inherit;
+    display: block;
+    font-size: fontSize("smaller");
+    font-weight: $eyeva-body-font-bold;
+    padding: spacing("third") spacing("half");
+    text-align: center;
+    text-decoration: none;
+
+    @include breakpoint("medium") {
+        font-size: inherit;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        border-color: $color-textSecondary;
+        color: inherit;
+    }
+
+    &.navBar-action-color--active,
+    &.is-selected {
+        border-color: $color-textSecondary;
+    }
+
+    &._view-all {
+        border: 0;
+        color: $color-textLink;
+        font-size: fontSize("smaller");
+        grid-column: 1 / -1;
+
+        &:hover,
+        &:focus {
+            color: $color-textLink-hover;
+        }
+
+        &:active {
+            color: $color-textLink-active;
+        }
+    }
+
+    ._count {
+        color: $color-textSecondary;
+        font-weight: $body-font-weight;
+    }
+}
+
+.sidebarBlock-list-action {
+    @extend %sidebarBlock-list-action;
+}
+
+.facetedSearch {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+
+    .sidebarBlock + & {
+        border-top: container("border");
+    }
+
+    &[aria-hidden="true"] {
+        display: none;
+    }
+}
+
+.facetedSearch-refineFilters {
+    display: block;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    ._list {
+        display: flex;
+        gap: spacing("third");
+        list-style: none;
+        margin: 0;
+
+        @include breakpoint("medium") {
+            flex-wrap: wrap;
+        }
+    }
+
+    ._item {
+        display: inline;
+        display: contents;
+    }
+
+    ._link,
+    ._link-clearall {
+        align-items: center;
+        border: 1px solid transparent;
+        border-radius: $eyeva-small-button-radius;
+        display: inline-flex;
+        font-size: fontSize("smaller");
+        font-weight: $eyeva-body-font-bold;
+        gap: spacing("third");
+        padding: spacing("third") / 2 spacing("base");
+        text-decoration: none;
+        white-space: nowrap;
+
+        @include breakpoint("medium") {
+            font-size: inherit;
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            border-color: $color-textSecondary;
+            color: $color-textLink-hover;
+        }
+    }
+
+    ._link {
+        background-color: container("fill", "dark");
+
+        .icon {
+            @include square(8px);
+            fill: $color-textLink;
+            flex-shrink: 0;
+        }
+    }
+
+    ._link-clearall {
+        border: container("border");
+        color: inherit;
+    }
+}
+
+.facetedSearch-selected {
+    border-bottom: container("border");
+    display: grid;
+    gap: spacing("third");
+    grid-template-columns: auto 1fr;
+    padding-block: 0 spacing("base");
+
+    @include breakpoint("medium") {
+        border-bottom: 0;
+        border-top: container("border");
+
+        &:has(.facetedSearch-refineFilters ._list) {
+            padding-block: spacing("base");
+        }
+    }
+
+}
+
+.facetedSearch-navList {
+    display: block;
+
+    .navList {
+        border: container("border");
+        border-radius: $eyeva-medium-radius;
+        gap: 0;
+        padding: spacing("third") spacing("base");
+        text-align: start;
+    }
+
+    .navList--inner {
+        border: 0;
+        padding: 0;
+
+        .navList-item {
+            border-top: container("border");
+        }
+    }
+
+    .navList-item {
+        padding-block: spacing("third");
+
+        + .navList-item {
+            border-top: container("border");
+        }
+    }
+
+    .navList-action {
+        color: $color-textBase;
+
+        &:hover,
+        &:focus,
+        &:active {
+            color: $color-textLink-hover;
+
+            ._count {
+                color: inherit;
+            }
+        }
+
+        ._count {
+            color: $color-textSecondary;
+        }
+    }
+}
+
+.toggleLink {
+    color: $color-textLink;
+    font-size: fontSize("smaller");
+    font-weight: $eyeva-body-font-bold;
+
+    &:hover,
+    &:focus {
+        color: $color-textLink-hover;
+    }
+
+    &:active {
+        color: $color-textLink-active;
+    }
+
+    &._expanded {
+        .toggleLink-text--off {
+            display: none;
+        }
+
+        .toggleLink-text--on {
+            display: inline-block;
+        }
+    }
+
+    &:not(._expanded):not(.is-open) {
+        .toggleLink-text--on {
+            display: none;
+        }
+    }
+
+    &._loading {
+        &::after {
+            animation: eyeva__spin-loading 1s linear infinite;
+            border: 2px solid currentColor;
+            border-color: container("fill", "dark");
+            border-radius: 50%;
+            border-top-color: currentColor;
+            content: "";
+            display: inline-block;
+            height: fontSize("base");
+            margin-inline-start: spacing("half");
+            margin-top: (remCalc(fontSize("smaller")) * $eyeva-body-line-height - fontSize("base")) / 2;
+            position: absolute;
+            width: fontSize("base");
+        }
+    }
+}
+
+.toggleLink-text {
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+
+.plp-page-sidebar-toggle {
+    align-items: center;
+    border: container("border");
+    border-radius: $eyeva-small-button-radius;
+    color: $color-textBase;
+    display: flex;
+    font-size: fontSize("smaller");
+    font-weight: $eyeva-body-font-bold;
+    gap: spacing("third") / 2;
+    margin: 0;
+    padding: spacing("third") / 2 spacing("base");
+    text-decoration: none;
+
+    @include breakpoint("medium") {
+        display: none;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        border-color: $color-textSecondary;
+        color: $color-textLink-hover;
+    }
+
+    &.is-open {
+        border-radius: $eyeva-small-button-radius;
+    }
+
+    &:has(._count) {
+        padding-inline-end: spacing("third");
+    }
+
+    .icon {
+        @include square(fontSize("smaller"));
+        flex-shrink: 0;
+
+        svg {
+            fill: $color-textBase;
+        }
+    }
+
+    ._count {
+        @include _facetedSearch-countPill;
+    }
+}
+
+.facetedSearch-clearLink {
+    @include square(36px);
+    align-items: center;
+    background: container("fill", "dark");
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    right: spacing("third") + remCalc(36px);
+    top: spacing("base");
+    transform: none;
+
+    @include breakpoint("medium") {
+        opacity: 0;
+
+        &:focus,
+        .accordion-heading:hover & {
+            opacity: 1;
+        }
+    }
+
+    &:hover {
+        border: 1px solid $color-textLink-hover;
+
+        svg {
+            fill: $color-textLink-hover;
+        }
+    }
+
+    .icon {
+        @include square(12px);
+
+
+        svg {
+            fill: $color-textBase;
+        }
+    }
+}
+
+.accordion--navList {
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+
+    &::before,
+    &::after {
+        display: none;
+    }
+
+    .accordion-block {
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+
+        + .accordion-block {
+            border-top: container("border");
+        }
+    }
+
+    .accordion-heading {
+        @extend %sidebarBlock-heading;
+    }
+
+    .accordion-navigation {
+        @extend %sidebarBlock-heading-button;
+        margin-bottom: 0 !important;
+    }
+
+    .accordion-content {
+        --animation-duration: 200;
+
+        padding: 0 0 spacing("base");
+        text-align: center;
+
+        &._animating,
+        &.is-open {
+            display: flex;
+            flex-direction: column;
+            gap: spacing("third");
+        }
+
+        .form-inlineMessage {
+            text-align: start;
+        }
+    }
+}
+
+
+.eyeva__faceted-list {
+    @extend %sidebarBlock-list;
+}
+
+.eyeva__faceted-list-item {
+    @extend %sidebarBlock-list-item;
+}
+
+.eyeva__faceted-list-action {
+    @extend %sidebarBlock-list-action;
+
+    ._img,
+    ._color {
+        display: block;
+        overflow: hidden;
+        position: relative;
+
+        &::before {
+            content: "";
+            display: block;
+            padding-top: get-padding(stencilString("facet_img_size"));
+        }
+
+        img {
+            bottom: 0;
+            display: none;
+            display: block;
+            height: auto;
+            left: 0;
+            margin: auto;
+            object-fit: contain;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+        }
+    }
+
+    ._color {
+        border: container("border");
+        border-radius: 50%;
+        left: spacing("half");
+        position: absolute;
+        top: spacing("third");
+        width: get-width(stencilString("facet_color_size"));
+
+        &::before {
+            padding-top: get-padding(stencilString("facet_color_size"));
+        }
+
+        img {
+            object-fit: cover;
+        }
+    }
+
+    &:has(._color) {
+        padding-block: spacing("third") + remCalc(to-number(get-height(stencilString("facet_color_size"))) - fontSize("smaller") * $eyeva-body-line-height) / 2;
+        padding-inline-start: spacing("single") + remCalc(to-number(get-width(stencilString("facet_color_size"))));
+        position: relative;
+        text-align: start;
+        @include breakpoint("medium") {
+            padding-block: spacing("third") + remCalc(to-number(get-height(stencilString("facet_color_size"))) - $fontSize-root * $eyeva-body-line-height) / 2;
+        }
+    }
+}
+
+.plp-page-main-header {
+    display: grid;
+    grid-template:
+        "filter filter" auto
+        "left sort" auto / 1fr auto;
+
+    @include breakpoint("medium") {
+        grid-template:
+            "left title sort" auto
+            "filter filter filter" auto / 1fr fit-content(80%) 1fr;
+    }
+
+    &:has(.eyeva__sidebar-toggle.is-open) {
+        ._left .breadcrumbs {
+            display: none;
+        }
+    }
+
+    &:not(:has(.facetedSearch-selected ._list)) {
+        @include eyeva-screen-mobile-tablet {
+            grid-template: "filter left sort" auto / auto auto 1fr;
+            padding-bottom: spacing("base");
+
+            .facetedSearch-selected {
+                border-bottom: 0;
+                padding-block: 0;
+            }
+
+            .sortBox {
+                padding-block: 0;
+            }
+
+            ._products-count {
+                padding-block: 0;
+            }
+        }
+
+        @include breakpoint("medium") {
+            @if (stencilString("product_list_display_mode") == "list") {
+                .facetedSearch-selected {
+                    border: 0;
+                    padding-block: 0;
+                }
+            }
+        }
+    }
+
+    ._left {
+        align-items: center;
+        align-self: center;
+        column-gap: spacing("base");
+        display: grid;
+        grid-area: left;
+        grid-template-columns: auto 1fr;
+
+        @include breakpoint("medium") {
+            padding-block: spacing("base");
+        }
+
+        nav {
+            display: none;
+            grid-column: 1 / -1;
+
+            @include breakpoint("medium") {
+                display: block;
+
+            }
+        }
+
+        .breadcrumbs {
+            padding-block: spacing("third");
+        }
+    }
+
+    ._products-count {
+        color: $color-textSecondary;
+        display: block;
+        font-size: fontSize("smaller");
+        padding-block: spacing("base");
+
+        @include breakpoint("medium") {
+            font-size: inherit;
+            padding: 0;
+        }
+    }
+
+    ._plp-name {
+        align-items: center;
+        display: none;
+        font-family: $header-font-family;
+        font-size: fontSize("larger");
+        font-weight: $header-font-weight;
+        grid-area: title;
+        justify-content: center;
+        line-height: $eyeva-heading-line-height;
+        opacity: 1;
+        text-align: center;
+        transition: opacity 0.3s ease-out, font-size 0.3s ease-out;
+
+        @include breakpoint("medium") {
+            display: flex;
+            padding-block: spacing("base");
+
+            .plp-page-header.is-open ~ .plp-page-main & {
+                font-size: 0;
+                opacity: 0;
+                transition: opacity 0.3s ease-out, font-size 0.01s 0.3s;
+
+                .plp-main-image {
+                    width: 0;
+                }
+            }
+        }
+
+        .plp-main-image {
+            transition: width 0.3s ease-out;
+
+            &._brand {
+                width: get-width(stencilString("brand_size"));
+            }
+
+            img {
+                margin: auto;
+            }
+        }
+    }
+
+    .facetedSearch-selected {
+        grid-area: filter;
+    }
+
+    .sortBox {
+        grid-area: sort;
+        text-align: end;
+    }
+
+
+}
+
+.eyeva__sidebar-toggle {
+    align-items: center;
+    display: none;
+    font-weight: $eyeva-body-font-bold;
+    gap: spacing("third");
+
+    @include breakpoint("medium") {
+        display: flex;
+    }
+
+    &:not(.is-open) {
+        ._title._on {
+            display: none;
+        }
+
+        .icon {
+            transform: rotate(-180deg);
+        }
+    }
+
+    &.is-open {
+        ._title._off {
+            display: none;
+        }
+    }
+}
+
+.sortBox {
+    align-self: center;
+    padding-block: spacing("base");
+
+    .form-field {
+        margin: 0;
+        position: relative;
+
+        @include breakpoint("medium") {
+            display: inline-flex;
+            gap: spacing("third");
+            padding: spacing("third") 0 spacing("third") spacing("base");
+            width: auto;
+
+            &::before,
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    .form-label {
+        align-items: center;
+        color: $color-textBase;
+        display: flex;
+        font-size: fontSize("smaller");
+        font-weight: $eyeva-body-font-bold;
+        gap: spacing("third");
+        justify-content: flex-end;
+        margin: 0;
+
+        @include breakpoint("medium") {
+            font-size: fontSize("base");
+            white-space: nowrap;
+        }
+
+        .icon {
+            @include square(12px);
+        }
+    }
+
+    .form-select {
+        @include eyeva-screen-mobile-tablet {
+            background: transparent;
+            border-color: transparent;
+            color: transparent;
+            height: 100%;
+            left: 0;
+            min-height: auto;
+            padding: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+
+            option {
+                color: $input-font-color;
+            }
+        }
+        @include breakpoint("medium") {
+            background: none;
+            border: 0;
+            color: $color-textSecondary;
+            height: auto;
+            padding: 0;
+            text-align: end;
+            text-overflow: ellipsis;
+            width: 7rem;
+        }
+    }
+}
+
+.plp-page-region {
+    grid-area: bottom-region;
+}

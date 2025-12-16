@@ -1,0 +1,3 @@
+{
+  "components/eyeva/home-laptop-banners": "<div class=\"section section--laptop-banners _theme-styled\">\n    <div class=\"_grid\">\n        <div class=\"_col\">\n            {{{region name=\"home_laptop_banner1\"}}}\n        </div>\n        <div class=\"_col\">\n            {{{region name=\"home_laptop_banner2\"}}}\n            {{{region name=\"home_laptop_banner3\"}}}\n        </div>\n        <div class=\"_col\">\n            {{{region name=\"home_laptop_banner4\"}}}\n        </div>\n    </div>\n</div>\n"
+}

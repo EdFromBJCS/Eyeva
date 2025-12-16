@@ -1,0 +1,406 @@
+.form--2col {
+    display: grid;
+    gap: spacing("base");
+    grid-template-columns: 1fr 1fr;
+
+    @include eyeva-size-mobile {
+        display: flex;
+        flex-direction: column;
+    }
+
+    > * {
+        grid-column: 1 / -1;
+    }
+
+    > .form-row--half {
+        grid-column: span 1;
+    }
+
+    .form-row--half {
+        .form-field {
+            width: 100%;
+        }
+    }
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+    margin: 0;
+
+    &::before,
+    &::after {
+        display: none;
+    }
+}
+
+.form-row--third {
+    flex-direction: row;
+
+    .form-field {
+        padding: 0;
+    }
+}
+
+.form-row--grid-2 {
+    display: grid;
+    gap: spacing("base");
+    grid-template-columns: repeat(2, 1fr);
+
+    @include eyeva-size-mobile {
+        grid-template-columns: 1fr;
+    }
+
+    .form-field {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.form-label {
+    line-height: unset;
+
+    small {
+        margin-left: 0;
+    }
+
+    ._required,
+    ._optional {
+        font-size: 0;
+        margin-left: 0;
+
+        &::before {
+            font-size: fontSize("smaller");
+        }
+    }
+
+    ._required::before {
+        color: color("error");
+        content: "*";
+    }
+}
+
+.form-label--inlineSmall {
+    small {
+        margin-left: 0;
+    }
+}
+
+.form-select--small,
+.form-select--date {
+    background-position: right spacing("base") top  ($input-small-height - remCalc(18px)) / 2;
+    background-size: remCalc(18px);
+    line-height: 1;
+}
+
+.form-select--small {
+    max-width: none;
+}
+
+textarea.form-input {
+    height: auto;
+    min-height: remCalc(100px);
+}
+
+.form-input[type="number"] {
+    text-align: center;
+    width: remCalc(120px);
+}
+
+.form-input--incrementTotal {
+    font-size: fontSize("base");
+}
+
+
+%form-checkbox-label {
+    min-height: $checkRadio-baseDimension;
+    padding-top: spacing("third") / 2;
+
+    @include breakpoint("medium") {
+        font-size: fontSize("base");
+        padding-top: spacing("third") / 4;
+    }
+
+    &:hover,
+    &:focus {
+        &::before {
+            border-color: stencilColor("input-border-color-active");
+        }
+    }
+
+    &::before {
+        top: 0;
+    }
+
+    &::after {
+        left: remCalc($checkRadio-baseDimension - $checkRadio-pip-size) / 2;
+        top: remCalc($checkRadio-baseDimension - $checkRadio-pip-size) / 2;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+%form-checkbox-label-checked {
+    &::before {
+        background-color: stencilColor("input-border-color-active");
+        border-color: stencilColor("input-border-color-active");
+    }
+
+    &::after {
+        background-image: $check-pip-backgroundImage-active;
+    }
+}
+
+.form-checkbox,
+.form-radio {
+    + .form-label {
+        @extend %form-checkbox-label;
+    }
+
+    &:checked {
+        + .form-label {
+            @extend %form-checkbox-label-checked;
+        }
+    }
+}
+
+.form-radio {
+    + .form-label {
+        &::after {
+            background-color: transparent;
+            background-position: 50%;
+            background-repeat: no-repeat;
+            background-size: 100%;
+            border: 0;
+            border-radius: 0;
+        }
+    }
+}
+
+.form-file {
+    background-color: $input-bg-color;
+    border: 1px solid $input-border-color;
+    border-radius: $input-border-radius;
+    color: $color-textSecondary;
+    cursor: pointer;
+    font-size: fontSize("smaller");
+    height: auto;
+    padding: spacing("base");
+    width: 100%;
+
+    @include breakpoint("medium") {
+        font-size: fontSize("base");
+    }
+
+    &:hover,
+    &:focus {
+        border-color: $input-focus-border-color;
+    }
+
+    &::file-selector-button {
+        background-color: stencilColor("button--primary-backgroundColor");
+        border: 0;
+        border-radius: $button-radius;
+        color: stencilColor("button--primary-color");
+        cursor: pointer;
+        margin-right: spacing("base");
+        min-height: $eyeva-button-height;
+        padding: spacing("half") spacing("base") * 2;
+
+        &:hover,
+        &:focus {
+            background-color: stencilColor("button--primary-backgroundColorHover");
+        }
+    }
+}
+
+.form-fileDescription {
+    color: $color-textSecondary;
+    font-size: fontSize("smaller");
+    margin-bottom: 0;
+}
+
+
+// Modern form style
+// =============================================================================
+
+.form-field._modern {
+    align-items: stretch;
+    // padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    // border: 1px solid $input-border-color;
+    // border-radius: $input-border-radius;
+    position: relative;
+
+    .form-label {
+        align-items: flex-start;
+        display: flex;
+        gap: spacing("third") / 2;
+        grid-column: 1;
+        grid-row: 1;
+        margin: 0;
+        padding: (spacing("half") - remCalc(1px)) spacing("single");
+        transition: all 0.25s ease-in;
+
+        small {
+            color: transparent;
+            font-size: 0;
+            margin: 0;
+            vertical-align: baseline;
+
+            &::after {
+                color: color("error");
+                content: "*";
+                display: block;
+                font-size: fontSize("base");
+            }
+        }
+
+        &:has(~.form-row--third), // date
+        &:has(~.form-select),
+        &:has(~.form-input--filled),
+        &:has(~.form-input:placeholder-shown),
+        &:has(~.form-input:focus) {
+            background-color: container("fill");
+            border-radius: $eyeva-small-radius;
+            color: $color-textSecondary;
+            font-size: fontSize("smallest");
+            margin-left: spacing("half");
+            margin-top: -(spacing("third"));
+            padding: 0 spacing("third") / 2;
+            place-self: start;
+            position: relative;
+            width: auto;
+
+            small {
+                &::after {
+                    font-size: fontSize("smallest");
+                }
+            }
+        }
+    }
+
+    .form-row--third, // date
+    .form-input,
+    .form-select {
+        background-color: transparent;
+        grid-column: 1;
+        grid-row: 1;
+        height: auto;
+        min-height: $input-height;
+
+        // &:focus,
+        // &:placeholder-shown {
+        //     grid-row: 2;
+        // }
+    }
+
+    // .form-input--filled {
+    //     grid-row: 2;
+    // }
+}
+
+.form-field-group._modern {
+    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-top: fontSize("base") * $eyeva-body-line-height / 2;
+    position: relative;
+
+    @include eyeva-size-mobile-tablet {
+        margin-top: remCalc(fontSize("smaller") * $eyeva-body-line-height) / 2;
+
+        > .form-label {
+            font-size: fontSize("smaller");
+            margin-top: -(spacing("single") + remCalc(fontSize("smaller") * $eyeva-body-line-height) / 2);
+        }
+    }
+
+    > .form-label {
+        align-items: flex-start;
+        align-self: start;
+        background-color: container("fill");
+        border-radius: $eyeva-small-radius;
+        color: $color-textSecondary;
+        display: flex;
+        font-size: inherit;
+        gap: spacing("third") / 2;
+        grid-column: 1;
+        grid-row: 1;
+        margin-left: 0;
+        margin-right: auto;
+        margin-top: -(spacing("single") + fontSize("base") * $eyeva-body-line-height / 2);
+        padding: 0 spacing("third") / 2;
+        width: auto;
+
+        small {
+            color: transparent;
+            font-size: 0;
+            margin: 0;
+
+            &::after {
+                color: color("error");
+                content: "*";
+                display: block;
+                font-size: fontSize("smallest");
+            }
+        }
+    }
+
+    .form-field {
+        grid-column: 1;
+        grid-row: 1;
+    }
+}
+
+.form-option-expanded {
+    left: -100%;
+}
+
+.form-option {
+    &:hover {
+        .form-option-expanded {
+            left: auto;
+            right: 0;
+            transform: none;
+        }
+    }
+}
+
+.form-option-image {
+    background-size: contain;
+}
+
+
+.form-minMaxRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $form-minMaxRow-column-gutter;
+    justify-content: stretch;
+    margin-inline: 0;
+    max-width: 100%;
+
+    .form-field {
+        padding: 0;
+        width: auto;
+
+        &:last-child {
+            flex: 1;
+        }
+    }
+
+    .form-input {
+        height: $eyeva-small-button-height;
+        max-width: 7.5rem;
+        width: auto;
+    }
+
+    &::before,
+    &::after {
+        display: none;
+    }
+}

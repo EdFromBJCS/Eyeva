@@ -1,0 +1,212 @@
+%home-productsBlock {
+    @extend %eyeva-section-products;
+
+    &._loading {
+        position: relative;
+
+        &::before {
+            background: container("fill");
+            bottom: 0;
+            content: "";
+            left: 0;
+            opacity: 0.8;
+            position: absolute;
+            right: 0;
+            top: 0;
+            z-index: zIndex("low");
+        }
+
+        &::after {
+            @include loadingOverlay-spinner();
+            animation: spin $loadingOverlay-spinner-duration infinite $loadingOverlay-spinner-easing;
+            z-index: zIndex("low");
+        }
+    }
+
+    .productCarousel {
+        .blaze-prev,
+        .blaze-next {
+            @include eyeva-screen-mobile-tablet {
+                display: none;
+            }
+        }
+    }
+
+    .section-heading {
+        grid-column: if(stencilString("section_align") == "start", 1, 2);
+        margin-inline: 0;
+
+        @include eyeva-screen-mobile-tablet {
+            justify-content: start;
+            margin-bottom: spacing("base");
+            margin-inline: 0;
+            min-height: auto;
+            text-align: start;
+        }
+    }
+
+    .section-header-wrapper {
+        @include breakpoint("medium") {
+            display: grid;
+            gap: spacing("base");
+            grid-template-columns: if(stencilString("section_align") == "start",
+            1fr max-content (remCalc($eyeva-button-height) + spacing("base")) * 2,
+            1fr auto minmax((remCalc($eyeva-button-height) + spacing("base")) * 2, 1fr));
+        }
+    }
+}
+
+.topProducts {
+    @extend %home-productsBlock;
+}
+
+.categoryTabs {
+    background: if(stencilString("section_align") == "start", transparent, container("fill", "dark"));
+    border-radius: $button-radius;
+    display: flex;
+    flex-wrap: nowrap;
+    grid-column: if(stencilString("section_align") == "start", 2, 1);
+    grid-row: 1;
+    height: $eyeva-button-height;
+    list-style: none;
+    margin: 0 0 spacing("base");
+    max-width: 100%;
+    padding: spacing("third") / 2;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+
+    @include eyeva-screen-mobile-tablet {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    @include breakpoint("medium") {
+        margin: 0;
+    }
+}
+
+.categoryTabs-list {
+    display: contents;
+}
+
+.categoryTabs-item {
+    display: contents;
+
+    &._hide {
+        display: none;
+    }
+}
+
+.categoryTabs-link {
+    align-items: center;
+    background: if(stencilString("section_align") == "start", transparent, container("fill", "dark"));
+    border-radius: min(remCalc($eyeva-button-height) - spacing("third") / 2, remCalc($button-radius));
+    color: $color-textSecondary;
+    display: flex;
+    font-size: inherit;
+    font-weight: $eyeva-body-font-bold;
+    padding: 0 spacing("base");
+    position: relative;
+    text-decoration: none;
+    transition: all 0.2s ease-out;
+    // overflow: hidden;
+
+    &._active,
+    &:hover,
+    &:focus,
+    &:active {
+        background: container("fill");
+        box-shadow: $eyeva-shadow-item;
+        color: inherit;
+    }
+
+    &._more {
+        flex-shrink: 0;
+        justify-content: center;
+        padding: 0;
+        width: remCalc($eyeva-button-height) - spacing("third");
+
+        &::after {
+            display: none;
+        }
+    }
+
+    &::after {
+        border-right: container("border");
+        content: "";
+        height: fontSize("base");
+        position: absolute;
+        right: 0;
+    }
+
+    .categoryTabs-item:last-child &::after {
+        display: none;
+    }
+
+    .icon {
+        @include square(20px);
+
+        svg {
+            fill {
+                color: $color-textSecondary;
+            }
+        }
+    }
+
+    // span {
+    //     overflow: hidden;
+    //     text-overflow: ellipsis;
+    // }
+}
+
+.categoryTabs-dropdown {
+    background: container("fill");
+    border-radius: $eyeva-medium-radius;
+    box-shadow: $eyeva-shadow-panel;
+    display: flex;
+    flex-direction: column;
+    left: auto !important;
+    list-style: none;
+    margin: spacing("third") 0 0;
+    max-width: 100% !important;
+    opacity: 1;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 100% !important;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    width: auto !important;
+    z-index: zIndex("low");
+
+    &[aria-hidden="true"] {
+        opacity: 0;
+        transform: translateY(50px);
+
+        &:not(._opening):not(._closing) {
+            display: none;
+        }
+    }
+
+    .categoryTabs-link {
+        background: none;
+        padding: spacing("third") spacing("base");
+
+        &._active,
+        &:hover,
+        &:focus,
+        &:active {
+            background: container("fill", "dark");
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        &::after {
+            display: none;
+        }
+    }
+}

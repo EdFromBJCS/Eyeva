@@ -1,0 +1,42 @@
+<article class="card card--placeholder {{#if alternate}} card--alternate{{/if}}">
+    <figure class="card-figure">
+        <div class="card-img-container">
+            <img class="card-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" alt="loading" />
+        </div>
+        <figcaption class="card-figcaption"></figcaption>
+    </figure>
+    <div class="card-body">
+        <div class="card-body-row">
+            <h3 class="card-title">&nbsp;</h3>
+            <div class="card-prices" data-test-info-type="price">&nbsp;</div>
+        </div>
+
+        <div class="card-body-row-swatch-rating">
+            {{#if theme_settings.card_show_swatches}}
+                <div class="card-text card-text--colorswatches"></div>
+            {{/if}}
+
+            {{#and rating show_rating}}
+                <p class="card-ratings" data-test-info-type="productRating">
+                    <span class="rating--small"></span>
+                </p>
+            {{/and}}
+        </div>
+    </div>
+    <div class="card-footer">
+        {{#unless hide_product_quick_view}}
+            {{#if theme_settings.show_product_quick_view}}
+                <button type="button" class="card-figcaption-button quickview" disabled>
+                    <span class="icon"><!-- <svg aria-hidden="true"><use href="#icon-magnifying-glass"></use></svg> --></span>
+                    <span class="is-srOnly">{{lang 'products.quick_view'}}</span>
+                </button>
+            {{/if}}
+        {{/unless}}
+        {{#if show_compare}}
+            <button type="button" class="card-figcaption-button compare" disabled>
+                <span class="icon"><!-- <svg aria-hidden="true"><use href="#icon-chart-line"></use></svg> --></span>
+                <span class="is-srOnly">{{lang 'products.quick_view'}}</span>
+            </button>
+        {{/if}}
+    </div>
+</article>

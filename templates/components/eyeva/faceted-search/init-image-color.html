@@ -1,0 +1,18 @@
+{{#if theme_settings}}
+    {{assignVar 'facet_img_size_width' (toInt (first (split theme_settings.facet_img_size 'x')))}}
+    {{assignVar 'facet_color_size_width' (toInt (first (split theme_settings.facet_color_size 'x')))}}
+
+    {{assignVar '_tmp' " "}}
+    {{#each (split (lowercase theme_settings.facet_img) ',')}}
+        {{assignVar '_tmp' (get 'string' (multiConcat (getVar '_tmp') ',' (trim this)))}}
+    {{/each}}
+    {{#all (getVar '_tmp') (merge theme_settings facet_img_arr=(split (getVar '_tmp') ','))}}
+    {{/all}}
+
+    {{assignVar '_tmp' " "}}
+    {{#each (split (lowercase theme_settings.facet_color) ',')}}
+        {{assignVar '_tmp' (get 'string' (multiConcat (getVar '_tmp') ',' (trim this)))}}
+    {{/each}}
+    {{#all (getVar '_tmp') (merge theme_settings facet_color_arr=(split (getVar '_tmp') ','))}}
+    {{/all}}
+{{/if}}

@@ -1,0 +1,3 @@
+{
+  "components/eyeva/header/menu-toggle": "<button class=\"navUser-action _menu\" type=\"button\" data-collapsible=\"navPages\"\n    data-collapsible-disabled-breakpoint=\"medium\"\n    data-collapsible-disabled-state=\"open\"\n    data-collapsible-enabled-state=\"closed\"\n    aria-expanded=\"false\"\n    data-menu-toggle\n>\n    <i class=\"icon\">\n        <svg class=\"_open\"><use href=\"#icon-bars\"></use></svg>\n        <svg class=\"_close\"><use href=\"#icon-xmark-large\"></use></svg>\n    </i>\n    <span class=\"is-srOnly\">Toggle menu</span>\n</button>"
+}

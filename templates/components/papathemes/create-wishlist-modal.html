@@ -1,0 +1,19 @@
+<div id="creatingWishlistModalContent" style="display:none">
+    <form action="{{urls.account.wishlists.add}}" class="form" method="post">
+        <div class="form-field">
+            <label class="form-label" for="creatingWishlistModalContent_wishlistname">
+                {{lang 'forms.wishlist.name'}}
+                <small>{{lang 'common.required' }}</small>
+            </label>
+            <input class="form-input" name="wishlistname" id="creatingWishlistModalContent_wishlistname" value="" required>
+        </div>
+        <div class="form-field">
+            <input type="checkbox" class="form-checkbox" name="publicwishlist" id="creatingWishlistModalContent_publicwishlist">
+            <label class="form-label" for="creatingWishlistModalContent_publicwishlist">{{lang 'forms.wishlist.public'}}</label>
+
+        </div>
+        <div class="form-actions">
+            <input type="submit" class="button button--primary" value="{{lang 'account.wishlists.create'}}">
+        </div>
+    </form>
+</div>

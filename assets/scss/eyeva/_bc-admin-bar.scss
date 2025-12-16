@@ -1,0 +1,4 @@
+// Fix admin bar causing dropdown menus on the header to be overlapped
+.eyeva__bc-admin-bar-loaded > [data-menu-dropdown] {
+    margin-top: 0 !important;
+}

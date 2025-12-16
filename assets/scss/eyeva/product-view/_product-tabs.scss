@@ -1,0 +1,34 @@
+.productView-related {
+    @extend %eyeva-section-products;
+}
+
+.productView-productTabs {
+    @include eyeva-screen-mobile-tablet {
+        .productCarousel {
+            .blaze-prev,
+            .blaze-next {
+                display: none;
+            }
+        }
+    }
+
+    .section-heading {
+        justify-content: start;
+        margin-block-end: spacing("base") * 2;
+        margin-inline-start: 0;
+        text-align: start;
+
+        @include eyeva-size-mobile-tablet {
+            margin-block-end: spacing("base");
+        }
+    }
+
+    .section {
+        border-top: container("border");
+
+        ~ .section {
+            border-top: 0;
+            padding-block-start: 0;
+        }
+    }
+}

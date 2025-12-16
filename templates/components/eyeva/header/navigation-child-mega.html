@@ -1,0 +1,21 @@
+{{#if children}}
+    {{#unless id}}
+        {{#if (merge this id=(concat 'page-' (incrementVar 'incrementId')))}}{{/if}}
+    {{/unless}}
+    <a class="navPages-childList-action _mega {{#if is_active}} activePage{{/if}}" href="{{url}}">
+        <span class="navPages-label">{{name}}</span>
+    </a>
+    <div class="navPages-megaMenu-subMenu">
+        <ul class="navPages-megaMenu-childList">
+            {{#each children}}
+                <li class="navPages-childList-item">
+                    {{> components/eyeva/header/navigation-child-list depth=(add ../depth 1)}}
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+{{else}}
+    <a class="navPages-childList-action _mega {{#if is_active}} activePage{{/if}}" href="{{url}}">
+        <span class="navPages-label">{{name}}</span>
+    </a>
+{{/if}}

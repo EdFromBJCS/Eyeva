@@ -1,0 +1,52 @@
+.sale-flag-side,
+.sold-out-flag-side {
+    border-radius: remCalc(fontSize("smallest")) * $eyeva-body-line-height / 2 + spacing("third") / 4;
+    font-size: fontSize("smallest");
+    font-weight: if($eyeva-font-rubik, 500, 800);
+
+    padding: spacing("third") / 4 spacing("third");
+    position: relative;
+
+    &:first-child {
+        border-bottom-left-radius: 0;
+        margin-left: -4px;
+
+        &::before {
+            border: 3px solid;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            content: "";
+            left: 0;
+            position: absolute;
+            top: 100%;
+        }
+    }
+}
+
+.sale-flag-side {
+    background-color: stencilColor("color_badge_product_sale_badges");
+    color: stencilColor("color_text_product_sale_badges");
+
+    &:first-child {
+        &::before {
+            border-right-color: stencilColor("color_badge_product_sale_badges");
+            border-top-color: stencilColor("color_badge_product_sale_badges");
+        }
+    }
+
+    .sale-text {
+        display: flex;
+    }
+}
+
+.sold-out-flag-side {
+    background-color: stencilColor("color_badge_product_sold_out_badges");
+    color: stencilColor("color_text_product_sold_out_badges");
+
+    &:first-child {
+        &::before {
+            border-right-color: stencilColor("color_badge_product_sold_out_badges");
+            border-top-color: stencilColor("color_badge_product_sold_out_badges");
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{{#if product.related_products}}
+    <div class="section section--related">
+        <div class="productView-related">
+            <h2 class="section-heading">{{lang 'products.related_products'}}</h2>
+            {{> components/products/carousel products=product.related_products list="Related Products"}}
+        </div>
+    </div>
+{{/if}}
+
+{{{region name="product_below_related"}}}
+{{{region name="product_below_related--global"}}}
+
+<div class="section section--recentlyViewed">
+    {{> components/products/recentviewed display_type='carousel'}}
+</div>
+
+{{{region name="product_below_recently_viewed"}}}
+{{{region name="product_below_recently_viewed--global"}}}

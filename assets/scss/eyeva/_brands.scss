@@ -1,0 +1,72 @@
+.brandGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 (-(spacing("third"))) spacing("base") * 2;
+    row-gap: spacing("base");
+
+    @include breakpoint("medium") {
+        margin-inline: -(spacing("half"));
+        row-gap: spacing("single");
+    }
+
+    &::before,
+    &::after {
+        display: none;
+    }
+
+    .brand {
+        padding-inline: spacing("third");
+
+        @include breakpoint("medium") {
+            padding-inline: spacing("half");
+        }
+
+        @include breakpoint("large") {
+            width: 16.6666%;
+        }
+
+        .card-figure__link {
+            color: inherit;
+            text-decoration: none;
+
+            &:hover,
+            &:focus {
+                color: $color-textLink-hover;
+            }
+
+            &:active {
+                color: $color-textLink-active;
+            }
+        }
+
+        .card-figure-title {
+            align-items: center;
+            bottom: 0;
+            display: flex;
+            font-family: $header-font-family;
+            font-size: fontSize("base");
+            font-weight: $header-font-weight;
+            justify-content: center;
+            left: 0;
+            margin: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+
+            @include breakpoint("medium") {
+                font-size: fontSize("small");
+            }
+        }
+
+        .card-img-container {
+            max-width: none;
+        }
+    }
+}
+
+.page-type-brands {
+    .pagination {
+        margin-bottom: spacing("base") * 2;
+    }
+}

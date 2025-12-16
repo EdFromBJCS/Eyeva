@@ -1,0 +1,23 @@
+{{!--
+Input:
+- product: object - product object
+- theme_settings: object - theme settings
+--}}
+{{#all product.can_purchase theme_settings.shipping_countdown (unless product.pre_order)}}
+    <div
+        data-papathemes-shipping-countdown="{{getVar 'shippingCountdown'}}"
+        data-hour-text="{{{lang 'shipping_countdown.hour'}}}"
+        data-hours-text="{{{lang 'shipping_countdown.hours'}}}"
+        data-minute-text="{{{lang 'shipping_countdown.minute'}}}"
+        data-minutes-text="{{{lang 'shipping_countdown.minutes'}}}"
+        class="productView-shippingCountdown"
+        style="display:none">
+            <i class="icon" aria-hidden="true"><svg><use href="#icon-truck-fast"></svg></i>
+            <div data-today-hm>{{{lang 'shipping_countdown.today_hm'}}}</div>
+            <div data-today-m>{{{lang 'shipping_countdown.today_h'}}}</div>
+            <div data-tomorrow-hm>{{{lang 'shipping_countdown.tomorrow_hm'}}}</div>
+            <div data-tomorrow-m>{{{lang 'shipping_countdown.tomorrow_m'}}}</div>
+            <div data-monday>{{{lang 'shipping_countdown.monday'}}}</div>
+            <div data-custom></div>
+    </div>
+{{/all}}

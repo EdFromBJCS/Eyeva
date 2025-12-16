@@ -1,0 +1,7 @@
+<div>
+    {{#each category.products}}
+        <div class="productCarousel-slide">
+            {{> components/products/card settings=../settings show_compare=../theme_settings.card_show_compare show_rating=../settings.show_product_rating theme_settings=../theme_settings customer=../customer event="list" position=(add @index 1)}}
+        </div>
+    {{/each}}
+</div>

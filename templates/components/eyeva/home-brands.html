@@ -1,0 +1,35 @@
+<div class="section section--brands">
+    <div class="brandCarousel">
+        <div class="section-header-wrapper">
+            <h2 class="section-heading">{{lang 'home.featured_brands'}}</h2>
+            <a href="{{urls.brands}}" class="button button--outline brandCarousel-more">
+                {{lang 'brand.more_brands'}}
+                <i class="icon" aria-hidden="true"><svg><use href="#icon-arrow-right-long"></use></svg></i>
+            </a>
+        </div>
+
+        <div class="brandCarousel-container" data-brand-carousel-container>
+            <div class="brandCarousel-list _style-{{theme_settings.home_brands_style}}" data-brand-carousel>
+                {{#each brands}}
+                    <div class="brandCarousel-item" data-brand-carousel-id="{{id}}">
+                        <a href="{{url}}" class="brandCarousel-link">
+                            <div class="brandCarousel-image-container" data-brand-image-container>
+                                <span class="brandCarousel-name">{{name}}</span>
+                            </div>
+                            {{#if ../theme_settings.home_brands_style '==' 'sofas'}}
+                                <span class="brandCarousel-name-alt">{{name}}</span>
+                            {{/if}}
+                        </a>
+                    </div>
+                {{/each}}
+                <div class="brandCarousel-item">
+                    <a href="{{urls.brands}}" class="brandCarousel-link">
+                        <div class="brandCarousel-image-container">
+                            <span class="brandCarousel-name">{{lang 'brand.more_brands'}}...</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

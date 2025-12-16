@@ -1,0 +1,20 @@
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.account.js' resourceHint='preload' as='script'}}" as="script">
+{{/partial}}
+
+{{#partial "page"}}
+<div class="account">
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    <h2 class="page-heading">{{lang 'account.recent_items.heading' }}</h2>
+    {{> components/account/navigation account_page='recent_items'}}
+
+    {{#unless customer.recently_viewed_products.items}}
+        {{> components/common/alert/alert-info (lang 'account.recent_items.no_items')}}
+    {{/unless}}
+
+    <div class="account-recentItems">
+        {{> components/products/grid products=customer.recently_viewed_products.items show_compare=customer.recently_viewed_products.show_compare}}
+    </div>
+</div>
+{{/partial}}
+{{> layout/base}}

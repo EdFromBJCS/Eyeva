@@ -1,0 +1,95 @@
+.productView-customFields {
+    .productView-collapsible-title {
+        border-top: container("border");
+        padding-top: spacing("single");
+    }
+}
+
+.productView-collapsible-content._customFields {
+    .productView-info {
+        border: 0;
+        display: grid;
+        grid-template-columns: auto auto;
+        margin: 0;
+        padding: 0;
+
+        @include breakpoint("medium") {
+            font-size: inherit;
+            grid-template-columns: auto auto spacing("single") auto auto;
+        }
+
+        &::before,
+        &::after {
+            display: none;
+        }
+    }
+
+
+    .productView-info-name {
+        background: container("fill", "dark");
+        color: $color-textSecondary;
+        grid-column: 1;
+        margin: 0;
+        padding: spacing("half") spacing("base");
+
+        @include breakpoint("medium") {
+            &:nth-child(4n - 1) {
+                grid-column: 4;
+            }
+
+            &:nth-child(3) ~ .productView-info-name {
+                border-top: container("border");
+            }
+        }
+
+        @include eyeva-screen-mobile-tablet {
+            ~ .productView-info-name {
+                border-top: container("border");
+            }
+        }
+    }
+
+    .productView-info-value {
+        grid-column: 2;
+        margin: 0;
+        padding: spacing("half") spacing("base");
+
+        @include breakpoint("medium") {
+            &:nth-child(4n) {
+                grid-column: 5;
+            }
+
+            &:nth-child(4) ~ .productView-info-value {
+                border-top: container("border");
+            }
+        }
+
+        @include eyeva-screen-mobile-tablet {
+            ~ .productView-info-value {
+                border-top: container("border");
+            }
+        }
+    }
+}
+
+.quickView .productView-collapsible-content._customFields {
+    .productView-info {
+        grid-template-columns: auto auto;
+    }
+
+    .productView-info-name {
+        grid-column: 1;
+
+        &:nth-child(3) {
+            border-top: container("border");
+        }
+    }
+
+    .productView-info-value {
+        grid-column: 2;
+
+        &:nth-child(4) {
+            border-top: container("border");
+        }
+    }
+}

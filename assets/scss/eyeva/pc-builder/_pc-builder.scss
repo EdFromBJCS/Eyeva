@@ -1,0 +1,1700 @@
+/**
+ * PC Builder Main Styles - Giao diện chính PC Builder
+ *
+ * COPYRIGHT NOTICE:
+ * ================
+ * This code is proprietary and confidential to PapaThemes.
+ * Copyright (c) 2024 PapaThemes. All rights reserved.
+ *
+ * This code is specifically developed for the Eyeva theme and is intended
+ * for use exclusively within the Eyeva theme framework.
+ *
+ * RESTRICTIONS:
+ * - This code may NOT be copied, reproduced, or distributed in any form
+ * - This code may NOT be modified, refactored, or adapted for other themes
+ * - This code may NOT be used as inspiration or reference for other projects
+ * - Any attempt to extract, reverse engineer, or reuse this code for other
+ *   themes or projects constitutes a violation of intellectual property rights
+ *
+ * LEGAL NOTICE:
+ * Unauthorized use, copying, modification, or distribution of this code
+ * is strictly prohibited and may result in legal action.
+ *
+ * For licensing inquiries, please contact PapaThemes.
+ */
+
+.papathemes-pcbuilder-page {
+    margin-bottom: spacing("double");
+}
+
+.papathemes-pcbuilder-header {
+    margin-bottom: spacing("base");
+    text-align: center;
+
+    @include breakpoint("medium") {
+        text-align: left;
+    }
+
+    .page-heading {
+        margin: 0 0 spacing("half");
+    }
+}
+
+// 2-Column Layout
+.papathemes-pcbuilder-layout {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+
+    @include breakpoint("medium") {
+        display: grid;
+        gap: spacing("single");
+        grid-template-columns: 1fr 320px;
+    }
+
+    @include breakpoint("large") {
+        gap: spacing("double");
+        grid-template-columns: 1fr 360px;
+    }
+}
+
+// Left Column: Main Content
+.papathemes-pcbuilder-main {
+    min-width: 0; // để tránh overflow trong grid
+    padding-bottom: spacing("double"); // Add bottom padding since final actions removed
+
+    // Mobile/Tablet: extra bottom padding to avoid fixed sidebar
+    @include eyeva-screen-mobile-tablet {
+        padding-bottom: 120px; // Account for fixed sidebar height
+    }
+}
+
+// Right Column: Sidebar
+.papathemes-pcbuilder-sidebar {
+    align-self: flex-start;
+    max-height: calc(100vh - spacing("double"));
+    overflow-y: auto;
+    // Desktop: sidebar sticky
+    position: sticky;
+    top: spacing("base");
+
+    // Mobile/Tablet: fixed bottom compact design
+    @include eyeva-screen-mobile-tablet {
+        align-self: auto;
+
+        // Compact styling
+        background: container("fill");
+        border-top: container("border");
+        bottom: 0;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+        left: 0;
+        max-height: none;
+        overflow-y: visible;
+        padding: spacing("half") spacing("base");
+        // Fixed positioning
+        position: fixed;
+        right: 0;
+
+        // Reset desktop properties
+        top: auto;
+        z-index: zIndex("high");
+    }
+}
+
+// Components List (Main Content)
+.papathemes-pcbuilder-components {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("half");
+}
+
+// Component Row - Optimized layout với performance improvements
+.papathemes-pcbuilder-component-row {
+    align-items: flex-start;
+    background: container("fill");
+    border: container("border");
+    border-radius: $eyeva-medium-radius;
+    display: flex;
+    flex-direction: column;
+    gap: spacing("half");
+    min-height: auto;
+    padding: spacing("base");
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, box-shadow;
+
+    // Tablet & Desktop: horizontal layout
+    @include breakpoint("medium") {
+        align-items: center;
+        flex-direction: row;
+        gap: spacing("base");
+        justify-content: space-between;
+        min-height: 88px; // 56px + padding
+    }
+
+    // Large screens: Enhanced spacing
+    @include breakpoint("large") {
+        gap: spacing("single");
+        min-height: 96px;
+        padding: spacing("single");
+    }
+
+    // Hover effects với performance optimization
+    &:hover {
+        background: lighten(container("fill"), 2%);
+        border-color: lighten($color-primary, 30%);
+        box-shadow: 0 4px 12px rgba($color-primary, 0.12);
+        transform: translateY(-1px);
+    }
+
+    // Focus state cho accessibility
+    &:focus-within {
+        border-color: $color-primary;
+        box-shadow: 0 0 0 2px rgba($color-primary, 0.2);
+    }
+
+    // Performance optimization: Reduce repaints
+    * {
+        backface-visibility: hidden;
+    }
+}
+
+// Component Row - Selected state với enhanced visual feedback
+.papathemes-pcbuilder-component-row.papathemes-pcbuilder-selected {
+    background: lighten($color-primary, 60%);
+    border-color: $color-primary;
+    border-width: 2px;
+    box-shadow: 0 2px 8px rgba($color-primary, 0.15);
+
+    &:hover {
+        background: lighten($color-primary, 55%);
+        border-color: darken($color-primary, 5%);
+        box-shadow: 0 4px 16px rgba($color-primary, 0.2);
+        transform: translateY(-1px);
+    }
+
+    // Enhanced focus state for selected components
+    &:focus-within {
+        border-color: darken($color-primary, 10%);
+        box-shadow: 0 0 0 3px rgba($color-primary, 0.3);
+    }
+}
+
+.papathemes-pcbuilder-component-info {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    gap: spacing("half");
+    min-width: 0; // Allow text to truncate
+    width: 100%;
+
+    // Desktop: Enhanced spacing
+    @include breakpoint("medium") {
+        gap: spacing("base");
+    }
+
+    // Large screens: Better spacing
+    @include breakpoint("large") {
+        gap: spacing("single");
+    }
+
+    // Performance optimization
+    * {
+        backface-visibility: hidden;
+    }
+}
+
+// Category thumbnail - Fully simplified without effects
+.papathemes-pcbuilder-category-thumbnail {
+    align-items: center;
+    background: container("fill", "light");
+    border: 0;
+    border-radius: $eyeva-medium-radius;
+    cursor: pointer;
+    display: flex;
+    flex-shrink: 0;
+    height: 56px;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+    width: 56px;
+
+    // Tablet size
+    @include breakpoint("medium") {
+        height: 64px;
+        width: 64px;
+    }
+
+    // Desktop size
+    @include breakpoint("large") {
+        height: 80px;
+        width: 80px;
+    }
+}
+
+// Category thumbnail image - Simplified without hover effects
+.papathemes-pcbuilder-category-thumbnail img,
+.papathemes-pcbuilder-category-thumbnail .papathemes-pcbuilder-category-image {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+
+    // Loading state
+    &.loading {
+        opacity: 0.6;
+    }
+
+    // Error state
+    &.error {
+        opacity: 0.3;
+    }
+}
+
+// Category placeholder - Simplified
+.papathemes-pcbuilder-category-placeholder {
+    align-items: center;
+    background: container("fill", "light");
+    color: $color-textSecondary;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+// Category placeholder icon - Simplified
+.papathemes-pcbuilder-category-placeholder .icon {
+    @include square(28px);
+
+    // Tablet size
+    @include breakpoint("medium") {
+        @include square(32px);
+    }
+
+    // Desktop size
+    @include breakpoint("large") {
+        @include square(36px);
+    }
+
+    svg {
+        fill: currentColor;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.papathemes-pcbuilder-component-details {
+    flex: 1;
+    min-width: 0; // Allow text to truncate
+}
+
+.papathemes-pcbuilder-component-name {
+    color: $color-textBase;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: $eyeva-body-font-bold;
+    line-height: lineHeight("base");
+    margin: 0 0 spacing("quarter");
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.papathemes-pcbuilder-component-selection {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: spacing("quarter") / 2;
+    min-height: $eyeva-button-height; // Adequate height for thumbnail layout
+
+    // Đảm bảo selected product info có đủ width để layout ngang
+    .papathemes-pcbuilder-selected-product-info {
+        width: 100%;
+    }
+}
+
+// Layout khi chưa chọn sản phẩm
+.papathemes-pcbuilder-no-selection {
+    display: block;
+}
+
+// Hide no-selection when component is selected
+.papathemes-pcbuilder-component-row.papathemes-pcbuilder-selected .papathemes-pcbuilder-no-selection {
+    display: none;
+}
+
+.papathemes-pcbuilder-no-product-text {
+    color: $color-textSecondary;
+    font-size: fontSize("smaller");
+}
+
+.papathemes-pcbuilder-no-product-price {
+    color: $color-textSecondary;
+    font-size: fontSize("smaller");
+}
+
+// Layout khi đã chọn sản phẩm - đơn giản với single class
+.papathemes-pcbuilder-selected-product-info {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    gap: spacing("half");
+}
+
+// Hidden state for selected product info
+.papathemes-pcbuilder-selected-product-info.hidden {
+    display: none;
+}
+
+// Product thumbnail - Optimized và simplified
+.papathemes-pcbuilder-product-thumbnail {
+    align-items: center;
+    background: container("fill", "light");
+    border-radius: $eyeva-small-radius;
+    display: flex;
+    flex-shrink: 0;
+    height: 60px;
+    justify-content: center;
+    overflow: hidden;
+    width: 60px;
+
+    @include breakpoint("medium") {
+        height: 80px;
+        width: 80px;
+    }
+}
+
+// Product thumbnail image - Simplified
+.papathemes-pcbuilder-product-thumbnail img,
+.papathemes-pcbuilder-product-thumbnail .papathemes-pcbuilder-thumbnail-img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+}
+
+// Fallback when image fails to load - Simplified
+.papathemes-pcbuilder-thumbnail-fallback {
+    align-items: center;
+    background: container("fill", "light");
+    color: $color-textSecondary;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+}
+
+// Thumbnail fallback icon - Simplified
+.papathemes-pcbuilder-thumbnail-fallback .icon {
+    @include square(16px);
+
+    svg {
+        fill: currentColor;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+// Product details bên cạnh thumbnail
+.papathemes-pcbuilder-product-details {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: spacing("quarter") / 2;
+    justify-content: center; // Căn giữa text theo chiều dọc
+    min-width: 0; // Allow text truncation
+}
+
+.papathemes-pcbuilder-selected-product {
+    color: $color-textBase;
+    font-size: fontSize("smaller");
+    font-weight: $eyeva-body-font-bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.papathemes-pcbuilder-selected-price {
+    color: $color-primary;
+    font-size: fontSize("base");
+    font-weight: $eyeva-body-font-bold;
+}
+
+.papathemes-pcbuilder-component-actions {
+    align-items: center;
+    display: flex;
+    flex-shrink: 0;
+    gap: spacing("half");
+    justify-content: flex-start;
+    width: 100%;
+
+    // Tablet & Desktop: align right
+    @include breakpoint("medium") {
+        justify-content: flex-end;
+        width: auto;
+    }
+
+    // Large screens: Enhanced spacing
+    @include breakpoint("large") {
+        gap: spacing("base");
+    }
+
+    // Performance optimization
+    * {
+        backface-visibility: hidden;
+    }
+}
+
+// Component Controls - Optimized layout với enhanced spacing
+.papathemes-pcbuilder-component-controls {
+    align-items: center;
+    display: flex;
+    gap: spacing("quarter");
+    justify-content: flex-start;
+    min-width: auto;
+
+    // Tablet & Desktop: space-between with fixed width
+    @include breakpoint("medium") {
+        justify-content: space-between;
+        min-width: 140px; // Minimum width để ensure proper spacing
+    }
+
+    // Large screens: Enhanced spacing
+    @include breakpoint("large") {
+        gap: spacing("half");
+        min-width: 160px;
+    }
+
+    // Performance optimization
+    * {
+        backface-visibility: hidden;
+    }
+}
+
+
+
+// Quantity Control - perfect alignment với buttons
+.papathemes-pcbuilder-quantity-control.form-increment {
+    align-items: center;
+    border: $input-border-width $input-border-style $input-border-color;
+    border-radius: $input-border-radius;
+    display: flex;
+    flex-shrink: 0; // Prevent shrinking
+    margin: 0;
+}
+
+// Bỏ cố định chiều cao cho control số lượng
+.papathemes-pcbuilder-quantity-control.form-increment {
+    height: auto;
+}
+
+// Bỏ padding cho nút icon trong controls trên mobile, tablet
+@include eyeva-screen-mobile-tablet {
+    .papathemes-pcbuilder-component-controls .button--icon {
+        padding: 0;
+    }
+}
+
+// Quantity control buttons
+.papathemes-pcbuilder-qty-decrease,
+.papathemes-pcbuilder-qty-increase {
+    background: none;
+    border: 0;
+    transition: all 0.2s ease-out;
+
+    .icon {
+        @include square(14px);
+
+        svg {
+            fill: $color-textBase;
+        }
+    }
+
+    &:hover,
+    &:focus {
+        background: container("fill", "dark");
+        transform: none; // No transform để avoid breaking alignment
+
+        .icon svg {
+            fill: $color-primary;
+        }
+    }
+
+    &:active {
+        background: lighten($color-primary, 45%);
+        border: 0;
+    }
+}
+
+// Visual feedback for quantity changes
+.papathemes-pcbuilder-quantity-changed {
+    animation: papathemes-pcbuilder-quantityPulse 0.3s ease-out;
+}
+
+@keyframes papathemes-pcbuilder-quantityPulse {
+    0% {
+        background: transparent;
+        transform: scale(1);
+    }
+
+    50% {
+        background: lighten(stencilColor("color-success"), 50%);
+        transform: scale(1.05);
+    }
+
+    100% {
+        background: transparent;
+        transform: scale(1);
+    }
+}
+
+// Loading animation cho category thumbnails
+@keyframes papathemes-pcbuilder-thumbnailPulse {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+// Sidebar Styles
+.papathemes-pcbuilder-summary {
+    background: container("fill");
+    border: container("border");
+    border-radius: $eyeva-medium-radius;
+    margin-bottom: spacing("base");
+    padding: spacing("base");
+
+    // Hide on mobile/tablet - show only in bottom fixed bar
+    @include eyeva-screen-mobile-tablet {
+        display: none;
+    }
+}
+
+.papathemes-pcbuilder-summary-header {
+    border-bottom: container("border");
+    margin-bottom: spacing("base");
+    padding-bottom: spacing("half");
+
+    h2 {
+        color: $color-textBase;
+        font-size: $eyeva-font-18;
+        line-height: $eyeva-heading-line-height;
+        margin: 0;
+    }
+}
+
+.papathemes-pcbuilder-summary-content {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+}
+
+.papathemes-pcbuilder-total-price {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("quarter");
+}
+
+.papathemes-pcbuilder-price-label {
+    color: $color-textSecondary;
+}
+
+.papathemes-pcbuilder-price-value {
+    color: $color-primary;
+    font-size: fontSize("largest");
+    font-weight: $eyeva-body-font-bold;
+    line-height: $eyeva-heading-line-height;
+}
+
+// Progress Section (Sidebar)
+.papathemes-pcbuilder-progress {
+    background: container("fill");
+    border: container("border");
+    border-radius: $eyeva-medium-radius;
+    margin-bottom: spacing("base");
+    padding: spacing("base");
+
+    // Hide on mobile/tablet - show only essential info in bottom bar
+    @include eyeva-screen-mobile-tablet {
+        display: none;
+    }
+}
+
+.papathemes-pcbuilder-progress-header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: spacing("half");
+
+    h3 {
+        color: $color-textBase;
+        font-family: inherit;
+        font-size: inherit;
+        font-weight: inherit;
+        line-height: $eyeva-heading-line-height;
+        margin: 0;
+    }
+}
+
+.papathemes-pcbuilder-progress-text {
+    color: $color-textSecondary;
+    font-size: fontSize("smaller");
+    font-weight: $eyeva-body-font-bold;
+}
+
+.papathemes-pcbuilder-progress-bar {
+    background: container("fill", "dark");
+    border-radius: $eyeva-small-radius;
+    height: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+.papathemes-pcbuilder-progress-fill {
+    background: linear-gradient(90deg, $color-primary, lighten($color-primary, 10%));
+    border-radius: $eyeva-small-radius;
+    height: 100%;
+    transition: width 0.3s ease-out;
+    width: 0%;
+}
+
+// Build Actions (Sidebar)
+.papathemes-pcbuilder-build-actions {
+    background: container("fill");
+    border: container("border");
+    border-radius: $eyeva-medium-radius;
+    display: flex;
+    flex-direction: column;
+    gap: spacing("half");
+    margin-bottom: spacing("base");
+    padding: spacing("base");
+
+    // Mobile/Tablet: compact horizontal layout
+    @include eyeva-screen-mobile-tablet {
+        background: none;
+        border: 0;
+        border-radius: 0;
+        flex-direction: column;
+        gap: spacing("quarter");
+        margin-bottom: 0;
+        padding: 0;
+    }
+
+    // Special styling for Add to Cart button (first button)
+    #papathemes-pcbuilder-add-to-cart {
+        // Slightly larger than other buttons
+        padding: spacing("half") spacing("single");
+        position: relative;
+
+        // Remove margin and separator on mobile/tablet
+        @include eyeva-size-medium-down {
+            margin-bottom: 0;
+        }
+    }
+}
+
+// Primary Actions (always visible)
+.papathemes-pcbuilder-primary-actions {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("half");
+
+    // Mobile/Tablet: compact layout with summary
+    @include eyeva-size-medium-down {
+        flex-direction: column;
+        gap: spacing("quarter");
+    }
+}
+
+// Mobile Summary (price & progress in bottom bar)
+.papathemes-pcbuilder-mobile-summary {
+    display: none; // Hidden on desktop
+
+    @include eyeva-size-medium-down {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        // Removed margin-bottom, padding-bottom, and border-bottom per user request
+    }
+}
+
+.papathemes-pcbuilder-mobile-price {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+}
+
+.papathemes-pcbuilder-mobile-price-label {
+    color: $color-textSecondary;
+    font-size: fontSize("smallest");
+    line-height: 1;
+}
+
+.papathemes-pcbuilder-mobile-price-value {
+    color: $color-primary;
+    font-family: stencilFontFamily("headings-font");
+    font-size: fontSize("larger");
+    font-weight: stencilFontWeight("headings-font");
+    line-height: 1.2;
+}
+
+.papathemes-pcbuilder-mobile-progress {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+}
+
+.papathemes-pcbuilder-mobile-config-name {
+    color: stencilColor("color-primary");
+    font-size: fontSize("smaller");
+    font-weight: fontWeight("semibold");
+    line-height: 1.2;
+}
+
+.papathemes-pcbuilder-mobile-progress-text {
+    color: stencilColor("color-textSecondary");
+    font-size: fontSize("smallest");
+    font-weight: fontWeight("bold");
+}
+
+// Action Buttons Row (horizontal on mobile)
+.papathemes-pcbuilder-action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("half");
+
+    // Mobile/Tablet: horizontal layout
+    @include eyeva-size-medium-down {
+        flex-direction: row;
+        gap: spacing("quarter");
+
+        .papathemes-pcbuilder-action-button {
+            flex: 1;
+            font-size: fontSize("smaller");
+            min-height: $eyeva-small-button-height; // Touch-friendly
+            padding: spacing("quarter") spacing("half");
+        }
+    }
+}
+
+// Configuration Toggle Button (mobile only)
+.papathemes-pcbuilder-config-toggle {
+    align-items: center;
+    background: transparent;
+    border: container("border");
+    border-radius: $eyeva-small-button-radius;
+    color: $color-textBase;
+    cursor: pointer;
+    display: none; // Hidden on desktop
+    font-family: stencilFontFamily("body-font");
+    justify-content: center;
+    transition: all 0.3s ease-out;
+
+    @include eyeva-size-medium-down {
+        display: flex;
+        flex: 0 0 auto;
+        padding: 8px;
+        width: 40px; // Same as more-toggle
+    }
+
+    .icon {
+        height: 20px;
+        width: 20px;
+    }
+
+    &:hover,
+    &:focus {
+        background: container("fill", "dark");
+        border-color: $color-textBase;
+        color: $color-textBase;
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    &:focus {
+        outline: 2px solid rgba(stencilColor("color-primary"), 0.5);
+        outline-offset: 2px;
+    }
+}
+
+// Secondary Actions (collapsible on mobile/tablet)
+.papathemes-pcbuilder-secondary-actions {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("half");
+
+    // Mobile/Tablet: hidden by default, show with animation
+    @include eyeva-size-medium-down {
+        gap: spacing("quarter");
+        margin-top: 0;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: all 0.3s ease-out;
+
+        &.papathemes-pcbuilder-expanded {
+            margin-top: spacing("quarter");
+            max-height: 300px; // Enough for all buttons
+            opacity: 1;
+        }
+
+        .papathemes-pcbuilder-action-button {
+            font-size: fontSize("smaller");
+            min-height: $eyeva-small-button-height; // Touch-friendly secondary buttons
+            padding: spacing("quarter") spacing("half");
+        }
+    }
+}
+
+// More Toggle Button - square icon on mobile, hidden on desktop
+.papathemes-pcbuilder-more-toggle {
+    align-items: center;
+    background: transparent;
+    border: container("border");
+    border-radius: $eyeva-small-button-radius;
+    color: $color-textBase;
+    display: none; // Hidden on desktop by default
+    font-family: stencilFontFamily("body-font");
+    justify-content: center;
+    transition: all 0.3s ease-out;
+
+    // Mobile/tablet: show as flex button with height stretching
+    @include eyeva-size-medium-down {
+        display: flex;
+        flex: 0 0 auto; // flex: 0 - don't grow or shrink
+        padding: 8px;
+        width: 40px; // fixed width
+    }
+
+    &:hover,
+    &:focus {
+        background: container("fill", "dark");
+        border-color: $color-textBase;
+        color: $color-textBase;
+        transform: translateY(-1px);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    // Visual feedback when expanded
+    &.expanded {
+        background: $color-primary;
+        border-color: $color-primary;
+        color: stencilColor("color-white");
+
+        &:hover,
+        &:focus {
+            background: darken($color-primary, 10%);
+            border-color: darken($color-primary, 10%);
+        }
+    }
+
+    .icon {
+        @include square(16px);
+        margin: 0; // No margin for icon-only buttons
+
+        svg {
+            fill: currentColor;
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+// Selected Specs (Sidebar)
+.papathemes-pcbuilder-selected-specs {
+    background: container("fill");
+    border: container("border");
+    border-radius: $eyeva-medium-radius;
+    padding: spacing("base");
+
+    h3 {
+        color: $color-textBase;
+        font-family: stencilFontFamily("headings-font");
+        font-size: fontSize("base");
+        font-weight: stencilFontWeight("headings-font");
+        line-height: $eyeva-heading-line-height;
+        margin: 0 0 spacing("half");
+    }
+}
+
+.papathemes-pcbuilder-specs-content {
+    color: $color-textSecondary;
+    font-size: fontSize("smaller");
+    line-height: $eyeva-body-line-height;
+}
+
+// Button Styles
+.papathemes-pcbuilder-action-button {
+    border-radius: $eyeva-small-button-radius;
+    font-size: fontSize("smaller");
+    font-weight: $button-font-weight;
+    padding: spacing("quarter") spacing("base");
+    transition: all 0.3s ease-out;
+
+    @include breakpoint("medium") {
+        font-size: fontSize("base");
+        padding: spacing("half") spacing("single");
+    }
+
+    .icon {
+        @include square(14px);
+        margin-right: spacing("quarter");
+
+        @include breakpoint("medium") {
+            @include square(16px);
+        }
+
+        svg {
+            fill: currentColor;
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+// Select component button styling
+.papathemes-pcbuilder-action-button.papathemes-pcbuilder-select-component {
+    background: transparent;
+    border: container("border");
+    color: $color-primary;
+
+    &:hover,
+    &:focus {
+        background: $color-primary;
+        border-color: $color-primary;
+        color: stencilColor("color-white");
+    }
+
+    &:active {
+        background: darken($color-primary, 10%);
+        border-color: darken($color-primary, 10%);
+    }
+}
+
+// Primary button styling
+.papathemes-pcbuilder-action-button-primary {
+    background: $color-primary;
+    border: 1px solid $color-primary;
+    color: stencilColor("color-white");
+    position: relative;
+
+    &:hover,
+    &:focus {
+        background: darken($color-primary, 10%);
+        border-color: darken($color-primary, 10%);
+    }
+
+    // Loading state when adding to cart
+    &.adding {
+        background: lighten($color-primary, 10%);
+        border-color: lighten($color-primary, 10%);
+        cursor: wait;
+
+        .icon {
+            animation: papathemes-pcbuilder-spin 1s linear infinite;
+
+            svg {
+                fill: stencilColor("color-white");
+            }
+        }
+    }
+
+    // Success state after adding to cart
+    &.success {
+        background: stencilColor("color-success");
+        border-color: stencilColor("color-success");
+        cursor: default;
+
+        &:hover,
+        &:focus {
+            background: stencilColor("color-success");
+            border-color: stencilColor("color-success");
+        }
+
+        .icon svg {
+            fill: stencilColor("color-white");
+        }
+    }
+
+    // Error state if adding fails
+    &.error {
+        background: stencilColor("color-error");
+        border-color: stencilColor("color-error");
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            background: darken(stencilColor("color-error"), 10%);
+            border-color: darken(stencilColor("color-error"), 10%);
+        }
+
+        .icon svg {
+            fill: stencilColor("color-white");
+        }
+    }
+}
+
+// Secondary button styling
+.papathemes-pcbuilder-action-button-secondary {
+    background: transparent;
+    border: container("border");
+    color: $color-textBase;
+
+    &:hover,
+    &:focus {
+        background: container("fill", "dark");
+        color: $color-textBase;
+    }
+}
+
+// Success button styling
+.papathemes-pcbuilder-action-button-success {
+    background: stencilColor("color-success");
+    border: 1px solid stencilColor("color-success");
+    color: stencilColor("color-white");
+
+    &:hover,
+    &:focus {
+        background: darken(stencilColor("color-success"), 10%);
+        border-color: darken(stencilColor("color-success"), 10%);
+    }
+}
+
+// Full width button
+.papathemes-pcbuilder-action-button-full {
+    width: 100%;
+}
+
+// Keyframe animation cho loading spinner
+@keyframes papathemes-pcbuilder-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+// Save Build và Load Build button states
+#papathemes-pcbuilder-save-build,
+#papathemes-pcbuilder-load-build {
+    position: relative;
+
+    // Loading state styling
+    &.saving,
+    &.loading {
+        background: lighten($color-primary, 20%);
+        border-color: lighten($color-primary, 20%);
+        cursor: wait;
+
+        .icon-spinner {
+            animation: papathemes-pcbuilder-spin 1s linear infinite;
+        }
+    }
+
+    // Success state after save/load
+    &.success {
+        background: stencilColor("color-success");
+        border-color: stencilColor("color-success");
+        cursor: default;
+
+        &:hover,
+        &:focus {
+            background: stencilColor("color-success");
+            border-color: stencilColor("color-success");
+        }
+
+        .icon svg {
+            fill: stencilColor("color-white");
+        }
+    }
+
+    // Error state if save/load fails
+    &.error {
+        background: stencilColor("color-error");
+        border-color: stencilColor("color-error");
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            background: darken(stencilColor("color-error"), 10%);
+            border-color: darken(stencilColor("color-error"), 10%);
+        }
+
+        .icon svg {
+            fill: stencilColor("color-white");
+        }
+    }
+}
+
+// Special styling for Save Build button
+#papathemes-pcbuilder-save-build {
+    .icon {
+        margin-right: spacing("quarter");
+
+        svg {
+            fill: currentColor;
+        }
+    }
+
+    &:hover,
+    &:focus {
+        .icon {
+            transform: scale(1.1);
+            transition: transform 0.2s ease-out;
+        }
+    }
+}
+
+// Special styling for Load Build button
+#papathemes-pcbuilder-load-build {
+    .icon {
+        margin-right: spacing("quarter");
+
+        svg {
+            fill: currentColor;
+        }
+    }
+
+    &:hover,
+    &:focus {
+        .icon {
+            transform: translateY(-1px);
+            transition: transform 0.2s ease-out;
+        }
+    }
+}
+
+// Special styling for Export Excel button
+#papathemes-pcbuilder-export-excel {
+    .icon {
+        margin-right: spacing("quarter");
+
+        svg {
+            fill: currentColor;
+        }
+    }
+
+    &:hover,
+    &:focus {
+        .icon {
+            transform: scale(1.1);
+            transition: transform 0.2s ease-out;
+        }
+    }
+
+    // Loading state styling
+    &.exporting {
+        background: lighten($color-primary, 20%);
+        border-color: lighten($color-primary, 20%);
+        cursor: wait;
+
+        .icon-spinner {
+            animation: papathemes-pcbuilder-spin 1s linear infinite;
+        }
+    }
+
+    // Success state after export
+    &.success {
+        background: stencilColor("color-success");
+        border-color: stencilColor("color-success");
+        cursor: default;
+
+        &:hover,
+        &:focus {
+            background: stencilColor("color-success");
+            border-color: stencilColor("color-success");
+        }
+
+        .icon svg {
+            fill: stencilColor("color-white");
+        }
+    }
+
+    // Error state if export fails
+    &.error {
+        background: stencilColor("color-error");
+        border-color: stencilColor("color-error");
+        cursor: pointer;
+
+        &:hover,
+        &:focus {
+            background: darken(stencilColor("color-error"), 10%);
+            border-color: darken(stencilColor("color-error"), 10%);
+        }
+
+        .icon svg {
+            fill: stencilColor("color-white");
+        }
+    }
+}
+
+// File input styling (hidden but functional)
+#papathemes-pcbuilder-file-input {
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+}
+
+// Progress indicator for build operations
+.papathemes-pcbuilder-build-progress {
+    background: container("fill");
+    border: container("border");
+    border-radius: $eyeva-small-radius;
+    margin-top: spacing("half");
+    overflow: hidden;
+    padding: spacing("quarter");
+
+    .papathemes-pcbuilder-progress-bar {
+        background: container("fill", "dark");
+        border-radius: $eyeva-small-radius;
+        height: 4px;
+        overflow: hidden;
+        position: relative;
+
+        .papathemes-pcbuilder-progress-fill {
+            background: linear-gradient(90deg, stencilColor("color-success"), lighten(stencilColor("color-success"), 10%));
+            border-radius: $eyeva-small-radius;
+            height: 100%;
+            transition: width 0.3s ease-out;
+            width: 0%;
+        }
+    }
+
+    .papathemes-pcbuilder-progress-text {
+        color: $color-textSecondary;
+        font-size: fontSize("smallest");
+        margin-top: spacing("quarter");
+        text-align: center;
+    }
+}
+
+// Notification styles for save/load feedback
+.papathemes-pcbuilder-notification {
+    background: stencilColor("color-success");
+    border-radius: $eyeva-small-radius;
+    color: stencilColor("color-white");
+    font-size: fontSize("smaller");
+    font-weight: fontWeight("bold");
+    margin-top: spacing("half");
+    padding: spacing("half");
+    text-align: center;
+
+    &.error {
+        background: stencilColor("color-error");
+    }
+
+    &.warning {
+        background: stencilColor("color-warning");
+        color: $color-textBase;
+    }
+}
+
+// Animation for success/error feedback
+@keyframes papathemes-pcbuilder-buttonFeedback {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.papathemes-pcbuilder-action-button-feedback {
+    animation: papathemes-pcbuilder-buttonFeedback 0.3s ease-out;
+}
+
+// CSS Variables for PC Builder responsiveness
+.papathemes-pcbuilder-page {
+    // Desktop default values
+    --pcbuilder-button-size: #{$eyeva-button-height};
+    --pcbuilder-button-padding: #{spacing("half")};
+    --pcbuilder-gap: #{spacing("half")};
+
+    // Mobile/tablet overrides
+    @include eyeva-size-medium-down {
+        --pcbuilder-button-size: #{$eyeva-small-button-height};
+        --pcbuilder-button-padding: #{spacing("quarter")};
+        --pcbuilder-gap: #{spacing("quarter")};
+    }
+}
+
+// Remove old custom styles that conflict with foundation patterns
+.papathemes-pcbuilder-action-button-icon:not(.papathemes-pcbuilder-more-toggle),
+.papathemes-pcbuilder-quantity-wrapper,
+.papathemes-pcbuilder-qty-btn {
+    // These classes are now replaced by foundation button--icon and form-increment patterns
+    all: unset;
+    display: none;
+}
+
+// Hide file input - đơn giản với utility class
+.papathemes-pcbuilder-file-input {
+    display: none;
+    height: 1px;
+    opacity: 0;
+    position: absolute;
+    visibility: hidden;
+    width: 1px;
+    z-index: -1;
+}
+
+// Responsive adjustments for PC Builder controls
+@include eyeva-screen-mobile-tablet {
+    .papathemes-pcbuilder-component-controls {
+        gap: spacing("quarter") / 2;
+        // height: 36px; // Slightly smaller on mobile
+        min-width: 130px;
+        padding: spacing("quarter") / 3;
+
+        .button--icon {
+            height: 30px;
+            width: 30px;
+
+            .icon {
+                @include square(14px);
+            }
+        }
+    }
+
+    .papathemes-pcbuilder-component-row {
+        flex-direction: column;
+        gap: spacing("half");
+
+        .papathemes-pcbuilder-component-actions {
+            justify-content: center;
+            width: 100%;
+        }
+
+        .papathemes-pcbuilder-component-controls {
+            justify-content: center; // Center on mobile
+            width: auto;
+        }
+
+
+
+        // Optimize thumbnail size for mobile
+        .papathemes-pcbuilder-category-thumbnail {
+            height: 64px; // Larger for better touch targets
+            width: 64px;
+        }
+    }
+}
+
+//
+// Quick View Modal - Add to Build Button
+// Styles cho nút "Add to Build" trong Quick View modal
+//
+
+.papathemes-pcbuilder-add-to-build-wrapper {
+    margin-top: spacing("base");
+    width: 100%;
+
+    @include breakpoint("medium") {
+        margin-top: spacing("single");
+    }
+}
+
+.papathemes-pcbuilder-add-to-build-from-quickview {
+    // Chỉ giữ styles cần thiết, inherit primary button styles from theme
+    width: 100%;
+
+    // Mobile responsive
+    @include eyeva-screen-mobile-tablet {
+        .icon {
+            @include square(16px);
+        }
+    }
+
+    .icon {
+        @include square(18px);
+        flex-shrink: 0;
+
+        svg {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+// Quick View modal specific overrides
+.modal--quickView {
+    .papathemes-pcbuilder-add-to-build-wrapper {
+        border-top: 1px solid container("borderColor");
+        margin-top: spacing("base");
+        padding-top: spacing("base");
+
+        @include breakpoint("medium") {
+            margin-top: spacing("single");
+            padding-top: spacing("single");
+        }
+    }
+
+    // Ensure proper spacing within Quick View
+    .add-to-cart-wrapper {
+        .papathemes-pcbuilder-add-to-build-wrapper {
+            border-top: 1px solid stencilColor("color-greyLighter");
+        }
+    }
+}
+
+// PC Builder Quick View Modal - đơn giản với class modifier
+.papathemes-pcbuilder-quickview {
+    // Style Add to Cart button as outline
+    .add-to-cart-wrapper .button--primary {
+        background: transparent;
+        border: 1px solid $color-primary;
+        color: $color-primary;
+
+        &:hover,
+        &:focus {
+            background: $color-primary;
+            border-color: $color-primary;
+            color: stencilColor("color-white");
+        }
+
+        &:active {
+            background: darken($color-primary, 10%);
+            border-color: darken($color-primary, 10%);
+            color: stencilColor("color-white");
+        }
+    }
+}
+
+// Add to Build Button states - đơn giản hóa
+.papathemes-pcbuilder-add-to-build-btn {
+    width: 100%;
+
+    &.adding {
+        background: stencilColor("color-success");
+        border-color: stencilColor("color-success");
+        color: stencilColor("color-white");
+    }
+}
+
+// Remove margin bottom for component control buttons
+.papathemes-pcbuilder-edit-component,
+.papathemes-pcbuilder-remove-component {
+    margin-bottom: 0;
+}
+
+//
+// Selected Options Display
+// Styles cho hiển thị options đã chọn trong component
+//
+
+.papathemes-pcbuilder-selected-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: spacing("quarter");
+    margin-top: spacing("quarter");
+    width: 100%;
+}
+
+.papathemes-pcbuilder-selected-option {
+    display: inline-flex;
+    font-size: fontSize("smallest");
+    line-height: lineHeight("smallest");
+
+    @include breakpoint("medium") {
+        font-size: fontSize("smaller");
+        line-height: lineHeight("smaller");
+    }
+
+    // Add separator between options
+    &:not(:last-child) {
+        &::after {
+            color: $color-textSecondary;
+            content: "|";
+            margin-left: spacing("half");
+            margin-right: spacing("half");
+            opacity: 0.25;
+        }
+    }
+}
+
+.papathemes-pcbuilder-option-label {
+    color: $color-textSecondary;
+    font-weight: fontWeight("normal");
+    margin-right: spacing("quarter");
+    opacity: 0.8;
+}
+
+.papathemes-pcbuilder-option-value {
+    color: $color-textSecondary;
+    font-weight: fontWeight("normal");
+    opacity: 0.9;
+}
+
+// Responsive adjustments for selected options
+@include eyeva-screen-mobile-tablet {
+    .papathemes-pcbuilder-selected-options {
+        gap: spacing("eighth");
+        margin-top: spacing("eighth");
+    }
+
+    .papathemes-pcbuilder-selected-option {
+        font-size: fontSize("smallest");
+        line-height: lineHeight("smallest");
+    }
+
+    .papathemes-pcbuilder-option-label {
+        margin-right: spacing("eighth");
+    }
+}
+
+
+.papathemes-pcbuilder-thumbnail-fallback {
+    align-items: center;
+    color: $color-textSecondary;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    opacity: 0.5;
+    width: 100%;
+
+    .icon {
+        @include square(24px);
+
+        @include breakpoint("medium") {
+            @include square(32px);
+        }
+
+        svg {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+
+// Share Modal Styles
+.papathemes-pcbuilder-share-modal {
+    margin: 0 auto;
+    max-width: 600px;
+    padding: spacing("base");
+
+    .papathemes-pcbuilder-share-header {
+        margin-bottom: spacing("base") * 2;
+        text-align: center;
+
+        h3 {
+            color: stencilColor("color-textBase");
+            font-size: fontSize("large");
+            font-weight: fontWeight("bold");
+            margin: 0 0 spacing("base");
+        }
+
+        p {
+            color: stencilColor("color-textSecondary");
+            line-height: lineHeight("base");
+            margin: 0 0 spacing("base") / 2;
+        }
+
+        .papathemes-pcbuilder-share-components {
+            color: stencilColor("color-primary");
+            font-weight: fontWeight("semibold");
+        }
+    }
+
+    .papathemes-pcbuilder-share-form {
+        margin-bottom: spacing("base") * 2;
+
+        @include eyeva-size-mobile-tablet {
+            .papathemes-pcbuilder-copy-button {
+                min-width: auto;
+                width: 100%;
+            }
+        }
+
+        .form-field {
+            margin-bottom: 0;
+        }
+
+        label {
+            color: stencilColor("color-textBase");
+            display: block;
+            font-weight: fontWeight("semibold");
+            margin-bottom: spacing("base") / 2;
+        }
+
+        .papathemes-pcbuilder-share-input-group {
+            align-items: stretch;
+            display: flex;
+            gap: spacing("base") / 2;
+
+            @include eyeva-size-mobile-tablet {
+                flex-direction: column;
+                gap: spacing("base");
+            }
+        }
+
+        .papathemes-pcbuilder-share-input {
+            background-color: stencilColor("color-greyLightest");
+            border: 1px solid stencilColor("color-greyLighter");
+            border-radius: borderRadius("base");
+            cursor: text;
+            flex: 1;
+            font-family: fontFamily("mono");
+            font-size: fontSize("smaller");
+            padding: spacing("base") / 2 spacing("base");
+
+            &:focus {
+                border-color: stencilColor("color-primary");
+                box-shadow: 0 0 0 2px rgba(stencilColor("color-primary"), 0.1);
+                outline: none;
+            }
+
+            &[readonly] {
+                background-color: stencilColor("color-greyLightest");
+                color: stencilColor("color-textSecondary");
+            }
+        }
+
+        .papathemes-pcbuilder-copy-button {
+            min-width: 120px;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+
+            &:disabled {
+                background-color: stencilColor("color-success");
+                border-color: stencilColor("color-success");
+                color: white;
+            }
+        }
+    }
+}
+
+// Share Modal Overlay
+.papathemes-pcbuilder-share-modal-overlay {
+    background-color: rgba(stencilColor("color-black"), 0.8);
+}
+
+// Share Modal Content
+.papathemes-pcbuilder-share-modal-content {
+    background: stencilColor("color-white");
+    border-radius: borderRadius("large");
+    box-shadow: 0 10px 30px rgba(stencilColor("color-black"), 0.3);
+    max-height: 90vh;
+    max-width: 600px;
+    overflow-y: auto;
+    width: 90%;
+
+    @include eyeva-size-mobile-tablet {
+        margin: spacing("base");
+        width: 95%;
+    }
+}

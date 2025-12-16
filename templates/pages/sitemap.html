@@ -1,0 +1,37 @@
+{{#partial "page"}}
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+<main class="page site-map">
+    <h1 class="page-heading">{{lang 'sitemap.page_title'}}</h1>
+
+    <ul class="sitemap">
+        {{#each sitemap}}
+            <li class="sitemap-section">
+                <h2 class="sitemap-section-title">{{label}}</h2>
+                <ul class="sitemap-list">
+                    {{#each body}}
+                    <li class="sitemap-item">
+                        <a href="{{url}}" class="sitemap-link">{{label}}</a>
+                        {{#if children}}
+                            <ul class="sitemap-sublist">
+                            {{#each children}}
+                                {{> components/sitemap/links}}
+                            {{/each}}
+                            </ul>
+                        {{/if}}
+                    </li>
+                    {{/each}}
+                    {{#if show_all_link}}
+                        <li class="sitemap-show-all">
+                            <a href="{{subsection_url}}" class="sitemap-link sitemap-link-show-all">{{lang 'sitemap.show_all_link'}}</a>
+                        </li>
+                    {{/if}}
+                </ul>
+            </li>
+        {{/each}}
+    </ul>
+</main>
+
+{{/partial}}
+{{> layout/base}}

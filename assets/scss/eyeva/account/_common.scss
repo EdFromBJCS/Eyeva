@@ -1,0 +1,139 @@
+.account {
+    .page-heading {
+        margin-bottom: spacing("single");
+        text-align: start;
+
+        @include eyeva-screen-mobile-tablet {
+            font-size: fontSize("large");
+        }
+
+        @include breakpoint("medium") {
+            margin-bottom: spacing("base") * 2;
+        }
+
+        &.title {
+            text-align: center;
+        }
+    }
+
+    .alertBox {
+        display: flex;
+        margin: 0 auto spacing("base");
+        width: fit-content;
+
+        @include breakpoint("medium") {
+            margin-bottom: spacing("base") * 2;
+        }
+    }
+
+    .alertBox-message {
+        width: auto;
+    }
+
+    .alertBox-icon {
+        padding-right: spacing("base");
+    }
+
+    .pagination {
+        margin-top: spacing("single");
+    }
+}
+
+.navBar--account {
+    display: block;
+}
+
+.navBar--sub {
+    margin-bottom: spacing("base");
+
+    @include breakpoint("medium") {
+        margin-bottom: spacing("base") * 2;
+    }
+
+    .container & {
+        @include eyeva-screen-mobile-tablet {
+            margin-inline: -(spacing("base"));
+        }
+    }
+
+    .navBar-item {
+        margin: 0;
+
+        + .navBar-item {
+            margin-left: -1px;
+        }
+
+        &:first-child {
+            .navBar-action {
+                border-top-left-radius: $eyeva-medium-radius;
+            }
+        }
+
+        &:last-child {
+            .navBar-action {
+                border-top-right-radius: $eyeva-medium-radius;
+            }
+        }
+
+        &.is-active {
+            border-bottom: 0;
+
+            .navBar-action {
+                background: container("fill");
+                border-bottom-color: transparent;
+                color: inherit;
+            }
+        }
+    }
+
+    .navBar-action {
+        background: container("fill", "dark");
+        border: container("border");
+        color: $color-textLink;
+        display: block;
+        font-weight: $eyeva-body-font-bold;
+        padding: spacing("third") spacing("base");
+
+        @include breakpoint("large") {
+            font-size: fontSize("small");
+            padding: spacing("half") spacing("single");
+        }
+
+        @include breakpoint("xxlarge") {
+            font-size: fontSize("small");
+            padding: spacing("half") spacing("double");
+        }
+
+        &:hover,
+        &:focus {
+            background: container("fill");
+            color: $color-textLink-hover;
+        }
+
+        &:active {
+            color: $color-textLink-active;
+        }
+    }
+}
+
+.navBar-section {
+    display: flex;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &::before,
+    &::after {
+        border-bottom: container("border");
+        content: "";
+        display: block;
+        flex: 1;
+        flex-shrink: 0;
+        min-width: spacing("base");
+        width: auto;
+    }
+}

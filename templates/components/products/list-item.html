@@ -1,0 +1,101 @@
+<article
+    class="listItem"
+    data-test="card-{{id}}"
+    data-event-type="{{event}}"
+    data-entity-id="{{id}}"
+    data-position="{{position}}"
+    data-name="{{name}}"
+    data-product-category="
+    {{#each category}}
+        {{#if @last}}
+            {{this}}
+        {{else}}
+            {{this}},
+        {{/if}}
+    {{/each}}"
+    data-product-brand="{{brand.name}}"
+    data-product-price="
+    {{#or customer (unless settings.hide_price_from_guests)}}
+        {{#if price.with_tax}}
+            {{price.with_tax.value}}
+        {{else}}
+            {{price.without_tax.value}}
+        {{/if}}
+    {{else}}
+        {{lang 'common.login_for_pricing'}}
+    {{/or}}"
+>
+    {{> components/products/list-badges}}
+    <figure class="listItem-figure">
+        <a href="{{url}}"
+           class="listItem-figure__link"
+           aria-label="{{> components/products/product-info}}"
+           data-event-type="product-click"
+        >
+            <div class="card-img-container">
+                {{> components/common/responsive-img
+                    image=image
+                    class="card-image"
+                    fallback_size=theme_settings.productgallery_size
+                    lazyload=theme_settings.lazyload_mode
+                    default_image=theme_settings.default_image_product
+                }}
+            </div>
+        </a>
+
+        <figcaption class="listItem-figcaption">
+            <div class="listItem-figcaption-body">
+                <div class="_bottomLeft">
+                    {{#if settings.show_wishlist}}
+                        {{> components/products/card-wishlist-dropdown}}
+                    {{/if}}
+                </div>
+                {{#if theme_settings.card_show_gallery}}
+                    <div class="_bottomRight">
+                        <button type="button" class="card-figcaption-button _videos" data-video-button style="display:none">
+                            <span class="icon"><svg aria-hidden="true"><use href="#icon-play"></use></svg></span>
+                            <span class="is-srOnly">{{lang 'products.videos.show'}}</span>
+                        </button>
+                        <button type="button" class="card-figcaption-button _img360" data-360-button style="display:none">
+                            <span class="icon"><svg aria-hidden="true"><use href="#icon-360"></use></svg></span>
+                            <span class="is-srOnly">{{lang 'products.image360'}}</span>
+                        </button>
+                    </div>
+                {{/if}}
+            </div>
+        </figcaption>
+    </figure>
+    <div class="listItem-body">
+        <h3 class="card-title">
+            <a aria-label="{{> components/products/product-info}}"
+               href="{{url}}"
+               data-event-type="product-click"
+            >
+                {{name}}
+            </a>
+        </h3>
+
+        <div class="card-prices" data-test-info-type="price">
+            {{#or customer (unless settings.hide_price_from_guests)}}
+                {{> components/products/price price=price}}
+            {{else}}
+                {{> components/common/login-for-pricing}}
+            {{/or}}
+        </div>
+
+        {{#if theme_settings.card_show_swatches}}
+            <div class="card-text card-text--colorswatches"></div>
+        {{/if}}
+
+        {{#and rating show_rating}}
+            <p class="card-ratings" data-test-info-type="productRating">
+                <span class="rating--small">
+                    {{> components/products/ratings-mini rating_target=name rating=rating}}
+                </span>
+            </p>
+        {{/and}}
+    </div>
+    <div class="listItem-footer">
+        {{> components/products/card-actions}}
+    </div>
+</article>

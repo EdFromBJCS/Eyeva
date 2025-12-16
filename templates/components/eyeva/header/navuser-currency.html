@@ -1,0 +1,35 @@
+{{#or customer (unless settings.hide_price_from_guests)}}
+    {{#if currency_selector.currencies.length '>' 1}}
+        <button class="navUser-action _currency" type="button"
+            data-collapsible="navUser-currency"
+            aria-controls="navUser-currency"
+            aria-expanded="false"
+            aria-label="{{currency_selector.active_currency_code}}"
+            data-menu-gap-cover
+        >
+            <span class="navUser-label-alt">{{currency_selector.active_currency_code}}</span>
+            <i class="icon" aria-hidden="true"><svg><use href="#icon-chevron-down" /></svg></i>
+        </button>
+        <div class="navUser-subMenu" id="navUser-currency" aria-hidden="true" data-menu-dropdown {{#if theme_settings.logo-position '==' 'center'}}data-ignore-header-position{{/if}}>
+            <ul class="navUser-childList">
+                {{#each currency_selector.currencies}}
+                    <li class="navUser-childList-item">
+                        <a class="navUser-childList-action" href="{{{switch_url}}}"
+                            data-currency-code="{{{code}}}"
+                            {{#if cart_currency_switch_url.length '>' 0 }}
+                                data-cart-currency-switch-url="{{{cart_currency_switch_url}}}"
+                            {{/if}}
+                            data-warning="{{lang 'common.currency_switch_promotion'}}"
+                        >
+                            {{#if is_active}}
+                                <strong>{{code}} - {{name}}</strong>
+                            {{else}}
+                                {{code}} - {{name}}
+                            {{/if}}
+                        </a>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+    {{/if}}
+{{/or}}

@@ -1,0 +1,36 @@
+<div class="facetedSearch-refineFilters" role="region" aria-label="{{lang 'search.faceted.selected.facet-label'}}">
+    <h2 class="is-srOnly">
+        {{lang 'search.faceted.selected.title'}}
+    </h2>
+
+    {{#if items}}
+        <ul class="_list">
+            {{#each items}}
+                <li class="_item">
+                    <a href="{{url}}"
+                       class="_link"
+                       rel="nofollow"
+                       data-faceted-search-facet
+                    >
+                        <svg class="icon">
+                            <use href="#icon-xmark-large" />
+                        </svg>
+
+                        {{#if facet '===' 'rating'}}
+                            {{lang 'search.faceted.selected.rating-label' rating=title}}
+                        {{else}}
+                            {{{sanitize title}}}
+                        {{/if}}
+                    </a>
+                </li>
+            {{/each}}
+            {{#if remove_all_url}}
+                <li class="_item">
+                    <a href="{{remove_all_url}}" class="_link-clearall" data-faceted-search-facet>
+                        {{lang 'search.faceted.selected.clear-all'}}
+                    </a>
+                </li>
+            {{/if}}
+        </ul>
+    {{/if}}
+</div>

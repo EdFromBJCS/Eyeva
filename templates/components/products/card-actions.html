@@ -1,0 +1,64 @@
+{{#or customer (unless settings.hide_price_from_guests)}}
+    {{#if show_cart_action}}
+        {{~inject 'show_cart_action' true}}
+        {{#if has_options}}
+            {{> components/products/card-qty}}
+            {{#if theme_settings.show_product_quick_view}}
+                <button type="button" class="card-figcaption-button quickview _choose-options" data-event-type="product-click" data-product-id="{{id}}">
+                    <span class="icon"><svg aria-hidden="true"><use href="#icon-cart-shopping-fast"></use></svg></span>
+                    <span class="_label">{{lang 'products.choose_options'}}</span>
+                </button>
+            {{else}}
+                <a href="{{url}}" data-event-type="product-click" class="card-figcaption-button _choose-options" data-product-id="{{id}}">
+                    <span class="icon"><svg aria-hidden="true"><use href="#icon-cart-shopping-fast"></use></svg></span>
+                    <span class="_label">{{lang 'products.choose_options'}}</span>
+                </a>
+            {{/if}}
+        {{/if}}
+        {{#if pre_order}}
+            {{> components/products/card-qty}}
+            {{#if pre_order_add_to_cart_url}}
+                <a href="{{pre_order_add_to_cart_url}}" data-event-type="product-click" class="card-figcaption-button _preorder" data-papathemes-cart-item-add>
+                    <span class="icon"><svg aria-hidden="true"><use href="#icon-cart-shopping-fast"></use></svg></span>
+                    <span class="_label">{{lang 'products.pre_order'}}</span>
+                </a>
+            {{else if theme_settings.show_product_quick_view}}
+                <button type="button" class="card-figcaption-button quickview _preorder" data-event-type="product-click" data-product-id="{{id}}">
+                    <span class="icon"><svg aria-hidden="true"><use href="#icon-cart-shopping-fast"></use></svg></span>
+                    <span class="_label">{{lang 'products.pre_order'}}</span>
+                </button>
+            {{/if}}
+        {{/if}}
+        {{#if add_to_cart_url}}
+            {{> components/products/card-qty}}
+            <a href="{{add_to_cart_url}}" data-event-type="product-click" data-button-type="add-cart" class="card-figcaption-button _add-to-cart" data-papathemes-cart-item-add>
+                <span class="icon"><svg aria-hidden="true"><use href="#icon-cart-shopping-fast"></use></svg></span>
+                <span class="_label">{{lang 'products.add_to_cart'}}</span>
+            </a>
+            <span class="product-status-message aria-description--hidden">{{lang 'category.add_cart_announcement'}}</span>
+        {{/if}}
+        {{#if out_of_stock_message }}
+            <a href="{{url}}" data-event-type="product-click" class="card-figcaption-button _outstock" data-product-id="{{id}}">
+                <span class="_label">{{out_of_stock_message}}</span>
+            </a>
+        {{/if}}
+    {{/if}}
+{{/or}}
+{{#unless hide_product_quick_view}}
+    {{#if theme_settings.show_product_quick_view}}
+        <button type="button" class="card-figcaption-button quickview" data-event-type="product-click" data-product-id="{{id}}">
+            <span class="icon"><svg aria-hidden="true"><use href="#icon-magnifying-glass"></use></svg></span>
+            <span class="is-srOnly">{{lang 'products.quick_view'}}</span>
+        </button>
+    {{/if}}
+{{/unless}}
+{{#if show_compare}}
+    <button type="button" class="card-figcaption-button compare"
+        data-compare-id="{{id}}"
+        data-compare-image="{{getImage image 'productthumb_size' (cdn theme_settings.default_image_product)}}"
+        data-compare-title="{{name}}" data-compare-url="{{url}}"
+    >
+        <span class="icon"><svg aria-hidden="true"><use href="#icon-chart-line"></use></svg></span>
+        <span class="is-srOnly">{{lang 'products.quick_view'}}</span>
+    </button>
+{{/if}}

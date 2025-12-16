@@ -1,0 +1,24 @@
+<h3 class="page-heading">{{lang 'account.messages.heading' }}</h3>
+
+<ul class="eyeva__account-messages-list">
+    {{#each messages}}
+    <li class="eyeva__account-messages-listItem">
+        <div class="account-message {{#unless unread}}is-read{{/unless}}">
+            <h5 class="account-product-title">
+                {{subject}}
+            </h5>
+            <div>
+                {{#if is_reply}}
+                    {{lang 'account.messages.merchant_said' store_name=../settings.store_name}}
+                {{else}}
+                    {{lang 'account.messages.customer_said'}}
+                {{/if}}
+                {{message}}
+            </div>
+            <div class="_status">
+                <span>{{date}}</span>
+            </div>
+        </div>
+    </li>
+    {{/each}}
+</ul>

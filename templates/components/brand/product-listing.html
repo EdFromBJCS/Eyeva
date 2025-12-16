@@ -1,0 +1,67 @@
+{{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+
+<div class="plp-page-main-header">
+    <div class="_left">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+        <button class="button button--plain eyeva__sidebar-toggle is-open" type="button" data-collapsible="page-sidebar-header" aria-expanded="true">
+            <i class="icon" aria-hidden="true"><svg><use href="#icon-arrow-left-from-line"></use></svg></i>
+            <span class="_title _on">{{lang 'search.faceted.hide-filters'}}</span>
+            <span class="_title _off">{{lang 'search.faceted.show-filters'}}</span>
+        </button>
+
+        <span class="_products-count">
+            {{#if pagination.brand.links}}
+                {{lang 'brand.product_count' products=(add (multiply theme_settings.brandpage_products_per_page (subtract (get 'number' (last pagination.brand.links)) 1)) brand.products.length)}}
+            {{else}}
+                {{lang 'brand.product_count' products=brand.products.length}}
+            {{/if}}
+        </span>
+    </div>
+
+    <span class="_plp-name">
+
+        {{#if brand.image}}
+            <div class="plp-main-image _brand">
+                {{> components/common/responsive-img
+                    image=brand.image
+                    fallback_size=theme_settings.thumb_size
+                    lazyload='disabled'
+                    class="brand-header-image"
+                }}
+            </div>
+        {{else}}
+            {{brand.name}}
+        {{/if}}
+    </span>
+
+    {{#if brand.products}}
+        {{> components/products/filter sort=pagination.brand.sort}}
+    {{/if}}
+
+    {{> components/faceted-search/header brand}}
+</div>
+
+{{#if brand.products}}
+    <div data-list-name="Brand: {{brand.name}}" role="region" aria-label="{{lang 'brand.product_label'}}">
+        {{#if theme_settings.product_list_display_mode '===' 'grid'}}
+            {{> components/products/grid products=brand.products show_compare=brand.show_compare theme_settings=theme_settings event="list" }}
+        {{else}}
+            {{> components/products/list products=brand.products show_compare=brand.show_compare theme_settings=theme_settings event="list" }}
+        {{/if}}
+    </div>
+
+    {{> components/common/paginator pagination.brand}}
+{{else}}
+    {{#if brand.search_error}}
+        <p>{{lang 'search.errorMessage'}}</p>
+    {{else}}
+        <p data-no-products-notification
+           role="alert"
+           aria-live="assertive"
+           tabindex="-1"
+        >
+            {{lang 'brands.no_products'}}
+        </p>
+    {{/if}}
+{{/if}}

@@ -1,0 +1,39 @@
+<nav class="faceted-search-container-nav">
+    {{#if category.subcategories}}
+        <div class="sidebarBlock">
+            <h2 class="sidebarBlock-heading">
+                <button class="button button--plain is-open" type="button" aria-expanded="true" aria-controls="sidebar-subcategories" data-collapsible="sidebar-subcategories">
+                    <span class="_title">{{lang 'category.subcategories'}}</span>
+                    <i class="icon" aria-hidden="true"><svg><use href="#icon-chevron-down"></use></svg></i>
+                </button>
+            </h2>
+            <ul class="sidebarBlock-list is-open" id="sidebar-subcategories" aria-hidden="false">
+                {{#each category.subcategories}}
+                <li class="sidebarBlock-list-item">
+                    <a class="sidebarBlock-list-action" href="{{url}}" title="{{name}}">{{name}}</a>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    {{/if}}
+
+    {{#if category.faceted_search_enabled}}
+        {{> components/faceted-search/index category theme_settings=theme_settings}}
+    {{else}}
+        {{> components/category/shop-by-price}}
+    {{/if}}
+
+    {{#if category.faceted_search_enabled}}
+        <div class="faceted-search-container-nav-footer">
+            {{#if category.selected.remove_all_url}}
+                    <a href="{{category.selected.remove_all_url}}" class="button button--outline" data-faceted-search-facet id="faceted-search-clear-all-close-sidebar">
+                        {{lang 'search.faceted.selected.clear-all'}}
+                    </a>
+                </li>
+            {{/if}}
+            <button class="button button--primary" type="button" title="{{lang 'common.close'}}" data-collapsible="page-sidebar">
+                {{lang 'category.view_product_count' products=category.total_products}}
+            </button>
+        </div>
+    {{/if}}
+</nav>

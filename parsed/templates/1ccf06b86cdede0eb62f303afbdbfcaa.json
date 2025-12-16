@@ -1,0 +1,3 @@
+{
+  "components/common/navigation-menu-bottom": "<ul class=\"navPages-bottom-list\">\n    {{#each categories}}\n        <li class=\"navPages-bottom-item\">\n            <a href=\"{{url}}\" class=\"navPages-bottom-link\">{{name}}</a>\n        </li>\n    {{/each}}\n</ul>"
+}

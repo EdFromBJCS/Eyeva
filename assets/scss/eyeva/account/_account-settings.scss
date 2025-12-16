@@ -1,0 +1,28 @@
+.eyeva__panel._accountEdit {
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: spacing("base") * 2;
+        margin: 0;
+
+        @include eyeva-size-mobile {
+            gap: spacing("single");
+        }
+    }
+
+    .form-actions {
+        display: flex;
+        gap: spacing("base");
+        justify-content: center;
+        margin: 0;
+
+        &::before,
+        &::after {
+            display: none;
+        }
+
+        .button {
+            margin: 0;
+        }
+    }
+}

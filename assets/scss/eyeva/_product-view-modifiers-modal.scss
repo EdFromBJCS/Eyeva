@@ -1,0 +1,769 @@
+/* Keyframes for gradient animation */
+@keyframes eyeva__gradient-loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Keyframes for spinning animation */
+@keyframes eyeva__spin-loading {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@mixin eyeva__price-preloader {
+    animation: eyeva__gradient-loading 1.5s ease-in-out infinite;
+    background: linear-gradient(90deg, #e0e0e0, #c0c0c0, #e0e0e0);
+    background-size: 200% 100%;
+    border-radius: 4px;
+    color: transparent;
+    width: 4rem;
+}
+
+body:has(.eyeva__productView-modifiersModal-overlay) {
+    overflow: hidden;
+}
+
+.productView ._eyeva-sticky-box:has(.eyeva__productView-modifiersModal-overlay) {
+    position: static;
+}
+
+.eyeva__productView-options {
+    &._enableModifiersModal {
+        .form-field[data-product-attribute-state="modifier"]:not(._show) {
+            display: none !important;
+        }
+    }
+}
+
+.eyeva__productView-openModifiersModalBtn {
+    margin: spacing("base") 0;
+    width: 100%;
+}
+
+.eyeva__productView-modifiersModal-overlay {
+    @include eyeva-modal-overlay;
+}
+
+.eyeva__productView-modifiersModal {
+    background: container("fill", "dark");
+    bottom: 0;
+    display: none;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: zIndex("higher");
+
+    &.is-open {
+        align-items: stretch;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+}
+
+.eyeva__productView-modifiersModal-panel {
+    background: container("fill");
+    box-shadow: 0 0 30px rgba(color("greys", "darkest"), 0.15);
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+    text-align: left;
+    width: 600px;
+
+    .form-field[data-product-attribute-state="modifier"] {
+        display: block;
+    }
+}
+
+.eyeva__productView-modifiersModal-header {
+    align-items: center;
+    background: container("fill");
+    box-shadow: $eyeva-shadow-panel;
+    display: flex;
+    justify-content: center;
+    min-height: remCalc($eyeva-small-button-height) + spacing("third") * 2;
+    position: relative;
+
+    @include breakpoint("medium") {
+        box-shadow: none;
+        min-height: remCalc($eyeva-small-button-height) + spacing("base") * 2;
+    }
+}
+
+.eyeva__productView-modifiersModal-close-button {
+    @include eyeva-modal-close-button;
+
+    @include breakpoint("medium") {
+        right: spacing("base") * 2;
+        top: spacing("base") * 2;
+    }
+}
+
+.eyeva__productView-modifiersModal-back-button {
+    @include eyeva-modal-back-button;
+
+    @include breakpoint("medium") {
+        left: spacing("base") * 2;
+        top: spacing("base") * 2;
+    }
+
+}
+
+.eyeva__productView-modifiersModal-header-title {
+    font-family: $header-font-family;
+    font-size: $eyeva-font-18;
+    font-weight: $header-font-weight;
+    line-height: $eyeva-heading-line-height;
+    margin: 0 remCalc($eyeva-small-button-height);
+    text-align: center;
+
+    @include breakpoint("medium") {
+        display: none;
+
+    }
+}
+
+.eyeva__productView-modifiersModal-content {
+    flex: 1;
+    overflow: auto;
+    padding: spacing("base");
+
+    @include breakpoint("medium") {
+        padding: spacing("base") * 2 spacing("base") * 3;
+    }
+}
+
+.eyeva__productView-modifiersModal-title {
+    margin: spacing("half") 0 spacing("single");
+    text-align: center;
+
+    @include breakpoint("medium") {
+        margin-bottom: spacing("base") * 2;
+        margin-top: 0;
+
+    }
+
+    .eyeva__productView-option-tooltip {
+        color: $color-textSecondary;
+        font-family: $body-font-family;
+        font-size: fontSize("smaller");
+        font-weight: $body-font-weight;
+        line-height: $eyeva-body-line-height;
+        margin-bottom: 0;
+        margin-top: spacing("third");
+
+        @include breakpoint("medium") {
+            font-size: fontSize("base");
+            margin-top: spacing("base");
+        }
+    }
+}
+
+
+.eyeva__productView-modifiersModal-options {
+    // .form-field > .form-radio + .form-label
+    .form-label[data-product-attribute-value] {
+        align-items: center;
+        column-gap: spacing("half");
+        display: flex !important;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .form-option-variant {
+        color: $color-textBase;
+    }
+
+
+    .form-field {
+        margin-bottom: spacing("base") * 2;
+
+        @include breakpoint("medium") {
+            margin-bottom: spacing("single") * 2;
+        }
+    }
+
+    .form-select {
+        box-shadow: $eyeva-shadow-panel;
+    }
+
+    .form-input {
+        box-shadow: $eyeva-shadow-panel;
+    }
+
+    .form-file {
+        box-shadow: $eyeva-shadow-panel;
+    }
+
+    /* Common radio options */
+    .form-radio {
+        + .form-label {
+            padding: 0;
+
+            &::before,
+            &::after {
+                display: none;
+            }
+
+            &:hover,
+            &:focus {
+                ._label {
+                    background-color: rgba(stencilColor("input-border-color-active"), 0.1);
+                }
+            }
+
+            ._label {
+                background-color: container("fill", "dark");
+                border-radius: $button-radius;
+                display: inline-block;
+                font-weight: $eyeva-body-font-bold;
+                padding: spacing("quarter") spacing("base");
+
+            }
+        }
+
+        &:disabled {
+            + .form-label {
+                opacity: 0.8;
+
+                ._label {
+                    color: color("greys");
+                }
+            }
+        }
+
+        &:checked {
+            + .form-label {
+                ._label {
+                    background-color: stencilColor("input-border-color-active");
+                    color: stencilColor("input-bg-color");
+                }
+            }
+        }
+    }
+
+    /* Radio options & Product Pick List without Image */
+    .form-field[data-product-attribute="set-radio"],
+    .form-field[data-product-attribute="product-list"]:not(:has(.productOptions-list)) {
+        @include breakpoint("medium") {
+            margin-bottom: spacing("single") * 2 - spacing("base");
+        }
+
+        .form-label {
+            @include breakpoint("medium") {
+                margin-bottom: spacing("base");
+            }
+        }
+
+        .form-radio + .form-label {
+            @include breakpoint("medium") {
+                margin-bottom: spacing("base");
+            }
+
+            &:has(+ .eyeva__productView-value-tooltip) {
+                @include breakpoint("medium") {
+                    margin-bottom: spacing("half");
+                }
+            }
+        }
+
+    }
+
+    /** Color swatches options */
+    .form-field[data-product-attribute="swatch"] {
+        margin-bottom: spacing("base") * 2 - spacing("third");
+
+        @include breakpoint("medium") {
+            margin-bottom: spacing("single") * 2 - spacing("base");
+
+        }
+
+        .form-radio {
+            + .form-option {
+                border: 0;
+                margin: 0 0 spacing("third");
+                padding: 0;
+
+                @include breakpoint("medium") {
+                    margin-bottom: spacing("base");
+                }
+
+                .form-option-variant--none {
+                    background-color: container("fill", "dark");
+                    border-radius: $button-radius;
+                    display: inline-block;
+                    font-size: fontSize("smaller");
+                    font-weight: $eyeva-body-font-bold;
+                    height: auto;
+                    padding: spacing("half") / 2 spacing("base");
+
+                    @include breakpoint("medium") {
+                        font-size: fontSize("base");
+                    }
+                }
+            }
+
+            &:checked {
+                + .form-option {
+                    .form-option-variant--none {
+                        background-color: stencilColor("input-border-color-active");
+                        color: stencilColor("input-bg-color");
+                    }
+                }
+            }
+        }
+
+        .form-option-wrapper {
+            display: block;
+            margin-bottom: spacing("third");
+
+            @include breakpoint("medium") {
+                margin-bottom: spacing("base");
+            }
+
+            .form-radio {
+                + .form-option {
+                    align-items: center;
+                    border: 0;
+                    display: flex;
+                    gap: spacing("half");
+                    justify-content: space-between;
+                    margin: 0;
+
+                    ._label {
+                        align-items: center;
+                        background-color: container("fill", "dark");
+                        border-radius: $button-radius;
+                        color: $color-textBase;
+                        display: inline-flex;
+                        flex-wrap: wrap;
+                        font-size: fontSize("smaller");
+                        font-weight: $eyeva-body-font-bold;
+                        padding: spacing("quarter") spacing("half");
+                        padding: spacing("half") / 2 spacing("base");
+
+                        @include breakpoint("medium") {
+                            font-size: fontSize("base");
+                        }
+
+                        .eyeva__productView-option-price-group {
+                            font-size: inherit;
+                            margin-left: spacing("third");
+                        }
+                    }
+
+                    ._colors {
+                        border: 1px solid stencilColor("input-border-color");
+                        border-radius: to-number(get-height(stencilString("swatch_option_size"))) / 2;
+                        // flex: 0 0 50%; // for eyeglasses
+                        overflow: hidden;
+
+                        .form-option-variant--color,
+                        .form-option-variant--pattern {
+                            border-radius: 0;
+                        }
+
+                        ._g2,
+                        ._g3 {
+                            border-radius: 0;
+                        }
+                    }
+
+                    // for eyeglasses
+                    // .form-option-variant {
+                    //     width: 100%;
+                    // }
+                }
+
+                &:checked {
+                    + .form-option {
+                        ._label {
+                            background-color: stencilColor("input-border-color-active");
+                            color: stencilColor("input-bg-color");
+                        }
+
+                        ._colors {
+                            border-color: stencilColor("checkRadio-color");
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /** Rectangle options */
+    .form-field[data-product-attribute="set-rectangle"] {
+        display: flex;
+        flex-direction: column;
+        gap: spacing("third");
+        margin-bottom: spacing("base") * 2;
+
+        @include breakpoint("medium") {
+            gap: spacing("base");
+            margin-bottom: spacing("single") * 2;
+        }
+
+        &::before,
+        &::after {
+            display: none;
+        }
+
+        .form-label {
+            margin-bottom: 0;
+        }
+
+        /* 3 option values or greater */
+        &:has(.form-option + .form-option-wrapper + .form-option-wrapper),
+        &:has(.form-option-wrapper + .form-option-wrapper + .form-option-wrapper) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            .form-label {
+                grid-column: 1 / span 2;
+            }
+
+            .form-option {
+                grid-column: 1;
+            }
+
+            .form-label + .form-option-wrapper {
+                grid-column: 1;
+            }
+
+
+            .form-radio {
+                + .form-option {
+                    background-color: container("fill", "dark");
+                    border: 0;
+                    border-radius: $button-radius;
+                    box-shadow: none;
+                    min-height: $eyeva-button-height;
+                    padding: spacing("third") spacing("half");
+                }
+
+                &:checked {
+                    + .form-option {
+                        background-color: stencilColor("input-border-color-active");
+                        color: stencilColor("input-bg-color");
+                    }
+                }
+            }
+        }
+
+        .form-radio {
+            + .form-option {
+                align-items: center;
+                background-color: stencilColor("checkRadio-backgroundColor");
+                border: 1px solid stencilColor("checkRadio-borderColor");
+                border-radius: $input-border-radius;
+                box-shadow: $eyeva-shadow-panel;
+                color: $color-textBase;
+                column-gap: spacing("third");
+                display: flex;
+                font-size: fontSize("smaller");
+                justify-content: center;
+                margin: 0;
+                min-height: $eyeva-button-height;
+                padding: spacing("third") spacing("half");
+
+                .eyeva__productView-option-price-group {
+                    font-weight: $eyeva-body-font-bold;
+                }
+            }
+
+            &:checked {
+                + .form-option {
+                    border-color: stencilColor("checkRadio-color");
+                }
+            }
+        }
+
+        .form-option-variant {
+            color: inherit;
+            padding: 0;
+        }
+    }
+
+    /** Date options */
+    .form-field[data-product-attribute="date"] {
+        .form-select {
+            max-width: none;
+        }
+    }
+
+    /* Product Pick List with Image */
+    .productOptions-list-item {
+        box-shadow: $eyeva-shadow-panel;
+        min-height: $eyeva-button-height;
+
+        .form-radio + .form-label {
+            ._label {
+                background: none;
+                color: $color-textBase;
+            }
+
+            .eyeva__productView-option-price-group {
+                padding: spacing("quarter") spacing("base");
+            }
+        }
+
+        > .eyeva__productView-option-price-group {
+            display: none;
+        }
+    }
+}
+
+.eyeva__productView-modifiersModal-footer {
+    background-color: container("fill", "dark");
+    box-shadow: $eyeva-shadow-panel;
+    padding: spacing("base");
+
+    @include breakpoint("medium") {
+        padding: spacing("single") spacing("base") * 3;
+    }
+}
+
+.eyeva__productView-option-tooltip {
+    color: $color-textSecondary;
+    font-size: fontSize("smaller");
+    margin-bottom: spacing("third");
+
+    @include breakpoint("medium") {
+        font-size: fontSize("base");
+        margin-bottom: spacing("base");
+    }
+}
+
+.eyeva__productView-value-tooltip {
+    color: $color-textSecondary;
+    font-size: fontSize("smaller");
+    margin-bottom: spacing("single");
+    margin-left: spacing("base");
+
+    @include breakpoint("medium") {
+        font-size: fontSize("base");
+    }
+}
+
+.eyeva__productView-value-tooltip-heading {
+    color: $color-textSecondary;
+    display: inline-block;
+    font-family: $header-font-family;
+    font-style: italic;
+}
+
+.eyeva__productView-option-price-group {
+    float: right;
+    font-size: fontSize("smaller");
+
+    @include breakpoint("medium") {
+        font-size: fontSize("base");
+    }
+}
+
+.eyeva__productView-option-price {
+    display: block;
+
+    &._preloader {
+        @include eyeva__price-preloader;
+    }
+}
+
+.eyeva__productView-option-price-old {
+    color: $color-textSecondary;
+    text-decoration: line-through 1px $color-textSecondary;
+}
+
+.eyeva__productView-option-price-now {
+    font-weight: $eyeva-body-font-bold;
+}
+
+.eyeva__productView-summaryOptions {
+    display: flex;
+    flex-direction: column;
+    font-size: fontSize("smaller");
+    gap: spacing("base");
+    margin-bottom: spacing("base") * 2;
+
+    @include breakpoint("medium") {
+        font-size: fontSize("base");
+        // margin-bottom: spacing("single") * 2;
+    }
+}
+
+.eyeva__productView-summaryOptions-option {
+    display: grid;
+    flex: 1;
+    grid-template:
+        "option price" auto
+        "value value" auto
+        / auto max-content;
+
+    &._preloader {
+        animation: eyeva__spin-loading 1s linear infinite;     /* Spinning animation */
+        border: 6px solid rgba(0, 0, 0, 0.1); /* Light border */
+        border-radius: 50%;                    /* Makes it circular */
+        border-top-color: #333;                /* Dark color for the spinning part */
+        height: 50px;
+        margin: auto;
+        width: 50px;
+    }
+}
+
+.eyeva__productView-summaryOptions-option-name {
+    font-weight: $eyeva-body-font-bold;
+    grid-area: option;
+}
+
+.eyeva__productView-summaryOptions-option-value {
+    color: $color-textSecondary;
+    grid-area: value;
+}
+
+.eyeva__productView-summaryOptions-option-prices {
+    grid-area: price;
+    text-align: right;
+}
+
+// .eyeva__productView-summaryOptions-subtotal {
+//     .eyeva__productView-option-subtotal-group-label {
+//         color: inherit;
+//     }
+
+//     .eyeva__productView-option-subtotal {
+//         font-size: inherit;
+//     }
+// }
+
+.eyeva__productView-option-subtotal-group {
+    align-items: center;
+    display: grid;
+    grid-template-columns: auto max-content;
+}
+
+.eyeva__productView-option-subtotal-group-label {
+    color: $color-textSecondary;
+    font-size: fontSize("smaller");
+    font-weight: $eyeva-body-font-bold;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+
+    @include breakpoint("medium") {
+        font-size: fontSize("base");
+    }
+}
+
+.eyeva__productView-option-subtotal {
+    font-size: fontSize("base");
+    font-weight: $eyeva-body-font-bold;
+    grid-column: 2;
+    text-align: right;
+
+    @include breakpoint("medium") {
+        font-size: $eyeva-font-18;
+    }
+
+    &._preloader {
+        @include eyeva__price-preloader;
+    }
+}
+
+.eyeva__productView-option-subtotal-old {
+    color: $color-textSecondary;
+    text-decoration: line-through;
+    text-decoration-color: $color-textSecondary;
+    text-decoration-thickness: 1px;
+}
+
+.eyeva__productView-modifiersModal-complete {
+    .add-to-cart-wrapper {
+        border-top: container("border");
+        display: grid !important;
+        grid-template:
+            "alert alert" auto
+            "qty subtotal" auto
+            "buttons buttons" auto / auto 1fr;
+        padding-top: spacing("single");
+
+        @include breakpoint("medium") {
+            grid-template:
+                "subtotal subtotal" auto
+                "alert alert" auto
+                "qty buttons" auto / auto 1fr !important;
+        }
+
+        .eyeva__productView-option-subtotal-group {
+            align-items: flex-end;
+            display: flex;
+            flex-direction: column;
+            grid-area: subtotal;
+            margin-bottom: spacing("half");
+            text-align: end;
+
+            @include breakpoint("medium") {
+                display: grid;
+                margin-bottom: spacing("single");
+                text-align: start;
+            }
+        }
+
+        .form-field {
+            margin-bottom: spacing("half");
+        }
+
+        .add-to-cart-buttons {
+            display: block;
+            float: none;
+            padding: 0;
+            width: 100%;
+        }
+    }
+}
+
+.eyeva__productView-modifiersModal-continue {
+    .button {
+        width: 100%;
+    }
+}
+
+.eyeva__productView-modifiersModal-image {
+    display: none;
+
+    @include breakpoint("medium") {
+        align-items: center;
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        padding: spacing("double");
+    }
+
+    img {
+        height: 100%;
+        object-fit: contain;
+        width: 100%;
+    }
+}
+
+.eyeva__productView-updateProductWrapper {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+    margin-bottom: spacing("base");
+
+    ._or {
+        color: $color-textSecondary;
+        font-size: fontSize("smallest");
+        text-transform: uppercase;
+
+        @include breakpoint("medium") {
+            font-size: fontSize("smaller");
+        }
+    }
+}

@@ -1,0 +1,35 @@
+{{!-- check if modifiers modal is enabled in theme settings --}}
+{{#if theme_settings.enableModifiersModal}}
+    {{assignVar 'enableModifiersModal' 1}}
+{{else}}
+    {{assignVar 'enableModifiersModal' 0}}
+{{/if}}
+
+{{assignVar 'txtSelectModifiers' (lang 'products.select_modifiers')}}
+
+{{> components/papathemes/shipping-countdown/custom-field reset=true}}
+{{> components/papathemes/sale-countdown/custom-field reset=true}}
+
+{{!-- check if modifiers modal is enabled in custom fields --}}
+{{#each product.custom_fields}}
+    {{#if name '===' '__@modifiers_modal'}}
+        {{#if value '==' '0'}}
+            {{assignVar 'enableModifiersModal' 0}}
+        {{else}}
+            {{assignVar 'enableModifiersModal' 1}}
+        {{/if}}
+    {{/if}}
+
+    {{#if name '===' '__@select_modifiers'}}
+        {{assignVar 'txtSelectModifiers' value}}
+    {{/if}}
+
+    {{#if name '===' '__@stepper'}}
+        {{#each (split (lowercase value) ';')}}
+            {{assignVar (get 'string' (concat '__stepper_' (dashcase this))) 1}}
+        {{/each}}
+    {{/if}}
+
+    {{> components/papathemes/shipping-countdown/custom-field}}
+    {{> components/papathemes/sale-countdown/custom-field}}
+{{/each}}

@@ -1,0 +1,18 @@
+<div class="section section--new">
+    <div class="newProducts">
+        <div class="section-header-wrapper">
+            <h2 class="section-heading">{{lang 'products.new'}}</h2>
+            {{> components/papathemes/category/tabs
+                type=theme_settings.new_type
+                count=theme_settings.new_count
+                sortby='newest'
+                scope='.topProducts'
+            }}
+        </div>
+        {{#if theme_settings.new_type '==' 'carousel'}}
+            {{> components/products/carousel show_compare=theme_settings.card_show_compare event="list"}}
+        {{else}}
+            {{> components/products/grid hscroll=true show_compare=theme_settings.card_show_compare event="list"}}
+        {{/if}}
+    </div>
+</div>

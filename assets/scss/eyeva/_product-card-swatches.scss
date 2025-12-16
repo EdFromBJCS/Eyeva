@@ -1,0 +1,74 @@
+.card-text--colorswatches {
+    min-height: max(to-number(get-height(stencilString("card_swatch_size"))), to-number(get-height(stencilString("card_swatch_img_size"))));
+}
+
+.productSwatches-attributes {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("third");
+}
+
+.productSwatches-swatches {
+    display: flex;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.productSwatches-swatches-item {
+    display: flex;
+    flex-shrink: 0;
+    overflow: hidden;
+
+    + .productSwatches-swatches-item {
+        margin-left: spacing("third");
+    }
+}
+
+.productSwatches-swatches-item--swatch {
+    $h: to-number(get-height(stencilString("card_swatch_size")));
+    $w: to-number(get-width(stencilString("card_swatch_size")));
+    border: 3px solid container("fill");
+    border-radius: min($h, $w) / 2;
+    height: $h;
+    width: $w;
+
+    &:has(.form-option-variant--pattern) {
+        $h: to-number(get-height(stencilString("card_swatch_img_size")));
+        $w: to-number(get-width(stencilString("card_swatch_img_size")));
+        border-radius: min($h, $w) / 2;
+        height: $h;
+        width: $w;
+    }
+
+    &.is-active {
+        outline: 1px solid $color-textBase;
+        outline-offset: -1px;
+    }
+
+    .form-option-variant--color,
+    .form-option-variant--pattern {
+        flex: 1;
+        height: unset;
+        width: unset;
+    }
+
+    .form-option-variant--pattern {
+        background-size: contain;
+    }
+}
+
+.productSwatches-swatches-more,
+.productSwatches-swatches-less {
+    color: $color-textSecondary;
+    font-size: fontSize("smaller");
+    margin-left: spacing("third");
+    padding: 0;
+
+    &:hover {
+        color: $color-textLink-hover;
+    }
+}

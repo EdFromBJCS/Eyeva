@@ -1,0 +1,39 @@
+{{#any previous next links}}
+<div class="pagination" role="region" aria-label="{{lang 'common.pagination'}}">
+    <ul class="pagination-list">
+        {{#if previous}}
+            <li class="pagination-item pagination-item--previous">
+                <a class="pagination-link" href="{{previous}}" data-faceted-search-facet>
+                    <i class="icon" aria-hidden="true">
+                        <svg>
+                            <use href="#icon-chevron-left"></use>
+                        </svg>
+                    </i>
+                    <span class="is-srOnly">{{lang 'common.previous'}}</span>
+                </a>
+            </li>
+        {{/if}}
+
+        {{#if this.links.length}}
+        {{#each this.links}}
+            <li class="pagination-item">
+                <a class="pagination-link" href="{{this.link}}">{{this.number}}</a>
+            </li>
+        {{/each}}
+        {{/if}}
+
+        {{#if next}}
+            <li class="pagination-item pagination-item--next">
+                <a class="pagination-link" href="{{next}}" data-faceted-search-facet>
+                    <span class="is-srOnly">{{lang 'common.next'}}</span>
+                    <i class="icon" aria-hidden="true">
+                        <svg>
+                            <use href="#icon-chevron-right"></use>
+                        </svg>
+                    </i>
+                </a>
+            </li>
+        {{/if}}
+    </ul>
+</div>
+{{/any}}

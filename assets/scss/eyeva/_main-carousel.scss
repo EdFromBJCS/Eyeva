@@ -1,0 +1,337 @@
+$_hero-default-height: 600;
+$_hero-default-width: 1920;
+$_hero-mb-height: stencilNumber("carousel-mb-height");
+
+.eyeva__heroCarousel {
+    --slides-to-show: 1;
+    --slides-to-show-max: 1;
+    --slide-gap: 0px; /* stylelint-disable-line */
+    --slide-width-max: calc((100% - (var(--slides-to-show-max) - 1) * var(--slide-gap)) / var(--slides-to-show-max));
+
+    overflow: hidden;
+
+    &.static {
+        .blaze-prev,
+        .blaze-next,
+        .blaze-pause {
+            display: none;
+        }
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .blaze-pagination {
+        @include eyeva-screen-mobile-tablet {
+            display: none;
+        }
+
+        @include breakpoint("medium") {
+            background-color: rgba($slick-dot-bgColor, 0.6);
+            bottom: spacing("third");
+            left: 50%;
+            position: absolute;
+            transform: translateX(-50%);
+        }
+    }
+
+    .blaze-prev,
+    .blaze-next,
+    .blaze-pause {
+        border: 0;
+        transition: all 0.2s ease-out;
+
+        @include eyeva-screen-mobile-tablet {
+            background: none;
+            margin-top: calc(var(--image-height, #{$_hero-default-height}) / var(--image-width, #{$_hero-default-width}) / 2 * 100%);
+            opacity: 0.5;
+            top: 0;
+
+            &:hover,
+            &:focus,
+            &:active {
+                opacity: 1;
+            }
+        }
+
+        @include breakpoint("medium") {
+            box-shadow: $eyeva-shadow-panel;
+        }
+    }
+
+    .blaze-prev {
+        @include breakpoint("medium") {
+            left: -$eyeva-button-height * 1.5;
+            opacity: 0;
+
+            &:hover,
+            &:focus,
+            &:active {
+                left: spacing("base");
+                opacity: 1;
+            }
+        }
+    }
+
+    .blaze-next {
+        @include breakpoint("medium") {
+            opacity: 0;
+            right: -$eyeva-button-height * 1.5;
+
+            &:hover,
+            &:focus,
+            &:active {
+                opacity: 1;
+                right: spacing("base");
+            }
+        }
+    }
+
+    .blaze-pause {
+        @include eyeva-screen-mobile-tablet {
+            bottom: auto;
+            left: auto;
+            margin-top: calc(var(--image-height, #{$_hero-default-height}) / var(--image-width, #{$_hero-default-width}) * 100%);
+            right: 0;
+            top: 0;
+            transform: translateY(-100%);
+        }
+
+        @include breakpoint("medium") {
+            bottom: spacing("base");
+            left: -$eyeva-button-height * 1.5;
+            opacity: 0;
+
+            &:hover,
+            &:focus,
+            &:active {
+                left: spacing("base");
+                opacity: 1;
+            }
+        }
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        .blaze-prev {
+            @include breakpoint("medium") {
+                left: spacing("base");
+                opacity: 1;
+            }
+        }
+
+        .blaze-next {
+            @include breakpoint("medium") {
+                opacity: 1;
+                right: spacing("base");
+            }
+        }
+
+        .blaze-pause {
+            @include breakpoint("medium") {
+                left: spacing("base");
+                opacity: 1;
+            }
+        }
+    }
+
+    &.paused {
+        .blaze-pause {
+            @include breakpoint("medium") {
+                left: spacing("base");
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.eyeva__heroCarousel-slide {
+    max-width: var(--slide-width-max);
+    position: relative;
+}
+
+.eyeva__heroCarousel-image-wrapper {
+    --lazyload-padding: calc(var(--image-height, #{$_hero-default-height}) / var(--image-width, #{$_hero-default-width}) * 100%);
+    overflow: hidden;
+    position: relative;
+
+    &::after {
+        content: "";
+        display: block;
+        height: 0;
+        padding-top: var(--lazyload-padding);
+        width: 100%;
+    }
+}
+
+.eyeva__heroCarousel-image {
+    @include lazy-loaded-img;
+    height: 100%;
+    object-fit: contain;
+    width: 100%;
+
+    .eyeva__heroCarousel._stretched & {
+        object-fit: cover;
+    }
+}
+
+.eyeva__heroCarousel-image--mobile {
+    @include breakpoint("medium") {
+        display: none;
+    }
+}
+
+.eyeva__heroCarousel-content {
+    background: $carousel-bgColor;
+    padding: spacing("single");
+
+    @if stencilString("carousel-align") == "left" {
+        text-align: left;
+    }
+    @else if stencilString("carousel-align") == "right" {
+        text-align: right;
+    }
+    @else {
+        text-align: center;
+    }
+
+    @include breakpoint("medium") {
+        background: rgba($carousel-bgColor, 0.8);
+        height: max-content;
+        max-height: 100%;
+        max-width: 40%;
+        padding: spacing("single") + spacing("half") spacing("double");
+        position: absolute;
+        top: 50%;
+        width: max-content;
+
+        @if stencilString("carousel-align") == "left" {
+            left: 5%;
+            text-align: left;
+            transform: translate(0, -50%);
+        }
+        @else if stencilString("carousel-align") == "right" {
+            right: 5%;
+            text-align: right;
+            transform: translate(0, -50%);
+        }
+        @else {
+            left: 50%;
+            text-align: center;
+            transform: translate(-50%, -50%);
+        }
+    }
+}
+
+.eyeva__heroCarousel-title {
+    color: $carousel-title-color;
+    font-family: $header-font-family;
+    font-size: fontSize("larger");
+    font-weight: $header-font-weight;
+    line-height: $eyeva-heading-line-height;
+    margin-bottom: spacing("base");
+
+    @include breakpoint("medium") {
+        font-size: $eyeva-font-48;
+        margin-bottom: spacing("single");
+    }
+}
+
+.eyeva__heroCarousel-description {
+    color: $carousel-description-color;
+    font-size: fontSize("smaller");
+    margin-bottom: spacing("base");
+
+    @include breakpoint("medium") {
+        font-size: fontSize("base");
+        margin-bottom: spacing("single");
+    }
+}
+
+.eyeva__heroCarousel-action {
+    margin: 0;
+}
+
+.eyeva__heroCarousel-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: spacing("base");
+
+    @if stencilString("carousel-align") == "left" {
+        justify-content: flex-start;
+    }
+    @else if stencilString("carousel-align") == "right" {
+        justify-content: flex-end;
+    }
+    @else {
+        justify-content: center;
+    }
+}
+
+// ======================================================================================
+// Fixed height on mobile
+// ======================================================================================
+
+@if ($_hero-mb-height > 0) {
+    @include eyeva-screen-mobile-tablet {
+        .eyeva__heroCarousel-image-wrapper {
+            &::after {
+                padding-top: $_hero-mb-height;
+            }
+
+            &:has(.eyeva__heroCarousel-image--mobile) {
+                .eyeva__heroCarousel-image:not(.eyeva__heroCarousel-image--mobile) {
+                    display: none;
+                }
+            }
+        }
+
+        .eyeva__heroCarousel .blaze-prev,
+        .eyeva__heroCarousel .blaze-next {
+            margin-top: 0;
+            top: $_hero-mb-height / 2;
+        }
+
+        .eyeva__heroCarousel .blaze-pause {
+            bottom: 0;
+            margin-top: 0;
+            top: auto;
+            transform: none;
+        }
+
+        .eyeva__heroCarousel-content {
+            background: rgba($carousel-bgColor, 0.8);
+            bottom: 0;
+            max-width: 100%;
+            position: absolute;
+            width: max-content;
+
+            @if stencilString("carousel-align") == "left" {
+                left: 0;
+                text-align: left;
+            }
+            @else if stencilString("carousel-align") == "right" {
+                right: 0;
+                text-align: right;
+            }
+            @else {
+                left: 50%;
+                text-align: center;
+                transform: translateX(-50%);
+            }
+        }
+
+        .eyeva__heroCarousel-image {
+            object-fit: cover;
+
+            @if stencilString("carousel-align") == "left" {
+                object-position: right;
+            }
+            @else if stencilString("carousel-align") == "right" {
+                object-position: left;
+            }
+        }
+    }
+}

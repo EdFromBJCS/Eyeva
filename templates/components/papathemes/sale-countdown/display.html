@@ -1,0 +1,25 @@
+{{!--
+    Display sale countdown for product based on variables `_saleCountdownDate`, `_saleCountdownLabel`, `_saleCountdownEndLabel`, `_salePercent`.
+    Input:
+    - theme_settings: object - theme settings.
+--}}
+
+{{#if (getVar '_saleCountdownDate')}}
+    {{!-- only display sale countdown if product has custom field '__countdown_date' --}}
+    <div class="productView-saleCountdown" {{#unless (getVar '_salePercent')}}style="display:none"{{/unless}}>
+        <i class="icon" aria-hidden="true"><svg><use href="#icon-badge-percent"></use></svg></i>
+        <div class="_content">
+            {{#if theme_settings.product_sale_badges '===' 'percent'}}
+                {{#replace '{percent}' (getVar '_saleCountdownLabel')}}
+                    {{getVar '_salePercent'}}%
+                {{else}}
+                    <span class="_label">{{getVar '_saleCountdownLabel'}}</span>
+                    <span class="_salePercent">{{getVar '_salePercent'}}%</span>
+                {{/replace}}
+            {{else}}
+                {{getVar '_saleCountdownLabel'}}
+            {{/if}}
+            <div class="_countdown" data-sale-countdown-date="{{getVar '_saleCountdownDate'}}" data-sale-countdown-label="{{getVar '_saleCountdownEndLabel'}}"></div>
+        </div>
+    </div>
+{{/if}}

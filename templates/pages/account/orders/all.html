@@ -1,0 +1,33 @@
+---
+customer:
+    orders:
+        limit: 10
+---
+
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.account.js' resourceHint='preload' as='script'}}" as="script">
+{{/partial}}
+
+{{#partial "page"}}
+
+<main class="account">
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    <h1 class="page-heading">{{lang 'account.orders.heading' }}</h1>
+    {{> components/account/navigation account_page='orders'}}
+
+    {{#if customer.store_credit.value '>' 0}}
+        <div class="alertBox alertBox--storeCredit">
+            {{{lang 'common.store_credit' store_credit=customer.store_credit.formatted}}}
+        </div>
+    {{/if}}
+
+    {{#if customer.orders.length}}
+        {{> components/account/orders-list orders=customer.orders}}
+        {{> components/common/small-paginator pagination.orders}}
+    {{else}}
+        {{> components/common/alert/alert-info (lang 'account.orders.none')}}
+    {{/if}}
+</main>
+
+{{/partial}}
+{{> layout/base}}

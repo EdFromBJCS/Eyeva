@@ -1,0 +1,95 @@
+<div class="section section--categories">
+    <div class="topCategories">
+        <div class="section-header-wrapper">
+            <h2 class="section-heading">{{lang 'home.top_categories'}}</h2>
+        </div>
+
+        {{assignVar 'tmp' 0}}
+        {{#each categories}}
+            {{#if image.data}}
+                {{assignVar 'tmp' 1}}
+            {{/if}}
+        {{/each}}
+
+        {{#if (getVar 'tmp')}}
+            {{!--
+                Remember to change `slideGap` match with CSS
+            --}}
+            <section class="categoryCarousel blaze-slider"
+                data-list-name="{{list}}"
+                data-blaze-slider='{
+                    "all": {
+                        "enablePagination": true,
+                        "enableAutoplay": false,
+                        "autoplayInterval": 5000,
+                        "stopAutoplayOnInteraction": true,
+                        "transitionDuration": 800,
+                        "slidesToShow": {{theme_settings.cat_col}},
+                        "slidesToScroll": {{floor theme_settings.cat_col}},
+                        "slideGap": "32px"
+                    },
+                    "(max-width: 800px)": {
+                        "slidesToShow": {{theme_settings.cat_col_md}},
+                        "slidesToScroll": {{floor theme_settings.cat_col_md}},
+                        "slideGap": "16px"
+                    },
+                    "(max-width: 550px)": {
+                        "slidesToShow": {{theme_settings.cat_col_sm}},
+                        "slidesToScroll": {{floor theme_settings.cat_col_sm}},
+                        "slideGap": "16px"
+                    }
+                }'
+            >
+                <div class="blaze-container">
+                    <div class="blaze-track-container">
+                        <div class="blaze-track">
+                            {{#each categories}}
+                                <div class="categoryCarousel-slide">
+                                    <div class="topCategories-img-container">
+                                        <a href="{{url}}" class="topCategories-link">
+                                            {{#if image}}
+                                                {{> components/common/responsive-img
+                                                    image=image
+                                                    class="topCategories-image"
+                                                    fallback_size=theme_settings.category_size
+                                                    lazyload=theme_settings.lazyload_mode
+                                                    default_image=theme_settings.default_image_product
+                                                }}
+                                            {{/if}}
+                                            {{#if ../theme_settings.home_sbc_style '!=' 'laptops'}}
+                                                <span class="button button--small topCategories-name">{{name}}</span>
+                                            {{/if}}
+                                        </a>
+                                    </div>
+                                    {{#if ../theme_settings.home_sbc_style '==' 'laptops'}}
+                                        <a href="{{url}}">
+                                            <span class="button button--small topCategories-name">{{name}}</span>
+                                        </a>
+                                    {{/if}}
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+
+                    <!-- pagination container -->
+                    <!-- <div class="blaze-pagination"></div> -->
+
+                    <!-- navigation buttons -->
+                    <button class="blaze-prev" aria-label="{{lang 'common.previous'}}"><span class="icon"><svg><use href="#icon-arrow-left-long"></use></svg></span></button>
+                    <button class="blaze-next" aria-label="{{lang 'common.next'}}"><span class="icon"><svg><use href="#icon-arrow-right-long"></use></svg></span></button>
+                </div>
+            </section>
+        {{else}}
+            <section class="categoryGrid">
+                {{#each categories}}
+                    <div class="categoryGrid-item">
+                        <a href="{{url}}" class="topCategories-link">
+                            <span class="button button--small topCategories-name">{{name}}</span>
+                        </a>
+                    </div>
+                {{/each}}
+            </section>
+        {{/if}}
+
+    </div>
+</div>

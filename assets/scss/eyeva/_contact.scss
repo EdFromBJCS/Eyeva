@@ -1,0 +1,24 @@
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+    margin: 0;
+
+    br {
+        display: none;
+    }
+
+    .form-field {
+        margin: 0;
+    }
+
+    .form-actions {
+        margin: 0;
+    }
+}
+
+.eyeva__panel._contact {
+    p:last-child {
+        margin-bottom: 0;
+    }
+}

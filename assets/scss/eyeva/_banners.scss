@@ -1,0 +1,178 @@
+%eyeva-top-banners {
+    background-color: $top-banner-bgColor;
+    color: $top-banner-color;
+    font-size: fontSize("smaller");
+
+    [data-banner-carousel] {
+        --animation-duration: 200;
+        align-items: center;
+        display: grid;
+        grid-template: "banner";
+        padding-inline: $eyeva-small-button-height;
+
+        @include breakpoint("large") {
+            padding-inline: remCalc($eyeva-small-button-height) + spacing("double");
+        }
+
+        &:has(> * + *),
+        &:has(.blaze-track > * + *) {
+            padding-inline: $eyeva-small-button-height * 2;
+
+            @include breakpoint("large") {
+                padding-inline: remCalc($eyeva-small-button-height * 2) + spacing("double");
+            }
+        }
+
+        &._closing {
+            height: 0 !important;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.2s ease-in;
+        }
+
+        > * {
+            grid-area: banner;
+            padding-block: spacing("half");
+
+            + * {
+                visibility: hidden;
+            }
+        }
+    }
+
+    .banner {
+        max-width: none;
+
+        + .banner {
+            margin-top: 0;
+        }
+    }
+}
+
+[data-content-region="header_top"],
+[data-content-region="header_top--global"],
+.banners--top {
+    @extend %eyeva-top-banners;
+}
+
+.banners--top {
+    padding: 0;
+}
+
+// ======================================================================================
+// After construct blaze-slider
+// ======================================================================================
+
+.eyeva__banners-carousel {
+    position: relative;
+
+    .blaze-slider {
+        --slide-to-show: 1;
+        --slide-gap: 0px; /* stylelint-disable-line */
+
+        &._prev .blaze-track > * {
+            &:first-child {
+                animation-name: eyeva__move-down-from-40;
+            }
+
+            &:last-child {
+                animation-name: eyeva__move-down-40;
+            }
+        }
+
+        &.static {
+            .blaze-prev,
+            .blaze-next,
+            .blaze-pause {
+                display: none;
+            }
+        }
+
+        &:not(.static) {
+            ~ ._close-btn {
+                right: -$eyeva-small-button-height * 2;
+            }
+        }
+    }
+
+    .blaze-track {
+        align-items: center;
+        display: grid;
+        grid-template: "banner";
+        transform: none !important;
+
+        > * {
+            grid-area: banner;
+            opacity: 0;
+
+            ._animation-on & {
+                animation-duration: 0.3s;
+                animation-timing-function: ease-in-out;
+            }
+
+            &:first-child {
+                animation-name: eyeva__move-up-from-40;
+                opacity: 1;
+            }
+
+            &:last-child {
+                animation-name: eyeva__move-up-40;
+            }
+        }
+    }
+
+    .blaze-prev,
+    .blaze-next,
+    .blaze-pause,
+    ._close-btn {
+        align-items: center;
+        background: none;
+        border: 0;
+        display: flex;
+        height: $eyeva-small-button-height;
+        justify-content: center;
+        padding: 0;
+        position: absolute;
+        width: $eyeva-small-button-height;
+
+        .icon {
+            @include square(20px);
+
+            svg {
+                fill: $top-banner-color;
+            }
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            .icon svg {
+                fill: rgba($top-banner-color, 0.6);
+            }
+        }
+    }
+
+    .blaze-pause {
+        left: -$eyeva-small-button-height * 2;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .blaze-prev {
+        left: -$eyeva-small-button-height;
+    }
+
+    .blaze-next {
+        right: -$eyeva-small-button-height;
+    }
+
+    ._close-btn {
+        right: -$eyeva-small-button-height;
+        top: 50%;
+        transform: translateY(-50%);
+
+        .icon {
+            @include square(16px);
+        }
+    }
+}

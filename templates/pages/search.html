@@ -1,0 +1,172 @@
+---
+product_results:
+    limit: {{theme_settings.searchpage_products_per_page}}
+---
+{{inject 'categoryTree' forms.search.category_options}}
+{{inject 'searchProductsPerPage' theme_settings.searchpage_products_per_page}}
+{{inject 'searchResultsCount' (lang 'search.results.count' count=result_count search_query=(sanitize forms.search.query))}}
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.search.js' resourceHint='preload' as='script'}}" as="script">
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.jstree.js' resourceHint='preload' as='script'}}" as="script">
+    {{#if pagination.product_results.previous}}
+        <link rel="prev" href="{{pagination.product_results.previous}}">
+    {{/if}}
+    {{#if pagination.product_results.next}}
+        <link rel="next" href="{{pagination.product_results.next}}">
+    {{/if}}
+
+    {{{ stylesheet '/assets/scss/vendor/jstree/style.css' }}}
+{{/partial}}
+
+{{#partial "page"}}
+<section class="plp-page">
+    {{#if result_count '>' 0}}
+        <div class="plp-page-header is-open" id="page-sidebar-header">
+            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+            {{#if forms.search.query}}
+                <div id="search-results-heading">
+                    {{>components/search/heading}}
+                </div>
+            {{/if}}
+
+            <div class="accordion accordion--navList accordion--suggestions">
+                <div class="accordion-block">
+                    <nav class="accordion-content is-open">
+                        <span id="search-tabs-widget-description" class="aria-description--hidden">
+                            {{lang 'search.tabs_accesibility_hint'}}
+                        </span>
+                        <ul role="tablist" class="eyeva__faceted-list" data-search-page-tabs>
+                            <li role="presentation" class="eyeva__faceted-list-item">
+                                <a aria-describedby="search-tabs-widget-description" role="tab" aria-controls="product-listing-container" id="search-results-product-count" class="eyeva__faceted-list-action" href="{{forms.search.product_url}}" data-product-results-toggle>
+                                    {{>components/search/product-count}}
+                                </a>
+                            </li>
+                            <li role="presentation" class="eyeva__faceted-list-item">
+                                <a aria-describedby="search-tabs-widget-description" role="tab" aria-controls="search-results-content" id="search-results-content-count" class="eyeva__faceted-list-action" href="{{forms.search.content_url}}" data-content-results-toggle>
+                                    {{>components/search/content-count}}
+                                </a>
+                            </li>
+                            <!-- {{#unless product_results.faceted_search_enabled}}
+                                <li class="eyeva__faceted-list-item">
+                                    <a class="eyeva__faceted-list-action _view-all toggleLink" data-collapsible="advanced-search-content" href="#" aria-controls="advanced-search-content" aria-expanded="false">
+                                        <span class="toggleLink-text toggleLink-text--on">
+                                            {{lang 'forms.search.hide'}}
+                                        </span>
+                                        <span class="toggleLink-text toggleLink-text--off">
+                                            {{lang 'forms.search.show'}}
+                                        </span>
+                                    </a>
+                                </li>
+                            {{/unless}} -->
+                        </ul>
+                    </nav>
+                    <!-- {{#unless product_results.faceted_search_enabled}}
+                        {{>components/search/advanced-search}}
+                    {{/unless}} -->
+                </div>
+
+                {{#if forms.search.has_suggestions}}
+                    {{#if forms.search.suggested_query}}
+                        <div class="search-suggestion">
+                            {{lang 'forms.search.did_you_mean'}} <strong>{{forms.search.suggested_query.query}}</strong>
+                            <a href="{{forms.search.suggested_query.url}}" class="search-refine">{{lang 'forms.search.refine'}}</a>
+                        </div>
+                    {{/if}}
+
+                    {{#if category_results.length}}
+                        <div class="accordion-block">
+                            <h5 class="accordion-heading">
+                                <button type="button" class="accordion-navigation is-open" data-collapsible="#category-suggestion" aria-label="{{lang 'forms.search.categories'}}" aria-controls="category-suggestion" aria-expanded="true">
+                                    <span class="_title">{{lang 'forms.search.categories'}}</span>
+                                    <span class="icon"><svg><use href="#icon-chevron-down"></use></svg></span>
+                                </button>
+                            </h5>
+                            <div id="category-suggestion" class="accordion-content is-open" aria-hidden="false">
+                                <ul class="eyeva__faceted-list">
+                                    {{#each category_results}}
+                                        {{#each this}}
+                                            <li class="eyeva__faceted-list-item">
+                                                <a href="{{url}}" class="eyeva__faceted-list-action">{{name}}</a>
+                                            </li>
+                                        {{/each}}
+                                    {{/each}}
+                                </ul>
+                            </div>
+                        </div>
+                    {{/if}}
+
+                    {{#if brand_results.length}}
+                        <div class="accordion-block">
+                            <h5 class="accordion-heading">
+                                <button type="button" class="accordion-navigation is-open" data-collapsible="#brand-suggestion" aria-label="{{lang 'forms.search.brand'}}" aria-controls="brand-suggestion" aria-expanded="true">
+                                    <span class="_title">{{lang 'forms.search.brand'}}</span>
+                                    <span class="icon"><svg><use href="#icon-chevron-down"></use></svg></span>
+                                </button>
+                            </h5>
+                            <div id="brand-suggestion" class="accordion-content is-open" aria-hidden="false">
+                                <ul class="eyeva__faceted-list">
+                                    {{#each brand_results}}
+                                        <li class="eyeva__faceted-list-item">
+                                            <a href="{{url}}" class="eyeva__faceted-list-action">{{name}}</a>
+                                        </li>
+                                    {{/each}}
+                                </ul>
+                            </div>
+                        </div>
+                    {{/if}}
+                {{/if}}
+            </div>
+        </div>
+
+        {{#if product_results.pagination.total '>' 0}}
+            {{> components/search/page-sidebar}}
+        {{/if}}
+    {{/if}}
+
+    <main class="plp-page-main">
+        {{#if result_count '===' 0}}
+            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+            {{>components/search/heading}}
+
+            {{#if forms.search.has_suggestions}}
+                <div class="search-suggestion">
+                    {{lang 'forms.search.did_you_mean'}} <strong>{{forms.search.suggested_query.query}}</strong>
+                    <a href="{{forms.search.suggested_query.url}}" class="search-refine">{{lang 'forms.search.refine'}}</a>
+                </div>
+            {{/if}}
+
+            <div class="search-suggestion">
+                <p>
+                    {{lang 'forms.search.your_search_for'}}
+                    "<strong>{{{sanitize forms.search.query}}}</strong>"
+                    {{lang 'forms.search.no_match'}}
+                </p>
+            </div>
+            <div class="search-suggestion">
+                <h5 class="suggestion-title">{{lang 'forms.search.suggestions.title'}}</h5>
+                <ul>
+                    <li>{{lang 'forms.search.suggestions.line1'}}</li>
+                    <li>{{lang 'forms.search.suggestions.line2'}}</li>
+                    <li>{{lang 'forms.search.suggestions.line3'}}</li>
+                </ul>
+            </div>
+        {{/if}}
+
+        <div role="tabpanel" id="search-results-content" aria-labelledby="search-results-content-count" {{#if forms.search.section '!=' 'content'}}class="u-hidden"{{/if}}>
+            {{> components/search/content-listing}}
+        </div>
+
+        <div role="tabpanel" id="product-listing-container" aria-labelledby="search-results-product-count" {{#if forms.search.section '!=' 'product'}}class="u-hidden"{{/if}}>
+            {{> components/search/product-listing}}
+        </div>
+    </main>
+
+    <div class="plp-page-region">
+        {{{region name="search_below_content"}}}
+        {{{region name="search_below_content--global"}}}
+    </div>
+</section>
+
+{{/partial}}
+{{> layout/base}}

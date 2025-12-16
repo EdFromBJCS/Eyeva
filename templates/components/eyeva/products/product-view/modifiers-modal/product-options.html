@@ -1,0 +1,11 @@
+{{assignVar 'hasModifier' 0}}
+{{#each product.options}}
+    {{{dynamicComponent 'components/products/options'}}}
+    {{#if state '===' 'modifier'}}
+        {{assignVar 'hasModifier' 1}}
+    {{/if}}
+{{/each}}
+{{!-- do not show modifiers modal if product has no modifiers --}}
+{{#unless (getVar 'hasModifier')}}
+    {{assignVar 'enableModifiersModal' 0}}
+{{/unless}}

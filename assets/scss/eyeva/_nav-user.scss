@@ -1,0 +1,193 @@
+.navUser-list {
+    display: flex;
+
+    .header._right & {
+        flex-direction: row-reverse;
+    }
+}
+
+.navUser-action {
+    align-items: center;
+    color: stencilColor("navUser-color");
+    display: flex;
+    font-size: $eyeva-header-font-size;
+    font-weight: $eyeva-header-font-weight;
+    justify-content: center;
+    min-height: $eyeva-small-button-height;
+    min-width: min($eyeva-small-button-height, 35px);
+    padding: 0;
+    text-decoration: none;
+
+    @include breakpoint("medium") {
+        min-height: $eyeva-button-height;
+        min-width: $eyeva-button-height;
+        white-space: nowrap;
+    }
+
+    &:hover {
+        color: stencilColor("navUser-color-hover");
+
+        .icon {
+            svg {
+                fill: stencilColor("navUser-color-hover");
+            }
+        }
+    }
+
+    &:focus,
+    &:active {
+        color: stencilColor("navUser-color");
+
+        .icon {
+            svg {
+                fill: stencilColor("navUser-color");
+            }
+        }
+    }
+
+    &._hasLabel {
+
+        @include _logo-center-medium-else-large {
+            border: 1px solid stencilColor("navUser-dropdown-borderColor");
+            border-radius: $button-radius;
+            gap: spacing("third");
+            padding-inline: spacing("single");
+
+            &:hover {
+                border-color: stencilColor("navUser-color-hover");
+            }
+
+            &:focus,
+            &:active {
+                border-color: stencilColor("navUser-color");
+            }
+        }
+    }
+
+    &._menu {
+        @include breakpoint("medium") {
+            display: none;
+        }
+    }
+
+    &._currency {
+        gap: spacing("third") / 2;
+        padding-inline: spacing("third");
+
+        @include eyeva-screen-mobile-tablet {
+            // @include u-hidden("visually");
+            display: none;
+        }
+
+        .icon {
+            @include square(12);
+        }
+    }
+
+    &:has(.countPill) {
+        position: relative;
+
+        .countPill {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+    }
+
+    &.is-open .icon svg {
+        &._open {
+            opacity: 0;
+            transform: rotate(90deg);
+        }
+
+        &._close {
+            opacity: 1;
+            transform: none;
+        }
+    }
+
+    .icon {
+        @include square(stencilNumber("navUser-iconSize-mobile"));
+
+        @include breakpoint("medium") {
+            @include square(stencilNumber("navUser-iconSize"));
+        }
+
+        &:has(._open),
+        &:has(._close) {
+            display: grid;
+        }
+
+        svg {
+            fill: stencilColor("navUser-color");
+            grid-column: 1;
+            grid-row: 1;
+            transition: all 0.3s ease-in-out;
+
+            &._close {
+                opacity: 0;
+                transform: rotate(-90deg);
+            }
+        }
+    }
+
+    .countPill {
+        align-items: center;
+        border-radius: remCalc(9);
+        color: stencilColor("header-backgroundColor");
+        display: flex;
+        height: auto;
+        justify-content: center;
+        line-height: 1;
+        min-height: remCalc(18);
+        min-width: remCalc(18);
+        padding: 2px;
+        width: auto;
+    }
+}
+
+.navUser-label {
+    @if stencilString("logo-position") == "center" {
+        @include eyeva-screen-mobile-tablet {
+            @include u-hidden("visually");
+        }
+    }
+    @else {
+        @media (max-width: (screenSize("large") - 1px)) {
+            @include u-hidden("visually");
+        }
+    }
+}
+
+.navUser-subMenu {
+    @extend %navPages-subMenu;
+
+    &[data-ignore-header-position] {
+        @include breakpoint("medium") {
+            margin-top: spacing("base");
+            z-index: zIndex("higher"); // same as header
+        }
+    }
+}
+
+.navUser-childList {
+    @extend %navPages-childList;
+}
+
+.navUser-childList-item {
+    @include breakpoint("medium") {
+        > *:not([id]) {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        &:hover {
+            > *:not([id]) {
+                transform: translateX(spacing("third"));
+            }
+        }
+    }
+}
+
+.navUser-childList-action {
+    @extend %navPages-childList-action;
+}

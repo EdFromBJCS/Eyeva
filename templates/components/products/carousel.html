@@ -1,0 +1,78 @@
+{{!--
+    Remember to change `slideGap` match with CSS
+--}}
+<section class="productCarousel blaze-slider"
+    data-list-name="{{list}}"
+    data-blaze-slider='{
+        {{#if mobileOnly}}
+            "all": {
+                "enablePagination": true,
+                "enableAutoplay": false,
+                "autoplayInterval": 5000,
+                "stopAutoplayOnInteraction": true,
+                "transitionDuration": 800,
+                "slidesToShow": {{theme_settings.product_col_sm}},
+                "slidesToScroll": {{floor theme_settings.product_col_sm}},
+                "slideGap": "16px"
+            }
+        {{else}}
+            "all": {
+                "enablePagination": true,
+                "enableAutoplay": false,
+                "autoplayInterval": 5000,
+                "stopAutoplayOnInteraction": true,
+                "transitionDuration": 800,
+                "slidesToShow": {{theme_settings.product_col_xl}},
+                "slidesToScroll": {{floor theme_settings.product_col_xl}},
+                "slideGap": "32px"
+            },
+            "(max-width: 1440px)": {
+                "slidesToShow": {{theme_settings.product_col_l}},
+                "slidesToScroll": {{floor theme_settings.product_col_l}},
+                "slideGap": "{{#if theme_settings.card_style '==' 'boxed'}}16px{{else}}32px{{/if}}"
+            },
+            "(max-width: 1260px)": {
+                "slidesToShow": {{theme_settings.product_col}},
+                "slidesToScroll": {{floor theme_settings.product_col}},
+                "slideGap": "{{#if theme_settings.card_style '==' 'boxed'}}16px{{else}}32px{{/if}}"
+            },
+            "(max-width: 800px)": {
+                "slidesToShow": {{theme_settings.product_col_md}},
+                "slidesToScroll": {{floor theme_settings.product_col_md}},
+                "slideGap": "16px"
+            },
+            "(max-width: 550px)": {
+                "slidesToShow": {{theme_settings.product_col_sm}},
+                "slidesToScroll": {{floor theme_settings.product_col_sm}},
+                "slideGap": "16px"
+            }
+        {{/if}}
+    }'
+>
+    <div class="blaze-container">
+        <div class="blaze-track-container">
+            <div class="blaze-track">
+                {{#if is_placeholder}}
+                    {{#for 1 (floor theme_settings.product_col)}}
+                        <div class="productCarousel-slide">
+                        {{> components/products/card-placeholder settings=../settings show_compare=../theme_settings.card_show_compare show_rating=../settings.show_product_rating theme_settings=../theme_settings customer=../customer event="list" position=(add @index 1)}}
+                        </div>
+                    {{/for}}
+                {{else}}
+                    {{#each products}}
+                        <div class="productCarousel-slide">
+                            {{> components/products/card settings=../settings show_compare=../theme_settings.card_show_compare show_rating=../settings.show_product_rating theme_settings=../theme_settings customer=../customer event="list" position=(add @index 1)}}
+                        </div>
+                    {{/each}}
+                {{/if}}
+            </div>
+        </div>
+
+        <!-- pagination container -->
+        <!-- <div class="blaze-pagination"></div> -->
+
+        <!-- navigation buttons -->
+        <button class="blaze-prev" aria-label="{{lang 'common.previous'}}"><span class="icon"><svg><use href="#icon-arrow-left-long"></use></svg></span></button>
+        <button class="blaze-next" aria-label="{{lang 'common.next'}}"><span class="icon"><svg><use href="#icon-arrow-right-long"></use></svg></span></button>
+    </div>
+</section>

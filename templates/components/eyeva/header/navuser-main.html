@@ -1,0 +1,27 @@
+<div class="navUser-list">
+    <button class="navUser-action" type="button" data-papathemes-quick-search-toggle>
+        <i class="icon"><svg><use href="#icon-magnifying-glass"></use></svg></i>
+        <span class="is-srOnly">{{lang 'common.search'}}</span>
+    </button>
+    {{#if customer}}
+        <a class="navUser-action" href="{{urls.account.wishlists.all}}">
+            <i class="icon"><svg><use href="#icon-heart"></use></svg></i>
+            <span class="is-srOnly">{{lang 'common.wishlist'}}</span>
+        </a>
+    {{else}}
+        <button class="navUser-action" type="button" {{#unless customer}}data-wishlist-open{{/unless}}>
+            <i class="icon"><svg><use href="#icon-heart"></use></svg></i>
+            <span class="is-srOnly">{{lang 'common.wishlist'}}</span>
+        </button>
+    {{/if}}
+    <a class="navUser-action" type="button"
+        {{#if page_type '!==' 'cart'}}
+            data-cart-drawer-toggle
+        {{/if}}
+        href="{{urls.cart}}"
+        aria-label="{{lang 'cart.nav_aria_label'}}"
+    >
+        <i class="icon"><svg><use href="#icon-cart-shopping"></use></svg></i>
+        <span class="countPill cart-quantity"></span>
+    </a>
+</div>

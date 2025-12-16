@@ -1,0 +1,126 @@
+// Override the default settings of BigCommerce Cornerstone default theme
+// -----------------------------------------------------------------------------
+
+$input-border-radius:                       stencilNumber("input-radius", "px");
+$select-borderRadius:                       stencilNumber("input-radius", "px");
+// $select-height: 50px;
+
+$input-small-fontSize:                      fontSize("base");
+$input-small-height:                        remCalc(50px);
+$input-small-padding:                       spacing("third") spacing("single");
+$select-small-paddingRight:                 spacing("base");
+
+
+
+// sizing
+$checkRadio-baseDimension:                  30px;
+$checkRadio-outerSize:                      remCalc($checkRadio-baseDimension);
+$checkRadio-pip-size:                       14px;
+
+// label
+$checkRadio-label-fontSize:                 fontSize("smaller");
+$checkRadio-label-spacing:                  remCalc($checkRadio-baseDimension) + spacing("half");
+$checkRadio-label-marginBottom:             spacing("third");
+
+// visual
+$check-pip-backgroundImage:                 url("data:image/svg+xml,%3Csvg width='14' height='10' viewBox='0 0 14 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.7066 0.293701C14.0973 0.684326 14.0973 1.3187 13.7066 1.70933L5.70664 9.70933C5.31602 10.1 4.68164 10.1 4.29102 9.70933L0.291016 5.70933C-0.0996094 5.3187 -0.0996094 4.68433 0.291016 4.2937C0.681641 3.90308 1.31602 3.90308 1.70664 4.2937L5.00039 7.58433L12.2941 0.293701C12.6848 -0.0969238 13.3191 -0.0969238 13.7098 0.293701H13.7066Z' fill='#{$check-pip-color}'/%3E%3C/svg%3E%0A");
+$check-pip-backgroundImage-active:          url("data:image/svg+xml,%3Csvg width='14' height='10' viewBox='0 0 14 10' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.7066 0.293701C14.0973 0.684326 14.0973 1.3187 13.7066 1.70933L5.70664 9.70933C5.31602 10.1 4.68164 10.1 4.29102 9.70933L0.291016 5.70933C-0.0996094 5.3187 -0.0996094 4.68433 0.291016 4.2937C0.681641 3.90308 1.31602 3.90308 1.70664 4.2937L5.00039 7.58433L12.2941 0.293701C12.6848 -0.0969238 13.3191 -0.0969238 13.7098 0.293701H13.7066Z' fill='#{container('fill')}'/%3E%3C/svg%3E%0A");
+
+$check-pip-size:                            $checkRadio-pip-size;
+
+$button-font-family:                        $body-font-family;
+$button-font-weight:                        if(#{stencilFontFamily("body-font")} == "Rubik", 500, 600);
+$button-radius:                             stencilNumber("button-radius", "px");
+
+$buttonStyle-default-color:                  stencilColor("button--default-color");
+$buttonStyle-default-colorHover:             stencilColor("button--default-colorHover");
+$buttonStyle-default-colorActive:            stencilColor("button--default-colorActive");
+$buttonStyle-default-backgroundColor:        stencilColor("button--default-backgroundColor");
+$buttonStyle-default-backgroundColorHover:   stencilColor("button--default-backgroundColorHover");
+$buttonStyle-default-backgroundColorActive:  stencilColor("button--default-backgroundColorActive");
+$buttonStyle-default-borderColor:            stencilColor("button--default-backgroundColor");
+$buttonStyle-default-borderColorHover:       stencilColor("button--default-backgroundColorHover");
+$buttonStyle-default-borderColorActive:      stencilColor("button--default-backgroundColorActive");
+
+$alert-button-cancel-borderColor:                      stencilColor("button--default-backgroundColor");
+$alert-button-cancel-borderColorHover:                 stencilColor("button--default-backgroundColorHover");
+$alert-button-cancel-borderColorActive:                stencilColor("button--default-backgroundColorActive");
+
+$buttonStyleMapOverride: (
+    default: (
+        color:                          $buttonStyle-default-color,
+        colorHover:                     $buttonStyle-default-colorHover,
+        colorActive:                    $buttonStyle-default-colorActive,
+        backgroundColor:                $buttonStyle-default-backgroundColor,
+        backgroundColorHover:           $buttonStyle-default-backgroundColorHover,
+        backgroundColorActive:          $buttonStyle-default-backgroundColorActive,
+        borderColor:                    $buttonStyle-default-borderColor,
+        borderColorHover:               $buttonStyle-default-borderColorHover,
+        borderColorActive:              $buttonStyle-default-borderColorActive
+    )
+);
+
+$buttonStyleMap: map-merge($buttonStyleMap, $buttonStyleMapOverride);
+
+$crumb-font-color-current:          stencilColor("color-textBase");
+
+$alert-padding-top:                spacing("base");
+$alert-padding-default-float:      spacing("single");
+$alert-padding-opposite-direction: $alert-padding-default-float;
+$alert-padding-bottom:             $alert-padding-top;
+$alert-font-size:                  fontSize("smaller");
+$alert-bottom-margin:              spacing("base");
+
+$form-inlineMessage-margin:                 spacing("quarter") 0;
+
+$card-title-fontSize:                       stencilNumber("card-title-fontSize");
+
+// Eyeva theme's Variables
+// -----------------------------------------------------------------------------
+
+$eyeva-font-rubik: if(#{stencilFontFamily("body-font")} == "Rubik", true, false);
+
+$eyeva-body-line-height:                    1.6;
+$eyeva-heading-line-height:                 1.15;
+
+$eyeva-font-48:                             remCalc(48px);
+$eyeva-font-40:                             remCalc(40px);
+$eyeva-font-36:                             remCalc(36px);
+$eyeva-font-18:                             remCalc(18px);
+$eyeva-body-font-bold:                      if($eyeva-font-rubik, 500, 600);
+
+$eyeva-container-radius:                    16px;
+$eyeva-small-radius:                        4px;
+$eyeva-medium-radius:                       8px;
+
+$eyeva-button-height:                       50px;
+$eyeva-small-button-height:                 40px;
+$eyeva-small-button-radius:                 stencilNumber("button-radius-small", "px");
+$eyeva-tiny-button-height:                  32px;
+$eyeva-tiny-button-radius:                  16px;
+
+$eyeva-shadow-panel:                        0 0 32px rgba(color("blacks"), 0.1);
+$eyeva-shadow-item:                         0 2px 4px rgba(color("blacks"), 0.1);
+$eyeva-shadow-hover:                        0 12px 24px rgba(color("blacks"), 0.15);
+
+$eyeva-card-show-button:                    if(stencilColor("card_show_button"), true, false);
+$eyeva-card-show-qty:                       if(stencilColor("card_show_qty"), true, false);
+$eyeva-card-show-custom-fields:             if(stencilString("card_custom_fields") != "", true, false);
+$eyeva-pdp-thumb-vertical:                  if(stencilColor("pdp_thumb_vertical"), true, false);
+
+$eyeva-price-ranges:                        if(stencilColor("price_ranges"), true, false);
+
+$home-brands-bgColor:                       stencilColor("home-brands-bgColor");
+
+$top-banner-color:                          stencilColor("top-banner-color");
+$top-banner-bgColor:                          stencilColor("top-banner-bgColor");
+
+$eyeva-header-font-size: stencilNumber("header-fontSize", "rem");
+$eyeva-header-font-weight: if(stencilColor("header-fontBold"), $eyeva-body-font-bold, $body-font-weight);
+
+$footer-color: stencilColor("footer-color");
+$footer-color-hover: stencilColor("footer-color-hover");
+$footer-heading-color: stencilColor("footer-heading-color");
+$footer-border-color: stencilColor("footer-border-color");
+
+$eyeva-menu-editing: if(stencilColor("menu_editing"), true, false);

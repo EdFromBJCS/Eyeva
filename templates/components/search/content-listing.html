@@ -1,0 +1,40 @@
+{{#if content_results}}
+    <div class="plp-page-main-header">
+        <div class="_left">
+            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+            <button class="button button--plain eyeva__sidebar-toggle is-open" type="button" data-collapsible="page-sidebar-header" aria-expanded="true">
+                <i class="icon" aria-hidden="true"><svg><use href="#icon-arrow-left-from-line"></use></svg></i>
+                <span class="_title _on">{{lang 'search.faceted.hide-filters'}}</span>
+                <span class="_title _off">{{lang 'search.faceted.show-filters'}}</span>
+            </button>
+
+            <span class="_products-count">
+                {{lang 'search.results.content_count' count=pagination.content_results.total}}
+            </span>
+        </div>
+
+        <span class="_plp-name">
+            {{#if forms.search.search_error}}
+                {{lang 'search.errorMessage' }}
+            {{else}}
+                {{{lang 'search.results.count' count=result_count search_query=(sanitize forms.search.query) }}}
+            {{/if}}
+        </span>
+
+        {{#if product_results.products.length}}
+            {{> components/search/content-sort-box sort=pagination.product_results.sort}}
+        {{/if}}
+    </div>
+
+    <div class="search-content-results">
+        {{#each content_results}}
+            <div class="search-content-results-item">
+                <p class="_title"><strong><a href="{{url}}">{{{title}}}</a></strong> ({{type}})</p>
+                <p>{{{content}}}</p>
+            </div>
+        {{/each}}
+    </div>
+
+    {{> components/common/paginator pagination.content_results reload=true}}
+{{/if}}

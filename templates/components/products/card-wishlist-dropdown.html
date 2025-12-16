@@ -1,0 +1,44 @@
+<div class="card-wishlist">
+    <form action="/wishlist.php?action=add&product_id={{id}}" class="form form-wishlist form-action" data-wishlist-add="{{id}}" method="post" data-product-name="{{name}}">
+        {{#if customer}}
+            <a aria-controls="eyeva__wishlist-dropdown-{{id}}-{{incrementVar 'cardWishListUID'}}"
+                aria-expanded="false"
+                class="card-figcaption-button _wishlist"
+                data-dropdown="eyeva__wishlist-dropdown-{{id}}-{{getVar 'cardWishListUID'}}"
+                data-wishlist-add-customer
+                href="#eyeva__wishlist-dropdown-{{id}}-{{getVar 'cardWishListUID'}}"
+            >
+                <span class="is-srOnly">{{lang 'account.wishlists.add_item'}}</span>
+                <i aria-hidden="true" class="icon"><svg><use href="#icon-heart" /></svg></i>
+            </a>
+            <ul aria-hidden="true" class="wishlist-dropdown-menu _card" data-dropdown-content data-dropdown-align="left" id="eyeva__wishlist-dropdown-{{id}}-{{getVar 'cardWishListUID'}}" data-wishlist-dropdown>
+                {{#if customer.wishlists}}
+                    {{#each customer.wishlists}}
+                        <li>
+                            <button class="_action {{#if this.num_items '!==' '0'}}_has-items{{/if}}"
+                                formaction="{{this.add_url}}&product_id={{../id}}"
+                                type="submit"
+                                data-wishlist-id="{{this.id}}"
+                            >
+                                {{this.name}}
+                                <i aria-hidden="true" class="icon _on"><svg><use href="#icon-check" /></svg></i>
+                            </button>
+                        </li>
+                    {{/each}}
+                {{else}}
+                    <li data-wishlist-add-to-default>
+                        <input class="_action" type="submit" value="{{lang 'account.wishlists.add_to_default'}}">
+                    </li>
+                {{/if}}
+                <li>
+                    <a data-wishlist-create class="_action" href="/wishlist.php?action=addwishlist&product_id={{id}}">{{lang 'account.wishlists.create_new'}}</a>
+                </li>
+            </ul>
+        {{else}}
+            <button type="button" class="card-figcaption-button _wishlist" data-wishlist-add-anonymous>
+                <span class="is-srOnly">{{lang 'account.wishlists.add_item'}}</span>
+                <i aria-hidden="true" class="icon"><svg><use href="#icon-heart" /></svg></i>
+            </button>
+        {{/if}}
+    </form>
+</div>

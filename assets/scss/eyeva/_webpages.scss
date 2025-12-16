@@ -1,0 +1,79 @@
+.article {
+    font-size: fontSize("base");
+
+    @include eyeva-size-mobile {
+        font-size: fontSize("base") * 0.875;
+    }
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: $body-font-family;
+        font-weight: $eyeva-body-font-bold;
+    }
+
+    h2 {
+        font-size: fontSize("large");
+
+        @include eyeva-size-mobile {
+            font-size: fontSize("large") * 0.875;
+        }
+    }
+
+    h3 {
+        font-size: fontSize("small");
+
+        @include eyeva-size-mobile {
+            font-size: fontSize("small") * 0.875;
+        }
+    }
+
+    h4 {
+        font-size: fontSize("base");
+
+        @include eyeva-size-mobile {
+            font-size: fontSize("base") * 0.875;
+        }
+    }
+
+    h5 {
+        font-size: fontSize("smaller");
+
+        @include eyeva-size-mobile {
+            font-size: fontSize("smaller") * 0.875;
+        }
+    }
+
+    h6 {
+        font-size: fontSize("smallest");
+
+        @include eyeva-size-mobile {
+            font-size: fontSize("smallest") * 0.875;
+        }
+    }
+
+    li {
+        margin-bottom: spacing("third") / 2;
+
+        > *:not(p) + ul {
+            margin-top: spacing("third") / 2;
+        }
+    }
+
+    hr {
+        margin-block: spacing("base");
+    }
+}
+
+
+.page-type-page {
+    .page {
+        margin-bottom: spacing("single");
+
+        @include breakpoint("medium") {
+            margin-bottom: spacing("double");
+        }
+    }
+}

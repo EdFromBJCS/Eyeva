@@ -1,0 +1,13 @@
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.account.js' resourceHint='preload' as='script'}}" as="script">
+{{/partial}}
+
+{{#partial "page"}}
+    <div class="account">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        <h2 class="page-heading">{{lang 'account.payment_methods.heading' }}</h2>
+        {{> components/account/navigation account_page='payment_methods'}}
+        {{> components/account/payment-methods-list }}
+    </div>
+{{/partial}}
+{{> layout/base}}

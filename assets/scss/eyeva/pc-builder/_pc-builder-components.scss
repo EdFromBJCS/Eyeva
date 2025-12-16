@@ -1,0 +1,355 @@
+// PC Builder Components Styles - Giao diện các thành phần linh kiện
+// prefix: papathemes-pcbuilder-
+
+// =============================================================================
+// 1. KEYFRAMES & ANIMATIONS
+// =============================================================================
+
+@keyframes papathemes-pcbuilder-componentSelect {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse-warning {
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+// =============================================================================
+// 2. COMPONENT CATEGORY & SELECTION
+// =============================================================================
+
+.papathemes-pcbuilder-component-category,
+.papathemes-pcbuilder-select-component {
+    &:focus-within,
+    &:focus {
+        outline: 2px solid stencilColor("color-primary");
+        outline-offset: 2px;
+    }
+}
+
+.papathemes-pcbuilder-component-category.papathemes-pcbuilder-selecting {
+    animation: papathemes-pcbuilder-componentSelect 0.3s ease-out;
+}
+
+// =============================================================================
+// 3. COMPONENT SPECIFICATIONS
+// =============================================================================
+
+.papathemes-pcbuilder-component-specs {
+    background: container("fill", "dark");
+    border-radius: $eyeva-small-radius;
+    display: none;
+    margin-top: spacing("half");
+    padding: spacing("half");
+
+    .papathemes-pcbuilder-component-category.papathemes-pcbuilder-selected & {
+        display: block;
+    }
+}
+
+.papathemes-pcbuilder-spec-item {
+    align-items: center;
+    display: flex;
+    font-size: fontSize("smaller");
+    gap: spacing("quarter");
+    justify-content: space-between;
+    margin-bottom: spacing("quarter");
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.papathemes-pcbuilder-spec-label {
+    color: stencilColor("color-textSecondary");
+    font-weight: stencilFontWeight("body-font");
+}
+
+.papathemes-pcbuilder-spec-value {
+    color: stencilColor("color-textBase");
+    font-weight: $eyeva-body-font-bold;
+}
+
+// =============================================================================
+// 4. COMPATIBILITY WARNINGS
+// =============================================================================
+
+.papathemes-pcbuilder-compatibility-warnings {
+    background: lighten(stencilColor("color-warning"), 45%);
+    border: 1px solid stencilColor("color-warning");
+    border-radius: $eyeva-small-radius;
+    color: stencilColor("color-warning");
+    display: none;
+    font-size: fontSize("smaller");
+    font-weight: $eyeva-body-font-bold;
+    margin-top: spacing("half");
+    padding: spacing("half");
+
+    .papathemes-pcbuilder-component-category.papathemes-pcbuilder-has-warning & {
+        display: block;
+    }
+}
+
+.papathemes-pcbuilder-warning-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    li {
+        margin-bottom: spacing("quarter");
+        padding-left: spacing("base");
+        position: relative;
+
+        &::before {
+            content: "⚠";
+            left: 0;
+            position: absolute;
+            top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+// =============================================================================
+// 5. COMPATIBILITY INDICATORS
+// =============================================================================
+
+.papathemes-pcbuilder-compatibility-indicator {
+    align-items: center;
+    align-self: start;
+    background: linear-gradient(135deg,
+    rgba(stencilColor("color-error"), 0.95) 0%,
+    rgba(darken(stencilColor("color-error"), 10%), 0.95) 100%);
+    border: 1px solid rgba(stencilColor("color-white"), 0.3);
+    border-radius: spacing("quarter");
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    display: inline-flex;
+    font-size: fontSize("smallest");
+    gap: spacing("eighth");
+    justify-content: center;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+    margin: 0;
+    padding: spacing("quarter") spacing("half");
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+
+    &:focus {
+        outline: 2px solid stencilColor("color-primary");
+        outline-offset: 1px;
+    }
+
+    &--incompatible:hover {
+        box-shadow: 0 3px 8px rgba(stencilColor("color-error"), 0.3);
+        transform: translateY(-1px);
+    }
+
+    .card & {
+        font-size: fontSize("smaller");
+        width: 100%;
+
+        &--incompatible:hover {
+            transform: translateY(-2px);
+        }
+    }
+}
+
+.papathemes-pcbuilder-compatibility-icon {
+    animation: pulse-warning 2s infinite;
+    font-size: fontSize("smallest");
+    line-height: 1;
+
+    &--incompatible {
+        color: stencilColor("color-white");
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.papathemes-pcbuilder-compatibility-text {
+    color: stencilColor("color-white");
+    font-size: fontSize("smaller");
+    line-height: 1.2;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+}
+
+// =============================================================================
+// 6. QUICK ACTIONS
+// =============================================================================
+
+.papathemes-pcbuilder-component-quick-actions {
+    display: none;
+    gap: spacing("quarter");
+    margin-top: spacing("half");
+
+    .papathemes-pcbuilder-component-category.papathemes-pcbuilder-selected & {
+        display: flex;
+    }
+}
+
+.papathemes-pcbuilder-quick-action {
+    align-items: center;
+    background: transparent;
+    border: container("border");
+    border-radius: $eyeva-small-radius;
+    color: stencilColor("color-textSecondary");
+    cursor: pointer;
+    display: flex;
+    font-size: fontSize("smaller");
+    font-weight: $eyeva-body-font-bold;
+    gap: spacing("quarter");
+    padding: spacing("quarter") spacing("half");
+    transition: all 0.3s ease-out;
+
+    &:hover,
+    &:focus {
+        background: container("fill", "dark");
+        color: stencilColor("color-textBase");
+    }
+
+    &:active {
+        background: stencilColor("color-greyLight");
+    }
+
+    .icon {
+        @include square(12px);
+    }
+
+    &.papathemes-pcbuilder-action-edit:hover,
+    &.papathemes-pcbuilder-action-edit:focus {
+        border-color: stencilColor("color-primary");
+        color: stencilColor("color-primary");
+    }
+
+    &.papathemes-pcbuilder-action-remove:hover,
+    &.papathemes-pcbuilder-action-remove:focus {
+        border-color: stencilColor("color-error");
+        color: stencilColor("color-error");
+    }
+
+    &.papathemes-pcbuilder-action-info:hover,
+    &.papathemes-pcbuilder-action-info:focus {
+        border-color: stencilColor("color-info");
+        color: stencilColor("color-info");
+    }
+}
+
+// =============================================================================
+// 7. RESPONSIVE ADJUSTMENTS
+// =============================================================================
+
+@include eyeva-screen-mobile-tablet {
+    .papathemes-pcbuilder-component-quick-actions {
+        flex-direction: column;
+        gap: spacing("quarter");
+
+        .papathemes-pcbuilder-quick-action {
+            justify-content: center;
+            width: 100%;
+        }
+    }
+
+    .papathemes-pcbuilder-spec-item {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: spacing("eighth");
+
+        .papathemes-pcbuilder-spec-label {
+            font-size: fontSize("smallest");
+        }
+
+        .papathemes-pcbuilder-spec-value {
+            font-size: fontSize("smaller");
+        }
+    }
+
+    .papathemes-pcbuilder-compatibility-indicator {
+        font-size: fontSize("tiny");
+        gap: 2px;
+        padding: spacing("eighth") spacing("quarter");
+    }
+
+    .papathemes-pcbuilder-compatibility-text {
+        font-size: fontSize("smallest");
+    }
+}
+
+@include breakpoint("small") {
+    .papathemes-pcbuilder-component-category {
+        padding: spacing("half");
+    }
+
+    .card .papathemes-pcbuilder-compatibility-indicator {
+        font-size: fontSize("small");
+    }
+}
+
+// =============================================================================
+// 8. ACCESSIBILITY & PREFERENCE-BASED ADJUSTMENTS
+// =============================================================================
+
+@media (prefers-contrast: high) {
+    .papathemes-pcbuilder-component-category {
+        border-width: 2px;
+
+        &:hover,
+        &.papathemes-pcbuilder-selected {
+            border-width: 3px;
+        }
+    }
+
+    .papathemes-pcbuilder-compatibility-warnings,
+    .papathemes-pcbuilder-compatibility-indicator--incompatible {
+        border-width: 2px;
+    }
+
+    .papathemes-pcbuilder-compatibility-indicator--incompatible {
+        font-weight: fontWeight("bold");
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .papathemes-pcbuilder-compatibility-indicator--incompatible {
+        background: rgba(darken(stencilColor("color-error"), 10%), 0.95);
+        border-color: darken(stencilColor("color-error"), 5%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .papathemes-pcbuilder-component-category {
+        transition: none;
+
+        &.papathemes-pcbuilder-selecting {
+            animation: none;
+        }
+    }
+
+    .papathemes-pcbuilder-compatibility-icon {
+        animation: none;
+    }
+
+    .papathemes-pcbuilder-compatibility-indicator:hover {
+        transform: none;
+    }
+}

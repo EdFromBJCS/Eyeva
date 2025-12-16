@@ -1,0 +1,388 @@
+.papathemes-compareList-panel-wrapper {
+    align-items: flex-end;
+    animation-duration: 300ms;
+    animation-fill-mode: forwards;
+    animation-name: papathemes-compareList-show;
+    animation-timing-function: cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    display: flex;
+    height: 0;
+    justify-content: center;
+    position: fixed;
+    right: spacing("third");
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: zIndex("high") - 10;
+
+    &.is-closed {
+        z-index: zIndex("low");
+    }
+
+    .button {
+        margin: 0;
+
+        .papathemes-compareList-text {
+            color: stencilColor("color-black");
+            font-size: fontSize("smaller");
+            font-weight: fontWeight("bold");
+            left: 0;
+            position: absolute;
+            top: (spacing("half") + spacing("third")) * 3.35;
+            transform: translate(-18%) rotate(-90deg);
+            white-space: nowrap;
+        }
+
+        &.button--close {
+            background-color: stencilColor("color-white");
+            border: container("border");
+            border-radius: unset;
+            border-bottom-left-radius: $button-radius;
+            border-right: 0;
+            border-top-left-radius: $button-radius;
+            box-shadow: 0 3px 10px rgba(stencilColor("color-black"), 0.15);
+
+            &:focus-visible {
+                z-index: 2;
+            }
+        }
+    }
+
+    .button--close,
+    .button--open {
+        align-items: center;
+        border: 0;
+        display: flex;
+        flex-direction: column;
+        font-size: fontSize("base");
+        height: (spacing("half") + spacing("third")) * 6.25;
+        justify-content: space-between;
+        left: -45px;
+        padding: 0;
+        position: absolute;
+        top: 0;
+        width: 46px;
+        z-index: 1;
+
+        &:hover {
+            .papathemes-compareList-icon {
+                > svg {
+                    fill: stencilColor("color-textLink");
+                }
+            }
+
+            .papathemes-compareList-text {
+                color: stencilColor("color-textLink");
+            }
+        }
+    }
+
+    .button--open {
+        display: none;
+    }
+
+    &.is-empty {
+        animation-name: papathemes-compareList-hide;
+        animation-timing-function: cubic-bezier(0.6, -0.28, 0.74, 0.05);
+    }
+
+    &.is-closed {
+        animation-name: papathemes-compareList-hide;
+
+        .papathemes-compareList-panel-body {
+            .papathemes-compareList-actions {
+                &::before {
+                    display: none;
+                }
+            }
+        }
+
+        .button--close {
+            display: none;
+        }
+
+        .button--open {
+            background-color: container("fill");
+            border: container("border");
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+            display: flex;
+            top: auto;
+        }
+
+        .papathemes-compareList-panel-body {
+            border: 0;
+            height: 0;
+            overflow: hidden;
+            padding: 0;
+            width: 100%;
+        }
+    }
+}
+
+@keyframes papathemes-compareList-show {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: none;
+    }
+}
+@keyframes papathemes-compareList-hide {
+    from {
+        transform: none;
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.papathemes-compareList-panel {
+    max-width: 100%;
+    position: relative;
+    transform: translateY(50%);
+    width: auto;
+
+    .papathemes-compareList-icon {
+        margin: (spacing("half") * 1.25) auto (spacing("base") * 0.625) auto;
+
+        > svg {
+            fill: stencilColor("color-black");
+            height: spacing("third") * 1.75;
+            width: spacing("half");
+        }
+    }
+
+    .button--open {
+        transform: translateY(-50%);
+    }
+}
+
+.papathemes-compareList-panel-body {
+    align-items: center;
+    background-color: container("fill");
+    border: container("border");
+    border-radius: $button-radius;
+    border-top-left-radius: unset;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base") * 0.625;
+    max-height: 80vh;
+    overflow: auto;
+    padding: spacing("base") * 0.625;
+    position: relative;
+    width: auto;
+
+    &::-webkit-scrollbar {
+        background-color: stencilColor("color-white");
+        display: block;
+        transition: all 0.3s ease-in;
+        width: 3px;
+    }
+
+    &:hover {
+        &::-webkit-scrollbar {
+            display: contents;
+        }
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: stencilColor("color-greyLight");
+        border-radius: $button-radius;
+        -webkit-box-shadow: inset 0 0 10px rgba(stencilColor("color-black"), 0.3);
+    }
+
+    &::after {
+        background-color: stencilColor("color-white");
+        border-bottom-left-radius: $button-radius;
+        bottom: 2px;
+        content: "";
+        left: 0;
+        position: fixed;
+        top: 2px;
+        width: 14px;
+        z-index: 1;
+    }
+
+    .papathemes-compareList-actions {
+        bottom: 0;
+        position: sticky;
+
+        &::before {
+            background-color: stencilColor("color-white");
+            border-bottom-left-radius: $button-radius;
+            border-bottom-right-radius: $button-radius;
+            bottom: 0;
+            content: "";
+            display: block;
+            height: spacing("single") * 4.25;
+            left: 0;
+            position: fixed;
+            position: fixed;
+            right: spacing("third") * 0.125;
+        }
+    }
+}
+
+.papathemes-compareList {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: spacing("base") * 0.625;
+    -webkit-overflow-scrolling: touch;
+    width: auto;
+}
+
+.papathemes-compareList-item {
+    @include square(120px);
+    flex: 0 0 auto;
+    margin: 0;
+    position: relative;
+    z-index: 2;
+
+    @include breakpoint("medium") {
+        .papathemes-compareList-img {
+            border-top-right-radius: 0;
+        }
+
+        .papathemes-compareList-remove {
+            opacity: 0;
+        }
+
+        &:hover {
+            .papathemes-compareList-img {
+                border-top-right-radius: $button-radius;
+            }
+
+            .papathemes-compareList-remove {
+                opacity: 1;
+            }
+        }
+
+        .quickview:focus-visible {
+            .papathemes-compareList-img {
+                border-top-right-radius: 0;
+            }
+
+            +.papathemes-compareList-remove {
+                opacity: 1;
+            }
+        }
+
+        .papathemes-compareList-remove:focus-visible {
+            opacity: 1;
+        }
+    }
+
+    .quickview {
+        &:focus-visible {
+            border-radius: $button-radius;
+        }
+    }
+
+    .papathemes-compareList-img {
+        border-top-right-radius: $button-radius;
+        cursor: pointer;
+        height: 100%;
+        object-fit: contain;
+        width: 100%;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    @media (max-width: (screenSize("small") - 1px)) {
+        @include square(80px);
+    }
+}
+
+.papathemes-compareList-actions {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    z-index: 3;
+
+    .button {
+        max-width: spacing("double") * 2.5;
+        padding-left: spacing("half");
+        padding-right: spacing("half");
+        width: spacing("double") * 2.5;
+
+        @media (max-width: (screenSize("small") - 1px)) {
+            font-size: fontSize("smallest");
+            max-width: spacing("base") * 5;
+            padding-left: spacing("third") * 0.5;
+            padding-right: spacing("third") * 0.5;
+            width: spacing("base") * 5;
+        }
+    }
+
+    .button + .button {
+        margin-top: spacing("quarter");
+    }
+}
+
+.papathemes-compareList-remove {
+    @include square(36px);
+    align-items: center;
+    background-color: container("fill", "dark");
+    border-radius: $button-radius;
+    display: flex;
+    justify-content: center;
+    padding: unset;
+    position: absolute;
+    right: 0;
+    text-decoration: none;
+    top: 0;
+
+    &:hover,
+    &:focus-visible {
+        background-color: stencilColor("button--primary-backgroundColor");
+
+        .icon {
+            fill: stencilColor("button--primary-color");
+            stroke: stencilColor("button--primary-color");
+        }
+    }
+
+    span:has(.icon) {
+        @include square(13px);
+        display: flex;
+    }
+
+    .icon {
+        @include square(13px);
+        fill: stencilColor("color-greyMedium");
+        overflow: unset;
+        stroke: stencilColor("color-greyMedium");
+    }
+
+    @media (max-width: (screenSize("small") - 1px)) {
+        background-color: transparent;
+
+        span:has(.icon) {
+            @include square(20px);
+            align-items: center;
+            background-color: container("fill", "dark");
+            border-radius: $button-radius;
+            justify-content: center;
+            position: absolute;
+            right: 0;
+            top: 0;
+
+            .icon {
+                @include square(12px);
+            }
+        }
+
+        &:hover,
+        &:focus-visible {
+            background-color: transparent;
+
+            span:has(.icon) {
+                background-color: stencilColor("button--primary-backgroundColor");
+            }
+        }
+    }
+}

@@ -1,0 +1,3 @@
+{
+  "components/products/product-badge": "<div class=\"{{badge-type}}-flag-side\">\n    <span class=\"{{badge-type}}-text\">{{{badge_label}}}</span>\n</div>"
+}

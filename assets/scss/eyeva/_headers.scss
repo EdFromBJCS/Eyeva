@@ -1,0 +1,319 @@
+body {
+    padding-top: 0;
+
+    &._menu-opened {
+        overflow: hidden;
+    }
+}
+
+.skip-to-main-link {
+    background: $header-bg;
+    color: $color-textBase;
+    font-weight: 700;
+    left: 50%;
+    padding: 4px;
+    position: absolute;
+    transform: translate(-50%, calc(-100% - #{$header-height}));
+    transition: transform 0.3s;
+    z-index: zIndex("highest");
+
+    &:focus {
+        transform: translate(-50%, 0%);
+    }
+}
+
+[data-trap-focus-inside],
+[data-trap-focus-outside] {
+    height: 1px;
+    left: 0;
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    width: 1px;
+}
+
+.header {
+    background: stencilColor("header-backgroundColor");
+    border-bottom: 1px solid stencilColor("navPages-subMenu-separatorColor");
+
+    &[data-sticky-header] {
+        position: sticky;
+        top: 0;
+        z-index: zIndex("higher");
+
+        @include breakpoint("medium") {
+            .container {
+                transition: padding 0.1s ease-in-out;
+            }
+        }
+    }
+
+    &:has(~ .eyeva__mobileCategoryNav .eyeva__mobileCategoryNav-list),
+    &:has(~ .eyeva__mobileCategoryNav [data-content-region] *) {
+        &:not(._is-sticky) {
+            @if stencilColor("header-backgroundColor") == stencilColor("navPages-backgroundColor") {
+                @include eyeva-screen-mobile-tablet {
+                    border-bottom-color: stencilColor("header-backgroundColor");
+                }
+            }
+        }
+    }
+
+    &._center {
+        .container {
+            align-items: center;
+            column-gap: spacing("third");
+            display: grid;
+            grid-template:
+                "left logo right" auto
+                "nav nav nav" auto / minmax(max-content, 1fr) auto minmax(max-content, 1fr);
+            padding-block: spacing("third");
+
+            @include breakpoint("medium") {
+                column-gap: spacing("base");
+                padding-block: spacing("base");
+            }
+        }
+    }
+
+    &._left,
+    &._right {
+        .container {
+            align-items: center;
+            column-gap: spacing("third");
+            display: grid;
+            grid-template: "left right" / 1fr max-content;
+            padding-block: spacing("third") - remCalc($outline-width) * 2;
+
+            @include breakpoint("medium") {
+                column-gap: spacing("base");
+                // grid-template: "left nav right" / auto minmax(40%, 1fr) auto;
+                display: flex;
+                justify-content: space-between;
+                padding-block: spacing("base");
+            }
+        }
+
+        .header-logo {
+            flex: 1;
+        }
+    }
+
+    &._right {
+        .container {
+            grid-template: "right left" / max-content 1fr;
+
+            @include breakpoint("medium") {
+                // grid-template: "right nav left" / auto minmax(40%, 1fr) auto;;
+                flex-direction: row-reverse;
+            }
+        }
+    }
+
+    &._is-sticky {
+        box-shadow: $eyeva-shadow-panel;
+
+        .container {
+            @include breakpoint("medium") {
+                padding-block: spacing("third");
+            }
+        }
+    }
+}
+
+.header-logo {
+    align-items: center;
+    display: flex;
+    font: inherit;
+    font-weight: fontWeight("medium");
+    grid-area: logo;
+    margin: 0;
+    text-transform: uppercase;
+    width: 100%;
+
+    @include eyeva-screen-mobile-tablet {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    @include breakpoint("medium") {
+        font-size: stencilNumber("logo_fontSize");
+    }
+}
+
+.header-logo-link {
+    color: stencilColor("navUser-color");
+    display: block;
+    max-width: 100%;
+    text-decoration: none;
+
+    @include eyeva-screen-mobile-tablet {
+        margin: $outline-width;
+    }
+
+
+    &:hover {
+        color: stencilColor("navUser-color-hover");
+    }
+
+    &:focus,
+    &:active {
+        color: stencilColor("navUser-color");
+    }
+}
+
+.header-logo-text {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.header-logo-image-container {
+    flex: 1;
+
+    @if stencilString("logo_size") != "original" {
+        @include lazy-loaded-padding("logo_size");
+        max-width: 100%;
+        overflow: hidden;
+        position: relative;
+        width: get-width(stencilString("logo_size"));
+    }
+}
+
+.header-logo-image {
+    @if stencilString("logo_size") != "original" {
+        @include lazy-loaded-img;
+        height: 100%;
+        object-fit: contain;
+        width: 100%;
+    }
+}
+
+.header-logo-image-unknown-size {
+    @include eyeva-screen-mobile-tablet {
+        max-height: $eyeva-button-height;
+    }
+}
+
+@mixin _logo-center-medium-else-large {
+    @if stencilString("logo-position") == "center" {
+        @include breakpoint("medium") {
+            @content;
+        }
+    }
+    @else {
+        @include breakpoint("large") {
+            @content;
+        }
+    }
+}
+
+.header-left {
+    display: flex;
+    grid-area: left;
+
+    @include eyeva-screen-mobile-tablet {
+        @if stencilString("logo-position") != "center" {
+            gap: spacing("third");
+            margin: -$outline-width;
+            overflow: hidden;
+            padding: $outline-width;
+        }
+    }
+
+    @include _logo-center-medium-else-large {
+        gap: 0 spacing("base");
+
+        @if stencilString("logo-position") != "center" {
+            align-items: center;
+        }
+    }
+
+    @include breakpoint("medium") {
+        @if stencilString("logo-position") != "center" {
+            max-width: 20%;
+        }
+
+    }
+
+    .header._right & {
+        flex-direction: row-reverse;
+    }
+}
+
+.header-right {
+    display: flex;
+    grid-area: right;
+    justify-content: flex-end;
+
+    @include _logo-center-medium-else-large {
+        gap: 0 spacing("base");
+
+        @if stencilString("logo-position") != "center" {
+            align-items: center;
+        }
+    }
+
+    .header._right & {
+        flex-direction: row-reverse;
+    }
+}
+
+.eyeva__mobileCategoryNav {
+    @include eyeva-screen-mobile-tablet {
+        --webkit-overflow-scrolling: touch;
+        background: stencilColor("navPages-backgroundColor");
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        &:has(.eyeva__mobileCategoryNav-list),
+        &:has([data-content-region] *) {
+            border-bottom: 1px solid stencilColor("navPages-subMenu-separatorColor");
+            padding-bottom: spacing("third");
+
+            @if stencilColor("header-backgroundColor") != stencilColor("navPages-backgroundColor") {
+                padding-top: spacing("third");
+            }
+        }
+    }
+
+    @include breakpoint("medium") {
+        display: none;
+    }
+
+    a:not(.button) {
+        color: stencilColor("navPages-color");
+
+        &:hover {
+            color: stencilColor("navPages-color-hover");
+        }
+    }
+}
+
+.eyeva__mobileCategoryNav-list {
+    display: flex;
+    gap: spacing("base");
+    list-style: none;
+    margin: 0;
+    white-space: nowrap;
+}
+
+.eyeva__mobileCategoryNav-link {
+    color: stencilColor("navPages-color");
+    font-size: $eyeva-header-font-size;
+    font-weight: $eyeva-header-font-weight;
+    text-decoration: none;
+
+    &._active {
+        color: stencilColor("navPages-color-hover");
+    }
+
+    &:hover {
+        color: stencilColor("navPages-color-hover");
+    }
+}

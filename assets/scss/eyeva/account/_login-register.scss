@@ -1,0 +1,158 @@
+.login {
+    @extend %eyeva-panel;
+
+    @include breakpoint("small") {
+        max-width: remCalc(450px);
+    }
+}
+
+.login--signup {
+    margin-top: 0;
+}
+
+.register-form,
+.forgot-password-form,
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+    margin: 0;
+    padding: 0;
+    width: 100%;
+
+    > br {
+        display: none;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .form-field {
+        margin-bottom: 0;
+    }
+
+    .form-actions {
+        display: flex;
+        flex-direction: column;
+        gap: spacing("base");
+        margin: 0;
+        text-align: start;
+
+        &::before,
+        &::after {
+            display: none;
+        }
+
+        > * {
+            margin: 0;
+        }
+
+        .button + .button {
+            margin: 0;
+        }
+    }
+}
+
+.login-row {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base") * 2;
+    margin: 0;
+
+    &::before,
+    &::after {
+        display: none;
+    }
+
+}
+
+.new-customer {
+    border-top: container("border");
+    color: $color-textSecondary;
+    font-size: fontSize("smaller");
+    padding: spacing("base") * 2 0 0;
+    width: 100%;
+
+    p,
+    li {
+        margin-bottom: spacing("third");
+    }
+
+    ul {
+        margin-bottom: 0;
+    }
+}
+
+.register-form {
+    &[data-step="1"] {
+        [data-submit-button] {
+            display: none;
+        }
+
+        [data-back-button] {
+            display: none;
+        }
+
+        .form-field {
+            display: none;
+
+            &[data-type="FirstName"],
+            &[data-type="LastName"],
+            &[data-type="EmailAddress"],
+            &[data-type="Password"],
+            &[data-type="ConfirmPassword"] {
+                display: block;
+
+                &._modern {
+                    display: grid;
+                }
+            }
+        }
+
+        .g-recaptcha {
+            display: none;
+        }
+    }
+
+    &[data-step="2"] {
+        [data-continue-button] {
+            display: none;
+        }
+
+        .form-field {
+            &[data-type="FirstName"],
+            &[data-type="LastName"],
+            &[data-type="EmailAddress"],
+            &[data-type="Password"],
+            &[data-type="ConfirmPassword"] {
+                display: none;
+            }
+        }
+    }
+
+    .form-inlineMessage + .form-inlineMessage {
+        display: none;
+    }
+}
+
+.account-created {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base") * 2;
+    margin: spacing("base") * 2 auto;
+    max-width: 100%;
+    text-align: center;
+    width: 800px;
+
+    @include breakpoint("medium") {
+        margin-block: spacing("base") * 3;
+    }
+
+    .page-heading {
+        font-family: $body-font-family;
+        font-size: fontSize("small");
+        font-weight: $eyeva-body-font-bold;
+        margin: 0;
+    }
+}

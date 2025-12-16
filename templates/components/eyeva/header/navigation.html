@@ -1,0 +1,110 @@
+<div class="navPages" id="navPages">
+    {{#if theme_settings.menu_editing}}
+        {{> components/common/alert/alert-error "Editing menu widgets. Remember to close this when finished from <b>Theme Styles</b> &gt; <b>Header and footer</b> &gt; <b>TURN ON EDITING MENU WIDGETS</b>"}}
+    {{/if}}
+    {{#if customer}}
+        <div class="navPages-list _customer">
+            <li class="navPages-item">
+                {{> components/eyeva/header/navigation-account depth=1}}
+            </li>
+        </div>
+    {{/if}}
+
+    <ul class="navPages-list">
+        {{#each categories}}
+            <li class="navPages-item" {{#if children}}data-menu-gap-cover{{/if}}>
+                {{#if ../theme_settings.navigation_design '==' 'simple'}}
+                    {{> components/eyeva/header/navigation-mega depth=1}}
+                {{else}}
+                    {{> components/eyeva/header/navigation-list depth=1}}
+                {{/if}}
+            </li>
+        {{/each}}
+    </ul>
+
+    <ul class="navPages-list _webpages {{#if theme_settings.hide_content_navigation}}force-hide-desktop{{/if}}">
+        {{#each pages}}
+            <li class="navPages-item
+                {{#unless ../theme_settings.hide_content_navigation}}
+                    {{#if (add @index 1) '<' (toInt ../theme_settings.webpage_start)}}
+                        force-hide-desktop
+                    {{else if (toInt ../theme_settings.webpage_limit)}}
+                        {{#if (add @index 2) '>' (add (toInt ../theme_settings.webpage_start) (toInt ../theme_settings.webpage_limit))}}
+                            force-hide-desktop
+                        {{/if}}
+                    {{/if}}
+                {{/unless}}
+                " {{#if children}}data-menu-gap-cover{{/if}}>
+                {{#if ../theme_settings.navigation_design '==' 'simple'}}
+                    {{> components/eyeva/header/navigation-mega depth=1 is_page=true}}
+                {{else}}
+                    {{> components/eyeva/header/navigation-list  depth=1 is_page=true}}
+                {{/if}}
+            </li>
+        {{/each}}
+        {{#if settings.gift_certificates_enabled}}
+            <li class="navPages-item _gift {{#any theme_settings.hide_content_navigation theme_settings.hide_gift_cert}}force-hide-desktop{{/any}}">
+                <a class="navPages-action _webpage" href="{{urls.gift_certificate.purchase}}" aria-label="{{lang 'common.gift_cert'}}">
+                    <span class="navPages-label">{{lang 'common.gift_cert'}}</span>
+                </a>
+            </li>
+        {{/if}}
+        {{#if currency_selector.currencies.length '>' 1}}
+            <li class="navPages-item _currency">
+                <a class="navPages-action _webpage" href="#"
+                    data-collapsible="navPages-currency"
+                    aria-controls="navPages-currency"
+                    aria-expanded="false"
+                    aria-label="{{lang 'common.currency' code=currency_selector.active_currency_code}}"
+                >
+                    <span class="navPages-label">{{lang 'common.currency' code=currency_selector.active_currency_code}}</span>
+                    <i class="icon" aria-hidden="true"><svg><use href="#icon-arrow-right-long"></use></svg></i>
+                </a>
+                <div class="navPages-subMenu" id="navPages-currency" aria-hidden="true" data-menu-dropdown>
+                    <ul class="navPages-childList">
+                        <li class="navPages-childList-item _parent _depth-1">
+                            <a class="navPages-childList-action  _parent _depth-1 _webpage" href="#"
+                                data-collapsible="navPages-currency"
+                                aria-controls="navPages-currency"
+                                aria-expanded="false"
+                            >
+                                <i class="icon" aria-hidden="true"><svg><use href="#icon-arrow-left-long"></use></svg></i>
+                                <span class="navPages-childList-label">{{lang 'common.currency' code=currency_selector.active_currency_code}}</span>
+                            </a>
+                        </li>
+                        {{#each currency_selector.currencies}}
+                            <li class="navPages-childList-item">
+                                <a class="navPages-childList-action {{#if is_active}} activePage{{/if}}" href="{{switch_url}}"
+                                    data-currency-code="{{{code}}}"
+                                    {{#if cart_currency_switch_url.length '>' 0 }}
+                                        data-cart-currency-switch-url="{{{cart_currency_switch_url}}}"
+                                    {{/if}}
+                                    data-warning="{{lang 'common.currency_switch_promotion'}}"
+                                >
+                                    <span class="navPages-label">{{name}}</span>
+                                </a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            </li>
+        {{/if}}
+    </ul>
+    {{#unless customer}}
+        <div class="navPages-list _account">
+            <p><span class="navPages-list-heading">{{lang 'login.heading'}}</span></p>
+            <p>
+                {{lang 'login.new_customer.intro'}}
+                {{lang 'login.new_customer.fact1'}},
+                {{lang 'login.new_customer.fact2'}},
+                {{lang 'login.new_customer.fact3'}},
+                {{lang 'login.new_customer.fact4'}},
+                {{lang 'login.new_customer.fact5'}}
+            </p>
+            <p><a class="button button--primary" href="{{urls.auth.login}}">{{lang 'login.submit_value'}}</a></p>
+            {{#if settings.account_creation_enabled}}
+                <p>{{lang 'login.no_account'}} <a href="{{urls.auth.create_account}}">{{lang 'login.sign_up'}}</a></p>
+            {{/if}}
+        </div>
+    {{/unless}}
+</div>

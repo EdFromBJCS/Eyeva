@@ -1,0 +1,44 @@
+{{#unless customer.addresses}}
+    {{> components/common/alert/alert-info (lang 'account.addresses.no_addresses')}}
+{{/unless}}
+
+<div class="eyeva__addressList-container">
+    <ul class="eyeva__addressList">
+        {{#each customer.addresses}}
+            <li class="eyeva__addressList-item">
+                <div class="eyeva__addressList-item-info">
+                    <h5 class="address-title">{{first_name}} {{last_name}}</h5>
+                    <ul class="address-details address-details--postal">
+                        <li>{{company}}</li>
+                        <li>{{address1}}{{#if address2}}, {{address2}}{{/if}}, {{city}}{{#if state}}, {{state}}{{/if}} {{zip}}, {{country}}</li>
+                    </ul>
+                    {{#if phone}}
+                        <dl class="address-details">
+                            <dt class="address-label">{{lang 'account.addresses.phone' }}</dt>
+                            <dd class="address-description">{{phone}}</dd>
+                        </dl>
+                    {{/if}}
+                </div>
+                <form action="{{delete_url}}" method="post" data-delete-address="{{lang 'forms.address.confirm_delete'}}">
+                    <div class="form-actions">
+                        <a class="button button--primary button--small button--icon" href="{{edit_url}}">
+                            <span class="is-srOnly">{{lang 'common.edit'}}</span>
+                            <i class="icon"><svg class="icon"><use href="#icon-pen"></use></svg></i>
+                        </a>
+                        <button type="submit" class="button button--outline button--small button--icon">
+                            <span class="is-srOnly">{{lang 'common.delete'}}</span>
+                            <i class="icon"><svg class="icon"><use href="#icon-trash"></use></svg></i>
+                        </button>
+                    </div>
+                </form>
+            </li>
+        {{/each}}
+    </ul>
+
+    <p class="eyeva__addressList-actions">
+        <a class="button button--primary" href="{{urls.account.add_address}}">
+            <i class="icon icon--left"><svg><use href="#icon-plus"></use></svg></i>
+            {{lang 'account.addresses.new_address'}}
+        </a>
+    </p>
+</div>

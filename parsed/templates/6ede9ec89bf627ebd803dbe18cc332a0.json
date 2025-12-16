@@ -1,0 +1,3 @@
+{
+  "components/products/price-label": "{{!-- papathemes-eyeva: do not need `fallack` --}}\n{{label_value}}\n"
+}

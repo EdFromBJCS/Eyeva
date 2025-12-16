@@ -1,0 +1,64 @@
+<div class="listItem-badges">
+    {{#if stock_level '===' 0}}
+        {{#if theme_settings.pdp_sold_out_label '===' ''}}
+            {{> components/products/product-badge
+                badge-type='sold-out'
+                badge_view=theme_settings.product_sold_out_badges
+                badge_label=(lang "page_builder.pdp_sold_out_label")
+            }}
+        {{else}}
+            {{> components/products/product-badge
+                badge-type='sold-out'
+                badge_view=theme_settings.product_sold_out_badges
+                badge_label=theme_settings.pdp_sold_out_label
+            }}
+        {{/if}}
+    {{else}}
+        {{#or price.non_sale_price_with_tax price.non_sale_price_without_tax price.rrp_with_tax price.rrp_without_tax}}
+            {{#if theme_settings.product_sale_badges '===' 'label'}}
+                <div class="sale-flag-side">
+                    <span class="sale-text">{{theme_settings.product_sale_label}}</span>
+                    {{#if theme_settings.card_show_countdown}}
+                        <span class="card-countdown"></span>
+                    {{/if}}
+                </div>
+            {{else if theme_settings.product_sale_badges '===' 'percent'}}
+                <div class="sale-flag-side _percent">
+                    <span class="sale-text">
+                        {{#replace '{percent}' theme_settings.product_sale_label}}
+                            {{#if price.non_sale_price_without_tax}}
+                                {{round (multiply (subtract 1 (divide price.without_tax.value price.non_sale_price_without_tax.value)) 100)}}%
+                            {{else}}
+                                {{round (multiply (subtract 1 (divide price.with_tax.value price.non_sale_price_with_tax.value)) 100)}}%
+                            {{/if}}
+                        {{else}}
+                            <span>{{theme_settings.product_sale_label}}</span>
+                            <span>
+                                {{#if price.rrp_without_tax}}
+                                    {{round (multiply (subtract 1 (divide price.without_tax.value price.rrp_without_tax.value)) 100)}}%
+                                {{else if price.rrp_with_tax}}
+                                    {{round (multiply (subtract 1 (divide price.with_tax.value price.rrp_with_tax.value)) 100)}}%
+                                {{else if price.non_sale_price_without_tax}}
+                                    {{round (multiply (subtract 1 (divide price.without_tax.value price.non_sale_price_without_tax.value)) 100)}}%
+                                {{else}}
+                                    {{round (multiply (subtract 1 (divide price.with_tax.value price.non_sale_price_with_tax.value)) 100)}}%
+                                {{/if}}
+                            </span>
+                        {{/replace}}
+                    </span>
+                    {{#if theme_settings.card_show_countdown}}
+                        <span class="card-countdown"></span>
+                    {{/if}}
+                </div>
+            {{/if}}
+        {{/or}}
+    {{/if}}
+
+    {{#if theme_settings.product_custom_badges}}
+        {{#filter custom_fields '__badge' property='name'}}
+            <div class="sale-flag-side sale-flag-side--custom">
+                <span class="sale-text">{{{value}}}</span>
+            </div>
+        {{/filter}}
+    {{/if}}
+</div>

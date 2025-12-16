@@ -1,0 +1,118 @@
+.eyeva__panel._newReturn {
+    color: $color-textSecondary;
+    container-type: inline-size; // stylelint-disable-line
+
+    @include eyeva-size-mobile-tablet {
+        font-size: fontSize("smaller");
+        gap: spacing("base");
+    }
+
+    ._heading {
+        display: flex;
+        flex-direction: column;
+        gap: spacing("base");
+        text-align: center;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .page-heading {
+        margin: 0;
+        text-align: inherit;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: spacing("base") * 2;
+        margin: 0;
+    }
+
+    .form-actions {
+        margin: 0;
+
+        .button {
+            width: auto;
+        }
+    }
+
+    .form-fieldset {
+        display: flex;
+        flex-direction: column;
+        gap: spacing("base");
+    }
+}
+
+.eyeva__return-product-grid {
+    ._row {
+        align-items: start;
+        border-bottom: container("border");
+        display: grid;
+        gap: spacing("base") * 2;
+        grid-template-columns: auto 1fr auto;
+        padding: spacing("base") 0;
+
+        @include eyeva-size-mobile-tablet {
+            gap: spacing("base");
+        }
+
+    }
+
+    ._thumbnail {
+        @include lazy-loaded-padding("productthumb_size");
+        max-width: 100%;
+        overflow: hidden;
+        position: relative;
+        width: get-width(stencilString("productthumb_size"));
+
+        img {
+            @include lazy-loaded-img();
+            height: 100%;
+            object-fit: contain;
+            width: 100%;
+        }
+    }
+
+    ._detail {
+        display: flex;
+        flex-direction: column;
+        gap: spacing("third");
+    }
+
+    ._title {
+        color: $color-textBase;
+        font-weight: $eyeva-body-font-bold;
+    }
+
+    ._price {
+        color: $color-textBase;
+        font-size: fontSize("base");
+    }
+
+    .definitionList {
+        margin: 0;
+    }
+
+    .definitionList-label,
+    .definitionList-description {
+        color: inherit;
+        display: contents;
+        font: inherit;
+    }
+
+    .definitionList-label::before {
+        content: "";
+        display: block;
+        height: 0;
+    }
+
+    .form-field {
+        margin: 0;
+    }
+
+    .form-label {
+        font-size: fontSize("smaller");
+    }
+}

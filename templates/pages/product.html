@@ -1,0 +1,41 @@
+---
+product:
+    videos:
+        limit: {{theme_settings.productpage_videos_count}}
+    reviews:
+        limit: {{theme_settings.productpage_reviews_count}}
+    related_products:
+        limit: {{theme_settings.productpage_related_products_count}}
+    similar_by_views:
+        limit: {{theme_settings.productpage_similar_by_views_count}}
+---
+{{inject 'productId' product.id}}
+
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.product.js' resourceHint='preload' as='script'}}" as="script">
+{{/partial}}
+
+{{#partial "page"}}
+
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+    {{#each product.shipping_messages}}
+        {{> components/common/alert/alert-info message}}
+    {{/each}}
+
+    {{> components/products/product-view}}
+
+    {{{region name="product_below_content"}}}
+
+    {{> components/products/reviews}}
+
+    {{{region name="product_below_reviews"}}}
+    {{{region name="product_below_reviews--global"}}}
+
+    <div class="productView-productTabs">
+        {{> components/products/tabs}}
+    </div>
+
+    {{> components/products/schema}}
+{{/partial}}
+{{> layout/base}}

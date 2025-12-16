@@ -1,0 +1,162 @@
+.account-list-container {
+    @include eyeva__grid-table-container;
+}
+
+.account-list {
+    @include eyeva__grid-table($grid-template-columns: max-content auto auto auto max-content);
+
+    @include eyeva-size-mobile-tablet {
+        font-size: fontSize("smaller");
+    }
+}
+
+.account-listItem {
+    @include eyeva__grid-table-row;
+
+    @include eyeva-size-mobile-tablet {
+        display: block;
+    }
+
+    .account-product-image {
+        position: absolute;
+    }
+
+
+}
+
+.account-listItem-column {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("third") / 2;
+
+    @include eyeva-size-mobile-tablet {
+        display: contents;
+    }
+}
+
+.account-product {
+    display: contents;
+
+    @include eyeva-size-mobile-tablet {
+        display: grid;
+        gap: spacing("third") spacing("base");
+        grid-template:
+            "image title status" auto
+            "image desc desc" auto
+            "image created updated" 1fr
+            "action action action" auto / auto 1fr 1fr;
+    }
+
+    &::before,
+    &::after {
+        display: none;
+    }
+}
+
+.account-product-figure {
+    margin: 0;
+
+    @include eyeva-size-mobile-tablet {
+        align-self: start;
+        display: block;
+        grid-area: image;
+    }
+
+    > img {
+        position: absolute;
+    }
+}
+
+
+.account-product-title {
+    font-family: $body-font-family;
+    font-size: $eyeva-font-18;
+    font-weight: $eyeva-body-font-bold;
+    margin: 0;
+
+    @include eyeva-size-mobile-tablet {
+        font-size: fontSize("base");
+        grid-area: title;
+    }
+}
+
+.account-product-description {
+    color: $color-textSecondary;
+    margin: 0;
+
+    @include eyeva-size-mobile-tablet {
+        grid-area: desc;
+    }
+}
+
+.account-product-created {
+    font-weight: $eyeva-body-font-bold;
+
+    @include eyeva-size-mobile-tablet {
+        display: flex;
+        grid-area: created;
+    }
+}
+
+.account-product-updated {
+    font-weight: $eyeva-body-font-bold;
+
+    @include eyeva-size-mobile-tablet {
+        display: flex;
+        grid-area: updated;
+    }
+}
+
+.account-product-status {
+    align-items: flex-end;
+    gap: spacing("third");
+}
+
+.account-orderStatus-label {
+    background-color: $color-warningLight;
+    border-radius: $eyeva-small-button-radius;
+    color: $color-warning;
+    font: inherit;
+    margin: 0;
+    padding: spacing("eighth") spacing("half");
+    text-transform: none;
+
+    @include eyeva-size-mobile-tablet {
+        grid-area: status;
+        justify-self: end;
+        padding: 0 spacing("third");
+    }
+
+    &[data-order-status="shipped"],
+    &[data-order-status="completed"] {
+        background-color: $color-successLight;
+        color: $color-success;
+    }
+
+    &[data-order-status="cancelled"],
+    &[data-order-status="declined"],
+    &[data-order-status="refunded"],
+    &[data-order-status="disputed"] {
+        background-color: container("fill", "dark");
+        color: $color-grey;
+    }
+}
+
+.account-orderStatus-action {
+    color: $color-textLink;
+    font-size: fontSize("smaller");
+    font-style: normal;
+    text-decoration: none;
+
+    @include eyeva-size-mobile-tablet {
+        grid-area: action;
+        justify-self: end;
+    }
+}
+
+.account-product-detail-heading {
+    font: inherit;
+    font-weight: $body-font-weight;
+    margin: 0;
+    text-transform: none;
+}

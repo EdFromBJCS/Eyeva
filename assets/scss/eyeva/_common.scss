@@ -1,0 +1,640 @@
+
+@keyframes eyeva__opacity-1 {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes eyeva__opacity-0 {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes eyeva__move-up-40 {
+    from {
+        opacity: 1;
+        transform: none;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+}
+
+@keyframes eyeva__move-up-from-40 {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes eyeva__move-down-40 {
+    from {
+        opacity: 1;
+        transform: none;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+}
+
+@keyframes eyeva__move-down-from-40 {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes eyeva__move-left-40 {
+    from {
+        opacity: 1;
+        transform: none;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+}
+
+@keyframes eyeva__move-left-from-40 {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes eyeva__move-right-40 {
+    from {
+        opacity: 1;
+        transform: none;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+}
+
+@keyframes eyeva__move-right-from-40 {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes eyeva__slide-in-right {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes eyeva__slide-out-right {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+legend {
+    font-size: $eyeva-font-18;
+    font-weight: $eyeva-body-font-bold;
+    margin-bottom: spacing("base");
+
+    @include breakpoint("medium") {
+        font-size: fontSize("small");
+    }
+
+    small {
+        color: $color-textSecondary;
+        font-size: fontSize("smaller");
+        font-weight: $body-font-weight;
+
+        @include breakpoint("medium") {
+            font-size: fontSize("base");
+        }
+    }
+}
+
+body {
+    line-height: $eyeva-body-line-height;
+}
+
+* {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+}
+
+a {
+    text-decoration-thickness: 1px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    line-height: $eyeva-heading-line-height;
+    margin-top: 0;
+}
+
+p,
+ul,
+ol {
+    margin-bottom: spacing("base");
+}
+
+[data-dropdown-content] {
+    --animation-duration: 200;
+}
+
+.body {
+    margin: 0;
+}
+
+.hide-desktop {
+    @include breakpoint("medium") {
+        display: none;
+    }
+}
+
+.force-hide-desktop {
+    @include breakpoint("medium") {
+        display: none !important;
+    }
+}
+
+
+.hide-mobile {
+    @media (max-width: (screenSize("small") - 1px)) {
+        display: none;
+    }
+}
+
+.force-hide-mobile {
+    @media (max-width: (screenSize("small") - 1px)) {
+        display: none !important;
+    }
+}
+
+.hide-tablet {
+    @media (min-width: screenSize("small")) and (max-width: (screenSize("medium") - 1px)) {
+        display: none;
+    }
+}
+
+.force-hide-tablet {
+    @media (min-width: screenSize("small")) and (max-width: (screenSize("medium") - 1px)) {
+        display: none !important;
+    }
+}
+
+.hide-mobile-tablet {
+    @media (max-width: (screenSize("medium") - 1px)) {
+        display: none;
+    }
+}
+
+.force-hide-mobile-tablet {
+    @media (max-width: (screenSize("medium") - 1px)) {
+        display: none !important;
+    }
+}
+
+%eyeva__container {
+    max-width: none;
+    padding-left: spacing("base");
+    padding-right: spacing("base");
+
+    @include breakpoint("large") {
+        padding-left: spacing("double");
+        padding-right: spacing("double");
+    }
+}
+
+.container {
+    @extend %eyeva__container;
+
+    &._fill {
+        background: container("fill");
+    }
+}
+
+.page {
+    margin: 0;
+}
+
+.modal-close {
+    @include square($eyeva-small-button-height);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    line-height: 1;
+    right: 0;
+    top: 0;
+
+    // fix close button overlapping on Safari/iOS only
+    &:has(~ .modal-content .eyeva__productView-modifiersModal.is-open) {
+        z-index: 0;
+    }
+}
+
+.section {
+    padding-block: spacing("double");
+
+    @if stencilString("card_style") == "boxed" {
+        margin-inline: -(spacing("single") * 2);
+        overflow: hidden;
+        padding-inline: spacing("single") * 2;
+
+        @include eyeva-size-large-down {
+            margin-inline: -(spacing("base"));
+            padding-inline: spacing("base");
+        }
+    }
+
+    @include eyeva-size-mobile-tablet {
+        padding-block: spacing("base") * 2;
+    }
+}
+
+
+%section-heading {
+    font-family: $header-font-family;
+    font-size: fontSize("larger");
+    font-weight: $header-font-weight;
+    margin-block: 0 spacing("single") * 2;
+
+    @if (stencilString("section_align") == "start") {
+        margin-block-end: spacing("single");
+    }
+
+    @include eyeva-size-mobile-tablet {
+        font-size: fontSize("large");
+        margin-block: 0 spacing("base") * 2;
+
+        @if (stencilString("section_align") == "start") {
+            margin-block-end: spacing("base");
+        }
+    }
+}
+
+.section-heading {
+    @extend %section-heading;
+}
+
+%eyeva-section {
+    position: relative;
+
+    .section-heading {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: if(stencilString("section_align") == "start", start, center);
+        margin-inline: (remCalc(50px) + spacing("base")) * 2;
+        min-height: 50px;
+
+        @if stencilString("section_align") == "start" {
+            margin-inline-start: 0;
+        }
+
+        @include eyeva-size-mobile-tablet {
+            margin-inline: remCalc(50px) + spacing("base");
+
+            @if stencilString("section_align") == "start" {
+                margin-inline-start: 0;
+            }
+        }
+    }
+
+    .section-footer {
+        text-align: center;
+
+        .button {
+            margin: 0;
+        }
+    }
+
+    .blaze-container {
+        position: static;
+
+        .blaze-prev {
+            left: auto;
+            right: remCalc(50px) + spacing("base");
+            top: 0;
+            transform: none;
+
+            @include eyeva-size-mobile-tablet {
+                @if stencilString("section_align") == "center" {
+                    left: 0;
+                    right: auto;
+                }
+            }
+        }
+
+        .blaze-next {
+            top: 0;
+            transform: none;
+        }
+    }
+
+    .blaze-track-container {
+        margin-inline: -(spacing("quarter"));
+        overflow-y: visible;
+        padding-block: 0 spacing("quarter");
+        padding-inline: spacing("quarter");
+        position: static;
+    }
+}
+
+%eyeva-section-products {
+    @extend %eyeva-section;
+
+    .productGrid {
+        margin-bottom: spacing("single") * 2;
+
+        @include eyeva-size-mobile-tablet {
+            margin-bottom: spacing("single");
+        }
+    }
+}
+
+%eyeva-panel {
+    container-type: inline-size; // stylelint-disable-line
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base") * 2;
+    margin: spacing("single") 0;
+    padding: 0;
+    width: 100%;
+
+    @include breakpoint("small") {
+        background: container("fill");
+        border: container("border");
+        border-radius: $eyeva-container-radius;
+        box-shadow: $eyeva-shadow-panel;
+        margin-block: spacing("single");
+        margin-inline: auto;
+        padding: spacing("base") * 4 spacing("base") * 2;
+    }
+
+    @include breakpoint("medium") {
+        margin-block: spacing("single") * 2;
+        max-width: remCalc(1000px);
+    }
+
+    .page-heading {
+        font-family: $body-font-family;
+        font-size: fontSize("small");
+        font-weight: $eyeva-body-font-bold;
+        margin: 0;
+        text-align: center;
+    }
+}
+
+.eyeva__panel {
+    @extend %eyeva-panel;
+}
+
+ol.breadcrumbs {
+    display: block;
+    font-size: 0;
+    margin-bottom: 0;
+    padding: spacing("base") 0;
+    text-align: start;
+
+    @media (max-width: (screenSize("medium") - 1px)) {
+        display: block;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
+.breadcrumb {
+    margin-right: spacing("third");
+
+    &:not(:first-child)::before {
+        display: none;
+    }
+
+    &:first-child {
+        .icon {
+            display: none;
+        }
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .icon {
+        @include square(10px);
+        margin-right: spacing("third");
+
+        svg {
+            fill: $input-disabled-bg;
+        }
+    }
+}
+
+.navList {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("third");
+
+    &::before,
+    &::after {
+        display: none;
+    }
+}
+
+// should be same form-checkbox
+.navList-action--checkbox {
+    @extend %form-checkbox-label;
+
+    &::before,
+    &::after {
+        margin-top: 0;
+    }
+
+    &.is-selected {
+        @extend %form-checkbox-label-checked;
+    }
+}
+
+.alertBox {
+    font-size: fontSize("base");
+
+    @include eyeva-size-mobile-tablet {
+        font-size: fontSize("smaller");
+    }
+}
+
+.alertBox--info {
+    background-color: $alert-info-bgColor;
+    color: $alert-info-iconColor;
+}
+
+
+
+// Page Heading
+.page {
+    >.page-heading {
+        margin-bottom: $spacing-base * 2;
+        text-align: left;
+
+        @media (max-width: (screenSize("medium") - 1px)) {
+            font-size: $fontSize-large;
+            margin-bottom: $spacing-single;
+        }
+    }
+}
+
+// Page Description
+.page-description {
+    margin: 0 0 spacing("single");
+    text-align: center;
+
+    @include breakpoint("medium") {
+        margin-bottom: spacing("double");
+    }
+}
+
+// Pagination
+.pagination {
+    .pagination-list {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        gap: $spacing-third;
+        justify-content: center;
+        margin: 0;
+
+        &::before,
+        &::after {
+            display: none;
+        }
+    }
+
+    .pagination-item {
+        align-content: center;
+        border-color: $container-border-global-color-base;
+        border-radius: $eyeva-medium-radius;
+        margin: 0;
+
+        &:hover {
+            background-color: $container-fill-dark;
+        }
+
+        &.pagination-item--current {
+            background-color: $buttonStyle-primary-backgroundColor;
+
+            .pagination-link {
+                color: $buttonStyle-primary-color;
+            }
+        }
+    }
+
+    .pagination-link {
+        @include square(50);
+        align-content: center;
+        color: $color-textBase;
+
+        .icon {
+            @include square(18);
+            margin: auto;
+
+            svg {
+                fill: $color-textBase;
+            }
+        }
+    }
+}
+
+
+// Counter Pill
+// -----------------------------------------------------------------------------
+//
+// 1. Hardcoded intentionally for precise pixels.
+//
+// -----------------------------------------------------------------------------
+
+.countPill {
+    background-color: stencilColor("navUser-indicator-backgroundColor");
+    border-radius: 50%;
+    color: color("whites", "bright");
+    display: none;
+    font-size: fontSize("tiny");
+    font-weight: $eyeva-header-font-weight;
+    height: 20px; // 1
+    line-height: 20px; // 1
+    margin-left: spacing("eighth");
+    text-align: center;
+    width: 20px; // 1
+}
+
+.countPill--positive {
+    display: inline-block;
+}
+
+.countPill--alt {
+    background-color: color("greys", "lighter");
+    color: color("greys", "darker");
+}

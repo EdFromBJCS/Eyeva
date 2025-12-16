@@ -1,0 +1,15 @@
+<span role="img"
+    class="stars"
+    {{#if rating_target}}
+      aria-label="{{lang 'products.reviews.rating_aria_label' rating_target=rating_target current_rating=rating max_rating=5}}"
+    {{else}}
+      aria-label="{{lang 'products.reviews.rating_aria_label' rating_target='Product' current_rating=rating max_rating=5}}"
+    {{/if}}
+>
+    <span class="icon icon--ratingFull">
+        <svg>
+            <use href="#icon-star" />
+        </svg>
+    </span>
+    {{rating}}
+</span>

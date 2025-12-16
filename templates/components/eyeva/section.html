@@ -1,0 +1,44 @@
+{{#if section '===' 'bestselling'}}
+
+    {{#if products.top_sellers}}
+        {{> components/products/top products=products.top_sellers}}
+    {{/if}}
+
+{{else if section '===' 'featured'}}
+
+    {{#if products.featured}}
+        {{> components/products/featured products=products.featured}}
+    {{/if}}
+
+{{else if section '===' 'new'}}
+
+    {{#if products.new}}
+        {{> components/products/new products=products.new}}
+    {{/if}}
+
+{{else if section '===' 'viewed'}}
+
+    <div class="section section--homeRecentlyViewed">
+        {{> components/products/recentviewed display_type="carousel"}}
+    </div>
+
+{{else if section '===' 'brands'}}
+
+    {{#if shop_by_brand.length '>' 1}}
+        {{> components/eyeva/home-brands brands=shop_by_brand}}
+    {{/if}}
+
+{{else if section '===' 'categories'}}
+    {{#if categories.length '>' 1}}
+        {{> components/eyeva/home-categories}}
+    {{/if}}
+
+{{else if section '===' 'blog'}}
+    {{#if theme_settings.homepage_blog_posts_count '>' 0}}
+        {{> components/eyeva/home-blog posts=(limit blog.recent_posts theme_settings.homepage_blog_posts_count)}}
+    {{/if}}
+
+{{else if section '===' 'laptop-banners'}}
+    {{> components/eyeva/home-laptop-banners}}
+
+{{/if}}

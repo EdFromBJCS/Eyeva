@@ -1,0 +1,45 @@
+<nav class="faceted-search-container-nav">
+    {{#if brand.faceted_search_enabled}}
+        {{> components/faceted-search/index brand theme_settings=theme_settings}}
+    {{else}}
+        {{#if shop_by_brand}}
+            <div class="sidebarBlock">
+                <h2 class="sidebarBlock-heading">
+                    <button class="button button--plain is-open" type="button" aria-expanded="true" aria-controls="sidebar-shopbybrand" data-collapsible="sidebar-shopbybrand">
+                        <span class="_title">{{lang 'brand.label'}}</span>
+                        <i class="icon" aria-hidden="true"><svg><use href="#icon-chevron-down"></use></svg></i>
+                    </button>
+                </h2>
+                <ul class="sidebarBlock-list is-open" id="sidebar-shopbybrand" aria-hidden="false">
+                    {{#each shop_by_brand}}
+                        <li class="sidebarBlock-list-item">
+                            <a class="sidebarBlock-list-action" href="{{url}}" title="{{name}}">{{name}}</a>
+                        </li>
+                    {{/each}}
+                    <li class="sidebarBlock-list-item">
+                        <a class="sidebarBlock-list-action _view-all" href="{{urls.brands}}">{{lang 'common.view_all'}}</a>
+                    </li>
+                </ul>
+            </div>
+        {{/if}}
+    {{/if}}
+
+    {{#if brand.faceted_search_enabled}}
+        <div class="faceted-search-container-nav-footer">
+            {{#if brand.selected.remove_all_url}}
+                    <a href="{{brand.selected.remove_all_url}}" class="button button--outline" data-faceted-search-facet id="faceted-search-clear-all-close-sidebar">
+                        {{lang 'search.faceted.selected.clear-all'}}
+                    </a>
+                </li>
+            {{/if}}
+
+            <button class="button button--primary" type="button" title="{{lang 'common.close'}}" data-collapsible="page-sidebar">
+                {{#if pagination.brands.links}}
+                    {{lang 'brand.view_product_count' products=(add (multiply theme_settings.brandpage_products_per_page (subtract (get 'number' (last pagination.brand.links)) 1)) brand.products.length)}}
+                {{else}}
+                    {{lang 'brand.view_product_count' products=brand.products.length}}
+                {{/if}}
+            </button>
+        </div>
+    {{/if}}
+</nav>

@@ -1,0 +1,674 @@
+@keyframes eyeva-button-inactive {
+    0% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(1.3);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+
+    60% {
+        transform: scale(1.15);
+    }
+
+    80% {
+        transform: scale(1);
+    }
+
+    90% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes eyeva-button-active {
+    0% {
+        transform: scale(1);
+    }
+
+    20% {
+        transform: scale(1.3);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+
+    60% {
+        transform: scale(1.15);
+    }
+
+    80% {
+        transform: scale(1);
+    }
+
+    90% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.price--rrp,
+.price--non-sale,
+.price--discounted {
+    text-decoration-thickness: 1px;
+}
+
+.card {
+    display: grid;
+    grid-template-rows: max-content 1fr max-content;
+    margin-bottom: 0;
+    min-height: 100%;
+}
+
+.card--boxed {
+    background: stencilColor("card-bgColor");
+    border-radius: $eyeva-container-radius;
+    box-shadow: $eyeva-shadow-panel;
+    overflow: hidden;
+    padding: 0;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: $eyeva-shadow-hover;
+        transform: translateY(-8px);
+    }
+
+    .card-figure {
+        background: transparent !important;
+        border-radius: $eyeva-container-radius $eyeva-container-radius 0 0;
+        margin: 0;
+        padding: 0;
+    }
+
+    .card-badges {
+        left: spacing("base");
+        top: spacing("half");
+    }
+
+    .card-body {
+        padding: spacing("base");
+
+        .card-title {
+            font-size: inherit;
+            font-weight: $eyeva-body-font-bold;
+            line-height: lineHeight("base");
+        }
+
+        .card-body-row {
+            align-items: center;
+            display: grid;
+            gap: spacing("third");
+            grid-template-columns: 1fr max-content;
+
+            @if $eyeva-card-show-custom-fields {
+                border-top: container("border");
+                padding-top: spacing("base");
+            }
+
+            .card-prices {
+                display: block;
+                justify-self: start;
+                margin: 0;
+                max-width: none;
+                text-align: start;
+
+                .price-section {
+                    margin-left: 0;
+                }
+
+                .price-starting-label {
+                    color: $color-textBase;
+                    display: block;
+                    font-size: fontSize("smaller");
+                    margin-bottom: spacing("quarter");
+                    width: 100%;
+                }
+
+                @if not $eyeva-price-ranges {
+                    .price-section {
+                        display: contents;
+
+                        &.rrp-price--withTax,
+                        &.rrp-price--withoutTax {
+                            display: block;
+                        }
+                    }
+                }
+            }
+
+            .card-ratings {
+                margin-left: 0;
+                width: max-content;
+
+                .icon {
+                    @include square(18px);
+                }
+            }
+        }
+    }
+
+    .card-footer {
+        padding: 0 spacing("base") spacing("base");
+
+        .card-figcaption-button {
+            box-shadow: none;
+        }
+    }
+}
+
+.card-image {
+    + .card-image {
+        // hide the hover image for this theme
+        display: none;
+    }
+}
+
+.card-video {
+    display: none;
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    &._playing {
+        display: block;
+    }
+}
+
+.card-figure {
+    border-radius: $eyeva-container-radius;
+    overflow: visible;
+    padding: 0;
+
+    @if (stencilColor("card-bgColor") != $body-bg) {
+        background: stencilColor("card-bgColor");
+    }
+}
+
+.card-figure__link:focus-visible {
+    border: 2px solid transparent;
+    outline-offset: -2px !important;
+    overflow: hidden;
+}
+
+.card-figcaption {
+    display: block;
+    opacity: 1;
+}
+
+.card-figcaption-body {
+    display: inline;
+    position: static;
+    transform: none;
+
+    ._bottomLeft,
+    ._bottomRight,
+    ._center {
+        display: flex;
+        flex-wrap: wrap;
+        gap: spacing("third");
+        position: absolute;
+        width: auto;
+    }
+
+    ._bottomLeft {
+        bottom: spacing("base");
+        left: spacing("base");
+    }
+
+    ._bottomRight {
+        bottom: spacing("base");
+        right: spacing("base");
+    }
+
+    ._center {
+        justify-content: center;
+        left: 0;
+        margin: auto;
+        opacity: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+
+        @include eyeva-screen-mobile-tablet {
+            display: none;
+        }
+
+        .card-figure:hover &,
+        &:has(*:focus) {
+            opacity: 1;
+        }
+    }
+}
+
+.card-body {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: if($eyeva-card-show-custom-fields, flex-start, space-between);
+    overflow: hidden;
+    padding-top: spacing("base");
+    row-gap: spacing("base");
+    text-align: start;
+    width: 100%;
+
+    @include breakpoint("medium") {
+        padding-top: spacing("single");
+    }
+}
+
+.card-body-row {
+    align-items: stretch;
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-body-row-swatch-rating {
+    display: grid;
+    gap: spacing("base");
+    grid-template-columns: 1fr auto;
+
+    &:not(:has(> *)) {
+        display: none;
+    }
+}
+
+.card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: spacing("third");
+
+    @if $eyeva-card-show-button and not $eyeva-card-show-qty {
+        flex-wrap: nowrap;
+
+        .card-figcaption-button {
+            &._add-to-cart,
+            &._preorder,
+            &._choose-options {
+                flex: 1;
+            }
+        }
+    }
+
+    @include breakpoint("medium") {
+        @if not $eyeva-card-show-button {
+            display: none;
+        }
+    }
+
+    &::before,
+    &::after {
+        display: none;
+    }
+
+    &:not(:empty) {
+        margin-top: spacing("base");
+
+        @include breakpoint("medium") {
+            margin-top: spacing("single");
+        }
+    }
+}
+
+.card-title {
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+.card-prices {
+    color: $color-textSecondary;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    justify-self: end;
+    line-height: $eyeva-heading-line-height;
+    max-width: 50%;
+    text-align: end;
+
+    .price-section {
+        margin-left: spacing("quarter");
+    }
+
+    .price {
+        @include breakpoint("medium") {
+            font-size: $eyeva-font-18;
+        }
+    }
+
+    .price--main {
+        color: $color-textBase;
+        font-weight: $eyeva-body-font-bold;
+    }
+}
+
+.card-ratings {
+    color: $color-textSecondary;
+    font-size: fontSize("smaller");
+    justify-self: end;
+    line-height: 1;
+    margin-bottom: 0;
+    margin-left: auto;
+    margin-right: 0;
+    text-align: end;
+
+    @include breakpoint("medium") {
+        font-size: inherit;
+    }
+}
+
+.card-figcaption-button {
+    align-items: center;
+    background: container("fill", "dark");
+    border-radius: $eyeva-small-button-radius;
+    box-shadow: $eyeva-shadow-item;
+    color: $color-textBase;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0;
+    min-height: $eyeva-small-button-height;
+    min-width: $eyeva-small-button-height;
+    padding: 0 spacing("quarter");
+    text-decoration: none;
+
+    .card-figcaption-body & {
+        background: container("fill");
+    }
+
+    .icon {
+        height: fontSize("base") + spacing("quarter") * 2;
+        padding: spacing("quarter");
+        width: fontSize("base") + spacing("quarter") * 2;
+
+        svg {
+            fill: $color-textBase;
+        }
+    }
+
+    ._label {
+        font-weight: $eyeva-body-font-bold;
+        padding: 0 spacing("third") 0 spacing("eighth");
+    }
+
+    &:hover,
+    &:focus,
+    .card-figcaption-body &:hover,
+    .card-figcaption-body &:focus {
+        background: $buttonStyle-primary-backgroundColorHover;
+        color: $buttonStyle-primary-colorHover;
+
+        .icon svg {
+            fill: $buttonStyle-primary-colorHover;
+        }
+    }
+
+    &:active,
+    .card-figcaption-body &:active {
+        background: $buttonStyle-primary-backgroundColorActive;
+        color: $buttonStyle-primary-colorActive;
+
+        .icon svg {
+            fill: $buttonStyle-primary-colorActive;
+        }
+    }
+
+    + .card-figcaption-button {
+        margin: 0;
+    }
+
+    &._choose-options,
+    &._add-to-cart,
+    &._preorder {
+        background: $buttonStyle-primary-backgroundColor;
+        color: $buttonStyle-primary-color;
+
+        .icon {
+            @if $eyeva-card-show-button and not $eyeva-card-show-qty {
+                display: none;
+            }
+
+            svg {
+                fill: $buttonStyle-primary-color;
+            }
+        }
+
+        ._label {
+            @if $eyeva-card-show-button and not $eyeva-card-show-qty {
+                padding: 0 spacing("quarter");
+            }
+            @else {
+                @include u-hidden("visually");
+            }
+        }
+
+        &:hover,
+        &:focus {
+            background: $buttonStyle-primary-backgroundColorHover;
+            color: $buttonStyle-primary-colorHover;
+
+            .icon svg {
+                fill: $buttonStyle-primary-colorHover;
+            }
+        }
+
+        &:active {
+            background: $buttonStyle-primary-backgroundColorActive;
+            color: $buttonStyle-primary-colorActive;
+
+            .icon svg {
+                fill: $buttonStyle-primary-colorActive;
+            }
+        }
+    }
+
+    &._wishlist,
+    &._videos,
+    &._img360 {
+        min-height: $eyeva-tiny-button-height;
+        min-width: $eyeva-tiny-button-height;
+        padding: 0;
+    }
+
+    &._wishlist {
+        animation: 0.01s ease-out;
+        animation-duration: 0.01s;
+        animation-name: eyeva-button-inactive;
+        animation-timing-function: ease-out;
+        background: container("fill", "dark");
+        color: $color-textBase;
+
+        &._animate {
+            animation-duration: 0.5s;
+        }
+
+        &,
+        .card-figcaption-body & {
+            background: container("fill");
+
+            .icon svg {
+                fill: $color-textBase;
+            }
+        }
+
+        &:hover,
+        &:focus,
+        &:active,
+        .card-figcaption-body &:hover,
+        .card-figcaption-body &:focus,
+        .card-figcaption-body &:active {
+            color: $color-primary;
+
+            .icon svg {
+                fill: $color-primary;
+            }
+        }
+
+        &.is-active,
+        .card-figcaption-body &.is-active {
+            animation-name: eyeva-button-active;
+            background: $buttonStyle-primary-backgroundColorActive;
+            color: $buttonStyle-primary-colorActive;
+
+            .icon svg {
+                fill: $buttonStyle-primary-colorActive;
+            }
+
+        }
+    }
+
+    &._remove {
+        background: container("fill");
+        position: absolute;
+        right: spacing("base");
+        top: spacing("base");
+
+        &:hover,
+        &:focus {
+            background: $buttonStyle-primary-backgroundColorHover;
+        }
+
+        &:active {
+            background: $buttonStyle-primary-backgroundColorActive;
+        }
+
+        ._label {
+            @include u-hidden("visually");
+        }
+    }
+}
+
+.card-qty {
+    .form-field {
+        margin: 0;
+    }
+
+    .form-increment {
+        background: container("fill", "dark");
+        border-radius: $eyeva-small-button-radius;
+        box-shadow: $eyeva-shadow-item;
+        display: inline-flex;
+        height: $eyeva-small-button-height;
+
+        .card-figcaption-body & {
+            background: container("fill");
+        }
+
+        &:has(input:disabled) {
+            background: $input-disabled-bg;
+        }
+
+        .button {
+            background-color: transparent;
+            border: 0;
+            min-height: auto;
+            padding: 0;
+            width: spacing("base") + spacing("half");
+
+            &:hover,
+            &:focus {
+                .icon svg {
+                    fill: $color-textLink-hover;
+                }
+            }
+
+            .icon {
+                @include square(16px);
+
+                svg {
+                    fill: $color-textSecondary;
+                }
+            }
+
+            &[data-action="dec"] {
+                padding-left: spacing("half");
+            }
+
+            &[data-action="inc"] {
+                padding-right: spacing("half");
+            }
+        }
+
+        .form-input {
+            background-color: transparent;
+            padding: 0;
+            width: $eyeva-small-button-height;
+        }
+    }
+}
+
+.card-wishlist {
+    display: inline;
+
+    .form-wishlist {
+        display: inline;
+        position: static;
+    }
+}
+
+.card-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: spacing("third") / 2;
+    left: spacing("half");
+    pointer-events: none;
+    position: absolute;
+    top: spacing("quarter");
+}
+
+// Custom fields specifications - independent of card style
+.card-customFields {
+    border-top: container("border");
+    color: $color-textSecondary;
+    margin: 0 0 auto;
+    padding: spacing("base") 0 0;
+    position: relative;
+
+    .card-customField-name {
+        font-weight: $eyeva-body-font-bold;
+
+        &._hide {
+            display: none; // Hide name, only show value as bullet points
+
+            // Only show bullet points for values when name is hidden
+            + .card-customField-value {
+                padding-left: spacing("half");
+
+                &::before {
+                    content: "•";
+                    font-size: inherit;
+                    font-weight: $eyeva-body-font-bold;
+                    left: 0;
+                    position: absolute;
+                }
+            }
+        }
+    }
+
+    .card-customField-value {
+        margin: 0 0 spacing("third") 0;
+        position: relative;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.wishlist-dropdown-menu._card {
+    margin-top: spacing("third");
+    right: auto;
+}

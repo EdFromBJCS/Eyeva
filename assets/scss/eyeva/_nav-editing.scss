@@ -1,0 +1,72 @@
+
+@mixin eyeva__menu-editing {
+    .header[data-sticky-header] {
+        position: relative;
+    }
+
+    .header._left .container,
+    .header._right .container {
+        align-items: flex-start;
+
+        @include eyeva-screen-mobile-tablet {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    .navPages {
+        display: flex !important;
+        flex-direction: column;
+        position: static;
+
+        @include eyeva-screen-mobile-tablet {
+            margin-inline: -(spacing("base"));
+            max-width: calc(100% + #{spacing("base") * 2});
+        }
+
+        [data-menu-dropdown] {
+            display: flex;
+            max-width: 100%;
+            position: relative;
+            width: 100%;
+
+            @include eyeva-screen-mobile-tablet {
+                background: none;
+                overflow: visible;
+                padding-inline: 0;
+            }
+        }
+    }
+
+    .navPages-item {
+        flex-wrap: wrap;
+        row-gap: spacing("third");
+    }
+
+    .navPages-action {
+        flex: 0 0 auto;
+    }
+
+    .navPages-subMenu-toggle {
+        display: inline-flex;
+        vertical-align: middle;
+    }
+
+    .navPages-childList,
+    .navPages-megaMenu-childList {
+        @include eyeva-screen-mobile-tablet {
+            margin-inline: -(spacing("base"));
+            width: calc(100% + #{spacing("base") * 2});
+
+            .navPages-childList,
+            .navPages-megaMenu-childList {
+                margin-inline: 0;
+                width: 100%;
+            }
+        }
+    }
+}
+
+@if ($eyeva-menu-editing) {
+    @include eyeva__menu-editing;
+}

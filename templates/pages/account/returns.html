@@ -1,0 +1,20 @@
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.account.js' resourceHint='preload' as='script'}}" as="script">
+{{/partial}}
+
+{{#partial "page"}}
+
+<main class="account">
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    <h1 class="page-heading">{{lang 'account.returns.heading' }}</h1>
+    {{> components/account/navigation account_page='returns'}}
+    {{#if customer.returns}}
+        {{> components/account/returns-list returns=customer.returns}}
+    {{else}}
+        {{> components/common/alert/alert-info (lang 'account.returns.none')}}
+    {{/if}}
+    </div>
+</main>
+
+{{/partial}}
+{{> layout/base}}

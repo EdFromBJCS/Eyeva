@@ -1,0 +1,103 @@
+
+@function pixel-calc($rem-value, $base-value: $fontSize-root) {
+    $value: stripUnit($rem-value) * stripUnit($base-value);
+    @return to-length($value, "px");
+}
+
+// A function to remove leading and trailing spaces from a string
+@function trim($string) {
+    $string-length: str-length($string);
+    $start: 1;
+    $end: $string-length;
+
+    // Move start forward past any leading spaces
+    @while ($start <= $string-length and str-slice($string, $start, $start) == " ") {
+        $start: $start + 1;
+    }
+
+    // Move end backward past any trailing spaces
+    @while ($end >= $start and str-slice($string, $end, $end) == " ") {
+        $end: $end - 1;
+    }
+
+    @return str-slice($string, $start, $end);
+}
+
+// A function to split a string by a given delimiter into a list and trim each piece
+@function split($string, $delimiter: ",") {
+    @if type-of($string) != "string" {
+        @return ();
+    }
+
+    $list: ();
+    $start: 1;
+    $length: str-length($string);
+    $delim-length: str-length($delimiter);
+
+    @if type-of($string) != "string" {
+        @return $list;
+    }
+
+    @while $start <= $length {
+        // Create a substring starting at $start
+        $sub: str-slice($string, $start);
+
+        // Find the position of the delimiter in this substring
+        $pos: str-index($sub, $delimiter);
+
+        @if $pos == null {
+            // No more delimiter found, take the rest of the string
+            $part: str-slice($sub, 1); // entire remaining substring
+            $list: append($list, trim($part), comma);
+            @return $list;
+        } @else {
+            // Calculate the actual position in the original string
+            $find: $pos + $start - 1;
+
+            // Extract the part before the delimiter
+            $part: str-slice($string, $start, $find - 1);
+            $list: append($list, trim($part), comma);
+
+            // Move $start past the delimiter
+            $start: $find + $delim-length;
+        }
+    }
+
+    @return $list;
+}
+
+@function to-lowercase($char) {
+    $uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    $lowercase: "abcdefghijklmnopqrstuvwxyz";
+    $pos: str-index($uppercase, $char);
+
+    @if $pos {
+        @return str-slice($lowercase, $pos, $pos);
+    }
+    @return $char;
+}
+
+@function is-alphanumeric($char) {
+    $allowed: "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    @return (str-index($allowed, $char) != null);
+}
+
+@function dash-case($string) {
+    $length: str-length($string);
+    $result: "";
+    $i: 1;
+
+    @while $i <= $length {
+        $char: str-slice($string, $i, $i);
+        @if is-alphanumeric($char) {
+            // Convert alphanumeric to lowercase
+            $result: #{$result}#{to-lowercase($char)};
+        } @else {
+            // Non-alphanumeric becomes dash
+            $result: #{$result}-;
+        }
+        $i: $i + 1;
+    }
+
+    @return $result;
+}

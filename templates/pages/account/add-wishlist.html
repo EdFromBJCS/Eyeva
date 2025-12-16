@@ -1,0 +1,15 @@
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.wishlist.js' resourceHint='preload' as='script'}}" as="script">
+{{/partial}}
+
+{{#partial "page"}}
+    <div class="account">
+        {{#if settings.show_wishlist}}
+            {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+            <h2 class="page-heading">{{lang 'account.wishlists.heading' }}</h2>
+            {{> components/account/navigation account_page='wishlists'}}
+            {{> components/account/add-wishlist}}
+        {{/if}}
+    </div>
+{{/partial}}
+{{> layout/base}}

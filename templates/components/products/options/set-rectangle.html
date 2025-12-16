@@ -1,0 +1,74 @@
+{{#if (getVar (get 'string' (concat '__stepper_' (dashcase this.display_name))))}}
+    {{assignVar 'isStepper' 1}}
+
+    {{!-- always disable stepper for modifiers in modal --}}
+    {{#if (getVar 'enableModifiersModal')}}
+        {{#if state '===' 'modifier'}}
+            {{assignVar 'isStepper' 0}}
+        {{/if}}
+    {{/if}}
+{{else}}
+    {{assignVar 'isStepper' 0}}
+{{/if}}
+<div class="form-field {{#if (getVar 'isStepper')}}form-field--stepper{{/if}}"
+    {{#if (getVar 'isStepper')}} data-product-option-stepper {{/if}}
+    data-product-attribute="set-rectangle" role="radiogroup" aria-labelledby="rectangle-group-label" data-product-attribute-state="{{state}}" data-product-attribute-id="{{id}}">
+
+    {{#if (getVar 'isStepper')}}
+        <button class="button button--checkbox _query-stepper-first" type="button" data-action="check">
+            <span class="is-srOnly">{{lang 'common.change'}}</span>
+        </button>
+    {{/if}}
+
+    <label class="form-label form-label--alternate form-label--inlineSmall" id="rectangle-group-label">
+        {{this.display_name}}:
+        <span data-option-value></span>
+
+        {{> components/common/requireness-msg}}
+    </label>
+
+    {{#unless required}}
+        <input
+            class="form-radio"
+            type="radio"
+            id="attribute_rectangle__{{id}}_none"
+            name="attribute[{{id}}]"
+            value=""
+            checked="{{#if defaultValue '==' ''}}checked{{/if}}"
+        >
+        <label class="form-option" for="attribute_rectangle__{{id}}_none">
+            <span class="form-option-variant">{{lang 'products.none'}}</span>
+        </label>
+    {{/unless}}
+
+    {{#each this.values}}
+    <div class="form-option-wrapper">
+        <input
+            class="form-radio"
+            type="radio"
+            id="attribute_rectangle__{{../id}}_{{id}}"
+            name="attribute[{{../id}}]"
+            value="{{id}}"
+            {{#if selected}}
+                checked
+                data-default
+            {{/if}}
+            {{#if ../required}}required{{/if}}
+        >
+        <label class="form-option" for="attribute_rectangle__{{../id}}_{{id}}" data-product-attribute-value="{{id}}">
+            <span class="form-option-variant">{{this.label}}</span>
+        </label>
+    </div>
+    {{/each}}
+
+    {{#if (getVar 'isStepper')}}
+        <button class="button button--outline _stepper _query-stepper-last" type="button" data-action="dec">
+            <span class="icon" aria-hidden="true"><svg><use href="#icon-minus"></use></svg></span>
+            <span class="is-srOnly">{{lang 'common.previous'}}</span>
+        </button>
+        <button class="button button--outline _stepper _query-stepper-last" type="button" data-action="inc">
+            <span class="icon" aria-hidden="true"><svg><use href="#icon-plus"></use></svg></span>
+            <span class="is-srOnly">{{lang 'common.next'}}</span>
+        </button>
+    {{/if}}
+</div>

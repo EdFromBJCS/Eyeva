@@ -1,0 +1,42 @@
+.eyeva__panel._addressEdit {
+    gap: spacing("double");
+    padding-block: spacing("double");
+
+    @include eyeva-size-mobile {
+        gap: spacing("single");
+        padding-block: 0;
+    }
+
+    .page-heading {
+        margin: 0;
+        text-align: center;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: spacing("double");
+        margin: 0;
+
+        @include eyeva-size-mobile {
+            gap: spacing("single");
+        }
+    }
+
+    .form-actions {
+        display: flex;
+        gap: spacing("base");
+        justify-content: center;
+        margin: 0;
+
+        &::before,
+        &::after {
+            display: none;
+        }
+
+        .button {
+            margin: 0;
+        }
+    }
+
+}

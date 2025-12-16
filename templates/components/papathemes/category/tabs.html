@@ -1,0 +1,42 @@
+{{!--
+    Input:
+    - type (carousel/grid): Type of the best selling products section.
+    - count (number): Number of products to show.
+    - sortby (bestselling/newest): Sort type.
+    - scope (string): section scope selector. example: `.topProducts`.
+    - categories (array): List of categories.
+        - id (number): Category ID.
+        - name (string): Category name.
+        - url (string): Category URL.
+--}}
+<div class="categoryTabs" data-category-tabs='{
+    "type": "{{type}}",
+    "limit": {{count}},
+    "sort": "{{sortby}}",
+    "scope": "{{scope}}",
+    "container": ".blaze-track, .productGrid"
+}'>
+    <ul class="categoryTabs-list">
+        {{#each categories}}
+            {{#if @index '>=' 3}}
+                <li class="categoryTabs-item force-hide-desktop" data-category-tabs-item-hide>
+                    <a class="categoryTabs-link" href="{{url}}" data-category-tabs-url="{{url}}" data-category-tabs-id="{{id}}"><span>{{name}}</span></a>
+                </li>
+            {{else}}
+                <li class="categoryTabs-item">
+                    <a class="categoryTabs-link" href="{{url}}" data-category-tabs-url="{{url}}" data-category-tabs-id="{{id}}"><span>{{name}}</span></a>
+                </li>
+            {{/if}}
+        {{/each}}
+    </ul>
+    {{#if categories.length '>' 3}}
+        <a href="#" class="categoryTabs-link _more force-hide-mobile-tablet"
+            data-dropdown="categoryTabs-dropdown-{{incrementVar 'incrementId'}}"
+            aria-controls="categoryTabs-dropdown-{{getVar 'incrementId'}}" aria-expanded="false"
+        >
+            <span class="is-srOnly">{{lang 'common.load_more'}}</span>
+            <i class="icon" aria-hidden="true"><svg><use href="#icon-circle-ellipsis"></use></svg></i>
+        </a>
+        <ul class="categoryTabs-dropdown" id="categoryTabs-dropdown-{{getVar 'incrementId'}}" data-dropdown-content data-category-tabs-dropdown aria-hidden="true"></ul>
+    {{/if}}
+</div>

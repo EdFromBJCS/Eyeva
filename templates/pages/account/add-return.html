@@ -1,0 +1,108 @@
+{{#partial "head"}}
+    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.account.js' resourceHint='preload' as='script'}}" as="script">
+{{/partial}}
+
+{{#partial "page"}}
+
+<main class="account account--addReturn">
+    {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+    <h1 class="page-heading">{{lang 'account.returns.heading' }}</h1>
+    {{> components/account/navigation account_page='returns'}}
+    <section class="eyeva__panel _newReturn">
+
+        <div class="_heading">
+            <h2 class="page-heading">{{lang 'account.returns.new_return' }}</h2>
+            <p>{{lang 'account.returns.from_order' id=forms.return.order_id}}</p>
+        </div>
+
+        {{#if forms.return.order_products.length}}
+            <form
+                action="{{urls.account.orders.save_new_return}}"
+                class="form"
+                method="post"
+                data-account-return-form-error="{{lang 'account.returns.error_no_qty'}}"
+                data-account-return-form
+            >
+                <fieldset class="form-fieldset">
+                    <input type="hidden" name="order_id" value="{{forms.return.order_id}}">
+                    <div class="eyeva__return-product-grid">
+                        {{#each forms.return.order_products}}
+                            <div class="_row">
+                                <div class="_thumbnail">
+                                    {{> components/common/responsive-img
+                                        image=image
+                                        class="account-product-image"
+                                        fallback_size=../theme_settings.productthumb_size
+                                        lazyload=../theme_settings.lazyload_mode
+                                        default_image=../theme_settings.default_image_product
+                                    }}
+                                </div>
+                                <div class="_detail">
+                                    <span class="_title">{{name}}</span>
+                                    {{#if options}}
+                                        <dl class="definitionList">
+                                            {{#each options}}
+                                                <dt class="definitionList-label">{{name}}:</dt>
+                                                <dd class="definitionList-description">{{{sanitize value}}}</dd>
+                                            {{/each}}
+                                        </dl>
+                                        {{/if}}
+                                    <div class="_price">{{price.formatted}}</div>
+                                </div>
+                                <div class="_qty form-field">
+                                    <label class="form-label">{{lang 'account.orders.return.quantity'}}:</label>
+                                    <select class="form-select form-select--small" name="return_qty[{{id}}]">
+                                        {{#for 0 quantity}}
+                                            <option value="{{$index}}">{{$index}}</option>
+                                        {{/for}}
+                                    </select>
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
+                </fieldset>
+                <fieldset class="form-fieldset">
+                    <div class="form-row form-row--grid-2">
+                        <div class="form-field _modern">
+                            <label for="return_reason" class="form-label">
+                                {{lang 'account.orders.return.reason'}}
+                                <small>{{lang 'common.required'}}</small>
+                            </label>
+                            <select name="return_reason" id="return_reason" class="form-select">
+                                {{#each forms.return.reasons}}
+                                    <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="form-field _modern">
+                            <label for="return_action" class="form-label">
+                                {{lang 'account.orders.return.action'}}
+                            </label>
+                            <select name="return_action" id="return_action" class="form-select">
+                                {{#each forms.return.actions}}
+                                    <option value="{{this}}">{{this}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-field _modern">
+                        <label for="return_comments" class="form-label">
+                            {{lang 'account.orders.return.comments'}}
+                        </label>
+                        <textarea class="form-input" rows="8" name="return_comments" id="return_comments"></textarea>
+                    </div>
+                </fieldset>
+                <div class="form-actions">
+                    <input class="button button--primary" type="submit" value="{{lang 'account.returns.submit_request'}}" />
+                </div>
+            </form>
+        {{else}}
+            <p>{{lang 'account.orders.return.already_returned'}}</p>
+            <a href="{{urls.account.orders.all}}" class="button">{{lang 'account.orders.return.back_button'}}</a>
+        {{/if}}
+
+    </section>
+</main>
+
+{{/partial}}
+{{> layout/base}}

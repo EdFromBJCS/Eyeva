@@ -1,0 +1,35 @@
+{{!--
+    Input:
+    - reset: boolean - reset `_saleCountdownDate`, `_saleCountdownLabel`, `_saleCountdownEndLabel`, `_salePercent`
+    - name: string - custom field name.
+        if custom field name is `__countdown_date`, it will set `_saleCountdownDate` value.
+        if custom field name is `__countdown_label`, it will set `_saleCountdownLabel` and `_saleCountdownEndLabel` value.
+    - value: string - custom field value
+    - product: object
+        set `_salePercent` value based on the product price rrp price or non sale price.
+--}}
+
+{{#if reset}}
+    {{assignVar '_saleCountdownDate' 0}}
+    {{assignVar '_saleCountdownLabel' (get 'string' (lang 'sale_countdown.sale'))}}
+    {{assignVar '_saleCountdownEndLabel' 0}}
+
+    {{#if product.price.rrp_without_tax}}
+        {{assignVar '_salePercent' (round (multiply (subtract 1 (divide product.price.without_tax.value product.price.rrp_without_tax.value)) 100))}}
+    {{else if product.price.rrp_with_tax}}
+        {{assignVar '_salePercent' (round (multiply (subtract 1 (divide product.price.with_tax.value product.price.rrp_with_tax.value)) 100))}}
+    {{else if product.price.non_sale_price_without_tax}}
+        {{assignVar '_salePercent' (round (multiply (subtract 1 (divide product.price.without_tax.value product.price.non_sale_price_without_tax.value)) 100))}}
+    {{else if product.price.non_sale_price_without_tax}}
+        {{assignVar '_salePercent' (round (multiply (subtract 1 (divide product.price.with_tax.value product.price.non_sale_price_with_tax.value)) 100))}}
+    {{else}}
+        {{assignVar '_salePercent' 0}}
+    {{/if}}
+{{else}}
+    {{#if name '===' '__countdown_date'}}
+        {{assignVar '_saleCountdownDate' value}}
+    {{else if name '===' '__countdown_label'}}
+        {{assignVar '_saleCountdownLabel' (get 'string' (first (split value '|')))}}
+        {{assignVar '_saleCountdownEndLabel' (get 'string' (last (split value '|')))}}
+    {{/if}}
+{{/if}}

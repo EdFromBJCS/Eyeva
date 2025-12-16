@@ -1,0 +1,621 @@
+.beautify__widget-page-heading {
+    @extend %section-heading;
+}
+
+.beautify__customerReviews {
+    /* TODO: overwrite these variable in the widget code (._item) */
+    --papathemes-beautify-customer-reviews-avatar-width: 432;
+    --papathemes-beautify-customer-reviews-avatar-height: 300;
+}
+
+[data-content-region="cart_above_totals"],
+[data-content-region="cart_below_totals"] {
+    [data-widget-id] {
+        > ul {
+
+            $icon-size: fontSize("base");
+            list-style: none;
+            margin: 0;
+
+            li {
+                margin-bottom: spacing("third");
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                &:has(> svg:first-child) {
+                    margin-left: $icon-size + spacing("third");
+                }
+
+                > svg:first-child {
+                    height: $icon-size;
+                    margin-left: -($icon-size + spacing("third"));
+                    margin-right: spacing("third");
+                    vertical-align: middle;
+                    width: $icon-size;
+
+                    &:has([href="#icon-check"]) {
+                        fill: $color-success;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+.container {
+    ._child-region-fullwidth > [data-content-region] {
+        margin-inline: -(spacing("base"));
+
+        @include breakpoint("large") {
+            margin-inline: -(spacing("double"));
+        }
+
+        .beautify__widget-page-heading {
+            padding-inline: spacing("base");
+
+            @include breakpoint("large") {
+                padding-inline: spacing("double");
+            }
+        }
+    }
+}
+
+.papathemes-eyeva-glasses-leaderboard._config._theme-styled {
+    --papathemes-eyeva-5981bff7-bg-color: #{container("fill", "dark")};
+    --papathemes-eyeva-5981bff7-bg-color-mobile: #{container("fill")};
+    --papathemes-eyeva-5981bff7-spacing-base: #{spacing("base")};
+    --papathemes-eyeva-5981bff7-heading-font-size: #{remCalc(36px)};
+    --papathemes-eyeva-5981bff7-heading-font-size-mobile: #{fontSize("larger")};
+    --papathemes-eyeva-5981bff7-heading-color: #{stencilColor("color-textHeading")};
+    --papathemes-eyeva-5981bff7-text-font-size: #{fontSize("base")};
+    --papathemes-eyeva-5981bff7-text-font-size-mobile: #{fontSize("smaller")};
+    --papathemes-eyeva-5981bff7-text-color: #{$color-textSecondary};
+    --papathemes-eyeva-5981bff7-link-color: #{$color-textLink};
+
+    @if stencilString("card_style") == "boxed" {
+        --papathemes-eyeva-5981bff7-bg-color: #{container("fill")};
+        --papathemes-eyeva-5981bff7-spacing-base: #{spacing("eighth")};
+        --papathemes-eyeva-5981bff7-heading-font-size: #{remCalc(60px)};
+        --papathemes-eyeva-5981bff7-text-font-size: #{remCalc(36px)};
+        --papathemes-eyeva-5981bff7-text-font-size-mobile: #{$eyeva-font-18};
+        --papathemes-eyeva-5981bff7-text-color: #{rgba($color-textSecondary, 0.6)};
+
+        ._content {
+            text-align: center;
+        }
+
+        ._heading {
+            font-weight: $eyeva-body-font-bold;
+        }
+
+        ._text {
+            line-height: $eyeva-heading-line-height;
+        }
+    }
+}
+
+.papathemes-eyeva-sofas-block-perfect-piece._config._theme-styled {
+    --papathemes-eyeva-c474f578-spacing-base: #{spacing("base")};
+    --papathemes-eyeva-c474f578-bg-color: #{container("fill")};
+    --papathemes-eyeva-c474f578-primary-color: #{$color-primary};
+    --papathemes-eyeva-c474f578-border-color: #{container("borderColor")};
+    --papathemes-eyeva-c474f578-secondary-color: #{$color-textSecondary};
+    --papathemes-eyeva-c474f578-small-radius: #{$eyeva-small-radius};
+    --papathemes-eyeva-c474f578-medium-radius: #{$eyeva-medium-radius};
+    --papathemes-eyeva-c474f578-font-size-18: #{$eyeva-font-18};
+}
+
+.papathemes-eyeva-sofas-block-our-policies._config._theme-styled {
+    --papathemes-eyeva-09bedf8d-spacing-base: #{spacing("base")};
+    --papathemes-eyeva-09bedf8d-heading-font-size: #{fontSize("larger")};
+    --papathemes-eyeva-09bedf8d-heading-font-size-mobile: #{fontSize("large")};
+    --papathemes-eyeva-09bedf8d-bg-color: #{container("fill")};
+    --papathemes-eyeva-09bedf8d-border-color: #{container("borderColor")};
+    --papathemes-eyeva-09bedf8d-border-radius: #{$eyeva-small-radius};
+    --papathemes-eyeva-09bedf8d-primary-color: #{$color-primary};
+    --papathemes-eyeva-09bedf8d-secondary-color: #{$color-textSecondary};
+    --papathemes-eyeva-09bedf8d-font-size: #{$eyeva-font-18};
+    --papathemes-eyeva-09bedf8d-font-size-mobile: #{fontSize("base")};
+}
+
+%calloutIconsWidget {
+    ._row {
+        gap: spacing("base");
+        margin-inline: 0;
+
+        @include breakpoint("medium") {
+            gap: spacing("base") * 2;
+        }
+
+        &:has(._item--style-left) {
+            @include eyeva-screen-mobile-tablet {
+                --webkit-overflow-scrolling: touch;
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                overflow: auto;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+
+                ._col {
+                    flex: 0 0 auto;
+                    max-width: 75%;
+                }
+            }
+
+            @include eyeva-screen-tablet {
+                ._col {
+                    max-width: 40%;
+                }
+            }
+        }
+    }
+
+    ._col {
+        ._item--style-left {
+            display: grid;
+            grid-template:
+                "icon text" max-content
+                "icon desc" auto / max-content minmax(min-content, max-content);
+            row-gap: spacing("quarter");
+
+            ._icon {
+                align-self: center;
+                grid-area: icon;
+                margin-right: spacing("base");
+
+                @include breakpoint("medium") {
+                    margin-right: spacing("base") * 2;
+                }
+            }
+
+            ._heading {
+                grid-area: text;
+                margin-top: 0;
+            }
+
+            ._desc {
+                grid-area: desc;
+            }
+        }
+
+        ._heading {
+            font-size: fontSize("base");
+            font-weight: $eyeva-body-font-bold;
+            line-height: $eyeva-body-line-height;
+
+            @include breakpoint("medium") {
+                font-size: $eyeva-font-18;
+            }
+        }
+
+        ._desc {
+            color: stencilColor("color-textSecondary");
+            font-size: fontSize("smaller");
+
+            @include breakpoint("medium") {
+                font-size: fontSize("base");
+            }
+        }
+    }
+}
+
+%calloutIconsWidgetBoxed {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-block: spacing("base");
+
+    @include breakpoint("medium") {
+        padding-block: spacing("single");
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    ._row {
+        flex-wrap: nowrap;
+        gap: spacing("base");
+        justify-content: space-around;
+
+
+        @if stencilString("section_align") == "start" {
+            justify-content: flex-start;
+        }
+
+        @include breakpoint("medium") {
+            gap: spacing("base") * 2;
+        }
+    }
+
+    ._col {
+        flex: 0 0 auto;
+
+        ._item {
+            background: container("fill");
+            border-radius: $eyeva-container-radius;
+            box-shadow: $eyeva-shadow-panel;
+            display: flex;
+            flex-direction: column;
+            gap: spacing("third");
+            height: 100%;
+            max-width: 300px;
+            padding: spacing("base") * 1.5;
+            text-align: if(stencilString("section_align") == "start", start, center);
+            transform: translateY(0);
+            transition: all 0.3s ease;
+
+            @include breakpoint("medium") {
+                max-width: 400px;
+                padding: spacing("base") * 2;
+            }
+
+            &:hover {
+                box-shadow: $eyeva-shadow-hover;
+                transform: translateY(-8px);
+            }
+        }
+
+        ._icon {
+            text-align: inherit !important;
+        }
+
+        ._heading {
+            font-size: $eyeva-font-18;
+            font-weight: $body-font-weight;
+            line-height: $eyeva-heading-line-height;
+            margin: spacing("quarter") 0 0;
+            text-align: inherit;
+
+            @include breakpoint("medium") {
+                font-size: fontSize("large");
+            }
+
+        }
+
+        ._desc {
+            color: $color-textSecondary;
+            font-size: fontSize("base");
+            line-height: $eyeva-body-line-height;
+            text-align: inherit;
+
+            @include breakpoint("medium") {
+                font-size: $eyeva-font-18;
+            }
+
+        }
+    }
+}
+
+%customerReviewsWidget {
+    padding: spacing("single") 0;
+
+    @include breakpoint("medium") {
+        padding-block: spacing("single") * 2;
+    }
+
+    ._list {
+        margin: 0;
+
+        @include breakpoint("medium") {
+            margin-inline: -(spacing("base"));
+        }
+    }
+
+    ._item {
+        margin: 0 spacing("third");
+        padding: 0;
+        text-align: start;
+
+        @include breakpoint("medium") {
+            margin-inline: spacing("base");
+        }
+
+        ._avatar {
+            height: auto;
+            margin-bottom: spacing("base");
+            max-width: 100%;
+            overflow: hidden;
+            padding-top: calc(100% * var(--papathemes-beautify-customer-reviews-avatar-height) / var(--papathemes-beautify-customer-reviews-avatar-width));
+            position: relative;
+
+            img {
+                height: 100%;
+                left: 0;
+                object-fit: contain;
+                position: absolute;
+                top: 0;
+                width: 100%;
+            }
+        }
+    }
+
+    ._heading {
+        font-size: $eyeva-font-18;
+        font-weight: $eyeva-body-font-bold;
+
+        @include breakpoint("medium") {
+            font-size: fontSize("small");
+        }
+    }
+
+    ._content {
+        font-size: fontSize("smaller");
+
+        @include breakpoint("medium") {
+            font-size: fontSize("base");
+        }
+    }
+
+    ._author {
+        font-size: fontSize("smaller");
+        font-style: normal;
+        font-weight: $eyeva-body-font-bold;
+
+        @include breakpoint("medium") {
+            font-size: fontSize("base");
+        }
+    }
+
+    .slick-dots {
+        display: none !important;
+    }
+}
+
+%customerReviewsWidgetBoxed {
+    padding-block: 0;
+
+    @include breakpoint("medium") {
+        padding-block: spacing("half");
+    }
+
+    ._list {
+        @include breakpoint("medium") {
+            width: auto;
+        }
+
+        @include breakpoint("large") {
+            margin-inline: -(spacing("single") * 2);
+        }
+    }
+
+    ._item {
+        background: container("fill");
+        border-radius: $eyeva-container-radius;
+        box-shadow: $eyeva-shadow-panel;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding: spacing("base") * 1.5 spacing("base");
+        transform: translateY(0);
+        transition: all 0.3s ease;
+
+        @include breakpoint("medium") {
+            padding: spacing("base") * 2 spacing("single");
+        }
+
+        &:hover {
+            box-shadow: $eyeva-shadow-hover;
+            transform: translateY(-8px);
+        }
+
+        ._rating {
+            margin-bottom: spacing("base");
+            order: -1;
+        }
+
+        ._heading {
+            font-size: $eyeva-font-18;
+            font-weight: $eyeva-body-font-bold;
+            margin-bottom: spacing("base");
+
+            @include breakpoint("medium") {
+                font-size: fontSize("small");
+            }
+        }
+
+        ._content {
+            color: $color-textSecondary;
+            font-size: fontSize("smaller");
+
+            @include breakpoint("medium") {
+                font-size: fontSize("base");
+            }
+        }
+
+        ._author {
+            color: rgba($color-textSecondary, 0.6);
+            font-size: fontSize("smaller");
+            font-weight: inherit;
+        }
+    }
+
+    .slick-list {
+        padding-block: spacing("single") !important;
+
+        @include breakpoint("large") {
+            padding-inline: spacing("base") * 2 !important;
+        }
+    }
+}
+
+%customerReviewsWidgetBoxedWithSliderButtons {
+    position: relative;
+
+    .slick-prev,
+    .slick-next {
+        @include square($eyeva-button-height);
+        align-items: center;
+        background: container("fill");
+        border: 1px solid $color-textBase;
+        border-radius: $button-radius;
+        display: flex;
+        font-size: 0;
+        justify-content: center;
+
+        // Reset slick defaults
+        left: auto;
+        margin-top: 0;
+        position: absolute;
+        right: 0;
+        top: -(remCalc($eyeva-button-height) + spacing("half") - spacing("third"));
+        transform: none;
+
+        &::before {
+            height: 21px;
+            width: 12px;
+        }
+
+        &:hover,
+        &:focus,
+        &:active {
+            border-color: $color-primary;
+        }
+    }
+
+    .slick-prev {
+        right: remCalc($eyeva-button-height) + spacing("base") * 2;
+
+        @include breakpoint("large") {
+            right: remCalc($eyeva-button-height) + spacing("single") * 2 + spacing("base");
+        }
+    }
+
+    .slick-next {
+        right: spacing("base");
+
+        @include breakpoint("large") {
+            right: spacing("single") * 2;
+        }
+    }
+}
+
+[data-content-region] {
+    .beautify__flexBanners {
+        ._heading {
+            font-family: $header-font-family;
+            font-size: $eyeva-font-36;
+            font-weight: $header-font-weight;
+
+            @include eyeva-size-mobile-tablet {
+                font-size: fontSize("larger");
+            }
+        }
+    }
+
+    .PapathemesWidgetAccordion {
+        ._accordion {
+            border: 0;
+
+            > * + * {
+                border-top: container("border");
+            }
+        }
+
+        ._accordion-panel {
+            background: unset;
+            border: 0;
+            color: unset;
+            padding: spacing("third") 0 spacing("single");
+
+        }
+
+        ._accordion-trigger {
+            cursor: pointer;
+            padding: spacing("single") 0;
+
+            &:hover {
+                background: unset;
+
+                ._accordion-title {
+                    color: $color-textLink-hover;
+                }
+
+                ._accordion-icon {
+                    border-color: $color-textLink-hover;
+
+                    &::before {
+                        border-color: $color-textLink-hover;
+                    }
+                }
+            }
+
+            &[aria-expanded="true"] {
+                ._accordion-icon {
+                    transform: translateY(-50%);
+
+                    &::before {
+                        transform: translate(-50%, -50%) rotate(-135deg) translate(-2px, -2px);
+                    }
+                }
+            }
+        }
+
+        ._accordion-icon {
+            @include square($eyeva-button-height);
+            border: container("border");
+            border-radius: 50%;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            transform-origin: center center;
+
+            &::before {
+                @include square(13px);
+                border-color: $color-textBase;
+                border-style: solid;
+                border-width: 0 2px 2px 0;
+                content: "";
+                left: 50%;
+                position: absolute;
+                top: 50%;
+                transform: translate(-50%, -50%) rotate(45deg) translate(-2px, -2px);
+                transform-origin: center center;
+            }
+        }
+    }
+}
+
+[data-sub-layout-container] {
+    &:has(.beautify__calloutIcons) {
+        @include breakpoint("medium") {
+            padding-inline: spacing("base") * 2;
+        }
+    }
+
+    &:has(.beautify__calloutIcons .container) {
+        @include breakpoint("medium") {
+            padding-inline: 0;
+        }
+    }
+}
+
+.beautify__calloutIcons {
+    [data-content-region] & {
+        @extend %calloutIconsWidget;
+
+        @if stencilString("card_style") == "boxed" {
+            @extend %calloutIconsWidgetBoxed;
+        }
+    }
+}
+
+.beautify__customerReviews {
+    [data-content-region] & {
+        @extend %customerReviewsWidget;
+
+        @if stencilString("card_style") == "boxed" {
+            @extend %customerReviewsWidgetBoxed;
+        }
+    }
+
+    @if stencilString("card_style") == "boxed" {
+        [data-widget-id]:has(.beautify__widget-page-heading) + [data-widget-id]:has(.beautify__customerReviews) & {
+            @extend %customerReviewsWidgetBoxedWithSliderButtons;
+        }
+    }
+}

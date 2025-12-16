@@ -1,0 +1,461 @@
+// PC Builder Compare Configurations Modal Styles
+// Styling for compare configurations modal using papathemes modal
+
+// Compare Modal Wrapper
+.papathemes-pcbuilder-compare-modal-wrapper {
+    max-width: 1000px;
+    width: 90vw;
+
+    @media (max-width: 768px) {
+        width: 95vw;
+    }
+
+    .papathemes__modal {
+        max-height: 90vh;
+        overflow: hidden;
+    }
+
+    .papathemes__modal-body {
+        margin: 0 (-(spacing("half")));
+        width: auto;
+    }
+}
+
+// Compare Content
+.papathemes-pcbuilder-compare-content {
+    max-height: calc(90vh - 80px);
+    overflow-y: auto;
+    padding: spacing("base") 0;
+
+    @media (max-width: 768px) {
+        max-height: calc(95vh - 80px);
+        padding: spacing("half") 0;
+    }
+}
+
+.papathemes-pcbuilder-compare-table-container {
+    border: container("border");
+    border-radius: $input-border-radius;
+    overflow-x: auto;
+
+    @media (max-width: 768px) {
+        // Custom scrollbar for mobile
+        &::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: container("fill", "light");
+            border-radius: 4px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: stencilColor("color-textSecondary");
+            border-radius: 4px;
+
+            &:hover {
+                background: stencilColor("color-primary");
+            }
+        }
+    }
+}
+
+// Compare Table
+.papathemes-pcbuilder-compare-table {
+    border-collapse: collapse;
+    font-size: fontSize("smaller");
+    width: 100%;
+
+    @media (max-width: 768px) {
+        font-size: fontSize("tiny");
+        min-width: 550px; // Optimized for 2 columns visible with max-width control
+    }
+
+    @media (max-width: 480px) {
+        font-size: fontSize("tiny");
+        min-width: 450px; // Ensure 2 columns fit on small screens with max-width control
+    }
+}
+
+// Table Header
+.papathemes-pcbuilder-compare-table-header {
+    background: container("fill", "dark");
+
+    th {
+        border: container("border");
+        color: stencilColor("color-textBase");
+        font-weight: fontWeight("bold");
+        padding: spacing("half") spacing("base");
+        text-align: left;
+        vertical-align: middle;
+
+        @media (max-width: 768px) {
+            font-size: fontSize("tiny");
+            padding: spacing("quarter") spacing("half");
+        }
+
+        @media (max-width: 480px) {
+            padding: spacing("quarter") spacing("quarter");
+        }
+
+        &.papathemes-pcbuilder-compare-component-col {
+            background: stencilColor("color-primary");
+            color: stencilColor("color-white");
+            left: 0;
+            max-width: 200px;
+            min-width: 150px;
+            position: sticky;
+            width: 180px;
+            z-index: 10;
+
+            @media (max-width: 768px) {
+                max-width: 140px;
+                min-width: 120px;
+                width: 130px;
+            }
+
+            @media (max-width: 480px) {
+                max-width: 120px;
+                min-width: 100px;
+                width: 110px;
+            }
+        }
+
+        &.papathemes-pcbuilder-compare-config-col {
+            max-width: 220px;
+            min-width: 180px;
+            text-align: center;
+            width: 200px;
+
+            @media (max-width: 768px) {
+                max-width: 200px;
+                min-width: 180px;
+                width: 190px;
+            }
+
+            @media (max-width: 480px) {
+                max-width: 180px;
+                min-width: 160px;
+                width: 170px;
+            }
+        }
+    }
+}
+
+// Table Body
+.papathemes-pcbuilder-compare-table-body {
+    tr {
+        transition: background-color 0.2s ease;
+
+        &:nth-child(even) {
+            background: container("fill", "light");
+        }
+
+        &:hover {
+            background: lighten(stencilColor("color-primary"), 50%);
+        }
+    }
+
+    td {
+        border: container("border");
+        padding: spacing("half") spacing("base");
+        vertical-align: top;
+
+        @media (max-width: 768px) {
+            padding: spacing("quarter") spacing("half");
+        }
+
+        @media (max-width: 480px) {
+            padding: spacing("quarter") spacing("quarter");
+        }
+
+        // Apply max-width to product columns (not component name column)
+        &:not(.papathemes-pcbuilder-compare-component-name) {
+            max-width: 220px;
+            width: 200px;
+
+            @media (max-width: 768px) {
+                max-width: 200px;
+                width: 190px;
+            }
+
+            @media (max-width: 480px) {
+                max-width: 180px;
+                width: 170px;
+            }
+        }
+
+        &.papathemes-pcbuilder-compare-component-name {
+            background: container("fill");
+            color: stencilColor("color-textBase");
+            font-weight: fontWeight("semibold");
+            left: 0;
+            max-width: 200px;
+            position: sticky;
+            width: 180px;
+            z-index: 5;
+
+            @media (max-width: 768px) {
+                font-size: fontSize("tiny");
+                max-width: 140px;
+                width: 130px;
+            }
+
+            @media (max-width: 480px) {
+                max-width: 120px;
+                width: 110px;
+            }
+        }
+
+        &.papathemes-pcbuilder-compare-no-selection {
+            color: stencilColor("color-textSecondary");
+            font-style: italic;
+            padding: spacing("base");
+            text-align: center;
+
+            @media (max-width: 768px) {
+                font-size: fontSize("tiny");
+                padding: spacing("half");
+            }
+
+            @media (max-width: 480px) {
+                padding: spacing("quarter");
+            }
+        }
+    }
+}
+
+// Product Info in Table
+.papathemes-pcbuilder-compare-product-info {
+    align-items: flex-start;
+    display: flex;
+    gap: spacing("half");
+    padding: spacing("quarter");
+
+    @media (max-width: 768px) {
+        align-items: center;
+        flex-direction: column;
+        gap: spacing("quarter");
+        padding: spacing("quarter") spacing("third");
+        text-align: center;
+    }
+
+    @media (max-width: 480px) {
+        padding: spacing("quarter") spacing("quarter");
+    }
+}
+
+.papathemes-pcbuilder-compare-product-thumbnail {
+    background: container("fill", "light");
+    border: container("border");
+    border-radius: $input-border-radius;
+    flex-shrink: 0;
+    height: 60px;
+    overflow: hidden;
+    position: relative;
+    width: 60px;
+
+    @media (max-width: 768px) {
+        height: 70px;
+        width: 70px;
+    }
+
+    @media (max-width: 480px) {
+        height: 65px;
+        width: 65px;
+    }
+
+    img {
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.2s ease;
+        width: 100%;
+
+        &:hover {
+            transform: scale(1.05);
+        }
+    }
+
+    // Loading placeholder
+    &::before {
+        background: container("fill", "dark");
+        content: "";
+        height: 100%;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        transition: opacity 0.2s ease;
+        width: 100%;
+    }
+
+    &.loading::before {
+        opacity: 1;
+    }
+}
+
+.papathemes-pcbuilder-compare-product-details {
+    flex: 1;
+    min-width: 0;
+
+    @media (max-width: 768px) {
+        min-width: auto;
+        width: 100%;
+    }
+}
+
+.papathemes-pcbuilder-compare-product-name {
+    color: stencilColor("color-textBase");
+    font-size: fontSize("smaller");
+    font-weight: fontWeight("semibold");
+    line-height: lineHeight("smaller");
+    margin-bottom: spacing("quarter");
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @media (max-width: 768px) {
+        -webkit-box-orient: vertical;
+        display: -webkit-box;
+        font-size: fontSize("tiny");
+        -webkit-line-clamp: 2;
+        line-height: lineHeight("smallest");
+        max-height: calc(2 * 1.1em); // 2 lines max
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+    }
+
+    @media (max-width: 480px) {
+        font-size: fontSize("tiny");
+        -webkit-line-clamp: 1;
+        max-height: 1.1em;
+        white-space: nowrap;
+    }
+}
+
+.papathemes-pcbuilder-compare-product-price {
+    color: stencilColor("color-primary");
+    font-size: fontSize("smaller");
+    font-weight: fontWeight("bold");
+    line-height: 1;
+
+    @media (max-width: 768px) {
+        font-size: fontSize("tiny");
+    }
+
+    @media (max-width: 480px) {
+        font-size: fontSize("tiny");
+        font-weight: fontWeight("semibold");
+    }
+}
+
+// Table Footer (Total Row)
+.papathemes-pcbuilder-compare-total-row {
+    background: lighten(stencilColor("color-primary"), 45%);
+
+    td {
+        border: container("border");
+        font-weight: fontWeight("bold");
+        padding: spacing("half") spacing("base");
+
+        @media (max-width: 768px) {
+            padding: spacing("quarter") spacing("half");
+        }
+
+        @media (max-width: 480px) {
+            padding: spacing("quarter") spacing("quarter");
+        }
+    }
+
+    .papathemes-pcbuilder-compare-total-label {
+        background: stencilColor("color-primary");
+        color: stencilColor("color-white");
+        left: 0;
+        position: sticky;
+        z-index: 5;
+
+        @media (max-width: 768px) {
+            font-size: fontSize("tiny");
+        }
+    }
+
+    .papathemes-pcbuilder-compare-total-price {
+        color: stencilColor("color-primary");
+        font-size: fontSize("base");
+        text-align: center;
+
+        @media (max-width: 768px) {
+            font-size: fontSize("smaller");
+        }
+
+        @media (max-width: 480px) {
+            font-size: fontSize("tiny");
+        }
+    }
+}
+
+// Loading State
+.papathemes-pcbuilder-compare-loading {
+    align-items: center;
+    display: flex;
+    height: 200px;
+    justify-content: center;
+
+    .papathemes-pcbuilder-compare-loading-text {
+        color: stencilColor("color-textSecondary");
+        font-size: fontSize("base");
+    }
+}
+
+// Empty State
+.papathemes-pcbuilder-compare-empty {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+    height: 200px;
+    justify-content: center;
+
+    .papathemes-pcbuilder-compare-empty-icon {
+        color: stencilColor("color-textSecondary");
+        height: 48px;
+        width: 48px;
+
+        svg {
+            fill: currentColor;
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    .papathemes-pcbuilder-compare-empty-text {
+        color: stencilColor("color-textSecondary");
+        font-size: fontSize("base");
+        text-align: center;
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+    .papathemes-pcbuilder-compare-product-info {
+        flex-direction: column;
+        gap: spacing("quarter");
+    }
+
+    .papathemes-pcbuilder-compare-product-thumbnail {
+        align-self: center;
+        height: 50px;
+        width: 50px;
+    }
+
+    .papathemes-pcbuilder-compare-product-name {
+        font-size: fontSize("tiny");
+        line-height: lineHeight("smaller");
+        white-space: normal;
+    }
+
+    .papathemes-pcbuilder-compare-product-price {
+        font-size: fontSize("tiny");
+    }
+}

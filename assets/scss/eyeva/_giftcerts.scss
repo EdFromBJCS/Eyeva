@@ -1,0 +1,52 @@
+.check-balance-form,
+.gift-certificate-form {
+    gap: spacing("base");
+    margin: 0;
+
+    &:not(.form--2col) {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form-field {
+        margin: 0;
+        padding: 0;
+
+    }
+
+    .form-fieldset {
+        display: flex;
+        flex-direction: column;
+        gap: spacing("base");
+    }
+
+    .form-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: spacing("base");
+        justify-content: center;
+        margin: 0;
+
+        &::before,
+        &::after {
+            display: none;
+        }
+
+        .button {
+            margin: 0;
+        }
+    }
+}
+
+.eyeva__panel._balance,
+.eyeva__panel._redeem {
+    gap: spacing("base");
+
+    .page-heading {
+        text-align: start;
+    }
+
+    > p {
+        margin-bottom: 0;
+    }
+}

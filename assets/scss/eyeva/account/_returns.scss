@@ -1,0 +1,117 @@
+.account-product-description + .definitionList {
+    margin: 0;
+}
+
+.account-list._return {
+    display: grid;
+    grid-template:
+        "image detail detail detail status" auto
+        "image requested action reason status" auto
+        "image comments comments comments comments" auto / auto 1fr 1fr 1fr auto;
+
+    @include eyeva-size-mobile-tablet {
+        display: flex;
+        flex-direction: column;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .account-product-figure {
+        grid-area: image;
+    }
+
+    .definitionList {
+        display: block;
+        display: flex;
+        flex-wrap: wrap;
+        gap: spacing("third");
+
+        &::before,
+        &::after {
+            display: none;
+        }
+    }
+
+    .definitionList-key,
+    .definitionList-value {
+        margin: 0;
+    }
+
+    .definitionList-value {
+        margin-right: spacing("base");
+    }
+
+    .account-listItem {
+        row-gap: spacing("base");
+    }
+}
+
+.account-return {
+    display: contents;
+
+    @include eyeva-size-mobile-tablet {
+        display: grid;
+        gap: spacing("base");
+        grid-template:
+            "image detail status" auto
+            "image requested requested" auto
+            "image action action" auto
+            "image reason reason" auto
+            "image comments comments" auto / auto 1fr auto;
+
+        .account-listItem-column {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+.account-return-detail {
+    grid-area: detail;
+}
+
+.account-return-status {
+    grid-area: status;
+}
+
+.account-return-requested {
+    grid-area: requested;
+}
+
+.account-return-action {
+    grid-area: action;
+}
+
+.account-return-reason {
+    grid-area: reason;
+}
+
+.account-return-comments {
+    grid-area: comments;
+}
+
+.account-orderStatus-label {
+    &._pending,
+    &._received,
+    &._authorized {
+        background-color: $color-warningLight;
+        color: $color-warning;
+    }
+
+    &._repaired,
+    &._refunded {
+        background-color: $color-successLight;
+        color: $color-success;
+    }
+
+    &._rejected,
+    &._cancelled {
+        background-color: container("fill", "dark");
+        color: $color-grey;
+    }
+}
+
+
+

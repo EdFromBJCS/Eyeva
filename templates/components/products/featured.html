@@ -1,0 +1,12 @@
+<div class="section section--featured">
+    <div class="featuredProducts">
+        <div class="section-header-wrapper">
+            <h2 class="section-heading">{{lang 'products.featured'}}</h2>
+        </div>
+        {{#if theme_settings.featured_type '==' 'carousel'}}
+            {{> components/products/carousel show_compare=theme_settings.card_show_compare event="list"}}
+        {{else}}
+            {{> components/products/grid hscroll=true show_compare=theme_settings.card_show_compare event="list"}}
+        {{/if}}
+    </div>
+</div>

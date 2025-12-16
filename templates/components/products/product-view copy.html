@@ -1,0 +1,323 @@
+{{inject 'outOfStockDefaultMessage' (lang 'products.out_of_stock_default_message')}}
+
+<div class="productView"
+    data-event-type="product"
+    data-entity-id="{{product.id}}"
+    data-name="{{product.title}}"
+    data-product-category="
+    {{#each product.category}}
+        {{#if @last}}{{this}}{{else}}{{this}}, {{/if}}
+    {{/each}}"
+    data-product-brand="{{product.brand.name}}"
+    data-product-price="
+    {{#or customer (unless settings.hide_price_from_guests)}}
+        {{#if product.price.with_tax}}
+            {{product.price.with_tax.value}}
+        {{else}}
+            {{product.price.without_tax.value}}
+        {{/if}}
+    {{else}}
+        {{lang 'common.login_for_pricing'}}
+    {{/or}}"
+    data-product-variant="single-product-option">
+
+    {{#each product.reviews.messages}}
+        {{#if error}}
+            {{> components/common/alert/alert-error error}}
+        {{/if}}
+        {{#if success}}
+            {{> components/common/alert/alert-success success}}
+        {{/if}}
+    {{/each}}
+
+    <section class="productView-images" data-image-gallery>
+        {{!--
+            Note that these image sizes are coupled to image sizes used in /assets/js/theme/common/product-details.js
+            for variant/rule image replacement
+        --}}
+        {{#if product.images.length '>' 1 }}
+        {{> components/carousel-content-announcement}}
+        {{/if}}
+        <figure class="productView-image"
+                data-image-gallery-main
+                {{#if product.main_image}}
+                data-zoom-image="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size }}"
+                {{/if}}
+                >
+            <div class="productView-img-container">
+                {{!-- Remove the surrounding a-element if there is no main image. --}}
+                {{#if product.main_image}}
+                    <a href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size}}"
+                        target="_blank">
+                {{/if}}
+                {{> components/common/responsive-img
+                    image=product.main_image
+                    class="productView-image--default"
+                    fallback_size=theme_settings.product_size
+                    lazyload=theme_settings.lazyload_mode
+                    default_image=theme_settings.default_image_product
+                    otherAttributes="data-main-image"
+                }}
+                {{!-- Remove the surrounding a-element if there is no main image. --}}
+                {{#if product.main_image}}
+                    </a>
+                {{/if}}
+            </div>
+        </figure>
+        <div class="productView-thumbnails blaze-slider">
+            <div class="blaze-container">
+                <div class="blaze-track-container">
+                    <ul class="blaze-track">
+                        {{#each product.images}}
+                            <li class="productView-thumbnail">
+                                <a
+                                    class="productView-thumbnail-link"
+                                    href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                                    data-image-gallery-item
+                                    data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.product_size}}"
+                                    data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
+                                    data-image-gallery-zoom-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                                >
+                                {{> components/common/responsive-img
+                                    image=this
+                                    fallback_size=../theme_settings.productview_thumb_size
+                                    lazyload=../theme_settings.lazyload_mode
+                                }}
+                                </a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+
+                <!-- navigation buttons -->
+                <button class="blaze-prev" aria-label="{{lang 'common.previous'}}"><span class="icon"><svg><use href="#icon-arrow-left-long"></use></svg></span></button>
+                <button class="blaze-next" aria-label="{{lang 'common.next'}}"><span class="icon"><svg><use href="#icon-arrow-right-long"></use></svg></span></button>
+            </div>
+        </div>
+    </section>
+
+    <div class="_eyeva-sticky-col">
+        <div class="_eyeva-sticky-box">
+            <section class="productView-details product-data">
+                <div class="productView-product">
+                    <h1 class="productView-title" data-eyeva-product-title>{{product.title}}</h1>
+
+                    {{#if product.main_image}}
+                        <div class="_eyeva-quickview-image">
+                            {{> components/common/responsive-img
+                                image=product.main_image
+                                class="_eyeva-quickview-img"
+                                fallback_size=theme_settings.product_size
+                                lazyload=theme_settings.lazyload_mode
+                                default_image=theme_settings.default_image_product
+                                otherAttributes="data-main-image"
+                            }}
+                        </div>
+                    {{/if}}
+
+                    {{#if settings.show_wishlist}}
+                        {{> components/common/wishlist-dropdown}}
+                    {{/if}}
+
+                    <dl class="_eyeva-product-info-top">
+                        {{#if product.brand}}
+                            <dt class="is-srOnly"></dt>
+                            <dd class="_brand"><a href="{{product.brand.url}}"><span>{{product.brand.name}}</span></a></dd>
+                        {{/if}}
+
+                        <dt class="sku-label"{{#unless product.sku}} style="display: none;"{{/unless}}>{{lang 'products.sku'}}</dt>
+                        <dd data-product-sku>{{product.sku}}</dd>
+
+                        {{#if product.availability}}
+                            <dt class="is-srOnly">{{lang 'products.availability'}}</dt>
+                            <dd>{{product.availability}}</dd>
+                        {{/if}}
+                    </dl>
+
+                    <div class="_eyeva-badges">
+                        {{#if product.shipping.price.value '===' 0}}
+                            <div class="_badge _shipping" aria-label="{{lang 'products.shipping'}}">{{lang 'products.shipping_free'}}</div>
+                        {{/if}}
+                        {{#if product.condition}}
+                            <div class="_badge _condition" aria-label="{{product.condition}}">{{product.condition}}</div>
+                        {{/if}}
+                        {{#each product.custom_fields}}
+                            {{#if name '===' '__badge'}}
+                                <div class="_badge _custom">{{value}}</div>
+                            {{/if}}
+                        {{/each}}
+                    </div>
+
+                    <div class="_group-price-bulk-rating">
+                        {{#if product.call_for_price}}
+                            <p class="productView-price">
+                                <span>{{product.call_for_price}}</span>
+                            </p>
+                        {{/if}}
+                        <div class="productView-price">
+                            {{#or customer (unless settings.hide_price_from_guests)}}
+                                {{> components/products/price price=product.price}}
+                            {{else}}
+                                {{> components/common/login-for-pricing}}
+                            {{/or}}
+                        </div>
+
+                        {{#if settings.bulk_discount_enabled}}
+                            {{#or customer (unless settings.hide_price_from_guests)}}
+                                <div class="productView-info-bulkPricing">
+                                    {{> components/products/bulk-discount-rates bulk_discount_rates=product.bulk_discount_rates}}
+                                </div>
+                            {{/or}}
+                        {{/if}}
+
+                        {{{region name="product_below_price"}}}
+                        {{#if settings.show_product_rating}}
+                            {{#if product.num_reviews '>' 0}}
+                                <div class="productView-rating">
+                                    {{> components/products/ratings rating=product.rating}}
+                                    <a href="{{product.url}}{{#if is_ajax}}#product-reviews{{/if}}" id="productReview_link" title="{{lang 'products.reviews.link_to_review_sr' total=product.num_reviews rating=product.rating}}">
+                                        {{lang 'products.reviews.link_to_review_short' total=product.num_reviews rating=product.rating}}
+                                    </a>
+                                </div>
+                            {{/if}}
+                        {{/if}}
+                    </div>
+
+                    {{product.detail_messages}}
+                    <dl class="productView-info">
+                        {{#all product.weight theme_settings.show_product_weight}}
+                            <dt class="productView-info-name">{{lang 'products.weight'}}</dt>
+                            <dd class="productView-info-value" data-product-weight>{{product.weight}}</dd>
+                        {{/all}}
+                        {{#all product.width product.height product.depth theme_settings.show_product_dimensions}}
+                            <dt class="productView-info-name">{{lang 'products.width'}}</dt>
+                            <dd class="productView-info-value" data-product-width>
+                                {{product.width}}
+                                {{#if settings.measurements.length '==' 'Centimeters'}}
+                                ({{lang 'products.measurement.metric'}})
+                                {{else}}
+                                ({{lang 'products.measurement.imperial'}})
+                                {{/if}}
+                            </dd>
+                            <dt class="productView-info-name">{{lang 'products.height'}}</dt>
+                            <dd class="productView-info-value" data-product-height>
+                                {{product.height}}
+                                {{#if settings.measurements.length '==' 'Centimeters'}}
+                                ({{lang 'products.measurement.metric'}})
+                                {{else}}
+                                ({{lang 'products.measurement.imperial'}})
+                                {{/if}}
+                            </dd>
+                            <dt class="productView-info-name">{{lang 'products.depth'}}</dt>
+                            <dd class="productView-info-value" data-product-depth>
+                                {{product.depth}}
+                                {{#if settings.measurements.length '==' 'Centimeters'}}
+                                ({{lang 'products.measurement.metric'}})
+                                {{else}}
+                                ({{lang 'products.measurement.imperial'}})
+                                {{/if}}
+                            </dd>
+                        {{/all}}
+                        {{#if product.min_purchase_quantity}}
+                            <dt class="productView-info-name">{{lang 'products.min_purchase_quantity'}}</dt>
+                            <dd class="productView-info-value">{{lang 'products.purchase_units' quantity=product.min_purchase_quantity}}</dd>
+                        {{/if}}
+                        {{#if product.max_purchase_quantity}}
+                            <dt class="productView-info-name">{{lang 'products.max_purchase_quantity'}}</dt>
+                            <dd class="productView-info-value">{{lang 'products.purchase_units' quantity=product.max_purchase_quantity}}</dd>
+                        {{/if}}
+                        {{#if product.gift_wrapping_available}}
+                            <dt class="productView-info-name">{{lang 'products.gift_wrapping'}}</dt>
+                            <dd class="productView-info-value">{{lang 'products.gift_wrapping_available'}}</dd>
+                        {{/if}}
+                        {{#if product.shipping}}
+                            {{#if product.shipping.calculated}}
+                                <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
+                                <dd class="productView-info-value">{{lang 'products.shipping_calculated'}}</dd>
+                            {{else}}
+                                {{#if product.shipping.price.value '===' 0}}
+                                {{else}}
+                                    <dt class="productView-info-name">{{lang 'products.shipping'}}</dt>
+                                    <dd class="productView-info-value">{{lang 'products.shipping_fixed' amount=product.shipping.price.formatted}}</dd>
+                                {{/if}}
+                            {{/if}}
+                        {{/if}}
+                    </dl>
+                </div>
+            </section>
+
+            <section class="productView-details product-options">
+                {{> components/eyeva/products/product-view/modifiers-modal/init}}
+
+                <div class="productView-options eyeva__productView-options {{#if (getVar 'enableModifiersModal')}}_enableModifiersModal{{/if}}">
+                    {{#if product.release_date }}
+                        <p>{{product.release_date}}</p>
+                    {{/if}}
+                    <form class="form" method="post" action="{{product.cart_url}}" enctype="multipart/form-data"
+                        data-cart-item-add>
+                        <input type="hidden" name="action" value="add">
+                        <input type="hidden" name="product_id" value="{{product.id}}"/>
+                        {{#if product.cart_order_source}}
+                            <input type="hidden" name="cart_order_source" value="{{product.cart_order_source}}"/>
+                        {{/if}}
+                        <div data-product-option-change style="display:none;">
+                            {{inject 'showSwatchNames' theme_settings.show_product_swatch_names}}
+                            {{> components/eyeva/products/product-view/modifiers-modal/product-options}}
+                        </div>
+                        <div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+                            <label class="form-label form-label--alternate">
+                                {{lang 'products.current_stock'}}
+                                <span data-product-stock>{{product.stock_level}}</span>
+                            </label>
+                        </div>
+
+                        {{> components/eyeva/products/product-view/modifiers-modal/add-to-cart}}
+
+                        {{#if product.out_of_stock}}
+                            {{#if product.out_of_stock_message}}
+                                {{> components/common/alert/alert-error product.out_of_stock_message}}
+                            {{else}}
+                                {{> components/common/alert/alert-error (lang 'products.sold_out')}}
+                            {{/if}}
+                        {{/if}}
+                    </form>
+                </div>
+                {{> components/common/share url=product.url}}
+            </section>
+        </div><!-- /._eyeva-sticky-box -->
+    </div><!-- /._eyeva-sticky-col -->
+
+    <article class="productView-description">
+        {{#unless quickview}}
+            {{#if theme_settings.show_product_details_tabs}}
+                {{> components/products/description-tabs}}
+            {{else}}
+                {{> components/products/description}}
+            {{/if}}
+        {{else}}
+            {{!-- show custom fields table only in the quick-view modal --}}
+            {{#all product.custom_fields theme_settings.show_custom_fields_tabs}}
+                <p class="productView-title">{{sanitize theme_settings.pdp-custom-fields-tab-label}}</p>
+                <dl class="productView-info productView-info--customFields">
+                    {{> components/products/custom-fields }}
+                </dl>
+            {{/all}}
+        {{/unless}}
+
+
+        {{#unless quickview}}
+            {{#if settings.show_product_reviews}}
+                <a href="{{product.url}}{{#if is_ajax}}#write_review{{/if}}"
+                class="productView-reviewLink productView-reviewLink--new"
+                {{#unless is_ajax}}data-reveal-id="modal-review-form"{{/unless}}
+                role="button"
+                >
+                {{lang 'products.reviews.new'}}
+                </a>
+                {{#unless is_ajax}}
+                    {{> components/products/modals/writeReview}}
+                {{/unless}}
+            {{/if}}
+        {{/unless}}
+    </article>
+</div>

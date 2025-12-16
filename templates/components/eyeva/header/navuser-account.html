@@ -1,0 +1,81 @@
+{{#if customer}}
+    <button class="navUser-action _hasLabel" type="button"
+        data-collapsible="navUser-account"
+        aria-controls="navUser-account"
+        aria-expanded="false"
+        data-menu-gap-cover
+        aria-label="{{lang 'common.account'}}"
+    >
+        <i class="icon">
+            <svg class="force-hide-mobile-tablet"><use href="#icon-circle-user"></use></svg>
+            <svg class="_open force-hide-desktop"><use href="#icon-circle-user"></use></svg>
+            <svg class="_close force-hide-desktop"><use href="#icon-xmark-large"></use></svg>
+        </i>
+        <span class="navUser-label">{{lang 'common.account'}}</span>
+    </button>
+    <div class="navUser-subMenu" id="navUser-account" aria-hidden="true" data-menu-dropdown {{#if theme_settings.logo-position '==' 'center'}}data-ignore-header-position{{/if}}>
+        <ul class="navUser-childList">
+            {{#if customer.store_credit.value '>' 0}}
+                <li class="navUser-childList-item">
+                    <a class="navUser-childList-action">
+                        <span class="navUser-childList-label">{{lang 'common.store_credit_overview' credit=customer.store_credit.formatted}}</span>
+                    </a>
+                </li>
+            {{/if}}
+            <li class="navUser-childList-item">
+                <a class="navUser-childList-action" href="{{urls.account.orders.all}}">
+                    <span class="navUser-childList-label">{{lang 'account.nav.orders'}}</span>
+                </a>
+            </li>
+            {{#if settings.returns_enabled}}
+                <li class="navUser-childList-item">
+                    <a class="navUser-childList-action" href="{{urls.account.returns}}">
+                        <span class="navUser-childList-label">{{lang 'account.nav.returns'}}</span>
+                    </a>
+                </li>
+            {{/if}}
+            <li class="navUser-childList-item">
+                <a class="navUser-childList-action" href="{{urls.account.inbox}}">
+                    <span class="navUser-childList-label">{{lang 'account.mobile_nav.messages'}}</span>
+                </a>
+            </li>
+            <li class="navUser-childList-item">
+                <a class="navUser-childList-action" href="{{urls.account.addresses}}">
+                    <span class="navUser-childList-label">{{lang 'account.nav.addresses'}}</span>
+                </a>
+            </li>
+            {{#if settings.show_payment_methods}}
+                <li class="navUser-childList-item">
+                    <a class="navUser-childList-action" href="{{urls.account.payment_methods.all}}">
+                        <span class="navUser-childList-label">{{lang 'account.nav.payment_methods'}}</span>
+                    </a>
+                </li>
+            {{/if}}
+            <li class="navUser-childList-item">
+                <a class="navUser-childList-action" href="{{urls.account.wishlists.all}}">
+                    <span class="navUser-childList-label">{{lang 'account.mobile_nav.wishlists'}}</span>
+                </a>
+            </li>
+            <li class="navUser-childList-item">
+                <a class="navUser-childList-action" href="{{urls.account.recent_items}}">
+                    <span class="navUser-childList-label">{{lang 'account.nav.recently_viewed'}}</span>
+                </a>
+            </li>
+            <li class="navUser-childList-item">
+                <a class="navUser-childList-action" href="{{urls.account.details}}">
+                    <span class="navUser-childList-label">{{lang 'account.nav.settings'}}</span>
+                </a>
+            </li>
+            <li class="navUser-childList-item">
+                <a class="navUser-childList-action" href="{{urls.auth.logout}}">
+                    <span class="navUser-childList-label">{{lang 'common.logout'}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+{{else}}
+    <a class="navUser-action _hasLabel" href="{{urls.auth.login}}" aria-label="{{lang 'common.login'}}">
+        <i class="icon"><svg><use href="#icon-circle-user"></use></svg></i>
+        <span class="navUser-label">{{lang 'common.login'}}</span>
+    </a>
+{{/if}}

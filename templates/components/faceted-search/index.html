@@ -1,0 +1,24 @@
+{{> components/eyeva/faceted-search/init-image-color}}
+<div id="facetedSearch" class="facetedSearch" role="region" aria-label="{{lang 'search.faceted.label'}}">
+    {{#any facets visible=true}}
+        <div id="facetedSearch-navList"
+            class="facetedSearch-navList"
+        >
+            <div class="accordion accordion--navList">
+                {{#each facets}}
+                    {{#if visible}}
+                        {{#inArray ../theme_settings.facet_img_arr (lowercase facet)}}
+                            {{#if (merge this isFacetImg=true)}}{{/if}}
+                        {{/inArray}}
+                        {{#inArray ../theme_settings.facet_color_arr (lowercase facet)}}
+                            {{#if (merge this isFacetColor=true)}}{{/if}}
+                        {{/inArray}}
+                        {{{dynamicComponent 'components/faceted-search/facets'}}}
+                    {{/if}}
+                {{/each}}
+            </div>
+
+            <div class="blocker" style="display: none;"></div>
+        </div>
+    {{/any}}
+</div>

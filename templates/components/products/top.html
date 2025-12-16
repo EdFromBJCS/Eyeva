@@ -1,0 +1,18 @@
+<div class="section section--bestselling">
+    <div class="topProducts">
+        <div class="section-header-wrapper">
+            <h2 class="section-heading">{{lang 'products.top'}}</h2>
+            {{> components/papathemes/category/tabs
+                type=theme_settings.bestselling_type
+                count=theme_settings.bestselling_count
+                sortby='bestselling'
+                scope='.topProducts'
+            }}
+        </div>
+        {{#if theme_settings.bestselling_type '==' 'carousel'}}
+            {{> components/products/carousel show_compare=theme_settings.card_show_compare event="list"}}
+        {{else}}
+            {{> components/products/grid hscroll=true show_compare=theme_settings.card_show_compare event="list"}}
+        {{/if}}
+    </div>
+</div>

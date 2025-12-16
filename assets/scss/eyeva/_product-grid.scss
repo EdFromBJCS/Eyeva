@@ -1,0 +1,101 @@
+.productGrid {
+    column-gap: spacing("base") * 2;
+    display: grid;
+    grid-template-columns: repeat(floor(stencilNumber("product_col_xl", "")), 1fr);
+    margin: 0 0 spacing("double");
+    row-gap: spacing("double");
+
+    // Large screens (1261px - 1440px)
+    @include eyeva-size-xlarge-down {
+        grid-template-columns: repeat(floor(stencilNumber("product_col_l", "")), 1fr);
+
+        @if stencilString("card_style") == "boxed" {
+            column-gap: spacing("base");
+        }
+    }
+
+    // Medium screens (801px - 1260px)
+    @include eyeva-size-large-down {
+        grid-template-columns: repeat(floor(stencilNumber("product_col", "")), 1fr);
+
+        @if stencilString("card_style") == "boxed" {
+            column-gap: spacing("base");
+        }
+    }
+
+    @include eyeva-size-mobile-tablet {
+        column-gap: spacing("base");
+        grid-template-columns: repeat(floor(stencilNumber("product_col_md", "")), 1fr);
+    }
+
+    @include eyeva-size-mobile {
+        grid-template-columns: repeat(floor(stencilNumber("product_col_sm", "")), 1fr);
+    }
+
+
+    &::before,
+    &::after {
+        display: none;
+    }
+
+    .product {
+        display: block;
+        padding: 0;
+        width: 100%;
+    }
+
+    .page-sidebar + .page-content & {
+        @include breakpoint("medium") {
+            grid-template-columns: repeat(floor(stencilNumber("product_col", "")) - 1, 1fr);
+        }
+
+        @include breakpoint("large") {
+            grid-template-columns: repeat(floor(stencilNumber("product_col_l", "")) - 1, 1fr);
+        }
+
+        @include breakpoint("xlarge") {
+            grid-template-columns: repeat(floor(stencilNumber("product_col_xl", "")) - 1, 1fr);
+        }
+
+        .product {
+            width: 100%;
+        }
+    }
+}
+
+.productGrid--hscroll {
+    @include eyeva-size-mobile-tablet {
+        --slides-to-show: #{stencilNumber("product_col_sm", "")};
+        --slide-gap: #{stencilNumber("fontSize-root")};
+        --slide-width: calc((100% - (var(--slides-to-show) - 1) * var(--slide-gap)) / var(--slides-to-show));
+        display: grid;
+        gap: var(--slide-gap);
+        grid-template-columns: repeat(floor(stencilNumber("product_col", "")), var(--slide-width));
+
+        margin-bottom: spacing("base") * 2;
+        row-gap: spacing("single") * 2;
+    }
+
+    @include eyeva-size-tablet {
+        --slides-to-show: #{stencilNumber("product_col_md", "")};
+    }
+}
+
+.productGrid-container {
+    @include eyeva-size-mobile-tablet {
+        margin-inline: -(spacing("quarter"));
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-block: 0 spacing("quarter");
+        padding-inline: spacing("quarter");
+        position: relative;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+}
+
+.product {
+    overflow: visible;
+}

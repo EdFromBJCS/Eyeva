@@ -1,0 +1,28 @@
+<div class="facetedSearch-selected">
+    <button type="button" class="plp-page-sidebar-toggle"
+        data-collapsible="page-sidebar"
+        data-collapsible-disabled-breakpoint="medium"
+        data-collapsible-disabled-state="open"
+        data-collapsible-enabled-state="closed"
+        >
+        <span class="_indicator">
+            <i class="icon" aria-hidden="true">
+                <svg><use href="#icon-sliders-up"/></svg>
+            </i>
+        </span>
+
+        <span class="_text">
+            {{lang 'search.faceted.filters'}}
+        </span>
+
+        {{#if selected.items.length}}
+            <span class="_count">
+                {{selected.items.length}}
+            </span>
+        {{/if}}
+    </button>
+
+    {{#if faceted_search_enabled}}
+        {{> components/faceted-search/selected-facets selected}}
+    {{/if}}
+</div>

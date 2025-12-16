@@ -1,0 +1,78 @@
+.eyeva__addressList-container {
+    @include eyeva__grid-table-container;
+    display: flex;
+    flex-direction: column;
+    gap: spacing("single");
+}
+
+.eyeva__addressList {
+    @include eyeva__grid-table(
+        $grid-template-columns: 1fr auto,
+        $grid-template-columns-mobile: 1fr auto,
+    );
+
+    margin-block: 0;
+
+    @include eyeva-size-mobile-tablet {
+        font-size: fontSize("smaller");
+    }
+}
+
+.eyeva__addressList-item {
+    @include eyeva__grid-table-row;
+
+    .form-actions {
+        display: flex;
+        gap: spacing("base");
+        margin: 0;
+
+        @include eyeva-size-mobile-tablet {
+            flex-direction: column;
+            gap: spacing("third");
+        }
+
+        &::before,
+        &::after {
+            display: none;
+        }
+
+        .button {
+            margin: 0;
+        }
+    }
+}
+
+.eyeva__addressList-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("third");
+}
+
+.address-title {
+    font: inherit;
+    font-size: fontSize("base");
+    font-weight: $eyeva-body-font-bold;
+    margin: 0;
+}
+
+.address-details {
+    color: $color-textSecondary;
+    font-size: inherit;
+    margin: 0;
+}
+
+.address-label,
+.address-description {
+    font-size: fontSize("smaller");
+}
+
+.eyeva__addressList-actions {
+    display: flex;
+    gap: spacing("base");
+    justify-content: center;
+    margin: 0;
+
+    .button {
+        margin: 0;
+    }
+}

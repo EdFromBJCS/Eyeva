@@ -1,0 +1,13 @@
+.paymentMethodForm-heading {
+    margin-bottom: spacing("single");
+    margin-top: 0;
+    text-align: center;
+}
+
+.paymentMethodForm {
+    margin-inline: auto;
+}
+
+.form-field._modern + .paymentMethodForm-inputs-icon {
+    top: $input-verticalPadding;
+}

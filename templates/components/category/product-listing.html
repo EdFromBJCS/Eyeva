@@ -1,0 +1,53 @@
+{{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+
+<div class="plp-page-main-header">
+
+    <div class="_left">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+        <button class="button button--plain eyeva__sidebar-toggle is-open" type="button" data-collapsible="page-sidebar-header" aria-expanded="true">
+            <i class="icon" aria-hidden="true"><svg><use href="#icon-arrow-left-from-line"></use></svg></i>
+            <span class="_title _on">{{lang 'search.faceted.hide-filters'}}</span>
+            <span class="_title _off">{{lang 'search.faceted.show-filters'}}</span>
+        </button>
+
+        <span class="_products-count">
+            {{lang 'category.product_count' products=category.total_products}}
+        </span>
+    </div>
+
+    <span class="_plp-name">{{category.name}}</span>
+
+    {{#if category.products}}
+        {{> components/products/filter sort=pagination.category.sort}}
+    {{/if}}
+
+    {{> components/faceted-search/header category}}
+</div>
+
+
+
+{{#if category.products}}
+
+    <div data-list-name="Category: {{category.name}}" role="region" aria-label="{{lang 'category.product_label'}}">
+        {{#if theme_settings.product_list_display_mode '===' 'grid'}}
+            {{> components/products/grid products=category.products show_compare=category.show_compare theme_settings=theme_settings event="list" }}
+        {{else}}
+            {{> components/products/list products=category.products show_compare=category.show_compare theme_settings=theme_settings event="list" }}
+        {{/if}}
+    </div>
+
+    {{> components/common/paginator pagination.category}}
+{{else}}
+    {{#if category.search_error}}
+        <p>{{lang 'search.errorMessage'}}</p>
+    {{else}}
+        <p data-no-products-notification
+           role="alert"
+           aria-live="assertive"
+           tabindex="-1"
+        >
+            {{lang 'categories.no_products'}}
+        </p>
+    {{/if}}
+{{/if}}

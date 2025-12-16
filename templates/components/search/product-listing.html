@@ -1,0 +1,44 @@
+{{inject 'noCompareMessage' (lang 'compare.no_compare')}}
+
+<div class="plp-page-main-header">
+
+    <div class="_left">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+        <button class="button button--plain eyeva__sidebar-toggle is-open" type="button" data-collapsible="page-sidebar-header" aria-expanded="true">
+            <i class="icon" aria-hidden="true"><svg><use href="#icon-arrow-left-from-line"></use></svg></i>
+            <span class="_title _on">{{lang 'search.faceted.hide-filters'}}</span>
+            <span class="_title _off">{{lang 'search.faceted.show-filters'}}</span>
+        </button>
+
+        <span class="_products-count">
+            {{lang 'search.results.product_count' count=pagination.product_results.total}}
+        </span>
+    </div>
+
+    <span class="_plp-name">
+        {{#if forms.search.search_error}}
+            {{lang 'search.errorMessage' }}
+        {{else}}
+            {{{lang 'search.results.count' count=result_count search_query=(sanitize forms.search.query) }}}
+        {{/if}}
+    </span>
+
+    {{#if product_results.products.length}}
+        {{> components/products/filter sort=pagination.product_results.sort}}
+    {{/if}}
+
+    {{> components/faceted-search/header product_results}}
+</div>
+
+
+
+<div data-list-name="Search Results">
+    {{#if theme_settings.product_list_display_mode '===' 'grid'}}
+        {{> components/products/grid products=product_results.products show_compare=product_results.show_compare theme_settings=theme_settings event="list" }}
+    {{else}}
+        {{> components/products/list products=product_results.products show_compare=product_results.show_compare theme_settings=theme_settings event="list" }}
+    {{/if}}
+</div>
+
+{{> components/common/paginator pagination.product_results}}

@@ -1,0 +1,153 @@
+.rating--large {
+    display: inline-flex;
+    gap: spacing("quarter");
+
+    .icon {
+        height: spacing("single");
+        width: spacing("single");
+    }
+}
+
+.productReview-averageRating {
+    align-items: center;
+    color: $color-textLink;
+    display: flex;
+    font-size: fontSize("small");
+    font-weight: $eyeva-body-font-bold;
+    margin-bottom: spacing("single");
+
+    @include breakpoint("medium") {
+        display: inline-flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: spacing("base") * 2;
+        margin-right: spacing("single");
+        row-gap: spacing("third") / 2;
+        vertical-align: top;
+        width: min-content;
+    }
+
+    .stars {
+        display: flex;
+        gap: spacing("third") / 2;
+        margin-right: spacing("base");
+
+        @include breakpoint("medium") {
+            margin-right: 0;
+        }
+
+        .icon {
+            @include square(fontSize("large"));
+        }
+
+        + span + span {
+            font-size: fontSize("smaller");
+            font-weight: $body-font-weight;
+
+            @include breakpoint("medium") {
+                font-size: fontSize("base");
+            }
+
+            &::before {
+                color: container("borderColor");
+                content: "|";
+                display: inline-block;
+                padding-inline: spacing("half");
+            }
+        }
+
+        + span:empty + span {
+            color: $color-textSecondary;
+
+            &::before {
+                display: none;
+            }
+        }
+    }
+}
+
+.productView-collapsible-content._reviews {
+    margin-bottom: spacing("double");
+
+    @include breakpoint("medium") {
+        padding-top: spacing("base");
+    }
+
+    .productView-reviewLink {
+        margin: 0 0 spacing("base") * 2;
+
+        @include breakpoint("medium") {
+            vertical-align: top;
+        }
+    }
+
+    &:not(:has(.productReviews-list)) {
+        margin-bottom: 0;
+    }
+}
+
+.productReviews {
+    .productView-collapsible-title {
+        border-top: container("border");
+        padding-top: spacing("single");
+
+        @include breakpoint("medium") {
+            margin-top: spacing("single");
+        }
+    }
+}
+
+.productReviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base") * 2;
+    margin: 0;
+
+    @include breakpoint("medium") {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    &::before,
+    &::after {
+        display: none;
+    }
+
+    ~ .pagination {
+        margin-top: spacing("single");
+    }
+}
+
+.productReview {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("third");
+    padding: 0;
+    width: 100%;
+
+    article,
+    header {
+        display: contents;
+    }
+}
+
+.productReview-rating {
+    margin-bottom: 0;
+}
+
+.productReview-title {
+    font-family: $header-font-family;
+    font-size: inherit;
+    font-style: italic;
+    font-weight: $header-font-weight;
+    line-height: inherit;
+}
+
+.productReview-body {
+    margin-bottom: 0;
+}
+
+.productReview-author {
+    font-size: fontSize("smaller");
+    margin-bottom: 0;
+}

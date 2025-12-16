@@ -1,0 +1,78 @@
+<a class="navPages-action _webpage" href="{{urls.account.index}}"
+    data-collapsible="navPages-account"
+    aria-controls="navPages-account"
+    aria-expanded="false"
+>
+    <span class="navPages-label">{{lang 'common.account'}}</span>
+    <i class="icon" aria-hidden="true"><svg><use href="#icon-arrow-right-long"></use></svg></i>
+</a>
+<div class="navPages-subMenu" id="navPages-account" aria-hidden="true" data-menu-dropdown>
+    <ul class="navPages-childList">
+        <li class="navPages-childList-item _parent _depth-{{depth}}">
+            <a class="navPages-childList-action  _parent _depth-{{depth}} _webpage" href="{{urls.account.index}}"
+                data-collapsible="navPages-account"
+                aria-controls="navPages-account"
+                aria-expanded="false"
+            >
+                <i class="icon" aria-hidden="true"><svg><use href="#icon-arrow-left-long"></use></svg></i>
+                <span class="navPages-childList-label">{{lang 'common.account'}}</span>
+            </a>
+        </li>
+        {{#if customer.store_credit.value '>' 0}}
+            <li class="navPages-childList-item">
+                <a class="navPages-childList-action">
+                    <span class="navPages-label">{{lang 'common.store_credit_overview' credit=customer.store_credit.formatted}}</span>
+                </a>
+            </li>
+        {{/if}}
+        <li class="navPages-childList-item">
+            <a class="navPages-childList-action" href="{{urls.account.orders.all}}">
+                <span class="navPages-label">{{lang 'account.nav.orders'}}</span>
+            </a>
+        </li>
+        {{#if settings.returns_enabled}}
+            <li class="navPages-childList-item">
+                <a class="navPages-childList-action" href="{{urls.account.returns}}">
+                    <span class="navPages-label">{{lang 'account.nav.returns'}}</span>
+                </a>
+            </li>
+        {{/if}}
+        <li class="navPages-childList-item">
+            <a class="navPages-childList-action" href="{{urls.account.inbox}}">
+                <span class="navPages-label">{{lang 'account.mobile_nav.messages'}}</span>
+            </a>
+        </li>
+        <li class="navPages-childList-item">
+            <a class="navPages-childList-action" href="{{urls.account.addresses}}">
+                <span class="navPages-label">{{lang 'account.nav.addresses'}}</span>
+            </a>
+        </li>
+        {{#if settings.show_payment_methods}}
+            <li class="navPages-childList-item">
+                <a class="navPages-childList-action" href="{{urls.account.payment_methods.all}}">
+                    <span class="navPages-label">{{lang 'account.nav.payment_methods'}}</span>
+                </a>
+            </li>
+        {{/if}}
+        <li class="navPages-childList-item">
+            <a class="navPages-childList-action" href="{{urls.account.wishlists.all}}">
+                <span class="navPages-label">{{lang 'account.mobile_nav.wishlists'}}</span>
+            </a>
+        </li>
+        <li class="navPages-childList-item">
+            <a class="navPages-childList-action" href="{{urls.account.recent_items}}">
+                <span class="navPages-label">{{lang 'account.nav.recently_viewed'}}</span>
+            </a>
+        </li>
+        <li class="navPages-childList-item">
+            <a class="navPages-childList-action" href="{{urls.account.details}}">
+                <span class="navPages-label">{{lang 'account.nav.settings'}}</span>
+            </a>
+        </li>
+        <li class="navPages-childList-item">
+            <a class="navPages-childList-action" href="{{urls.auth.logout}}">
+                <span class="navPages-label">{{lang 'common.logout'}}</span>
+            </a>
+        </li>
+    </ul>
+</div>

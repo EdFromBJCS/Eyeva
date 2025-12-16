@@ -1,0 +1,87 @@
+<a href="#main-content" class="skip-to-main-link">{{lang 'header.skip_to_main'}}</a>
+{{!--
+<!--
+    Top Banner Carousel Instruction:
+    --------------------------------
+    Option 1:
+        Use HTML widget with content below:
+        ```html
+        <div data-banner-carousel>
+            <div>Banner 1 content</div>
+            <div>Banner 2 content</div>
+            <div>Banner 3 content</div>
+        </div>
+        ```
+
+    Option 2:
+        Create multiple Marketing Banners with location `top`: Admin Panel > Marketing > Banners
+-->
+--}}
+{{{region name="header_top--global"}}}
+{{{region name="header_top"}}}
+{{#if banners.top}}
+<div class="banners banners--top" data-banner-location="top">
+    <div data-banner-carousel>
+        {{#each banners.top_metadata}}
+        <div class="banner" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-banner-id="{{this.banner-name}}">
+            <div data-event-type="promotion-click">
+                {{{this.content}}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+{{/if}}
+
+<header class="header _{{theme_settings.logo-position}}" data-sticky-header>
+    {{#if theme_settings.logo-position '===' 'center'}}
+        <div class="container">
+            <div class="header-left" data-nav-user>
+                {{> components/eyeva/header/menu-toggle}}
+                {{> components/eyeva/header/navuser-account}}
+                {{> components/eyeva/header/navuser-currency}}
+            </div>
+            {{> components/common/header/logo}}
+            <div class="header-right" data-nav-user>
+                {{> components/eyeva/header/navuser-main}}
+            </div>
+        </div>
+        <div class="navPages-container">
+            {{> components/eyeva/header/navigation type=theme_settings.navigation_design}}
+        </div>
+    {{else}}
+        <div class="container">
+            <div class="header-left">
+                {{> components/eyeva/header/menu-toggle}}
+                {{> components/common/header/logo}}
+            </div>
+            {{> components/eyeva/header/navigation type=theme_settings.navigation_design}}
+            <div class="header-right" data-nav-user>
+                {{> components/eyeva/header/navuser-currency}}
+                {{> components/eyeva/header/navuser-account}}
+                {{> components/eyeva/header/navuser-main}}
+            </div>
+        </div>
+    {{/if}}
+</header>
+
+
+<div class="eyeva__mobileCategoryNav">
+    {{#if theme_settings.show_nav_mobile}}
+        {{#if categories.length '>' 1}}
+            <div class="container">
+                <ul class="eyeva__mobileCategoryNav-list">
+                    {{#each categories}}
+                        <li class="eyeva__mobileCategoryNav-item">
+                            <a href="{{url}}" class="eyeva__mobileCategoryNav-link {{#if is_active}} _active{{/if}}">{{name}}</a>
+                        </li>
+                    {{/each}}
+                </ul>
+            </div>
+        {{/if}}
+    {{/if}}
+    {{{region name="header_bottom_mobile--global"}}}
+</div>
+
+{{{region name="header_bottom--global"}}}
+{{{region name="header_bottom"}}}

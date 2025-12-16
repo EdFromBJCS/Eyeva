@@ -1,0 +1,120 @@
+<section class="productView-images" data-image-gallery
+    data-videos-label="{{lang 'products.videos.header'}}:"
+    data-images360-label="{{lang 'products.image360'}}:"
+    data-images-label="{{lang 'products.images'}}:"
+    >
+    {{!--
+        Note that these image sizes are coupled to image sizes used in /assets/js/theme/common/product-details.js
+        for variant/rule image replacement
+    --}}
+    {{#if product.images.length '>' 1 }}
+    {{> components/carousel-content-announcement}}
+    {{/if}}
+    <figure class="productView-image"
+            data-image-gallery-main
+            {{#if product.main_image}}
+            data-zoom-image="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size }}"
+            {{/if}}
+            >
+        <div class="productView-img-container">
+            {{!-- Remove the surrounding a-element if there is no main image. --}}
+            {{#if product.main_image}}
+                <a href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size}}"
+                    target="_blank">
+            {{/if}}
+            {{> components/common/responsive-img
+                image=product.main_image
+                class="productView-image--default"
+                fallback_size=theme_settings.product_size
+                lazyload=theme_settings.lazyload_mode
+                default_image=theme_settings.default_image_product
+                otherAttributes="data-main-image"
+            }}
+            {{!-- Remove the surrounding a-element if there is no main image. --}}
+            {{#if product.main_image}}
+                </a>
+            {{/if}}
+        </div>
+    </figure>
+    <div class="productView-thumbnails-scroll">
+        <ul class="productView-thumbnails">
+            {{#each product.videos.list}}
+                <li class="productView-thumbnail _vid" data-image-gallery-item-video>
+                    <a
+                        class="productView-thumbnail-link"
+                        href="https://www.youtube.com/watch?v={{id}}"
+                        data-image-gallery-item-video-id="{{id}}">
+                        <img class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="https://i.ytimg.com/vi/{{id}}/default.jpg" alt="{{title_long}}" />
+                        <p class="_title" data-image-gallery-item-video-title>{{title_long}}</p>
+                        <p class="_description" data-image-gallery-item-video-description>{{description_short}}</p>
+                        <svg aria-hidden="true"><use href="#icon-play-solid"></use></svg>
+                        <span class="_countPill _{{../product.videos.list.length}}">{{../product.videos.list.length}}</span>
+                    </a>
+                </li>
+            {{/each}}
+
+            {{assignVar '_count360' 0}}
+            {{#each product.custom_fields}}
+                {{#if name '==' '__@360'}}
+                    <li class="productView-thumbnail _360 _360_{{incrementVar '_count360'}}" data-image-gallery-item-360>
+                        <a
+                            class="productView-thumbnail-link"
+                            href="{{value}}"
+                            title="{{lang 'products.image360'}}"
+                            data-image-gallery-item
+                            data-image-gallery-new-image-url="{{value}}"
+                            data-image-gallery-new-image-srcset="{{value}}"
+                            data-image-gallery-zoom-image-url="{{value}}"
+                        >
+                        <img class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{value}}" alt="{{lang 'products.image360'}}" />
+                        <svg aria-hidden="true"><use href="#icon-360"></use></svg>
+                        <span class="_countPill _{{getVar '_count360'}}">{{getVar '_count360'}}</span>
+                        </a>
+                    </li>
+                {{/if}}
+            {{/each}}
+
+            {{#each product.images}}
+                {{#if @index '==' ../theme_settings.pdp_thumb_count}}
+                    <li class="productView-thumbnail _more" data-image-gallery-item-more>
+                        <a
+                            class="productView-thumbnail-link"
+                            href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                            data-image-gallery-item
+                            data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.product_size}}"
+                            data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
+                            data-image-gallery-zoom-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                        >
+                            <span>+{{subtract ../product.images.length ../theme_settings.pdp_thumb_count}}</span>
+                        </a>
+                    </li>
+                {{/if}}
+
+                <li class="productView-thumbnail _std _std_{{add @index 1}}
+                    {{#if @index '>=' ../theme_settings.pdp_thumb_count}}
+                        _hide
+                    {{/if}}
+                    "
+                    {{#if @index '>=' ../theme_settings.pdp_thumb_count}}
+                        data-image-gallery-item-hide
+                    {{/if}}
+                >
+                    <a
+                        class="productView-thumbnail-link"
+                        href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                        data-image-gallery-item
+                        data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.product_size}}"
+                        data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
+                        data-image-gallery-zoom-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+                    >
+                    {{> components/common/responsive-img
+                        image=this
+                        fallback_size=../theme_settings.productview_thumb_size
+                        lazyload=../theme_settings.lazyload_mode
+                    }}
+                    </a>
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</section>

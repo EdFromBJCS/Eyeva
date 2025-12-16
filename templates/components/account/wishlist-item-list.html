@@ -1,0 +1,23 @@
+<ul class="productGrid _wishlist">
+    {{#each wishlist.items}}
+    <li class="product _wishlist-item">
+        {{> components/products/card
+            id=product_id
+            settings=../settings
+            show_compare=../theme_settings.card_show_compare
+            show_rating=../settings.show_product_rating
+            theme_settings=../theme_settings customer=../customer
+        }}
+        
+        {{#if ../show_remove}}
+            <form action="{{remove_url}}" class="form _wishlist-remove" method="post">
+                <button type="submit" class="card-figcaption-button _remove">
+                    <span class="icon"><svg aria-hidden="true"><use href="#icon-xmark-large"></use></svg></span>
+                    <span class="_label">{{lang 'account.wishlists.remove_item'}}</span>
+                </button>
+            </form>
+        {{/if}}
+    </li>
+    {{/each}}
+</ul>
+{{> components/common/paginator wishlist.pagination}}

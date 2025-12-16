@@ -1,0 +1,234 @@
+.section--brands {
+    padding-inline: 0;
+
+    @if $home-brands-bgColor != $body-bg {
+        background: $home-brands-bgColor;
+        padding-bottom: spacing("double");
+
+        @include breakpoint("medium") {
+            padding-bottom: spacing("double") + spacing("base");
+        }
+    }
+
+    .container & {
+        margin-inline: -(spacing("base"));
+
+        @include breakpoint("large") {
+            margin-inline: -(spacing("double"));
+        }
+    }
+}
+
+.brandCarousel {
+    .section-header-wrapper {
+        @include breakpoint("medium") {
+            align-items: center;
+            display: grid;
+            gap: spacing("base");
+            grid-template-columns: if(stencilString("section_align") == "start", max-content 1fr, 1fr auto 1fr);
+            margin-bottom: if(stencilString("section_align") == "start", spacing("single"), spacing("single") * 2);
+            padding-inline: spacing("base");
+        }
+
+        @include breakpoint("large") {
+            padding-inline: spacing("double");
+        }
+    }
+
+    .section-heading {
+        padding-inline: spacing("base");
+        text-align: if(stencilString("section_align") == "start", start, center);
+
+        @if $home-brands-bgColor != $body-bg {
+            color: $color-secondary;
+        }
+
+        @include breakpoint("medium") {
+            grid-column: if(stencilString("section_align") == "start", 1, 2);
+            margin-bottom: 0;
+
+            @if stencilString("section_align") == "start" {
+                padding-inline-start: 0;
+            }
+        }
+    }
+}
+
+.brandCarousel-more {
+    font-weight: $eyeva-body-font-bold;
+    gap: spacing("base");
+    justify-self: end;
+    margin: 0;
+
+    @include eyeva-screen-mobile-tablet {
+        display: none;
+    }
+
+    &.button--outline {
+        @if $home-brands-bgColor != $body-bg {
+            border-color: $color-secondary;
+            color: $color-secondary;
+
+            .icon svg {
+                fill: $color-secondary;
+            }
+
+            &:hover,
+            &:focus,
+            &:active {
+                background-color: $color-secondary;
+                border-color: $home-brands-bgColor;
+                color: $home-brands-bgColor;
+
+                .icon svg {
+                    fill: $home-brands-bgColor;
+                }
+            }
+        }
+    }
+}
+
+.brandCarousel-container {
+    --webkit-overflow-scrolling: touch;
+    overflow: auto;
+    padding-inline: spacing("base");
+
+    @include breakpoint("large") {
+        padding-inline: spacing("double");
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.brandCarousel-list {
+    display: grid;
+    gap: spacing("base");
+    grid-auto-flow: column;
+    width: fit-content;
+
+    @include breakpoint("medium") {
+        gap: spacing("single");
+    }
+}
+
+.brandCarousel-item {
+    grid-column: auto / span 2;
+    width: to-number(get-width(stencilString("brand_size"))) / 2;
+
+    @include breakpoint("medium") {
+        width: get-width(stencilString("brand_size"));
+    }
+
+    &:nth-child(even) {
+        grid-row: 2;
+    }
+
+    &:first-child {
+        grid-column-start: 1;
+    }
+
+    &:nth-child(2) {
+        grid-column-start: 2;
+    }
+
+    &:has(.brandCarousel-link:focus-visible) {
+        border-radius: $eyeva-container-radius;
+        outline: $outline-width $outline-style $outline-color !important;
+        outline-offset: $outline-offset !important;
+
+        @if $home-brands-bgColor != $body-bg {
+            outline-color: $color-secondary !important;
+        }
+    }
+}
+
+.brandCarousel-link {
+    color: $color-textSecondary;
+    font-size: fontSize("base");
+    font-weight: $eyeva-body-font-bold;
+    text-decoration: none;
+
+    @include breakpoint("medium") {
+        font-size: $eyeva-font-18;
+    }
+
+    &:hover,
+    &:focus {
+        color: $color-textLink-hover;
+
+        .brandCarousel-name-alt {
+            color: inherit;
+        }
+    }
+
+    &:active {
+        color: $color-textLink-active;
+    }
+}
+
+.brandCarousel-image-container {
+    @include lazy-loaded-padding("brand_size");
+    border-radius: $eyeva-container-radius;
+    overflow: hidden;
+    position: relative;
+
+    @if stencilColor("card-bgColor") != $body-bg or $home-brands-bgColor != $body-bg {
+        background: stencilColor("card-bgColor");
+    }
+
+    img {
+        @include lazy-loaded-img();
+        height: 100%;
+        object-fit: contain;
+        width: 100%;
+    }
+}
+
+.brandCarousel-name {
+    align-items: center;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.brandCarousel-name-alt {
+    color: $color-textBase;
+    display: block;
+    font-family: $header-font-family;
+    font-size: fontSize("base");
+    font-weight: $header-font-weight;
+    margin-top: spacing("third");
+
+    @include eyeva-screen-mobile-tablet {
+        font-size: fontSize("smaller");
+    }
+}
+
+// ============================================================================
+// Sofas & Laptops Style
+// ============================================================================
+
+.brandCarousel-list._style-sofas,
+.brandCarousel-list._style-laptops {
+    .brandCarousel-item {
+        grid-column: auto / span 1;
+
+        &:nth-child(even) {
+            grid-row: unset;
+        }
+
+        &:first-child {
+            grid-column-start: unset;
+        }
+
+        &:nth-child(2) {
+            grid-column-start: unset;
+        }
+    }
+}

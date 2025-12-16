@@ -1,0 +1,21 @@
+.productView-shippingCountdown {
+    border-top: container("border");
+    color: $color-textSecondary;
+    display: flex;
+    font-size: fontSize("smaller");
+    gap: spacing("base");
+    padding-top: spacing("base");
+
+    @include breakpoint("medium") {
+        font-size: inherit;
+        padding-top: spacing("single");
+    }
+
+    .icon {
+        align-items: center;
+        display: flex;
+        flex-shrink: 0;
+        height: fontSize("smaller") * $eyeva-body-line-height;
+        width: remCalc(24px);
+    }
+}

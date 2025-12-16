@@ -1,0 +1,3 @@
+{
+  "components/papathemes/shipping-countdown/custom-field": "{{!--\nInput:\n- reset: boolean - reset the variable `shippingCountdown`\n- name: string - Custom field className\n- value: string - Custom field value\n--}}\n\n{{#if reset}}\n    {{assignVar 'shippingCountdown' 0}}\n{{else}}\n    {{#if name '===' '__shipping_countdown'}}\n        {{assignVar 'shippingCountdown' value}}\n    {{/if}}\n{{/if}}\n"
+}

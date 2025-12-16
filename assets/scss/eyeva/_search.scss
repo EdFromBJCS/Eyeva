@@ -1,0 +1,82 @@
+.search-suggestion {
+    margin-bottom: spacing("single");
+}
+
+.suggestion-title {
+    font-size: fontSize("base");
+}
+
+.search-refine {
+    margin-left: spacing("half");
+}
+
+.advancedSearch-form {
+    margin-bottom: spacing("single");
+    text-align: start;
+
+    .form-row {
+        margin: 0;
+    }
+
+    .faceted-search-container-nav-footer {
+        display: flex;
+
+        .button--primary {
+            flex: 1;
+        }
+    }
+}
+
+.advancedSearch-title {
+    font-family: $body-font-family;
+    font-size: fontSize("base");
+    font-weight: $eyeva-body-font-bold;
+}
+
+.search-price-range {
+    column-gap: spacing("base");
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: stretch;
+
+    > * {
+        width: 100%;
+    }
+
+    > label {
+        align-items: center;
+        display: flex;
+        gap: spacing("base");
+        width: calc(50% - #{spacing("base") / 2});
+
+        span {
+            padding: 0;
+        }
+    }
+
+    .form-input {
+        width: 100%;
+    }
+}
+
+.accordion-block--advancedSearch {
+    @include eyeva-screen-mobile-tablet {
+        .accordion-heading {
+            display: none;
+        }
+
+        .accordion-content {
+            display: block;
+
+            .accordion--navList & {
+                padding-block-start: spacing("base");
+            }
+        }
+    }
+}
+
+.search-content-results-item {
+    ._title {
+        margin-bottom: spacing("quarter");
+    }
+}

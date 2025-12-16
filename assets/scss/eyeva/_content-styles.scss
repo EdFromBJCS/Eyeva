@@ -1,0 +1,498 @@
+
+// ======================================================================================
+// Format product description beautifully!
+// ======================================================================================
+
+@mixin eyeva__apply-spacing($descendant, $child, $property, $value) {
+    @if $child {
+        // Apply spacing to *direct* children only
+        > * {
+            #{$property}: #{$value};
+        }
+    } @else if $descendant {
+        // Apply spacing to *all* descendants
+        * {
+            #{$property}: #{$value};
+        }
+    } @else {
+        // Apply spacing to the element itself
+        #{$property}: #{$value};
+    }
+}
+
+@mixin eyeva__generate-spacing-classes(
+    $sizes,
+    $prefix,
+    $property,
+    $descendant: false,
+    $child: false,
+    $breakpoint: "",
+    $suffix: ""
+) {
+    $dashSuffix: if($suffix != "", "-#{$suffix}", "");
+
+    @if $breakpoint != "" {
+        @media (max-width: (screenSize($breakpoint) - 1px)) {
+            @include _eyeva__generate-spacing-classes-content($sizes, $prefix, $property, $descendant, $child, $dashSuffix);
+        }
+    } @else {
+        @include _eyeva__generate-spacing-classes-content($sizes, $prefix, $property, $descendant, $child, $dashSuffix);
+    }
+}
+
+/** @private */
+@mixin _eyeva__generate-spacing-classes-content (
+    $sizes,
+    $prefix,
+    $property,
+    $descendant: false,
+    $child: false,
+    $suffix: ""
+) {
+    @each $key, $value in $sizes {
+
+        // All sides, e.g. .m-16, .p-16, or .des-child-m-16
+        .#{$prefix}-#{$key}#{$suffix} {
+            @include eyeva__apply-spacing($descendant, $child, $property, $value);
+        }
+
+        // Horizontal, e.g. .mx-16, .px-16
+        .#{$prefix}x-#{$key}#{$suffix} {
+            @include eyeva__apply-spacing($descendant, $child, "#{$property}-left", $value);
+            @include eyeva__apply-spacing($descendant, $child, "#{$property}-right", $value);
+        }
+
+        // Vertical, e.g. .my-16, .py-16
+        .#{$prefix}y-#{$key}#{$suffix} {
+            @include eyeva__apply-spacing($descendant, $child, "#{$property}-top", $value);
+            @include eyeva__apply-spacing($descendant, $child, "#{$property}-bottom", $value);
+        }
+
+        // Individual sides, e.g. .mt-16, .mr-16, .mb-16, .ml-16
+        .#{$prefix}t-#{$key}#{$suffix} {
+            @include eyeva__apply-spacing($descendant, $child, "#{$property}-top", $value);
+        }
+        .#{$prefix}r-#{$key}#{$suffix} {
+            @include eyeva__apply-spacing($descendant, $child, "#{$property}-right", $value);
+        }
+        .#{$prefix}b-#{$key}#{$suffix} {
+            @include eyeva__apply-spacing($descendant, $child, "#{$property}-bottom", $value);
+        }
+        .#{$prefix}l-#{$key}#{$suffix} {
+            @include eyeva__apply-spacing($descendant, $child, "#{$property}-left", $value);
+        }
+    }
+}
+
+@mixin eyeva__generate-gap-classes($sizes, $descendant: false, $child: false) {
+    @each $key, $value in $sizes {
+
+        // .gap-#
+        .gap-#{$key} {
+            @if ($descendant == true) {
+                // Applies gap to all nested elements
+                * {
+                    gap: $value;
+                    /*
+                    In practice, this won't do anything unless these nested
+                    elements themselves are flex/grid containers.
+                    */
+                }
+            } @else if ($child == true) {
+                // Applies gap to direct children only
+                > * {
+                    gap: $value;
+                }
+            } @else {
+                // Default behavior: container-level gap
+                gap: $value;
+            }
+        }
+
+        // .row-gap-#
+        .row-gap-#{$key} {
+            @if ($descendant == true) {
+                * {
+                    row-gap: $value;
+                }
+            } @else if ($child == true) {
+                > * {
+                    row-gap: $value;
+                }
+            } @else {
+                row-gap: $value;
+            }
+        }
+
+        // .column-gap-#
+        .column-gap-#{$key} {
+            @if ($descendant == true) {
+                * {
+                    column-gap: $value;
+                }
+            } @else if ($child == true) {
+                > * {
+                    column-gap: $value;
+                }
+            } @else {
+                column-gap: $value;
+            }
+        }
+
+    }
+}
+
+@mixin eyeva__generate-border-classes($class-name: "border", $border: container("border")) {
+    .#{$class-name} {
+        border: $border;
+    }
+
+    .#{$class-name}-x {
+        border-left: $border;
+        border-right: $border;
+    }
+
+    .#{$class-name}-y {
+        border-bottom: $border;
+        border-top: $border;
+    }
+
+    .#{$class-name}-left {
+        border-left: $border;
+    }
+
+    .#{$class-name}-right {
+        border-right: $border;
+    }
+
+    .#{$class-name}-top {
+        border-top: $border;
+    }
+
+    .#{$class-name}-bottom {
+        border-bottom: $border;
+    }
+}
+
+@mixin eyeva__font-sizes($sizes) {
+    @each $size in $sizes {
+        .font-#{$size} {
+            font-size: remCalc($size);
+        }
+    }
+
+    @media (max-width: (screenSize("medium") - 1px)) {
+        @each $size in $sizes {
+            .font-#{$size}-md {
+                font-size: remCalc($size);
+            }
+        }
+    }
+
+    @media (max-width: (screenSize("small") - 1px)) {
+        @each $size in $sizes {
+            .font-#{$size}-sm {
+                font-size: remCalc($size);
+            }
+        }
+    }
+}
+
+@mixin eyeva__flex-columns($breakpoint: "", $suffix: "") {
+    @if ($breakpoint != "") {
+        @media (max-width: (screenSize($breakpoint) - 1px)) {
+            .flex-column#{if($suffix != "", "-#{$suffix}", "")} {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    } @else {
+        .flex-column#{if($suffix != "", "-#{$suffix}", "")} {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}
+
+@mixin eyeva__align-items($breakpoint: "", $suffix: "") {
+    @if ($breakpoint != "") {
+        @media (max-width: (screenSize($breakpoint) - 1px)) {
+            @each $alignment in (center, start, end) {
+                .align-items-#{$alignment}#{if($suffix != "", "-#{$suffix}", "")} {
+                    align-items: #{$alignment};
+                }
+            }
+        }
+    } @else {
+        @each $alignment in (center, start, end) {
+            .align-items-#{$alignment}#{if($suffix != "", "-#{$suffix}", "")} {
+                align-items: #{$alignment};
+            }
+        }
+    }
+}
+
+@mixin eyeva__flex-spans($breakpoint: "", $suffix: "", $child: false, $max: 4) {
+    @if ($breakpoint != "") {
+        @media (max-width: (screenSize($breakpoint) - 1px)) {
+            @for $i from 0 through $max {
+                @if $child {
+                    .child-span-#{$i}#{if($suffix != "", "-#{$suffix}", "")} {
+                        > * {
+                            flex: #{$i};
+                        }
+                    }
+                } @else {
+                    .span-#{$i}#{if($suffix != "", "-#{$suffix}", "")} {
+                        flex: #{$i};
+                    }
+                }
+            }
+        }
+    } @else {
+        @for $i from 0 through $max {
+            @if $child {
+                .child-span-#{$i}#{if($suffix != "", "-#{$suffix}", "")} {
+                    > * {
+                        flex: #{$i};
+                    }
+                }
+            } @else {
+                .span-#{$i}#{if($suffix != "", "-#{$suffix}", "")} {
+                    flex: #{$i};
+                }
+            }
+        }
+    }
+}
+
+@mixin eyeva__flex-shrinks($breakpoint: "", $suffix: "") {
+    @if ($breakpoint != "") {
+        @media (max-width: (screenSize($breakpoint) - 1px)) {
+            @for $i from 0 through 1 {
+                .shrink-#{$i}#{if($suffix != "", "-#{$suffix}", "")} {
+                    flex-shrink: $i;
+                }
+            }
+        }
+    }
+    @else {
+        @for $i from 0 through 1 {
+            .shrink-#{$i}#{if($suffix != "", "-#{$suffix}", "")} {
+                flex-shrink: $i;
+            }
+        }
+    }
+}
+
+@mixin eyeva__text-aligns($breakpoint: "", $suffix: "") {
+    @if ($breakpoint != "") {
+        @media (max-width: (screenSize($breakpoint) - 1px)) {
+            @each $alignment in (center, start, end, left, right) {
+                .text-#{$alignment}#{if($suffix != "", "-#{$suffix}", "")} {
+                    text-align: #{$alignment};
+                }
+            }
+        }
+    } @else {
+        @each $alignment in (center, start, end, left, right) {
+            .text-#{$alignment}#{if($suffix != "", "-#{$suffix}", "")} {
+                text-align: #{$alignment};
+            }
+        }
+    }
+}
+
+%eyeva-style {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        margin-top: spacing("single");
+    }
+
+    h2 {
+        @include eyeva-screen-mobile-tablet {
+            font-size: fontSize("large");
+        }
+    }
+
+    .color-secondary {
+        color: $color-textSecondary;
+    }
+
+    .border-radius {
+        border-radius: $eyeva-container-radius;
+        overflow: hidden;
+    }
+
+    .fill {
+        background: container("fill");
+    }
+
+    .fill-alt {
+        background: container("fill", "dark");
+    }
+
+    .flex {
+        display: flex;
+    }
+
+    [data-collapsible] {
+        cursor: pointer;
+
+        &:not(a) {
+            align-items: center;
+
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+
+            &:hover,
+            &:focus {
+                color: $color-textLink-hover;
+            }
+
+            &::after {
+                background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='#{rgba($color-textBase, 0.99)}'%3E%3Cpath d='M267.3 395.3c-6.2 6.2-16.4 6.2-22.6 0l-192-192c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L256 361.4 436.7 180.7c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6l-192 192z'/%3E%3C/svg%3E");
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: remCalc(26);
+                border: container("border");
+                border-radius: 50%;
+                content: "";
+                display: block;
+                flex-shrink: 0;
+                height: $eyeva-button-height;
+                padding: spacing("third") + spacing("eighth");
+                width: $eyeva-button-height;
+            }
+
+            &:hover,
+            &:focus {
+                &::after {
+                    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='#{rgba($color-textLink-hover, 0.99)}'%3E%3Cpath d='M267.3 395.3c-6.2 6.2-16.4 6.2-22.6 0l-192-192c-6.2-6.2-6.2-16.4 0-22.6s16.4-6.2 22.6 0L256 361.4 436.7 180.7c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6l-192 192z'/%3E%3C/svg%3E");
+                    border-color: $color-textLink-hover;
+                }
+            }
+        }
+
+        &[aria-expanded="false"] {
+            .icon {
+                transform: rotate(-180deg);
+            }
+        }
+
+        .icon {
+            border: container("border");
+            border-radius: 50%;
+            height: $eyeva-button-height;
+            padding: spacing("third") + spacing("eighth");
+            width: $eyeva-button-height;
+
+            svg {
+                fill: $color-textBase;
+            }
+        }
+    }
+
+    a[data-collapsible] {
+        align-items: center;
+        display: inline-flex;
+        gap: spacing("third") / 2;
+
+        &::after {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='#{rgba($color-textBase, 0.99)}'%3E%3Cpath d='M239 401c9.4 9.4 24.6 9.4 33.9 0L465 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-175 175L81 175c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9L239 401z'/%3E%3C/svg%3E");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            content: "";
+            display: inline-block;
+            height: fontSize("smaller");
+            width: fontSize("smaller");
+        }
+
+        .icon {
+            border: 0;
+            height: fontSize("smaller");
+            padding: 0;
+            width: fontSize("smaller");
+
+            svg {
+                fill: $color-textBase;
+            }
+        }
+    }
+
+    [aria-hidden="true"]:not(._animating) {
+        &:not(.icon) {
+            display: none;
+        }
+    }
+
+    .button {
+        @media (max-width: (screenSize("small") - 1px)) {
+            padding-inline: spacing("base");
+        }
+    }
+}
+
+%eyeva-style {
+    $sizes: (
+        0: 0,
+        8: spacing("third"),
+        12: spacing("half"),
+        16: spacing("base"),
+        24: spacing("single"),
+        32: spacing("base") * 2,
+        48: spacing("single") * 2,
+        64: spacing("base") * 4,
+        72: spacing("single") * 3,
+        96: spacing("single") * 4,
+        128: spacing("base") * 8
+    );
+
+    $font-sizes: 12, 14, 16, 18, 20, 24, 28, 32, 36, 40, 48;
+
+    @each $breakpoint, $suffix in ("": "", "medium": "md", "small": "sm") {
+        @include eyeva__generate-spacing-classes($sizes, "des-m", "margin", true, false, $breakpoint, $suffix);
+        @include eyeva__generate-spacing-classes($sizes, "des-p", "padding", true, false, $breakpoint, $suffix);
+        @include eyeva__generate-spacing-classes($sizes, "child-m", "margin", false, true, $breakpoint, $suffix);
+        @include eyeva__generate-spacing-classes($sizes, "child-p", "padding", false, true, $breakpoint, $suffix);
+        @include eyeva__generate-spacing-classes($sizes, "m", "margin", false, false, $breakpoint, $suffix);   // m-0, mx-16, etc.
+        @include eyeva__generate-spacing-classes($sizes, "p", "padding", false, false, $breakpoint, $suffix); // p-0, py-8, etc.
+    }
+
+    @include eyeva__generate-gap-classes($sizes, true);
+    @include eyeva__generate-gap-classes($sizes, false, true);
+    @include eyeva__generate-gap-classes($sizes);
+    @include eyeva__generate-border-classes();
+    @include eyeva__font-sizes($font-sizes);
+
+    @each $breakpoint, $suffix in ("": "", "medium": "md", "small": "sm") {
+        @include eyeva__flex-columns($breakpoint, $suffix);
+    }
+
+    @each $breakpoint, $suffix in ("": "", "medium": "md", "small": "sm") {
+        @include eyeva__align-items($breakpoint, $suffix);
+    }
+
+    @each $breakpoint, $suffix in ("": "", "medium": "md", "small": "sm") {
+        @include eyeva__flex-spans($breakpoint, $suffix);
+        @include eyeva__flex-spans($breakpoint, $suffix, true);
+    }
+
+    @each $breakpoint, $suffix in ("": "", "medium": "md", "small": "sm") {
+        @include eyeva__flex-shrinks($breakpoint, $suffix);
+    }
+
+    @each $breakpoint, $suffix in ("": "", "medium": "md", "small": "sm") {
+        @include eyeva__text-aligns($breakpoint, $suffix);
+    }
+}
+
+.eyeva-style {
+    @extend %eyeva-style;
+}

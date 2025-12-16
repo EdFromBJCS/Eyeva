@@ -1,0 +1,16 @@
+<aside class="plp-page-sidebar" id="page-sidebar">
+    <div class="plp-page-sidebar-modal">
+        <button class="plp-page-sidebar-modal-close" type="button" title="{{lang 'common.close'}}" data-collapsible="page-sidebar">
+            <span class="aria-description--hidden">{{lang 'common.close'}}</span>
+            <span class="icon" aria-hidden="true">
+                <svg><use href="#icon-xmark-large"></use></svg>
+            </span>
+        </button>
+        <div class="plp-page-sidebar-modal-header">
+            {{lang 'search.faceted.filters'}}
+        </div>
+        <div class="faceted-search-container" id="faceted-search-container">
+            {{> components/category/sidebar}}
+        </div>
+    </div>
+</aside>

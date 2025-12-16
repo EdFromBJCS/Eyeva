@@ -1,0 +1,144 @@
+@mixin papathemes__body-modal-opened {
+    overflow: hidden;
+}
+
+body%_papathemes__modal-opened,
+body._papathemes__modal-opened {
+    @include papathemes__body-modal-opened;
+}
+
+@mixin papathemes__modal-overlay($position: "center") {
+    @include eyeva-modal-overlay;
+    transition: background-color 0.2s;
+    z-index: 1010; // higher than quick-view modal
+
+    @if $position == "bottom" {
+        align-items: flex-end;
+    }
+
+    &._closing,
+    &._opening {
+        background-color: rgba(color("greys", "darkest"), 0);
+    }
+
+    &._opening {
+        transition: none;
+    }
+
+    &._force-visible {
+        display: flex !important;
+    }
+}
+
+%papathemes__modal-overlay,
+.papathemes__modal-overlay {
+    @include papathemes__modal-overlay;
+}
+
+@mixin papathemes__modal-loading {
+    display: block;
+    min-height: 100px;
+    position: static;
+}
+
+%papathemes__modal-loading,
+.papathemes__modal-loading {
+    @include papathemes__modal-loading;
+}
+
+@mixin papathemes__modal($position: "center") {
+    background: container("fill");
+    container-type: inline-size; // stylelint-disable-line
+    display: flex;
+    flex-direction: column;
+    max-height: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    padding: spacing("base");
+    position: relative;
+    transition: transform 0.3s, opacity 0.3s;
+    width: 1000px;
+
+    @if $position == "bottom" {
+        border-top-left-radius: $eyeva-container-radius;
+        border-top-right-radius: $eyeva-container-radius;
+        max-height: calc(100% - 50px);
+    }
+
+    @include breakpoint("medium") {
+        padding: spacing("base") * 2;
+    }
+
+    ._closing &,
+    ._opening & {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    ._opening & {
+        transition: none;
+    }
+}
+
+%papathemes__modal,
+.papathemes__modal {
+    @include papathemes__modal;
+}
+
+@mixin papathemes__modal-close($height: null) {
+    @include eyeva-modal-close-button;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: zIndex("high");
+
+    @if ($height) {
+        height: $height;
+    }
+}
+
+%papathemes__modal-close,
+.papathemes__modal-close {
+    @include papathemes__modal-close;
+}
+
+@mixin papathemes__modal-header {
+    align-items: center;
+    border-bottom: container("border");
+    display: flex;
+    font-weight: $eyeva-body-font-bold;
+    justify-content: center;
+    margin-left: -(spacing("base")) * 2;
+    margin-right: -(spacing("base")) * 2;
+    margin-top: -(spacing("base")) * 2;
+    min-height: $eyeva-button-height;
+    padding: spacing("third") spacing("half");
+    text-align: center;
+
+    @include eyeva-size-mobile-tablet {
+        margin-left: -(spacing("base"));
+        margin-right: -(spacing("base"));
+        margin-top: -(spacing("base"));
+    }
+}
+
+%papathemes__modal-header,
+.papathemes__modal-header {
+    @include papathemes__modal-header;
+}
+
+@mixin papathemes__modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("single");
+    max-height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
+%papathemes__modal-body,
+.papathemes__modal-body {
+    @include papathemes__modal-body;
+}
+

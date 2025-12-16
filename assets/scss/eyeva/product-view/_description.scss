@@ -1,0 +1,62 @@
+.productView-collapsible-title {
+    border-top: container("border");
+    font-family: $header-font-family;
+    font-size: fontSize("large");
+    font-weight: $header-font-weight;
+    line-height: $eyeva-heading-line-height;
+    margin-bottom: spacing("single");
+    padding-top: spacing("single");
+
+    @include breakpoint("medium") {
+        font-size: fontSize("larger");
+    }
+
+    .button {
+        font: inherit;
+        justify-content: space-between;
+        width: 100%;
+
+        &:hover,
+        &:focus,
+        &:active {
+            .icon {
+                border-color: $color-primary;
+
+                svg {
+                    fill: $color-primary;
+                }
+            }
+        }
+
+        &[aria-expanded="false"] {
+            .icon {
+                transform: rotate(-180deg);
+            }
+        }
+
+        .icon {
+            border: container("border");
+            border-radius: 50%;
+            height: $eyeva-button-height;
+            padding: spacing("third") + spacing("eighth");
+            width: $eyeva-button-height;
+
+            svg {
+                fill: $color-textBase;
+            }
+        }
+    }
+}
+
+.productView-collapsible-content {
+    --animation-duration: 200;
+    margin-bottom: spacing("base") * 2;
+
+    &[aria-hidden="true"] {
+        display: none;
+    }
+
+    &._animating {
+        display: block;
+    }
+}

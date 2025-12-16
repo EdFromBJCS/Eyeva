@@ -1,0 +1,114 @@
+.cart-drawer {
+    justify-content: end;
+
+    &._closing,
+    &._opening {
+        .papathemes__modal {
+            transform: translateX(350px);
+            transform: translateX(#{"min(500px, 100vw)"});
+        }
+    }
+
+    .papathemes__modal {
+        background: container("fill", "dark");
+        height: 100%;
+        padding: 0 spacing("base");
+        width: 500px;
+    }
+
+    .papathemes__modal-close {
+        right: spacing("base");
+        top: remCalc(fontSize("larger") * $eyeva-heading-line-height / 2 - $eyeva-small-button-height / 2) + spacing("base");
+
+        @include eyeva-screen-mobile-tablet {
+            top: remCalc(fontSize("large") * $eyeva-heading-line-height / 2 - $eyeva-small-button-height / 2) + spacing("base");
+        }
+    }
+
+    .papathemes__modal-body {
+        margin-inline: -(spacing("base"));
+        padding: 0 spacing("base");
+        width: auto;
+
+        @include eyeva-screen-mobile-tablet {
+            padding-bottom: spacing("base") + remCalc($eyeva-button-height);
+        }
+    }
+
+    .cart-drawer-header {
+        align-items: center;
+        background: container("fill");
+        border-bottom: container("border");
+        color: $color-textBase;
+        display: flex;
+        font-size: fontSize("large");
+        gap: spacing("base");
+        margin: 0 (-(spacing("base"))) spacing("base");
+        padding: spacing("base");
+        position: sticky;
+        text-decoration: none;
+        top: 0;
+        z-index: zIndex("low");
+
+        .icon svg {
+            fill: $color-textLink;
+        }
+
+        &:hover,
+        &:focus {
+            color: $color-textLink-hover;
+
+            .icon svg {
+                fill: $color-textLink-hover;
+            }
+        }
+
+        &:active {
+            color: $color-textLink-active;
+
+            .icon svg {
+                fill: $color-textLink-active;
+            }
+        }
+
+    }
+
+    .cart-page-heading {
+        color: inherit;
+        margin: 0;
+    }
+
+    .eyeva__cart-layout {
+        display: block;
+        padding-bottom: spacing("single");
+    }
+
+    .eyeva__cart-layout-side {
+        position: static;
+    }
+
+    .cart-item {
+        grid-template:
+            "image image" auto
+            "details details" auto
+            "quantity price" auto / max-content 1fr;
+    }
+
+    .cart-actions-wrapper {
+        @include eyeva-screen-mobile-tablet {
+            position: absolute;
+        }
+
+    }
+
+    .cart-drawer-products {
+        background: container("fill");
+        margin-inline: -(spacing("base"));
+        padding-inline: spacing("base");
+    }
+
+    .productGrid-container {
+        margin-inline: -(spacing("base"));
+        padding-inline: spacing("base");
+    }
+}

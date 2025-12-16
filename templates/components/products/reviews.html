@@ -1,0 +1,60 @@
+{{#if settings.show_product_reviews}}
+    <section class="productReviews" id="product-reviews" data-product-reviews>
+        <p class="productView-collapsible-title">
+            <button class="button button--plain _animation-on {{#unless theme_settings.collapse_reviews}}is-open{{/unless}}" data-collapsible="productReviews-content" type="button" aria-expanded="{{#if theme_settings.collapse_reviews}}false{{else}}true{{/if}}" aria-controls="productReviews-content">
+                <span>{{lang 'products.reviews.customer_reviews'}}</span>
+                <i class="icon" aria-hidden="true"><svg><use href="#icon-chevron-down-light"></use></svg></i>
+            </button>
+        </p>
+        <div class="productView-collapsible-content _reviews {{#unless theme_settings.collapse_reviews}}is-open{{/unless}}" id="productReviews-content" aria-hidden="{{#if theme_settings.collapse_reviews}}true{{else}}false{{/if}}">
+            <div class="productReview-averageRating">
+                {{> components/products/ratings rating=product.rating}}
+                <span>{{#if product.rating}}{{product.rating}}{{/if}}</span>
+                <span>{{{lang 'products.reviews.link_to_review' total=product.num_reviews}}}</span>
+            </div>
+
+            <a href="{{product.url}}{{#if is_ajax}}#write_review{{/if}}"
+                class="button button--outline productView-reviewLink"
+                {{#unless is_ajax}}data-reveal-id="modal-review-form"{{/unless}}
+                role="button"
+            >
+                {{lang 'products.reviews.new'}}
+            </a>
+
+            {{#if product.reviews.list}}
+                <ul class="productReviews-list">
+                    {{#each product.reviews.list}}
+                        <li class="productReview">
+                            <article>
+                                <header>
+                                    <span class="productReview-rating rating--small">
+                                        {{> components/products/ratings rating=rating}}
+                                        <span class="productReview-ratingNumber">{{ rating }}</span>
+                                    </span>
+                                    <p class="productReview-title">{{{ sanitize title }}}</p>
+                                </header>
+                                <p class="productReview-body">{{{ sanitize text }}}</p>
+                                {{#if name}}
+                                    <p class="productReview-author">
+                                        {{{lang 'products.reviews.post_on_by' date=date name=(sanitize name) }}}
+                                    </p>
+                                {{else}}
+                                    <p class="productReview-author">
+                                        {{lang 'products.reviews.post_on_by' date=date name=(lang 'products.reviews.anonymous_poster')}}
+                                    </p>
+                                {{/if}}
+                            </article>
+                        </li>
+                    {{/each}}
+                </ul>
+                {{> components/common/paginator pagination.reviews reload=true}}
+            {{/if}}
+        </div>
+    </section>
+{{/if}}
+
+{{#if settings.show_product_reviews}}
+    {{#unless is_ajax}}
+        {{> components/products/modals/writeReview}}
+    {{/unless}}
+{{/if}}

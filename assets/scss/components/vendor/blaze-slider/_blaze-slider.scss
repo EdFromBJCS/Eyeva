@@ -1,0 +1,125 @@
+
+.blaze-container {
+    .blaze-track-container {
+        position: relative;
+    }
+
+    .blaze-prev,
+    .blaze-next,
+    .blaze-pause {
+        background: container("fill");
+        border: 1px solid $color-textBase;
+        border-radius: 25px;
+        color: $color-textBase;
+        display: block;
+        height: remCalc(50px);
+        padding: 15px;
+        position: absolute;
+        top: 50%;
+        width: remCalc(50px);
+        z-index: 1;
+
+        .icon {
+            display: block;
+            height: 100%;
+            width: 100%;
+
+            svg {
+                fill: $color-textBase;
+            }
+        }
+
+        &:hover,
+        &:focus {
+            border-color: $color-primary;
+            color: $color-primary;
+
+            .icon svg {
+                fill: $color-primary;
+            }
+        }
+    }
+
+    .blaze-prev {
+        left: 0;
+        transform: translate(0, -50%);
+    }
+
+    .blaze-next {
+        right: 0;
+        transform: translate(0, -50%);
+    }
+
+    .blaze-pause {
+        bottom: 0;
+        left: 0;
+        top: auto;
+        transform: none;
+    }
+
+    .blaze-pagination {
+        $btn-size: 24px; // ADA compliance
+        $dot-size: 10px;
+        $gap: ($btn-size - $dot-size) / 2;
+        background-color: rgba($slick-dot-color, 0.1);
+        border-radius: $btn-size / 2 + $gap;
+
+        display: flex;
+        flex-wrap: wrap;
+        gap: $gap;
+        justify-content: center;
+        margin: 0 auto;
+        min-height: $btn-size;
+        padding: $gap;
+        width: fit-content;
+
+        button {
+            align-items: center;
+            background: transparent;
+            color: transparent;
+            display: inline-flex;
+            font-size: 0;
+            height: $btn-size;
+            justify-content: center;
+            margin: -$gap / 2;
+            padding: 0;
+            width: $btn-size;
+
+            @media (max-width: (screenSize("medium") - 1px)) {
+                margin: -$gap;
+            }
+
+            &::before {
+                background-color: rgba($slick-dot-color, 0.9);
+                border-radius: 50%;
+                content: "";
+                display: inline-block;
+                height: $dot-size;
+                width: $dot-size;
+            }
+
+            &.active {
+                filter: unset;
+
+                &::before {
+                    background-color: $slick-dot-color-active;
+                }
+            }
+
+            // + button {
+            //     margin-left: -(remCalc(14px) / 2);
+            // }
+        }
+    }
+}
+
+.blaze-slider.start .blaze-prev,
+.blaze-slider.end .blaze-next {
+    border-color: container("borderColor");
+    color: container("borderColor");
+    cursor: default;
+
+    .icon svg {
+        fill: container("borderColor");
+    }
+}

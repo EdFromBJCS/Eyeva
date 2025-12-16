@@ -1,0 +1,17 @@
+<nav class="faceted-search-container-nav">
+    {{#if product_results.faceted_search_enabled}}
+        {{> components/faceted-search/index product_results theme_settings=theme_settings}}
+
+        <div class="faceted-search-container-nav-footer">
+            {{#if product_results.selected.remove_all_url}}
+                    <a href="{{product_results.selected.remove_all_url}}" class="button button--outline" data-faceted-search-facet id="faceted-search-clear-all-close-sidebar">
+                        {{lang 'search.faceted.selected.clear-all'}}
+                    </a>
+                </li>
+            {{/if}}
+            <button class="button button--primary" type="button" title="{{lang 'common.close'}}" data-collapsible="page-sidebar">
+                {{lang 'search.results.view_product_count' count=pagination.product_results.total}}
+            </button>
+        </div>
+    {{/if}}
+</nav>

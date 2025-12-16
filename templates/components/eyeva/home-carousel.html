@@ -1,0 +1,99 @@
+{{!--
+    Remember to change `slideGap` match with CSS
+--}}
+<section class="eyeva__heroCarousel blaze-slider {{#if theme_settings.homepage_stretch_carousel_images}}_stretched{{/if}}"
+    data-blaze-slider='{
+        "all": {
+            "enablePagination": true,
+            "enableAutoplay": true,
+            "autoplayInterval": {{carousel.swap_frequency}},
+            "stopAutoplayOnInteraction": false,
+            "transitionDuration": 800,
+            "slidesToShow": 1,
+            "slidesToScroll": 1,
+            "slideGap": "0px"
+        }
+    }'
+    style="--image-width: {{carousel.slides.0.image_width}}; --image-height: {{carousel.slides.0.image_height}}"
+>
+    <div class="blaze-container">
+        <div class="blaze-track-container">
+            <div class="blaze-track">
+                {{#each carousel.slides}}
+                    <div class="eyeva__heroCarousel-slide">
+                        {{#if url}}
+                            {{#unless button_text}}
+                                <a href="{{url}}" aria-label="{{#if alt_text.length '!=' 0}}{{alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}">
+                            {{/unless}}
+                        {{/if}}
+
+                        <div class="eyeva__heroCarousel-image-wrapper" {{#unless ../theme_settings.homepage_stretch_carousel_images}}style="--image-width: {{image_width}}; --image-height: {{image_height}}"{{/unless}}>
+                            {{#if @first}}
+                                {{> components/common/responsive-img
+                                    image=stencil_image
+                                    class="eyeva__heroCarousel-image"
+                                    fallback_size='1280w'
+                                    lazyload='disabled'
+                                }}
+                            {{else}}
+                                {{> components/common/responsive-img
+                                    image=stencil_image
+                                    class="eyeva__heroCarousel-image"
+                                    fallback_size='1280w'
+                                    lazyload='lazyload'
+                                }}
+                            {{/if}}
+
+                            {{assignVar '_s' (get 'string' (concat 'carousel-mb-img' (add @index 1)))}}
+                            {{#if (get (getVar '_s') ../theme_settings)}}
+                                <img
+                                    {{#if @first}}
+                                        src="{{get (getVar '_s') ../theme_settings}}"
+                                        class="eyeva__heroCarousel-image eyeva__heroCarousel-image--mobile"
+                                    {{else}}
+                                        src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                                        data-src="{{get (getVar '_s') ../theme_settings}}"
+                                        data-sizes="auto"
+                                        class="lazyload eyeva__heroCarousel-image eyeva__heroCarousel-image--mobile"
+                                    {{/if}}
+                                    alt="{{sanitize alt_text}}"
+                                />
+                            {{/if}}
+                        </div>
+
+                        {{#or heading text button_text}}
+                            <div class="eyeva__heroCarousel-content">
+                                {{#if heading}}
+                                    <p class="eyeva__heroCarousel-title">{{{heading}}}</p>
+                                {{/if}}
+                                {{#if text}}
+                                    <p class="eyeva__heroCarousel-description">{{{text}}}</p>
+                                {{/if}}
+                                {{#if button_text}}
+                                    <div class="eyeva__heroCarousel-buttons">
+                                        <a href="{{url}}" aria-label="{{#if alt_text.length '!=' 0}}{{alt_text}}{{else}}{{lang 'carousel.slide_number' slide_number=(add @index 1)}}{{/if}}, {{button_text}}" class="eyeva__heroCarousel-action button button--primary">{{{button_text}}}</a>
+                                        {{{region name=(concat 'home_carousel_buttons' (add @index 1))}}}
+                                    </div>
+                                {{/if}}
+                            </div>
+                        {{/or}}
+
+                        {{#if url}}
+                            {{#unless button_text}}
+                                </a>
+                            {{/unless}}
+                        {{/if}}
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+
+        <!-- pagination container -->
+        <div class="blaze-pagination"></div>
+
+        <!-- navigation buttons -->
+        <button class="blaze-prev" type="button" aria-label="{{lang 'common.previous'}}"><span class="icon"><svg><use href="#icon-arrow-left-long"></use></svg></span></button>
+        <button class="blaze-next" type="button" aria-label="{{lang 'common.next'}}"><span class="icon"><svg><use href="#icon-arrow-right-long"></use></svg></span></button>
+        <button class="blaze-pause" type="button" aria-label="{{lang 'carousel.play_pause_button_play'}}/{{lang 'carousel.play_pause_button_pause'}}"><span class="icon"><svg><use href="#icon-play-pause"></use></svg></span></button>
+    </div>
+</section>

@@ -1,0 +1,14 @@
+{{!--
+Input:
+- reset: boolean - reset the variable `shippingCountdown`
+- name: string - Custom field className
+- value: string - Custom field value
+--}}
+
+{{#if reset}}
+    {{assignVar 'shippingCountdown' 0}}
+{{else}}
+    {{#if name '===' '__shipping_countdown'}}
+        {{assignVar 'shippingCountdown' value}}
+    {{/if}}
+{{/if}}

@@ -1,0 +1,654 @@
+/**
+ * PC Builder Modal Styles - Giao diện popup chọn linh kiện
+ * prefix: papathemes-pcbuilder-
+ *
+ * COPYRIGHT NOTICE:
+ * ================
+ * This code is proprietary and confidential to PapaThemes.
+ * Copyright (c) 2024 PapaThemes. All rights reserved.
+ *
+ * This code is specifically developed for the Eyeva theme and is intended
+ * for use exclusively within the Eyeva theme framework.
+ *
+ * RESTRICTIONS:
+ * - This code may NOT be copied, reproduced, or distributed in any form
+ * - This code may NOT be modified, refactored, or adapted for other themes
+ * - This code may NOT be used as inspiration or reference for other projects
+ * - Any attempt to extract, reverse engineer, or reuse this code for other
+ *   themes or projects constitutes a violation of intellectual property rights
+ *
+ * LEGAL NOTICE:
+ * Unauthorized use, copying, modification, or distribution of this code
+ * is strictly prohibited and may result in legal action.
+ *
+ * For licensing inquiries, please contact PapaThemes.
+ */
+
+// Sử dụng existing modal patterns từ eyeva/_modal.scss
+.papathemes-pcbuilder-modal-overlay {
+    @include papathemes__modal-overlay;
+}
+
+.papathemes-pcbuilder-modal-content {
+    @include papathemes__modal;
+
+    // Desktop: Constrained width
+    @include breakpoint("medium") {
+        margin: auto;
+        width: calc(100% - #{spacing("single")});
+    }
+
+    @include breakpoint("large") {
+        width: calc(100% - #{spacing("single") * 3});
+    }
+
+    // Mobile/Tablet: Padding bottom = 0 per user request
+    @include eyeva-screen-mobile-tablet {
+        padding-bottom: 0;
+    }
+
+    // Mobile/Tablet: Chỉnh margin và padding cho papathemes__modal-body
+    .papathemes__modal-body {
+        @include eyeva-screen-mobile-tablet {
+            margin: 0 (-(spacing("base")));
+            padding: spacing("base");
+            width: auto;
+        }
+    }
+}
+
+// Modal category layout
+.papathemes-pcbuilder-modal-category {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.papathemes-pcbuilder-modal-layout {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("half");
+    height: 100%;
+
+    // Mobile: Stack vertically with minimal gap
+    @include breakpoint("small") {
+        gap: spacing("quarter");
+    }
+
+    // Desktop: Side by side layout
+    @include breakpoint("medium") {
+        flex-direction: row;
+        gap: spacing("single");
+    }
+}
+
+// PC Builder Product Sidebar - Optimized for modal layout
+.papathemes-pcbuilder-product-sidebar {
+    flex: 0 0 auto;
+    order: 2; // Show sidebar after products on mobile
+
+    // Mobile/Tablet: Modal overlay style với collapsible behavior
+    @include eyeva-screen-mobile-tablet {
+        @include papathemes__modal-overlay($position: "bottom");
+        display: none;
+        padding: 0; // Padding = 0 per user request
+
+        // Collapsible behavior cho mobile
+        @include breakpoint("small") {
+            border-bottom: container("border");
+            margin-bottom: spacing("quarter");
+            max-height: 0;
+            opacity: 0;
+            order: 1; // Show sidebar first on mobile for filters
+            overflow: hidden;
+            padding-bottom: spacing("half");
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+
+            // Show when toggled open
+            &.is-open {
+                max-height: 500px; // Enough for most filter content
+                opacity: 1;
+            }
+        }
+
+        &[aria-hidden="false"] {
+            display: flex;
+        }
+    }
+
+    // Desktop: Always visible, fixed width sidebar
+    @include breakpoint("medium") {
+        animation-name: eyeva__opacity-1;
+        border-bottom: 0;
+        border-right: container("border");
+        display: block; // Always visible on desktop
+        flex: 0 0 280px; // Slightly wider for better readability
+        margin-bottom: 0;
+        max-height: none;
+        opacity: 1;
+        order: 1; // Normal order on desktop
+        overflow: visible;
+        padding-bottom: 0;
+        padding-right: spacing("single");
+        transition: none;
+
+        ._animation-on & {
+            animation-duration: 0.6s;
+        }
+    }
+
+    // Large screens: Even wider sidebar
+    @include breakpoint("large") {
+        flex: 0 0 320px;
+    }
+
+    // Navigation styling
+    nav {
+        display: flex;
+        flex-direction: column;
+        gap: spacing("base");
+        height: 100%;
+        -webkit-overflow-scrolling: touch;
+        overflow-y: auto;
+
+        // Mobile/Tablet: Optimize scroll behavior
+        @include eyeva-screen-mobile-tablet {
+            max-height: 60vh; // Limit height on mobile
+            padding: spacing("base");
+        }
+
+        // Desktop: Full height with padding
+        @include breakpoint("medium") {
+            max-height: none;
+            padding: spacing("single");
+        }
+    }
+
+    // Optimize faceted search content trong sidebar
+    .faceted-search-container {
+        height: 100%;
+        overflow: hidden;
+
+        .faceted-search-container-nav {
+            height: 100%;
+            -webkit-overflow-scrolling: touch;
+            overflow-y: auto;
+
+            @include breakpoint("medium") {
+                padding: 0;
+            }
+        }
+    }
+
+    // Improve accordion performance trong sidebar
+    .accordion {
+        .accordion-content {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        .accordion-navigation {
+            transition: background-color 0.2s ease-out;
+
+            &:focus {
+                outline: 2px solid stencilColor("color-primary");
+                outline-offset: 2px;
+            }
+        }
+    }
+
+    // Accessibility improvements
+    &:focus-within {
+        outline: 2px solid stencilColor("color-primary");
+        outline-offset: 2px;
+    }
+
+    // Performance optimization: Reduce repaints
+    * {
+        backface-visibility: hidden;
+        transform: translateZ(0);
+    }
+}
+
+.papathemes-pcbuilder-product-listing {
+    flex: 1;
+    order: 1; // Show products first on mobile
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    // Mobile: Add padding for better touch interaction
+    @include breakpoint("small") {
+        order: 2; // Show products after sidebar on mobile
+        padding: 0; // Remove padding, let grid handle spacing
+    }
+
+    // Desktop: Normal layout
+    @include breakpoint("medium") {
+        order: 2; // Normal order on desktop
+    }
+
+    // Style for "Add to Build" buttons in product cards
+    .card-actions,
+    .card-footer {
+        // Đảm bảo các nút trong card-actions/footer hiển thị flex
+        &:has(.papathemes-pcbuilder-add-to-build) {
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            gap: spacing("quarter");
+        }
+
+        // Override nút Add to Cart để phân biệt với Add to Build
+        .card-figcaption-button._add-to-cart,
+        .card-figcaption-button._choose-options {
+            background: container("fill", "dark");
+            color: $color-textBase;
+
+            .card-figcaption-body & {
+                background: container("fill");
+            }
+
+            .icon svg {
+                fill: $color-textBase;
+            }
+
+            &:hover,
+            &:focus {
+                background: $buttonStyle-primary-backgroundColorHover;
+                color: $buttonStyle-primary-colorHover;
+
+                .icon svg {
+                    fill: $buttonStyle-primary-colorHover;
+                }
+            }
+
+            &:active {
+                background: $buttonStyle-primary-backgroundColorActive;
+                color: $buttonStyle-primary-colorActive;
+
+                .icon svg {
+                    fill: $buttonStyle-primary-colorActive;
+                }
+            }
+        }
+
+        .papathemes-pcbuilder-add-to-build {
+            background: $buttonStyle-primary-backgroundColor;
+            color: $buttonStyle-primary-color;
+            font-weight: $eyeva-body-font-bold;
+            width: 100%;
+
+            .icon {
+                height: fontSize("base") + spacing("quarter") * 2;
+                padding: spacing("quarter");
+                width: fontSize("base") + spacing("quarter") * 2;
+
+                svg {
+                    fill: $buttonStyle-primary-color;
+                }
+            }
+
+            &:hover,
+            &:focus {
+                background: $buttonStyle-primary-backgroundColorHover;
+                color: $buttonStyle-primary-colorHover;
+
+                .icon svg {
+                    fill: $buttonStyle-primary-colorHover;
+                }
+            }
+
+            &:active {
+                background: $buttonStyle-primary-backgroundColorActive;
+                color: $buttonStyle-primary-colorActive;
+
+                .icon svg {
+                    fill: $buttonStyle-primary-colorActive;
+                }
+            }
+        }
+    }
+
+    // Styling cho card-actions được tạo mới bởi PC Builder
+    .papathemes-pcbuilder-card-actions {
+        background: container("fill", "light");
+        border-top: container("border");
+        display: flex;
+        justify-content: center;
+        margin-top: spacing("half");
+        padding: spacing("half");
+
+        .papathemes-pcbuilder-add-to-build {
+            max-width: remCalc(200px);
+            width: 100%;
+        }
+    }
+
+    // Đảm bảo card hiển thị đúng khi có nút Add to Build
+    .card {
+        &[data-component-type] {
+            position: relative;
+            transition: all 0.2s ease;
+
+            &:hover {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                transform: translateY(-2px);
+            }
+        }
+
+
+    }
+}
+
+// Loading state trong modal
+.papathemes-pcbuilder-loading-state {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+    justify-content: center;
+    min-height: 200px;
+    padding: spacing("base");
+}
+
+.papathemes-pcbuilder-loading-spinner {
+    @include square($eyeva-small-button-height);
+    animation: spin 1s linear infinite;
+    border: 3px solid stencilColor("color-textSecondary");
+    border-radius: 50%;
+    border-top: 3px solid stencilColor("color-primary");
+}
+
+.papathemes-pcbuilder-loading-text {
+    color: stencilColor("color-textSecondary");
+    font-size: stencilFontSize("fontSize-base");
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+// Component Filters
+.papathemes-pcbuilder-component-filters {
+    background: container("fill");
+    border: container("border");
+    border-radius: $eyeva-medium-radius;
+    display: flex;
+    flex-wrap: wrap;
+    gap: spacing("base");
+    padding: spacing("base");
+
+    @include breakpoint("medium") {
+        flex-wrap: nowrap;
+        padding: spacing("single");
+    }
+}
+
+.papathemes-pcbuilder-filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("quarter");
+    min-width: 0;
+
+    @include breakpoint("medium") {
+        flex: 1;
+    }
+
+    label {
+        color: stencilColor("color-textBase");
+        font-size: fontSize("smaller");
+        font-weight: $eyeva-body-font-bold;
+        margin: 0;
+
+        @include breakpoint("medium") {
+            font-size: fontSize("base");
+        }
+    }
+}
+
+.papathemes-pcbuilder-price-range {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("quarter");
+}
+
+.papathemes-pcbuilder-price-slider {
+    border: container("border");
+    border-radius: $eyeva-small-radius;
+    font-size: fontSize("smaller");
+    padding: spacing("quarter") spacing("half");
+    width: 100%;
+
+    @include breakpoint("medium") {
+        font-size: fontSize("base");
+    }
+
+    &:focus {
+        border-color: stencilColor("color-primary");
+        outline: none;
+    }
+}
+
+.papathemes-pcbuilder-price-display {
+    color: stencilColor("color-textSecondary");
+    font-size: fontSize("smaller");
+    font-weight: stencilFontWeight("body-font");
+    text-align: center;
+}
+
+.papathemes-pcbuilder-brand-filter,
+.papathemes-pcbuilder-sort-filter {
+    border: container("border");
+    border-radius: $eyeva-small-radius;
+    font-size: fontSize("smaller");
+    padding: spacing("quarter") spacing("half");
+    width: 100%;
+
+    @include breakpoint("medium") {
+        font-size: fontSize("base");
+    }
+
+    &:focus {
+        border-color: stencilColor("color-primary");
+        outline: none;
+    }
+}
+
+// Component Grid
+.papathemes-pcbuilder-component-grid {
+    display: grid;
+    gap: spacing("base");
+    grid-template-columns: 1fr;
+
+    @include breakpoint("small") {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include breakpoint("medium") {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include breakpoint("large") {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.papathemes-pcbuilder-component-item {
+    background: container("fill");
+    border: container("border");
+    border-radius: $eyeva-medium-radius;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease-out;
+
+    &:hover {
+        border-color: stencilColor("color-primary");
+        box-shadow: 0 4px 12px rgba(stencilColor("color-primary"), 0.15);
+        transform: translateY(-2px);
+    }
+
+    &.papathemes-pcbuilder-selected {
+        border-color: stencilColor("color-primary");
+        box-shadow: 0 4px 12px rgba(stencilColor("color-primary"), 0.25);
+    }
+}
+
+.papathemes-pcbuilder-component-item-image {
+    aspect-ratio: 1;
+    background: container("fill", "dark");
+    overflow: hidden;
+    position: relative;
+
+    img {
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .papathemes-pcbuilder-image-placeholder {
+        align-items: center;
+        color: stencilColor("color-textSecondary");
+        display: flex;
+        font-size: fontSize("smaller");
+        height: 100%;
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+.papathemes-pcbuilder-component-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: spacing("quarter");
+    padding: spacing("base");
+
+    .papathemes-pcbuilder-item-name {
+        color: stencilColor("color-textBase");
+        font-size: fontSize("base");
+        font-weight: $eyeva-body-font-bold;
+        line-height: $eyeva-body-line-height;
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .papathemes-pcbuilder-item-price {
+        color: stencilColor("color-primary");
+        font-size: fontSize("base");
+        font-weight: $eyeva-body-font-bold;
+        margin: 0;
+    }
+
+    .papathemes-pcbuilder-item-rating {
+        align-items: center;
+        display: flex;
+        gap: spacing("quarter");
+
+        .papathemes-pcbuilder-rating-stars {
+            display: flex;
+            gap: 1px;
+
+            .papathemes-pcbuilder-star {
+                @include square(12px);
+                color: stencilColor("color-warning");
+            }
+        }
+
+        .papathemes-pcbuilder-rating-count {
+            color: stencilColor("color-textSecondary");
+            font-size: fontSize("smaller");
+        }
+    }
+}
+
+.papathemes-pcbuilder-component-item-actions {
+    border-top: container("border");
+    display: flex;
+    gap: spacing("quarter");
+    margin-top: auto;
+    padding: spacing("base");
+
+    .papathemes-pcbuilder-action-button {
+        width: 100%;
+    }
+}
+
+// Loading State
+.papathemes-pcbuilder-loading-state {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+    justify-content: center;
+    min-height: 200px;
+    padding: spacing("double");
+}
+
+.papathemes-pcbuilder-loading-spinner {
+    @include square(40px);
+    animation: eyeva__spin-loading 1s linear infinite;
+    border: 3px solid container("fill", "dark");
+    border-radius: 50%;
+    border-top-color: stencilColor("color-primary");
+}
+
+@keyframes eyeva__spin-loading {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.papathemes-pcbuilder-loading-text {
+    color: stencilColor("color-textSecondary");
+    font-size: fontSize("base");
+    font-weight: stencilFontWeight("body-font");
+}
+
+// Empty State
+.papathemes-pcbuilder-empty-state {
+    align-items: center;
+    color: stencilColor("color-textSecondary");
+    display: flex;
+    flex-direction: column;
+    gap: spacing("base");
+    justify-content: center;
+    min-height: 200px;
+    padding: spacing("double");
+    text-align: center;
+
+    .papathemes-pcbuilder-empty-icon {
+        @include square(48px);
+        opacity: 0.5;
+    }
+
+    .papathemes-pcbuilder-empty-text {
+        font-size: fontSize("base");
+        font-weight: stencilFontWeight("body-font");
+    }
+}
+
+// Responsive Adjustments
+@include eyeva-screen-mobile-tablet {
+    .papathemes-pcbuilder-component-filters {
+        flex-direction: column;
+        gap: spacing("half");
+    }
+
+    .papathemes-pcbuilder-component-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .papathemes-pcbuilder-modal-content {
+        border-radius: $eyeva-medium-radius $eyeva-medium-radius 0 0;
+        margin-top: auto;
+        max-height: 80vh;
+        max-width: 100vw;
+    }
+
+    .papathemes-pcbuilder-modal-body {
+        max-height: calc(80vh - 60px);
+    }
+}

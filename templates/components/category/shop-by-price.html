@@ -1,0 +1,22 @@
+{{#if theme_settings.shop_by_price_visibility}}
+    <div class="sidebarBlock">
+        <h2 class="sidebarBlock-heading" data-shop-by-price>{{lang 'category.shop_by_price'}}</h2>
+
+        {{> components/faceted-search/range-form shop_by_price=theme_settings.shop_by_price_visibility}}
+
+        <div class="reset-filters force-hide-mobile-tablet">
+            <a href="{{category.url}}" class="button button--outline button--small reset-btn">{{lang 'category.reset'}}</a>
+            <span class="reset-message aria-description--hidden">{{lang 'category.filter_reset_announcement'}}</span>
+        </div>
+
+        <div class="reset-filters force-hide-desktop">
+            <div class="faceted-search-container-nav-footer">
+                <a href="{{category.url}}" class="button button--outline reset-btn">{{lang 'category.reset'}}</a>
+                <span class="reset-message aria-description--hidden">{{lang 'category.filter_reset_announcement'}}</span>
+                <button class="button button--primary" type="button" title="{{lang 'common.close'}}" data-collapsible="page-sidebar">
+                    {{lang 'category.view_product_count' products=category.total_products}}
+                </button>
+            </div>
+        </div>
+    </div>
+{{/if}}

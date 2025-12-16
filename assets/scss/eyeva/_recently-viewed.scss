@@ -1,0 +1,11 @@
+.papathemes-recentlyViewed {
+    @extend %eyeva-section-products;
+}
+
+.section--homeRecentlyViewed {
+    @extend %home-productsBlock;
+}
+
+.section + .section--recentlyViewed {
+    padding-block-start: 0;
+}
