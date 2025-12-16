@@ -1,4 +1,4 @@
 {
-  "components/products/custom-fields": "{{> components/eyeva/products/custom-fields}}",
+  "components/products/custom-fields": "{{> components/eyeva/products/custom-fields}}\n",
   "components/eyeva/products/custom-fields": "{{#each product.custom_fields}}\n    {{#startsWith '__' name}}\n    {{else}}\n        <dt class=\"productView-info-name\">{{name}}:</dt>\n        <dd class=\"productView-info-value\">{{{value}}}</dd>\n        {{#if (merge ../product _visible_custom_fields_count=(add (default ../product._visible_custom_fields_count 0) 1))}}{{/if}}\n    {{/startsWith}}\n{{/each}}\n"
 }
