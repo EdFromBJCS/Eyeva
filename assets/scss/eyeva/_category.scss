@@ -218,6 +218,7 @@ body:has(.plp-page-sidebar.is-open) {
 }
 
 .plp-page-main {
+    margin-top: 20px;
     grid-area: main;
 
     @include breakpoint("medium") {
@@ -378,12 +379,8 @@ body:has(.plp-page-sidebar.is-open) {
 %sidebarBlock-list {
     --animation-duration: 200;
 
-    display: grid;
+    display: block;
     gap: spacing("third");
-    grid-auto-rows: max-content;
-    grid-template-columns: 1fr 1fr;
-    grid-template-columns: repeat(2, calc(50% - #{spacing("third") / 2}));
-    list-style: none;
     margin: 0;
 
     &[aria-hidden="true"] {
@@ -814,7 +811,8 @@ body:has(.plp-page-sidebar.is-open) {
 
     ._img,
     ._color {
-        display: block;
+        display: flex;
+        flex-direction: column;
         overflow: hidden;
         position: relative;
 
