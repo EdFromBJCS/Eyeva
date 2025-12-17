@@ -15,3 +15,83 @@
 .product-sales-tax {
     display: flex;
 }
+
+// Navigation Bar
+
+.info-panel {
+    background-color: #c4301f;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.info-panel.is-open {
+    max-height: 1000px; // enough for all content
+}
+
+.info-toggle .navPages-action-moreIcon {
+    transition: transform 0.3s ease;
+}
+
+.info-toggle.is-open .navPages-action-moreIcon {
+    transform: rotate(180deg);
+}
+
+.info-submenu {
+    padding-top: 15px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.info-links-list {
+    
+    display: grid;
+    grid-template-columns: auto auto auto;
+    list-style: none;
+}
+
+.button--darkprimary {
+    background-color: #c4301f;
+    border-style: none;
+}
+
+.store-info {
+    display: flex;
+    flex-wrap: wrap;
+    float: right;
+    width: 50%;
+}
+
+.map {
+    background: url("../img/bjcs-location-map.svg") no-repeat;
+    background-size: contain;
+    margin-bottom: spacing("half");
+    min-height: 20rem;
+    min-width: 20rem;
+    transition: 0.5s;
+
+    @include breakpoint("medium") {
+        flex-grow: 1;
+        margin-right: spacing("half");
+    }
+}
+
+.deets {
+    color: #fff;
+    list-style: none;
+    float: right;
+
+    a {
+        color: #fff;
+    }
+}
+
+.navInfo {
+    list-style: none;
+    float: right;
+}
+
+.material-icons {
+    font-size: 1.33rem;
+    vertical-align: top;
+}

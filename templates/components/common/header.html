@@ -84,4 +84,52 @@
 </div>
 
 {{{region name="header_bottom--global"}}}
+<li class="navPages-item info-panel">
+    <div class="info-submenu">
+        <ul class="info-links-list">
+            {{#each pages}}
+            <li class="navPages-subMenu-item button button--darkprimary">
+                <a class="navPages-subMenu-action navPages-action" href="{{url}}">{{name}}</a>
+            </li>
+            {{/each}}
+        </ul>
+        <div class="map"></div>
+        <ul class="navPages-subMenu-list navInfo">
+            
+            <li class="navPages-subMenu-item storeInfo">
+                <div class="deets">
+                    <p><img src="{{cdn 'icons/phone.svg'}}" alt="Phone Icon" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.25rem;"><a href="tel:8772027788">877-202-7788</a> or <a href="tel:3026592727">302-659-2727</a></p>
+                    <p><img src="{{cdn 'icons/clock.svg'}}" alt="Clock Icon" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.25rem;"> 9am – 5pm Eastern, Monday – Friday</p>
+                    <p><img src="{{cdn 'icons/locationpin.svg'}}" alt="Location Pin Icon" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.25rem;"> 133 N Dupont Blvd Ste 103, Smyrna, DE 19977</p>
+                    <p><img src="{{cdn 'icons/taxes.svg'}}" alt="Sales Tax" style="width: 20px; height: 20px; vertical-align: middle; margin-right: 0.25rem;"> Sale Tax Free Shopping!</p>
+                </div>
+            </li>
+            
+        </ul>
+    </div>
+</li>
 {{{region name="header_bottom"}}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const infoToggle = document.querySelector('.info-toggle');
+    const infoPanel = document.querySelector('.info-panel');
+
+    if (!infoToggle || !infoPanel) return;
+
+    infoToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const isOpen = infoPanel.classList.toggle('is-open');
+        infoToggle.classList.toggle('is-open', isOpen);
+    });
+
+    // Optional: click outside closes the panel
+    document.addEventListener('click', function(e) {
+        if (!infoPanel.contains(e.target) && !infoToggle.contains(e.target)) {
+            infoPanel.classList.remove('is-open');
+            infoToggle.classList.remove('is-open');
+        }
+    });
+});
+</script>
