@@ -1,3 +1,7 @@
+<div class="inventory-specs-btn-container">
+    <a href="https://www.bobjohnson.com/blog/real-honest-photos-of-real-honest-toughbooks/" class="button button--outline picturesActualInventory" target="_blank">Pictures Of Actual Inventory! Learn More Here!</a>
+    <a href="#website-specifications" class="button button--primary" id="skipToSpecs">Skip To Specs</a>
+</div>
 {{#unless quickview}}
     {{#if product.description}}
         <p class="productView-collapsible-title">
@@ -22,7 +26,7 @@
     <div class="productView-customFields" id="productView-customFields-{{product.id}}">
         <p class="productView-collapsible-title">
             <button class="button button--plain _animation-on {{#unless theme_settings.collapse_custom_fields}}is-open{{/unless}}" data-collapsible="productView-collapsible-customFields-{{product.id}}" type="button" aria-expanded="{{#if theme_settings.collapse_custom_fields}}false{{else}}true{{/if}}" aria-controls="productView-collapsible-customFields-{{product.id}}">
-                <span>{{default theme_settings.pdp-custom-fields-tab-label (lang 'page_builder.pdp-custom-fields-tab-label')}}</span>
+                <span id="website-specifications">Base Specifications</span>
                 <i class="icon" aria-hidden="true"><svg><use href="#icon-chevron-down-light"></use></svg></i>
             </button>
         </p>
@@ -49,3 +53,47 @@
         </div>
     {{/if}}
 {{/unless}}
+<script>
+    //Hides the "Skip To Specs button if there is no specifications section"
+document.addEventListener("DOMContentLoaded", function() {
+    var specsSection = document.getElementById("website-specifications");
+    var skipButton = document.getElementById("skipToSpecs");
+
+    if (specsSection && skipButton) {
+        skipButton.style.display = "block";
+
+        skipButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            specsSection.scrollIntoView({ behavior: "smooth" });
+        });
+    } else if (skipButton) {
+        skipButton.style.display = "none";
+    }
+});
+
+//Checks to see if the products are new so that the "Pictures Of Actual Inventory! Learn More Here!" link hides on new products
+document.addEventListener("DOMContentLoaded", function() {
+    var picturesLink = document.querySelector(".picturesActualInventory");
+    if (!picturesLink) return;
+
+    var dtElements = document.querySelectorAll(".productView-info dt");
+
+    dtElements.forEach(function(dt) {
+        var dtText = dt.textContent.trim().toLowerCase();
+
+        if (dtText.includes("condition")) {
+            var dd = dt.nextElementSibling;
+            if (dd) {
+                var conditionText = dd.textContent.trim().toLowerCase();
+
+                if (conditionText === "new") {
+                    picturesLink.style.display = "none";
+                } else {
+                    picturesLink.style.display = "block";
+                }
+            }
+        }
+    });
+});
+
+</script>
