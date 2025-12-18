@@ -68,15 +68,13 @@
 }
 
 .info-links-list {
-    
     display: grid;
     grid-template-columns: auto auto auto;
     list-style: none;
 }
 
-.button--darkprimary {
-    background-color: #c4301f;
-    border-style: none;
+.info-link-item {
+    padding: 10px 20px;
 }
 
 .store-info {
