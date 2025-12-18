@@ -599,6 +599,39 @@ function initLaptopBannersResize() {
     });
 }
 
+function initCategoryTabsDefaultActive() {
+    const desired = 'All Rugged Computers';
+    $('.categoryTabs').each((_i, el) => {
+        const $tabs = $(el);
+        const $links = $tabs.find('.categoryTabs-link').not('._more');
+
+        // If any tab is already active, leave it alone
+        if ($links.filter('._active').length) return;
+
+        // Exact match first
+        let $match = $links.filter(function filterByText() {
+            const $span = $(this).find('span').first();
+            const txt = $span.length ? $span.text().trim() : $(this).text().trim();
+            return txt === desired;
+        }).first();
+
+        // Fallback: case-insensitive contains
+        if (!$match.length) {
+            const desiredLower = desired.toLowerCase();
+            $match = $links.filter(function filterByTextContains() {
+                const $span = $(this).find('span').first();
+                const txt = $span.length ? $span.text().trim().toLowerCase() : $(this).text().trim().toLowerCase();
+                return txt.indexOf(desiredLower) !== -1;
+            }).first();
+        }
+
+        if ($match.length) {
+            $links.removeClass('_active');
+            $match.addClass('_active');
+        }
+    });
+}
+
 export default function (context) {
     initFormFields();
     initBlazeSlider();
@@ -610,6 +643,7 @@ export default function (context) {
     initTextCollapsible();
     initSidebarModal();
     initRecentlyViewedEvent();
+    initCategoryTabsDefaultActive();
     initLaptopBannersResize(); // Thêm handler resize cho laptop banners
 
     // lower priority

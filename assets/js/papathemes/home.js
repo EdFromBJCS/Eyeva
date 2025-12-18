@@ -80,6 +80,16 @@ export default class Home extends PageManager {
                 updateContent(content);
             });
         });
+
+        // If any tab was programmatically marked as active before handlers were attached,
+        // trigger its click so the related products are loaded.
+        $('[data-category-tabs]').each((_i, el) => {
+            const $tabs = $(el);
+            const $preActive = $tabs.find('[data-category-tabs-url]._active').first();
+            if ($preActive.length) {
+                $preActive.trigger('click');
+            }
+        });
     }
 
     /**
