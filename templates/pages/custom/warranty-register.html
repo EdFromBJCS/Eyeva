@@ -1,0 +1,400 @@
+{{#partial "page"}}
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+<main class="page">
+
+    <h1 class="page-heading">{{ page.title }}</h1>
+
+    <div class="page-content page-content--centered">
+        <style type="text/css">
+            .warrantyRegister * {
+                transition: .15s;
+            }
+
+            .warrantyRegister {
+                max-width: 600px;
+                background-color: #f8f8f8;
+                margin: 0 -1.5rem;
+                border: 1px solid rgba(0, 0, 0, .05);
+                border-radius: 2px;
+                box-shadow: 0 1px 2px rgba(34, 34, 34, .13);
+            }
+
+            @media (min-width:551px) {
+                .warrantyRegister {
+                    margin: 0 0;
+                }
+            }
+
+            .infusion-field {
+                float: none;
+                width: auto;
+                margin-top: 16px;
+            }
+
+            .infusion-option {
+                display: block;
+            }
+
+            .infusion-field label {
+                opacity: 0.75;
+                display: inline-block;
+                width: auto;
+                float: none;
+                font-weight: normal;
+                margin: 6px 12px 6px 0;
+            }
+
+            .infusion-field label:hover,
+            .infusion-field input:checked+label {
+                opacity: 1;
+            }
+
+            .infusion-field select {
+                display: block;
+                width: 66%;
+                min-width: 192px;
+                border: 1px solid #ccc;
+            }
+
+            .infusion-radio {
+                display: block;
+                margin-top: .5em;
+            }
+
+            .warrantyRegister .infusion-field input[type="text"] {
+                display: block;
+                width: 66%;
+                min-width: 192px;
+                border: 1px solid #ccc;
+            }
+
+            .warrantyRegister .infusion-field input[type="text"]:focus {
+                border: 1px solid #999;
+            }
+
+            .infusion-field input[type="radio"] {
+                display: none;
+            }
+
+            .infusion-field input[type="radio"]+label span {
+                display: inline-block;
+                width: 12px;
+                height: 12px;
+                border: 1px solid #999;
+                border-radius: 12px;
+                margin-right: .5em;
+                margin-bottom: 2px;
+                vertical-align: middle;
+            }
+
+            .infusion-field input[type="radio"]:disabled+label,
+            .infusion-field input[type="checkbox"]:disabled+label {
+                opacity: 1;
+            }
+
+            .infusion-field input[type="radio"]:checked+label,
+            .infusion-field input[type="checkbox"]:checked+label {
+                opacity: 1;
+            }
+
+            .infusion-field input[type="radio"]:checked+label span {
+                background-image: radial-gradient(#179adf 4px, transparent 4px);
+            }
+
+            .infusion-captcha,
+            .infusion-submit {
+                float: none;
+            }
+
+            .infusion-field .form-select {
+                font-family: 'Roboto';
+                font-display: swap;
+            }
+
+            .field1 .infusion-submit input {
+                font-family: 'Roboto';
+                color: #fff;
+                width: 100%;
+                margin-top: 1rem;
+                padding: 1em;
+                background: #dc3522;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+                font-display: swap;
+            }
+
+            .field .infusion-submit input:hover {
+                background: #c4301f;
+            }
+
+            .choices input:checked+label {
+                background: #dcdcdc;
+                border: 1px solid #777777;
+                border-bottom: none;
+                padding: 8px 16px 2px 16px;
+                margin: 0 16px 16px 0;
+            }
+
+            .formSection h2 {
+                padding: 12px;
+                text-align: center;
+            }
+
+            .field1 {
+                padding: 16px;
+                margin: 8px;
+                display: block;
+                clear: left;
+            }
+
+            .field1>label {
+                font-size: 1.25em;
+                opacity: 1;
+            }
+
+            .warrantyRegister .custom-field input[type="text"] {
+                display: block;
+                width: 100%;
+                min-width: 192px;
+                border: 1px solid #ccc;
+            }
+
+            .warrantyRegister .custom-field input[type="text"]:focus {
+                border: 1px solid #999;
+            }
+
+            .form-serial {
+                appearance: none;
+                background-color: #fff;
+                border-color: #dfdfdf;
+                border-style: solid;
+                border-width: 1px;
+                border-radius: 4px;
+                color: #454545;
+                display: block;
+                font-family: inherit;
+                font-size: 1rem;
+                height: 3rem;
+                margin: 0;
+                padding: .75rem 1rem;
+                transition: border-color 100ms ease-out;
+                width: 100%;
+            }
+
+            .serialrowcontroller {
+                height: 100%;
+                width: 100%;
+            }
+
+            .serialrow,
+            .serialrow1 {
+                display: inline-block;
+                vertical-align: bottom;
+            }
+
+            .serialrow {
+                width: 66%;
+            }
+
+            .serialrow1 {
+                width: 15.5%;
+            }
+
+            .new-serial {
+                width: 66%;
+                min-width: 192px;
+                padding: 0.75rem 0rem;
+                margin: 0;
+                display: inline-block;
+                border-width: 1px;
+                border-radius: 4px;
+            }
+
+            .new-serial input[type="text"] {
+                height: 3rem;
+                padding: 8px 16px 2px 16px;
+                margin: 0 16px 16px 0;
+            }
+
+            .infusion-field textarea {
+                width: 100%;
+                margin-bottom: 12px;
+                border: 1px solid #ccc;
+            }
+
+            .infusion-field textarea:focus {
+                border: 1px solid #999;
+            }
+        </style>
+        <form accept-charset="UTF-8"
+            action="https://gc200.infusionsoft.com/app/form/process/7e5d6eed4c835df8e40435416e180ea0"
+            class="infusion-form warrantyRegister" method="POST">
+            <input name="inf_form_xid" type="hidden" value="7e5d6eed4c835df8e40435416e180ea0" />
+            <input name="inf_form_name" type="hidden" value="Warranty Registration Form" />
+            <input name="infusionsoft_version" type="hidden" value="1.70.0.447643" />
+            <div class="formSection">
+                <div class="infusion-field field1">
+                    <label for="inf_field_FirstName">First Name (required)</label>
+                    <input class="infusion-field-input-container form-input" id="inf_field_FirstName" is-required="true"
+                        name="inf_field_FirstName" type="text" />
+                </div>
+                <div class="infusion-field field1">
+                    <label for="inf_field_LastName">Last Name (required)</label>
+                    <input class="infusion-field-input-container form-input" id="inf_field_LastName" is-required="true"
+                        name="inf_field_LastName" type="text" />
+                </div>
+                <div class="infusion-field field1">
+                    <label for="inf_field_Company">Company / Organization (optional)</label>
+                    <input class="infusion-field-input-container form-input" id="inf_field_Company"
+                        name="inf_field_Company" type="text" />
+                </div>
+                <div class="infusion-field field1">
+                    <label for="inf_field_Phone1">Phone (required)</label>
+                    <input class="infusion-field-input-container form-input" id="inf_field_Phone1" is-required="true"
+                        name="inf_field_Phone1" type="text" />
+                </div>
+                <div class="infusion-field field1">
+                    <label for="inf_field_Email">E-mail (required)</label>
+                    <input class="infusion-field-input-container form-input" id="inf_field_Email" is-required="true"
+                        name="inf_field_Email" type="text" />
+                </div>
+                <div class="infusion-field field1">
+                    <label for="inf_field_Address2Street1">Street Address (required)</label>
+                    <input class="infusion-field-input-container form-input" id="inf_field_Address2Street1"
+                        is-required="true" name="inf_field_Address2Street1" type="text" />
+                </div>
+                <div class="infusion-field field1">
+                    <label for="inf_field_City2">City (required)</label>
+                    <input class="infusion-field-input-container form-input" id="inf_field_City2" is-required="true"
+                        name="inf_field_City2" type="text" />
+                </div>
+                <div class="infusion-field field1">
+                    <label for="inf_field_State2">State (required)</label>
+                    <input class="infusion-field-input-container form-input" id="inf_field_State2" is-required="true"
+                        name="inf_field_State2" type="text" />
+                </div>
+                <div class="infusion-field field1">
+                    <label for="inf_field_PostalCode2">Postal / Zip Code (required)</label>
+                    <input class="infusion-field-input-container form-input" id="inf_field_PostalCode2"
+                        is-required="true" name="inf_field_PostalCode2" type="text" />
+                </div>
+                <div>
+                    <div>
+                        <div> </div>
+                        <div> </div>
+                    </div>
+                </div>
+                <div class="infusion-field field1">
+                    <label for="inf_custom_OrderInvoiceNumber">Invoice Number (required)</label>
+                    <input class="infusion-field-input-container form-input" id="inf_custom_OrderInvoiceNumber"
+                        is-required="true" name="inf_custom_OrderInvoiceNumber" type="text" />
+                </div>
+                <div class="infusion-field field1">
+                    <label for="inf_custom_SerialNumber1">Serial Number(s) (required)</label>
+                    <textarea cols="24" id="inf_custom_SerialNumber1" name="inf_custom_SerialNumber1"
+                        rows="5"></textarea>
+                </div>
+                <div class="infusion-field field1">
+                    <label for="inf_option_WarrantyPackagePurchased">Warranty Package Purchased (required)</label>
+                    <div class="infusion-radio">
+                        <div class="options-container">
+                            <span class="infusion-option">
+                                <input checked="checked" id="inf_option_WarrantyPackagePurchased_5702"
+                                    name="inf_option_WarrantyPackagePurchased" type="radio" value="5702" />
+                                <label for="inf_option_WarrantyPackagePurchased_5702"><span></span>Default: 6 Month
+                                    Coverage</label>
+                            </span>
+                            <span class="infusion-option">
+                                <input id="inf_option_WarrantyPackagePurchased_5704"
+                                    name="inf_option_WarrantyPackagePurchased" type="radio" value="5704" />
+                                <label for="inf_option_WarrantyPackagePurchased_5704"><span></span>1 Year Extended: 18
+                                    Month Coverage</label>
+                            </span>
+                            <span class="infusion-option">
+                                <input id="inf_option_WarrantyPackagePurchased_5706"
+                                    name="inf_option_WarrantyPackagePurchased" type="radio" value="5706" />
+                                <label for="inf_option_WarrantyPackagePurchased_5706"><span></span>2 Year Extended: 30
+                                    Month Coverage</label>
+                            </span>
+                            <span class="infusion-option">
+                                <input id="inf_option_WarrantyPackagePurchased_5708"
+                                    name="inf_option_WarrantyPackagePurchased" type="radio" value="5708" />
+                                <label for="inf_option_WarrantyPackagePurchased_5708"><span></span>3 Year Extended: 42
+                                    Month Coverage</label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="infusion-field field1">
+                    <span class="infusion-checkbox">
+                        <input
+                            id="inf_option_IhavereviewedtheincludedchecklistinmyshipmentandverifiedthattheproductsIreceivedisareinworkingcondition"
+                            is-required="true"
+                            name="inf_option_IhavereviewedtheincludedchecklistinmyshipmentandverifiedthattheproductsIreceivedisareinworkingcondition"
+                            type="checkbox" value="5714" />
+                        <label class="infusion-field-label-container infusion-label-checkbox"
+                            for="inf_option_IhavereviewedtheincludedchecklistinmyshipmentandverifiedthattheproductsIreceivedisareinworkingcondition"
+                            style="display:inline;">I have reviewed the included checklist in my shipment, and verified
+                            that the product(s) I received is/are in working condition. *</label>
+                    </span>
+                </div>
+                <div class="infusion-field field1">
+                    <span class="infusion-checkbox">
+                        <input
+                            id="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinourPrivacyPolicy"
+                            is-required="true"
+                            name="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinourPrivacyPolicy"
+                            type="checkbox" value="5696" />
+                        <label class="infusion-field-label-container infusion-label-checkbox"
+                            for="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinourPrivacyPolicy"
+                            style="display:inline;">I give consent to use this information to send additional emails and
+                            communication as described in our Privacy Policy *</label>
+                    </span>
+                </div>
+                <div class="field1">
+                    <p>This site is protected by reCAPTCHA and the Google
+                        <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                        <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+                    </p>
+                    <div class="infusion-submit">
+                        <input class="infusion-recaptcha" id="recaptcha_7e5d6eed4c835df8e40435416e180ea0"
+                            data-badge="inline" type="submit" value="Register Warranty" />
+                    </div>
+                </div>
+            </div>
+        </form>
+        <script type="text/javascript" src="https://gc200.infusionsoft.app/app/webTracking/getTrackingCode"></script>
+        <script type="text/javascript"
+            src="https://gc200.infusionsoft.com/resources/external/recaptcha/production/recaptcha.js?b=1.70.0.447643-hf-202203141437"></script>
+        <script src="https://www.google.com/recaptcha/api.js?onload=onloadInfusionRecaptchaCallback&render=explicit"
+            async="async" defer="defer"></script>
+        <style>
+            .warrantyRegister .grecaptcha-badge {
+                display: none !important;
+            }
+        </style>
+        <script type="text/javascript"
+            src="https://gc200.infusionsoft.com/app/timezone/timezoneInputJs?xid=7e5d6eed4c835df8e40435416e180ea0"></script>
+        <script type="text/javascript" src="https://gc200.infusionsoft.com/js/jquery/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="https://gc200.infusionsoft.app/app/webform/overwriteRefererJs"></script>
+        <p>Read our <a href="https://www.bobjohnson.com/privacy-policy">Privacy Policy</a></p>
+    </div>
+
+    {{#if page.feed}}
+    <ul>
+        {{#each page.feed}}
+        <li>
+            <h6><a href="{{url}}" target="_blank">{{title}}</a></h6>
+            <p>{{content}}</p>
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</main>
+
+{{/partial}}
+
+{{> layout/base}}

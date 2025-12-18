@@ -1,0 +1,1132 @@
+{{#partial "page"}}
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+<main class="page">
+
+    <div class="myhomepage-banner" onclick="location.href = '/blog/installing-windows-rugged-computer/'">
+        <div class="myhomepage-banner-text">
+            <h1>Upgrade Your Windows 10 Toughbook To Windows 11!</h1>
+            <p>With Windows 10 losing support in October and becoming a thing of the past, it’s time to move on to
+                Windows 11. Follow our installation guide to get Windows 11 on older rugged computers!</p>
+            <a href="/blog/installing-windows-rugged-computer/" class="button button--primary">Learn More!</a>
+        </div>
+    </div>
+
+    {{#if page.sub_pages}}
+    <nav class="navBar navBar--sub">
+        <ul class="navBar-section account-navigation">
+            {{#each page.sub_pages}}
+            <li class="navBar-item"><a class="navBar-action" href="{{url}}">{{title}}</a></li>
+            {{/each}}
+        </ul>
+    </nav>
+    {{/if}}
+
+    <div class="page-content page-content--centered">
+        {{#replace '%%Syndicate%%' page.content}}
+        {{> components/page/rss_feed}}
+        {{else}}
+        <p>{{{page.content}}}</p>
+        {{/replace}}
+        <style type="text/css">
+            .page-content {
+                margin: 0;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100% !important;
+            }
+
+            .button--primary {
+                margin-left: 0 !important;
+                min-width: 11rem;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .img-center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 60%;
+            }
+
+            /* Banner css and medias*/
+
+            .myhomepage-banner {
+                background-image: url("https://www.bobjohnson.com/product_images/uploaded_images/myhomepagebanner9-5-2025-1500-x-400.jpg");
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                box-sizing: border-box;
+                left: 0;
+                margin-top: -15px;
+                padding: 0;
+                position: absolute;
+                width: 100vw;
+                cursor: pointer;
+            }
+
+            .myhomepage-banner-text {
+                color: white;
+                height: 450px;
+                left: 20px;
+                padding-left: 35%;
+                padding-right: 5%;
+                padding-top: 3%;
+                text-align: left;
+                top: 30px;
+            }
+
+            .myhomepage-banner-text h1 {
+                color: white;
+                font-size: 45px;
+            }
+
+            .myhomepage-banner-text p {
+                font-size: 18px;
+            }
+
+            @media screen and (max-width: 2200px) {
+                .myhomepage-banner-text {
+                    height: 400;
+                }
+            }
+
+            @media screen and (max-width: 1696px) {
+                .myhomepage-banner {
+                    left: 0 !important;
+                    margin-left: 0;
+                }
+
+                .myhomepage-banner-text h1 {
+                    font-size: 40px;
+                }
+
+                .myhomepage-banner-text p {
+                    font-size: 16px;
+                }
+            }
+
+            @media screen and (max-width: 1300px) {
+                .myhomepage-banner-text {
+                    height: 350px;
+                }
+
+                .myhomepage-banner-text h1 {
+                    font-size: 35px;
+                }
+
+                .myhomepage-banner-text p {
+                    font-size: 14px;
+                }
+
+                .myhomepage-banner-text .button {
+                    font-size: 14px;
+                    padding: 14px 25px;
+                }
+            }
+
+            @media screen and (max-width: 1000px) {
+
+                .myhomepage-banner-text {
+                    height: 250px;
+                }
+
+                .myhomepage-banner-text h1 {
+                    font-size: 30px;
+                }
+
+                .myhomepage-banner-text p {
+                    font-size: 12px;
+                }
+
+                .myhomepage-banner-text .button {
+                    font-size: 12px;
+                    padding: 12px 20px;
+                }
+            }
+
+            @media screen and (max-width: 700px) {
+
+                .myhomepage-banner {
+                    margin-top: -10px;
+                    top: 0;
+                }
+
+                .myhomepage-banner-text {
+                    height: 175px;
+                    padding-top: 0.1%;
+                }
+
+                .myhomepage-banner-text h1 {
+                    font-size: 20px;
+                }
+
+                .myhomepage-banner-text p {
+                    font-size: 10px;
+                }
+
+                .myhomepage-banner-text .button {
+                    font-size: 10px;
+                    padding: 10px 15px;
+                }
+            }
+
+            @media screen and (max-width: 500px) {
+                .myhomepage-banner {
+                    background-image: url("https://www.bobjohnson.com/product_images/uploaded_images/myhomepagebanner9-5-2025-750-x-600.jpg");
+                    background-position: center;
+                    background-size: cover;
+                    margin-top: 0;
+                    top: 0;
+                }
+
+                .myhomepage-banner-text {
+                    height: 400px;
+                    padding-left: 10%;
+                    padding-right: 10%;
+                    padding-top: 40%;
+                    text-align: center;
+                }
+            }
+
+            @media screen and (max-width: 400px) {
+                .myhomepage-banner-text {
+                    padding-top: 50%;
+                }
+            }
+
+            @media screen and (max-width: 320px) {
+                .myhomepage-banner {
+                    margin-top: 0;
+                }
+
+                .myhomepage-banner-text {
+                    height: 300px;
+                    padding-top: 35%;
+                }
+            }
+
+            .body {
+                margin-bottom: 0;
+            }
+
+            .connect {
+                margin-top: 0;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+                text-align: center;
+            }
+
+            img.playlist-thumbnail {
+                width: 80%;
+            }
+
+            /* control is for the product selection slider or trade in here*/
+
+            .control {
+                list-style: none;
+            }
+
+            .control li {
+                background: #c4301f;
+                border-radius: 1px;
+                color: white;
+                cursor: pointer;
+                padding-bottom: 5px;
+                padding-left: 4px;
+                padding-right: 2px;
+                position: absolute;
+            }
+
+            .control li:hover {
+                background: #dc3522;
+            }
+
+            .control li.prev {
+                left: 0;
+                top: 40%;
+                z-index: 2;
+            }
+
+            .control li.next {
+                right: 0;
+                top: 40%;
+                z-index: 2;
+            }
+
+            .control span {
+                font-size: 3rem;
+            }
+
+            .button-alt {
+                float: right;
+                right: 6%;
+            }
+
+            div.tns-item {
+                text-align: center;
+            }
+
+            div#tns1-mw {
+                height: 315px;
+            }
+
+            #tns2-ow .tns-nav {
+                float: left;
+                position: absolute;
+            }
+
+            .slider-button {
+                background-color: #d86558;
+                border: none;
+                border-radius: 50%;
+                height: 13px;
+                margin-left: 7px;
+                width: 13px;
+            }
+
+            .vertical-container {
+                list-style: none;
+            }
+
+            .tns-nav-active .slider-button {
+                background-color: #c4301f;
+            }
+
+            .tns-nav-active .slider-button:hover {
+                background-color: #dc3522;
+            }
+
+            .slider-button:hover {
+                background-color: #d84d3d;
+            }
+
+            .slider-container {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+            }
+
+            /*control2 is the video playlist slider*/
+
+            .control2 li {
+                background: #c4301f;
+                border-radius: 1px;
+                color: white;
+                cursor: pointer;
+                padding-bottom: 5px;
+                padding-left: 4px;
+                padding-right: 2px;
+                position: absolute;
+            }
+
+            .control2 li:hover {
+                background: #dc3522;
+            }
+
+            .control2 li.next2 {
+                right: 0;
+                top: 40%;
+                z-index: 2;
+            }
+
+            .control2 li.prev2 {
+                left: 0;
+                top: 40%;
+                z-index: 2;
+            }
+
+
+
+            .control2 {
+                list-style: none;
+            }
+
+            .control2 span {
+                font-size: 3rem;
+            }
+
+            ul#custom-control2 {
+                display: flex;
+                justify-content: center;
+            }
+
+            /*grid for the page layout*/
+
+            .home-grid1 {
+                display: grid;
+                grid-template-areas:
+                    "home-trade-in-card home-trade-in-card home-warranty-card"
+                    "home-video-card home-video-card home-repair-card"
+                    "mobile-data-card mobile-data-card home-connect-card";
+                grid-template-columns: 1fr 1fr 1fr;
+                justify-content: space-evenly;
+                padding-top: 425px;
+            }
+
+            @media screen and (max-width: 1300px) {
+                .home-grid1 {
+                    padding-top: 325px;
+                }
+            }
+
+
+            @media screen and (max-width: 1000px) {
+                .home-grid1 {
+                    padding-top: 225px;
+                }
+            }
+
+            @media screen and (max-width: 875px) {
+                .home-grid1 {
+                    padding-top: 225px;
+                }
+            }
+
+            @media screen and (max-width: 700px) {
+                .home-grid1 {
+                    padding-top: 150px;
+                }
+            }
+
+            @media screen and (max-width: 500px) {
+                .home-grid1 {
+                    padding-top: 375px;
+                }
+            }
+
+            @media screen and (max-width: 320px) {
+                .home-grid1 {
+                    padding-top: 275px;
+                }
+            }
+
+            .repair-card-btn-menu {
+                align-items: center;
+
+                justify-content: center;
+                text-align: center;
+            }
+
+            .home-trade-in-card {
+                grid-area: home-trade-in-card;
+                position: relative;
+            }
+
+            .home-repair-card {
+                grid-area: home-repair-card;
+            }
+
+            .home-warranty-card {
+                grid-area: home-warranty-card;
+            }
+
+            .warranty-img {
+                width: 30%;
+            }
+
+            .warranty-imgs {
+                text-align: center;
+            }
+
+            .home-blog-card {
+                grid-area: home-blog-card;
+                position: relative;
+            }
+
+            .home-video-card {
+                grid-area: home-video-card;
+                position: relative;
+            }
+
+            .home-mobile-data-card {
+                grid-area: mobile-data-card;
+                display: flex;
+                cursor: pointer;
+            }
+
+            .mobile-data-text {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .home-connect-card {
+                grid-area: home-connect-card;
+            }
+
+            /*social cards*/
+
+            .myhomepage-socials {
+                display: flex;
+                justify-content: space-evenly;
+                padding-bottom: 20px;
+                text-align: center;
+            }
+
+            .home-social-logo {
+                padding: 10px;
+                width: 75px;
+
+            }
+
+            .video-stack {
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .trade-in {
+                display: block;
+            }
+
+            .home-card {
+                background-color: #dedcdc;
+                margin: .5rem;
+            }
+
+            .home-card p {
+                margin: 5%;
+            }
+
+            .home-card-alt {
+                background-color: white;
+                margin: .5rem;
+            }
+
+            @media screen and (max-width: 931px) {
+                .blog-slider {
+                    padding: 40px;
+                }
+            }
+
+            .blog-slider {
+                padding: 40px;
+            }
+
+            .blog-article {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                text-align: center;
+            }
+
+            /*Control3 is for the blog slider*/
+
+            .control3 {
+                list-style: none;
+                padding: 0;
+            }
+
+            .control3 span {
+                font-size: 3rem;
+            }
+
+            .control3 li {
+                background: #c4301f;
+                border-radius: 1px;
+                color: #fff;
+                cursor: pointer;
+                padding-bottom: 5px;
+                padding-left: 4px;
+                padding-right: 2px;
+                position: absolute;
+            }
+
+            .control3 li:hover {
+                background: #dc3522
+            }
+
+            .control3 li.prev {
+                left: 0;
+                top: 40%;
+                z-index: 2;
+            }
+
+            .control3 li.next {
+                right: 0;
+                top: 40%;
+                z-index: 2;
+            }
+
+            #tns2-ow .tns-nav {
+                float: none;
+                position: relative;
+            }
+
+            /*Adjusts the grid to a single stack for tablets and mobile devices*/
+
+            @media screen and (max-width: 600px) {
+                .home-grid1 {
+                    display: block;
+                }
+
+                .trade-in {
+                    display: block;
+                }
+
+                .home-repair-card {
+                    padding-top: 10px;
+                }
+
+                .repair-card-btn-menu {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+
+                .mobile-data-text {
+                    display: block;
+                }
+
+                .home-mobile-data-card {
+                    display: block;
+                }
+
+                .home-card {
+                    background-color: #ffffff;
+                }
+
+                .warranty-img {
+                    width: 50%;
+                }
+
+                .control2 li.next2 {
+                    right: 0;
+                    top: 40%;
+                    z-index: 2;
+                }
+
+                .control2 li.prev2 {
+                    left: 0;
+                    top: 40%;
+                    z-index: 2;
+                }
+            }
+
+            @media screen and (max-width: 1000px) {
+                .home-grid1 {
+                    grid-template-columns: 1fr 1fr 2fr;
+                }
+            }
+
+            @media screen and (max-width: 930px) {
+                div#tns2-ow.tns-outer {
+                    transform: translateY(-4rem);
+                }
+            }
+
+            @media screen and (max-width: 850px) {
+                div#tns2-ow.tns-outer {
+                    transform: translateY(-2.5rem);
+                }
+            }
+
+            .myhome-banner {
+                max-width: 100%;
+                /* Ensures the banner is responsive */
+                overflow: hidden;
+                /* Ensures the image does not overflow its container */
+            }
+
+            .myhome-banner img {
+                display: block;
+                height: auto;
+                /* Ensures the image keeps its aspect ratio */
+                width: 100%;
+                /* Makes the image fill its container */
+            }
+
+            @media (min-width: 768px) {
+                .banner {
+                    height: 300px;
+                    /* Adjust height as needed */
+                    max-width: 100%;
+                    /* Maintain responsiveness */
+                }
+            }
+
+            .connect-buttons {
+                font-size: 1.75rem;
+                margin-top: 1rem;
+                text-align: center;
+            }
+        </style>
+
+        <div class="myhome-container">
+            <div class="home-grid1">
+                <div class="home-card-alt home-trade-in-card">
+                    <h2>Upgrade To Another Rugged Computer</h2>
+                    <ul class="control" id="custom-control">
+                        <li class="prev">
+                            <span class="tiny-prev-arrow">‹</span>
+                        </li>
+                        <li class="next">
+                            <span class="tiny-next-arrow">›</span>
+                        </li>
+                    </ul>
+                    <div class="home-carousel">
+                        <div class="item">
+                            <a href="/toughbook-cf-33/"><img src="/product_images/uploaded_images/cf33category2.jpg"
+                                    alt="Panasonic Toughbook Cf-33 Rugged Laptops" width="250" height="250"></a>
+                            <a href="/toughbook-cf-33/" class="button button--primary">Panasonic CF-33</a>
+                        </div>
+                        <div class="item">
+                            <a href="/toughbook-fz-55/"><img src="/product_images/uploaded_images/fz55category2.jpg"
+                                    alt="Semi-Rugged XPAK Modular Panasonic CF-55 Toughbook Laptops" width="250"
+                                    height="250"></a>
+                            <a href="/toughbook-fz-55/" class="button button--primary">Panasonic FZ-55</a>
+                        </div>
+                        <div class="item">
+                            <a href="/cf-54/"><img src="/product_images/uploaded_images/cf54category2.jpg"
+                                    alt="Semi-Rugged Toughbook CF-54 Laptops" width="250" height="250"></a>
+                            <a href="/cf-54/" class="button button--primary">Panasonic CF-54</a>
+                        </div>
+                        <div class="item">
+                            <a href="/refurbished-dell-laptops/"><img
+                                    src="/product_images/uploaded_images/dellltcategory2.jpg"
+                                    alt="Dell Latitude Rugged Laptops and Tablets" width="250" height="250"></a>
+                            <a href="/refurbished-dell-laptops/" class="button button--primary">Dell Rugged Laptops</a>
+                        </div>
+                        <div class="item">
+                            <a href="https://www.bobjohnson.com/getac-v110/"><img
+                                    src="https://www.bobjohnson.com/product_images/uploaded_images/v110category2.jpg"
+                                    alt="Getac V110 Fully Rugged Laptops" width="250" height="250"></a>
+                            <a href="https://www.bobjohnson.com/getac-v110/"
+                                class="homepage-category-button button button--primary">Getac V110</a>
+                        </div>
+                        <div class="item">
+                            <a href="/refurbished-getac-rugged-laptops/"><img
+                                    src="/product_images/uploaded_images/getaclaptopcategory2.jpg"
+                                    alt="Refurbished Getac Rugged Laptops" width="250" height="250"></a>
+                            <a href="/refurbished-getac-rugged-laptops/" class="button button--primary">Getac
+                                Laptops</a>
+                        </div>
+                        <div class="item">
+                            <a href="/toughbook-cf-31/"><img src="/product_images/uploaded_images/cf31category2.jpg"
+                                    alt="Fully Rugged Toughbook CF-31 Laptops" width="250" height="250"></a>
+                            <a href="/toughbook-cf-31/" class="button button--primary">Panasonic CF-31</a>
+                        </div>
+                        <div class="item">
+                            <a href="/toughpad-FZ-G1/"><img src="/product_images/uploaded_images/fzg1category2.jpg"
+                                    alt="Panasonic Toughpad FZ-G1 Tablets" width="250" height="250"></a>
+                            <a href="/toughpad-FZ-G1/" class="button button--primary">Panasonic FZ-G1</a>
+                        </div>
+                        <div class="item">
+                            <a href="/cf-53/"><img src="/product_images/uploaded_images/cf53category2.jpg"
+                                    alt="Semi-Rugged Panasonic CF-53 Toughbook Laptops" width="250" height="250"></a>
+                            <a href="/cf-53/" class="button button--primary">Panasonic CF-53</a>
+                        </div>
+                        <div class="item">
+                            <a href="/rugged-laptops/?_bc_fsnf=1&brand=51"><img
+                                    src="/product_images/uploaded_images/durabookltcategory.jpg"
+                                    alt="New Durabook Z14, S14, S15AB Rugged Laptops" width="250" height="250"></a>
+                            <a href="/rugged-laptops/?_bc_fsnf=1&brand=51" class="button button--primary">Durabook
+                                Laptops</a>
+                        </div>
+                        <div class="item">
+                            <a href="/tablets/?_bc_fsnf=1&brand=51"><img
+                                    src="/product_images/uploaded_images/durabooktbltcategory.jpg"
+                                    alt="New U11, R11, and R8 Durabook Rugged Tablets" width="250" height="250"></a>
+                            <a href="/tablets/?_bc_fsnf=1&brand=51" class="button button--primary">Durabook Tablets</a>
+                        </div>
+                        <div class="item">
+                            <a href="/vehicle-mounts/?_bc_fsnf=1&brand=39"><img
+                                    src="/product_images/uploaded_images/rammountcategory.jpg"
+                                    alt="No-Drill Vehicle RAM Mounts" width="250" height="250"></a>
+                            <a href="/vehicle-mounts/?_bc_fsnf=1&brand=39" class="button button--primary">RAM Mounts</a>
+                        </div>
+                        <div class="item">
+                            <a href="/printers/?_bc_fsnf=1&brand=41"><img
+                                    src="/product_images/uploaded_images/brotherprintercategory.jpg"
+                                    alt="Mobile Printers by Brother" width="250" height="250"></a>
+                            <a href="/printers/?_bc_fsnf=1&brand=41" class="button button--primary">Brother Printers</a>
+                        </div>
+                    </div>
+                    <a href="/toughbook-trade-in-program/?tab=0" class="button button-alt">Trade-In Your Rugged
+                        Computer</a>
+                </div>
+
+                <div class="home-card home-repair-card">
+                    <h2>Tech Support & Repair Services</h2>
+                    <img src="{{cdn 'img/GearCross.svg'}}" class="img-center">
+                    <p>Talk to one of our techs over-the-phone or through email to solve your issue. Have a more serious
+                        problem? Send your rugged computer to our full-service repair department where we can diagnose,
+                        repair, or even upgrade your machine.</p>
+                    <div class="repair-card-btn-menu">
+                        <a href="https://www.bobjohnson.com/tech-support-form/" class="button button--primary">Tech
+                            Support</a>
+                        <a href="https://www.bobjohnson.com/repairs-service/?tab=0"
+                            class="button button--primary">Repair Services</a>
+                    </div>
+                </div>
+
+                <div class="home-card home-warranty-card">
+                    <h2>Extended Warranties</h2>
+                    <div class="warranty-imgs">
+                        <a href="/one-year-enhanced-coverage/"><img src="{{cdn 'img/Warranty1Year.svg'}}"
+                                class="warranty-img" alt="Bob Johnson's One Year Warranty Coverage"></a>
+                        <a href="/two-year-enhanced-coverage/"><img src="{{cdn 'img/Warranty2Year.svg'}}"
+                                class="warranty-img" alt="Bob Johnson's Two Year Warranty Coverage"></a>
+                        <a href="/three-year-enhanced-coverage/"><img src="{{cdn 'img/Warranty3Year.svg'}}"
+                                class="warranty-img" alt="Bob Johnson's Three Year Warranty Coverage"></a>
+                    </div>
+                    <p>Pay nothing for your next repair by extending the lifetime of your coverage with an extended
+                        warranty on your rugged laptop or tablet.</p>
+                    <div class="repair-card-btn-menu">
+                        <a href="/warranties/" class="button button--primary">Warranty Information</a>
+                    </div>
+                </div>
+
+                <div class="home-card home-connect">
+                    <h2>Connect With Us!</h2>
+                    <div class="myhomepage-socials">
+                        <a href="https://www.youtube.com/@Bobjohnson"><img src="{{cdn 'img/YouTube.svg'}}"
+                                class="home-social-logo"></a>
+                        <a href="https://www.instagram.com/bobjohnsonscomputerstuffinc/"><img
+                                src="{{cdn 'img/Instagram.svg'}}" class="home-social-logo"></a>
+                        <a href="https://www.facebook.com/BobJohnsonsComputerStuff"><img
+                                src="{{cdn 'img/Facebook.svg'}}" class="home-social-logo"></a>
+                    </div>
+                </div>
+
+                <div class="home-card-alt home-video-card">
+                    <h2>Watch Our YouTube Videos on All Rugged Computer Models!</h2>
+                    <div class="video-stack">
+                        <ul class="control2" id="custom-control2">
+                            <li class="prev2">
+                                <span class="tiny-prev-arrow2">‹</span>
+                            </li>
+                            <li class="next2">
+                                <span class="tiny-next-arrow2">›</span>
+                            </li>
+                        </ul>
+                        <div class="vertical-slider">
+                            <div class="playlist-slide">
+                                <a href="https://www.youtube.com/playlist?list=PL_ntP3EI-k2SyBmAcP7HHgKgIMI6Dd8If"><img
+                                        class="playlist-thumbnail"
+                                        src="https://www.bobjohnson.com/product_images/uploaded_images/cf-31-playlist.png"
+                                        alt="Panasonic Toughbook CF-31 Youtube Playlist"></a>
+                            </div>
+                            <div class="playlist-slide">
+                                <a href="https://www.youtube.com/playlist?list=PL_ntP3EI-k2RnSHfmKB5MgyC1WT4mxy0k"><img
+                                        class="playlist-thumbnail"
+                                        src="https://www.bobjohnson.com/product_images/uploaded_images/cf-53-playlist.png"
+                                        alt="Panasonic Toughbook CF-53 Youtube Playlist"></a>
+                            </div>
+                            <div class="playlist-slide">
+                                <a href="https://www.youtube.com/playlist?list=PL_ntP3EI-k2RiOzdqPzi3PHHkT3Q8w8yD"><img
+                                        class="playlist-thumbnail"
+                                        src="https://www.bobjohnson.com/product_images/uploaded_images/cf-19-playlist.png"
+                                        alt="Panasonic Toughbook CF-19 Youtube Playlist"></a>
+                            </div>
+                            <div class="playlist-slide">
+                                <a href="https://www.youtube.com/playlist?list=PL_ntP3EI-k2SXpKsIjXLa1nsq8i6H74tb"><img
+                                        class="playlist-thumbnail"
+                                        src="https://www.bobjohnson.com/product_images/uploaded_images/cf-33-playlist.png"
+                                        alt="Panasonic Toughbook CF-33 Youtube Playlist"></a>
+                            </div>
+                            <div class="playlist-slide">
+                                <a href="https://www.youtube.com/playlist?list=PL_ntP3EI-k2S-hIT763OUxyBJGuQxkNMA"><img
+                                        class="playlist-thumbnail"
+                                        src="https://www.bobjohnson.com/product_images/uploaded_images/cf-20-playlist.png"
+                                        alt="Panasonic Toughbook CF-20 Youtube Playlist"></a>
+                            </div>
+                            <div class="playlist-slide">
+                                <a href="https://www.youtube.com/playlist?list=PL_ntP3EI-k2SewLIwp9rp3U_TXu364YH5"><img
+                                        class="playlist-thumbnail"
+                                        src="https://www.bobjohnson.com/product_images/uploaded_images/cf-54-playlist.png"
+                                        alt="Panasonic Toughbook CF-54 Youtube Playlist"></a>
+                            </div>
+                            <div class="playlist-slide">
+                                <a href="https://www.youtube.com/playlist?list=PL_ntP3EI-k2Tb3B2RhAf9M7BzRDen9z1Y"><img
+                                        class="playlist-thumbnail"
+                                        src="https://www.bobjohnson.com/product_images/uploaded_images/durabook-s14i-playlist.png"
+                                        alt="Durabook S14i Youtube Playlist"></a>
+                            </div>
+                        </div>
+                        <ul class="slider-container" id="vert-nav">
+                            <li class="vertical-container">
+                                <button class="slider-button"></button>
+                            </li>
+                            <li class="vertical-container">
+                                <button class="slider-button"></button>
+                            </li>
+                            <li class="vertical-container">
+                                <button class="slider-button"></button>
+                            </li>
+                            <li class="vertical-container">
+                                <button class="slider-button"></button>
+                            </li>
+                            <li class="vertical-container">
+                                <button class="slider-button"></button>
+                            </li>
+                            <li class="vertical-container">
+                                <button class="slider-button"></button>
+                            </li>
+                            <li class="vertical-container">
+                                <button class="slider-button"></button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="home-card home-mobile-data-card" onclick="location.href = '/mobile-data-plans/'">
+                    <img src="{{cdn 'img/broadbandantennalogo.svg'}}" class="img-center">
+                    <div class="mobile-data-text">
+                        <h2>Unlimited Cellular Data Plans For <strong>$29.29</strong>!</h2>
+                        <p>Our newly implemented mobile data plans for our rugged computers are the lowest they've ever
+                            been! And now they're unlimited! Take advantage of the ability to connect to the internet
+                            using cellular data at the most affordable price! </p>
+                        <div class="repair-card-btn-menu">
+                            <a href="https://www.bobjohnson.com/mobile-data-plans/" class="button button--primary">Learn
+                                More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="home-card-alt home-blog-card">
+                <h2>Read More about Rugged Computers</h2>
+
+                <ul class="control3" id="custom-control3">
+                    <li class="prev">
+                        <span class="home-prev-arrow">‹</span>
+                    </li>
+                    <li class="next">
+                        <span class="home-next-arrow">›</span>
+                    </li>
+                </ul>
+                <div class="custom-slider">
+                    <div class="blog-slider">
+                        <div class="blog-article">
+                            <img class="info-graphic-svg" src="{{cdn 'img/mechanic.svg'}}" width="200" height="31.9"
+                                alt="Mechanic Logo">
+                            <p><strong><a
+                                        href="/blogyour-ultimate-guide-to-the-best-laptops-for-automotive-technicians-mechanics-and-dealers/">Your
+                                        Ultimate Guide to the Best Laptops For Automotive Technicians, Mechanics, And
+                                        Dealers </a></strong>
+                            </p>
+                        </div>
+                        <div class="blog-article">
+                            <img class="info-graphic-svg" src="{{cdn 'img/nerd.svg'}}" width="200" height="31.9"
+                                alt="Toughbooks for Nerds">
+                            <p>
+                                <strong>
+                                    <a href="/blog/a-note-on-model-numbers-for-toughbook-nerds/">A Note on Model
+                                        Numbers (for Toughbook Nerds)</a>
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="blog-article">
+                            <img class="info-graphic-svg" src="{{cdn 'img/ice.svg'}}" width="200" height="31.9"
+                                alt="A graph">
+                            <p>
+                                <strong>
+                                    <a href="/blog/how-rugged-laptops-handle-extreme-temperatures/">How Rugged Laptops
+                                        Handle Extreme Temperatures</a>
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="blog-article">
+                            <img class="info-graphic-svg" src="{{cdn 'img/boat.svg'}}" width="200" height="31.9"
+                                alt="A box">
+                            <p>
+                                <strong>
+                                    <a href="/blog/toughbooks-for-marine-charting-software-electronic-charts/">Top
+                                        Rugged Toughbooks for Marine Charting Software and Electronic Charts</a>
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="blog-article">
+                            <img class="info-graphic-svg" src="{{cdn 'img/clock.svg'}}" width="200" height="31.9"
+                                alt="Clock">
+                            <p>
+                                <strong>
+                                    <a href="/blog/rugged-laptop-lifespan/">Rugged Laptop Lifespan: How Long Should You
+                                        Expect Yours to Last?</a>
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="blog-article">
+                            <img class="info-graphic-svg" src="{{cdn 'img/hour-glass.svg'}}" width="200" height="31.9"
+                                alt="Hourglass">
+                            <p>
+                                <strong>
+                                    <a href="/blog/why-lowhour-rugged-units-are-worth-the-extra-investment/">Why
+                                        Low-Hour Rugged Units Are Worth the Extra Investment</a>
+                                </strong>
+                            </p>
+                        </div>
+                        <div class="blog-article">
+                            <img class="info-graphic-svg" src="{{cdn 'img/dock-24-filled.svg'}}" width="200"
+                                height="31.9" alt="Docking Icon">
+                            <p><strong><a href="/blog/the-ultimate-docking-stations-guide/">The Ultimate Guide to
+                                        Panasonic Toughbook Docking Stations</a></strong>
+                            </p>
+                        </div>
+                        <div class="blog-article">
+                            <img class="info-graphic-svg" src="{{cdn 'img/repairservices.svg'}}" width="200"
+                                height="31.9" alt="Repair Logo">
+                            <p><strong><a href="/blog/when-to-repair-vs-replace-your-rugged-laptop/">When to Repair vs
+                                        Replace Your Rugged Laptop?</a></strong>
+                            </p>
+                        </div>
+                        <div class="blog-article">
+                            <img class="info-graphic-svg" src="{{cdn 'img/puzzle.svg'}}" width="200" height="31.9"
+                                alt="A puzzle piece">
+                            <p>
+                                <strong>
+                                    <a href="/blog/exploring-toughbook-fzg2-expansion-packs/">Exploring Expansion Packs:
+                                        Panasonic Toughbook FZ-G2</a>
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                    <a class="button button-alt" href="/blog-archive/">More Blogs<i class="material-icons"
+                            aria-hidden="true">arrow_forward_ios</i></a>
+                </div>
+            </div>
+            <script type="module">
+                var slider = tns({
+                    container: '.home-carousel',
+                    items: 4,
+                    slideBy: '1',
+                    autoplay: false,
+                    controlsContainer: "#custom-control",
+                    navPosition: "bottom",
+                    controlsPosition: "bottom",
+                    responsive: {
+                        0: {
+                            items: 1,
+                            slideBy: '1',
+                            nav: false
+                        },
+                        830: {
+                            items: 2,
+                            slideBy: '1',
+                            nav: true
+                        },
+                        1001: {
+                            items: 3,
+                            slideBy: '1',
+                            nav: true
+                        },
+                        1200: {
+                            items: 4,
+                            slideBy: '1',
+                            nav: true
+                        }
+                    }
+                });
+            </script>
+            <script type="module">
+                var slider = tns({
+                    container: '.blog-slider',
+                    items: 4,
+                    slideBy: '1',
+                    autoplay: false,
+                    controlsContainer: "#custom-control3",
+                    navPosition: "bottom",
+                    controlsPosition: "bottom",
+                    responsive: {
+                        0: {
+                            items: 1,
+                            slideBy: '1',
+                            nav: false
+                        },
+                        770: {
+                            items: 2,
+                            slideBy: '1',
+                            nav: true
+                        },
+                        1000: {
+                            items: 3,
+                            slideBy: '1',
+                            nav: true
+                        },
+                        1330: {
+                            items: 4,
+                            slideBy: '1',
+                            nav: true
+                        }
+                    }
+                });
+            </script>
+            <script type="module">
+                var slider = tns({
+                    container: '.vertical-slider',
+                    items: 1,
+                    slideBy: '1',
+                    autoplay: true,
+                    autoplayButton: false,
+                    autoplayButtonOutput: false,
+                    autoplayHoverPause: true,
+                    controlsContainer: "#custom-control2",
+                    navPosition: "bottom",
+                    controlsPosition: "bottom",
+                    axis: "horizontal",
+                    navContainer: "#vert-nav",
+                    responsive: {
+                        0: {
+                            items: 1,
+                            slideBy: '1',
+                            nav: false
+                        },
+                        820: {
+                            items: 1,
+                            slideBy: '1',
+                            nav: true
+                        }
+                    }
+                });
+            </script>
+            <script>
+                function centerBanner() {
+                    var banner = document.querySelector('.myhomepage-banner');
+                    var content = document.querySelector('.myhomepage-banner-text');
+
+                    var bannerWidth = banner.offsetWidth;  // Get the width of the banner
+                    var contentWidth = content.offsetWidth; // Get the width of the content (could be different than the banner if you want to center content inside)
+                    var windowWidth = window.innerWidth;   // Get the viewport width
+
+                    if (windowWidth > 1696) {
+                        // Calculate horizontal centering (with a negative margin-left adjustment)
+                        var horizontalCenter = (1696 - windowWidth) / 2;
+                        //  console.log(horizontalCenter, windowWidth)
+
+                        // Calculate negative margin-left (adjust to your needs)
+                        var negativeMargin = 0;  // Example of a negative margin you might want to apply
+
+                        // Apply the centering with the negative margin
+                        banner.style.marginLeft = negativeMargin + horizontalCenter + 'px';
+                    } else {
+                        banner.style.marginLeft = '';
+                        content.style.marginLeft = '';
+                    }
+                }
+
+                // Call the function when the page loads
+                centerBanner();
+
+                // Adjust the position when the window is resized
+                window.addEventListener('resize', centerBanner);
+            </script>
+
+        </div>
+
+        {{#if page.feed}}
+        <ul>
+            {{#each page.feed}}
+            <li>
+                <h6><a href="{{url}}" target="_blank">{{title}}</a></h6>
+                <p>{{content}}</p>
+            </li>
+            {{/each}}
+        </ul>
+        {{/if}}
+</main>
+
+{{/partial}}
+
+{{> layout/base}}
