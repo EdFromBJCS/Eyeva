@@ -113,3 +113,147 @@
     font-size: 1.33rem;
     vertical-align: top;
 }
+
+// Mobile Data Page Checkout
+
+.mobile-data-table {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.mobile-data-recurring-row {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (max-width: 876px) {
+    .mobile-data-table {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+// Tab buttons and Elements
+
+.tab-content {
+    display: none;
+}
+
+.active-tab {
+    background-color: #dc3522;
+}
+
+.tab-button {
+    background-color: #c4301f;
+    border: 1px solid #c4301f;
+    border-bottom: none;
+    border-radius: 6px;
+    border-width: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-family: Roboto;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding-bottom: 5px;
+    padding-top: 0;
+    text-align: center;
+    transform: translateY(25px);
+    transition: transform 0.2s ease-in-out;
+}
+
+.tab-button:hover,
+.tab-button2:hover {
+    background-color: #dc3522;
+    transform: scaleY(1.6) translateY(5px);
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.tab-container {
+    margin: 0;
+    width: 100%;
+}
+
+//hr {
+//    margin: 0;
+//    margin-left: -55px;
+//}
+
+div.tab-button:hover div,
+div.tab-button2:hover div {
+    transform: scaleY(.625);
+}
+
+div.tab-button div,
+div.tab-button2 div {
+    transition: transform 0.2s ease-in-out;
+}
+
+.tabs-title {
+    color: #fff;
+    font-size: 16px;
+    margin-top: 1rem;
+    padding: 0 5px 0 5px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.form-field.margin-remover {
+    margin-bottom: 0;
+}
+
+.tab-button2 {
+    background-color: #c4301f;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid #c4301f;
+    border-bottom: none;
+    border-radius: 6px;
+    border-width: 6px;
+    font-family: Roboto;
+    font-weight: 700;
+    letter-spacing: 1px;
+    min-width: 11rem;
+    padding-bottom: 0;
+    padding-top: 0;
+    text-align: center;
+    transform: translateY(23px);
+    transition: transform 0.2s ease-in-out;
+    width: 10rem;
+}
+
+.tab-table-trade {
+    border-collapse: separate;
+    border-spacing: 5px;
+    max-width: 25rem;
+    min-width: 25rem;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.tab-table-repair {
+    border-collapse: separate;
+    border-spacing: 5px;
+    max-width: 45rem;
+    min-width: 40rem;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.repair-indent {
+    margin-left: 5em;
+}
+
+@media screen and (max-width: 550px) {
+
+    .tab-table-repair,
+    .tab-table-trade {
+        display: flex;
+    }
+
+    .tab-cell {
+        width: 30%;
+    }
+}
