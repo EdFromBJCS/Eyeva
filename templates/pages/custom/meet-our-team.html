@@ -1,0 +1,361 @@
+{{#partial "page"}}
+
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+<main class="page">
+  <h1 class="page-heading">{{ page.title }}</h1>
+
+  {{#if page.sub_pages}}
+  <nav class="navBar navBar--sub">
+    <ul class="navBar-section account-navigation">
+      {{#each page.sub_pages}}
+      <li class="navBar-item"><a class="navBar-action" href="{{url}}">{{title}}</a></li>
+      {{/each}}
+    </ul>
+  </nav>
+  {{/if}}
+
+  <div class="page-content page-content--centered">
+    {{#replace '%%Syndicate%%' page.content}}
+    {{> components/page/rss_feed}}
+    {{else}}
+    <p>{{{page.content}}}</p>
+    {{/replace}}
+
+    <style>
+      #team-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        justify-items: center;
+        margin-top: 20px;
+      }
+
+      .photo-container {
+        position: relative;
+        text-align: center;
+      }
+
+      .team-photo {
+        margin-bottom: 0;
+      }
+
+      .bio-pic {
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 10px solid #c4301f;
+        box-shadow: 3px 3px 8px 1px #000;
+      }
+
+      .name-plate {
+        background-color: #dc3522;
+        border: 5px solid #a82a1d;
+        width: 180px;
+        height: 80px;
+        margin: -50px auto 0 auto;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: 0 10px;
+      }
+
+      .header-name {
+        color: #fff;
+        font-family: Roboto, sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        text-align: center;
+        margin: 0 0 5px 0;
+      }
+
+      .moreInfo {
+        background-color: #dc3522;
+        color: #fff;
+        border: none;
+        font-family: Roboto, sans-serif;
+        font-size: 14px;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .moreInfo:hover {
+        background-color: #a82a1d;
+      }
+
+      .biomodal {
+        display: none;
+        position: fixed;
+        z-index: 50;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .modal-content {
+        background-color: #ebe8e8;
+        margin: 10% auto;
+        padding: 20px;
+        border: 10px solid #c4301f;
+        width: 80%;
+        max-width: 600px;
+        position: relative;
+        border-radius: 10px;
+      }
+
+      .bio-text {
+        font-family: Roboto, sans-serif;
+        font-size: 14px;
+        color: #222;
+        margin-bottom: 10px;
+      }
+
+      .bio-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-top: 15px;
+      }
+
+      .bio-container p {
+        margin: 5px 0;
+      }
+
+      button.close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #dc3522;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      button.close:hover {
+        background: #a82a1d;
+      }
+
+      @media screen and (max-width: 600px) {
+        .modal-content {
+          width: 90%;
+        }
+
+        .bio-container {
+          flex-direction: column;
+        }
+      }
+    </style>
+
+    <script type="application/json" id="team-data">
+[
+  {
+  "name": "Bob Johnson",
+  "photo": "https://store-8lxh1.mybigcommerce.com/product_images/uploaded_images/bobj.jpg",
+  "bio": [
+    "Bob is the owner and founder of Bob Johnson’s Computer Stuff. Yes, he does in fact exist.",
+    "He is also the go-to guy for most e-commerce, marketing, and sales-related things.",
+    "Bob’s day-to-day consists of just about everything. Typically, anything and everything will end up on his desk eventually. The good and the bad.",
+    "One of the inside jokes around the office that Bob takes part in goes like this, 'That is the CD ROM Tray - Not a cup holder.'",
+    "Outside of work, Bob’s hobbies include gardening, golf, and vermicomposting.",
+    "He has a featured museum in the office. This museum consists of older laptops customers have dropped off or traded in. It’s interesting to see how far computers have come.",
+    "Bob’s favorite rugged computers are the Panasonic Toughbook FZ-55 because of their XPAK expansion modules and the Toughbook CF-52 for its 15.4-inch screen. And if you want to learn more about Bob’s opinions on rugged computers, check out his reviews on YouTube!"
+  ],
+  "phone": "302-659-2727",
+  "email": "parts@bobjohnson.com"
+},
+
+  {
+    "name": "Marisa Johnson",
+    "photo": "https://store-8lxh1.mybigcommerce.com/product_images/uploaded_images/marisaj.jpg",
+    "bio": [
+      "Marisa is the “go-to” woman of the company, she dips her hands into almost every aspect of the company in some way. She knows the laptops she works on inside and out, and nobody surpasses her expertise in the shipping area.",
+      "She was born and raised in Brazil, coming to the United States when she was nineteen to pursue the American Dream.",
+      "No one day is quite the same for Marisa; some days you will find her at her desk, while other days you will find her with the technicians grinding away at some rugged laptops.",
+      "When not kicking butt at BJCS, Marisa enjoys cooking, spending time with friends, exercising and watching futbol (AKA: soccer).",
+      "Marisa is the spouse of Bob Johnson and the mother of three, rambunctious children.",
+      "Her favorite rugged laptop is the Panasonic Toughbook CF-29 because it is the first laptop that she learned how to repair and it was easy to work on."
+    ],
+    "phone": "302-659-2727",
+    "email": "marisa_2@bobjohnson.com"
+  },
+  {
+    "name": "Matt Wertz",
+    "photo": "https://www.bobjohnson.com/product_images/uploaded_images/mattw.jpg",
+    "bio": [
+      "Matt is the general manager here at BJCS.",
+      "We consider him the rugged expert around the office. He knows almost everything there is to know about each rugged laptop and tablet, and everyone in the office goes to him for his knowledge about them.",
+      "His day-to-day consists of processing any orders that come in, answering tech support emails and phone calls, and answering any sales questions that our customers have. He will also be found, from time to time, piecing together broken computers to make complete, working units.",
+      "Matt is pretty handy around the kitchen, and is well known to cook lunch for him and his coworkers.",
+      "Matt spends his free time with his dogs, in the gym, or gaming.",
+      "A fun fact about Matt is that he enjoys sharing memes with the rest of the office.",
+      "Matt’s favorite rugged computer is the Getac S410. He admires its lightweight versatility as well as the ability to upgrade it with ease."
+    ],
+    "phone": "302-659-2727",
+    "email": "tech_support@bobjohnson.com"
+  },
+  {
+    "name": "Zach Lawson",
+    "photo": "https://www.bobjohnson.com/product_images/uploaded_images/zachl2.jpg",
+    "bio": [
+      "Zach has the privilege of repairing any and all of the Toughbooks that get sent to our repair department.",
+      "That being said, he elected to share this Toughbook tip: “Before you send in your laptop because it’s not turning on, take the battery out, unplug it, and hold the power button for a couple of seconds. Plug it back in and try again.”",
+      "In his free time, Zach likes playing video games, doing BMX, and programming.",
+      "An interesting fact about Zach is that he is the office’s only fully licensed drone pilot.",
+      "His favorite rugged computer is the Panasonic Toughbook CF-31 because it is simple to work on."
+    ],
+    "phone": "302-471-3243",
+    "email": "tech_support@bobjohnson.com"
+  },
+  {
+    "name": "Matthew Johnson",
+    "photo": "https://www.bobjohnson.com/product_images/uploaded_images/matthewj2.jpg",
+    "bio": [
+      "Matt Johnson is the manager of all the local repairs from our walk-in shop.",
+      "He is also one of the few people with the knowledge of how to work the cash register.",
+      "Matt's day-to-day includes answering phone calls about our repair services and helping the repair department get through all of the repairs that come in.",
+      "One of the bigger inside jokes around the office that Matt is a part of is that he is the office's lead constructive critic. He is all about improving work for everyone.",
+      "His hobbies outside of work include sleeping and film development.",
+      "Matt’s favorite rugged computer is the Getac V110 because of the rotating screen and the multi-functionality."
+    ],
+    "phone": "302-659-2727",
+    "email": "m_tech@bobjohnson.com"
+  },
+  {
+    "name": "DJ Smith",
+    "photo": "https://www.bobjohnson.com/product_images/uploaded_images/djs.jpg",
+    "bio": [
+      "DJ handles editing and posting all of our YouTube content and is heavily involved in the marketing department.",
+      "He would like to share that “YouTube is the second largest search engine after Google.”",
+      "He creates all the videos for social media, YouTube, and the website. A typical day for DJ consists of editing and “fighting” with Adobe applications.",
+      "DJ likes to catch up on TV shows and do extreme ironing outside of work.",
+      "A fun fact about DJ is that he can bend a fork with enough concentration.",
+      "His favorite rugged computer is the Panasonic Toughpad CF-H2 because it is “the ugly duckling of the family.”"
+    ],
+    "phone": "302-659-2727",
+    "email": "info@bobjohnson.com"
+  },
+    {
+    "name": "Evelyn Walsh",
+    "photo": "https://www.bobjohnson.com/product_images/uploaded_images/evelyn.jpg",
+    "bio": [
+      "Evelyn is a vital member of the company’s customer service team, known for bringing positivity and a bright spirit to her role.",
+      "She excels at making everyone’s day a little lighter, always ready with a smile and top-tier service for every customer she encounters.",
+      "Evelyn’s practical approach shines through when it comes to troubleshooting—her advice is simple: if you run into an error code, just look it up!",
+      "Her workdays are filled with friendly banter and laughter as she and her teammates keep things light with inside jokes and running gags, creating a welcoming, upbeat atmosphere.", 
+      "Outside of the office, Evelyn enjoys cooking and spending quality time with her family. Her lighthearted nature is one of her defining traits, and she’s always happy to share a fun fact or story.",
+      "When it comes to favorite products, Evelyn is a fan of the Panasonic Toughbook CF-31, especially for its port covers and unique on/off switch."
+    ],
+    "phone": "302-659-2727",
+    "email": "repair@bobjohnson.com"
+  },
+  {
+    "name": "Doran Janeka",
+    "photo": "https://www.bobjohnson.com/product_images/uploaded_images/doranj2.jpg",
+    "bio": [
+      "Doran is a member of the marketing team. He is one of the content writers responsible for putting information on the website.",
+      "Doran’s day normally consists of answering Youtube comments, writing video and product descriptions, taking photographs of products, and optimizing the website so that you can find things quicker and easier when shopping for rugged laptops.",
+      "With the new ice cream shop downstairs, the biggest team tradition is getting ice cream. Typically, on Fridays, but that could turn into every day of the week in a heartbeat.",
+      "Doran spends his free time in the gym, playing video games, or spending time with friends and family.",
+      "He has earned his bachelor’s degree in graphic design and web development.",
+      "Doran’s favorite rugged computer is the CF-33. It’s “neat” to use it with a tablet and then reconnect it to the keyboard when you need a laptop."
+    ],
+    "phone": "302-471-3247",
+    "email": "djaneka@bobjohnson.com"
+  },
+  {
+    "name": "GeCat \"Squeaky\"",
+    "photo": "https://www.bobjohnson.com/product_images/uploaded_images/gecat2.jpg",
+    "bio": [
+      "Meow meow meow meow meow",
+      "Meow meow meow",
+      "mowmowmow... mow mow mow",
+      "meow my favourite computer is the Getac V110 meow",
+      "Meow Squeak Meow"
+    ],
+    "phone": "302-659-2727",
+    "email": "tech_support@bobjohnson.com"
+  },
+  {
+    "name": "Rick Baker",
+    "photo": "https://www.bobjohnson.com/product_images/uploaded_images/rickb.jpg",
+    "bio": [
+      "Rick is one of our inside sales representatives and the only remote employee at Bob Johnson’s Computer Stuff. He focuses on ensuring that our customers get the best unit for their needs, with all the upgrades they need at the best possible cost. He is extremely well-versed in Panasonic, Getac, Dell, and Durabook rugged computers, as well as their accessories.",
+      "A typical day for him involves providing customer service and following up on leads with new and existing customers.",
+      "He loves Bob Johnson’s “Family Model” team aesthetic. One of his favorite running jokes is that Matt J and Rick like to hang up on each other while they are on the phone.",
+      "Outside of work, Rick is busy tackling “Honey-Do’s” and spending time with his family.",
+      "A fun fact about Rick is that he created and owned his very own surfing magazine!",
+      "Rick's favorite rugged computers are all of Bob Johnson’s EXTREME rugged computers. He likes that they offer every upgrade at the most affordable cost for our customers."
+    ],
+    "phone": "302-508-5209",
+    "email": "rbaker@bobjohnson.com"
+  }
+]
+</script>
+    <div id="team-container"></div>
+    <script>
+      const teamData = JSON.parse(document.getElementById('team-data').textContent);
+      const container = document.getElementById('team-container');
+
+      teamData.forEach((member, i) => {
+        const card = document.createElement('div');
+        card.className = 'photo-container';
+        card.innerHTML = `
+      <div class="team-photo">
+        <img class="bio-pic" src="${member.photo}" width="250" height="250">
+      </div>
+      <div class="name-plate">
+        <h3 class="header-name">${member.name}</h3>
+        <button class="moreInfo" data-index="${i}">More info...</button>
+      </div>
+    `;
+        container.appendChild(card);
+
+        const modal = document.createElement('div');
+        modal.className = 'biomodal';
+        modal.id = `biomodal-${i}`;
+        modal.innerHTML = `
+      <div class="modal-content">
+        <h2><u>${member.name}</u></h2>
+        ${member.bio.map(p => `<p class="bio-text">${p}</p>`).join('')}
+        <div class="bio-container">
+          <p class="bio-text">Phone: <a href="tel:${member.phone}">${member.phone}</a></p>
+          <p class="bio-text">Email: <a href="mailto:${member.email}">${member.email}</a></p>
+        </div>
+        <button class="close button button--primary">Close</button>
+      </div>
+    `;
+        container.appendChild(modal);
+      });
+
+      container.addEventListener('click', e => {
+        if (e.target.classList.contains('moreInfo')) {
+          const index = e.target.dataset.index;
+          document.getElementById(`biomodal-${index}`).style.display = 'block';
+        }
+        if (e.target.classList.contains('close')) {
+          e.target.closest('.biomodal').style.display = 'none';
+        }
+      });
+
+      window.addEventListener('click', e => {
+        if (e.target.classList.contains('biomodal')) {
+          e.target.style.display = 'none';
+        }
+      });
+    </script>
+</main>
+
+{{/partial}}
+
+{{> layout/base}}
