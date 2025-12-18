@@ -113,8 +113,31 @@
 document.addEventListener('DOMContentLoaded', function() {
     const infoToggle = document.querySelector('.info-toggle');
     const infoPanel = document.querySelector('.info-panel');
+    const headerEl = document.querySelector('header.header[data-sticky-header]') || document.querySelector('header.header');
 
-    if (!infoToggle || !infoPanel) return;
+    if (!infoToggle || !infoPanel || !headerEl) return;
+
+    function positionInfoPanel() {
+        // Prefer the navPages container (if present and visible) so the panel sits under the full nav
+        let attachEl = headerEl;
+        const next = headerEl.nextElementSibling;
+        if (next && next.classList && next.classList.contains('navPages-container') && next.offsetHeight > 0) {
+            attachEl = next;
+        }
+
+        const rect = attachEl.getBoundingClientRect();
+        const topPx = Math.max(rect.bottom, 0);
+        infoPanel.style.position = 'fixed';
+        infoPanel.style.top = topPx + 'px';
+        infoPanel.style.left = '0px';
+        infoPanel.style.width = '100%';
+        infoPanel.style.zIndex = '9999';
+    }
+
+    // Compute initial position and keep it updated
+    positionInfoPanel();
+    window.addEventListener('resize', positionInfoPanel);
+    window.addEventListener('scroll', positionInfoPanel);
 
     infoToggle.addEventListener('click', function(e) {
         e.preventDefault();
@@ -122,6 +145,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const isOpen = infoPanel.classList.toggle('is-open');
         infoToggle.classList.toggle('is-open', isOpen);
+        // ensure position after opening (content may change layout)
+        positionInfoPanel();
     });
 
     // Optional: click outside closes the panel
@@ -131,5 +156,41 @@ document.addEventListener('DOMContentLoaded', function() {
             infoToggle.classList.remove('is-open');
         }
     });
+
+    // Desktop: open panel on hover/focus for non-touch devices
+    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+    if (!isTouch) {
+        let hoverTimeout = null;
+
+        function openPanel() {
+            if (!infoPanel.classList.contains('is-open')) {
+                infoPanel.classList.add('is-open');
+                infoToggle.classList.add('is-open');
+                positionInfoPanel();
+            }
+        }
+
+        function closePanel() {
+            infoPanel.classList.remove('is-open');
+            infoToggle.classList.remove('is-open');
+        }
+
+        infoToggle.addEventListener('mouseenter', function() {
+            clearTimeout(hoverTimeout);
+            openPanel();
+        });
+
+        infoToggle.addEventListener('mouseleave', function() {
+            hoverTimeout = setTimeout(closePanel, 250);
+        });
+
+        infoPanel.addEventListener('mouseenter', function() {
+            clearTimeout(hoverTimeout);
+        });
+
+        infoPanel.addEventListener('mouseleave', function() {
+            hoverTimeout = setTimeout(closePanel, 250);
+        });
+    }
 });
 </script>

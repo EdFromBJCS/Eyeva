@@ -41,6 +41,12 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
+    /* position will be managed by JS so it always sits under header/nav */
+    position: fixed;
+    left: 0;
+    width: 100%;
+    top: 0; /* JS will overwrite this value on load/resize/scroll */
+    
 }
 
 .info-panel.is-open {
@@ -257,3 +263,45 @@ div.tab-button2 div {
         width: 30%;
     }
 }
+
+/* Navigation: show dropdowns on hover/focus for desktop, keep panel behavior for mobile */
+@media (min-width: 877px) {
+    .info-toggle:hover + .info-panel,
+    .info-toggle:focus-within + .info-panel {
+        max-height: 1000px;
+    }
+
+    .navInfo {
+        position: relative;
+    }
+
+    .navInfo .info-submenu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #ffffff;
+        color: #222;
+        padding: 1rem;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        display: none;
+        min-width: 220px;
+        z-index: 80;
+    }
+
+    .navInfo li:hover > .info-submenu,
+    .navInfo li:focus-within > .info-submenu {
+        display: block;
+    }
+}
+
+/* Mobile: ensure submenu remains stacked and the JS-managed info panel still controls visibility */
+@media (max-width: 876px) {
+    .navInfo .info-submenu {
+        position: static;
+        box-shadow: none;
+        display: block;
+        background: transparent;
+        padding: 0;
+    }
+}
+
