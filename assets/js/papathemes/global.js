@@ -639,6 +639,24 @@ export default function (context) {
     initProductCardQty();
     fixCollapsibleAccessibility(); // must call before collapsibleFactory
     collapsibleFactory();
+
+    // Close the `page-sidebar` by default on category pages
+    // (body class is set via layout: `page-type-category`)
+    if ($('body').hasClass('page-type-category')) {
+        setTimeout(() => {
+            const $toggle = $('[data-collapsible="page-sidebar"], [data-collapsible="#page-sidebar"]').not(':hidden').first();
+            const collapsible = $toggle.data('collapsibleInstance');
+            if (collapsible && !collapsible.isCollapsed) {
+                collapsible.close();
+            }
+            // Also close the header toggle that controls the filters
+            const $headerToggle = $('[data-collapsible="page-sidebar-header"]').not(':hidden').first();
+            const headerCollapsible = $headerToggle.data('collapsibleInstance');
+            if (headerCollapsible && !headerCollapsible.isCollapsed) {
+                headerCollapsible.close();
+            }
+        }, 0);
+    }
     initMenu(context); // must call after collapsibleFactory
     initTextCollapsible();
     initSidebarModal();

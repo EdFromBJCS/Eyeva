@@ -1,6 +1,6 @@
 <h2 class="accordion-heading accordion-nav-clear-holder">
-    <button type="button"
-         class="accordion-navigation {{#unless start_collapsed}} is-open{{/unless}}"
+        <button type="button"
+            class="accordion-navigation {{#if selected}} is-open{{/if}}"
          data-collapsible="#facetedSearch-content--{{dashcase facet}}"
          aria-label="{{lang 'search.faceted.toggleSection' title=title}}"
     >
