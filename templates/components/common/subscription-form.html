@@ -5,12 +5,23 @@
         {{lang 'newsletter.subscribe'}}
     {{/and}}
 </h3>
-
 <form class="form eyeva__newsletter-form" action="{{urls.subscribe.action}}" method="post">
     <fieldset class="form-fieldset">
         <input type="hidden" name="action" value="subscribe">
-        <input type="hidden" name="nl_first_name" value="bc">
         <input type="hidden" name="check" value="1">
+        <div class="form-prefixPostfix">
+            <input class="form-input"
+                       id="nl_first_name"
+                       name="nl_first_name"
+                       type="name"
+                       value="{{customer.name}}"
+                       placeholder="Your name"
+                       aria-describedby="alertBox-message-text"
+                       aria-required="true"                       
+                       required
+        </div>
+    </fieldset>
+    <fieldset class="form-fieldset">        
         <div class="form-field">
             <label class="form-label is-srOnly" for="nl_email">{{lang 'common.email_address'}}</label>
             <div class="form-prefixPostfix">
@@ -25,13 +36,11 @@
                        autocomplete="email"
                        required
                 >
-                {{!--
-                <input class="button button--primary form-prefixPostfix-button--postfix"
+        </div>
+                        <input class="button button--primary form-prefixPostfix-button--postfix"
                        type="submit"
                        value="{{lang 'newsletter.subscribe_submit'}}"
                        >
-                --}}
             </div>
-        </div>
     </fieldset>
 </form>
