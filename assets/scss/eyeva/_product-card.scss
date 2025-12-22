@@ -290,6 +290,7 @@
 .card-footer {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: spacing("third");
 
     @if $eyeva-card-show-button and not $eyeva-card-show-qty {
