@@ -1,7 +1,10 @@
 .topCategories {
     @extend %eyeva-section;
+    background-color: #dc3522;
+    margin-inline: -10rem;
 
     .section-heading {
+        color: #fff;
         @include eyeva-screen-mobile-tablet {
             justify-content: start;
             margin-bottom: spacing("base");
@@ -142,17 +145,17 @@
 }
 
 .topCategories-name {
-    background-color: container("fill");
+    background-color: #fff;
     border: 0;
     box-shadow: $eyeva-shadow-item;
-    color: $color-textBase;
+    color: #dc3522;
     margin: 0;
 
     &:hover,
     &:focus,
     &:active {
-        background-color: $buttonStyle-primary-backgroundColorHover;
-        color: $buttonStyle-primary-colorHover;
+        background-color: #000;
+        color: #dc3522;
     }
 }
 
@@ -166,6 +169,7 @@
     flex-wrap: wrap;
     gap: spacing("base");
     justify-content: center;
+    padding-bottom: 10px;
 
     @include breakpoint("medium") {
         gap: spacing("single");
