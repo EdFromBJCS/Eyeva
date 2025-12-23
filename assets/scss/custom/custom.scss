@@ -123,11 +123,17 @@
 .mobile-data-table {
     display: grid;
     grid-template-columns: auto auto;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .mobile-data-recurring-row {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: auto;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @media screen and (max-width: 876px) {
@@ -231,10 +237,11 @@ div.tab-button2 div {
 .tab-table-trade {
     border-collapse: separate;
     border-spacing: 5px;
-    max-width: 25rem;
-    min-width: 25rem;
+    max-width: 30rem;
+    min-width: 30rem;
     table-layout: fixed;
     width: 100%;
+    padding-bottom: 10px;
 }
 
 .tab-table-repair {
@@ -244,6 +251,7 @@ div.tab-button2 div {
     min-width: 40rem;
     table-layout: fixed;
     width: 100%;
+    padding-bottom: 10px;
 }
 
 .repair-indent {
