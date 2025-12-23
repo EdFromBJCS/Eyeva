@@ -14,6 +14,7 @@
 .blog {
     display: flex;
     gap: $spacing-base * 2;
+    padding: 10px 0px 10px 0px;
 
     +.blog {
         margin-top: $spacing-base * 2;
@@ -79,7 +80,6 @@ h2.blog-title {
 .blog-thumbnail {
 
     @include lazy-loaded-padding("blog_size");
-    margin: 0;
     max-width: get_width(stencilString("blog_size"));
     position: relative;
 
