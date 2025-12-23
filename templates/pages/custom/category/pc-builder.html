@@ -29,7 +29,7 @@ category:
         {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
 
 
-        <h1 class="page-heading">{{category.name}} - <span id="papathemes-pcbuilder-active-config-name">{{lang 'pc_builder.config.default_name'}}</span></h1>
+        <h1 class="page-heading">{{category.name}} - {{lang 'pc_builder.selection_assistance.title'}}</h1>
         <div class="page-description">{{{category.description}}}</div>
 
         {{{region name="category_below_header"}}}
@@ -39,243 +39,264 @@ category:
     <div class="papathemes-pcbuilder-layout">
         <!-- Left Column: Main Content -->
         <div class="papathemes-pcbuilder-main">
-            <!-- Components List -->
-            <div class="papathemes-pcbuilder-components">
-                {{#each category.subcategories}}
-                <div class="papathemes-pcbuilder-component-row" data-category="{{id}}" data-category-id="{{id}}" data-category-name="{{name}}" data-category-url="{{url}}">
-                    <div class="papathemes-pcbuilder-component-info">
-                        <!-- Category thumbnail - hiện khi chưa chọn sản phẩm -->
-                        <div class="papathemes-pcbuilder-category-thumbnail">
-                            {{#if image}}
-                                {{> components/common/responsive-img
-                                    image=image
-                                    fallback_size="144x144"
-                                    lazyload=theme_settings.lazyload_mode
-                                    class="papathemes-pcbuilder-category-image"
-                                    default_image=theme_settings.default_image_product
-                                }}
-                            {{else}}
-                                <div class="papathemes-pcbuilder-category-placeholder">
-                                    <i class="icon" aria-hidden="true">
-                                        <svg><use href="#icon-image"></use></svg>
-                                    </i>
-                                </div>
-                            {{/if}}
-                        </div>
-                                                <div class="papathemes-pcbuilder-component-details">
-                            <h3 class="papathemes-pcbuilder-component-name">{{name}}</h3>
-                            <div class="papathemes-pcbuilder-component-selection">
-                                <!-- Product info với thumbnail khi đã chọn -->
-                                <div class="papathemes-pcbuilder-selected-product-info" style="display: none;">
-                                    <div class="papathemes-pcbuilder-product-thumbnail">
-                                        <!-- Thumbnail sẽ được thêm bằng JavaScript -->
-                                    </div>
-                                    <div class="papathemes-pcbuilder-product-details">
-                                        <span class="papathemes-pcbuilder-selected-product"></span>
-                                        <span class="papathemes-pcbuilder-selected-price"></span>
-                                    </div>
-                                </div>
-                                <!-- Default text khi chưa chọn -->
-                                <div class="papathemes-pcbuilder-no-selection">
-                                    <span class="papathemes-pcbuilder-no-product-text">{{lang 'pc_builder.component.no_selection'}}</span>
-                                    <span class="papathemes-pcbuilder-no-product-price">$0.00</span>
-                                </div>
-                            </div>
+            <!-- Selection Assistance Form -->
+            <form id="pc-selection-form" class="papathemes-selection-form">
+                <!-- Initial Questions Section -->
+                <fieldset class="papathemes-form-section">
+                    <legend class="papathemes-form-legend">{{lang 'pc_builder.selection.initial_questions'}}</legend>
+                    
+                    <div class="papathemes-form-group">
+                        <label for="computer-condition">{{lang 'pc_builder.selection.computer_condition'}}</label>
+                        <select id="computer-condition" name="computer_condition">
+                            <option value="">{{lang 'pc_builder.selection.select_option'}}</option>
+                            <option value="new">{{lang 'pc_builder.selection.new_computers'}}</option>
+                            <option value="refurbished">{{lang 'pc_builder.selection.refurbished_computers'}}</option>
+                            <option value="both">{{lang 'pc_builder.selection.either_both'}}</option>
+                        </select>
+                    </div>
+
+                    <div class="papathemes-form-group">
+                        <label for="computer-type">{{lang 'pc_builder.selection.computer_type'}}</label>
+                        <select id="computer-type" name="computer_type">
+                            <option value="">{{lang 'pc_builder.selection.select_option'}}</option>
+                            <option value="laptop">{{lang 'pc_builder.selection.laptop'}}</option>
+                            <option value="desktop">{{lang 'pc_builder.selection.desktop'}}</option>
+                            <option value="tablet">{{lang 'pc_builder.selection.tablet'}}</option>
+                            <option value="not_sure">{{lang 'pc_builder.selection.not_sure'}}</option>
+                        </select>
+                    </div>
+
+                    <div class="papathemes-form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="job-use" name="job_use">
+                            {{lang 'pc_builder.selection.job_use'}}
+                        </label>
+                    </div>
+                </fieldset>
+
+                <!-- Environmental Conditions Section -->
+                <fieldset class="papathemes-form-section">
+                    <legend class="papathemes-form-legend">{{lang 'pc_builder.selection.environmental_conditions'}}</legend>
+                    
+                    <div class="papathemes-form-group">
+                        <label>{{lang 'pc_builder.selection.environment_description'}}</label>
+                        <div class="papathemes-checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="environment[]" value="wet">
+                                {{lang 'pc_builder.selection.wet'}}
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="environment[]" value="oily">
+                                {{lang 'pc_builder.selection.oily'}}
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="environment[]" value="dusty">
+                                {{lang 'pc_builder.selection.dusty_dirty_sandy'}}
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="environment[]" value="humid">
+                                {{lang 'pc_builder.selection.humid'}}
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="environment[]" value="rough">
+                                {{lang 'pc_builder.selection.rough'}}
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="environment[]" value="hot">
+                                {{lang 'pc_builder.selection.hot'}}
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="environment[]" value="cold">
+                                {{lang 'pc_builder.selection.cold'}}
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="environment[]" value="bright_sunny">
+                                {{lang 'pc_builder.selection.bright_sunny'}}
+                            </label>
                         </div>
                     </div>
-                    <div class="papathemes-pcbuilder-component-actions">
-                        <button class="papathemes-pcbuilder-action-button papathemes-pcbuilder-select-component" data-component="{{id}}" data-category-id="{{id}}">
-                            {{lang 'pc_builder.component.select'}}
-                        </button>
-                        <div class="papathemes-pcbuilder-component-controls" style="display: none;">
-                            <!-- Edit button -->
-                            <button class="papathemes-pcbuilder-edit-component"
-                                    data-component="{{id}}"
-                                    data-action="edit"
-                                    aria-label="Edit {{name}} component">
-                                <span class="is-srOnly">Edit component</span>
-                                <i class="icon" aria-hidden="true"><svg><use href="#icon-pen"/></svg></i>
-                            </button>
 
-                            <!-- Quantity control -->
-                            <div class="form-increment papathemes-pcbuilder-quantity-control">
-                                <button class="papathemes-pcbuilder-qty-decrease"
-                                        data-component="{{id}}"
-                                        aria-label="Decrease {{name}} quantity">
-                                    <span class="is-srOnly">Decrease quantity</span>
-                                    <i class="icon" aria-hidden="true"><svg><use href="#icon-minus"/></svg></i>
-                                </button>
-                                <input type="tel"
-                                       class="form-input form-input--incrementTotal papathemes-pcbuilder-quantity-input"
-                                       value="1"
-                                       min="1"
-                                       max="10"
-                                       data-quantity-min="1"
-                                       data-quantity-max="10"
-                                       pattern="[0-9]*"
-                                       data-component="{{id}}"
-                                       aria-label="{{name}} quantity"
-                                       aria-live="polite">
-                                <button class="papathemes-pcbuilder-qty-increase"
-                                        data-component="{{id}}"
-                                        aria-label="Increase {{name}} quantity">
-                                    <span class="is-srOnly">Increase quantity</span>
-                                    <i class="icon" aria-hidden="true"><svg><use href="#icon-plus"/></svg></i>
-                                </button>
-                            </div>
-
-                            <!-- Remove button -->
-                            <button class="papathemes-pcbuilder-remove-component"
-                                    data-component="{{id}}"
-                                    data-action="remove"
-                                    aria-label="Remove {{name}} component">
-                                <span class="is-srOnly">Remove component</span>
-                                <i class="icon" aria-hidden="true"><svg><use href="#icon-trash"/></svg></i>
-                            </button>
-                        </div>
+                    <div class="papathemes-form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="vibration-shock" name="vibration_shock">
+                            {{lang 'pc_builder.selection.vibration_shock'}}
+                        </label>
                     </div>
+
+                    <div class="papathemes-form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="moving-vehicle" name="moving_vehicle">
+                            {{lang 'pc_builder.selection.moving_vehicle'}}
+                        </label>
+                    </div>
+                </fieldset>
+
+                <!-- Features and Requirements Section -->
+                <fieldset class="papathemes-form-section">
+                    <legend class="papathemes-form-legend">{{lang 'pc_builder.selection.features_requirements'}}</legend>
+                    
+                    <div class="papathemes-form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="touchscreen" name="touchscreen">
+                            {{lang 'pc_builder.selection.touchscreen'}}
+                        </label>
+                    </div>
+
+                    <div class="papathemes-form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="mobile-data" name="mobile_data">
+                            {{lang 'pc_builder.selection.mobile_data'}}
+                        </label>
+                    </div>
+
+                    <div class="papathemes-form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="gps" name="gps">
+                            {{lang 'pc_builder.selection.gps'}}
+                        </label>
+                    </div>
+
+                    <div class="papathemes-form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="optical-drive" name="optical_drive">
+                            {{lang 'pc_builder.selection.optical_drive'}}
+                        </label>
+                    </div>
+
+                    <div class="papathemes-form-group">
+                        <label for="budget">{{lang 'pc_builder.selection.budget'}}</label>
+                        <select id="budget" name="budget">
+                            <option value="">{{lang 'pc_builder.selection.select_option'}}</option>
+                            <option value="under_500">{{lang 'pc_builder.selection.under_500'}}</option>
+                            <option value="500_1000">{{lang 'pc_builder.selection.500_1000'}}</option>
+                            <option value="1000_1500">{{lang 'pc_builder.selection.1000_1500'}}</option>
+                            <option value="1500_2000">{{lang 'pc_builder.selection.1500_2000'}}</option>
+                            <option value="over_2000">{{lang 'pc_builder.selection.over_2000'}}</option>
+                        </select>
+                    </div>
+
+                    <div class="papathemes-form-group">
+                        <label for="additional-notes">{{lang 'pc_builder.selection.additional_notes'}}</label>
+                        <textarea id="additional-notes" name="additional_notes" rows="3" placeholder="{{lang 'pc_builder.selection.notes_placeholder'}}"></textarea>
+                    </div>
+                </fieldset>
+
+                <!-- Contact Information Section -->
+                <fieldset class="papathemes-form-section">
+                    <legend class="papathemes-form-legend">{{lang 'pc_builder.selection.contact_info'}}</legend>
+                    
+                    <div class="papathemes-form-group">
+                        <label for="first-name">{{lang 'pc_builder.selection.first_name'}} <span class="required">*</span></label>
+                        <input type="text" id="first-name" name="first_name" required>
+                    </div>
+
+                    <div class="papathemes-form-group">
+                        <label for="email">{{lang 'pc_builder.selection.email'}} <span class="required">*</span></label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="papathemes-form-group">
+                        <label for="phone">{{lang 'pc_builder.selection.phone'}}</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+
+                    <div class="papathemes-form-group">
+                        <label for="contact-method">{{lang 'pc_builder.selection.contact_method'}}</label>
+                        <select id="contact-method" name="contact_method">
+                            <option value="email">{{lang 'pc_builder.selection.by_email'}}</option>
+                            <option value="phone">{{lang 'pc_builder.selection.by_phone'}}</option>
+                        </select>
+                    </div>
+
+                    <div class="papathemes-form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            {{lang 'pc_builder.selection.subscribe_newsletter'}}
+                        </label>
+                    </div>
+                </fieldset>
+
+                <!-- Submit Button -->
+                <div class="papathemes-form-actions">
+                    <button type="submit" class="button button--primary">{{lang 'pc_builder.selection.request_assistance'}}</button>
+                    <button type="button" id="filter-products" class="button button--secondary">{{lang 'pc_builder.selection.filter_products'}}</button>
                 </div>
-                {{/each}}
-            </div>
+            </form>
 
-            <!-- Final Actions - removed per user request -->
+            <!-- Filtered Products Section -->
+            <div id="filtered-products-section" class="papathemes-filtered-products" style="display: none;">
+                <h2>{{lang 'pc_builder.selection.filtered_results'}}</h2>
+                <div id="filtered-products-list" class="papathemes-products-grid">
+                    <!-- Products will be loaded here via JavaScript -->
+                </div>
+                <div id="no-products-message" class="papathemes-no-products" style="display: none;">
+                    <p>{{lang 'pc_builder.selection.no_products_found'}}</p>
+                    <p>{{lang 'pc_builder.selection.contact_for_help'}}</p>
+                </div>
+            </div>
         </div>
 
         <!-- Right Column: Sidebar -->
-        <div class="papathemes-pcbuilder-sidebar">
-            <!-- Configuration List -->
-            <div class="papathemes-pcbuilder-config-list-section">
-                <div class="papathemes-pcbuilder-config-list-header" id="papathemes-pcbuilder-config-list-header">
-                    <h3>{{lang 'pc_builder.config.your_configurations'}}</h3>
-                    <div class="papathemes-pcbuilder-config-header-actions">
-                        <span class="papathemes-pcbuilder-config-count">
-                            <span id="papathemes-pcbuilder-config-count">1</span>/5
-                        </span>
-                        <button class="button button--small papathemes-pcbuilder-add-config-btn" id="papathemes-pcbuilder-add-config"
-                                title="{{lang 'pc_builder.config.add_new'}}"
-                                aria-label="{{lang 'pc_builder.config.add_new'}}">
-                            <i class="icon" aria-hidden="true">
-                                <svg><use href="#icon-plus"></use></svg>
-                            </i>
-                        </button>
+        <div class="papathemes-selection-sidebar">
+            <!-- Selection Assistance Info -->
+            <div class="papathemes-selection-info-section">
+                <div class="papathemes-selection-info-header">
+                    <h3>{{lang 'pc_builder.selection.how_it_works'}}</h3>
+                </div>
+                <div class="papathemes-selection-info-content">
+                    <p>{{lang 'pc_builder.selection.how_it_works_desc'}}</p>
+                    <ul>
+                        <li>{{lang 'pc_builder.selection.step_1'}}</li>
+                        <li>{{lang 'pc_builder.selection.step_2'}}</li>
+                        <li>{{lang 'pc_builder.selection.step_3'}}</li>
+                        <li>{{lang 'pc_builder.selection.step_4'}}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="papathemes-selection-tips">
+                <div class="papathemes-selection-tips-header">
+                    <h3>{{lang 'pc_builder.selection.tips'}}</h3>
+                </div>
+                <div class="papathemes-selection-tips-content">
+                    <div class="papathemes-tip">
+                        <h4>{{lang 'pc_builder.selection.budget_tip_title'}}</h4>
+                        <p>{{lang 'pc_builder.selection.budget_tip_desc'}}</p>
+                    </div>
+                    <div class="papathemes-tip">
+                        <h4>{{lang 'pc_builder.selection.requirements_tip_title'}}</h4>
+                        <p>{{lang 'pc_builder.selection.requirements_tip_desc'}}</p>
+                    </div>
+                    <div class="papathemes-tip">
+                        <h4>{{lang 'pc_builder.selection.future_proofing_title'}}</h4>
+                        <p>{{lang 'pc_builder.selection.future_proofing_desc'}}</p>
                     </div>
                 </div>
-                <div class="papathemes-pcbuilder-config-list" id="papathemes-pcbuilder-config-list">
-                    <!-- Configuration items will be dynamically added by JavaScript -->
-                </div>
-                <div class="papathemes-pcbuilder-config-actions">
-                    <button class="button papathemes-pcbuilder-compare-btn" id="papathemes-pcbuilder-compare-configs" disabled>
-                        <i class="icon" aria-hidden="true">
-                            <svg><use href="#icon-chart-line"></use></svg>
-                        </i>
-                        {{lang 'pc_builder.config.compare'}}
-                    </button>
-                </div>
             </div>
 
-
-            <!-- Build Summary -->
-            <div class="papathemes-pcbuilder-summary">
-                <div class="papathemes-pcbuilder-summary-header">
-                    <h2>{{lang 'pc_builder.build.summary'}}</h2>
+            <!-- Contact Info -->
+            <div class="papathemes-selection-contact">
+                <div class="papathemes-selection-contact-header">
+                    <h3>{{lang 'pc_builder.selection.need_help'}}</h3>
                 </div>
-                <div class="papathemes-pcbuilder-summary-content">
-                    <div class="papathemes-pcbuilder-total-price">
-                        <span class="papathemes-pcbuilder-price-label">{{lang 'pc_builder.build.total_price'}}</span>
-                        <span class="papathemes-pcbuilder-price-value">$0.00</span>
-                    </div>
-
-                </div>
-            </div>
-
-            <!-- Build Progress -->
-            <div class="papathemes-pcbuilder-progress">
-                <div class="papathemes-pcbuilder-progress-header">
-                    <h3>{{lang 'pc_builder.build.progress'}}</h3>
-                    <span class="papathemes-pcbuilder-progress-text">0/{{category.subcategories.length}} {{lang 'pc_builder.component.select'}}ed</span>
-                </div>
-                <div class="papathemes-pcbuilder-progress-bar">
-                    <div class="papathemes-pcbuilder-progress-fill" style="width: 0%"></div>
-                </div>
-            </div>
-
-            <!-- Build Actions -->
-            <div class="papathemes-pcbuilder-build-actions">
-                <!-- Primary Actions (always visible) -->
-                <div class="papathemes-pcbuilder-primary-actions">
-                    <!-- Mobile Summary (compact price display) -->
-                    <div class="papathemes-pcbuilder-mobile-summary">
-                        <div class="papathemes-pcbuilder-mobile-price">
-                            <span class="papathemes-pcbuilder-mobile-price-label">{{lang 'pc_builder.build.total_price'}}</span>
-                            <span class="papathemes-pcbuilder-mobile-price-value">$0.00</span>
+                <div class="papathemes-selection-contact-content">
+                    <p>{{lang 'pc_builder.selection.contact_desc'}}</p>
+                    <div class="papathemes-contact-methods">
+                        <div class="papathemes-contact-method">
+                            <i class="icon" aria-hidden="true"><svg><use href="#icon-phone"/></svg></i>
+                            <span>{{lang 'pc_builder.selection.call_us'}}</span>
                         </div>
-                        <div class="papathemes-pcbuilder-mobile-progress">
-                            <span class="papathemes-pcbuilder-mobile-config-name" id="papathemes-pcbuilder-mobile-config-name">{{lang 'pc_builder.config.default_name'}}</span>
-                            <span class="papathemes-pcbuilder-mobile-progress-text">0/{{category.subcategories.length}} {{lang 'pc_builder.component.select'}}ed</span>
+                        <div class="papathemes-contact-method">
+                            <i class="icon" aria-hidden="true"><svg><use href="#icon-envelope"/></svg></i>
+                            <span>{{lang 'pc_builder.selection.email_us'}}</span>
                         </div>
                     </div>
-
-                    <!-- Action Buttons Row -->
-                    <div class="papathemes-pcbuilder-action-buttons">
-                        <!-- Add to Cart - moved here from final actions -->
-                        <button class="papathemes-pcbuilder-action-button papathemes-pcbuilder-action-button-primary papathemes-pcbuilder-action-button-full" id="papathemes-pcbuilder-add-to-cart" disabled>
-                            <i class="icon-cart"></i>
-                            {{lang 'pc_builder.actions.add_to_cart'}}
-                        </button>
-
-                        <!-- Configuration Toggle Button (mobile/tablet only) -->
-                        <button class="papathemes-pcbuilder-config-toggle" id="papathemes-pcbuilder-config-toggle" title="{{lang 'pc_builder.config.your_configurations'}}" aria-label="{{lang 'pc_builder.config.your_configurations'}}">
-                            <i class="icon" aria-hidden="true">
-                                <svg><use href="#icon-list"></use></svg>
-                            </i>
-                        </button>
-
-                        <!-- More Actions Toggle (mobile/tablet only) -->
-                        <button class="papathemes-pcbuilder-more-toggle" id="papathemes-pcbuilder-more-toggle" title="More Actions" aria-label="More Actions">
-                            <span class="is-srOnly">{{lang 'common.load_more'}}</span>
-                            <i class="icon" aria-hidden="true"><svg><use href="#icon-circle-ellipsis"></use></svg></i>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Secondary Actions (collapsible on mobile/tablet) -->
-                <div class="papathemes-pcbuilder-secondary-actions" id="papathemes-pcbuilder-secondary-actions">
-                    <button class="papathemes-pcbuilder-action-button papathemes-pcbuilder-action-button-secondary papathemes-pcbuilder-action-button-full" id="papathemes-pcbuilder-save-build">
-                        <i class="icon-save"></i>
-                        {{lang 'pc_builder.actions.save_build'}}
-                    </button>
-                    <button class="papathemes-pcbuilder-action-button papathemes-pcbuilder-action-button-secondary papathemes-pcbuilder-action-button-full" id="papathemes-pcbuilder-load-build">
-                        <i class="icon-load"></i>
-                        {{lang 'pc_builder.actions.load_build'}}
-                    </button>
-                    <button class="papathemes-pcbuilder-action-button papathemes-pcbuilder-action-button-secondary papathemes-pcbuilder-action-button-full" id="papathemes-pcbuilder-share-build">
-                        <i class="icon-share"></i>
-                        {{lang 'pc_builder.actions.share_build'}}
-                    </button>
-                    <button class="papathemes-pcbuilder-action-button papathemes-pcbuilder-action-button-secondary papathemes-pcbuilder-action-button-full" id="papathemes-pcbuilder-export-excel">
-                        {{lang 'pc_builder.actions.export_excel'}}
-                    </button>
-                    <button class="papathemes-pcbuilder-action-button papathemes-pcbuilder-action-button-secondary papathemes-pcbuilder-action-button-full" id="papathemes-pcbuilder-view-print">
-                        <i class="icon-print"></i>
-                        {{lang 'pc_builder.actions.view_print'}}
-                    </button>
-                    <button class="papathemes-pcbuilder-action-button papathemes-pcbuilder-action-button-secondary papathemes-pcbuilder-action-button-full" id="papathemes-pcbuilder-clear-build">
-                        <i class="icon-clear"></i>
-                        {{lang 'pc_builder.actions.clear_build'}}
-                    </button>
-                </div>
-            </div>
-
-            <!-- Component Specs (when selected) -->
-            <div class="papathemes-pcbuilder-selected-specs" style="display: none;">
-                <h3>{{lang 'products.description'}}</h3>
-                <div class="papathemes-pcbuilder-specs-content">
-                    <!-- Will be populated by JavaScript -->
                 </div>
             </div>
 
             <!-- Sidebar Region -->
-            <div class="papathemes-pcbuilder-sidebar-region">
+            <div class="papathemes-selection-sidebar-region">
                 {{{region name="category_sidebar"}}}
             </div>
         </div>
