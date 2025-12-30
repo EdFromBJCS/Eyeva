@@ -31,6 +31,17 @@
         }
     }
 
+    @media (max-width: (screenSize("medium") - 1px)) {
+        ._grid {
+            ._col {
+                display: block;
+                width: 100%;
+                
+                margin: 10px;;
+            }
+    }
+}
+
     // Apply custom style for specific theme Eyeva
     &._theme-styled {
         ._theme-fixed .papathemes-eyeva-hero-carousel-image {
@@ -60,6 +71,25 @@
         }
     }
 
+    .papathemes-eyeva-hero-carousel-content {
+        top: 70%;
+        max-width: 100%;
+
+        @include breakpoint("xxsmall") {
+
+            .papathemes-eyeva-hero-carousel-title,
+            .papathemes-eyeva-hero-carousel-description {
+                color: #222222;
+            }
+        }
+
+        @include breakpoint("medium") {
+
+            .papathemes-eyeva-hero-carousel-title,
+            .papathemes-eyeva-hero-carousel-description {
+                color: #ffffff;
+            }
+        }
 
     // Nếu widget region trống thì hiển thị khung viền in development mode
     ._dev-mode & {
@@ -75,4 +105,5 @@
             }
         }
     }
+}
 }
