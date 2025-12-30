@@ -18,6 +18,108 @@
     height: 100%;
 }
 
+//Wishlist
+@media (max-width: (screenSize("medium") - 1px)) {
+    .wishlist-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+}
+
+// Trade-In Page
+
+.trade-in-table {
+    border: 2px solid;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 8px;
+    width: 90%;
+}
+
+@media screen and (max-width: 700px) {
+    .trade-in-table {
+        width: 90%;
+    }
+}
+
+.trade-in-table th,
+.trade-in-table td {
+    border: 2px solid;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.pan-table-column,
+.getac-table-column,
+.dell-table-column {
+    width: 10rem;
+}
+
+.cell-checked {
+    background-color: hsla(6.1, 73.2%, 49.8%, 0.7);
+}
+
+// Frequently Asked Questions
+.faqtitle {
+    margin: 0;
+}
+
+.faq1,
+.faq2,
+.faq3 {
+    display: inline-block;
+}
+
+.expandfaq {
+    display: inline-block;
+}
+
+.expandfaq {
+    .faqplus {
+        color: #dc3522;
+        display: inline-block;
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        display: inline-block;
+        margin: 0;
+        text-align: left;
+        text-transform: none !important;
+        vertical-align: middle;
+    }
+}
+
+.faqplus {
+    color: #dc3522;
+    display: inline-block;
+    font-size: 1.75rem;
+}
+
+button.expandfaq.button-alt::after {
+    margin: 0;
+}
+
+.faqdivider {
+    border-color: #c4301f;
+    border-width: 3px;
+    margin-top: 0;
+    width: 30%;
+}
+
+.answer {
+    display: none;
+}
+
+.faqicon {
+    max-width: revert;
+}
+
+.under-tab-faq {
+    margin: 0;
+}
+
 // Category Page
 .category-description {
     padding: 0px 10% 0px 10%;
@@ -107,6 +209,14 @@
         color: #fff;
     }
 }
+
+@media (max-width: (screenSize("medium") - 1px)) {
+        ._info {
+        display: none;
+}
+}
+
+
 
 .navInfo {
     list-style: none;
@@ -258,7 +368,7 @@ div.tab-button2 div {
     margin-left: 5em;
 }
 
-@media screen and (max-width: 550px) {
+@media (max-width: (screenSize("small") - 1px)) {
 
     .tab-table-repair,
     .tab-table-trade {

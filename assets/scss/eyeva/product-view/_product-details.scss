@@ -1,4 +1,3 @@
-
 .productView {
     @include breakpoint("medium") {
         display: grid;
@@ -34,10 +33,17 @@
         box-shadow: $eyeva-shadow-panel;
         padding: spacing("base");
         position: sticky;
-        top: 0;
+        top: 60px;
+        z-index: 1;
 
         @include breakpoint("large") {
             padding: spacing("single");
+        }
+    }
+
+    @media (max-width: (screenSize("medium") - 1px)) {
+        ._eyeva-sticky-box {
+            position: static;
         }
     }
 }
@@ -70,6 +76,10 @@
 
     &.product-options {
         margin-top: spacing("base");
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 0 32px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
     }
 }
 
@@ -170,7 +180,7 @@
     margin-inline-end: remCalc(60px);
 
     @include breakpoint("medium") {
-        font-size: $eyeva-font-40;
+        font-size: 2rem;
         margin-inline-end: remCalc(76px);
     }
 }
@@ -179,13 +189,16 @@
 // -----------------------------------------------------------------------------
 
 .form-wishlist {
+    width: auto;
+}
+@include breakpoint("medium") {
+    .form-wishlist {
     margin: 0;
     padding: 0;
     position: absolute;
     right: 0;
     top: 0;
-    width: auto;
-
+}
 }
 
 .button-wishlist-icon {
@@ -319,7 +332,7 @@
     color: $color-textSecondary;
     display: flex;
     flex-wrap: wrap;
-    font-size: fontSize("smaller");
+    font-size: fontSize("small");
     margin-bottom: spacing("third") / 2;
 
     @include breakpoint("medium") {
@@ -405,7 +418,7 @@
         gap: spacing("third") / 4;
     }
 
-    > span {
+    >span {
         margin: 0 spacing("third") spacing("third") / 2 0;
     }
 
@@ -434,7 +447,7 @@
         border-radius: $eyeva-small-radius;
         color: $color-textSecondary;
         font-size: fontSize("smaller");
-        margin: 0 spacing("third") spacing("third") / 2 0;
+        // margin: 0 spacing("third") spacing("third") / 2 0;
         padding: spacing("third") / 4 spacing("third") / 2;
     }
 }
@@ -446,9 +459,7 @@
     font-size: fontSize("smaller");
 
     &:has(.productView-info-value) {
-        border-top: container("border");
         margin-top: spacing("base") - spacing("third") / 2;
-        padding-top: spacing("base");
     }
 
     > :first-child {
@@ -520,7 +531,7 @@
             .form-option-wrapper {
                 display: block;
 
-                + .form-option-wrapper {
+                +.form-option-wrapper {
                     margin-top: spacing("third");
                 }
             }
@@ -547,7 +558,7 @@
         }
     }
 
-    .form-radio:checked + .form-option {
+    .form-radio:checked+.form-option {
         box-shadow: none;
     }
 
@@ -593,16 +604,17 @@
 
         // show the checked option
         .form-radio:not(:checked):not(._checking) {
-            + .form-option {
+            +.form-option {
                 display: none;
             }
         }
 
         // if no option checked, then show the first not disabled option
         &:not(:has(.form-radio:checked)) {
+
             // show not disabled 'none' option
-            > .form-radio:not(:disabled) {
-                + .form-option {
+            >.form-radio:not(:disabled) {
+                +.form-option {
                     display: inline-block;
                 }
             }
@@ -618,7 +630,7 @@
             min-height: remCalc($eyeva-small-button-height);
             padding: 0;
 
-            + .button {
+            +.button {
                 margin-left: spacing("third");
             }
         }
@@ -856,5 +868,68 @@
             transform: rotate(-45deg);
             transform-origin: 100% 0;
         }
+    }
+}
+
+.productView-sticky-bar {
+    display: none;
+
+
+
+    @include eyeva-screen-mobile-tablet {
+        background: container("fill");
+        border-top: container("border");
+        bottom: 0;
+        display: flex;
+        gap: spacing("base");
+        justify-content: space-between;
+        left: 0;
+        padding: spacing("base");
+        position: fixed;
+        right: 0;
+        z-index: zIndex("high");
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+
+        .productView-sticky-price {
+            flex: 1;
+            font-weight: bold;
+        }
+
+        .productView-sticky-add-to-cart {
+            flex-shrink: 0;
+
+            .button {
+                width: 100%;
+            }
+        }
+
+        .price,
+        .price--main {
+            font-size: 25px;
+        }
+    }
+}
+
+// Hide main price and add to cart on mobile since sticky bar shows them
+@include eyeva-screen-mobile-tablet {
+    .productView-price {
+        display: none;
+    }
+
+    [data-eyeva-add-to-cart-wrapper] {
+        display: none;
+    }
+}
+
+// Make price sticky on desktop within the sticky box
+@include breakpoint("medium") {
+    .productView-price {
+        position: sticky;
+        top: 0;
+        background: container("fill");
+        z-index: zIndex("low");
+        padding-top: spacing("base");
+        margin-top: -spacing("base");
+        border-bottom: container("border");
     }
 }

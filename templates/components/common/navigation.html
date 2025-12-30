@@ -86,13 +86,11 @@
                 <span class="is-srOnly">{{lang 'common.search'}}</span>
             </button>
         </li>
-        {{#if settings.show_wishlist}}
             <li class="navUser-item navUser-item--wishlist">
                 <a class="navUser-action navUser-action--wishlist" href="{{urls.account.wishlists.all}}" title="{{lang 'common.wishlist'}}" {{#unless customer}}data-wishlist-open{{/unless}}>
                     <svg class="icon"><use xlink:href="#icon-heart" /></svg>
                 </a>
             </li>
-        {{/if}}
         <!-- {{#if settings.gift_certificates_enabled}}
             <li class="navUser-item">
                 <a class="navUser-action"

@@ -1,12 +1,7 @@
-<article
-    class="card
+<article class="card
     {{#if alternate}} card--alternate{{/if}}
-    {{#if theme_settings.card_style '===' 'boxed'}} card--boxed{{/if}}"
-    data-test="card-{{id}}"
-    data-event-type="{{event}}"
-    data-entity-id="{{id}}"
-    data-position="{{position}}"
-    data-name="{{name}}"
+    {{#if theme_settings.card_style '===' 'boxed'}} card--boxed{{/if}}" data-test="card-{{id}}"
+    data-event-type="{{event}}" data-entity-id="{{id}}" data-position="{{position}}" data-name="{{name}}"
     data-product-category="
     {{#each category}}
         {{#if @last}}
@@ -14,9 +9,7 @@
         {{else}}
             {{this}},
         {{/if}}
-    {{/each}}"
-    data-product-brand="{{brand.name}}"
-    data-product-price="
+    {{/each}}" data-product-brand="{{brand.name}}" data-product-price="
     {{#or customer (unless settings.hide_price_from_guests)}}
         {{#if price.with_tax}}
             {{price.with_tax.value}}
@@ -25,22 +18,17 @@
         {{/if}}
     {{else}}
         {{lang 'common.login_for_pricing'}}
-    {{/or}}"
-    data-product-simple="{{#if has_options}}false{{else}}true{{/if}}"
->
+    {{/or}}" data-product-simple="{{#if has_options}}false{{else}}true{{/if}}">
     <figure class="card-figure">
-        <a href="{{url}}"
-           class="card-figure__link"
-           aria-label="{{> components/products/product-info}}"
-           data-event-type="product-click"
-        >
+        <a href="{{url}}" class="card-figure__link" aria-label="{{> components/products/product-info}}"
+            data-event-type="product-click">
             <div class="card-img-container">
                 {{> components/common/responsive-img
-                    image=image
-                    class="card-image"
-                    fallback_size=theme_settings.productgallery_size
-                    lazyload=theme_settings.lazyload_mode
-                    default_image=theme_settings.default_image_product
+                image=image
+                class="card-image"
+                fallback_size=theme_settings.productgallery_size
+                lazyload=theme_settings.lazyload_mode
+                default_image=theme_settings.default_image_product
                 }}
             </div>
         </a>
@@ -49,119 +37,115 @@
         <figcaption class="card-figcaption">
             <div class="card-figcaption-body">
                 <div class="_bottomLeft">
-                    {{#if settings.show_wishlist}}
-                        {{> components/products/card-wishlist-dropdown}}
-                    {{/if}}
+                    {{> components/products/card-wishlist-dropdown}}
                 </div>
                 {{#if theme_settings.card_show_gallery}}
-                    <div class="_bottomRight">
-                        <button type="button" class="card-figcaption-button _videos" data-video-button style="display:none">
-                            <span class="icon"><svg aria-hidden="true"><use href="#icon-play"></use></svg></span>
-                            <span class="is-srOnly">{{lang 'products.videos.show'}}</span>
-                        </button>
-                        <button type="button" class="card-figcaption-button _img360" data-360-button style="display:none">
-                            <span class="icon"><svg aria-hidden="true"><use href="#icon-360"></use></svg></span>
-                            <span class="is-srOnly">{{lang 'products.image360'}}</span>
-                        </button>
-                    </div>
+                <div class="_bottomRight">
+                    <button type="button" class="card-figcaption-button _videos" data-video-button style="display:none">
+                        <span class="icon"><svg aria-hidden="true">
+                                <use href="#icon-play"></use>
+                            </svg></span>
+                        <span class="is-srOnly">{{lang 'products.videos.show'}}</span>
+                    </button>
+                    <button type="button" class="card-figcaption-button _img360" data-360-button style="display:none">
+                        <span class="icon"><svg aria-hidden="true">
+                                <use href="#icon-360"></use>
+                            </svg></span>
+                        <span class="is-srOnly">{{lang 'products.image360'}}</span>
+                    </button>
+                </div>
                 {{/if}}
                 {{#unless theme_settings.card_show_button}}
-                    <div class="_center">
-                        {{> components/products/card-actions}}
-                    </div>
+                <div class="_center">
+                    {{> components/products/card-actions}}
+                </div>
                 {{/unless}}
             </div>
         </figcaption>
     </figure>
     <div class="card-body">
         {{#if theme_settings.card_style '===' 'boxed'}}
+        <h3 class="card-title">
+            <a aria-label="{{> components/products/product-info}}" href="{{url}}" data-event-type="product-click">
+                {{name}}
+            </a>
+        </h3>
+
+        {{#if theme_settings.card_show_swatches}}
+        <div class="card-text card-text--colorswatches"></div>
+        {{/if}}
+
+        <div class="card-body-row">
+            <div class="card-prices" data-test-info-type="price">
+                {{#or customer (unless settings.hide_price_from_guests)}}
+                {{> components/products/price price=price}}
+                {{else}}
+                {{> components/common/login-for-pricing}}
+                {{/or}}
+            </div>
+            {{#and rating show_rating}}
+            <p class="card-ratings" data-test-info-type="productRating">
+                <span class="rating--small">
+                    {{> components/products/ratings-mini rating_target=name rating=rating}}
+                </span>
+            </p>
+            {{/and}}
+        </div>
+        {{else}}
+        <div class="card-body-row">
             <h3 class="card-title">
-                <a aria-label="{{> components/products/product-info}}"
-                   href="{{url}}"
-                   data-event-type="product-click"
-                >
+                <a aria-label="{{> components/products/product-info}}" href="{{url}}" data-event-type="product-click">
                     {{name}}
                 </a>
             </h3>
 
+            <div class="card-prices" data-test-info-type="price">
+                {{#or customer (unless settings.hide_price_from_guests)}}
+                {{> components/products/price price=price}}
+                {{else}}
+                {{> components/common/login-for-pricing}}
+                {{/or}}
+            </div>
+        </div>
+
+        <div class="card-body-row-swatch-rating">
             {{#if theme_settings.card_show_swatches}}
-                <div class="card-text card-text--colorswatches"></div>
+            <div class="card-text card-text--colorswatches"></div>
             {{/if}}
 
-            <div class="card-body-row">
-                <div class="card-prices" data-test-info-type="price">
-                    {{#or customer (unless settings.hide_price_from_guests)}}
-                        {{> components/products/price price=price}}
-                    {{else}}
-                        {{> components/common/login-for-pricing}}
-                    {{/or}}
-                </div>
-                {{#and rating show_rating}}
-                    <p class="card-ratings" data-test-info-type="productRating">
-                        <span class="rating--small">
-                            {{> components/products/ratings-mini rating_target=name rating=rating}}
-                        </span>
-                    </p>
-                {{/and}}
-            </div>
-        {{else}}
-            <div class="card-body-row">
-                <h3 class="card-title">
-                    <a aria-label="{{> components/products/product-info}}"
-                       href="{{url}}"
-                       data-event-type="product-click"
-                    >
-                        {{name}}
-                    </a>
-                </h3>
-
-                <div class="card-prices" data-test-info-type="price">
-                    {{#or customer (unless settings.hide_price_from_guests)}}
-                        {{> components/products/price price=price}}
-                    {{else}}
-                        {{> components/common/login-for-pricing}}
-                    {{/or}}
-                </div>
-            </div>
-
-            <div class="card-body-row-swatch-rating">
-                {{#if theme_settings.card_show_swatches}}
-                    <div class="card-text card-text--colorswatches"></div>
-                {{/if}}
-
-                {{#and rating show_rating}}
-                    <p class="card-ratings" data-test-info-type="productRating">
-                        <span class="rating--small">
-                            {{> components/products/ratings-mini rating_target=name rating=rating}}
-                        </span>
-                    </p>
-                {{/and}}
-            </div>
+            {{#and rating show_rating}}
+            <p class="card-ratings" data-test-info-type="productRating">
+                <span class="rating--small">
+                    {{> components/products/ratings-mini rating_target=name rating=rating}}
+                </span>
+            </p>
+            {{/and}}
+        </div>
         {{/if}}
 
         {{!-- Custom fields for all card styles --}}
         {{#if theme_settings.card_custom_fields}}
-            <dl class="card-customFields">
-                {{#if theme_settings.card_custom_fields '===' '*'}}
-                    {{#each custom_fields}}
-                        {{#startsWith '__' name}}
-                        {{else}}
-                            <dt class="card-customField-name card-customField-name--{{dashcase name}}">{{name}}</dt>
-                            <dd class="card-customField-value card-customField-value--{{dashcase name}}">{{value}}</dd>
-                        {{/startsWith}}
-                    {{/each}}
-                {{else}}
-                    {{#unless theme_settings.card_custom_fields_array}}
-                        {{#if (merge theme_settings card_custom_fields_array=(split theme_settings.card_custom_fields ','))}}{{/if}}
-                    {{/unless}}
-                    {{#each custom_fields}}
-                        {{#inArray ../theme_settings.card_custom_fields_array name}}
-                            <dt class="card-customField-name card-customField-name--{{dashcase name}} _hide">{{name}}</dt>
-                            <dd class="card-customField-value card-customField-value--{{dashcase name}}">{{value}}</dd>
-                        {{/inArray}}
-                    {{/each}}
-                {{/if}}
-            </dl>
+        <dl class="card-customFields">
+            {{#if theme_settings.card_custom_fields '===' '*'}}
+            {{#each custom_fields}}
+            {{#startsWith '__' name}}
+            {{else}}
+            <dt class="card-customField-name card-customField-name--{{dashcase name}}">{{name}}</dt>
+            <dd class="card-customField-value card-customField-value--{{dashcase name}}">{{value}}</dd>
+            {{/startsWith}}
+            {{/each}}
+            {{else}}
+            {{#unless theme_settings.card_custom_fields_array}}
+            {{#if (merge theme_settings card_custom_fields_array=(split theme_settings.card_custom_fields ','))}}{{/if}}
+            {{/unless}}
+            {{#each custom_fields}}
+            {{#inArray ../theme_settings.card_custom_fields_array name}}
+            <dt class="card-customField-name card-customField-name--{{dashcase name}} _hide">{{name}}</dt>
+            <dd class="card-customField-value card-customField-value--{{dashcase name}}">{{value}}</dd>
+            {{/inArray}}
+            {{/each}}
+            {{/if}}
+        </dl>
         {{/if}}
     </div>
     <div class="card-footer">

@@ -12,11 +12,9 @@
 
 {{> components/papathemes/create-wishlist-modal}}
 
-{{#if settings.show_wishlist}}
     <script type="text/x-template" id="cardWishlistTemplate" nonce="{{nonce}}">
         {{> components/products/card-wishlist-dropdown id="%%PRODUCT_ID%%" name="%%PRODUCT_NAME%%"}}
     </script>
-{{/if}}
 
 <script type="text/x-template" id="quickSearchModalTemplate"
     data-modal-title="{{lang 'search.quick_search.header' name=settings.store_name}}"
