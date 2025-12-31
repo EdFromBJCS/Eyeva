@@ -127,15 +127,13 @@ button.expandfaq.button-alt::after {
 
 // Product Page
 
-
-
-
 @include breakpoint("medium") {
     .inventory-specs-btn-container {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
     .mobile-inventory-specs-btn-container {
         display: none;
     }
@@ -152,6 +150,12 @@ button.expandfaq.button-alt::after {
         display: flex;
         justify-content: center;
         gap: 15px;
+    }
+}
+
+.quickView {
+    .mobile-inventory-specs-btn-container, .inventory-specs-btn-container {
+        display: none;
     }
 }
 
