@@ -871,18 +871,20 @@
     }
 }
 
+.productView-sticky-flexbox {
+    display: flex;
+    gap: spacing("base");
+    justify-content: space-between;
+}
+
 .productView-sticky-bar {
     display: none;
-
-
-
+    
     @include eyeva-screen-mobile-tablet {
         background: container("fill");
         border-top: container("border");
         bottom: 0;
-        display: flex;
-        gap: spacing("base");
-        justify-content: space-between;
+        display: block;
         left: 0;
         padding: spacing("base");
         position: fixed;

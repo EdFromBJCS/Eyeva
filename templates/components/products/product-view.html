@@ -31,22 +31,22 @@
             <section class="productView-details product-data">
                 <div class="productView-product">
                     <div class="wishlist-flex">
-                    <h1 class="productView-title" data-eyeva-product-title>{{product.title}}</h1>
+                        <h1 class="productView-title" data-eyeva-product-title>{{product.title}}</h1>
 
-                    {{#if product.main_image}}
-                    <div class="_eyeva-quickview-image">
-                        {{> components/common/responsive-img
-                        image=product.main_image
-                        class="_eyeva-quickview-img"
-                        fallback_size=theme_settings.product_size
-                        lazyload=theme_settings.lazyload_mode
-                        default_image=theme_settings.default_image_product
-                        otherAttributes="data-main-image"
-                        }}
-                    </div>
-                    {{/if}}
+                        {{#if product.main_image}}
+                        <div class="_eyeva-quickview-image">
+                            {{> components/common/responsive-img
+                            image=product.main_image
+                            class="_eyeva-quickview-img"
+                            fallback_size=theme_settings.product_size
+                            lazyload=theme_settings.lazyload_mode
+                            default_image=theme_settings.default_image_product
+                            otherAttributes="data-main-image"
+                            }}
+                        </div>
+                        {{/if}}
 
-                    {{> components/common/wishlist-dropdown}}
+                        {{> components/common/wishlist-dropdown}}
                     </div>
                     <dl class="_eyeva-product-info-top">
                         {{#if product.brand}}
@@ -188,6 +188,12 @@
                 {{{region name="product_below_shipping--global"}}}
             </section>
         </div><!-- /._eyeva-sticky-box -->
+        <div class="mobile-inventory-specs-btn-container">
+            <a href="https://www.bobjohnson.com/blog/real-honest-photos-of-real-honest-toughbooks/"
+                class="button button--outline picturesActualInventory" target="_blank">Pictures Of Actual Inventory!
+                Learn More Here!</a>
+            <a href="#website-specifications" class="button button--primary" id="skipToSpecs">Skip To Specs</a>
+        </div>
         <section class="productView-details product-options">
             {{> components/eyeva/products/product-view/modifiers-modal/init}}
 
@@ -218,7 +224,7 @@
                     {{{region name="product_below_options"}}}
                     {{{region name="product_below_options--global"}}}
 
-                        {{> components/eyeva/products/product-view/modifiers-modal/add-to-cart}}
+                    {{> components/eyeva/products/product-view/modifiers-modal/add-to-cart}}
 
                     {{#if product.out_of_stock}}
                     {{#if product.out_of_stock_message}}
@@ -256,21 +262,77 @@
     </article>
 
     <div class="productView-sticky-bar">
-        <div class="productView-sticky-price">
-            {{#or customer (unless settings.hide_price_from_guests)}}
-            {{> components/products/price price=product.price}}
-            {{else}}
-            {{> components/common/login-for-pricing}}
-            {{/or}}
+        <div class="alertBox productAttributes-message" style="display:none">
+            <div class="alertBox-column alertBox-icon">
+                <icon glyph="ic-success" class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24">
+                        <path
+                            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z">
+                        </path>
+                    </svg></icon>
+            </div>
+            <p class="alertBox-column alertBox-message"></p>
         </div>
-        <div class="productView-sticky-add-to-cart">
-            <button class="button button--primary" type="button" data-sticky-add-to-cart>
-                {{#if product.pre_order}}
-                {{lang 'products.pre_order'}}
+        <div class="productView-sticky-flexbox">
+            <div class="productView-sticky-price">
+                {{#or customer (unless settings.hide_price_from_guests)}}
+                {{> components/products/price price=product.price}}
                 {{else}}
-                {{lang 'products.add_to_cart'}}
+                {{> components/common/login-for-pricing}}
+                {{/or}}
+            </div>
+            <div class="productView-sticky-add-to-cart">
+                {{#if product.show_quantity_input}}
+                {{inject 'productQuantityErrorMessage' (lang 'products.quantity_error_message')}}
+                <div class="form-field form-field--increments">
+                    <label class="form-label form-label--alternate is-srOnly" for="qty[]">{{lang
+                        'products.quantity'}}</label>
+                    <div class="form-increment mobile-increment" data-quantity-change>
+                        <button class="button button--icon" data-action="dec">
+                            <span class="is-srOnly">{{lang 'products.quantity_decrease' name=product.title}}</span>
+                            <i class="icon" aria-hidden="true">
+                                <svg>
+                                    <use href="#icon-minus" />
+                                </svg>
+                            </i>
+                        </button>
+                        <input class="form-input form-input--incrementTotal" id="qty[]" name="qty[]" type="tel"
+                            value="{{#if product.min_purchase_quantity}}{{product.min_purchase_quantity}}{{else}}1{{/if}}"
+                            data-quantity-min="{{product.min_purchase_quantity}}"
+                            data-quantity-max="{{product.max_purchase_quantity}}" min="1" pattern="[0-9]*"
+                            aria-live="polite">
+                        <button class="button button--icon" data-action="inc">
+                            <span class="is-srOnly">{{lang 'products.quantity_increase' name=product.title}}</span>
+                            <i class="icon" aria-hidden="true">
+                                <svg>
+                                    <use href="#icon-plus" />
+                                </svg>
+                            </i>
+                        </button>
+                    </div>
+                </div>
                 {{/if}}
+            </div>
+            {{#or customer (unless settings.hide_price_from_guests)}}
+            <button type="button" class="button button--primary" id="sticky-add-to-cart" {{#unless
+                product.can_purchase}}button--disabled{{/unless}}" {{#unless product.can_purchase}}disabled
+                aria-disabled="true" {{/unless}} data-can-purchase="{{product.can_purchase}}">
+                {{lang 'products.add_to_cart'}}
             </button>
+            {{/or}}
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const stickyBtn = document.getElementById('sticky-add-to-cart');
+        const productForm = document.querySelector('form[data-cart-item-add]');
+
+        if (!stickyBtn || !productForm) return;
+
+        stickyBtn.addEventListener('click', function () {
+            productForm.requestSubmit();
+        });
+    });
+</script>

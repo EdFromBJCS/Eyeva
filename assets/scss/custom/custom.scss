@@ -21,10 +21,10 @@
 //Wishlist
 @media (max-width: (screenSize("medium") - 1px)) {
     .wishlist-flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
 }
 
 // Trade-In Page
@@ -126,10 +126,33 @@ button.expandfaq.button-alt::after {
 }
 
 // Product Page
-.inventory-specs-btn-container {
+
+
+
+
+@include breakpoint("medium") {
+    .inventory-specs-btn-container {
     display: flex;
     justify-content: center;
     gap: 15px;
+}
+    .mobile-inventory-specs-btn-container {
+        display: none;
+    }
+}
+
+@media (max-width: (screenSize("medium") - 1px)) {
+    .inventory-specs-btn-container {
+        display: none;
+    }
+
+    .mobile-inventory-specs-btn-container {
+        background-color: #ffffff;
+        padding-top: 15px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
 }
 
 .product-sales-tax {
@@ -147,8 +170,9 @@ button.expandfaq.button-alt::after {
     position: fixed;
     left: 0;
     width: 100%;
-    top: 0; /* JS will overwrite this value on load/resize/scroll */
-    
+    top: 0;
+    /* JS will overwrite this value on load/resize/scroll */
+
 }
 
 .info-panel.is-open {
@@ -211,9 +235,9 @@ button.expandfaq.button-alt::after {
 }
 
 @media (max-width: (screenSize("medium") - 1px)) {
-        ._info {
+    ._info {
         display: none;
-}
+    }
 }
 
 
@@ -252,6 +276,12 @@ button.expandfaq.button-alt::after {
         flex-direction: column;
     }
 }
+
+// Mobile Increment For Sticky Cart
+.mobile-increment {
+    display: flex;
+}
+
 
 // Tab buttons and Elements
 
@@ -382,8 +412,9 @@ div.tab-button2 div {
 
 /* Navigation: show dropdowns on hover/focus for desktop, keep panel behavior for mobile */
 @media (min-width: 877px) {
-    .info-toggle:hover + .info-panel,
-    .info-toggle:focus-within + .info-panel {
+
+    .info-toggle:hover+.info-panel,
+    .info-toggle:focus-within+.info-panel {
         max-height: 1000px;
     }
 
@@ -398,14 +429,14 @@ div.tab-button2 div {
         background: #ffffff;
         color: #222;
         padding: 1rem;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
         display: none;
         min-width: 220px;
         z-index: 80;
     }
 
-    .navInfo li:hover > .info-submenu,
-    .navInfo li:focus-within > .info-submenu {
+    .navInfo li:hover>.info-submenu,
+    .navInfo li:focus-within>.info-submenu {
         display: block;
     }
 }
@@ -453,11 +484,11 @@ div.tab-button2 div {
     }
 
     /* When heading or content is hovered/focused, show immediately with no delay */
-    #blog-filter .filter-heading:hover + .filter-content,
-    #blog-filter .filter-heading:focus + .filter-content,
+    #blog-filter .filter-heading:hover+.filter-content,
+    #blog-filter .filter-heading:focus+.filter-content,
     #blog-filter .filter-content:hover,
-    #blog-filter #blog-filter-content > div:hover > .filter-content,
-    #blog-filter #blog-filter-content > div:focus-within > .filter-content {
+    #blog-filter #blog-filter-content>div:hover>.filter-content,
+    #blog-filter #blog-filter-content>div:focus-within>.filter-content {
         opacity: 1;
         visibility: visible;
         max-height: 1000px;
@@ -479,7 +510,8 @@ div.tab-button2 div {
         line-height: 1;
         transition: transform 0.25s ease;
         transform-origin: center;
-        color: inherit; /* make icon match text color */
+        color: inherit;
+        /* make icon match text color */
         margin-left: 6px;
     }
 
@@ -496,4 +528,3 @@ div.tab-button2 div {
         transform: rotate(180deg);
     }
 }
-
