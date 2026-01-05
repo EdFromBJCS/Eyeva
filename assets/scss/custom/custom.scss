@@ -37,7 +37,7 @@
     width: 90%;
 }
 
-@media screen and (max-width: 700px) {
+@media (max-width: (screenSize("medium") - 1px)) {
     .trade-in-table {
         width: 90%;
     }
@@ -170,17 +170,15 @@ button.expandfaq.button-alt::after {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.3s ease;
-    /* position will be managed by JS so it always sits under header/nav */
     position: fixed;
     left: 0;
     width: 100%;
     top: 0;
-    /* JS will overwrite this value on load/resize/scroll */
 
 }
 
 .info-panel.is-open {
-    max-height: 1000px; // enough for all content
+    max-height: 1000px;
 }
 
 .info-toggle .navPages-action-moreIcon {
@@ -274,7 +272,7 @@ button.expandfaq.button-alt::after {
     margin-right: auto;
 }
 
-@media screen and (max-width: 876px) {
+@media (max-width: (screenSize("medium") - 1px)) {
     .mobile-data-table {
         display: flex;
         flex-direction: column;
@@ -415,7 +413,7 @@ div.tab-button2 div {
 }
 
 /* Navigation: show dropdowns on hover/focus for desktop, keep panel behavior for mobile */
-@media (min-width: 877px) {
+@media (max-width: (screenSize("medium") - 1px)) {
 
     .info-toggle:hover+.info-panel,
     .info-toggle:focus-within+.info-panel {
@@ -446,7 +444,7 @@ div.tab-button2 div {
 }
 
 /* Mobile: ensure submenu remains stacked and the JS-managed info panel still controls visibility */
-@media (max-width: 876px) {
+@media (max-width: (screenSize("medium") - 1px)){
     .navInfo .info-submenu {
         position: static;
         box-shadow: none;
@@ -457,7 +455,7 @@ div.tab-button2 div {
 }
 
 /* Blog filter: show dropdown contents on hover for desktop */
-@media (min-width: 877px) {
+@media (max-width: (screenSize("medium") - 1px)) {
     /* Blog filter: animate visibility and keep open slightly longer when leaving
        Use opacity/visibility/max-height so we can apply a hide delay (300ms)
        to make moving between headings feel natural (matches info-panel timing). */
@@ -530,5 +528,45 @@ div.tab-button2 div {
     /* rotate when open */
     #blog-filter .filter-heading.open .filter-arrow {
         transform: rotate(180deg);
+    }
+}
+
+// Specs Table for Toughbook Model Numbers For Nerds
+.specs {
+    font-size: 0.75rem;
+
+    @include breakpoint("small") {
+        font-size: 1rem;
+        margin-top: 0;
+        padding: 20px;
+
+        tr {
+            td {
+                background: stencilColor("color-whitesBase");
+                vertical-align: baseline;
+            }
+
+            th {
+                background: stencilColor("color-greyLightest");
+                font-size: 1em;
+                font-weight: 700;
+                padding: 1rem;
+                vertical-align: baseline;
+            }
+        }
+    }
+
+    tr {
+
+        th,
+        td {
+            border-bottom: 1px solid #ccc;
+            padding: 1rem;
+        }
+
+        th {
+            text-align: left;
+            width: 33.3333%;
+        }
     }
 }
