@@ -259,7 +259,7 @@ button.expandfaq.button-alt::after {
 .mobile-data-table {
     display: grid;
     grid-template-columns: auto auto;
-    width: 50%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -308,6 +308,7 @@ button.expandfaq.button-alt::after {
     letter-spacing: 1px;
     padding-bottom: 5px;
     padding-top: 0;
+    min-width: 300px;
     text-align: center;
     transform: translateY(25px);
     transition: transform 0.2s ease-in-out;
@@ -396,20 +397,21 @@ div.tab-button2 div {
     padding-bottom: 10px;
 }
 
-.repair-indent {
-    margin-left: 5em;
+.tab-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
 }
 
-@media (max-width: (screenSize("small") - 1px)) {
-
-    .tab-table-repair,
-    .tab-table-trade {
-        display: flex;
+@media (max-width: (screenSize("medium") - 1px)) {
+    .tab-buttons {
+        flex-direction: column;
+        align-items: center;
     }
+}
 
-    .tab-cell {
-        width: 30%;
-    }
+.repair-indent {
+    margin-left: 5em;
 }
 
 /* Navigation: show dropdowns on hover/focus for desktop, keep panel behavior for mobile */
@@ -569,4 +571,12 @@ div.tab-button2 div {
             width: 33.3333%;
         }
     }
+}
+
+// Contact Us Form Styles
+
+.contact-us-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
