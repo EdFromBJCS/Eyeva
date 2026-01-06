@@ -3,207 +3,6 @@
 {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
 
 <main class="page">
-    <style>
-
-.transcript-video-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    /* 16:9 aspect ratio */
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-}
-
-.transcript-video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 0;
-}
-
-.latest-video-wrapper {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
-}
-
-.latest-video-wrapper iframe {
-    width: 90%;
-    max-width: 900px;
-    height: 506px;
-    /* 16:9 ratio for 900px width */
-    display: block;
-    border: none;
-}
-
-.video-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.video-container {
-    width: 100%;
-    max-width: 450px;
-    /* Increase this to make videos bigger */
-    margin: 0 auto;
-}
-
-.video-container iframe {
-    width: 100%;
-    height: 260px;
-    /* Increase to match bigger size */
-}
-
-
-img.playlist-thumbnail {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 90%;
-}
-
-.vod-grid {
-    display: grid;
-    grid-template-areas:
-        "vod-playlists video-request";
-    grid-template-columns: 50% 50%;
-    justify-content: space-evenly;
-}
-
-@media screen and (max-width: 876px) {
-    .vod-grid {
-        display: block;
-    }
-}
-
-.video-transcript-section {
-    position: relative;
-}
-
-.vods-playlists {
-    grid-area: vod-playlists;
-    position: relative;
-}
-
-.video-request {
-    grid-area: video-request;
-
-    .infusion-field {
-        margin-bottom: 10px;
-    }
-
-    .infusion-submit {
-        text-align: center;
-    }
-}
-
-.infusion-form {
-    margin: 20px;
-}
-
-.vod-playlist-btncenter {
-    margin-top: 20px;
-    text-align: center;
-}
-
-.rundown-logo {
-    display: block;
-    background-color: #fff;
-    padding: 2rem;
-    width: 60%;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-@media screen and (max-width: 500px) {
-    .rundown-logo {
-        width: 100%;
-    }
-}
-
-.vod-custom-slider {
-    position: relative;
-}
-
-.vods-control-buttons1,
-.vods-control-buttons2 {
-    list-style: none;
-    padding: 0;
-
-    span {
-        font-size: 3rem;
-    }
-
-    li {
-        background: #c4301f;
-        color: white;
-        cursor: pointer;
-        
-        top: 200px;
-
-        &:hover {
-            background: #dc3522;
-        }
-    }
-}
-
-.vods-control-buttons1 {
-    li.prev-vod {
-        border-radius: 1px;
-        left: 0;
-        padding-bottom: 5px;
-        padding-left: 2px;
-        padding-right: 4px;
-        top: 15%;
-        z-index: 2;
-        position: absolute;
-    }
-
-    li.next-vod {
-        border-radius: 1px;
-        padding-bottom: 5px;
-        padding-left: 4px;
-        padding-right: 2px;
-        right: 0;
-        top: 15%;
-        z-index: 2;
-        position: absolute;
-    }
-}
-
-.vods-control-buttons2 {
-    li.next-vod2 {
-        border-radius: 1px;
-        padding-bottom: 5px;
-        padding-left: 4px;
-        padding-right: 2px;
-        right: 0;
-        top: 50%;
-        z-index: 2;
-        position: absolute;
-    }
-
-    li.prev-vod2 {
-        border-radius: 1px;
-        left: 0;
-        padding-bottom: 5px;
-        padding-left: 2px;
-        padding-right: 4px;
-        top: 50%;
-        z-index: 2;
-        position: absolute;
-    }
-
-}
-
-.rugged-rundown-btn {
-    margin-top: 20px;
-}
-    </style>
     <img src="{{cdn 'img/ruggedrundown.svg'}}" class="rundown-logo" alt="Rugged Rundown Logo">
     <p>The Rugged Rundown is our video series at Bob Johnson's Computer Stuff. We give in-depth reviews and insights on
         rugged technology, covering the best features, common issues, and detailed comparisons of Panasonic, Getac, and
@@ -219,12 +18,16 @@ img.playlist-thumbnail {
     <div class="video-transcript-section">
         <h3>Videos With Transcripts</h3>
         <ul class="vods-control-buttons1" id="custom-control-vods1">
-            <li class="prev-vod">
-                <span class="home-prev-arrow">‹</span>
-            </li>
-            <li class="next-vod">
-                <span class="home-next-arrow">›</span>
-            </li>
+            <button class="blaze-prev" onclick="prevSlide()">
+                <svg class="icon">
+                    <use xlink:href="#icon-arrow-left-long"></use>
+                </svg>
+            </button>
+            <button class="blaze-next" onclick="nextSlide()">
+                <svg class="icon">
+                    <use xlink:href="#icon-arrow-right-long"></use>
+                </svg>
+            </button>
         </ul>
         <div class="vod-custom-slider">
             <div class="vods-slider1">
@@ -428,12 +231,16 @@ img.playlist-thumbnail {
                 <div class="vods-playlists">
                     <h2>Watch Our YouTube Videos on All Rugged Computer Models!</h2>
                     <ul class="vods-control-buttons2" id="custom-control-vods2">
-                        <li class="prev-vod2">
-                            <span class="home-prev-arrow">‹</span>
-                        </li>
-                        <li class="next-vod2">
-                            <span class="home-next-arrow">›</span>
-                        </li>
+                        <button class="blaze-prev" onclick="prevSlide()">
+                <svg class="icon">
+                    <use xlink:href="#icon-arrow-left-long"></use>
+                </svg>
+            </button>
+            <button class="blaze-next" onclick="nextSlide()">
+                <svg class="icon">
+                    <use xlink:href="#icon-arrow-right-long"></use>
+                </svg>
+            </button>
                     </ul>
                     <div class="vods-slider2">
                         <div class="playlist-slide">
@@ -530,21 +337,24 @@ img.playlist-thumbnail {
                         <input name="infusionsoft_version" type="hidden" value="1.70.0.877959" />
                         <div class="infusion-field">
                             <label class="form-label" for="inf_field_FirstName">First Name *</label>
-                            <input class="form-input"id="inf_field_FirstName" name="inf_field_FirstName" placeholder="First Name *"
-                                type="text" />
+                            <input class="form-input" id="inf_field_FirstName" name="inf_field_FirstName"
+                                placeholder="First Name *" type="text" />
                         </div>
                         <div class="infusion-field">
                             <label class="form-label" for="inf_field_LastName">Last Name *</label>
-                            <input class="form-input"id="inf_field_LastName" name="inf_field_LastName" placeholder="Last Name *"
-                                type="text" />
+                            <input class="form-input" id="inf_field_LastName" name="inf_field_LastName"
+                                placeholder="Last Name *" type="text" />
                         </div>
                         <div class="infusion-field">
                             <label class="form-label" for="inf_field_Email">Email *</label>
-                            <input class="form-input" id="inf_field_Email" name="inf_field_Email" placeholder="Email *" type="text" />
+                            <input class="form-input" id="inf_field_Email" name="inf_field_Email" placeholder="Email *"
+                                type="text" />
                         </div>
                         <div class="infusion-field">
                             <label class="form-label" for="inf_custom_VideoIdea">Video Idea *</label>
-                            <textarea cols="24" id="inf_custom_VideoIdea" is-required="true" name="inf_custom_VideoIdea" placeholder="Video Idea *" rows="5" data-qb-tmp-id="lt-832502" spellcheck="false" data-gramm="false" class="form-input"></textarea>
+                            <textarea cols="24" id="inf_custom_VideoIdea" is-required="true" name="inf_custom_VideoIdea"
+                                placeholder="Video Idea *" rows="5" data-qb-tmp-id="lt-832502" spellcheck="false"
+                                data-gramm="false" class="form-input"></textarea>
                         </div>
                         <div>
                             <div>&nbsp;</div>
@@ -587,7 +397,7 @@ img.playlist-thumbnail {
 {{/partial}}
 
 {{> layout/base}}
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.4/min/tiny-slider.js"></script>
 <script type="module">
     var slider1 = tns({
         container: '.vods-slider1',

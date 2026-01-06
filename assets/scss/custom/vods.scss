@@ -1,0 +1,198 @@
+    .transcript-video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+    .transcript-video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    .latest-video-wrapper {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+    }
+
+    .latest-video-wrapper iframe {
+        width: 90%;
+        max-width: 900px;
+        height: 506px;
+        /* 16:9 ratio for 900px width */
+        display: block;
+        border: none;
+    }
+
+    .video-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .video-container {
+        width: 100%;
+        max-width: 450px;
+        /* Increase this to make videos bigger */
+        margin: 0 auto;
+    }
+
+    .video-container iframe {
+        width: 100%;
+        height: 260px;
+        /* Increase to match bigger size */
+    }
+
+
+    img.playlist-thumbnail {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+    }
+
+    .vod-grid {
+        display: grid;
+        grid-template-areas:
+            "vod-playlists video-request";
+        grid-template-columns: 50% 50%;
+        justify-content: space-evenly;
+    }
+
+    @media screen and (max-width: 876px) {
+        .vod-grid {
+            display: block;
+        }
+    }
+
+    .video-transcript-section {
+        position: relative;
+    }
+
+    .vods-playlists {
+        grid-area: vod-playlists;
+        position: relative;
+    }
+
+    .video-request {
+        grid-area: video-request;
+
+        .infusion-field {
+            margin-bottom: 10px;
+        }
+
+        .infusion-submit {
+            text-align: center;
+        }
+    }
+
+    .infusion-form {
+        margin: 20px;
+    }
+
+    .vod-playlist-btncenter {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .rundown-logo {
+        display: block;
+        background-color: #fff;
+        padding: 2rem;
+        width: 60%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @media screen and (max-width: 500px) {
+        .rundown-logo {
+            width: 100%;
+        }
+    }
+
+    .vod-custom-slider {
+        position: relative;
+    }
+
+    .vods-control-buttons1,
+    .vods-control-buttons2 {
+        list-style: none;
+        padding: 0;
+
+        span {
+            font-size: 3rem;
+        }
+
+        li {
+            background: #c4301f;
+            color: white;
+            cursor: pointer;
+
+            top: 200px;
+
+            &:hover {
+                background: #dc3522;
+            }
+        }
+    }
+
+    @media (max-width: (screenSize("small") - 1px)) {
+    .blaze-prev,
+    .blaze-next {
+        display: none;
+    }
+}
+
+    .blaze-prev,
+    .blaze-next {
+        position: absolute;
+        transform: translateY(-50%);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1;
+        background-color: #fff;
+        border: 1px solid #dc3522;
+        border-radius: 50%;
+
+        .icon {
+            fill: #dc3522;
+        }
+    }
+
+    .blaze-prev {
+        left: 25px;
+    }
+
+    .blaze-next {
+        right: 25px;
+    }
+
+    .vods-control-buttons1 {
+
+        .blaze-prev,
+        .blaze-next {
+            top: 15%;
+        }
+    }
+
+    .vods-control-buttons2 {
+
+        .blaze-prev,
+        .blaze-next {
+            top: 45%;
+        }
+    }
+
+    .rugged-rundown-btn {
+        margin-top: 20px;
+    }
