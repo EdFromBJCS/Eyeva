@@ -872,7 +872,8 @@
 }
 
 .productView-sticky-flexbox {
-    display: flex;
+    display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
     gap: spacing("base");
     justify-content: space-between;
 }
@@ -894,6 +895,7 @@
 
         .productView-sticky-price {
             flex: 1;
+            text-align: center;
             font-weight: bold;
         }
 
