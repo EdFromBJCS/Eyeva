@@ -1,0 +1,132 @@
+      #team-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        justify-items: center;
+        margin-top: 20px;
+      }
+
+      .photo-container {
+        position: relative;
+        text-align: center;
+      }
+
+      .team-photo {
+        margin-bottom: 0;
+      }
+
+      .bio-pic {
+        width: 250px;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 10px solid #c4301f;
+        box-shadow: 3px 3px 8px 1px #000;
+      }
+
+      .name-plate {
+        background-color: #dc3522;
+        border: 5px solid #a82a1d;
+        width: 180px;
+        height: 80px;
+        margin: -50px auto 0 auto;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: 0 10px;
+      }
+
+      .header-name {
+        color: #fff;
+        font-family: Roboto, sans-serif;
+        font-weight: 800;
+        font-size: 16px;
+        text-align: center;
+        margin: 0 0 5px 0;
+      }
+
+      .moreInfo {
+        background-color: #dc3522;
+        color: #fff;
+        border: none;
+        font-family: Roboto, sans-serif;
+        font-size: 14px;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      .moreInfo:hover {
+        background-color: #a82a1d;
+      }
+
+      .biomodal {
+        display: none;
+        position: fixed;
+        z-index: 50;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.7);
+      }
+
+      .modal-content {
+        background-color: #ebe8e8;
+        margin: 10% auto;
+        padding: 20px;
+        border: 10px solid #c4301f;
+        width: 80%;
+        max-width: 600px;
+        position: relative;
+        border-radius: 10px;
+      }
+
+      .bio-text {
+        font-family: Roboto, sans-serif;
+        font-size: 14px;
+        color: #222;
+        margin-bottom: 10px;
+      }
+
+      .bio-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-top: 15px;
+      }
+
+      .bio-container p {
+        margin: 5px 0;
+      }
+
+      button.close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #dc3522;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      button.close:hover {
+        background: #a82a1d;
+      }
+
+      @media screen and (max-width: 600px) {
+        .modal-content {
+          width: 90%;
+        }
+
+        .bio-container {
+          flex-direction: column;
+        }
+      }
