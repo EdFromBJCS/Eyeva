@@ -457,7 +457,7 @@ div.tab-button2 div {
 }
 
 /* Blog filter: show dropdown contents on hover for desktop */
-@media (max-width: (screenSize("medium") - 1px)) {
+@include breakpoint("medium") {
     /* Blog filter: animate visibility and keep open slightly longer when leaving
        Use opacity/visibility/max-height so we can apply a hide delay (300ms)
        to make moving between headings feel natural (matches info-panel timing). */
