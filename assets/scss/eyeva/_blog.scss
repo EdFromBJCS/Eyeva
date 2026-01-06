@@ -100,26 +100,35 @@ h2.blog-title {
     width: 100%;
 
     @media (max-width: (screenSize("medium") - 1px)) {
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "header"
+            "thumbnail"
+            "post"
+            "footer";
 
 
 
         &:has(.blog-thumbnail-mobile) {
             .blog-post {
                 padding-right: $spacing-base;
-                width: calc(100% - 100px);
+                
+                grid-area: post;
             }
 
             .blog-thumbnail-mobile {
                 display: block;
                 margin: 0;
-                width: 100%;
+                
+                text-align: center;
+                grid-area: thumbnail;
             }
         }
 
         .blog-header {
             width: 100%;
+            grid-area: header;
         }
 
         .blog-post-footer {
@@ -129,6 +138,7 @@ h2.blog-title {
             gap: $spacing-third;
             margin-top: $spacing-third;
             width: 100%;
+            grid-area: footer;
         }
     }
 }
@@ -181,7 +191,7 @@ h2.blog-title {
     @include lazy-loaded-padding("blog_size");
     display: none;
     margin: 0;
-    max-width: 100px;
+    
     position: relative;
 
     img {
@@ -190,7 +200,7 @@ h2.blog-title {
         margin: 0;
         max-height: 100%;
         object-fit: contain;
-        object-position: center left;
+        object-position: center;
         width: 100%;
     }
 }
