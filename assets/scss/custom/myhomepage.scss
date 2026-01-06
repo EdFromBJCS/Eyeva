@@ -1,0 +1,624 @@
+.page-content {
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95% !important;
+}
+
+.img-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+/* Banner css and medias*/
+
+.myhomepage-banner {
+    background-image: url("https://www.bobjohnson.com/product_images/uploaded_images/myhomepagebanner9-5-2025-1500-x-400.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+    left: 0;
+    right: 0;
+    margin-top: -15px;
+    padding: 0;
+    position: absolute;
+    width: 110vw;
+    cursor: pointer;
+}
+
+.myhomepage-banner-text {
+    color: white;
+    height: 450px;
+    left: 20px;
+    padding-left: 35%;
+    padding-right: 5%;
+    padding-top: 3%;
+    text-align: left;
+    top: 30px;
+}
+
+.myhomepage-banner-text h1 {
+    color: white;
+    font-size: 45px;
+}
+
+.myhomepage-banner-text p {
+    font-size: 18px;
+}
+
+@media screen and (max-width: 2200px) {
+    .myhomepage-banner-text {
+        height: 400;
+    }
+}
+
+@media screen and (max-width: 1696px) {
+    .myhomepage-banner {
+        left: 0 !important;
+        margin-left: 0;
+    }
+
+    .myhomepage-banner-text h1 {
+        font-size: 40px;
+    }
+
+    .myhomepage-banner-text p {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .myhomepage-banner-text {
+        height: 350px;
+    }
+
+    .myhomepage-banner-text h1 {
+        font-size: 35px;
+    }
+
+    .myhomepage-banner-text p {
+        font-size: 14px;
+    }
+
+    .myhomepage-banner-text .button {
+        font-size: 14px;
+        padding: 14px 25px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+
+    .myhomepage-banner-text {
+        height: 250px;
+    }
+
+    .myhomepage-banner-text h1 {
+        font-size: 30px;
+    }
+
+    .myhomepage-banner-text p {
+        font-size: 12px;
+    }
+
+    .myhomepage-banner-text .button {
+        font-size: 12px;
+        padding: 12px 20px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+
+    .myhomepage-banner {
+        margin-top: -10px;
+        top: 0;
+    }
+
+    .myhomepage-banner-text {
+        height: 175px;
+        padding-top: 0.1%;
+    }
+
+    .myhomepage-banner-text h1 {
+        font-size: 20px;
+    }
+
+    .myhomepage-banner-text p {
+        font-size: 10px;
+    }
+
+    .myhomepage-banner-text .button {
+        font-size: 10px;
+        padding: 10px 15px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .myhomepage-banner {
+        background-image: url("https://www.bobjohnson.com/product_images/uploaded_images/myhomepagebanner9-5-2025-750-x-600.jpg");
+        background-position: center;
+        background-size: cover;
+        margin-top: 0;
+        top: 0;
+    }
+
+    .myhomepage-banner-text {
+        height: 400px;
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-top: 40%;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .myhomepage-banner-text {
+        padding-top: 50%;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .myhomepage-banner {
+        margin-top: 0;
+    }
+
+    .myhomepage-banner-text {
+        height: 300px;
+        padding-top: 35%;
+    }
+}
+
+.body {
+    margin-bottom: 0;
+}
+
+.connect {
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 1.75rem;
+    text-align: center;
+}
+
+img.playlist-thumbnail {
+    width: 80%;
+}
+
+/* control is for the product selection slider or trade in here*/
+
+.control {
+    list-style: none;
+}
+
+.control li {
+    background: #c4301f;
+    border-radius: 1px;
+    color: white;
+    cursor: pointer;
+    padding-bottom: 5px;
+    padding-left: 4px;
+    padding-right: 2px;
+    position: absolute;
+}
+
+.control li:hover {
+    background: #dc3522;
+}
+
+.control .blaze-prev {
+    left: 0;
+    top: 40%;
+    z-index: 2;
+}
+
+.control .blaze-next {
+    right: 0;
+    top: 40%;
+    z-index: 2;
+}
+
+.control span {
+    font-size: 3rem;
+}
+
+.button-alt {
+    float: right;
+    right: 6%;
+}
+
+div.tns-item {
+    text-align: center;
+
+    .button--outline {
+        text-align: center;
+    }
+}
+
+div#tns1-mw {
+    height: 315px;
+}
+
+#tns2-ow .tns-nav {
+    float: left;
+    position: absolute;
+}
+
+.slider-button {
+    background-color: #d86558;
+    border: none;
+    border-radius: 50%;
+    height: 13px;
+    margin-left: 7px;
+    width: 13px;
+}
+
+.vertical-container {
+    list-style: none;
+}
+
+.tns-nav-active .slider-button {
+    background-color: #c4301f;
+}
+
+.tns-nav-active .slider-button:hover {
+    background-color: #dc3522;
+}
+
+.slider-button:hover {
+    background-color: #d84d3d;
+}
+
+.slider-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+/*control2 is the video playlist slider*/
+
+.control2 li {
+    background: #c4301f;
+    border-radius: 1px;
+    color: white;
+    cursor: pointer;
+    padding-bottom: 5px;
+    padding-left: 4px;
+    padding-right: 2px;
+    position: absolute;
+}
+
+.control2 li:hover {
+    background: #dc3522;
+}
+
+.control2 .blaze-next {
+    right: 0;
+    top: 40%;
+    z-index: 2;
+}
+
+.control2 .blaze-prev {
+    left: 0;
+    top: 40%;
+    z-index: 2;
+}
+
+
+
+.control2 {
+    list-style: none;
+}
+
+.control2 span {
+    font-size: 3rem;
+}
+
+ul#custom-control2 {
+    display: flex;
+    justify-content: center;
+}
+
+/*grid for the page layout*/
+
+.home-grid1 {
+    display: grid;
+    grid-template-areas:
+        "home-warranty-card home-warranty-card home-repair-card"
+        "home-video-card home-video-card mobile-data-card"        
+        "home-trade-in-card home-trade-in-card home-trade-in-card";
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: space-evenly;
+    padding-top: 10px;
+}
+
+/*@media screen and (max-width: 1300px) {
+    .home-grid1 {
+        padding-top: 325px;
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
+    .home-grid1 {
+        padding-top: 225px;
+    }
+}
+
+@media screen and (max-width: 875px) {
+    .home-grid1 {
+        padding-top: 225px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .home-grid1 {
+        padding-top: 150px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .home-grid1 {
+        padding-top: 375px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .home-grid1 {
+        padding-top: 275px;
+    }
+}*/
+
+.repair-card-btn-menu {
+    align-items: center;
+
+    justify-content: center;
+    text-align: center;
+}
+
+.home-trade-in-card {
+    grid-area: home-trade-in-card;
+    position: relative;
+}
+
+.home-repair-card {
+    grid-area: home-repair-card;
+}
+
+.home-warranty-card {
+    grid-area: home-warranty-card;
+}
+
+.warranty-img {
+    width: 30%;
+}
+
+.warranty-imgs {
+    text-align: center;
+}
+
+.home-blog-card {
+    grid-area: home-blog-card;
+    position: relative;
+}
+
+.home-video-card {
+    grid-area: home-video-card;
+    position: relative;
+}
+
+.home-mobile-data-card {
+    grid-area: mobile-data-card;
+    cursor: pointer;
+}
+
+.mobile-data-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.home-connect-card {
+    grid-area: home-connect-card;
+}
+
+/*social cards*/
+
+.myhomepage-socials {
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.home-social-logo {
+    padding: 10px;
+    width: 75px;
+
+}
+
+.video-stack {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.trade-in {
+    display: block;
+}
+
+.home-card {
+    background-color: #dedcdc;
+    margin: .5rem;
+}
+
+.home-card p {
+    margin: 5%;
+}
+
+.home-card-alt {
+    background-color: white;
+    margin: .5rem;
+}
+
+@media screen and (max-width: 931px) {
+    .blog-slider {
+        padding: 40px;
+    }
+}
+
+.blog-slider {
+    padding: 40px;
+}
+
+.blog-article {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-align: center;
+}
+
+/*Control3 is for the blog slider*/
+
+.control3 {
+    list-style: none;
+    padding: 0;
+}
+
+.control3 span {
+    font-size: 3rem;
+}
+
+.control3 li {
+    background: #c4301f;
+    border-radius: 1px;
+    color: #fff;
+    cursor: pointer;
+    padding-bottom: 5px;
+    padding-left: 4px;
+    padding-right: 2px;
+    position: absolute;
+}
+
+.control3 li:hover {
+    background: #dc3522
+}
+
+.control3 li.prev {
+    left: 0;
+    top: 40%;
+    z-index: 2;
+}
+
+.control3 li.next {
+    right: 0;
+    top: 40%;
+    z-index: 2;
+}
+
+#tns2-ow .tns-nav {
+    float: none;
+    position: relative;
+}
+
+/*Adjusts the grid to a single stack for tablets and mobile devices*/
+
+@media screen and (max-width: 600px) {
+    .home-grid1 {
+        display: block;
+    }
+
+    .trade-in {
+        display: block;
+    }
+
+    .home-repair-card {
+        padding-top: 10px;
+    }
+
+    .repair-card-btn-menu {
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .mobile-data-text {
+        display: block;
+    }
+
+    .home-mobile-data-card {
+        display: block;
+    }
+
+    .home-card {
+        background-color: #ffffff;
+    }
+
+    .warranty-img {
+        width: 50%;
+    }
+
+    .control2 li.next2 {
+        right: 0;
+        top: 40%;
+        z-index: 2;
+    }
+
+    .control2 li.prev2 {
+        left: 0;
+        top: 40%;
+        z-index: 2;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .home-grid1 {
+        grid-template-columns: 1fr 1fr 2fr;
+    }
+}
+
+@media screen and (max-width: 930px) {
+    div#tns2-ow.tns-outer {
+        transform: translateY(-4rem);
+    }
+}
+
+@media screen and (max-width: 850px) {
+    div#tns2-ow.tns-outer {
+        transform: translateY(-2.5rem);
+    }
+}
+
+.myhome-banner {
+    max-width: 100%;
+    /* Ensures the banner is responsive */
+    overflow: hidden;
+    /* Ensures the image does not overflow its container */
+}
+
+.myhome-banner img {
+    display: block;
+    height: auto;
+    /* Ensures the image keeps its aspect ratio */
+    width: 100%;
+    /* Makes the image fill its container */
+}
+
+@media (min-width: 768px) {
+    .banner {
+        height: 300px;
+        /* Adjust height as needed */
+        max-width: 100%;
+        /* Maintain responsiveness */
+    }
+}
+
+.connect-buttons {
+    font-size: 1.75rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.trade-in-btn-container {
+    text-align: center;
+}
