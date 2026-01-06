@@ -56,9 +56,22 @@
 
     .form-input {
         width: 100%;
+
+        .button {
+            width: 10%;
+        }
     }
 }
 
+@media screen and (max-width: 800px) {
+    .form--quickSearch{
+    .form-fieldset {
+    .button { 
+        width: 20%;
+    }
+}
+}
+}
 .accordion-block--advancedSearch {
     @include eyeva-screen-mobile-tablet {
         .accordion-heading {
