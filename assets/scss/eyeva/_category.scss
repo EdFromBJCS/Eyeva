@@ -242,6 +242,22 @@ body:has(.plp-page-sidebar.is-open) {
     }
 }
 
+@media (max-width: (screenSize("medium") - 1px)) {
+    
+    .page-type-brand{
+    .plp-page-main {
+        margin-top: -160px;
+    }
+
+    .brand-header-image {
+        min-height: 80px;
+        max-height: 120px;
+        justify-content: center;
+    }
+}
+}
+
+
 .plp-page-title {
     font-size: fontSize("larger");
     margin: 0 0 spacing("base");
@@ -256,6 +272,8 @@ body:has(.plp-page-sidebar.is-open) {
         @include lazy-loaded-padding("brand_size");
         position: relative;
 
+        @include breakpoint("medium") {
+
         img {
             @include lazy-loaded-img;
             margin-block-start: 0;
@@ -264,6 +282,7 @@ body:has(.plp-page-sidebar.is-open) {
             max-width: 100%;
             object-fit: contain;
         }
+    }
     }
 
     &._category {
