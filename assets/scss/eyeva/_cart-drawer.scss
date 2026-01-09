@@ -1,5 +1,6 @@
 .cart-drawer {
     justify-content: end;
+    z-index: 100;
 
     &._closing,
     &._opening {
