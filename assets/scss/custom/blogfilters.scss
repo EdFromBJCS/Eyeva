@@ -63,11 +63,11 @@
 @media (max-width: 1260px) {
     .blog-filter-box {
         top: auto;
-        bottom: 70px;
+        bottom: 0px;
         right: 20px;
         width: 80%;
         transform: translateY(120%);
-        z-index: 1000;
+        z-index: 1;
     }
 
     .blog-filter-box.open {
@@ -92,7 +92,7 @@
     border-radius: 50px;
     font-size: 14px;
     cursor: pointer;
-    z-index: 10000;
+    z-index: 1;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -100,7 +100,7 @@
 @media (max-width: 1260px) {
     .toc {
         top: auto;
-        bottom: 70px;
+        bottom: 0px;
         right: 20px;
         width: 80%;
         max-width: 300px;
@@ -185,7 +185,7 @@
         border-radius: 50px;
         font-size: 14px;
         cursor: pointer;
-        z-index: 10000;
+        z-index: 1;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
 
