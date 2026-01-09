@@ -531,7 +531,7 @@
 }
 
 .cart-additionalCheckoutButtons {
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: spacing("third");
     margin-top: spacing("third");
