@@ -191,14 +191,15 @@
 .form-wishlist {
     width: auto;
 }
+
 @include breakpoint("medium") {
     .form-wishlist {
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-}
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
 }
 
 .button-wishlist-icon {
@@ -873,14 +874,14 @@
 
 .productView-sticky-flexbox {
     display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: spacing("base");
     justify-content: space-between;
 }
 
 .productView-sticky-bar {
     display: none;
-    
+
     @include eyeva-screen-mobile-tablet {
         background: container("fill");
         border-top: container("border");
@@ -905,6 +906,10 @@
             .button {
                 width: 100%;
             }
+        }
+
+        .price-section--salePercent {
+            display: none;
         }
 
         .price,
