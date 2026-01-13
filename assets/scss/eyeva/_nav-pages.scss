@@ -278,7 +278,7 @@
 
     @include breakpoint("medium") {
         animation-duration: 0.2s;
-        background: stencilColor("navPages-subMenu-backgroundColor");
+        background: #c4301f;
         border-radius: $eyeva-container-radius;
         box-shadow: $eyeva-shadow-panel;
         display: flex;
