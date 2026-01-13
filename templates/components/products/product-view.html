@@ -99,6 +99,9 @@
                         </div>
                         {{/or}}
                         {{/if}}
+                        <div class="yotpo-widget-instance" data-yotpo-instance-id="656855"
+                            data-yotpo-product-id="{{product.id}}">
+                        </div>
 
                         <div class="_regions">
                             {{{region name="product_below_price"}}}
@@ -194,6 +197,7 @@
                 Learn More Here!</a>
             <a href="#website-specifications" class="button button--primary" id="skipToSpecs">Skip To Specs</a>
         </div>
+
         <section class="productView-details product-options">
             {{> components/eyeva/products/product-view/modifiers-modal/init}}
 
@@ -323,7 +327,19 @@
         </div>
     </div>
 </div>
-
+<script type="text/javascript">//<![CDATA[
+    var div = document.createElement("div");
+    div.setAttribute('class', 'yotpo yotpo-main-widget');
+    div.setAttribute('data-product-id', "{{product.id}}");
+    div.setAttribute('data-name', "{{product.title}}");
+    div.setAttribute('data-url', "{{product.url}}");
+    div.setAttribute('data-description', "{{product.jibberjabber}}");
+    div.setAttribute('data-image-url', "{{getImage product.main_image 'product'}}");
+    div.setAttribute('data-price', "{{#if product.price.with_tax}}{{product.price.with_tax.value}}{{/if}}{{#if product.price.without_tax}}{{product.price.without_tax.value}}{{/if}}");
+    div.setAttribute('data-currency', "{{currency_selector.active_currency_code}}");
+    document.querySelectorAll('.productView')[0].appendChild(div)
+    //]]>
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const stickyBtn = document.getElementById('sticky-add-to-cart');

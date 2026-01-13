@@ -1,0 +1,297 @@
+<style>
+    .iframe-container {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        padding-top: 60%;
+    }
+
+    .responsive-iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .rugged-rundown-btn {
+        margin-top: 20px;
+        width: 100%;
+    }
+
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        overflow: hidden;
+        contain: layout paint;
+    }
+
+    .carousel {
+        display: flex;
+        box-sizing: border-box;
+        transition: transform 0.5s ease;
+        width: 100%;
+        will-change: transform;
+
+        a {
+            text-decoration: none;
+        }
+    }
+
+    .slide {
+        flex: 0 0 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 10px;
+        margin: 0;
+        padding: 10px 2px;
+    }
+
+  @media (max-width: 1200px) and (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+    }
+}
+
+
+    .icon-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .heroBannerIcon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+
+    .icon-heading {
+        font-size: 18px;
+        margin: 5px 0;
+    }
+
+    .icon-description {
+        font-size: 14px;
+        color: #222;
+        text-align: center;
+    }
+
+    .homeblaze-prev,
+    .homeblaze-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 1;
+        border: 1px solid #222;
+        border-radius: 50%;
+    }
+
+    .homeblaze-prev {
+        left: 10px;
+    }
+
+    .homeblaze-next {
+        right: 10px;
+    }
+</style>
+<div>
+    <div class="iframe-container">
+        <iframe class="responsive-iframe"
+            src='https://www.youtube.com/embed/?listType=playlist&list=UUdbuXeiBYZHzEU158JyGMvA'>
+        </iframe>
+    </div>
+</div>
+
+
+<div class="video-repair-grid">
+
+    <div class="carousel-container">
+        <button class="homeblaze-prev" onclick="prevSlide()">
+            <svg class="icon">
+                <use xlink:href="#icon-arrow-left-long"></use>
+            </svg>
+        </button>
+        <div class="carousel" id="carousel">
+            <div class="slide">
+                <div class="grid">
+                    <a href="https://www.bobjohnson.com/warranties/">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/warranty.png?t=1766596862"
+                                    alt="Warranty" /></div>
+                            <h3 class="icon-heading">Limited Lifetime Warranty!</h3>
+                            <p class="icon-description">Only pay for parts on repairs when you purchase from us.</p>
+                        </div>
+                    </a>
+                    <div class="icon-item">
+                        <div class="heroBannerIcon"><img
+                                src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/money.png?t=1766596883"
+                                alt="Sales Tax" /></div>
+                        <h3 class="icon-heading">Sales Tax Free!</h3>
+                        <p class="icon-description">Since we're based out of Delaware, never pay a sales tax!</p>
+                    </div>
+                    <a href="tel:3026592727">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/phone.png?t=1766596843"
+                                    alt="Call" /></div>
+                            <h3 class="icon-heading">We're Here To Help!</h3>
+                            <p class="icon-description">Call (302)659-2727 for assistance.</p>
+                        </div>
+                    </a>
+                    <a href="https://gc200.infusionsoft.app/app/form/homepage-banner">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/newsletter.png?t=1766596934"
+                                    alt="Newsletter" /></div>
+                            <h3 class="icon-heading">5% Off Coupon!</h3>
+                            <p class="icon-description">Sign up for our newsletter to get 5% off your next order!</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="grid">
+                    <a href="https://www.youtube.com/@Bobjohnson">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/review.png?t=1766596915"
+                                    alt="YouTube" /></div>
+                            <h3 class="icon-heading">YouTube Reviews</h3>
+                            <p class="icon-description">Bob reviews all of the computers that we sell on YouTube!</p>
+                        </div>
+                    </a>
+                    <a href="https://www.bobjohnson.com/blog/tag/Buying-Guide">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/guide.png?t=1766596941"
+                                    alt="Buyers Guide" /></div>
+                            <h3 class="icon-heading">Buyers Guides</h3>
+                            <p class="icon-description">Our blog provides detailed reviews on the rugged computers we sell.
+                            </p>
+                        </div>
+                    </a>
+                    <a href="https://www.bobjohnson.com/rugged-computer-selection-assistance/">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/warranty.png?t=1766596862"
+                                    alt="Selection Assistance" /></div>
+                            <h3 class="icon-heading">Selection Assistance</h3>
+                            <p class="icon-description">Fill out our form and we'll help you find the perfect option for
+                                you!
+                            </p>
+                        </div>
+                    </a>
+                    <a href="https://www.bobjohnson.com/testimonials/">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/money.png?t=1766596883"
+                                    alt="Testimonials" /></div>
+                            <h3 class="icon-heading">Testimonials</h3>
+                            <p class="icon-description">See what our customers have said!</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+                <button class="homeblaze-next" onclick="nextSlide()">
+                <svg class="icon">
+                    <use xlink:href="#icon-arrow-right-long"></use>
+                </svg>
+            </button>
+        </div>
+
+    <div class="repair-container">
+        <a href="https://store-8lxh1-1.mybigcommerce.com/repairs-service/?tab=0">
+            <img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/repairservices-gearcross-1.png?t=1766596980"
+                alt="Repair Services" class="rugged-rundown-btn" width="80px" height="80px" />
+            <h3>Full Service Rugged Computer Repair</h3>
+            <p>Industry leading rugged Dell, Durabook, Getac, and Panasonic rugged computers.</p>
+            
+            
+            <a class="button button--primary" href="https://store-8lxh1-1.mybigcommerce.com/repairs-service/?tab=0">Send It In Today!</a>
+        </a>
+    </div>
+</div>
+
+    <script>
+        const carousel = document.getElementById('carousel');
+        let slides = document.querySelectorAll('.slide');
+
+        // Clone first slide and append it
+        const firstClone = slides[0].cloneNode(true);
+        carousel.appendChild(firstClone);
+
+        slides = document.querySelectorAll('.slide'); // refresh list
+        const totalSlides = slides.length;
+
+        let currentSlide = 0;
+        let slideWidth = 100;
+
+        function moveToSlide(index) {
+            carousel.style.transition = 'transform 0.5s ease';
+            carousel.style.transform = `translateX(-${index * slideWidth}%)`;
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            moveToSlide(currentSlide);
+
+            // If we're on the clone, reset to real first slide
+            if (currentSlide === totalSlides - 1) {
+                setTimeout(() => {
+                    carousel.style.transition = 'none';
+                    currentSlide = 0;
+                    carousel.style.transform = `translateX(0%)`;
+                }, 500);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide === 0) {
+                // Jump instantly to clone (last slide)
+                carousel.style.transition = 'none';
+                currentSlide = totalSlides - 1;
+                carousel.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        carousel.style.transition = 'transform 0.5s ease';
+                        currentSlide--;
+                        carousel.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+                    });
+                });
+            } else {
+                currentSlide--;
+                moveToSlide(currentSlide);
+            }
+        }
+
+        // Autoplay (always moves left)
+        setInterval(nextSlide, 5000);
+
+        // Init
+        moveToSlide(0);
+    </script>

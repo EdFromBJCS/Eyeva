@@ -13,7 +13,7 @@
             display: flex;
             flex: 1;
             gap: spacing("single");
-            width: 100%;
+            
 
             @include breakpoint("medium") {
                 flex: 1;
@@ -71,26 +71,6 @@
         }
     }
 
-    .papathemes-eyeva-hero-carousel-content {
-        top: 70%;
-        max-width: 100%;
-
-        @include breakpoint("xxsmall") {
-
-            .papathemes-eyeva-hero-carousel-title,
-            .papathemes-eyeva-hero-carousel-description {
-                color: #222222;
-            }
-        }
-
-        @include breakpoint("medium") {
-
-            .papathemes-eyeva-hero-carousel-title,
-            .papathemes-eyeva-hero-carousel-description {
-                color: #ffffff;
-            }
-        }
-
     // Nếu widget region trống thì hiển thị khung viền in development mode
     ._dev-mode & {
         [data-content-region]:not(:has(*)) {
@@ -106,4 +86,29 @@
         }
     }
 }
+
+    .home-page-hero-layout {
+    .papathemes-eyeva-hero-carousel-content {
+        top: unset;
+        bottom: 25px;
+        max-width: 100%;
+        left: 0;
+        transform: translate(0%, 0%);
+
+        @media (max-width: (screenSize("medium") - 1px)) {
+
+            .papathemes-eyeva-hero-carousel-title,
+            .papathemes-eyeva-hero-carousel-description {
+                color: #222222;
+            }
+        }
+
+        @include breakpoint("medium") {
+
+            .papathemes-eyeva-hero-carousel-title,
+            .papathemes-eyeva-hero-carousel-description {
+                color: #ffffff;
+            }
+        }
+    }
 }
