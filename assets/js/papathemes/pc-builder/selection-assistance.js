@@ -15,6 +15,13 @@
             this.categoryId = window.pcBuilderCategoryId || '';
             this.graphQLToken = window.graphQLToken || '';
             this.lang = window.pcBuilderLangJSON || {};
+            
+            // Compatibility fields from BigCommerce config
+            this.compatibilityFields = window.compatibilityFields ? 
+                (typeof window.compatibilityFields === 'string' ? 
+                    window.compatibilityFields.split(',').map(field => field.trim()).filter(field => field.length > 0) :
+                    window.compatibilityFields) : 
+                [];
 
             this.init();
         }
@@ -39,13 +46,20 @@
             // Show loading state
             this.showLoadingState();
 
+            console.log('Filtering products with criteria:', formData);
+            console.log('Compatibility fields:', this.compatibilityFields);
+
             try {
                 // Build GraphQL query for filtering products
                 const query = this.buildProductQuery(formData);
                 const products = await this.fetchProducts(query);
 
+                console.log('Fetched products:', products.length);
+
                 // Filter products based on criteria
                 const filteredProducts = this.filterProductsByCriteria(products, formData);
+
+                console.log('Filtered products:', filteredProducts.length);
 
                 // Display filtered products
                 this.displayFilteredProducts(filteredProducts);
@@ -81,7 +95,7 @@
         }
 
         buildProductQuery(formData) {
-            // Build GraphQL query based on form data
+            // Build GraphQL query to fetch products with custom fields from category and subcategories
             let query = `
                 query GetProducts($categoryId: Int!) {
                     site {
@@ -113,13 +127,51 @@
                                                 }
                                             }
                                         }
-                                        variants {
+                                        categories {
                                             edges {
                                                 node {
+                                                    name
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            children {
+                                edges {
+                                    node {
+                                        products {
+                                            edges {
+                                                node {
+                                                    id
+                                                    entityId
+                                                    name
                                                     sku
+                                                    path
                                                     prices {
                                                         price {
                                                             value
+                                                            currencyCode
+                                                        }
+                                                    }
+                                                    images {
+                                                        url(width: 400, height: 400)
+                                                        altText
+                                                    }
+                                                    description
+                                                    customFields {
+                                                        edges {
+                                                            node {
+                                                                name
+                                                                value
+                                                            }
+                                                        }
+                                                    }
+                                                    categories {
+                                                        edges {
+                                                            node {
+                                                                name
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -157,29 +209,71 @@
                 throw new Error(result.errors[0].message);
             }
 
-            return result.data.site.category.products.edges.map(edge => edge.node);
+            const categoryData = result.data.site.category;
+            let allProducts = [];
+
+            // Add products from main category
+            if (categoryData.products?.edges) {
+                allProducts = allProducts.concat(categoryData.products.edges.map(edge => edge.node));
+            }
+
+            // Add products from subcategories
+            if (categoryData.children?.edges) {
+                categoryData.children.edges.forEach(child => {
+                    if (child.node.products?.edges) {
+                        allProducts = allProducts.concat(child.node.products.edges.map(edge => edge.node));
+                    }
+                });
+            }
+
+            // Remove duplicates based on entityId
+            const uniqueProducts = allProducts.filter((product, index, self) => 
+                index === self.findIndex(p => p.entityId === product.entityId)
+            );
+
+            return uniqueProducts;
         }
 
         filterProductsByCriteria(products, criteria) {
             return products.filter(product => {
-                // Filter by computer type
-                if (criteria.computer_type && criteria.computer_type !== '') {
-                    const productName = product.name.toLowerCase();
-                    const productDesc = (product.description || '').toLowerCase();
+                const customFields = product.customFields?.edges || [];
+                const categories = product.categories?.edges || [];
+                
+                // Helper function to get custom field value
+                const getCustomFieldValue = (fieldName) => {
+                    const field = customFields.find(edge => edge.node.name === fieldName);
+                    return field ? field.node.value : '';
+                };
 
+                // Filter by computer condition (new/refurbished)
+                if (criteria.computer_condition && criteria.computer_condition !== '') {
+                    const condition = getCustomFieldValue('Condition');
+                    if (condition && !condition.toLowerCase().includes(criteria.computer_condition.toLowerCase())) {
+                        return false;
+                    }
+                }
+
+                // Filter by computer type using categories
+                if (criteria.computer_type && criteria.computer_type !== 'not_sure') {
+                    const categoryNames = categories.map(edge => edge.node.name.toLowerCase());
+                    const productName = product.name.toLowerCase();
+                    
                     switch (criteria.computer_type) {
                         case 'laptop':
-                            if (!productName.includes('laptop') && !productDesc.includes('laptop')) {
+                            if (!categoryNames.some(name => name.includes('laptop')) && 
+                                !productName.includes('laptop')) {
                                 return false;
                             }
                             break;
                         case 'desktop':
-                            if (!productName.includes('desktop') && !productDesc.includes('desktop')) {
+                            if (!categoryNames.some(name => name.includes('desktop')) && 
+                                !productName.includes('desktop')) {
                                 return false;
                             }
                             break;
                         case 'tablet':
-                            if (!productName.includes('tablet') && !productDesc.includes('tablet')) {
+                            if (!categoryNames.some(name => name.includes('tablet')) && 
+                                !productName.includes('tablet')) {
                                 return false;
                             }
                             break;
@@ -211,37 +305,55 @@
                     }
                 }
 
-                // Filter by features using custom fields or description
-                const description = (product.description || '').toLowerCase();
-                const customFields = product.customFields?.edges || [];
-
-                // Touchscreen
-                if (criteria.touchscreen && !description.includes('touchscreen') && !description.includes('touch screen')) {
-                    return false;
+                // Filter by touchscreen using custom field
+                if (criteria.touchscreen) {
+                    const touchScreen = getCustomFieldValue('Touch Screen');
+                    if (!touchScreen || !touchScreen.toLowerCase().includes('yes')) {
+                        return false;
+                    }
                 }
 
-                // Mobile data
-                if (criteria.mobile_data && !description.includes('mobile data') && !description.includes('4g') && !description.includes('lte')) {
-                    return false;
+                // Filter by mobile data (this might be in description or custom field)
+                if (criteria.mobile_data) {
+                    const description = (product.description || '').toLowerCase();
+                    const hasMobileData = description.includes('mobile data') || 
+                                        description.includes('4g') || 
+                                        description.includes('lte') ||
+                                        description.includes('cellular');
+                    if (!hasMobileData) {
+                        return false;
+                    }
                 }
 
-                // GPS
-                if (criteria.gps && !description.includes('gps')) {
-                    return false;
+                // Filter by GPS (might be in description)
+                if (criteria.gps) {
+                    const description = (product.description || '').toLowerCase();
+                    if (!description.includes('gps')) {
+                        return false;
+                    }
                 }
 
-                // Optical drive
-                if (criteria.optical_drive && !description.includes('optical drive') && !description.includes('cd') && !description.includes('dvd')) {
-                    return false;
+                // Filter by optical drive (might be in description)
+                if (criteria.optical_drive) {
+                    const description = (product.description || '').toLowerCase();
+                    if (!description.includes('optical') && !description.includes('cd') && !description.includes('dvd')) {
+                        return false;
+                    }
                 }
 
-                // Environmental conditions (rough handling, vibration, etc.)
+                // Filter by environmental conditions using Ingress Protection Rating
                 if (criteria.vibration_shock || criteria.moving_vehicle || criteria.environment.length > 0) {
-                    // Check if product mentions rugged or durable features
-                    const hasRuggedFeatures = description.includes('rugged') ||
+                    const ipRating = getCustomFieldValue('Ingress Protection Rating');
+                    const description = (product.description || '').toLowerCase();
+                    
+                    // Check if product has rugged features
+                    const hasRuggedFeatures = ipRating || 
+                                            description.includes('rugged') ||
                                             description.includes('durable') ||
                                             description.includes('military') ||
-                                            description.includes('industrial');
+                                            description.includes('industrial') ||
+                                            description.includes('waterproof') ||
+                                            description.includes('dustproof');
 
                     if (!hasRuggedFeatures) {
                         return false;
