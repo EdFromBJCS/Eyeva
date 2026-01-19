@@ -1,27 +1,33 @@
 // PC Builder Selection Assistance
-// Handles the selection assistance form and product filtering
+// Handles the selection assistance form and product filtering 
 
 (function() {
     'use strict';
 
     class SelectionAssistanceManager {
         constructor() {
+            // Get DOM elements
             this.form = document.getElementById('pc-selection-form');
             this.filterButton = document.getElementById('filter-products');
             this.filteredProductsSection = document.getElementById('filtered-products-section');
             this.productsGrid = document.getElementById('filtered-products-list');
             this.noProductsMessage = document.getElementById('no-products-message');
 
+            // Get injected values from window
             this.categoryId = window.pcBuilderCategoryId || '';
-            this.graphQLToken = window.graphQLToken || '';
             this.lang = window.pcBuilderLangJSON || {};
             
             // Compatibility fields from BigCommerce config
             this.compatibilityFields = window.compatibilityFields ? 
                 (typeof window.compatibilityFields === 'string' ? 
                     window.compatibilityFields.split(',').map(field => field.trim()).filter(field => field.length > 0) :
-                    window.compatibilityFields) : 
+                    Array.isArray(window.compatibilityFields) ? window.compatibilityFields : []) : 
                 [];
+
+            console.log('=== SelectionAssistanceManager initialized ===');
+            console.log('Category ID:', this.categoryId);
+            console.log('Language JSON available:', !!this.lang);
+            console.log('Compatibility Fields:', this.compatibilityFields);
 
             this.init();
         }
@@ -46,15 +52,19 @@
             // Show loading state
             this.showLoadingState();
 
+            console.log('Category ID:', this.categoryId);
+            console.log('GraphQL Token:', this.graphQLToken ? 'Present' : 'Missing');
             console.log('Filtering products with criteria:', formData);
             console.log('Compatibility fields:', this.compatibilityFields);
 
             try {
                 // Build GraphQL query for filtering products
                 const query = this.buildProductQuery(formData);
+                console.log('GraphQL Query:', query);
                 const products = await this.fetchProducts(query);
 
                 console.log('Fetched products:', products.length);
+                console.log('First product sample:', products.length > 0 ? products[0] : 'No products');
 
                 // Filter products based on criteria
                 const filteredProducts = this.filterProductsByCriteria(products, formData);
@@ -66,6 +76,7 @@
 
             } catch (error) {
                 console.error('Error filtering products:', error);
+                console.error('Error details:', error.message, error.stack);
                 this.showErrorState();
             }
         }
@@ -189,53 +200,78 @@
         }
 
         async fetchProducts(query) {
-            const response = await fetch('/graphql', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${this.graphQLToken}`
-                },
-                body: JSON.stringify({
-                    query: query,
-                    variables: {
-                        categoryId: parseInt(this.categoryId)
-                    }
-                })
-            });
-
-            const result = await response.json();
-
-            if (result.errors) {
-                throw new Error(result.errors[0].message);
-            }
-
-            const categoryData = result.data.site.category;
-            let allProducts = [];
-
-            // Add products from main category
-            if (categoryData.products?.edges) {
-                allProducts = allProducts.concat(categoryData.products.edges.map(edge => edge.node));
-            }
-
-            // Add products from subcategories
-            if (categoryData.children?.edges) {
-                categoryData.children.edges.forEach(child => {
-                    if (child.node.products?.edges) {
-                        allProducts = allProducts.concat(child.node.products.edges.map(edge => edge.node));
-                    }
+            try {
+                // Use the window.fetch with proper GraphQL endpoint
+                // BigCommerce Stencil automatically handles authentication
+                const response = await fetch('/graphql', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        query: query,
+                        variables: {
+                            categoryId: parseInt(this.categoryId)
+                        }
+                    })
                 });
+
+                console.log('GraphQL Response Status:', response.status);
+
+                const result = await response.json();
+
+                console.log('GraphQL Result:', result);
+
+                if (result.errors) {
+                    console.error('GraphQL Errors:', result.errors);
+                    throw new Error(result.errors[0].message);
+                }
+
+                if (!result.data || !result.data.site || !result.data.site.category) {
+                    console.error('Invalid response structure:', result);
+                    throw new Error('Invalid response structure from GraphQL');
+                }
+
+                const categoryData = result.data.site.category;
+                let allProducts = [];
+
+                // Add products from main category
+                if (categoryData.products?.edges) {
+                    console.log('Main category products:', categoryData.products.edges.length);
+                    allProducts = allProducts.concat(categoryData.products.edges.map(edge => edge.node));
+                }
+
+                // Add products from subcategories
+                if (categoryData.children?.edges) {
+                    console.log('Subcategories found:', categoryData.children.edges.length);
+                    categoryData.children.edges.forEach((child, index) => {
+                        if (child.node.products?.edges) {
+                            console.log(`Subcategory ${index} products:`, child.node.products.edges.length);
+                            allProducts = allProducts.concat(child.node.products.edges.map(edge => edge.node));
+                        }
+                    });
+                }
+
+                console.log('Total products before dedup:', allProducts.length);
+
+                // Remove duplicates based on entityId
+                const uniqueProducts = allProducts.filter((product, index, self) => 
+                    index === self.findIndex(p => p.entityId === product.entityId)
+                );
+
+                console.log('Total products after dedup:', uniqueProducts.length);
+
+                return uniqueProducts;
+            } catch (error) {
+                console.error('Fetch error:', error);
+                throw error;
             }
-
-            // Remove duplicates based on entityId
-            const uniqueProducts = allProducts.filter((product, index, self) => 
-                index === self.findIndex(p => p.entityId === product.entityId)
-            );
-
-            return uniqueProducts;
         }
 
         filterProductsByCriteria(products, criteria) {
-            return products.filter(product => {
+            console.log('Starting filter with criteria:', criteria);
+            
+            return products.filter((product, index) => {
                 const customFields = product.customFields?.edges || [];
                 const categories = product.categories?.edges || [];
                 
@@ -245,9 +281,16 @@
                     return field ? field.node.value : '';
                 };
 
+                if (index === 0) {
+                    console.log('Sample product:', product.name);
+                    console.log('Custom fields:', customFields.map(e => ({ name: e.node.name, value: e.node.value })));
+                    console.log('Categories:', categories.map(e => e.node.name));
+                }
+
                 // Filter by computer condition (new/refurbished)
                 if (criteria.computer_condition && criteria.computer_condition !== '') {
                     const condition = getCustomFieldValue('Condition');
+                    console.log(`[${product.name}] Condition check - looking for "${criteria.computer_condition}", found "${condition}"`);
                     if (condition && !condition.toLowerCase().includes(criteria.computer_condition.toLowerCase())) {
                         return false;
                     }

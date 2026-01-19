@@ -35,7 +35,6 @@ import BuildSummaryManager from './build-summary-manager';
 import ActionButtonManager from './action-button-manager';
 import ConfigurationManager from './configuration-manager';
 import ConfigurationUIManager from './configuration-ui-manager';
-import SelectionAssistanceManager from './selection-assistance';
 
 
 export default class PcBuilder {
@@ -115,13 +114,6 @@ export default class PcBuilder {
      * Initialize PC Builder
      */
     async init() {
-        // Check if this is a selection assistance page
-        if (document.getElementById('pc-selection-form')) {
-            // Initialize selection assistance instead of PC builder
-            this.selectionAssistanceManager = new SelectionAssistanceManager();
-            return;
-        }
-
         // Initialize configuration UI with callbacks
         await this.configurationUIManager.initialize({
             onSwitchConfiguration: this.switchConfiguration.bind(this),
