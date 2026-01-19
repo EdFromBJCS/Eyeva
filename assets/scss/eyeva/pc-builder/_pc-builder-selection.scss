@@ -1,156 +1,243 @@
-// PC Builder Selection Assistance Form Styles
-// prefix: papathemes-selection-
+// PC Builder Selection Assistance Styles 
 
-.papathemes-selection-form {
-    max-width: 100%;
+.papathemes-selection-assistance-page {
+    padding: 2rem 0;
+    max-width: 1400px;
+    margin: 0 auto;
+}
 
-    .papathemes-form-section {
-        margin-bottom: 2rem;
-        padding: 1.5rem;
-        border: 1px solid #e5e5e5;
-        border-radius: 8px;
-        background: #fff;
+// Header
+.papathemes-selection-header {
+    margin-bottom: 3rem;
+    text-align: center;
 
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-
-    .papathemes-form-legend {
-        font-size: 1.25rem;
-        font-weight: 600;
-        color: #333;
+    .page-heading {
+        font-size: 2.5rem;
         margin-bottom: 1rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid #007cba;
+        font-weight: 600;
     }
 
-    .papathemes-form-group {
+    .page-description {
+        font-size: 1.1rem;
+        color: #666;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .breadcrumbs {
         margin-bottom: 1.5rem;
+    }
+}
 
-        &:last-child {
-            margin-bottom: 0;
-        }
+// Main Layout
+.papathemes-selection-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    padding: 0 1rem;
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: #333;
+    @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 
-            .required {
-                color: #dc3545;
-                margin-left: 0.25rem;
-            }
-        }
+    @media (max-width: 768px) {
+        padding: 0 0.5rem;
+    }
+}
 
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
+// Form Styles
+.papathemes-selection-form {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 2rem;
 
-            &:focus {
-                outline: none;
-                border-color: #007cba;
-                box-shadow: 0 0 0 2px rgba(0, 124, 186, 0.2);
-            }
-        }
+    @media (max-width: 768px) {
+        padding: 1.5rem;
+    }
+}
 
-        textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
+.papathemes-form-section {
+    border: none;
+    padding: 0;
+    margin-bottom: 2rem;
 
-        .checkbox-label {
-            display: flex;
-            align-items: center;
-            font-weight: normal;
-            cursor: pointer;
-            margin-bottom: 0.5rem;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
 
-            &:last-child {
-                margin-bottom: 0;
-            }
+.papathemes-form-legend {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #007bff;
+    color: #333;
+}
 
-            input[type="checkbox"] {
-                margin-right: 0.5rem;
-                width: auto;
-            }
+.papathemes-form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+
+    label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: #333;
+        font-size: 0.95rem;
+
+        .required {
+            color: #dc3545;
+            margin-left: 0.25rem;
         }
     }
 
-    .papathemes-checkbox-group {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 0.75rem;
-        margin-top: 0.5rem;
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
-        .checkbox-label {
-            margin-bottom: 0;
+        &:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
         }
     }
 
-    .papathemes-form-actions {
-        margin-top: 2rem;
-        text-align: center;
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
+    textarea {
+        resize: vertical;
+        min-height: 80px;
+    }
 
-        .button {
-            min-width: 200px;
-            padding: 1rem 2rem;
+    select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        background-size: 1.5em 1.5em;
+        padding-right: 2.5rem;
+    }
+}
 
-            &.button--secondary {
-                background: #6c757d;
-                border-color: #6c757d;
+.papathemes-checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
 
-                &:hover {
-                    background: #5a6268;
-                    border-color: #5a6268;
-                }
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 400;
+    margin-bottom: 0;
+
+    input[type="checkbox"] {
+        margin-right: 0.5rem;
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+    }
+}
+
+.papathemes-form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+
+    button {
+        flex: 1;
+        min-width: 150px;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+
+        &.button--primary {
+            background-color: #007bff;
+            color: white;
+
+            &:hover {
+                background-color: #0056b3;
             }
+
+            &:active {
+                transform: scale(0.98);
+            }
+        }
+
+        &.button--secondary {
+            background-color: #6c757d;
+            color: white;
+
+            &:hover {
+                background-color: #545b62;
+            }
+        }
+
+        @media (max-width: 640px) {
+            flex: 1 1 100%;
+            min-width: 100%;
         }
     }
 }
 
+// Filtered Products Section
 .papathemes-filtered-products {
     margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid #eee;
 
     h2 {
         font-size: 1.5rem;
-        font-weight: 600;
-        color: #333;
         margin-bottom: 1.5rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid #007cba;
+        color: #333;
     }
 }
 
 .papathemes-products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
     margin-bottom: 2rem;
+
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+    }
 }
 
 .papathemes-product-card {
-    border: 1px solid #e5e5e5;
+    background: #fff;
+    border: 1px solid #ddd;
     border-radius: 8px;
     padding: 1rem;
-    background: #fff;
-    transition: box-shadow 0.3s ease;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
 
     &:hover {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        border-color: #007bff;
     }
 
     .product-image {
@@ -162,170 +249,572 @@
     }
 
     .product-title {
-        font-size: 1.1rem;
         font-weight: 600;
-        color: #333;
+        font-size: 1rem;
         margin-bottom: 0.5rem;
+        color: #333;
+        text-decoration: none;
         display: block;
+
+        &:hover {
+            color: #007bff;
+        }
     }
 
     .product-price {
-        font-size: 1.2rem;
+        font-size: 1.25rem;
         font-weight: 700;
-        color: #007cba;
-        margin-bottom: 1rem;
+        color: #28a745;
+        margin-bottom: 0.75rem;
     }
 
     .product-description {
-        color: #666;
         font-size: 0.9rem;
-        line-height: 1.4;
+        color: #666;
         margin-bottom: 1rem;
+        flex-grow: 1;
+        text-align: left;
+        line-height: 1.4;
     }
 
     .product-link {
         display: inline-block;
-        background: #007cba;
-        color: #fff;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
+        padding: 0.6rem 1rem;
+        background-color: #007bff;
+        color: white;
         text-decoration: none;
-        font-weight: 500;
-        transition: background 0.3s ease;
+        border-radius: 4px;
+        font-weight: 600;
+        transition: all 0.3s ease;
 
         &:hover {
-            background: #005a87;
+            background-color: #0056b3;
         }
     }
 }
 
-.papathemes-no-products {
+.papathemes-no-products,
+.error-message {
+    grid-column: 1 / -1;
+    padding: 2rem;
     text-align: center;
-    padding: 3rem 1rem;
-    background: #f8f9fa;
+    background-color: #f8f9fa;
     border-radius: 8px;
-    border: 1px solid #e5e5e5;
+    border: 1px solid #ddd;
 
     p {
-        margin-bottom: 1rem;
+        margin: 0.5rem 0;
         color: #666;
+        font-size: 1rem;
 
-        &:last-child {
-            margin-bottom: 0;
+        &:first-child {
+            font-weight: 600;
+            color: #333;
         }
     }
 }
 
+.error-message {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+// Sidebar
 .papathemes-selection-sidebar {
-    .papathemes-selection-info-section,
-    .papathemes-selection-tips,
-    .papathemes-selection-contact {
-        margin-bottom: 2rem;
-        padding: 1.5rem;
-        border: 1px solid #e5e5e5;
-        border-radius: 8px;
-        background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: fit-content;
+    position: sticky;
+    top: 2rem;
+
+    @media (max-width: 1024px) {
+        position: static;
+        height: auto;
+    }
+}
+
+.papathemes-selection-info-section,
+.papathemes-selection-tips,
+.papathemes-selection-contact {
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1.5rem;
+
+    h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: #333;
+        font-weight: 600;
+    }
+
+    p {
+        color: #666;
+        margin-bottom: 1rem;
+        font-size: 0.95rem;
+        line-height: 1.5;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+            padding: 0.5rem 0 0.5rem 1.5rem;
+            position: relative;
+            color: #666;
+            font-size: 0.95rem;
+
+            &::before {
+                content: "✓";
+                position: absolute;
+                left: 0;
+                color: #28a745;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.papathemes-selection-tips {
+    .papathemes-tip {
+        margin-bottom: 1.5rem;
 
         &:last-child {
             margin-bottom: 0;
         }
 
-        h3 {
-            font-size: 1.25rem;
+        h4 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #007bff;
             font-weight: 600;
-            color: #333;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #007cba;
         }
 
-        ul {
-            padding-left: 1.5rem;
-
-            li {
-                margin-bottom: 0.5rem;
-                color: #555;
-            }
+        p {
+            margin-bottom: 0;
+            color: #666;
+            font-size: 0.9rem;
         }
     }
+}
 
-    .papathemes-selection-tips-content {
-        .papathemes-tip {
-            margin-bottom: 1.5rem;
+// Loading and Error States
+.loading {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-size: 1.1rem;
 
-            &:last-child {
-                margin-bottom: 0;
-            }
-
-            h4 {
-                font-size: 1.1rem;
-                font-weight: 600;
-                color: #333;
-                margin-bottom: 0.5rem;
-            }
-
-            p {
-                color: #666;
-                line-height: 1.5;
-            }
-        }
+    &::after {
+        content: "";
+        animation: dots 1.5s steps(3, end) infinite;
     }
+}
 
-    .papathemes-contact-methods {
-        .papathemes-contact-method {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.75rem;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
-
-            i {
-                margin-right: 0.75rem;
-                color: #007cba;
-                font-size: 1.2rem;
-            }
-
-            span {
-                color: #333;
-                font-weight: 500;
-            }
-        }
+@keyframes dots {
+    0%,
+    20% {
+        content: "";
     }
+    40% {
+        content: ".";
+    }
+    60% {
+        content: "..";
+    }
+    80%,
+    100% {
+        content: "...";
+    }
+}
+
+.error {
+    text-align: center;
+    padding: 2rem;
+    color: #dc3545;
+    font-size: 1.1rem;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 8px;
 }
 
 // Responsive adjustments
-@media (max-width: 768px) {
+@media (max-width: 640px) {
+    .papathemes-selection-assistance-page {
+        padding: 1rem 0;
+    }
+
+    .papathemes-selection-header {
+        margin-bottom: 2rem;
+
+        .page-heading {
+            font-size: 1.8rem;
+        }
+
+        .page-description {
+            font-size: 1rem;
+        }
+    }
+
     .papathemes-selection-form {
-        .papathemes-form-section {
-            padding: 1rem;
-        }
-
-        .papathemes-form-actions {
-            flex-direction: column;
-            align-items: center;
-
-            .button {
-                width: 100%;
-                min-width: auto;
-            }
-        }
-
-        .papathemes-checkbox-group {
-            grid-template-columns: 1fr;
-        }
+        padding: 1rem;
     }
 
-    .papathemes-products-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .papathemes-selection-sidebar {
-        .papathemes-selection-info-section,
-        .papathemes-selection-tips,
-        .papathemes-selection-contact {
-            padding: 1rem;
-        }
+    .papathemes-checkbox-group {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 0.75rem;
     }
 }
+
+
+            .selectAssist * {
+                transition: .15s;
+            }
+
+            .selectAssist {
+                background-color: #f8f8f8;
+                border: 1px solid rgba(0, 0, 0, .05);
+                border-radius: 2px;
+                box-shadow: 0 1px 2px rgba(34, 34, 34, .13);
+                margin: 0 -1.5rem;
+                
+            }
+
+            @media (min-width:551px) {
+                .selectAssist {
+                    margin: 0 0;
+                }
+            }
+
+            .infusion-field {
+                float: none;
+                width: auto;
+                margin-top: 16px;
+            }
+
+            .infusion-option {
+                display: block;
+            }
+
+            .infusion-field label {
+                opacity: 0.75;
+            }
+
+            .infusion-field label:hover,
+            .infusion-field input:checked+label {
+                opacity: 1;
+            }
+
+            .infusion-radio {
+                display: block;
+                margin-top: 0.5em;
+            }
+
+            .infusion-field label {
+                display: inline-block;
+                float: none;
+                font-weight: normal;
+                margin: 6px 12px 6px 0;
+                width: auto;
+            }
+
+            .infusion-field textarea {
+                border: 1px solid #ccc;
+                margin-bottom: 12px;
+                width: 100%;
+            }
+
+            .infusion-field textarea:focus {
+                border: 1px solid #999;
+            }
+
+            .infusion-field select {
+                display: block;
+                border: 1px solid #ccc;
+            }
+
+            .selectAssist .infusion-field input[type="text"] {
+                display: block;
+                width: 66%;
+                min-width: 192px;
+                border: 1px solid #ccc;
+            }
+
+            .selectAssist .infusion-field input[type="text"]:focus {
+                border: 1px solid #999;
+            }
+
+            .infusion-field input[type="radio"] {
+                display: none;
+            }
+
+            .infusion-field input[type="radio"]+label span {
+                border: 1px solid #999;
+                border-radius: 12px;
+                display: inline-block;
+                height: 12px;
+                margin-bottom: 2px;
+                margin-right: 0.5em;
+                vertical-align: middle;
+                width: 12px;
+            }
+
+            .infusion-field input[type="radio"]:disabled+label,
+            .infusion-field input[type="checkbox"]:disabled+label {
+                opacity: 0.5;
+            }
+
+            .infusion-field input[type="radio"]:checked+label,
+            .infusion-field input[type="checkbox"]:checked+label {
+                opacity: 1;
+            }
+
+            .infusion-field input[type="radio"]:checked+label span {
+                background-image: radial-gradient(#dc3522 4px, transparent 4px);
+            }
+
+            .infusion-captcha,
+            .infusion-submit {
+                float: none;
+            }
+
+            .field1 .infusion-submit input {
+                background: #dc3522;
+                border: none;
+                border-radius: 3px;
+                color: #fff;
+                cursor: pointer;
+                font-display: swap;
+                font-family: 'Roboto';
+                margin-top: 1rem;
+                padding: 1em;
+                width: 100%;
+            }
+
+            .field1 .infusion-submit input:hover {
+                background: #c4301f;
+            }
+
+            .choices input:checked+label {
+                background: #dcdcdc;
+                border: 1px solid #777777;
+                border-bottom: none;
+                padding: 8px 16px 2px 16px;
+                margin: 0 16px 16px 0;
+            }
+
+            .control:checked~.conditional {
+                background: #ebe8e8;
+                box-shadow: 0 2px 4px #dedcdc;
+                clip: auto;
+                display: block;
+                height: auto;
+                margin: 16px 0;
+                overflow: visible;
+                padding: 16px;
+                position: static;
+            }
+
+            .control:checked~.conditional:before {
+                border-bottom-color: #e0e0e0;
+                border-color: transparent;
+                border-style: solid outset solid solid;
+                border-width: 10px;
+                content: ' ';
+                display: block;
+                height: 0;
+                left: 0;
+                margin-bottom: -16px;
+                position: relative;
+                top: -35px;
+                width: 0;
+            }
+
+            .control:not(:checked)~.conditional,
+            #touchscreenYes:not(:checked)~.conditional,
+            #gobiYes:not(:checked)~.conditional,
+            #opticalYes:not(:checked)~.conditional,
+            #inf_custom_usevehicle_Yes:not(:checked)~.conditional,
+            #needMountYes:not(:checked)~.conditional {
+                border: 0;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                width: 1px;
+            }
+
+            .formSection {
+                border-bottom: 1px solid #ddd;
+                margin-bottom: 2em;
+            }
+
+            .formSection h2 {
+                margin-left: 12px;
+                padding: 12px;
+            }
+
+            .field1 {
+                clear: left;
+                display: block;
+                margin: 8px;
+                padding: 16px;
+            }
+
+            .field1>label {
+                font-size: 1.25em;
+                opacity: 1;
+            }
+
+            label.rectangle {
+                display: block;
+                float: left;
+                margin: 0 5px 12px 0;
+                opacity: 1;
+                position: relative;
+            }
+
+            .rectangle input {
+                position: absolute;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+                opacity: 0;
+            }
+
+            .rectangle-text {
+                display: block;
+                padding: 1em;
+                margin: 0 .5em 0 0;
+                text-align: center;
+                background: #dedcdc;
+                opacity: 0.75;
+            }
+
+            .rectangle input:hover+.rectangle-text {
+                background: #ccc;
+            }
+
+            .rectangle input[type=checkbox]:checked+.rectangle-text {
+                background: #dc3522;
+                color: #fff;
+                opacity: 1;
+            }
+
+            .tenscale {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 24px;
+                position: relative;
+            }
+
+            .tenscale input {
+                display: block !important;
+                opacity: 0;
+            }
+
+            .tenscale label {
+                display: inline-block;
+                opacity: 1;
+            }
+
+            .tenscale label input[type="radio"]:checked+span {
+                background: #dc3522;
+                color: #fff;
+            }
+
+            .tenscale label span {
+                display: block;
+                height: 26px;
+                width: 26px;
+                text-align: center;
+                border: 1px solid #999;
+                border-radius: 13px;
+                cursor: pointer;
+            }
+
+            .tenscale label span:hover {
+                background: #ccc;
+            }
+
+            .elab {
+                border: 0;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                width: 100%;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                opacity: 0;
+            }
+
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1123:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1125:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1127:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1129:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1131:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1133:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1135:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1137:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1139:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1141:checked~.elab {
+                clip: auto;
+                height: auto;
+                width: 100%;
+                margin: 16px 0;
+                overflow: visible;
+                position: absolute;
+                left: 0;
+                text-align: center;
+                opacity: 1;
+                color: #dc3522;
+            }
+
+            @media only screen and (max-width: 700px) {
+                .tenscale {
+                    flex-direction: column;
+                }
+
+                .tenscale input {
+                    display: block !important;
+                    opacity: 0;
+                }
+
+                .tenscale label span {
+                    cursor: none;
+                }
+
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1123:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1125:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1127:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1129:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1131:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1133:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1135:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1137:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1139:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1141:checked~.elab {
+                    margin-top: -24px;
+                    position: absolute;
+                    left: 10px;
+                    text-align: center;
+                    opacity: 1;
+                    color: #dc3522;
+                }
+            }
+
+            .selectAssist .grecaptcha-badge {
+                display: none !important;
+            }

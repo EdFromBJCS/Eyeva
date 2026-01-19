@@ -458,6 +458,11 @@ div.tab-button2 div {
     }
 }
 
+//Blog Image Center
+.blog-img-center {
+    text-align: center;
+}
+
 /* Blog filter: show dropdown contents on hover for desktop */
 @include breakpoint("medium") {
     /* Blog filter: animate visibility and keep open slightly longer when leaving
@@ -585,166 +590,166 @@ div.tab-button2 div {
 
 // Home page Hero Custom CSS
 
-    .video-container {
-        grid-area: video;
+.video-container {
+    grid-area: video;
+}
+
+.iframe-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 60%;
+}
+
+.responsive-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.rugged-rundown-btn {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+    contain: layout paint;
+    grid-area: icons;
+}
+
+.carousel {
+    display: flex;
+    box-sizing: border-box;
+    transition: transform 0.5s ease;
+    width: 100%;
+    will-change: transform;
+
+    a {
+        text-decoration: none;
     }
+}
 
-    .iframe-container {
-        position: relative;
-        overflow: hidden;
-        width: 100%;
-        padding-top: 60%;
-    }
+.slide {
+    flex: 0 0 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    text-align: center;
+}
 
-    .responsive-iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        width: 100%;
-        height: 100%;
-    }
-
-    .rugged-rundown-btn {
-        margin-top: 20px;
-        width: 100%;
-    }
-
-    .carousel-container {
-        position: relative;
-        width: 100%;
-        max-width: 100%;
-        margin: 0 auto;
-        overflow: hidden;
-        contain: layout paint;
-        grid-area: icons;
-    }
-
-    .carousel {
-        display: flex;
-        box-sizing: border-box;
-        transition: transform 0.5s ease;
-        width: 100%;
-        will-change: transform;
-
-        a {
-            text-decoration: none;
-        }
-    }
-
-    .slide {
-        flex: 0 0 100%;
-        max-width: 100%;
-        box-sizing: border-box;
-        padding: 10px;
-        text-align: center;
-    }
-
-    .grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
-        gap: 10px;
-        margin: 0;
-        padding: 10px 2px;
-    }
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    margin: 0;
+    padding: 10px 2px;
+}
 
 
-    .icon-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    .heroBannerIcon {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        margin-bottom: 10px;
-    }
+.heroBannerIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
 
-    .icon-heading {
-        font-size: 18px;
-        margin: 5px 0;
-    }
+.icon-heading {
+    font-size: 18px;
+    margin: 5px 0;
+}
 
-    .icon-description {
-        font-size: 14px;
-        color: #222;
-        text-align: center;
-    }
+.icon-description {
+    font-size: 14px;
+    color: #222;
+    text-align: center;
+}
 
-    .homeblaze-prev,
-    .homeblaze-next {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        border: none;
-        padding: 10px;
-        cursor: pointer;
-        z-index: 1;
-        border: 1px solid #222;
-        border-radius: 50%;
-    }
+.homeblaze-prev,
+.homeblaze-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+    border: 1px solid #222;
+    border-radius: 50%;
+}
 
-    .homeblaze-prev {
-        left: 10px;
-    }
+.homeblaze-prev {
+    left: 10px;
+}
 
-    .homeblaze-next {
-        right: 10px;
-    }
+.homeblaze-next {
+    right: 10px;
+}
 
+.video-repair-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "video repair"
+        "icons repair";
+}
+
+@media screen and (max-width: 801px) {
     .video-repair-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         grid-template-areas:
-            "video repair"
-            "icons repair";
+            "video"
+            "icons"
+            "repair";
+    }
+}
+
+.repair-container {
+    padding: 30px;
+    text-align: center;
+    align-items: center;
+    grid-area: repair;
+
+    a {
+        text-decoration: none;
     }
 
-    @media screen and (max-width: 801px) {
-        .video-repair-grid {
-            grid-template-columns: 1fr;
-            grid-template-areas:
-                "video"
-                "icons"
-                "repair";
+    li,
+    p {
+        list-style: none;
+        color: #222;
+    }
+
+    li {
+        text-align: left;
+
+        img {
+            width: 20%;
         }
     }
 
-    .repair-container {
-        padding: 30px;
-        text-align: center;
-        align-items: center;
-        grid-area: repair;
-
-        a {
-            text-decoration: none;
-        }
-
-        li,
-        p {
-            list-style: none;
-            color: #222;
-        }
-
-        li {
-            text-align: left;
-
-            img {
-                width: 20%;
-            }
-        }
-
-        .button {
-            width: 100%;
-        }
+    .button {
+        width: 100%;
+    }
 }
 
 .mobile-repair {
@@ -765,7 +770,7 @@ div.tab-button2 div {
         }
     }
 
-       .video-repair-grid {
+    .video-repair-grid {
         grid-template-columns: 1fr;
         grid-template-areas:
             "video"
@@ -774,5 +779,115 @@ div.tab-button2 div {
 
     .desktop-repair {
         display: none;
+    }
+}
+
+  .data-banner-carousel-link {
+        color: white;
+}
+
+    .data-banner-carousel-link:hover {
+        color: #E5E5E5;
+}
+
+// Home Page Category Slider
+
+.popular-rugged-laptops-card-background {
+    background-color: rgba(229, 229, 229, 0.1);
+    box-shadow: 0px -2px 2px rgba(229, 229, 229, 0.05);
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.popular-rugged-laptops-card {
+    
+    position: relative;
+    margin-top: 20px;
+    width: 95%;
+    margin-bottom: 1.5rem;
+
+    .section-header-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .section-heading {
+            flex: 1;
+            text-align: center;
+        }
+    }
+
+    .categoryCarousel {
+        .blaze-container {
+            .blaze-track-container {
+                overflow: visible;
+            }
+
+            .blaze-track {
+                padding: 12px 8px;
+            }
+
+            .blaze-prev,
+            .blaze-next {
+                position: absolute;
+                top: -60px;
+                background: container("fill");
+                border: 1px solid $color-textBase;
+                border-radius: 25px;
+                color: $color-textBase;
+                display: block;
+                height: remCalc(50px);
+                padding: 15px;
+                width: remCalc(50px);
+                z-index: 10;
+
+                .icon {
+                    display: block;
+                    height: 100%;
+                    width: 100%;
+
+                    svg {
+                        fill: $color-textBase;
+                    }
+                }
+
+                &:hover,
+                &:focus {
+                    border-color: $color-primary;
+                    color: $color-primary;
+
+                    .icon svg {
+                        fill: $color-primary;
+                    }
+                }
+            }
+
+            .blaze-prev {
+                left: auto;
+                right: 60px;
+                transform: none;
+            }
+
+            .blaze-next {
+                right: 0;
+                transform: none;
+            }
+        }
+    }
+
+    @media (max-width: (screenSize("medium") - 1px)) {
+        .blaze-prev,
+        .blaze-next {
+            opacity: 0;
+        }
+    }
+
+    .item {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 2px 4px rgba(color("blacks"), 0.1);
+        background: stencilColor("card-bgColor");
+        border: rgba(229, 229, 229, 0.3) 1px solid;
     }
 }
