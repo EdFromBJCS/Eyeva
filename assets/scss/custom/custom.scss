@@ -592,13 +592,18 @@ div.tab-button2 div {
 
 .video-container {
     grid-area: video;
+
+    .iframe-container {
+    position: relative;
+    overflow: hidden;
+    padding-top: 0px;
+}
 }
 
 .iframe-container {
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding-top: 60%;
 }
 
 .responsive-iframe {
