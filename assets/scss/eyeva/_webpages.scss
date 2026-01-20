@@ -1,5 +1,6 @@
 .article {
     font-size: fontSize("base");
+    margin: 0% 10% 0% 10%;
 
     @include eyeva-size-mobile {
         font-size: fontSize("base") * 0.875;
