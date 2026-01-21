@@ -1,0 +1,350 @@
+    :root {
+        --card-bg: #ffffff;
+        --card-border: #e5e7eb;
+        --muted: #64748b;
+        --text-strong: #0f172a;
+        --accent: #dc3522;
+        --accent-soft: rgba(220, 53, 34, 0.12);
+        --input-bg: #f8fafc;
+        --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    }
+    
+    .page-heading-form {
+        margin-bottom: 2rem;
+        text-align: left;
+        margin-top: 20px;
+        margin-left: 5%;
+    }
+
+
+    .dual-form-container {
+        margin: 0 auto;
+        padding: 24px 20px 48px;
+        color: var(--text-strong);
+    }
+
+    .tab-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .tab-button {
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        padding: 10px;
+        width: 100%;
+        text-align: center;
+        background: #dc3522;
+        color: white;
+        cursor: pointer;
+        transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .tab-button:hover,
+    .tab-button.active-tab {
+        border-color: var(--accent);
+        box-shadow: 0 8px 20px rgba(15, 98, 254, 0.15);
+        background: #a7291b;
+    }
+
+    .tab-text h3,
+    .tabs-title {
+        margin: 0;
+        color: white;
+    }
+
+    .tab-content {
+        padding: 12px 0 0;
+        border: 0;
+        box-shadow: none;
+        background: transparent;
+    }
+
+    @include breakpoint("large") {
+        .dual-form-container {
+            max-width: 60%;
+        }
+    }
+
+    @media (max-width: (screenSize("large") - 1px)) {
+        .dual-form-container {
+            max-width: 80%;
+        }
+    }
+
+    @media (max-width: (screenSize("small") - 1px)) {
+        .dual-form-container {
+            max-width: 100%;
+        }
+    }
+
+    .support-switcher {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin: 12px 0 24px;
+        padding: 10px;
+        background: #f4f6fb;
+        border: 1px solid var(--card-border);
+        border-radius: 14px;
+    }
+
+    .support-switcher label {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1px solid var(--card-border);
+        background: var(--card-bg);
+        cursor: pointer;
+        font-weight: 400;
+        color: var(--text-strong);
+        box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+    }
+
+    .support-switcher input[type="radio"] {
+        accent-color: var(--accent);
+    }
+
+    .support-switcher label:hover {
+        border-color: var(--accent);
+        box-shadow: 0 6px 14px rgba(15, 98, 254, 0.12);
+    }
+
+    .main-content, .blogpost {
+
+    .form-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .form-panel {
+        display: block;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        padding: 24px 20px 28px;
+    }
+
+    .form-panel.is-hidden {
+        display: none;
+    }
+
+    .form-panel h2 {
+        margin: 0 0 10px;
+        font-size: 1.5rem;
+    }
+
+    .form-panel p {
+        color: var(--muted);
+        line-height: 1.6;
+    }
+
+    .infusion-form {
+        margin-top: 14px;
+    }
+
+    .form-field {
+        margin-bottom: 16px;
+    }
+
+    .form-label {
+        display: block;
+        font-weight: 400;
+        margin-bottom: 6px;
+        color: var(--text-strong);
+    }
+
+    .form-input,
+    .form-field input[type="text"],
+    .form-field input[type="email"],
+    .form-field select,
+    .form-field textarea {
+        width: 100%;
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        padding: 12px 14px;
+        background: var(--input-bg);
+        color: var(--text-strong);
+        transition: border-color 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .form-field textarea {
+        min-height: 140px;
+        resize: vertical;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-soft);
+        background: #fff;
+    }
+
+    .infusion-radio,
+    .infusion-checkbox,
+    .repair-indent {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* Fix conditional behavior when parent uses flex layout */
+    .selectAssist .infusion-radio,
+    .form--quickSearch .infusion-radio {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* Make conditional panels span full width inside the flex row */
+    .selectAssist .infusion-radio > .conditional,
+    .form--quickSearch .infusion-radio > .conditional {
+        flex: 0 0 100%;
+        order: 99;
+        align-self: stretch;
+        margin-top: 8px;
+        width: 100%;
+    }
+
+    /* Ensure options behave as compact flex items */
+    .selectAssist .infusion-radio > .infusion-option,
+    .form--quickSearch .infusion-radio > .infusion-option {
+        flex: 0 1 auto;
+        min-width: 140px;
+    }
+
+    /* Show conditional when an associated control is checked (supports markup using .control) */
+    .selectAssist .infusion-radio .control:checked ~ .conditional,
+    .form--quickSearch .infusion-radio .control:checked ~ .conditional,
+    .selectAssist .control:checked ~ .conditional,
+    .form--quickSearch .control:checked ~ .conditional {
+        max-height: 2000px;
+        opacity: 1;
+        transform: translateY(0);
+        padding: 14px;
+    }
+
+    /* Nested conditional spacing */
+    .selectAssist .conditional .conditional,
+    .form--quickSearch .conditional .conditional {
+        margin-top: 8px;
+    }
+
+    @media (max-width: 700px) {
+        .selectAssist .infusion-radio,
+        .form--quickSearch .infusion-radio {
+            flex-direction: column;
+        }
+
+        .selectAssist .infusion-radio > .infusion-option,
+        .form--quickSearch .infusion-radio > .infusion-option {
+            min-width: 0;
+            width: 100%;
+        }
+    }
+
+    .infusion-option,
+    .infusion-checkbox {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 12px;
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        background: var(--input-bg);
+        box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    }
+
+    .infusion-option label,
+    .infusion-checkbox label {
+        margin: 0;
+        font-weight: 400;
+    }
+
+    .infusion-option input,
+    .infusion-checkbox input {
+        accent-color: var(--accent);
+        margin: 0;
+    }
+
+    .infusion-submit .button {
+        width: 100%;
+        padding: 14px;
+        font-size: 1rem;
+        font-weight: 700;
+        border-radius: 12px;
+        border: none;
+        background: linear-gradient(135deg, #dc3522, #f1543f);
+        box-shadow: 0 12px 24px rgba(220, 53, 34, 0.28);
+    }
+
+    .infusion-submit .button:hover {
+        box-shadow: 0 14px 28px rgba(220, 53, 34, 0.34);
+        transform: translateY(-1px);
+    }
+
+    .tab-container {
+        margin-top: 6px;
+    }
+
+    @media (max-width: 700px) {
+        .dual-form-container {
+            padding: 16px 12px 32px;
+        }
+
+        .form-panel {
+            padding: 18px 14px 24px;
+        }
+
+        .support-switcher {
+            gap: 8px;
+        }
+    }
+    }
+
+    // Tab table utilities for trade-in and repair forms
+    .tab-table-trade {
+        border-collapse: separate;
+        border-spacing: 5px;
+        max-width: 30rem;
+        min-width: 30rem;
+        table-layout: fixed;
+        width: 100%;
+        padding-bottom: 10px;
+    }
+
+    .tab-table-repair {
+        border-collapse: separate;
+        border-spacing: 5px;
+        max-width: 45rem;
+        min-width: 40rem;
+        table-layout: fixed;
+        width: 100%;
+        padding-bottom: 10px;
+    }
+
+    .tab-cell {
+        width: 100%;
+    }
+
+    .tab-text {
+        color: #fff;
+    }
+
+    // Utility classes
+    .form-field.margin-remover {
+        margin-bottom: 0;
+    }
+
+    .underline {
+        text-decoration: underline;
+    }

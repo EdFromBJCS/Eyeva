@@ -62,39 +62,109 @@
 
 // Frequently Asked Questions
 .faqtitle {
-    margin: 0;
+    margin: 1.5rem 0 1rem;
+    font-size: 1.25rem;
 }
 
 .faq1,
 .faq2,
-.faq3 {
-    display: inline-block;
+.faq3,
+.faq4,
+.faq5 {
+    display: block;
+
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
 }
 
 .expandfaq {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px;
+    background: #ebe8e8;
+    border: none;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease;
+    gap: 12px;
+
+    &:hover {
+        background: #dedcdc;
+    }
+
+    table {
+        width: 100%;
+        border: none;
+        background: transparent;
+
+        tr {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+        }
+
+        td {
+            border: none;
+            padding: 0;
+            background: transparent;
+
+            &:first-child {
+                flex-shrink: 0;
+            }
+
+            &:last-child {
+                flex: 1;
+            }
+        }
+    }
+}
+
+.plp-page-region {
+
+    .expandfaq {
+        justify-content: flex-start;
+    }
+
+    .faq-group {
+        margin-bottom: 15px;
+    }
+}
+
+.blog-post {
+
+    .faq1,
+    .faq2,
+    .faq3,
+    .faq4,
+    .faq5 {
+        margin-bottom: 15px;
+    }
 }
 
 .expandfaq {
     .faqplus {
         color: #dc3522;
-        display: inline-block;
-        font-size: 1.75rem;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+        transition: transform 0.18s ease;
     }
 
     h3 {
-        display: inline-block;
         margin: 0;
         text-align: left;
         text-transform: none !important;
-        vertical-align: middle;
+        font-size: 1.2rem;
+        color: #0f172a;
+        text-decoration: none;
     }
 }
 
 .faqplus {
     color: #dc3522;
-    display: inline-block;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
 }
 
 button.expandfaq.button-alt::after {
@@ -102,22 +172,34 @@ button.expandfaq.button-alt::after {
 }
 
 .faqdivider {
-    border-color: #c4301f;
-    border-width: 3px;
-    margin-top: 0;
-    width: 30%;
+    border-color: #e5e7eb;
+    border-width: 1px;
+    margin: 24px 0;
+    width: 100%;
 }
 
 .answer {
-    display: none;
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 16px;
+    background: #ffffff;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    line-height: 1.6;
+    color: #64748b;
+
+    &.open {
+        max-height: 1000px;
+        padding: 16px;
+    }
 }
 
 .faqicon {
     max-width: revert;
+    display: block;
 }
 
 .under-tab-faq {
-    margin: 0;
+    margin: 24px 0;
 }
 
 // Category Page
@@ -284,136 +366,6 @@ button.expandfaq.button-alt::after {
 // Mobile Increment For Sticky Cart
 .mobile-increment {
     display: flex;
-}
-
-
-// Tab buttons and Elements
-
-.tab-content {
-    display: none;
-}
-
-.active-tab {
-    background-color: #dc3522;
-}
-
-.tab-button {
-    background-color: #c4301f;
-    border: 1px solid #c4301f;
-    border-bottom: none;
-    border-radius: 6px;
-    border-width: 6px;
-    color: #fff;
-    cursor: pointer;
-    font-family: Roboto;
-    font-weight: 700;
-    letter-spacing: 1px;
-    padding-bottom: 5px;
-    padding-top: 0;
-    min-width: 300px;
-    text-align: center;
-    transform: translateY(25px);
-    transition: transform 0.2s ease-in-out;
-}
-
-.tab-button:hover,
-.tab-button2:hover {
-    background-color: #dc3522;
-    transform: scaleY(1.6) translateY(5px);
-}
-
-.underline {
-    text-decoration: underline;
-}
-
-.tab-container {
-    margin: 0;
-    width: 100%;
-}
-
-//hr {
-//    margin: 0;
-//    margin-left: -55px;
-//}
-
-div.tab-button:hover div,
-div.tab-button2:hover div {
-    transform: scaleY(.625);
-}
-
-div.tab-button div,
-div.tab-button2 div {
-    transition: transform 0.2s ease-in-out;
-}
-
-.tabs-title {
-    color: #fff;
-    font-size: 16px;
-    margin-top: 1rem;
-    padding: 0 5px 0 5px;
-    text-align: center;
-    white-space: nowrap;
-}
-
-.form-field.margin-remover {
-    margin-bottom: 0;
-}
-
-.tab-button2 {
-    background-color: #c4301f;
-    color: #fff;
-    cursor: pointer;
-    border: 1px solid #c4301f;
-    border-bottom: none;
-    border-radius: 6px;
-    border-width: 6px;
-    font-family: Roboto;
-    font-weight: 700;
-    letter-spacing: 1px;
-    min-width: 11rem;
-    padding-bottom: 0;
-    padding-top: 0;
-    text-align: center;
-    transform: translateY(23px);
-    transition: transform 0.2s ease-in-out;
-    width: 10rem;
-}
-
-.tab-table-trade {
-    border-collapse: separate;
-    border-spacing: 5px;
-    max-width: 30rem;
-    min-width: 30rem;
-    table-layout: fixed;
-    width: 100%;
-    padding-bottom: 10px;
-}
-
-.tab-table-repair {
-    border-collapse: separate;
-    border-spacing: 5px;
-    max-width: 45rem;
-    min-width: 40rem;
-    table-layout: fixed;
-    width: 100%;
-    padding-bottom: 10px;
-}
-
-.tab-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-@media (max-width: (screenSize("medium") - 1px)) {
-    .tab-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-}
-
-.repair-indent {
-    margin-left: 5em;
 }
 
 /* Navigation: show dropdowns on hover/focus for desktop, keep panel behavior for mobile */
@@ -594,10 +546,10 @@ div.tab-button2 div {
     grid-area: video;
 
     .iframe-container {
-    position: relative;
-    overflow: hidden;
-    padding-top: 0px;
-}
+        position: relative;
+        overflow: hidden;
+        padding-top: 0px;
+    }
 }
 
 .iframe-container {
@@ -787,12 +739,12 @@ div.tab-button2 div {
     }
 }
 
-  .data-banner-carousel-link {
-        color: white;
+.data-banner-carousel-link {
+    color: white;
 }
 
-    .data-banner-carousel-link:hover {
-        color: #E5E5E5;
+.data-banner-carousel-link:hover {
+    color: #E5E5E5;
 }
 
 // Home Page Category Slider
@@ -805,7 +757,7 @@ div.tab-button2 div {
 }
 
 .popular-rugged-laptops-card {
-    
+
     position: relative;
     margin-top: 20px;
     width: 95%;
@@ -881,6 +833,7 @@ div.tab-button2 div {
     }
 
     @media (max-width: (screenSize("medium") - 1px)) {
+
         .blaze-prev,
         .blaze-next {
             opacity: 0;
@@ -894,5 +847,20 @@ div.tab-button2 div {
         box-shadow: 0 2px 4px rgba(color("blacks"), 0.1);
         background: stencilColor("card-bgColor");
         border: rgba(229, 229, 229, 0.3) 1px solid;
+    }
+}
+
+.form--quicksearch {
+    .form-input {
+        background-color: transparent;
+        border: 0;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        font-family: Roboto, Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        font-weight: 400;
+        height: auto;
+        padding: 1rem 0;
     }
 }
