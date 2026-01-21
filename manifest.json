@@ -47,50 +47,6 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/cart": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "cart_above_totals"
-      },
-      {
-        "name": "cart_below_totals"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
     "pages/blog-post": [
       {
         "name": "header_top--global"
@@ -129,7 +85,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/blog": [
+    "pages/brands": [
       {
         "name": "header_top--global"
       },
@@ -144,6 +100,56 @@
       },
       {
         "name": "header_bottom"
+      },
+      {
+        "name": "brands_below_header"
+      },
+      {
+        "name": "brands_below_content"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/cart": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "cart_above_totals"
+      },
+      {
+        "name": "cart_below_totals"
       },
       {
         "name": "footer_info_col_1--global"
@@ -214,7 +220,8 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/contact-us": [
+    "pages/checkout": [],
+    "pages/blog": [
       {
         "name": "header_top--global"
       },
@@ -290,8 +297,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/checkout": [],
-    "pages/brands": [
+    "pages/contact-us": [
       {
         "name": "header_top--global"
       },
@@ -306,12 +312,6 @@
       },
       {
         "name": "header_bottom"
-      },
-      {
-        "name": "brands_below_header"
-      },
-      {
-        "name": "brands_below_content"
       },
       {
         "name": "footer_info_col_1--global"
@@ -335,47 +335,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/page": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "page_builder_content"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
+    "pages/order-confirmation": [],
     "pages/home": [
       {
         "name": "header_top--global"
@@ -439,6 +399,47 @@
       },
       {
         "name": "home_below_section9"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/page": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "page_builder_content"
       },
       {
         "name": "footer_info_col_1--global"
@@ -551,45 +552,6 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/order-confirmation": [],
-    "pages/subscribed": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
     "pages/search": [
       {
         "name": "header_top--global"
@@ -634,7 +596,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/unsubscribe": [
+    "pages/sitemap": [
       {
         "name": "header_top--global"
       },
@@ -672,7 +634,45 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/sitemap": [
+    "pages/subscribed": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/unsubscribe": [
       {
         "name": "header_top--global"
       },
@@ -748,7 +748,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/auth/account-created": [
+    "pages/auth/forgot-password": [
       {
         "name": "header_top--global"
       },
@@ -824,44 +824,6 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/auth/forgot-password": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
     "pages/auth/new-password": [
       {
         "name": "header_top--global"
@@ -900,45 +862,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/errors/generic": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/errors/404": [
+    "pages/auth/account-created": [
       {
         "name": "header_top--global"
       },
@@ -1014,7 +938,45 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/gift-certificate/purchase": [
+    "pages/errors/404": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/errors/generic": [
       {
         "name": "header_top--global"
       },
@@ -1090,6 +1052,44 @@
         "name": "footer_copyright_links--global"
       }
     ],
+    "pages/gift-certificate/purchase": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
     "pages/gift-certificate/redeem": [
       {
         "name": "header_top--global"
@@ -1128,8 +1128,46 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/unavailable/maintenance": [],
     "pages/unavailable/hibernation": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/unavailable/maintenance": [],
+    "pages/account/add-address": [
       {
         "name": "header_top--global"
       },
@@ -1205,7 +1243,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/account/add-address": [
+    "pages/account/add-return": [
       {
         "name": "header_top--global"
       },
@@ -1243,7 +1281,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/account/add-return": [
+    "pages/account/add-wishlist": [
       {
         "name": "header_top--global"
       },
@@ -1357,82 +1395,6 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/account/edit": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/account/add-wishlist": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
     "pages/account/edit-payment-method": [
       {
         "name": "header_top--global"
@@ -1471,7 +1433,45 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/account/recent-items": [
+    "pages/account/edit": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/account/payment-methods": [
       {
         "name": "header_top--global"
       },
@@ -1547,7 +1547,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/account/payment-methods": [
+    "pages/account/recent-items": [
       {
         "name": "header_top--global"
       },
@@ -1902,83 +1902,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/custom/page/meet-our-team": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
     "pages/custom/page/blog-archive": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/custom/page/select-assist": [
       {
         "name": "header_top--global"
       },
@@ -2043,6 +1967,82 @@
       },
       {
         "name": "home_laptop_banner4"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/custom/page/meet-our-team": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/custom/page/select-assist": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
       },
       {
         "name": "footer_info_col_1--global"
@@ -2145,49 +2145,49 @@
   },
   "templates": [
     "layout/base",
-    "layout/test",
     "layout/empty",
+    "layout/test",
     "pages/brand",
-    "pages/cart",
     "pages/blog-post",
-    "pages/blog",
-    "pages/category",
-    "pages/contact-us",
-    "pages/compare",
-    "pages/checkout",
     "pages/brands",
-    "pages/page",
-    "pages/home",
-    "pages/product",
+    "pages/cart",
+    "pages/category",
+    "pages/checkout",
+    "pages/blog",
+    "pages/compare",
+    "pages/contact-us",
     "pages/order-confirmation",
-    "pages/subscribed",
+    "pages/home",
+    "pages/page",
+    "pages/product",
     "pages/search",
-    "pages/unsubscribe",
     "pages/sitemap",
+    "pages/subscribed",
+    "pages/unsubscribe",
     "pages/auth/create-account",
-    "pages/auth/account-created",
-    "pages/auth/login",
     "pages/auth/forgot-password",
+    "pages/auth/login",
     "pages/auth/new-password",
-    "pages/errors/generic",
-    "pages/errors/404",
+    "pages/auth/account-created",
     "pages/errors/403",
-    "pages/gift-certificate/purchase",
+    "pages/errors/404",
+    "pages/errors/generic",
     "pages/gift-certificate/balance",
+    "pages/gift-certificate/purchase",
     "pages/gift-certificate/redeem",
-    "pages/unavailable/maintenance",
     "pages/unavailable/hibernation",
-    "pages/account/add-payment-method",
+    "pages/unavailable/maintenance",
     "pages/account/add-address",
+    "pages/account/add-payment-method",
     "pages/account/add-return",
+    "pages/account/add-wishlist",
     "pages/account/addresses",
     "pages/account/download-item",
-    "pages/account/edit",
-    "pages/account/add-wishlist",
     "pages/account/edit-payment-method",
-    "pages/account/recent-items",
-    "pages/account/inbox",
+    "pages/account/edit",
     "pages/account/payment-methods",
+    "pages/account/inbox",
+    "pages/account/recent-items",
     "pages/account/returns",
     "pages/account/return-saved",
     "pages/account/wishlists",
@@ -2197,207 +2197,207 @@
     "pages/account/orders/details",
     "pages/account/orders/invoice",
     "pages/custom/category/pc-builder",
-    "pages/custom/page/meet-our-team",
     "pages/custom/page/blog-archive",
-    "pages/custom/page/select-assist",
     "pages/custom/page/my-homepage",
+    "pages/custom/page/meet-our-team",
+    "pages/custom/page/select-assist",
     "pages/custom/page/video-archive",
     "pages/custom/page/warranty-register",
-    "components/carousel-content-announcement",
     "components/carousel-content",
     "components/carousel-play-pause-button",
     "components/carousel",
-    "components/blog/post",
-    "components/brand/product-listing",
-    "components/brand/sidebar",
-    "components/brand/page-sidebar",
-    "components/brand/show-more",
-    "components/account/address-list",
-    "components/account/add-wishlist",
-    "components/account/messages-form",
+    "components/carousel-content-announcement",
     "components/account/edit-account",
+    "components/account/add-wishlist",
+    "components/account/address-list",
+    "components/account/messages-form",
+    "components/account/messages-list",
+    "components/account/orders-list",
     "components/account/navigation",
     "components/account/order-contents",
-    "components/account/messages-list",
-    "components/account/payment-methods-list",
-    "components/account/orders-list",
     "components/account/returns-list",
+    "components/account/payment-methods-list",
     "components/account/wishlist-list",
     "components/account/wishlist-item-list",
+    "components/blog/post",
+    "components/brand/product-listing",
+    "components/brand/page-sidebar",
+    "components/brand/sidebar",
+    "components/brand/show-more",
     "components/category/page-sidebar",
     "components/category/product-listing",
     "components/category/shop-by-price",
     "components/category/show-more",
     "components/category/sidebar",
     "components/category/sort-box",
-    "components/page/rss_feed",
-    "components/page/contact-us-form",
     "components/gift-certificate/navigation",
+    "components/page/contact-us-form",
+    "components/page/rss_feed",
+    "components/sitemap/links",
+    "components/search/content-count",
+    "components/search/content-listing",
+    "components/search/advanced-search",
+    "components/search/content-sort-box",
+    "components/search/heading",
+    "components/search/page-sidebar",
+    "components/search/product-count",
+    "components/search/product-listing",
+    "components/search/quick-results",
+    "components/search/show-more",
+    "components/search/sidebar",
     "components/social/instagram",
     "components/social/connect",
     "components/social/twitter",
-    "components/sitemap/links",
-    "components/search/advanced-search",
-    "components/search/content-count",
-    "components/search/content-sort-box",
-    "components/search/heading",
-    "components/search/content-listing",
-    "components/search/product-count",
-    "components/search/product-listing",
-    "components/search/page-sidebar",
-    "components/search/show-more",
-    "components/search/sidebar",
-    "components/search/quick-results",
-    "components/common/body",
     "components/common/breadcrumbs",
-    "components/common/channel-selector-mobile",
+    "components/common/body",
     "components/common/cart-preview",
-    "components/common/footer",
-    "components/common/currency-selector",
     "components/common/channel-selector",
-    "components/common/header",
+    "components/common/channel-selector-mobile",
+    "components/common/currency-selector",
+    "components/common/footer",
     "components/common/login-for-pricing",
+    "components/common/header",
     "components/common/navigation-dropdown",
-    "components/common/navigation-list",
-    "components/common/navigation-menu-bottom",
     "components/common/navigation-list-alternate",
     "components/common/navigation-menu",
-    "components/common/navigation",
+    "components/common/navigation-list",
+    "components/common/navigation-menu-bottom",
     "components/common/paginator",
+    "components/common/navigation",
+    "components/common/payment-icons",
     "components/common/product-options",
     "components/common/polyfill-script",
-    "components/common/payment-icons",
     "components/common/quick-search",
     "components/common/responsive-img",
-    "components/common/requireness-msg",
-    "components/common/share",
-    "components/common/small-paginator",
     "components/common/search-box",
+    "components/common/requireness-msg",
+    "components/common/small-paginator",
+    "components/common/share",
     "components/common/subscription-form",
     "components/common/social-links",
-    "components/common/wishlist-dropdown",
     "components/common/store-logo",
     "components/common/wallet-buttons",
+    "components/common/wishlist-dropdown",
     "components/common/alert/alert-error",
-    "components/common/alert/alert-generic",
-    "components/common/alert/alert-info",
     "components/common/alert/alert-modal",
+    "components/common/alert/alert-info",
+    "components/common/alert/alert-generic",
     "components/common/alert/alert-success",
-    "components/common/header/logo",
     "components/common/forms/checkbox",
     "components/common/forms/date-options",
     "components/common/forms/date",
     "components/common/forms/multiline",
-    "components/common/forms/password",
     "components/common/forms/number",
+    "components/common/forms/password",
     "components/common/forms/radio",
     "components/common/forms/select",
     "components/common/forms/selectortext",
     "components/common/forms/text",
+    "components/common/header/logo",
     "components/common/modal/modal-close-btn",
     "components/common/modal/modal",
-    "components/faceted-search/header",
-    "components/faceted-search/faceted-search-navigation",
-    "components/faceted-search/index",
-    "components/faceted-search/show-more-facets",
-    "components/faceted-search/range-form",
-    "components/faceted-search/selected-facets",
-    "components/faceted-search/facets/hierarchy",
-    "components/faceted-search/facets/hierarchy-children",
-    "components/faceted-search/facets/multi",
-    "components/faceted-search/facets/range",
-    "components/faceted-search/facets/rating",
     "components/cart/additional-checkout-buttons",
     "components/cart/content",
     "components/cart/coupon-input",
     "components/cart/gift-certificate-input",
-    "components/cart/item-options",
     "components/cart/item-giftwrap",
-    "components/cart/shipping-estimator",
+    "components/cart/item-options",
     "components/cart/page-title",
+    "components/cart/shipping-estimator",
     "components/cart/preview",
-    "components/cart/status-messages",
     "components/cart/shipping-quotes",
+    "components/cart/status-messages",
     "components/cart/totals",
     "components/cart/modals/configure-product",
     "components/cart/modals/gift-wrapping-form",
+    "components/faceted-search/faceted-search-navigation",
+    "components/faceted-search/header",
+    "components/faceted-search/index",
+    "components/faceted-search/range-form",
+    "components/faceted-search/selected-facets",
+    "components/faceted-search/show-more-facets",
+    "components/faceted-search/facets/hierarchy-children",
+    "components/faceted-search/facets/hierarchy",
+    "components/faceted-search/facets/multi",
+    "components/faceted-search/facets/range",
+    "components/faceted-search/facets/rating",
+    "components/papathemes/create-wishlist-modal",
+    "components/papathemes/cart-drawer",
+    "components/papathemes/preload",
+    "components/papathemes/category/products-grid",
+    "components/papathemes/category/products-carousel",
+    "components/papathemes/category/tabs",
+    "components/papathemes/sale-countdown/custom-field",
+    "components/papathemes/sale-countdown/display",
+    "components/papathemes/recently-viewed-products/customer-product-ids",
+    "components/papathemes/shipping-countdown/custom-field",
+    "components/papathemes/shipping-countdown/display",
     "components/products/add-to-cart",
-    "components/products/card-badges",
     "components/products/bulk-discount-rates",
-    "components/products/card-actions",
     "components/products/card-placeholder",
-    "components/products/card",
     "components/products/card-qty",
+    "components/products/card-actions",
+    "components/products/card-badges",
     "components/products/card-wishlist-dropdown",
+    "components/products/card",
     "components/products/carousel",
     "components/products/cart-suggested",
     "components/products/custom-fields",
     "components/products/description-tabs",
-    "components/products/description",
     "components/products/filter",
     "components/products/grid",
     "components/products/featured",
+    "components/products/description",
     "components/products/list-badges",
     "components/products/list-item",
     "components/products/list",
     "components/products/new",
-    "components/products/price-range",
-    "components/products/price-label",
-    "components/products/product-aria-label",
     "components/products/price",
+    "components/products/price-label",
+    "components/products/price-range",
+    "components/products/product-aria-label",
     "components/products/product-badge",
-    "components/products/product-view copy",
-    "components/products/product-info",
     "components/products/product-view",
+    "components/products/product-info",
+    "components/products/product-view copy",
     "components/products/quick-view",
     "components/products/ratings-mini",
-    "components/products/recentviewed",
     "components/products/ratings",
+    "components/products/recentviewed",
     "components/products/related",
-    "components/products/schema",
     "components/products/reviews",
+    "components/products/schema",
+    "components/products/tabs",
     "components/products/top",
     "components/products/videos",
-    "components/products/tabs",
     "components/products/modals/writeReview",
     "components/products/options/date",
     "components/products/options/input-checkbox",
-    "components/products/options/input-numbers",
     "components/products/options/input-file",
     "components/products/options/input-text",
-    "components/products/options/product-list",
     "components/products/options/set-radio",
+    "components/products/options/product-list",
+    "components/products/options/input-numbers",
     "components/products/options/set-select",
     "components/products/options/set-rectangle",
-    "components/products/options/textarea",
     "components/products/options/swatch",
-    "components/papathemes/create-wishlist-modal",
-    "components/papathemes/cart-drawer",
-    "components/papathemes/preload",
-    "components/papathemes/category/products-carousel",
-    "components/papathemes/category/products-grid",
-    "components/papathemes/category/tabs",
-    "components/papathemes/sale-countdown/display",
-    "components/papathemes/sale-countdown/custom-field",
-    "components/papathemes/recently-viewed-products/customer-product-ids",
-    "components/papathemes/shipping-countdown/custom-field",
-    "components/papathemes/shipping-countdown/display",
-    "components/eyeva/home-carousel",
-    "components/eyeva/home-brands",
-    "components/eyeva/home-categories",
+    "components/products/options/textarea",
     "components/eyeva/home-blog",
+    "components/eyeva/home-brands",
+    "components/eyeva/home-carousel",
+    "components/eyeva/home-categories",
     "components/eyeva/home-laptop-banners",
     "components/eyeva/section",
     "components/eyeva/faceted-search/init-image-color",
     "components/eyeva/header/menu-toggle",
-    "components/eyeva/header/navigation-child-list",
     "components/eyeva/header/navigation-account",
-    "components/eyeva/header/navigation-child-mega",
+    "components/eyeva/header/navigation-child-list",
     "components/eyeva/header/navigation-list",
+    "components/eyeva/header/navigation-child-mega",
     "components/eyeva/header/navigation-mega",
     "components/eyeva/header/navuser-account",
-    "components/eyeva/header/navuser-currency",
     "components/eyeva/header/navigation",
+    "components/eyeva/header/navuser-currency",
     "components/eyeva/header/navuser-main",
     "components/eyeva/products/custom-fields",
     "components/eyeva/products/demo-product-description",
