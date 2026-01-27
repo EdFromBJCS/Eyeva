@@ -88,6 +88,22 @@
 }
 
     .home-page-hero-layout {
+        
+        .hero-banner{
+            grid-area: banner;
+        }
+
+        .hero-video{
+            grid-area: video;
+        }
+
+        .hero-carousel {
+            grid-area: carousel;
+        }
+
+        .hero-repair {
+            grid-area: repair;
+        }
 
     .papathemes-eyeva-hero-carousel-content {
         top: unset;
@@ -111,5 +127,36 @@
                 color: #ffffff;
             }
         }
+    }
+}
+
+@include breakpoint("xsmall") {
+    .home-page-hero-layout {
+        display: grid;
+        grid-template-areas:
+            "banner"
+            "video"
+            "carousel"
+            "repair";
+    }
+}
+
+@include breakpoint("medium") {
+    .home-page-hero-layout {
+        display: grid;
+        grid-template-areas:
+            "banner banner"
+            "carousel carousel"
+            "video repair";
+    }
+}
+
+@include breakpoint("large") {
+    .home-page-hero-layout {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-template-areas:
+            "banner video repair"
+            "banner carousel repair";
     }
 }
