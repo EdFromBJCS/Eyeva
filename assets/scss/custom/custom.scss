@@ -552,7 +552,6 @@ button.expandfaq.button-alt::after {
 // Home page Hero Custom CSS
 
 .video-container {
-    grid-area: video;
 
     .iframe-container {
         position: relative;
@@ -614,8 +613,6 @@ button.expandfaq.button-alt::after {
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
     gap: 10px;
     margin: 0;
     padding: 10px 2px;
@@ -671,24 +668,6 @@ button.expandfaq.button-alt::after {
     right: 10px;
 }
 
-.video-repair-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-        "video repair"
-        "icons repair";
-}
-
-@media screen and (max-width: 801px) {
-    .video-repair-grid {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "video"
-            "icons"
-            "repair";
-    }
-}
-
 .repair-container {
     padding: 30px;
     text-align: center;
@@ -718,35 +697,6 @@ button.expandfaq.button-alt::after {
     }
 }
 
-.mobile-repair {
-    display: none;
-}
-
-
-@media (min-width: 701px) and (max-width: 1050px) {
-    .mobile-repair {
-        display: block;
-
-        .home-repair-img {
-            width: 100%;
-        }
-
-        ul {
-            display: none;
-        }
-    }
-
-    .video-repair-grid {
-        grid-template-columns: 1fr;
-        grid-template-areas:
-            "video"
-            "icons";
-    }
-
-    .desktop-repair {
-        display: none;
-    }
-}
 
 .data-banner-carousel-link {
     color: white;
