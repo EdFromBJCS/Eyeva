@@ -79,26 +79,32 @@ export function parseCountdownDate(str) {
     // eslint-disable-next-line object-curly-newline
     const { year, month, day, hour, minute, second, timezone } = parsedDate;
 
-    const date = new Date();
+    const now = new Date();
+    const y = year ?? now.getFullYear();
+    const m = month ?? (now.getMonth() + 1);
+    const d = day ?? now.getDate();
+    const h = hour || 0;
+    const min = minute || 0;
+    const sec = second || 0;
 
-    if (year) date.setFullYear(year);
-    if (month) date.setMonth(month - 1);
-    if (day) date.setDate(day);
-    date.setHours(hour || 0);
-    date.setMinutes(minute || 0);
-    date.setSeconds(second || 0);
+    let date;
 
-    // change timezone to UTC
-    date.setHours(date.getHours() - date.getTimezoneOffset() / 60);
-
-    // Adjust for timezone
-    if (timezone) {
-        date.setHours(date.getHours() - timezone);
+    if (timezone !== undefined) {
+        const utcMillis = Date.UTC(y, m - 1, d, h, min, sec) - (timezone * 60 * 60 * 1000);
+        date = new Date(utcMillis);
+    } else {
+        date = new Date();
+        if (year) date.setFullYear(year);
+        if (month) date.setMonth(month - 1);
+        if (day) date.setDate(day);
+        date.setHours(h);
+        date.setMinutes(min);
+        date.setSeconds(sec);
     }
 
     if (!year && !month && !day) {
         // for daily countdown, add 1 day if date is in the past
-        if (date < new Date()) {
+        if (date < now) {
             date.setDate(date.getDate() + 1);
         }
     }
