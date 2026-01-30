@@ -174,7 +174,7 @@
 @include breakpoint("medium") {
     .home-page-hero-layout {
         display: grid;
-        grid-template-columns: 60% 40%;
+        grid-template-columns: 50% 50%;
         grid-template-areas:
             "banner banner"
             "carousel carousel"
