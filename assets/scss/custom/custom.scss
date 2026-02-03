@@ -830,3 +830,39 @@ button.expandfaq.button-alt::after {
         text-align: center;
     }
 }
+
+
+@include breakpoint("xxsmall") {
+
+.navPages-childList-item {
+    .navPages-childList-action {
+        .navPages-label {
+            color: #222;
+        }
+    }
+}
+}
+
+@include breakpoint("medium") {
+
+.navPages-childList-item {
+    .navPages-childList-action {
+        .navPages-label {
+            color: #fff;
+            text-decoration: none;
+        }
+    }
+}
+}
+
+.navPages-childList-action {
+    .navPages-label {
+        text-decoration: none;
+    }
+}
+
+.navPages-childList-item:has(.navPages-childList) .navPages-label,
+.navPages-childList-action._mega:has(+ .navPages-megaMenu-subMenu) .navPages-label,
+.navPages-megaMenu-column:has(.navPages-megaMenu-subMenu) > .navPages-childList-action .navPages-label {
+    text-decoration: underline !important;
+}
