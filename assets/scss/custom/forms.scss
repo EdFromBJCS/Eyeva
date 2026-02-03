@@ -64,12 +64,6 @@
 
     @include breakpoint("large") {
         .dual-form-container {
-            max-width: 60%;
-        }
-    }
-
-    @media (max-width: (screenSize("large") - 1px)) {
-        .dual-form-container {
             max-width: 80%;
         }
     }
