@@ -192,10 +192,15 @@
             </section>
         </div><!-- /._eyeva-sticky-box -->
         <div class="mobile-inventory-specs-btn-container">
+            {{#if product.condition '===' 'New'}}
+            {{else}}
             <a href="https://www.bobjohnson.com/blog/real-honest-photos-of-real-honest-toughbooks/"
                 class="button button--outline picturesActualInventory" target="_blank">Pictures Of Actual Inventory!
                 Learn More Here!</a>
+            {{/if}}
+            {{#all product.custom_fields theme_settings.show_custom_fields_tabs}}
             <a href="#website-specifications" class="button button--primary" id="skipToSpecs">Skip To Specs</a>
+            {{/all}}
         </div>
 
         <section class="productView-details product-options">
@@ -318,9 +323,11 @@
                 {{/if}}
             </div>
             {{#or customer (unless settings.hide_price_from_guests)}}
-            <button type="button" class="button button--primary" id="sticky-add-to-cart" {{#unless
-                product.can_purchase}}button--disabled{{/unless}}" {{#unless product.can_purchase}}disabled
-                aria-disabled="true" {{/unless}} data-can-purchase="{{product.can_purchase}}">
+            <button type="button"
+                class="button button--primary {{#unless product.can_purchase}}is-disabled{{/unless}}"
+                id="sticky-add-to-cart"
+                {{#unless product.can_purchase}}disabled aria-disabled="true"{{/unless}}
+                data-can-purchase="{{product.can_purchase}}">
                 {{lang 'products.add_to_cart'}}
             </button>
             {{/or}}
