@@ -33,6 +33,18 @@
     }
 }
 
+.button:disabled,
+.button.is-disabled {
+    background-color: $buttonStyle-disabled-backgroundColor;
+    border-color: $buttonStyle-disabled-borderColor;
+    color: $buttonStyle-disabled-color;
+    cursor: not-allowed;
+
+    svg {
+        fill: $buttonStyle-disabled-color;
+    }
+}
+
 .button--small {
     border-radius: $eyeva-small-button-radius;
     min-height: $eyeva-small-button-height;
