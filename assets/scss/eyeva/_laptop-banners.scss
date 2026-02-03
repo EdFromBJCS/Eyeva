@@ -132,16 +132,17 @@
     }
 }
 
-@include breakpoint("xxsmall") {
-    .home-page-hero-layout {
-        display: grid;
-        grid-template-areas:
-            "banner"
-            "video"
-            "carousel"
-            "repair";
+@media (max-width: (screenSize("xxsmall") - 1px)){
+    .hero-video {
+        display: none;
     }
 
+    .desktop-repair {
+        display: none;
+    }
+}
+
+@include breakpoint("xxsmall") {
     .hero-video {
         display: none;
     }
