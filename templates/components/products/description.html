@@ -1,6 +1,11 @@
 <div class="inventory-specs-btn-container">
+    {{#if product.condition '===' 'New'}}
+    {{else}}
     <a href="https://www.bobjohnson.com/blog/real-honest-photos-of-real-honest-toughbooks/" class="button button--outline picturesActualInventory" target="_blank">Pictures Of Actual Inventory! Learn More Here!</a>
+    {{/if}}
+    {{#all product.custom_fields theme_settings.show_custom_fields_tabs}}
     <a href="#website-specifications" class="button button--primary" id="skipToSpecs">Skip To Specs</a>
+    {{/all}}
 </div>
 {{#unless quickview}}
     {{#if product.description}}
