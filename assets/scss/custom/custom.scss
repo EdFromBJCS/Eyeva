@@ -866,3 +866,46 @@ button.expandfaq.button-alt::after {
 .navPages-megaMenu-column:has(.navPages-megaMenu-subMenu) > .navPages-childList-action .navPages-label {
     text-decoration: underline !important;
 }
+
+//SIM card blog
+
+.simTable-container {
+    display: flex;
+    justify-content: center;
+}
+
+.simTable-FlexColumn {
+    margin: 0 20px 0 20px;
+}
+
+.simTable {
+    border: 2px solid;
+    border-collapse: collapse;
+    text-align: center;
+    min-width: 10vw;
+}
+
+.simTable th,
+.simTable td {
+    border: 2px solid;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 8px;
+}
+
+@media (max-width: (screenSize("medium") - 1px)){ 
+    .simTable-container {
+    flex-direction: column;
+    align-items: center;
+    }
+
+.simTable-FlexColumn {
+    margin: 20px 0 20px 0;
+}
+}
+
+@media (max-width: (screenSize("xsmall") - 1px)){ 
+.simTable {
+    min-width: 90%;
+}
+}
