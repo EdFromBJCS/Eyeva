@@ -1,0 +1,187 @@
+---
+category:
+    products:
+        limit: 250
+---
+{{inject "categoryProductsPerPage" theme_settings.categorypage_products_per_page}}
+{{#partial "head"}}
+<link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.category.js' resourceHint='preload' as='script'}}"
+    as="script">
+{{#if pagination.category.previous}}
+<link rel="prev" href="{{{pagination.category.previous}}}">
+{{/if}}
+{{#if pagination.category.next}}
+<link rel="next" href="{{{pagination.category.next}}}">
+{{/if}}
+{{/partial}}
+
+{{#partial "page"}}
+
+<div class="plp-page">
+    <div class="plp-page-header" id="page-sidebar-header">
+        {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+        {{#unless theme_settings.hide_category_page_heading }}
+        <h1 class="plp-page-title">{{category.name}}</h1>
+        {{/unless}}
+
+        {{#if category.image}}
+        <div class="plp-main-image _category">
+            {{> components/common/responsive-img
+            image=category.image
+            fallback_size=theme_settings.zoom_size
+            lazyload=theme_settings.lazyload_mode
+            class="category-header-image"
+            }}
+        </div>
+        {{/if}}
+
+        {{{region name="category_below_header"}}}
+    </div>
+
+    <main class="plp-page-main" id="product-listing-container">
+        <div class="page-content page-content--centered"></div>
+        <style>
+            .question,
+            .result {
+                font-weight: bold;
+                margin: 20px 0;
+            }
+
+            .option {
+                cursor: pointer;
+                text-transform: capitalize;
+            }
+
+            .option.is-selected {
+                background-color: #fff;
+                border-color: #dc3522;
+                color: #dc3522;
+            }
+
+            .option.is-selected:hover {
+                background-color: #222;
+                border-color: #dc3522;
+            }
+
+            .multi-select-hint {
+                color: #555;
+                font-size: 14px;
+                margin: 0 0 8px;
+            }
+
+            #quiz-container {
+                border: 1px solid #ebe8e8;
+                margin: 0 auto 24px;
+                width: 80%;
+            }
+
+            #options-container {
+                font-size: 16px;
+                margin: 0 auto;
+                width: 100%;
+            }
+
+            .card-figcaption-button {
+                width: 100%;
+            }
+
+            #result-container {
+                text-align: center;
+            }
+
+            #progress-bar-container {
+                background-color: #e0e0e0;
+                border-radius: 8px;
+                height: 16px;
+                margin-bottom: 16px;
+                overflow: hidden;
+                width: 100%;
+            }
+
+            #progress-bar {
+                background-color: #4CAF50;
+                height: 100%;
+                transition: width 0.3s ease-in-out;
+                width: 0%;
+            }
+
+            #quiz-products-source {
+                display: none;
+            }
+
+            .pagination {
+                display: none;
+            }
+
+            .budget-range-input {
+                width: 50%;
+                margin-right: 8px;
+            }
+
+            .quiz .card-footer {
+                flex-wrap: nowrap;
+            }
+
+            .quiz .productGrid {
+                overflow: hidden;
+                gap: 16px;
+            }
+
+            @media screen and (max-width: 1441px) {
+                .quiz .productGrid {
+                    grid-template-columns: repeat(3, 1fr);
+                }
+            }
+
+            @media screen and (max-width: 1261px) {
+                .quiz .productGrid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+            }
+
+            @media screen and (max-width: 801px) {
+                .quiz .productGrid {
+                    grid-template-columns: 1fr;
+                    justify-items: center;
+                }
+
+                .quiz .productGrid>.product {
+                    width: 100%;
+                }
+
+                .quiz .card-footer {
+                    flex-wrap: wrap;
+                }
+            }
+        </style>
+        <div class="quiz">
+            <div id="quiz-container">
+                <div id="progress-bar-container">
+                    <div id="progress-bar"></div>
+                </div>
+                <div id="question-container" class="question"></div>
+                <ul id="options-container" class="productGrid"></ul>
+            </div>
+            <ul id="result-container" class="result"></ul>
+        </div>
+
+        <div id="quiz-products-source">
+            {{> components/category/product-listing}}
+        </div>
+    </main>
+
+    <div class="plp-page-region">
+        {{{region name="category_below_content"}}}
+        {{{region name="category_below_content--global"}}}
+    </div>
+</div>
+<div class="category-description">
+    {{#if category.description}}
+    {{{category.description}}}
+    {{/if}}
+</div>
+
+<script src="{{cdn 'assets/js/custom/autoselect-assist.js'}}"></script>
+
+{{/partial}}
+{{> layout/base}}

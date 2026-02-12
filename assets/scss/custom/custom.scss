@@ -549,6 +549,13 @@ button.expandfaq.button-alt::after {
     gap: 20px;
 }
 
+@media screen and (max-width: (screenSize("medium") - 1px)) {
+    .contact-us-container {
+        grid-template-columns: 1fr;
+        max-width: 95%;
+    }
+}
+
 // Home page Hero Custom CSS
 
 .video-container {

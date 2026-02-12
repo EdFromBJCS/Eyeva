@@ -1,6 +1,12 @@
-<main class="page">
+---
+page_type: custom
+---
+{{#partial "page"}}
 
-    <h1 class="page-heading">{{ page.title }}</h1>
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+
+<main class="page">
+  <h1 class="page-heading">{{ page.title }}</h1>
 
     {{#if page.sub_pages}}
     <nav class="navBar navBar--sub">
@@ -21,23 +27,31 @@
         }
 
         .option {
-            border: 1px solid #ccc;
-            border-radius: 5px;
             cursor: pointer;
-            display: inline-block;
-            margin: 5px 0;
-            padding: 10px;
             text-transform: capitalize;
         }
 
-        .option:hover {
-            background-color: #f0f0f0;
+        .option.is-selected {
+            background-color: #1b5dbf;
+            border-color: #1b5dbf;
+            color: #fff;
+        }
+
+        .option.is-selected:hover {
+            background-color: #174fa1;
+            border-color: #174fa1;
+        }
+
+        .multi-select-hint {
+            color: #555;
+            font-size: 14px;
+            margin: 0 0 8px;
         }
 
         #quiz-container {
             border: 1px solid #ebe8e8;
             margin: 0 auto;
-            width: 600px;
+            width: 80%;
         }
 
         #options-container {
@@ -102,3 +116,7 @@
     </ul>
     {{/if}}
 </main>
+
+  {{/partial}}
+
+{{> layout/base}}

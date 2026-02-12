@@ -2,6 +2,7 @@
     {{#if alternate}} card--alternate{{/if}}
     {{#if theme_settings.card_style '===' 'boxed'}} card--boxed{{/if}}" data-test="card-{{id}}"
     data-event-type="{{event}}" data-entity-id="{{id}}" data-position="{{position}}" data-name="{{name}}"
+    data-condition="{{condition}}"
     data-product-category="
     {{#each category}}
         {{#if @last}}
@@ -18,7 +19,8 @@
         {{/if}}
     {{else}}
         {{lang 'common.login_for_pricing'}}
-    {{/or}}" data-product-simple="{{#if has_options}}false{{else}}true{{/if}}">
+    {{/or}}" data-product-simple="{{#if has_options}}false{{else}}true{{/if}}"
+    data-custom-fields='{{#if custom_fields}}{{{json custom_fields}}}{{else}}[]{{/if}}'>
     <figure class="card-figure">
         <a href="{{url}}" class="card-figure__link" aria-label="{{> components/products/product-info}}"
             data-event-type="product-click">
