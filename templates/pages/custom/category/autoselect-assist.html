@@ -52,6 +52,11 @@ category:
                 text-transform: capitalize;
             }
 
+            @media screen and (max-width: 801px) {
+                .option {
+                    width: 90%
+                }
+            }
             .option.is-selected {
                 background-color: #fff;
                 border-color: #dc3522;
@@ -152,6 +157,15 @@ category:
                 .quiz .card-footer {
                     flex-wrap: wrap;
                 }
+            }
+
+            .port-counts {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .port-count-row {
+                padding: 20px;
             }
         </style>
         <div class="quiz">
