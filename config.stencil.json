@@ -2,10 +2,9 @@
   "customLayouts": {
     "brand": {},
     "category": {
-      "autoselect-assist.html": "/rugged-computers/"
+      "autoselect-assist.html": "/auto-rugged-computer-selection-assistance/"
     },
     "page": {
-      "autoselect-assist.html" : "/auto-selection-assistance/",
       "blog-archive.html" : "/blog-archive/",
       "meet-our-team.html": "/meet-our-team/",
       "my-homepage.html" : "/my-homepage/",

@@ -41,6 +41,7 @@ category:
     <main class="plp-page-main" id="product-listing-container">
         <div class="page-content page-content--centered"></div>
         <style>
+            /* Custom styles for the quiz */
             .question,
             .result {
                 font-weight: bold;
@@ -57,6 +58,7 @@ category:
                     width: 90%
                 }
             }
+
             .option.is-selected {
                 background-color: #fff;
                 border-color: #dc3522;
@@ -77,7 +79,7 @@ category:
             #quiz-container {
                 border: 1px solid #ebe8e8;
                 margin: 0 auto 24px;
-                width: 80%;
+                width: 100%;
             }
 
             #options-container {
@@ -167,27 +169,1054 @@ category:
             .port-count-row {
                 padding: 20px;
             }
+
+            /*Selection Assistance Form Styles*/
+            .selectAssist * {
+                transition: .15s;
+            }
+
+            .selectAssist {
+                background-color: #f8f8f8;
+                border: 1px solid rgba(0, 0, 0, .05);
+                border-radius: 2px;
+                box-shadow: 0 1px 2px rgba(34, 34, 34, .13);
+                margin: 0 -1.5rem;
+
+            }
+
+            @media (min-width:551px) {
+                .selectAssist {
+                    margin: 0 0;
+                }
+            }
+
+            .infusion-field {
+                float: none;
+                width: auto;
+                margin-top: 16px;
+            }
+
+            .infusion-option {
+                display: block;
+            }
+
+            .infusion-field label {
+                opacity: 0.75;
+            }
+
+            .infusion-field label:hover,
+            .infusion-field input:checked+label {
+                opacity: 1;
+            }
+
+            .infusion-radio {
+                display: block;
+                margin-top: 0.5em;
+            }
+
+            .infusion-field label {
+                display: inline-block;
+                float: none;
+                font-weight: normal;
+                margin: 6px 12px 6px 0;
+                width: auto;
+            }
+
+            .infusion-field textarea {
+                border: 1px solid #ccc;
+                margin-bottom: 12px;
+                width: 100%;
+            }
+
+            .infusion-field textarea:focus {
+                border: 1px solid #999;
+            }
+
+            .infusion-field select {
+                display: block;
+                border: 1px solid #ccc;
+            }
+
+            .selectAssist .infusion-field input[type="text"] {
+                display: block;
+                width: 66%;
+                min-width: 192px;
+                border: 1px solid #ccc;
+            }
+
+            .selectAssist .infusion-field input[type="text"]:focus {
+                border: 1px solid #999;
+            }
+
+            .infusion-field input[type="radio"] {
+                display: none;
+            }
+
+            .infusion-field input[type="radio"]+label span {
+                border: 1px solid #999;
+                border-radius: 12px;
+                display: inline-block;
+                height: 12px;
+                margin-bottom: 2px;
+                margin-right: 0.5em;
+                vertical-align: middle;
+                width: 12px;
+            }
+
+            .infusion-field input[type="radio"]:disabled+label,
+            .infusion-field input[type="checkbox"]:disabled+label {
+                opacity: 0.5;
+            }
+
+            .infusion-field input[type="radio"]:checked+label,
+            .infusion-field input[type="checkbox"]:checked+label {
+                opacity: 1;
+            }
+
+            .infusion-field input[type="radio"]:checked+label span {
+                background-image: radial-gradient(#dc3522 4px, transparent 4px);
+            }
+
+            .infusion-captcha,
+            .infusion-submit {
+                float: none;
+            }
+
+            .field1 .infusion-submit input {
+                background: #dc3522;
+                border: none;
+                border-radius: 3px;
+                color: #fff;
+                cursor: pointer;
+                font-display: swap;
+                font-family: 'Roboto';
+                margin-top: 1rem;
+                padding: 1em;
+                width: 100%;
+            }
+
+            .field1 .infusion-submit input:hover {
+                background: #c4301f;
+            }
+
+            .choices input:checked+label {
+                background: #dcdcdc;
+                border: 1px solid #777777;
+                border-bottom: none;
+                padding: 8px 16px 2px 16px;
+                margin: 0 16px 16px 0;
+            }
+
+            .control:checked~.conditional {
+                background: #ebe8e8;
+                box-shadow: 0 2px 4px #dedcdc;
+                clip: auto;
+                display: block;
+                height: auto;
+                margin: 16px 0;
+                overflow: visible;
+                padding: 16px;
+                position: static;
+            }
+
+            .control:checked~.conditional:before {
+                border-bottom-color: #e0e0e0;
+                border-color: transparent;
+                border-style: solid outset solid solid;
+                border-width: 10px;
+                content: ' ';
+                display: block;
+                height: 0;
+                left: 0;
+                margin-bottom: -16px;
+                position: relative;
+                top: -35px;
+                width: 0;
+            }
+
+            .control:not(:checked)~.conditional,
+            #touchscreenYes:not(:checked)~.conditional,
+            #gobiYes:not(:checked)~.conditional,
+            #opticalYes:not(:checked)~.conditional,
+            #inf_custom_usevehicle_Yes:not(:checked)~.conditional,
+            #needMountYes:not(:checked)~.conditional {
+                border: 0;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                width: 1px;
+            }
+
+            .formSection {
+                border-bottom: 1px solid #ddd;
+                margin-bottom: 2em;
+            }
+
+            .formSection h2 {
+                margin-left: 12px;
+                padding: 12px;
+            }
+
+            .field1 {
+                clear: left;
+                display: block;
+                margin: 8px;
+                padding: 16px;
+            }
+
+            .field1>label {
+                font-size: 1.25em;
+                opacity: 1;
+            }
+
+            label.rectangle {
+                display: block;
+                float: left;
+                margin: 0 5px 12px 0;
+                opacity: 1;
+                position: relative;
+            }
+
+            .rectangle input {
+                position: absolute;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+                opacity: 0;
+            }
+
+            .rectangle-text {
+                display: block;
+                padding: 1em;
+                margin: 0 .5em 0 0;
+                text-align: center;
+                background: #dedcdc;
+                opacity: 0.75;
+            }
+
+            .rectangle input:hover+.rectangle-text {
+                background: #ccc;
+            }
+
+            .rectangle input[type=checkbox]:checked+.rectangle-text {
+                background: #dc3522;
+                color: #fff;
+                opacity: 1;
+            }
+
+            .tenscale {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 24px;
+                position: relative;
+            }
+
+            .tenscale input {
+                display: block !important;
+                opacity: 0;
+            }
+
+            .tenscale label {
+                display: inline-block;
+                opacity: 1;
+            }
+
+            .tenscale label input[type="radio"]:checked+span {
+                background: #dc3522;
+                color: #fff;
+            }
+
+            .tenscale label span {
+                display: block;
+                height: 26px;
+                width: 26px;
+                text-align: center;
+                border: 1px solid #999;
+                border-radius: 13px;
+                cursor: pointer;
+            }
+
+            .tenscale label span:hover {
+                background: #ccc;
+            }
+
+            .elab {
+                border: 0;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                width: 100%;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                opacity: 0;
+            }
+
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1123:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1125:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1127:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1129:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1131:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1133:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1135:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1137:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1139:checked~.elab,
+            #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1141:checked~.elab {
+                clip: auto;
+                height: auto;
+                width: 100%;
+                margin: 16px 0;
+                overflow: visible;
+                position: absolute;
+                left: 0;
+                text-align: center;
+                opacity: 1;
+                color: #dc3522;
+            }
+
+            @media only screen and (max-width: 700px) {
+                .tenscale {
+                    flex-direction: column;
+                }
+
+                .tenscale input {
+                    display: block !important;
+                    opacity: 0;
+                }
+
+                .tenscale label span {
+                    cursor: none;
+                }
+
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1123:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1125:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1127:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1129:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1131:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1133:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1135:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1137:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1139:checked~.elab,
+                #inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1141:checked~.elab {
+                    margin-top: -24px;
+                    position: absolute;
+                    left: 10px;
+                    text-align: center;
+                    opacity: 1;
+                    color: #dc3522;
+                }
+            }
+
+            .selectAssist .grecaptcha-badge {
+                display: none !important;
+            }
         </style>
-        <div class="quiz">
-            <div id="quiz-container">
-                <div id="progress-bar-container">
-                    <div id="progress-bar"></div>
+        <div class="main-content">
+            <div class="dual-form-container">
+                <h2>Bob Johnson's Rugged Computer Selection Assistance</h2>
+                <div>Need help choosing the right rugged computer? We offer two simple ways to get expert
+                    recommendations tailored to your needs:</div>
+                <ul>
+                    <li>Use our Auto Selection Assistance tool. This interactive quiz guides you through your
+                        requirements and instantly matches you with the best rugged computer options from our inventory.
+                    </li>
+                    <li>Fill out the classic Bob Johnson's Selection Assistance Form. Our team will review your needs
+                        and reach out within 1-2 business days with personalized recommendations.</li>
+                </ul>
+                <p>You can further customize your rugged computer with a variety of options, including extended warranties, solid state drives (SSDs), additional RAM, and integrated mobile data cards. These upgrades are available on the option lists for most units, allowing you to tailor your selection to your exact needs.</p>
+                <div class="support-switcher"><label><input type="radio" name="formChoice" value="tech" /> Auto Selection Assistance</label> <label><input type="radio" name="formChoice"
+                            value="repairs" /> Selection Assistance Form</label></div>
+                <div class="form-wrapper">
+                    <div class="form-panel is-hidden" data-form="tech">
+                        <div class="quiz">
+                            <div id="quiz-container">
+                                <div id="progress-bar-container">
+                                    <div id="progress-bar"></div>
+                                </div>
+                                <div id="question-container" class="question"></div>
+                                <ul id="options-container" class="productGrid"></ul>
+                            </div>
+                            <ul id="result-container" class="result"></ul>
+                        </div>
+                        <p>If you do not get any options, odds are we do not have a computer of that configuration. Please complete our form so one of our rugged computer experts can assist you further.</p>
+                        <div id="quiz-products-source">
+                            {{> components/category/product-listing}}
+                        </div>
+                    </div>
+                    <div class="form-panel is-hidden" data-form="repairs">
+                        <p>Not sure which rugged computer is right for you? Answer a few questions for us and a member
+                            of our staff will
+                            help you figure out a solution. The more information you can provide, the better, but if you
+                            are unsure of
+                            how to answer a question, feel free to skip it.</p>
+                        <form accept-charset="UTF-8"
+                            action="https://gc200.infusionsoft.com/app/form/process/8a3ea6422a30268cd397383fd61af459"
+                            class="infusion-form selectAssist" method="POST">
+                            <input name="inf_form_xid" type="hidden" value="8a3ea6422a30268cd397383fd61af459" />
+                            <input name="inf_form_name" type="hidden" value="Selection Assistance 2.0" />
+                            <input name="infusionsoft_version" type="hidden" value="1.55.0.65" />
+                            <div class="formSection">
+
+                                <div class="infusion-field field1">
+                                    <label for="inf_option_Doyouwanttoknowaboutnewcomputersorrefurbished">Do you want to
+                                        know about new
+                                        computers or refurbished?</label>
+                                    <div class="infusion-radio">
+                                        <span class="infusion-option">
+                                            <input id="inf_option_Doyouwanttoknowaboutnewcomputersorrefurbished_4672"
+                                                name="inf_option_Doyouwanttoknowaboutnewcomputersorrefurbished"
+                                                type="radio" value="4672" />
+                                            <label
+                                                for="inf_option_Doyouwanttoknowaboutnewcomputersorrefurbished_4672"><span></span>New
+                                                computers only</label>
+                                        </span>
+                                        <span class="infusion-option">
+                                            <input id="inf_option_Doyouwanttoknowaboutnewcomputersorrefurbished_4674"
+                                                name="inf_option_Doyouwanttoknowaboutnewcomputersorrefurbished"
+                                                type="radio" value="4674" />
+                                            <label
+                                                for="inf_option_Doyouwanttoknowaboutnewcomputersorrefurbished_4674"><span></span>Refurbished
+                                                computers only</label>
+                                        </span>
+                                        <span class="infusion-option">
+                                            <input id="inf_option_Doyouwanttoknowaboutnewcomputersorrefurbished_4676"
+                                                name="inf_option_Doyouwanttoknowaboutnewcomputersorrefurbished"
+                                                type="radio" value="4676" />
+                                            <label
+                                                for="inf_option_Doyouwanttoknowaboutnewcomputersorrefurbished_4676"><span></span>Either/Both/No
+                                                preference</label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="infusion-field field1">
+                                    <label for="inf_option_Whattypeofcomputerareyoulookingfor">What type of computer are
+                                        you looking
+                                        for?</label>
+                                    <div class="infusion-radio">
+                                        <span class="infusion-option">
+                                            <input id="inf_option_Whattypeofcomputerareyoulookingfor_4678"
+                                                name="inf_option_Whattypeofcomputerareyoulookingfor" type="radio"
+                                                value="4678" />
+                                            <label
+                                                for="inf_option_Whattypeofcomputerareyoulookingfor_4678"><span></span>Laptop</label>
+                                        </span>
+                                        <span class="infusion-option">
+                                            <input id="inf_option_Whattypeofcomputerareyoulookingfor_4680"
+                                                name="inf_option_Whattypeofcomputerareyoulookingfor" type="radio"
+                                                value="4680" />
+                                            <label
+                                                for="inf_option_Whattypeofcomputerareyoulookingfor_4680"><span></span>Tablet</label>
+                                        </span>
+                                        <span class="infusion-option">
+                                            <input id="inf_option_Whattypeofcomputerareyoulookingfor_4682"
+                                                name="inf_option_Whattypeofcomputerareyoulookingfor" type="radio"
+                                                value="4682" />
+                                            <label
+                                                for="inf_option_Whattypeofcomputerareyoulookingfor_4682"><span></span>Not
+                                                sure/No
+                                                preference</label>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="infusion-field field1">
+                                    <label for="inf_option_Willyoubeusingthiscomputerforyourjob">Will you be using this
+                                        computer for
+                                        your job?</label>
+
+                                    <div class="infusion-radio">
+                                        <input id="inf_option_Willyoubeusingthiscomputerforyourjob_1069"
+                                            name="inf_option_Willyoubeusingthiscomputerforyourjob" type="radio"
+                                            value="1069" class="control" />
+                                        <label
+                                            for="inf_option_Willyoubeusingthiscomputerforyourjob_1069"><span></span>Yes</label>
+
+                                        <div class="conditional">
+                                            <label for="inf_custom_Industry1">In what industry do you work?</label>
+                                            <select id="inf_custom_Industry1" class="form-select"
+                                                name="inf_custom_Industry1">
+                                                <option value="">Please select one</option>
+                                                <option value="Law Enforcement">Law Enforcement</option>
+                                                <option value="Fire">Fire</option>
+                                                <option value="EMS">EMS</option>
+                                                <option value="Defense">Defense</option>
+                                                <option value="Construction">Construction</option>
+                                                <option value="Health Care">Health Care</option>
+                                                <option value="Automotive">Automotive</option>
+                                                <option value="Aviation">Aviation</option>
+                                                <option value="Logistics">Logistics</option>
+                                                <option value="Government">Government</option>
+                                                <option value="Telecommunications">Telecommunications</option>
+                                                <option value="Oil & Gas Utility">Oil & Gas Utility</option>
+                                                <option value="Electric Utility">Electric Utility</option>
+                                                <option value="Water Utility">Water Utility</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                            <div class="infusion-field conditional" style="margin-top:4px;">
+                                                <label for="inf_custom_Ifotherpleasespecify">If other, please
+                                                    specify</label>
+                                                <input class="infusion-field-input-container form-input"
+                                                    id="inf_custom_Ifotherpleasespecify"
+                                                    name="inf_custom_Ifotherpleasespecify" type="text" />
+                                            </div>
+                                            <div class="infusion-field">
+                                                <label for="inf_field_JobTitle">What is your position / job
+                                                    title?</label>
+                                                <input class="infusion-field-input-container form-input"
+                                                    id="inf_field_JobTitle" name="inf_field_JobTitle" type="text" />
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <input id="inf_option_Willyoubeusingthiscomputerforyourjob_1071"
+                                                name="inf_option_Willyoubeusingthiscomputerforyourjob" type="radio"
+                                                value="1071" />
+                                            <label
+                                                for="inf_option_Willyoubeusingthiscomputerforyourjob_1071"><span></span>No</label>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="formSection">
+                                <h2>Environmental Conditions</h2>
+                                <div class="field1">
+                                    <label>Which of the following words describe the environment in which you will be
+                                        using the
+                                        computer? (select all that apply).</label>
+
+                                    <div class="infusion-field">
+                                        <label for="inf_option_Wet" class="rectangle">
+
+                                            <input id="inf_option_Wet" name="inf_option_Wet" type="checkbox"
+                                                value="1077" />
+                                            <span class="infusion-option rectangle-text">Wet</span></label>
+
+
+                                        <label for="inf_option_Oily" class="rectangle">
+                                            <input id="inf_option_Oily" name="inf_option_Oily" type="checkbox"
+                                                value="1083" />
+                                            <span class="infusion-option rectangle-text">Oily</span></label>
+
+
+                                        <label for="inf_option_DustyDirtySandy" class="rectangle">
+                                            <input id="inf_option_DustyDirtySandy" name="inf_option_DustyDirtySandy"
+                                                type="checkbox" value="1075" />
+                                            <span
+                                                class="infusion-option rectangle-text">Dusty/Dirty/Sandy</span></label>
+
+
+                                        <label for="inf_option_Humid" class="rectangle">
+                                            <input id="inf_option_Humid" name="inf_option_Humid" type="checkbox"
+                                                value="1079" />
+                                            <span class="infusion-option rectangle-text">Humid</span></label>
+
+
+                                        <label for="inf_option_Rough" class="rectangle">
+                                            <input id="inf_option_Rough" name="inf_option_Rough" type="checkbox"
+                                                value="1081" />
+                                            <span class="infusion-option rectangle-text">Rough</span></label>
+
+
+                                        <label for="inf_option_Hot" class="rectangle">
+                                            <input id="inf_option_Hot" name="inf_option_Hot" type="checkbox"
+                                                value="1085" />
+                                            <span class="infusion-option rectangle-text">Hot</span></label>
+
+
+                                        <label for="inf_option_Cold" class="rectangle">
+                                            <input id="inf_option_Cold" name="inf_option_Cold" type="checkbox"
+                                                value="1087" />
+                                            <span class="infusion-option rectangle-text">Cold</span></label>
+
+
+                                        <label for="inf_option_BrightSunny" class="rectangle">
+                                            <input id="inf_option_BrightSunny" name="inf_option_BrightSunny"
+                                                type="checkbox" value="1089" />
+                                            <span class="infusion-option rectangle-text">Bright/Sunny</span></label>
+
+                                    </div><br>
+                                </div>
+
+                                <div class="infusion-field field1">
+                                    <label for="inf_option_Willthiscomputerbesubjectedtovibrationorshock">Will this
+                                        computer be
+                                        subjected to vibration or shock?</label>
+                                    <div class="infusion-radio">
+
+                                        <input id="inf_option_Willthiscomputerbesubjectedtovibrationorshock_1119"
+                                            name="inf_option_Willthiscomputerbesubjectedtovibrationorshock" type="radio"
+                                            value="1119" class="control" />
+                                        <label
+                                            for="inf_option_Willthiscomputerbesubjectedtovibrationorshock_1119"><span></span>Yes</label>
+                                        <div class="conditional">
+                                            <div class="infusion-field">
+                                                <label
+                                                    for="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure">On
+                                                    a scale of 1 to 10 (1 being the least and 10 being the most), how
+                                                    much physical
+                                                    abuse will this Toughbook have to endure?</label>
+                                                <div class="infusion-radio tenscale">
+                                                    <label
+                                                        for="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1123"><input
+                                                            id="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1123"
+                                                            name="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure"
+                                                            type="radio" value="1123" />
+                                                        <span>1</span>
+                                                        <div class="elab">Barely any</div>
+                                                    </label>
+
+                                                    <label
+                                                        for="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1125">
+                                                        <input
+                                                            id="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1125"
+                                                            name="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure"
+                                                            type="radio" value="1125" />
+                                                        <span>2</span>
+                                                        <div class="elab">Just a little bit</div>
+                                                    </label>
+
+                                                    <label
+                                                        for="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1127">
+                                                        <input
+                                                            id="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1127"
+                                                            name="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure"
+                                                            type="radio" value="1127" />
+                                                        <span>3</span>
+                                                        <div class="elab">Not too much</div>
+                                                    </label>
+
+                                                    <label
+                                                        for="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1129">
+                                                        <input
+                                                            id="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1129"
+                                                            name="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure"
+                                                            type="radio" value="1129" />
+                                                        <span>4</span>
+                                                        <div class="elab">Incidental bumps and bruises</div>
+                                                    </label>
+
+                                                    <label
+                                                        for="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1131">
+                                                        <input
+                                                            id="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1131"
+                                                            name="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure"
+                                                            type="radio" value="1131" />
+                                                        <span>5</span>
+                                                        <div class="elab">A moderate amount</div>
+                                                    </label>
+
+                                                    <label
+                                                        for="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1133">
+                                                        <input
+                                                            id="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1133"
+                                                            name="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure"
+                                                            type="radio" value="1133" />
+                                                        <span>6</span>
+                                                        <div class="elab">I'm kind of accident prone</div>
+                                                    </label>
+
+                                                    <label
+                                                        for="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1135">
+                                                        <input
+                                                            id="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1135"
+                                                            name="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure"
+                                                            type="radio" value="1135" />
+                                                        <span>7</span>
+                                                        <div class="elab">A lot</div>
+                                                    </label>
+
+                                                    <label
+                                                        for="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1137">
+                                                        <input
+                                                            id="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1137"
+                                                            name="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure"
+                                                            type="radio" value="1137" />
+                                                        <span>8</span>
+                                                        <div class="elab">It's gonna be rough</div>
+                                                    </label>
+
+                                                    <label
+                                                        for="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1139">
+                                                        <input
+                                                            id="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1139"
+                                                            name="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure"
+                                                            type="radio" value="1139" />
+                                                        <span>9</span>
+                                                        <div class="elab">It's gonna be very rough</div>
+                                                    </label>
+
+                                                    <label
+                                                        for="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1141">
+                                                        <input
+                                                            id="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure_1141"
+                                                            name="inf_option_Onascaleof1to10howmuchphysicalabusewillthisToughbookhavetoendure"
+                                                            type="radio" value="1141" />
+                                                        <span>10</span>
+                                                        <div class="elab">I WILL SHOW NO MERCY!!</div>
+                                                    </label>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <input id="inf_option_Willthiscomputerbesubjectedtovibrationorshock_1121"
+                                                name="inf_option_Willthiscomputerbesubjectedtovibrationorshock"
+                                                type="radio" value="1121" />
+                                            <label
+                                                for="inf_option_Willthiscomputerbesubjectedtovibrationorshock_1121"><span></span>No</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="infusion-field field1">
+                                    <label for="inf_custom_usevehicle">Will you be operating this computer in a moving
+                                        vehicle?</label>
+                                    <div class="infusion-radio">
+                                        <span class="infusion-option">
+                                            <input id="inf_custom_usevehicle_Yes" name="inf_custom_usevehicle"
+                                                type="radio" value="Yes" />
+                                            <label for="inf_custom_usevehicle_Yes"><span></span>Yes</label>
+                                        </span>
+
+                                        <input id="inf_custom_usevehicle_Yes and I will need to mount it"
+                                            name="inf_custom_usevehicle" type="radio"
+                                            value="Yes and I will need to mount it" class="control" />
+                                        <label
+                                            for="inf_custom_usevehicle_Yes and I will need to mount it"><span></span>Yes,
+                                            and I would
+                                            like information on mounting solutions</label>
+
+                                        <div class="infusion-field conditional">
+                                            <label for="inf_misc_Whatisthemakemodelandyearofyourvehicle">What is the
+                                                make, model and
+                                                year of your vehicle?</label>
+                                            <input class="form-input" type="text"
+                                                id="inf_misc_Whatisthemakemodelandyearofyourvehicle"
+                                                name="inf_misc_Whatisthemakemodelandyearofyourvehicle">
+                                            </input>
+                                        </div>
+                                        <span class="infusion-option">
+                                            <input id="inf_custom_usevehicle_No" name="inf_custom_usevehicle"
+                                                type="radio" value="No" />
+                                            <label for="inf_custom_usevehicle_No"><span></span>No</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="formSection">
+                                <h2>Performance and required features</h2>
+                                <div class="infusion-field field1">
+                                    <label for="inf_misc_Whatsoftwaredoyouintendtorun">What software do you intend to
+                                        run?</label>
+                                    <textarea cols="24" id="inf_misc_Whatsoftwaredoyouintendtorun"
+                                        name="inf_misc_Whatsoftwaredoyouintendtorun" rows="5"></textarea>
+                                </div>
+                                <div class="infusion-field field1">
+                                    <label for="inf_custom_featuretouchscreen">Will you require a touch screen?</label>
+                                    <div class="infusion-radio">
+                                        <input id="inf_custom_featuretouchscreen_Yes"
+                                            name="inf_custom_featuretouchscreen" type="radio" value="Yes"
+                                            class="control" />
+                                        <label for="inf_custom_featuretouchscreen_Yes"><span></span>Yes</label>
+
+                                        <div class="infusion-field conditional">
+                                            <label for="inf_custom_usecapturesignatures">Will you frequently need to
+                                                capture signatures,
+                                                take hand-written notes, or sketch using the touch screen?</label>
+                                            <div class="infusion-radio">
+                                                <span class="infusion-option">
+                                                    <input id="inf_custom_usecapturesignatures_1"
+                                                        name="inf_custom_usecapturesignatures" type="radio" value="1" />
+                                                    <label
+                                                        for="inf_custom_usecapturesignatures_1"><span></span>Yes</label>
+                                                </span>
+                                                <span class="infusion-option">
+                                                    <input id="inf_custom_usecapturesignatures_0"
+                                                        name="inf_custom_usecapturesignatures" type="radio" value="0" />
+                                                    <label
+                                                        for="inf_custom_usecapturesignatures_0"><span></span>No</label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <span class="infusion-option">
+                                            <input id="inf_custom_featuretouchscreen_No"
+                                                name="inf_custom_featuretouchscreen" type="radio" value="No" />
+                                            <label for="inf_custom_featuretouchscreen_No"><span></span>No</label>
+                                        </span>
+                                        <span class="infusion-option">
+                                            <input
+                                                id="inf_custom_featuretouchscreen_I\'d prefer it but it isn\'t essential"
+                                                name="inf_custom_featuretouchscreen" type="radio"
+                                                value="I'd prefer it but it isn't essential" />
+                                            <label
+                                                for="inf_custom_featuretouchscreen_I\'d prefer it but it isn\'t essential"><span></span>I'd
+                                                prefer it but it isn't essential</label>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="infusion-field field1">
+                                    <label for="inf_custom_featureWWANGobi">Will you require mobile data connectivity
+                                        (3G, 4G
+                                        LTE)?</label>
+                                    <div class="infusion-radio">
+
+                                        <input id="inf_custom_featureWWANGobi_Yes" name="inf_custom_featureWWANGobi"
+                                            type="radio" value="Yes" class="control" />
+                                        <label for="inf_custom_featureWWANGobi_Yes"><span></span>Yes</label>
+                                        <div class="infusion-field conditional">
+                                            <label for="inf_misc_Whoisyourwirelesscarrier">Who is your wireless
+                                                carrier?</label>
+                                            <select id="inf_misc_Whoisyourwirelesscarrier"
+                                                name="inf_misc_Whoisyourwirelesscarrier">
+                                                <option value="">Please select one</option>
+                                                <option value="ATT">AT&T</option>
+                                                <option value="sprint">Sprint</option>
+                                                <option value="tmobile">T-Mobile</option>
+                                                <option value="verizon">Verizon</option>
+                                                <option value="other">other/not sure</option>
+                                            </select>
+                                        </div>
+                                        <span class="infusion-option">
+                                            <input id="inf_custom_featureWWANGobi_No" name="inf_custom_featureWWANGobi"
+                                                type="radio" value="No" />
+                                            <label for="inf_custom_featureWWANGobi_No"><span></span>No</label>
+                                        </span>
+                                        <span class="infusion-option">
+                                            <input
+                                                id="inf_custom_featureWWANGobi_I\'d prefer it but it isn\'t essential"
+                                                name="inf_custom_featureWWANGobi" type="radio"
+                                                value="I'd prefer it but it isn't essential" />
+                                            <label
+                                                for="inf_custom_featureWWANGobi_I\'d prefer it but it isn\'t essential"><span></span>I'd
+                                                prefer it but it isn't essential</label>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="infusion-field field1">
+                                    <label for="inf_custom_DoyouneedGPS">Will you require a GPS receiver?</label>
+                                    <div class="infusion-radio">
+                                        <span class="infusion-option">
+                                            <input id="inf_custom_DoyouneedGPS_Yes" name="inf_custom_DoyouneedGPS"
+                                                type="radio" value="Yes" />
+                                            <label for="inf_custom_DoyouneedGPS_Yes"><span></span>Yes</label>
+                                        </span>
+                                        <span class="infusion-option">
+                                            <input id="inf_custom_DoyouneedGPS_No" name="inf_custom_DoyouneedGPS"
+                                                type="radio" value="No" />
+                                            <label for="inf_custom_DoyouneedGPS_No"><span></span>No</label>
+                                        </span>
+                                        <span class="infusion-option">
+                                            <input id="inf_custom_DoyouneedGPS_I\'d prefer it but it isn\'t essential"
+                                                name="inf_custom_DoyouneedGPS" type="radio"
+                                                value="I'd prefer it but it isn't essential" />
+                                            <label
+                                                for="inf_custom_DoyouneedGPS_I\'d prefer it but it isn\'t essential"><span></span>I'd
+                                                prefer it but it isn't essential</label>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="infusion-field field1">
+                                    <label for="inf_custom_featureMediaDrive">Will you require an optical drive (CD-RW,
+                                        DVD,
+                                        etc.)</label>
+                                    <div class="infusion-radio">
+
+                                        <input id="inf_custom_featureMediaDrive_Yes" name="inf_custom_featureMediaDrive"
+                                            type="radio" value="Yes" class="control" />
+                                        <label for="inf_custom_featureMediaDrive_Yes"><span></span>Yes</label>
+
+
+                                        <div class="conditional">
+                                            <div>
+                                                <p>
+                                                    What tasks must the optical drive perform? (Check all that apply)
+                                                </p>
+                                            </div>
+                                            <div class="infusion-field">
+                                                <span class="infusion-option">
+                                                    <input id="inf_option_Loadsoftware" name="inf_option_Loadsoftware"
+                                                        type="checkbox" value="1095" />
+                                                    <label for="inf_option_Loadsoftware">Load software</label>
+                                                </span>
+                                            </div>
+                                            <div class="infusion-field">
+                                                <span class="infusion-option">
+                                                    <input id="inf_option_PlayCDs" name="inf_option_PlayCDs"
+                                                        type="checkbox" value="1097" />
+                                                    <label for="inf_option_PlayCDs">Play CDs</label>
+                                                </span>
+                                            </div>
+                                            <div class="infusion-field">
+                                                <span class="infusion-option">
+                                                    <input id="inf_option_PlayDVDs" name="inf_option_PlayDVDs"
+                                                        type="checkbox" value="1099" />
+                                                    <label for="inf_option_PlayDVDs">Play DVDs</label>
+                                                </span>
+                                            </div>
+                                            <div class="infusion-field">
+                                                <span class="infusion-option">
+                                                    <input id="inf_option_BurnCDs" name="inf_option_BurnCDs"
+                                                        type="checkbox" value="1101" />
+                                                    <label for="inf_option_BurnCDs">Burn CDs</label>
+                                                </span>
+                                            </div>
+                                            <div class="infusion-field">
+                                                <span class="infusion-option">
+                                                    <input id="inf_option_BurnDVDs" name="inf_option_BurnDVDs"
+                                                        type="checkbox" value="1103" />
+                                                    <label for="inf_option_BurnDVDs">Burn DVDs</label>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <span class="infusion-option">
+                                            <input id="inf_custom_featureMediaDrive_No"
+                                                name="inf_custom_featureMediaDrive" type="radio" value="No" />
+                                            <label for="inf_custom_featureMediaDrive_No"><span></span>No</label>
+                                        </span>
+                                        <span class="infusion-option">
+                                            <input id="inf_custom_featureMediaDrive_I\'d prefer it but isn\'t essential"
+                                                name="inf_custom_featureMediaDrive" type="radio"
+                                                value="I'd prefer it but isn't essential" />
+                                            <label
+                                                for="inf_custom_featureMediaDrive_I\'d prefer it but isn\'t essential"><span></span>I'd
+                                                prefer it but it isn't essential</label>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="infusion-field field1">
+                                    <label for="inf_custom_featureportsslots">Do you require any special ports or
+                                        expansion slots
+                                        (serial, parallel, HDMI, PCMCIA, SD, etc.)? If you are unsure, describe any
+                                        peripheral devices
+                                        you may use</label>
+                                    <textarea cols="24" id="inf_custom_featureportsslots"
+                                        name="inf_custom_featureportsslots" rows="5"></textarea>
+                                </div>
+                                <div class="infusion-field field1">
+                                    <label for="inf_misc_Anyadditionalnotes">Any additional notes?</label>
+                                    <textarea cols="24" id="inf_misc_Anyadditionalnotes"
+                                        name="inf_misc_Anyadditionalnotes" rows="5"></textarea>
+                                </div>
+                                <div class="infusion-field field1">
+                                    <label for="inf_custom_Budget">What is your budget?</label>
+                                    <input class="infusion-field-input-container form-input" id="inf_custom_Budget"
+                                        name="inf_custom_Budget" type="text" />
+                                </div>
+                            </div>
+                            <div class="formSection">
+                                <h2>Contact information</h2>
+
+                                <div class="infusion-field field1">
+                                    <label for="inf_field_FirstName">First Name (required)</label>
+                                    <input class="infusion-field-input-container form-input" id="inf_field_FirstName"
+                                        name="inf_field_FirstName" type="text" />
+                                </div>
+
+                                <div class="infusion-field field1">
+                                    <label for="inf_field_Email">Email (required)</label>
+                                    <input class="infusion-field-input-container form-input" id="inf_field_Email"
+                                        name="inf_field_Email" type="text" />
+                                </div>
+                                <div class="infusion-field field1"
+                                    style="padding:0 16px; margin:0 8px; position:relative; top:-16px;">
+                                    <span>
+                                        <input id="inf_option_SubscribetoourNewsletter"
+                                            name="inf_option_SubscribetoourNewsletter" type="checkbox" value="1111" />
+                                        <label for="inf_option_SubscribetoourNewsletter">Subscribe to our
+                                            Newsletter</label>
+                                    </span>
+                                </div>
+
+                                <div class="infusion-field field1">
+                                    <label for="inf_field_Phone1">Phone</label>
+                                    <input class="infusion-field-input-container form-input" id="inf_field_Phone1"
+                                        name="inf_field_Phone1" type="text" />
+                                </div>
+                                <div class="infusion-field field1">
+                                    <label for="inf_option_Howwouldyoulikeustocontactyou">How would you like us to
+                                        contact you?</label>
+                                    <div class="infusion-radio">
+                                        <span class="infusion-option">
+                                            <input id="inf_option_Howwouldyoulikeustocontactyou_1105"
+                                                name="inf_option_Howwouldyoulikeustocontactyou" type="radio"
+                                                value="1105" />
+                                            <label for="inf_option_Howwouldyoulikeustocontactyou_1105"><span></span>By
+                                                phone</label>
+                                        </span>
+                                        <span class="infusion-option">
+                                            <input id="inf_option_Howwouldyoulikeustocontactyou_1107"
+                                                name="inf_option_Howwouldyoulikeustocontactyou" type="radio"
+                                                value="1107" />
+                                            <label for="inf_option_Howwouldyoulikeustocontactyou_1107"><span></span>By
+                                                email</label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="infusion-field field1">
+                                <label for="inf_custom_Howdidyoufindoutaboutus">How did you find out about us?</label>
+                                <input class="infusion-field-input-container form-input"
+                                    id="inf_custom_Howdidyoufindoutaboutus" name="inf_custom_Howdidyoufindoutaboutus"
+                                    type="text" />
+                            </div>
+                            <div class="field1">
+                                <div class="infusion-field">
+                                    <span class="infusion-option">
+                                        <input
+                                            id="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy"
+                                            name="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy"
+                                            type="checkbox" value="4694" />
+                                        <label
+                                            for="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy"
+                                            style="display:inline;">I give consent to use this information to send
+                                            additional emails and
+                                            communication as described in your Privacy Policy *</label>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="field1">
+                                <p>This site is protected by reCAPTCHA and the Google
+                                    <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                                    <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+                                </p>
+                                <div class="infusion-submit">
+                                    <input class="infusion-recaptcha" id="recaptcha_8a3ea6422a30268cd397383fd61af459"
+                                        data-badge="inline" type="submit" value="Request Selection Assistance" />
+                                </div>
+                            </div>
+                        </form>
+                        <script type="text/javascript"
+                            src="https://gc200.infusionsoft.app/app/webTracking/getTrackingCode"></script>
+                        <script type="text/javascript"
+                            src="https://gc200.infusionsoft.com/resources/external/recaptcha/production/recaptcha.js?b=1.70.0.358781-hf-202105050145"></script>
+                        <script
+                            src="https://www.google.com/recaptcha/api.js?onload=onloadInfusionRecaptchaCallback&render=explicit"
+                            async="async" defer="defer"></script>
+                        <script type="text/javascript"
+                            src="https://gc200.infusionsoft.com/app/timezone/timezoneInputJs?xid=8a3ea6422a30268cd397383fd61af459"></script>
+                        <script type="text/javascript"
+                            src="https://gc200.infusionsoft.com/js/jquery/jquery-3.3.1.js"></script>
+                        <script type="text/javascript"
+                            src="https://gc200.infusionsoft.app/app/webform/overwriteRefererJs"></script>
+                        <p>Read our <a href="https://www.bobjohnson.com/privacy-policy">Privacy Policy</a></p>
+                    </div>
                 </div>
-                <div id="question-container" class="question"></div>
-                <ul id="options-container" class="productGrid"></ul>
             </div>
-            <ul id="result-container" class="result"></ul>
-        </div>
-
-        <div id="quiz-products-source">
-            {{> components/category/product-listing}}
-        </div>
     </main>
-
-    <div class="plp-page-region">
-        {{{region name="category_below_content"}}}
-        {{{region name="category_below_content--global"}}}
-    </div>
 </div>
 <div class="category-description">
     {{#if category.description}}
@@ -199,3 +1228,75 @@ category:
 
 {{/partial}}
 {{> layout/base}}
+</div>
+<script type="text/javascript">// <![CDATA[
+    function toggleAnswer(id) {
+        const answer = document.getElementById(id);
+        answer.classList.toggle('open');
+    }
+
+    const tabs = document.querySelectorAll('.tab-content');
+    const tabButtons = document.querySelectorAll('.tab-button');
+
+    // Function to get URL parameters
+    function getURLParam(parameter) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(parameter);
+    }
+
+    // Check if there's a 'tab' parameter in the URL
+    const tabParam = getURLParam('tab');
+
+    // If 'tab' parameter is not present or invalid, default to tab 0
+    const initialTabIndex = tabParam !== null ? parseInt(tabParam) : 0;
+
+    // Function to show the selected tab
+
+    function showTab(tabIndex) {
+        tabs.forEach((tab, index) => {
+            if (index === tabIndex) {
+                tab.style.display = 'block';
+            } else {
+                tab.style.display = 'none';
+            }
+        });
+
+        tabButtons.forEach((button, index) => {
+            if (index === tabIndex) {
+                button.classList.add('active-tab', 'underline');
+            } else {
+                button.classList.remove('active-tab', 'underline');
+            }
+        });
+
+        // Update URL with the selected tab index
+        history.pushState(null, null, `?tab=${tabIndex}`);
+    }
+
+    // Show the initial tab when the page loads
+    showTab(initialTabIndex);
+
+    // ]]></script>
+</div>
+</div>
+<script>
+    const formChoiceInputs = document.querySelectorAll('input[name="formChoice"]');
+
+    function syncPanels(choice) {
+        document.querySelectorAll('.form-panel').forEach(panel => {
+            panel.classList.toggle('is-hidden', panel.dataset.form !== choice);
+        });
+    }
+
+    formChoiceInputs.forEach(input => {
+        input.addEventListener('change', () => {
+            syncPanels(input.value);
+        });
+    });
+
+    // Ensure neither form shows on page open
+    document.addEventListener('DOMContentLoaded', () => {
+        formChoiceInputs.forEach(input => { input.checked = false; });
+        document.querySelectorAll('.form-panel').forEach(panel => panel.classList.add('is-hidden'));
+    });
+</script>

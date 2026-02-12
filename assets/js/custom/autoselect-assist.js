@@ -658,7 +658,7 @@ function displayQuestion() {
         submitButton.addEventListener('click', () => {
             const minValue = document.getElementById('budget-min-input').value.trim();
             const maxValue = document.getElementById('budget-max-input').value.trim();
-            const minBudget = parseBudgetValue(minValue);
+            const minBudget = parseBudgetValue(minValue) ?? 0;
             const maxBudget = parseBudgetValue(maxValue);
             if ((minBudget !== null && minBudget < 0)
                 || (maxBudget !== null && maxBudget < 0)) {
