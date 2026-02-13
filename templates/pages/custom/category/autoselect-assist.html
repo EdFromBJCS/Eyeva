@@ -21,7 +21,6 @@ category:
     <div class="plp-page-header" id="page-sidebar-header">
         {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
         {{#unless theme_settings.hide_category_page_heading }}
-        <h1 class="plp-page-title">{{category.name}}</h1>
         {{/unless}}
 
         {{#if category.image}}
@@ -88,6 +87,74 @@ category:
                 width: 100%;
             }
 
+            .quiz-layout {
+                display: grid;
+                gap: 24px;
+                grid-template-columns: minmax(0, 1fr) 280px;
+                align-items: start;
+            }
+
+            .quiz-main {
+                min-width: 0;
+            }
+
+            .quiz-summary {
+                align-self: start;
+                background-color: #fafafa;
+                border: 1px solid #e5e5e5;
+                border-radius: 6px;
+                padding: 12px;
+                position: sticky;
+                top: 16px;
+            }
+
+            .quiz-summary-panel {
+                position: sticky;
+                top: 16px;
+                align-self: start;
+            }
+
+            .quiz-summary-toggle {
+                width: 100%;
+                margin-bottom: 8px;
+            }
+
+            .quiz-summary.is-collapsed {
+                display: none;
+            }
+
+            .quiz-summary-title {
+                font-size: 16px;
+                margin: 0 0 8px;
+            }
+
+            .quiz-summary-list {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                display: grid;
+                gap: 8px;
+            }
+
+            .quiz-summary-item {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .quiz-summary-label {
+                font-weight: 600;
+            }
+
+            .quiz-summary-value {
+                color: #444;
+            }
+
+            .quiz-summary-empty {
+                color: #666;
+                font-size: 14px;
+            }
+
             .card-figcaption-button {
                 width: 100%;
             }
@@ -125,6 +192,38 @@ category:
                 margin-right: 8px;
             }
 
+            .quiz-actions {
+                display: flex;
+                gap: 12px;
+                margin-top: 12px;
+            }
+
+            .quiz-actions--full {
+                grid-column: 1 / -1;
+                width: 100%;
+            }
+
+            .quiz-actions .quiz-continue {
+                background-color: #000;
+                border-color: #000;
+                color: #fff;
+                width: auto;
+            }
+
+            .quiz-actions .quiz-continue:hover,
+            .quiz-actions .quiz-continue:focus {
+                background-color: #222;
+                border-color: #222;
+                color: #fff;
+            }
+
+            .quiz-continue {
+                grid-column: 1 / -1;
+                justify-self: start;
+                margin-top: 8px;
+                width: auto;
+            }
+
             .quiz .card-footer {
                 flex-wrap: nowrap;
             }
@@ -134,7 +233,7 @@ category:
                 gap: 16px;
             }
 
-            @media screen and (max-width: 1441px) {
+            @media screen and (min-width: 1262px) {
                 .quiz .productGrid {
                     grid-template-columns: repeat(3, 1fr);
                 }
@@ -158,6 +257,17 @@ category:
 
                 .quiz .card-footer {
                     flex-wrap: wrap;
+                }
+            }
+
+            @media screen and (max-width: 1024px) {
+                .quiz-layout {
+                    grid-template-columns: 1fr;
+                }
+
+                .quiz-summary {
+                    position: static;
+                    top: auto;
                 }
             }
 
@@ -517,7 +627,7 @@ category:
         </style>
         <div class="main-content">
             <div class="dual-form-container">
-                <h2>Bob Johnson's Rugged Computer Selection Assistance</h2>
+                <h2>Rugged Computer Selection Assistance</h2>
                 <div>Need help choosing the right rugged computer? We offer two simple ways to get expert
                     recommendations tailored to your needs:</div>
                 <ul>
@@ -537,8 +647,18 @@ category:
                                 <div id="progress-bar-container">
                                     <div id="progress-bar"></div>
                                 </div>
-                                <div id="question-container" class="question"></div>
-                                <ul id="options-container" class="productGrid"></ul>
+                                <div class="quiz-layout">
+                                    <div class="quiz-main">
+                                        <div id="question-container" class="question"></div>
+                                        <ul id="options-container" class="productGrid"></ul>
+                                    </div>
+                                    <aside class="quiz-summary-panel">
+                                        <button type="button" id="quiz-summary-toggle" class="button button--secondary quiz-summary-toggle" aria-expanded="false">
+                                            View selections
+                                        </button>
+                                        <div id="quiz-summary" class="quiz-summary is-collapsed"></div>
+                                    </aside>
+                                </div>
                             </div>
                             <ul id="result-container" class="result"></ul>
                         </div>
@@ -1243,40 +1363,7 @@ category:
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(parameter);
     }
-
-    // Check if there's a 'tab' parameter in the URL
-    const tabParam = getURLParam('tab');
-
-    // If 'tab' parameter is not present or invalid, default to tab 0
-    const initialTabIndex = tabParam !== null ? parseInt(tabParam) : 0;
-
-    // Function to show the selected tab
-
-    function showTab(tabIndex) {
-        tabs.forEach((tab, index) => {
-            if (index === tabIndex) {
-                tab.style.display = 'block';
-            } else {
-                tab.style.display = 'none';
-            }
-        });
-
-        tabButtons.forEach((button, index) => {
-            if (index === tabIndex) {
-                button.classList.add('active-tab', 'underline');
-            } else {
-                button.classList.remove('active-tab', 'underline');
-            }
-        });
-
-        // Update URL with the selected tab index
-        history.pushState(null, null, `?tab=${tabIndex}`);
-    }
-
-    // Show the initial tab when the page loads
-    showTab(initialTabIndex);
-
-    // ]]></script>
+    </script
 </div>
 </div>
 <script>

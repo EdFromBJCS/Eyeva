@@ -347,6 +347,40 @@ button.expandfaq.button-alt::after {
     vertical-align: top;
 }
 
+.navPages-action--autoselect {
+    background: linear-gradient(135deg, #ebe8e8 0%, #cccaca 100%);
+    border: 1px solid #cccaca;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #912417;
+    color: #222222;
+    display: inline-flex;
+    flex: 0 0 auto;
+    padding: 6px 12px;
+    white-space: nowrap;
+
+    .navPages-label {
+        color: #dc3522;
+    }
+
+    .navPages-label:hover {
+        color: #222;
+    }
+}
+
+.navPages-action--autoselect .navPages-label::before {
+    content: "";
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 8px;
+    background: url("../icons/autoselect-magnifying-glass.svg") no-repeat center;
+    background-size: contain;
+}
+
+.navPages-action--autoselect:hover .navPages-label::before {
+    filter: brightness(0) saturate(100%);
+}
+
 // Mobile Data Page Checkout
 
 .mobile-data-table {

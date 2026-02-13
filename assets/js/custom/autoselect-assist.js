@@ -83,6 +83,10 @@ let recommendedProducts = [];
 let filteredProducts = [];
 const productDomMap = new Map();
 const multiSelectState = {};
+const quizHistory = [];
+const budgetState = { min: null, max: null };
+let portCountRequirements = {};
+const selectionsState = {};
 
 const questionContainer = document.getElementById('question-container');
 const optionsContainer = document.getElementById('options-container');
@@ -119,6 +123,174 @@ function normalizeYesNo(value) {
         return 'no';
     }
     return null;
+}
+
+function cloneMultiSelectState(state) {
+    const clone = {};
+    Object.keys(state).forEach(key => {
+        clone[key] = Array.from(state[key]);
+    });
+    return clone;
+}
+
+function restoreMultiSelectState(snapshot) {
+    Object.keys(multiSelectState).forEach(key => {
+        delete multiSelectState[key];
+    });
+    Object.keys(snapshot || {}).forEach(key => {
+        multiSelectState[key] = new Set(snapshot[key]);
+    });
+}
+
+function cloneSelectionsState(state) {
+    return JSON.parse(JSON.stringify(state || {}));
+}
+
+function pushHistory() {
+    const filteredIds = filteredProducts.map(product => product.id).filter(id => id !== null && typeof id !== 'undefined');
+    quizHistory.push({
+        questionIndex: currentQuestionIndex,
+        filteredIds,
+        filteredIsEmpty: filteredProducts.length === 0,
+        filteredIsAll: filteredProducts.length === recommendedProducts.length,
+        multiSelect: cloneMultiSelectState(multiSelectState),
+        budgetMin: budgetState.min,
+        budgetMax: budgetState.max,
+        portCounts: { ...portCountRequirements },
+        selections: cloneSelectionsState(selectionsState),
+    });
+}
+
+function getFilteredByIds(ids) {
+    const idSet = new Set(ids);
+    return recommendedProducts.filter(product => idSet.has(product.id));
+}
+
+function goBack() {
+    if (quizHistory.length === 0) {
+        return;
+    }
+    const previous = quizHistory.pop();
+    currentQuestionIndex = previous.questionIndex;
+    if (previous.filteredIsEmpty) {
+        filteredProducts = [];
+    } else if (previous.filteredIsAll) {
+        filteredProducts = [...recommendedProducts];
+    } else {
+        filteredProducts = getFilteredByIds(previous.filteredIds);
+    }
+    restoreMultiSelectState(previous.multiSelect);
+    budgetState.min = previous.budgetMin;
+    budgetState.max = previous.budgetMax;
+    portCountRequirements = { ...previous.portCounts };
+    Object.keys(selectionsState).forEach(key => {
+        delete selectionsState[key];
+    });
+    Object.assign(selectionsState, previous.selections || {});
+    resultContainer.innerHTML = '';
+    displayQuestion();
+}
+
+function formatBudgetSummary(value) {
+    if (value === null || typeof value === 'undefined') {
+        return 'Any';
+    }
+    return `$${value}`;
+}
+
+function formatSelectionLabel(question, selection) {
+    if (question.type === 'range') {
+        const minValue = selection && typeof selection.min !== 'undefined' ? selection.min : null;
+        const maxValue = selection && typeof selection.max !== 'undefined' ? selection.max : null;
+        if (minValue !== null && maxValue !== null) {
+            return `${formatBudgetSummary(minValue)} - ${formatBudgetSummary(maxValue)}`;
+        }
+        if (minValue !== null) {
+            return `${formatBudgetSummary(minValue)}+`;
+        }
+        if (maxValue !== null) {
+            return `Up to ${formatBudgetSummary(maxValue)}`;
+        }
+        return 'Any';
+    }
+    if (question.type === 'portCounts') {
+        const entries = Object.entries(selection || {}).filter(([, count]) => count > 0);
+        if (entries.length === 0) {
+            return 'Any';
+        }
+        return entries.map(([label, count]) => `${label}: ${count}`).join(', ');
+    }
+    if (Array.isArray(selection)) {
+        return selection.length > 0 ? selection.join(', ') : 'Any';
+    }
+    return selection || 'Any';
+}
+
+function updateSummary() {
+    const summary = document.getElementById('quiz-summary');
+    if (!summary) {
+        return;
+    }
+    summary.innerHTML = '';
+
+    const title = document.createElement('h3');
+    title.classList.add('quiz-summary-title');
+    title.textContent = 'Your Selections';
+    summary.appendChild(title);
+
+    const list = document.createElement('ul');
+    list.classList.add('quiz-summary-list');
+
+    questions.forEach(question => {
+        const selection = selectionsState[question.key];
+        if (typeof selection === 'undefined') {
+            return;
+        }
+        const item = document.createElement('li');
+        item.classList.add('quiz-summary-item');
+
+        const label = document.createElement('span');
+        label.classList.add('quiz-summary-label');
+        label.textContent = question.question;
+
+        const value = document.createElement('span');
+        value.classList.add('quiz-summary-value');
+        value.textContent = formatSelectionLabel(question, selection);
+
+        item.appendChild(label);
+        item.appendChild(value);
+        list.appendChild(item);
+    });
+
+    if (!list.childNodes.length) {
+        const empty = document.createElement('div');
+        empty.classList.add('quiz-summary-empty');
+        empty.textContent = 'No selections yet.';
+        summary.appendChild(empty);
+        return;
+    }
+
+    summary.appendChild(list);
+}
+
+function initSummaryToggle() {
+    const toggle = document.getElementById('quiz-summary-toggle');
+    const summary = document.getElementById('quiz-summary');
+    if (!toggle || !summary) {
+        return;
+    }
+    toggle.addEventListener('click', () => {
+        const isCollapsed = summary.classList.contains('is-collapsed');
+        if (isCollapsed) {
+            summary.classList.remove('is-collapsed');
+            toggle.setAttribute('aria-expanded', 'true');
+            toggle.textContent = 'Hide selections';
+        } else {
+            summary.classList.add('is-collapsed');
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.textContent = 'View selections';
+        }
+    });
 }
 
 function findPortCount(source, aliases) {
@@ -604,6 +776,8 @@ function displayResults() {
     restartButton.addEventListener("click", restartQuiz);
     restartButton.classList.add("restart", "button", "button--primary");
     resultContainer.appendChild(restartButton);
+
+    updateSummary();
 }
 
 function showAllResults() {
@@ -616,6 +790,16 @@ function restartQuiz() {
     filteredProducts = [...recommendedProducts];
     currentQuestionIndex = 0;
     resultContainer.innerHTML = "";
+    quizHistory.length = 0;
+    Object.keys(multiSelectState).forEach(key => {
+        delete multiSelectState[key];
+    });
+    Object.keys(selectionsState).forEach(key => {
+        delete selectionsState[key];
+    });
+    budgetState.min = null;
+    budgetState.max = null;
+    portCountRequirements = {};
     displayQuestion();
 }
 
@@ -638,6 +822,9 @@ function displayQuestion() {
         minInput.placeholder = '$ Min budget';
         minInput.id = 'budget-min-input';
         minInput.classList.add('budget-range-input', 'form-input');
+        if (budgetState.min !== null) {
+            minInput.value = formatBudgetInput(budgetState.min);
+        }
         minInput.addEventListener('input', event => {
             event.target.value = formatBudgetInput(event.target.value);
         });
@@ -648,6 +835,9 @@ function displayQuestion() {
         maxInput.placeholder = '$ Max budget';
         maxInput.id = 'budget-max-input';
         maxInput.classList.add('budget-range-input', 'form-input');
+        if (budgetState.max !== null) {
+            maxInput.value = formatBudgetInput(budgetState.max);
+        }
         maxInput.addEventListener('input', event => {
             event.target.value = formatBudgetInput(event.target.value);
         });
@@ -702,17 +892,38 @@ function displayQuestion() {
             input.classList.add('form-input', 'port-count-input');
             input.setAttribute('data-port-option', option);
 
+            const mappedKey = portsQuestion && portsQuestion.valueMap && portsQuestion.valueMap[option]
+                ? portsQuestion.valueMap[option]
+                : option;
+            const existingRequirement = portCountRequirements[normalizeValue(mappedKey)];
+            if (existingRequirement !== null && typeof existingRequirement !== 'undefined') {
+                input.value = existingRequirement;
+            }
+
             row.appendChild(label);
             row.appendChild(input);
             rows.appendChild(row);
         });
 
+        const actions = document.createElement('div');
+        actions.classList.add('quiz-actions', 'quiz-actions--full');
+
+        if (currentQuestionIndex > 0) {
+            const backButton = document.createElement('button');
+            backButton.type = 'button';
+            backButton.textContent = 'Back';
+            backButton.classList.add('button', 'button--primary', 'quiz-continue', 'quiz-back');
+            backButton.addEventListener('click', goBack);
+            actions.appendChild(backButton);
+        }
+
         const continueButton = document.createElement('button');
         continueButton.type = 'button';
         continueButton.textContent = 'Continue';
-        continueButton.classList.add('button', 'button--primary');
+        continueButton.classList.add('button', 'button--primary', 'quiz-continue');
         continueButton.addEventListener('click', () => {
             const requirements = {};
+            const displayRequirements = {};
             const inputs = rows.querySelectorAll('input[data-port-option]');
             for (const input of inputs) {
                 const option = input.getAttribute('data-port-option');
@@ -732,7 +943,11 @@ function displayQuestion() {
                     ? portsQuestion.valueMap[option]
                     : option;
                 requirements[normalizeValue(mapped)] = count;
+                displayRequirements[option] = count;
             }
+
+            portCountRequirements = { ...requirements };
+            selectionsState.portCounts = { ...displayRequirements };
 
             if (Object.keys(requirements).length > 0) {
                 filteredProducts = filteredProducts.filter(result => {
@@ -748,12 +963,14 @@ function displayQuestion() {
                 });
             }
 
+            pushHistory();
             currentQuestionIndex++;
             displayQuestion();
         });
+        actions.appendChild(continueButton);
 
         optionsContainer.appendChild(rows);
-        optionsContainer.appendChild(continueButton);
+        optionsContainer.appendChild(actions);
     } else if (currentQuestion.multiSelect) {
         if (!multiSelectState[currentQuestion.key]) {
             multiSelectState[currentQuestion.key] = new Set();
@@ -783,14 +1000,27 @@ function displayQuestion() {
             optionsContainer.appendChild(optionElement);
         });
 
+        const actions = document.createElement('div');
+        actions.classList.add('quiz-actions', 'quiz-actions--full');
+
+        if (currentQuestionIndex > 0) {
+            const backButton = document.createElement('button');
+            backButton.type = 'button';
+            backButton.textContent = 'Back';
+            backButton.classList.add('button', 'button--primary', 'quiz-continue', 'quiz-back');
+            backButton.addEventListener('click', goBack);
+            actions.appendChild(backButton);
+        }
+
         const continueButton = document.createElement('button');
         continueButton.type = 'button';
         continueButton.textContent = 'Continue';
-        continueButton.classList.add('button', 'button--primary');
+        continueButton.classList.add('button', 'button--primary', 'quiz-continue');
         continueButton.addEventListener('click', () => {
             handleMultiAnswer(currentQuestion.key, Array.from(selections));
         });
-        optionsContainer.appendChild(continueButton);
+        actions.appendChild(continueButton);
+        optionsContainer.appendChild(actions);
     } else {
         currentQuestion.options.forEach(option => {
             const optionElement = document.createElement('li');
@@ -800,6 +1030,17 @@ function displayQuestion() {
             optionsContainer.appendChild(optionElement);
         });
     }
+
+    if (currentQuestionIndex > 0 && currentQuestion.type !== 'portCounts' && !currentQuestion.multiSelect) {
+        const backButton = document.createElement('button');
+        backButton.type = 'button';
+        backButton.textContent = 'Back';
+        backButton.classList.add('button', 'button--secondary', 'quiz-back');
+        backButton.addEventListener('click', goBack);
+        optionsContainer.appendChild(backButton);
+    }
+
+    updateSummary();
 
     /*if (currentQuestionIndex === 0) {
         const showAllButton = document.createElement('button');
@@ -834,7 +1075,12 @@ function handleMultiAnswer(key, values) {
             return normalizedValues.includes(normalizeValue(resultValue));
         });
     }
-
+    selectionsState[key] = values;
+    if (key === 'ports') {
+        portCountRequirements = {};
+        selectionsState.portCounts = {};
+    }
+    pushHistory();
     currentQuestionIndex++;
     displayQuestion();
 }
@@ -858,6 +1104,8 @@ function handleAnswer(key, value) {
             return normalizeValue(resultValue) === normalizedValue;
         });
     }
+    selectionsState[key] = value;
+    pushHistory();
     currentQuestionIndex++;
     displayQuestion();
 }
@@ -875,6 +1123,10 @@ function handleBudgetAnswer(minBudget, maxBudget) {
         }
         return true;
     });
+    budgetState.min = minBudget;
+    budgetState.max = maxBudget;
+    selectionsState.price = { min: minBudget, max: maxBudget };
+    pushHistory();
     currentQuestionIndex++;
     displayQuestion();
 }
@@ -882,6 +1134,7 @@ function handleBudgetAnswer(minBudget, maxBudget) {
 async function initQuiz() {
     try {
         await loadProducts();
+        initSummaryToggle();
         displayQuestion();
     } catch (error) {
         questionContainer.textContent = 'Unable to load products at this time.';

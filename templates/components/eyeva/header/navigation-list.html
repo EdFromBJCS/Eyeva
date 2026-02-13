@@ -2,7 +2,7 @@
     {{#unless id}}
         {{#if (merge this id=(concat 'page-' (incrementVar 'incrementId')))}}{{/if}}
     {{/unless}}
-    <a class="navPages-action {{#if is_active}} activePage{{/if}} {{#if is_page}}_webpage{{/if}}" href="{{url}}"
+    <a class="navPages-action {{#if is_active}} activePage{{/if}} {{#if is_page}}_webpage{{/if}} {{#if name '==' 'Selection Assistance'}}navPages-action--autoselect{{/if}}" href="{{url}}"
         data-collapsible="navPages-subMenu-{{id}}"
         data-collapsible-disabled-breakpoint="medium"
         data-collapsible-disabled-state="close"
@@ -42,7 +42,7 @@
         </ul>
     </div>
 {{else}}
-    <a class="navPages-action {{#if is_active}} activePage{{/if}} {{#if is_page}}_webpage{{/if}}" href="{{url}}">
+    <a class="navPages-action {{#if is_active}} activePage{{/if}} {{#if is_page}}_webpage{{/if}} {{#if name '==' 'Selection Assistance'}}navPages-action--autoselect{{/if}}" href="{{url}}">
         <span class="navPages-label">{{name}}</span>
     </a>
 {{/if}}
