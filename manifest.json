@@ -47,89 +47,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/brands": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "brands_below_header"
-      },
-      {
-        "name": "brands_below_content"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
     "pages/blog-post": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/blog": [
       {
         "name": "header_top--global"
       },
@@ -211,54 +129,8 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/category": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "category_below_header"
-      },
-      {
-        "name": "category_below_content"
-      },
-      {
-        "name": "category_below_content--global"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/contact-us": [
+    "pages/checkout": [],
+    "pages/blog": [
       {
         "name": "header_top--global"
       },
@@ -334,9 +206,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/checkout": [],
-    "pages/order-confirmation": [],
-    "pages/home": [
+    "pages/category": [
       {
         "name": "header_top--global"
       },
@@ -353,58 +223,13 @@
         "name": "header_bottom"
       },
       {
-        "name": "home_below_menu"
+        "name": "category_below_header"
       },
       {
-        "name": "home_below_carousel"
+        "name": "category_below_content"
       },
       {
-        "name": "home_above_sections"
-      },
-      {
-        "name": "hero-video"
-      },
-      {
-        "name": "hero-carousel"
-      },
-      {
-        "name": "mobile_repair"
-      },
-      {
-        "name": "home_laptop_banner1"
-      },
-      {
-        "name": "home_laptop_banner2"
-      },
-      {
-        "name": "home_laptop_banner3"
-      },
-      {
-        "name": "home_laptop_banner4"
-      },
-      {
-        "name": "home_below_section2"
-      },
-      {
-        "name": "home_below_section4"
-      },
-      {
-        "name": "home_below_section5"
-      },
-      {
-        "name": "home_below_section3"
-      },
-      {
-        "name": "home_below_section6"
-      },
-      {
-        "name": "home_below_section7"
-      },
-      {
-        "name": "home_below_section8"
-      },
-      {
-        "name": "home_below_section9"
+        "name": "category_below_content--global"
       },
       {
         "name": "footer_info_col_1--global"
@@ -428,6 +253,51 @@
         "name": "footer_copyright_links--global"
       }
     ],
+    "pages/brands": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "brands_below_header"
+      },
+      {
+        "name": "brands_below_content"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/order-confirmation": [],
     "pages/page": [
       {
         "name": "header_top--global"
@@ -469,89 +339,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/search": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "search_below_content"
-      },
-      {
-        "name": "search_below_content--global"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/sitemap": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/subscribed": [
+    "pages/contact-us": [
       {
         "name": "header_top--global"
       },
@@ -678,7 +466,333 @@
         "name": "footer_copyright_links--global"
       }
     ],
+    "pages/home": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "home_below_menu"
+      },
+      {
+        "name": "home_below_carousel"
+      },
+      {
+        "name": "home_above_sections"
+      },
+      {
+        "name": "hero-video"
+      },
+      {
+        "name": "hero-carousel"
+      },
+      {
+        "name": "mobile_repair"
+      },
+      {
+        "name": "home_laptop_banner1"
+      },
+      {
+        "name": "home_laptop_banner2"
+      },
+      {
+        "name": "home_laptop_banner3"
+      },
+      {
+        "name": "home_laptop_banner4"
+      },
+      {
+        "name": "home_below_section2"
+      },
+      {
+        "name": "home_below_section4"
+      },
+      {
+        "name": "home_below_section5"
+      },
+      {
+        "name": "home_below_section3"
+      },
+      {
+        "name": "home_below_section6"
+      },
+      {
+        "name": "home_below_section7"
+      },
+      {
+        "name": "home_below_section8"
+      },
+      {
+        "name": "home_below_section9"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/sitemap": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/search": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "search_below_content"
+      },
+      {
+        "name": "search_below_content--global"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
     "pages/unsubscribe": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/subscribed": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/auth/account-created": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/auth/login": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/auth/new-password": [
       {
         "name": "header_top--global"
       },
@@ -792,197 +906,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/auth/login": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/auth/account-created": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/auth/new-password": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/gift-certificate/purchase": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/gift-certificate/redeem": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/gift-certificate/balance": [
+    "pages/errors/404": [
       {
         "name": "header_top--global"
       },
@@ -1021,44 +945,6 @@
       }
     ],
     "pages/errors/403": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/errors/404": [
       {
         "name": "header_top--global"
       },
@@ -1173,6 +1059,120 @@
         "name": "footer_copyright_links--global"
       }
     ],
+    "pages/gift-certificate/balance": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/gift-certificate/purchase": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/gift-certificate/redeem": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
     "pages/account/add-address": [
       {
         "name": "header_top--global"
@@ -1249,44 +1249,6 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/account/add-return": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
     "pages/account/add-wishlist": [
       {
         "name": "header_top--global"
@@ -1325,7 +1287,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/account/addresses": [
+    "pages/account/download-item": [
       {
         "name": "header_top--global"
       },
@@ -1439,6 +1401,44 @@
         "name": "footer_copyright_links--global"
       }
     ],
+    "pages/account/add-return": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
     "pages/account/inbox": [
       {
         "name": "header_top--global"
@@ -1477,45 +1477,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/account/download-item": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
-    "pages/account/payment-methods": [
+    "pages/account/addresses": [
       {
         "name": "header_top--global"
       },
@@ -1591,44 +1553,6 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/account/return-saved": [
-      {
-        "name": "header_top--global"
-      },
-      {
-        "name": "header_top"
-      },
-      {
-        "name": "header_bottom_mobile--global"
-      },
-      {
-        "name": "header_bottom--global"
-      },
-      {
-        "name": "header_bottom"
-      },
-      {
-        "name": "footer_info_col_1--global"
-      },
-      {
-        "name": "footer_info_col_2--global"
-      },
-      {
-        "name": "footer_info_col_3--global"
-      },
-      {
-        "name": "footer_info_col_4--global"
-      },
-      {
-        "name": "footer_support--global"
-      },
-      {
-        "name": "ssl_site_seal--global"
-      },
-      {
-        "name": "footer_copyright_links--global"
-      }
-    ],
     "pages/account/returns": [
       {
         "name": "header_top--global"
@@ -1667,7 +1591,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/account/wishlists": [
+    "pages/account/wishlist-details": [
       {
         "name": "header_top--global"
       },
@@ -1705,7 +1629,83 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/account/wishlist-details": [
+    "pages/account/payment-methods": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/account/return-saved": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/account/wishlists": [
       {
         "name": "header_top--global"
       },
@@ -1819,6 +1819,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
+    "pages/account/orders/invoice": [],
     "pages/account/orders/details": [
       {
         "name": "header_top--global"
@@ -1857,8 +1858,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/account/orders/invoice": [],
-    "pages/custom/page/meet-our-team": [
+    "pages/custom/category/autoselect-assist": [
       {
         "name": "header_top--global"
       },
@@ -1873,6 +1873,9 @@
       },
       {
         "name": "header_bottom"
+      },
+      {
+        "name": "category_below_header"
       },
       {
         "name": "footer_info_col_1--global"
@@ -1896,8 +1899,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/custom/page/autoselect-assist": [],
-    "pages/custom/page/my-homepage": [
+    "pages/custom/category/pc-builder": [
       {
         "name": "header_top--global"
       },
@@ -1914,16 +1916,54 @@
         "name": "header_bottom"
       },
       {
-        "name": "home_laptop_banner1"
+        "name": "category_below_header"
       },
       {
-        "name": "home_laptop_banner2"
+        "name": "category_sidebar"
       },
       {
-        "name": "home_laptop_banner3"
+        "name": "category_below_content"
       },
       {
-        "name": "home_laptop_banner4"
+        "name": "category_below_content--global"
+      },
+      {
+        "name": "footer_info_col_1--global"
+      },
+      {
+        "name": "footer_info_col_2--global"
+      },
+      {
+        "name": "footer_info_col_3--global"
+      },
+      {
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/custom/page/meet-our-team": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
       },
       {
         "name": "footer_info_col_1--global"
@@ -1985,7 +2025,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/custom/page/select-assist": [
+    "pages/custom/page/my-homepage": [
       {
         "name": "header_top--global"
       },
@@ -2000,6 +2040,18 @@
       },
       {
         "name": "header_bottom"
+      },
+      {
+        "name": "home_laptop_banner1"
+      },
+      {
+        "name": "home_laptop_banner2"
+      },
+      {
+        "name": "home_laptop_banner3"
+      },
+      {
+        "name": "home_laptop_banner4"
       },
       {
         "name": "footer_info_col_1--global"
@@ -2023,7 +2075,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/custom/page/video-archive": [
+    "pages/custom/page/select-assist": [
       {
         "name": "header_top--global"
       },
@@ -2099,7 +2151,7 @@
         "name": "footer_copyright_links--global"
       }
     ],
-    "pages/custom/category/pc-builder": [
+    "pages/custom/page/video-archive": [
       {
         "name": "header_top--global"
       },
@@ -2116,16 +2168,42 @@
         "name": "header_bottom"
       },
       {
-        "name": "category_below_header"
+        "name": "footer_info_col_1--global"
       },
       {
-        "name": "category_sidebar"
+        "name": "footer_info_col_2--global"
       },
       {
-        "name": "category_below_content"
+        "name": "footer_info_col_3--global"
       },
       {
-        "name": "category_below_content--global"
+        "name": "footer_info_col_4--global"
+      },
+      {
+        "name": "footer_support--global"
+      },
+      {
+        "name": "ssl_site_seal--global"
+      },
+      {
+        "name": "footer_copyright_links--global"
+      }
+    ],
+    "pages/custom/page/vods": [
+      {
+        "name": "header_top--global"
+      },
+      {
+        "name": "header_top"
+      },
+      {
+        "name": "header_bottom_mobile--global"
+      },
+      {
+        "name": "header_bottom--global"
+      },
+      {
+        "name": "header_bottom"
       },
       {
         "name": "footer_info_col_1--global"
@@ -2155,125 +2233,174 @@
     "layout/test",
     "layout/empty",
     "pages/brand",
-    "pages/brands",
     "pages/blog-post",
-    "pages/blog",
     "pages/cart",
-    "pages/category",
-    "pages/contact-us",
-    "pages/compare",
     "pages/checkout",
+    "pages/blog",
+    "pages/compare",
+    "pages/category",
+    "pages/brands",
     "pages/order-confirmation",
-    "pages/home",
     "pages/page",
-    "pages/search",
-    "pages/sitemap",
-    "pages/subscribed",
+    "pages/contact-us",
     "pages/product",
+    "pages/home",
+    "pages/sitemap",
+    "pages/search",
     "pages/unsubscribe",
+    "pages/subscribed",
+    "pages/auth/account-created",
+    "pages/auth/login",
+    "pages/auth/new-password",
     "pages/auth/create-account",
     "pages/auth/forgot-password",
-    "pages/auth/login",
-    "pages/auth/account-created",
-    "pages/auth/new-password",
-    "pages/gift-certificate/purchase",
-    "pages/gift-certificate/redeem",
-    "pages/gift-certificate/balance",
-    "pages/errors/403",
     "pages/errors/404",
+    "pages/errors/403",
     "pages/errors/generic",
     "pages/unavailable/maintenance",
     "pages/unavailable/hibernation",
+    "pages/gift-certificate/balance",
+    "pages/gift-certificate/purchase",
+    "pages/gift-certificate/redeem",
     "pages/account/add-address",
     "pages/account/add-payment-method",
-    "pages/account/add-return",
     "pages/account/add-wishlist",
-    "pages/account/addresses",
+    "pages/account/download-item",
     "pages/account/edit-payment-method",
     "pages/account/edit",
+    "pages/account/add-return",
     "pages/account/inbox",
-    "pages/account/download-item",
-    "pages/account/payment-methods",
+    "pages/account/addresses",
     "pages/account/recent-items",
-    "pages/account/return-saved",
     "pages/account/returns",
-    "pages/account/wishlists",
     "pages/account/wishlist-details",
+    "pages/account/payment-methods",
+    "pages/account/return-saved",
+    "pages/account/wishlists",
     "pages/account/orders/all",
     "pages/account/orders/completed",
-    "pages/account/orders/details",
     "pages/account/orders/invoice",
-    "pages/custom/page/meet-our-team",
-    "pages/custom/page/autoselect-assist",
-    "pages/custom/page/my-homepage",
-    "pages/custom/page/blog-archive",
-    "pages/custom/page/select-assist",
-    "pages/custom/page/video-archive",
-    "pages/custom/page/warranty-register",
+    "pages/account/orders/details",
+    "pages/custom/category/autoselect-assist",
     "pages/custom/category/pc-builder",
-    "components/carousel-content",
-    "components/carousel-play-pause-button",
+    "pages/custom/page/meet-our-team",
+    "pages/custom/page/blog-archive",
+    "pages/custom/page/my-homepage",
+    "pages/custom/page/select-assist",
+    "pages/custom/page/warranty-register",
+    "pages/custom/page/video-archive",
+    "pages/custom/page/vods",
     "components/carousel-content-announcement",
+    "components/carousel-content",
     "components/carousel",
+    "components/carousel-play-pause-button",
     "components/blog/post",
-    "components/account/add-wishlist",
     "components/account/address-list",
     "components/account/edit-account",
-    "components/account/messages-list",
-    "components/account/navigation",
+    "components/account/add-wishlist",
     "components/account/messages-form",
     "components/account/order-contents",
-    "components/account/orders-list",
+    "components/account/messages-list",
     "components/account/payment-methods-list",
-    "components/account/wishlist-list",
     "components/account/wishlist-item-list",
+    "components/account/navigation",
     "components/account/returns-list",
+    "components/account/wishlist-list",
+    "components/account/orders-list",
     "components/brand/show-more",
-    "components/brand/page-sidebar",
     "components/brand/product-listing",
     "components/brand/sidebar",
+    "components/brand/page-sidebar",
+    "components/page/rss_feed",
+    "components/page/contact-us-form",
+    "components/gift-certificate/navigation",
     "components/category/page-sidebar",
-    "components/category/product-listing",
     "components/category/shop-by-price",
+    "components/category/product-listing",
+    "components/category/sidebar",
     "components/category/show-more",
     "components/category/sort-box",
-    "components/category/sidebar",
-    "components/gift-certificate/navigation",
-    "components/page/contact-us-form",
-    "components/page/rss_feed",
+    "components/search/content-sort-box",
     "components/search/advanced-search",
     "components/search/content-count",
-    "components/search/content-listing",
-    "components/search/content-sort-box",
-    "components/search/product-count",
-    "components/search/product-listing",
-    "components/search/page-sidebar",
     "components/search/heading",
+    "components/search/product-listing",
     "components/search/quick-results",
+    "components/search/content-listing",
+    "components/search/page-sidebar",
+    "components/search/product-count",
     "components/search/show-more",
     "components/search/sidebar",
     "components/sitemap/links",
-    "components/social/connect",
     "components/social/instagram",
     "components/social/twitter",
+    "components/social/connect",
+    "components/common/body",
+    "components/common/breadcrumbs",
+    "components/common/channel-selector-mobile",
+    "components/common/footer",
+    "components/common/cart-preview",
+    "components/common/channel-selector",
+    "components/common/header",
+    "components/common/currency-selector",
+    "components/common/navigation-list-alternate",
+    "components/common/navigation-list",
+    "components/common/navigation-menu",
+    "components/common/navigation-dropdown",
+    "components/common/login-for-pricing",
+    "components/common/navigation",
+    "components/common/polyfill-script",
+    "components/common/navigation-menu-bottom",
+    "components/common/product-options",
+    "components/common/requireness-msg",
+    "components/common/paginator",
+    "components/common/payment-icons",
+    "components/common/responsive-img",
+    "components/common/quick-search",
+    "components/common/small-paginator",
+    "components/common/store-logo",
+    "components/common/subscription-form",
+    "components/common/wallet-buttons",
+    "components/common/share",
+    "components/common/social-links",
+    "components/common/wishlist-dropdown",
+    "components/common/search-box",
+    "components/common/alert/alert-error",
+    "components/common/alert/alert-generic",
+    "components/common/alert/alert-info",
+    "components/common/alert/alert-success",
+    "components/common/alert/alert-modal",
+    "components/common/forms/checkbox",
+    "components/common/forms/number",
+    "components/common/forms/date",
+    "components/common/forms/date-options",
+    "components/common/forms/password",
+    "components/common/forms/multiline",
+    "components/common/forms/radio",
+    "components/common/forms/selectortext",
+    "components/common/forms/select",
+    "components/common/forms/text",
+    "components/common/modal/modal-close-btn",
+    "components/common/modal/modal",
+    "components/common/header/logo",
+    "components/cart/coupon-input",
+    "components/cart/item-giftwrap",
     "components/cart/additional-checkout-buttons",
     "components/cart/content",
-    "components/cart/coupon-input",
-    "components/cart/gift-certificate-input",
     "components/cart/item-options",
-    "components/cart/item-giftwrap",
-    "components/cart/page-title",
     "components/cart/preview",
     "components/cart/shipping-estimator",
-    "components/cart/totals",
+    "components/cart/gift-certificate-input",
+    "components/cart/page-title",
     "components/cart/status-messages",
     "components/cart/shipping-quotes",
-    "components/cart/modals/configure-product",
+    "components/cart/totals",
     "components/cart/modals/gift-wrapping-form",
-    "components/faceted-search/header",
+    "components/cart/modals/configure-product",
     "components/faceted-search/faceted-search-navigation",
     "components/faceted-search/index",
     "components/faceted-search/selected-facets",
+    "components/faceted-search/header",
     "components/faceted-search/range-form",
     "components/faceted-search/show-more-facets",
     "components/faceted-search/facets/hierarchy-children",
@@ -2281,137 +2408,89 @@
     "components/faceted-search/facets/multi",
     "components/faceted-search/facets/rating",
     "components/faceted-search/facets/range",
-    "components/common/body",
-    "components/common/cart-preview",
-    "components/common/breadcrumbs",
-    "components/common/channel-selector",
-    "components/common/currency-selector",
-    "components/common/footer",
-    "components/common/channel-selector-mobile",
-    "components/common/header",
-    "components/common/navigation-dropdown",
-    "components/common/login-for-pricing",
-    "components/common/navigation-list-alternate",
-    "components/common/navigation-list",
-    "components/common/navigation-menu-bottom",
-    "components/common/navigation",
-    "components/common/navigation-menu",
-    "components/common/paginator",
-    "components/common/payment-icons",
-    "components/common/polyfill-script",
-    "components/common/quick-search",
-    "components/common/requireness-msg",
-    "components/common/product-options",
-    "components/common/responsive-img",
-    "components/common/search-box",
-    "components/common/share",
-    "components/common/small-paginator",
-    "components/common/subscription-form",
-    "components/common/social-links",
-    "components/common/wishlist-dropdown",
-    "components/common/store-logo",
-    "components/common/wallet-buttons",
-    "components/common/alert/alert-info",
-    "components/common/alert/alert-error",
-    "components/common/alert/alert-generic",
-    "components/common/alert/alert-success",
-    "components/common/alert/alert-modal",
-    "components/common/forms/date-options",
-    "components/common/forms/checkbox",
-    "components/common/forms/date",
-    "components/common/forms/number",
-    "components/common/forms/radio",
-    "components/common/forms/multiline",
-    "components/common/forms/password",
-    "components/common/forms/select",
-    "components/common/forms/selectortext",
-    "components/common/forms/text",
-    "components/common/header/logo",
-    "components/common/modal/modal-close-btn",
-    "components/common/modal/modal",
     "components/products/bulk-discount-rates",
+    "components/products/card-actions",
     "components/products/add-to-cart",
     "components/products/card-badges",
-    "components/products/card-qty",
-    "components/products/card-placeholder",
-    "components/products/card-actions",
     "components/products/card-wishlist-dropdown",
-    "components/products/custom-fields",
+    "components/products/card-placeholder",
     "components/products/card",
+    "components/products/custom-fields",
+    "components/products/card-qty",
     "components/products/carousel",
     "components/products/description-tabs",
     "components/products/filter",
-    "components/products/description",
-    "components/products/featured",
     "components/products/cart-suggested",
+    "components/products/featured",
     "components/products/grid",
-    "components/products/list-item",
-    "components/products/list-badges",
-    "components/products/new",
+    "components/products/description",
     "components/products/list",
+    "components/products/list-item",
+    "components/products/new",
+    "components/products/list-badges",
     "components/products/price-label",
-    "components/products/price-range",
-    "components/products/product-aria-label",
-    "components/products/product-info",
-    "components/products/product-view copy",
-    "components/products/product-badge",
     "components/products/price",
+    "components/products/product-badge",
+    "components/products/product-view copy",
+    "components/products/price-range",
+    "components/products/product-info",
     "components/products/product-view",
-    "components/products/quick-view",
-    "components/products/ratings-mini",
-    "components/products/recentviewed",
-    "components/products/related",
+    "components/products/product-aria-label",
     "components/products/ratings",
-    "components/products/schema",
-    "components/products/tabs",
+    "components/products/ratings-mini",
+    "components/products/related",
+    "components/products/quick-view",
+    "components/products/recentviewed",
     "components/products/reviews",
+    "components/products/schema",
     "components/products/videos",
+    "components/products/tabs",
     "components/products/top",
     "components/products/modals/writeReview",
     "components/products/options/date",
     "components/products/options/input-checkbox",
-    "components/products/options/input-numbers",
-    "components/products/options/input-file",
     "components/products/options/input-text",
-    "components/products/options/set-radio",
+    "components/products/options/input-file",
+    "components/products/options/input-numbers",
     "components/products/options/product-list",
+    "components/products/options/set-radio",
     "components/products/options/set-rectangle",
     "components/products/options/set-select",
-    "components/products/options/swatch",
     "components/products/options/textarea",
-    "components/papathemes/create-wishlist-modal",
+    "components/products/options/swatch",
     "components/papathemes/cart-drawer",
     "components/papathemes/preload",
+    "components/papathemes/create-wishlist-modal",
+    "components/papathemes/recently-viewed-products/customer-product-ids",
     "components/papathemes/category/products-grid",
     "components/papathemes/category/products-carousel",
     "components/papathemes/category/tabs",
-    "components/papathemes/recently-viewed-products/customer-product-ids",
-    "components/papathemes/shipping-countdown/display",
     "components/papathemes/shipping-countdown/custom-field",
+    "components/papathemes/shipping-countdown/display",
     "components/papathemes/sale-countdown/custom-field",
     "components/papathemes/sale-countdown/display",
+    "components/eyeva/home-brands",
     "components/eyeva/home-blog",
+    "components/eyeva/home-laptop-banners",
     "components/eyeva/home-carousel",
     "components/eyeva/home-categories",
-    "components/eyeva/home-brands",
-    "components/eyeva/home-laptop-banners",
     "components/eyeva/section",
     "components/eyeva/faceted-search/init-image-color",
-    "components/eyeva/header/navigation-account",
     "components/eyeva/header/navigation-child-list",
+    "components/eyeva/header/navigation-account",
     "components/eyeva/header/menu-toggle",
+    "components/eyeva/header/navigation-child-mega",
     "components/eyeva/header/navigation-list",
     "components/eyeva/header/navigation-mega",
-    "components/eyeva/header/navigation-child-mega",
-    "components/eyeva/header/navuser-account",
     "components/eyeva/header/navigation",
-    "components/eyeva/header/navuser-currency",
+    "components/eyeva/header/navuser-account",
     "components/eyeva/header/navuser-main",
+    "components/eyeva/header/navuser-currency",
     "components/eyeva/products/custom-fields",
     "components/eyeva/products/demo-product-description",
     "components/eyeva/products/product-view/image-gallery",
     "components/eyeva/products/product-view/modifiers-modal/add-to-cart",
-    "components/eyeva/products/product-view/modifiers-modal/init",
-    "components/eyeva/products/product-view/modifiers-modal/product-options"
+    "components/eyeva/products/product-view/modifiers-modal/product-options",
+    "components/eyeva/products/product-view/modifiers-modal/init"
   ]
 }
