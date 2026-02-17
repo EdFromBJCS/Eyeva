@@ -180,8 +180,14 @@
     margin-inline-end: remCalc(60px);
 
     @include breakpoint("medium") {
-        font-size: 2rem;
+        font-size: 23px;
         margin-inline-end: remCalc(76px);
+    }
+
+    @include breakpoint("large") {
+    font-size: fontSize("larger");
+        margin-block: 0 spacing("half");
+        margin-inline-end: remCalc(60px);
     }
 }
 
@@ -978,3 +984,90 @@
         border-bottom: container("border");
     }
 }
+
+/* Sticky product panel fixes */
+:root {
+    --eyeva-sticky-top: 90px;
+    --eyeva-sticky-gap: 0px; /* remove the little gap at top */
+}
+
+@media (min-width: 801px) {
+    .productView ._eyeva-sticky-box {
+        position: sticky;
+        top: calc(var(--eyeva-sticky-top) + var(--eyeva-sticky-gap));
+        max-height: calc(100dvh - var(--eyeva-sticky-top) - (var(--eyeva-sticky-gap) * 2));
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+    }
+}
+
+/* On short desktop screens, disable sticky so options remain easy to use */
+@media (min-width: 801px) and (max-height: 760px) {
+    .productView ._eyeva-sticky-box {
+        position: static;
+        max-height: none;
+        overflow: visible;
+    }
+}
+
+@media (min-width: 801px) and (max-width: 1366px) {
+    body.eyeva-compact-meta .productView .productView-brand,
+    body.eyeva-compact-meta .productView ._eyeva-product-info-top,
+    body.eyeva-compact-meta .productView .productView-info {
+        display: none !important;
+    }
+
+    /* hide the two divider lines under price/meta */
+    body.eyeva-compact-meta .productView .productView-price + hr,
+    body.eyeva-compact-meta .productView ._eyeva-product-info-top + hr,
+    body.eyeva-compact-meta .productView .productView-info + hr {
+        display: none !important;
+    }
+
+    /* if your theme uses borders instead of hr */
+    body.eyeva-compact-meta .productView .productView-price,
+    body.eyeva-compact-meta .productView ._eyeva-product-info-top,
+    body.eyeva-compact-meta .productView .productView-info {
+        border-bottom: 0 !important;
+        padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* Fix stretched warranty option text on mid-width screens (ex: 939px) */
+    @media (min-width: 801px) and (max-width: 1366px) {
+        .productView .form-field label,
+        .productView .form-option,
+        .productView .form-option-variant {
+            text-align: left !important;
+            text-align-last: auto !important;
+            word-spacing: normal !important;
+            letter-spacing: normal !important;
+            white-space: normal !important;
+        }
+    }
+}
+
+/* Prevent layout "left shift" when scrollbars appear/disappear */
+html {
+    scrollbar-gutter: stable;
+}
+
+@media (min-width: 801px) {
+    .productView,
+    .productView-description,
+    ._eyeva-sticky-col,
+    ._eyeva-sticky-box {
+        min-width: 0;
+    }
+
+    .productView ._eyeva-sticky-box {
+        width: 100%;
+        box-sizing: border-box;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-gutter: stable; /* reserve scrollbar space */
+    }
+}
+
+// ...existing code...

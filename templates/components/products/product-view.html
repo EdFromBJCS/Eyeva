@@ -351,11 +351,63 @@
     document.addEventListener('DOMContentLoaded', function () {
         const stickyBtn = document.getElementById('sticky-add-to-cart');
         const productForm = document.querySelector('form[data-cart-item-add]');
+        const root = document.documentElement;
+        const header = document.querySelector('.header');
+        const productView = document.querySelector('.productView');
 
-        if (!stickyBtn || !productForm) return;
+        if (stickyBtn && productForm) {
+            stickyBtn.addEventListener('click', function () {
+                productForm.requestSubmit();
+            });
+        }
 
-        stickyBtn.addEventListener('click', function () {
-            productForm.requestSubmit();
-        });
+        function setStickyTopOffset() {
+            if (!header) return;
+            const headerHeight = Math.ceil(header.getBoundingClientRect().height);
+            root.style.setProperty('--eyeva-sticky-top', headerHeight + 'px');
+        }
+
+        setStickyTopOffset();
+        window.addEventListener('load', setStickyTopOffset);
+        window.addEventListener('resize', setStickyTopOffset, { passive: true });
+
+        if ('ResizeObserver' in window && header) {
+            const ro = new ResizeObserver(setStickyTopOffset);
+            ro.observe(header);
+        }
+
+        // Hide PDP meta blocks on smaller laptops while scrolling down,
+        // keep hidden until user returns near top
+        const laptopMQ = window.matchMedia('(min-width: 801px) and (max-width: 1366px)');
+        let lastY = window.scrollY;
+        let compactLocked = false;
+
+        function handleCompactMeta() {
+            const y = window.scrollY;
+            const scrollingDown = y > lastY;
+            const hideAt = 120;   // hide after this point
+            const showAt = 40;    // only show again near top
+
+            if (!laptopMQ.matches) {
+                document.body.classList.remove('eyeva-compact-meta');
+                compactLocked = false;
+                lastY = y;
+                return;
+            }
+
+            if (!compactLocked && scrollingDown && y > hideAt) {
+                compactLocked = true;
+                document.body.classList.add('eyeva-compact-meta');
+            } else if (compactLocked && y <= showAt) {
+                compactLocked = false;
+                document.body.classList.remove('eyeva-compact-meta');
+            }
+
+            lastY = y;
+        }
+
+        window.addEventListener('scroll', handleCompactMeta, { passive: true });
+        window.addEventListener('resize', handleCompactMeta, { passive: true });
+        handleCompactMeta();
     });
 </script>
