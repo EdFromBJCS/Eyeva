@@ -33,19 +33,20 @@ const questions = [
     {
         key: 'touchscreen',
         question: 'Do you need a touch screen?',
-        options: ['yes', 'no preference', 'no'],
+        options: ['yes', 'no', 'no preference'],
         skipValues: ['no preference'],
     },
         {
         key: 'ports',
         question: 'Do you need any specific ports? (Select all that apply)',
-        options: ['USB-C', 'USB-A', 'HDMI', 'Serial', 'RJ-45', 'SD', 'microSD', 'Docking', 'VGA', 'Audio'],
+        options: ['USB-C', 'USB-A', 'HDMI', 'DisplayPort', 'Serial', 'RJ-45', 'SD', 'microSD', 'Docking', 'VGA', 'Audio'],
         skipValues: [],
             multiSelect: true,
         valueMap: {
             'USB-C': 'usb-c',
             'USB-A': 'usb-a',
             HDMI: 'hdmi',
+            DisplayPort: 'display',
             Serial: 'serial',
             'RJ-45': 'rj-45',
             SD: 'sd',
@@ -101,6 +102,54 @@ function normalizeValue(value) {
     return String(value || '').trim().toLowerCase();
 }
 
+function decodeHtmlEntities(value) {
+    return String(value || '')
+        .replace(/&amp;/g, '&')
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'");
+}
+
+function parseCustomFieldsRaw(raw) {
+    const source = String(raw || '').trim();
+    if (!source) {
+        return [];
+    }
+
+    const attempts = [source, decodeHtmlEntities(source)];
+    for (const attempt of attempts) {
+        try {
+            const parsed = JSON.parse(attempt);
+            if (Array.isArray(parsed)) {
+                return parsed;
+            }
+        } catch (error) {
+            // Fall through to regex-based parsing.
+        }
+    }
+
+    const fallback = [];
+    const regexes = [
+        /&quot;name&quot;:\s*&quot;([^&]*)&quot;\s*,\s*&quot;value&quot;:\s*&quot;([\s\S]*?)&quot;(?=\s*\}|\s*,\s*&quot;id&quot;)/g,
+        /"name"\s*:\s*"([^"\\]*)"\s*,\s*"value"\s*:\s*"([\s\S]*?)"(?=\s*\}|\s*,\s*"id")/g,
+    ];
+
+    regexes.forEach(regex => {
+        let match;
+        while ((match = regex.exec(source)) !== null) {
+            const name = decodeHtmlEntities(match[1]);
+            const value = decodeHtmlEntities(match[2]);
+            if (name) {
+                fallback.push({ name, value });
+            }
+        }
+    });
+
+    return fallback;
+}
+
 function normalizeList(list) {
     if (!list) {
         return [];
@@ -123,6 +172,17 @@ function normalizeYesNo(value) {
         return 'no';
     }
     return null;
+}
+
+function normalizePortText(text) {
+    return String(text || '')
+        .toLowerCase()
+        .replace(/\u00a0/g, ' ')
+        .replace(/[™®]/g, '')
+        .replace(/\u00d7/g, 'x')
+        .replace(/[^a-z0-9x*]+/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
 }
 
 function cloneMultiSelectState(state) {
@@ -172,12 +232,15 @@ function goBack() {
     }
     const previous = quizHistory.pop();
     currentQuestionIndex = previous.questionIndex;
-    if (previous.filteredIsEmpty) {
+    const baseState = quizHistory.length > 0 ? quizHistory[quizHistory.length - 1] : null;
+    if (!baseState) {
+        filteredProducts = [...recommendedProducts];
+    } else if (baseState.filteredIsEmpty) {
         filteredProducts = [];
-    } else if (previous.filteredIsAll) {
+    } else if (baseState.filteredIsAll) {
         filteredProducts = [...recommendedProducts];
     } else {
-        filteredProducts = getFilteredByIds(previous.filteredIds);
+        filteredProducts = getFilteredByIds(baseState.filteredIds);
     }
     restoreMultiSelectState(previous.multiSelect);
     budgetState.min = previous.budgetMin;
@@ -224,6 +287,72 @@ function formatSelectionLabel(question, selection) {
         return selection.length > 0 ? selection.join(', ') : 'Any';
     }
     return selection || 'Any';
+}
+
+function formatMatchCount(count) {
+    return `<span class="quiz-match-count__number">${count}</span> product${count === 1 ? '' : 's'} match so far`;
+}
+
+function getMultiSelectMatchCount(question, selections, baseProducts) {
+    const mappedValues = selections.map(value =>
+        question.valueMap && question.valueMap[value]
+            ? question.valueMap[value]
+            : value
+    );
+    const normalizedValues = mappedValues.map(value => normalizeValue(value));
+    const skipValues = (question.skipValues || []).map(item => normalizeValue(item));
+
+    if (normalizedValues.length === 0 || normalizedValues.some(value => skipValues.includes(value))) {
+        return baseProducts.length;
+    }
+
+    return baseProducts.filter(result => {
+        const resultValue = result[question.key];
+        if (resultValue === null || typeof resultValue === 'undefined') {
+            return ALLOW_UNKNOWN_FILTERS;
+        }
+        if (Array.isArray(resultValue)) {
+            const normalizedResult = resultValue.map(item => normalizeValue(item));
+            return normalizedValues.every(value => normalizedResult.includes(value));
+        }
+        return normalizedValues.includes(normalizeValue(resultValue));
+    }).length;
+}
+
+function getBudgetMatchCount(minValue, maxValue, baseProducts) {
+    const minBudget = parseBudgetValue(minValue) ?? 0;
+    const maxBudget = parseBudgetValue(maxValue);
+
+    return (baseProducts || []).filter(result => {
+        if (result.price === null) {
+            return true;
+        }
+        if (minBudget !== null && result.price < minBudget) {
+            return false;
+        }
+        if (maxBudget !== null && result.price > maxBudget) {
+            return false;
+        }
+        return true;
+    }).length;
+}
+
+function getPortCountMatchCount(requirements, baseProducts) {
+    const keys = Object.keys(requirements || {});
+    if (!keys.length) {
+        return (baseProducts || []).length;
+    }
+    return (baseProducts || []).filter(result => {
+        const countMap = result.portCounts || {};
+        return keys.every(key => {
+            const required = requirements[key];
+            const actual = countMap[key];
+            if (typeof actual === 'undefined' || actual === null) {
+                return true;
+            }
+            return actual >= required;
+        });
+    }).length;
 }
 
 function updateSummary() {
@@ -315,86 +444,148 @@ function findPortCount(source, aliases) {
     return maxCount;
 }
 
+function sumPortCounts(source, aliases) {
+    let total = 0;
+    aliases.forEach(alias => {
+        const escaped = alias.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const patterns = [
+            new RegExp(`(\\d+)\\s*[x\\*]\\s*${escaped}`, 'gi'),
+            new RegExp(`${escaped}\\s*[x\\*]\\s*(\\d+)`, 'gi'),
+            new RegExp(`${escaped}\\s*\\(\\s*(\\d+)\\s*[x\\*]?\\s*\\)`, 'gi'),
+        ];
+        patterns.forEach(pattern => {
+            const matches = source.matchAll(pattern);
+            for (const match of matches) {
+                const count = parseInt(match[1], 10);
+                if (!Number.isNaN(count)) {
+                    total += count;
+                }
+            }
+        });
+    });
+    return total > 0 ? total : null;
+}
+
 function parsePortCountsFromText(text) {
-    const normalized = normalizeValue(text);
+    const normalized = normalizePortText(text);
     if (!normalized) {
         return {};
     }
     const counts = {};
-    const withoutMicroHdmi = normalized.replace(/micro\s*-?hdmi/g, '');
-    const withoutMicroSerial = normalized.replace(/micro\s*-?serial/g, '');
-    const withoutMicroSd = normalized.replace(/micro\s*sd/g, '');
+    const withoutMicroHdmi = normalized.replace(/\bmicro hdmi\b/g, '');
+    const withoutMicroSerial = normalized.replace(/\bmicro serial\b/g, '');
+    const withoutMicroSd = normalized.replace(/\bmicro sd\b/g, '');
     const hasPort = (source, aliases) => aliases.some(alias => source.includes(alias));
+    const lineHasExplicitCount = (line, aliases) => {
+        return aliases.some(alias => {
+            const escaped = alias.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            return new RegExp(`(\\d+)\\s*[x\\*]\\s*${escaped}|${escaped}\\s*[x\\*]\\s*(\\d+)`, 'i').test(line);
+        });
+    };
+    const countPortMentions = (rawText, aliases) => {
+        const parts = String(rawText || '').split(/<br\s*\/?\s*>|<\/?li>|<\/?p>|[\n,;]+/i);
+        let count = 0;
+        parts.forEach(part => {
+            const chunk = normalizePortText(part);
+            if (!chunk) {
+                return;
+            }
+            if (aliases.some(alias => chunk.includes(alias)) && !lineHasExplicitCount(chunk, aliases)) {
+                count += 1;
+            }
+        });
+        return count;
+    };
 
-    const usbC = findPortCount(normalized, ['usb c', 'usb-c', 'type c', 'type-c', 'usb type c', 'usb type-c']);
-    if (usbC !== null) {
-        counts['usb-c'] = usbC;
+    const usbCAliases = [
+        'usb c',
+        'usb-c',
+        'type c',
+        'type-c',
+        'usb type c',
+        'usb type-c',
+        'thunderbolt',
+        'thunderbolt 3',
+        'thunderbolt 4',
+        'thunderbolt type-c',
+    ];
+    const usbC = sumPortCounts(normalized, usbCAliases);
+    const usbCMentions = countPortMentions(text, usbCAliases);
+    const usbCTotal = (usbC || 0) + usbCMentions;
+    if (usbCTotal > 0) {
+        counts['usb-c'] = usbCTotal;
     }
-    if (counts['usb-c'] == null && hasPort(normalized, ['usb c', 'usb-c', 'type c', 'type-c', 'usb type c', 'usb type-c'])) {
-        counts['usb-c'] = 1;
+    const usbAAliases = [
+        'usb a',
+        'usb-a',
+        'type a',
+        'type-a',
+        'usb type a',
+        'usb type-a',
+        'usb 2.0',
+        'usb 2 0',
+        'usb 3.0',
+        'usb 3 0',
+        'usb 3.1',
+        'usb 3 1',
+        'usb 3.2',
+        'usb 3 2',
+        'usb 3 2 gen1',
+        'usb 3 2 gen2',
+        'usb 3',
+    ];
+    const usbA = sumPortCounts(normalized, usbAAliases);
+    const usbAMentions = countPortMentions(text, usbAAliases);
+    const usbATotal = (usbA || 0) + usbAMentions;
+    if (usbATotal > 0) {
+        counts['usb-a'] = usbATotal;
     }
-    const usbA = findPortCount(normalized, ['usb a', 'usb-a', 'usb 2.0', 'usb 3.0', 'usb 3.1', 'usb 3']);
-    if (usbA !== null) {
-        counts['usb-a'] = usbA;
+    const hdmiTotal = (sumPortCounts(withoutMicroHdmi, ['hdmi']) || 0)
+        + countPortMentions(text, ['hdmi']);
+    if (hdmiTotal > 0) {
+        counts.hdmi = hdmiTotal;
     }
-    if (counts['usb-a'] == null && hasPort(normalized, ['usb a', 'usb-a', 'usb 2.0', 'usb 3.0', 'usb 3.1', 'usb 3'])) {
-        counts['usb-a'] = 1;
+    const displayPortAliases = ['displayport', 'display port', 'mini displayport', 'mini display port'];
+    const displayTotal = (sumPortCounts(normalized, displayPortAliases) || 0)
+        + countPortMentions(text, displayPortAliases);
+    if (displayTotal > 0) {
+        counts.display = displayTotal;
     }
-    const hdmi = findPortCount(withoutMicroHdmi, ['hdmi']);
-    if (hdmi !== null) {
-        counts.hdmi = hdmi;
+    const serialTotal = (sumPortCounts(withoutMicroSerial, ['serial']) || 0)
+        + countPortMentions(text, ['serial']);
+    if (serialTotal > 0) {
+        counts.serial = serialTotal;
     }
-    if (counts.hdmi == null && hasPort(withoutMicroHdmi, ['hdmi'])) {
-        counts.hdmi = 1;
+    const rj45Aliases = ['rj-45', 'rj45', 'rj 45', 'lan', 'ethernet'];
+    const rj45Total = (sumPortCounts(normalized, rj45Aliases) || 0)
+        + countPortMentions(text, rj45Aliases);
+    if (rj45Total > 0) {
+        counts['rj-45'] = rj45Total;
     }
-    const serial = findPortCount(withoutMicroSerial, ['serial']);
-    if (serial !== null) {
-        counts.serial = serial;
+    const microsdTotal = (sumPortCounts(normalized, ['microsd', 'micro sd']) || 0)
+        + countPortMentions(text, ['microsd', 'micro sd']);
+    if (microsdTotal > 0) {
+        counts.microsd = microsdTotal;
     }
-    if (counts.serial == null && hasPort(withoutMicroSerial, ['serial'])) {
-        counts.serial = 1;
+    const sdTotal = (sumPortCounts(withoutMicroSd, ['sd']) || 0)
+        + countPortMentions(text, ['sd']);
+    if (sdTotal > 0) {
+        counts.sd = sdTotal;
     }
-    const rj45 = findPortCount(normalized, ['rj-45', 'rj45', 'lan']);
-    if (rj45 !== null) {
-        counts['rj-45'] = rj45;
+    const dockingTotal = (sumPortCounts(normalized, ['docking', 'dock']) || 0)
+        + countPortMentions(text, ['docking', 'dock']);
+    if (dockingTotal > 0) {
+        counts.docking = dockingTotal;
     }
-    if (counts['rj-45'] == null && hasPort(normalized, ['rj-45', 'rj45', 'lan'])) {
-        counts['rj-45'] = 1;
+    const vgaTotal = (sumPortCounts(normalized, ['vga']) || 0)
+        + countPortMentions(text, ['vga']);
+    if (vgaTotal > 0) {
+        counts.vga = vgaTotal;
     }
-    const microsd = findPortCount(normalized, ['microsd', 'micro sd']);
-    if (microsd !== null) {
-        counts.microsd = microsd;
-    }
-    if (counts.microsd == null && hasPort(normalized, ['microsd', 'micro sd'])) {
-        counts.microsd = 1;
-    }
-    const sd = findPortCount(withoutMicroSd, ['sd']);
-    if (sd !== null) {
-        counts.sd = sd;
-    }
-    if (counts.sd == null && hasPort(withoutMicroSd, ['sd'])) {
-        counts.sd = 1;
-    }
-    const docking = findPortCount(normalized, ['docking', 'dock']);
-    if (docking !== null) {
-        counts.docking = docking;
-    }
-    if (counts.docking == null && hasPort(normalized, ['docking', 'dock'])) {
-        counts.docking = 1;
-    }
-    const vga = findPortCount(normalized, ['vga']);
-    if (vga !== null) {
-        counts.vga = vga;
-    }
-    if (counts.vga == null && hasPort(normalized, ['vga'])) {
-        counts.vga = 1;
-    }
-    const audio = findPortCount(normalized, ['audio', 'headphone', 'headphone jack', 'headset']);
-    if (audio !== null) {
-        counts.audio = audio;
-    }
-    if (counts.audio == null && hasPort(normalized, ['audio', 'headphone', 'headphone jack', 'headset'])) {
-        counts.audio = 1;
+    const audioTotal = (sumPortCounts(normalized, ['audio', 'headphone', 'headphone jack', 'headset']) || 0)
+        + countPortMentions(text, ['audio', 'headphone', 'headphone jack', 'headset']);
+    if (audioTotal > 0) {
+        counts.audio = audioTotal;
     }
 
     return counts;
@@ -422,7 +613,7 @@ function parseBudgetValue(rawValue) {
 function toCustomFieldMap(customFields) {
     const fields = {};
     (customFields || []).forEach(field => {
-        const key = normalizeValue(field.name);
+        const key = normalizeValue(decodeHtmlEntities(field.name));
         if (!key) {
             return;
         }
@@ -514,24 +705,27 @@ function inferBrightnessFromDisplay(displayValue) {
 }
 
 function parsePortsFromText(text) {
-    const normalized = normalizeValue(text);
+    const normalized = normalizePortText(text);
     if (!normalized) {
         return [];
     }
     const ports = new Set();
-    if (normalized.includes('usb c') || normalized.includes('usb-c')) {
+    if (normalized.includes('usb c') || normalized.includes('type c') || normalized.includes('thunderbolt')) {
         ports.add('usb-c');
     }
-    if (normalized.includes('usb a') || normalized.includes('usb-a') || normalized.includes('usb 3') || normalized.includes('usb 2')) {
+    if (normalized.includes('usb a') || normalized.includes('type a') || normalized.includes('usb 3') || normalized.includes('usb 2')) {
         ports.add('usb-a');
     }
     if (normalized.includes('hdmi') && !normalized.includes('micro hdmi') && !normalized.includes('micro-hdmi')) {
         ports.add('hdmi');
     }
+    if (normalized.includes('displayport') || normalized.includes('display port')) {
+        ports.add('display');
+    }
     if (normalized.includes('serial') && !normalized.includes('micro serial') && !normalized.includes('micro-serial')) {
         ports.add('serial');
     }
-    if (normalized.includes('rj-45') || normalized.includes('lan')) {
+    if (normalized.includes('rj-45') || normalized.includes('rj45') || normalized.includes('rj 45') || normalized.includes('lan') || normalized.includes('ethernet')) {
         ports.add('rj-45');
     }
     if (normalized.includes('microsd') || normalized.includes('micro sd')) {
@@ -546,7 +740,10 @@ function parsePortsFromText(text) {
     if (normalized.includes('vga')) {
         ports.add('vga');
     }
-    if (normalized.includes('audio')) {
+    if (normalized.includes('audio')
+        || normalized.includes('headphone')
+        || normalized.includes('headphone jack')
+        || normalized.includes('headset')) {
         ports.add('audio');
     }
     return Array.from(ports);
@@ -605,13 +802,20 @@ function deriveAttributesFromCustomFields(customFieldMap) {
     const displayBrightness = inferBrightnessFromDisplay(findCustomFieldValue(customFieldMap, 'display'));
     attributes.sunlightReadable = displayBrightness ? 'yes' : displayBrightness === null ? null : 'no';
 
-    const connectionsValues = findCustomFieldValues(customFieldMap, 'connections & expansion slots');
+    const connectionsValues = [
+        ...findCustomFieldValues(customFieldMap, 'connections & expansion slots'),
+        ...findCustomFieldValues(customFieldMap, 'connections and expansion slots'),
+        ...findCustomFieldValues(customFieldMap, 'connections & expansion'),
+        ...findCustomFieldValues(customFieldMap, 'connections and expansion'),
+    ];
     const connectionText = connectionsValues.join(' ');
     attributes.ports = parsePortsFromText(connectionText);
     attributes.portCounts = parsePortCountsFromText(connectionText);
 
     const upgradeSlotsValue = findCustomFieldValue(customFieldMap, 'upgrade slots');
-    attributes.modules = parseModulesFromText(upgradeSlotsValue || '');
+    const inputDevicesValues = findCustomFieldValues(customFieldMap, 'input devices');
+    const modulesSource = [upgradeSlotsValue, ...inputDevicesValues].filter(Boolean).join(' ');
+    attributes.modules = parseModulesFromText(modulesSource);
 
     return attributes;
 }
@@ -671,12 +875,7 @@ function parseDomProduct(card) {
     const categoryRaw = card.getAttribute('data-product-category') || '';
     const categories = categoryRaw.split(',').map(value => ({ name: value.trim() })).filter(cat => cat.name);
     const customFieldsRaw = card.getAttribute('data-custom-fields') || '[]';
-    let customFields = [];
-    try {
-        customFields = JSON.parse(customFieldsRaw);
-    } catch (error) {
-        customFields = [];
-    }
+    const customFields = parseCustomFieldsRaw(customFieldsRaw);
 
     return formatProductBase({
         id,
@@ -815,6 +1014,17 @@ function displayQuestion() {
     questionContainer.textContent = currentQuestion.question;
     optionsContainer.innerHTML = '';
 
+    const currentSelections = currentQuestion.multiSelect
+        ? Array.from(multiSelectState[currentQuestion.key] || [])
+        : [];
+    const matchCountValue = currentQuestion.multiSelect
+        ? getMultiSelectMatchCount(currentQuestion, currentSelections, filteredProducts)
+        : filteredProducts.length;
+    const matchCount = document.getElementById('quiz-match-count');
+    if (matchCount) {
+        matchCount.innerHTML = formatMatchCount(matchCountValue);
+    }
+
     if (currentQuestion.type === 'range') {
         const minInput = document.createElement('input');
         minInput.type = 'text';
@@ -827,6 +1037,10 @@ function displayQuestion() {
         }
         minInput.addEventListener('input', event => {
             event.target.value = formatBudgetInput(event.target.value);
+            if (matchCount) {
+                const maxValue = document.getElementById('budget-max-input')?.value || '';
+                matchCount.innerHTML = formatMatchCount(getBudgetMatchCount(event.target.value, maxValue, filteredProducts));
+            }
         });
 
         const maxInput = document.createElement('input');
@@ -840,6 +1054,10 @@ function displayQuestion() {
         }
         maxInput.addEventListener('input', event => {
             event.target.value = formatBudgetInput(event.target.value);
+            if (matchCount) {
+                const minValue = document.getElementById('budget-min-input')?.value || '';
+                matchCount.innerHTML = formatMatchCount(getBudgetMatchCount(minValue, event.target.value, filteredProducts));
+            }
         });
 
         const submitButton = document.createElement('button');
@@ -876,6 +1094,30 @@ function displayQuestion() {
         const rows = document.createElement('div');
         rows.classList.add('port-counts');
 
+        const refreshPortCountMatch = () => {
+            if (!matchCount) {
+                return;
+            }
+            const requirements = {};
+            const inputs = rows.querySelectorAll('input[data-port-option]');
+            for (const input of inputs) {
+                const option = input.getAttribute('data-port-option');
+                const rawValue = input.value.trim();
+                if (!rawValue) {
+                    continue;
+                }
+                const count = parseInt(rawValue, 10);
+                if (Number.isNaN(count) || count <= 0) {
+                    continue;
+                }
+                const mapped = portsQuestion && portsQuestion.valueMap && portsQuestion.valueMap[option]
+                    ? portsQuestion.valueMap[option]
+                    : option;
+                requirements[normalizeValue(mapped)] = count;
+            }
+            matchCount.innerHTML = formatMatchCount(getPortCountMatchCount(requirements, filteredProducts));
+        };
+
         selections.forEach(option => {
             const row = document.createElement('div');
             row.classList.add('port-count-row');
@@ -891,6 +1133,7 @@ function displayQuestion() {
             input.placeholder = '0';
             input.classList.add('form-input', 'port-count-input');
             input.setAttribute('data-port-option', option);
+            input.addEventListener('input', refreshPortCountMatch);
 
             const mappedKey = portsQuestion && portsQuestion.valueMap && portsQuestion.valueMap[option]
                 ? portsQuestion.valueMap[option]
@@ -971,6 +1214,8 @@ function displayQuestion() {
 
         optionsContainer.appendChild(rows);
         optionsContainer.appendChild(actions);
+
+        refreshPortCountMatch();
     } else if (currentQuestion.multiSelect) {
         if (!multiSelectState[currentQuestion.key]) {
             multiSelectState[currentQuestion.key] = new Set();
