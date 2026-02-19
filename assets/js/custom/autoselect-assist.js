@@ -1,4 +1,4 @@
-const LAPTOP_MODELS = ['FZ-55', 'CF-54', 'CF-31', 'CF-19', 'S410', 'V110', '5420', '5424', '5430', 'S14I', 'S15', 'Z14I', 'S510'];
+const LAPTOP_MODELS = ['FZ-55', 'CF-54', 'CF-31', 'CF-19', 'S410', 'V110', '5420', '5424', '5430', 'S14I', 'S15', 'Z14I', 'S510', 'B360'];
 const TABLET_MODELS = ['CF-20', 'CF-33', 'FZ-G1', 'FZ-G2', 'F110', 'K120', '7220', 'R8', 'R11', 'U11'];
 const ALLOW_UNKNOWN_FILTERS = true;
 
