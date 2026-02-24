@@ -1014,25 +1014,26 @@
 @media (min-width: 801px) and (max-width: 1366px) {
     body.eyeva-compact-meta .productView .productView-brand,
     body.eyeva-compact-meta .productView ._eyeva-product-info-top,
-    body.eyeva-compact-meta .productView .productView-info {
+    body.eyeva-compact-meta .productView .productView-product .productView-info {
         display: none !important;
     }
 
     /* hide the two divider lines under price/meta */
     body.eyeva-compact-meta .productView .productView-price + hr,
     body.eyeva-compact-meta .productView ._eyeva-product-info-top + hr,
-    body.eyeva-compact-meta .productView .productView-info + hr {
+    body.eyeva-compact-meta .productView .productView-product .productView-info + hr {
         display: none !important;
     }
 
     /* if your theme uses borders instead of hr */
     body.eyeva-compact-meta .productView .productView-price,
     body.eyeva-compact-meta .productView ._eyeva-product-info-top,
-    body.eyeva-compact-meta .productView .productView-info {
+    body.eyeva-compact-meta .productView .productView-product .productView-info {
         border-bottom: 0 !important;
         padding-bottom: 0 !important;
         margin-bottom: 0 !important;
     }
+
 
     /* Fix stretched warranty option text on mid-width screens (ex: 939px) */
     @media (min-width: 801px) and (max-width: 1366px) {
