@@ -266,13 +266,13 @@ category:
                 gap: 16px;
             }
 
-            @media screen and (min-width: 1262px) {
+            @media screen and (min-width: 1442px) {
                 .quiz .productGrid {
                     grid-template-columns: repeat(3, 1fr);
                 }
             }
 
-            @media screen and (max-width: 1261px) {
+            @media screen and (max-width: 1442px) {
                 .quiz .productGrid {
                     grid-template-columns: repeat(2, 1fr);
                 }
@@ -658,6 +658,7 @@ category:
             .selectAssist .grecaptcha-badge {
                 display: none !important;
             }
+
         </style>
         <div class="main-content">
             <div class="dual-form-container">
@@ -1422,9 +1423,14 @@ category:
         });
     });
 
-    // Ensure neither form shows on page open
+    // Show Auto Selection Assistance by default on page open
     document.addEventListener('DOMContentLoaded', () => {
-        formChoiceInputs.forEach(input => { input.checked = false; });
-        document.querySelectorAll('.form-panel').forEach(panel => panel.classList.add('is-hidden'));
+        const defaultChoice = 'tech';
+
+        formChoiceInputs.forEach(input => {
+            input.checked = input.value === defaultChoice;
+        });
+
+        syncPanels(defaultChoice);
     });
 </script>
