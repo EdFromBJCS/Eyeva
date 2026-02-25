@@ -349,17 +349,9 @@
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const stickyBtn = document.getElementById('sticky-add-to-cart');
-        const productForm = document.querySelector('form[data-cart-item-add]');
         const root = document.documentElement;
         const header = document.querySelector('.header');
         const productView = document.querySelector('.productView');
-
-        if (stickyBtn && productForm) {
-            stickyBtn.addEventListener('click', function () {
-                productForm.requestSubmit();
-            });
-        }
 
         function setStickyTopOffset() {
             if (!header) return;

@@ -213,7 +213,7 @@ button.expandfaq.button-alt::after {
 
 // Category Page
 .category-description {
-    padding: 0px 10% 0px 10%;
+    padding: 50px 5% 0px 5%;
 }
 
 // Product Page
@@ -485,13 +485,14 @@ button.expandfaq.button-alt::after {
         pointer-events: none;
         transition: opacity 0.3s ease, max-height 0.3s ease;
         /* default delay before hiding starts (gives user brief grace to move mouse) */
-        transition-delay: 0.25s;
+        transition-delay: 0.45s;
         padding: 4px 0 8px 0;
     }
 
     /* When heading or content is hovered/focused, show immediately with no delay */
     #blog-filter .filter-heading:hover+.filter-content,
     #blog-filter .filter-heading:focus+.filter-content,
+    #blog-filter .filter-heading.open+.filter-content,
     #blog-filter .filter-content:hover,
     #blog-filter #blog-filter-content>div:hover>.filter-content,
     #blog-filter #blog-filter-content>div:focus-within>.filter-content {
@@ -752,7 +753,7 @@ button.expandfaq.button-alt::after {
 .popular-rugged-laptops-card-background {
     background-color: rgba(229, 229, 229, 0.1);
     box-shadow: 0px -2px 2px rgba(229, 229, 229, 0.05);
-    width: 100vw;
+    width: 100%;
     overflow-x: hidden;
 }
 

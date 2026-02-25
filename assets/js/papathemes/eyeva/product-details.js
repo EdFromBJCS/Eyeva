@@ -326,6 +326,7 @@ export default class ProductDetails extends CornerstoneProductDetails {
         }
 
         this.bindProductEditEvents();
+        this.bindStickyAddToCartEvents();
         this.bindModalDestroy();
         this.initOptionStepper();
         this.syncProductCardQty();
@@ -468,6 +469,24 @@ export default class ProductDetails extends CornerstoneProductDetails {
         this.$updateProductWrapper.find('input, button').on('click', event => {
             event.preventDefault();
             $form.trigger(submitEvent);
+        });
+    }
+
+    bindStickyAddToCartEvents() {
+        this.$scope.on('click', '#sticky-add-to-cart', event => {
+            event.preventDefault();
+
+            const $button = $(event.currentTarget);
+            if ($button.prop('disabled') || $button.attr('aria-disabled') === 'true') {
+                return;
+            }
+
+            const $form = this.$scope.find('form[data-cart-item-add]').first();
+            if (!$form.length) {
+                return;
+            }
+
+            $form.trigger('submit');
         });
     }
 
