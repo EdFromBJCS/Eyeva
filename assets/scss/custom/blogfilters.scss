@@ -125,11 +125,21 @@
         padding-bottom: 2px;
     }
 
+    #blog-filter #blog-filter-content > div::after,
+    #blog-filter .filter-content > div::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 100%;
+        width: 14px;
+        height: 100%;
+    }
+
     #blog-filter .filter-content {
         display: block !important;
         position: absolute;
         top: 0;
-        left: calc(100% + 8px);
+        left: calc(100% + 4px);
         z-index: 130;
         min-width: 220px;
         max-width: 320px;
@@ -141,9 +151,9 @@
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
-        transform: translateX(-6px);
+        transform: translateX(-4px);
         transition: opacity 0.2s ease, transform 0.2s ease;
-        transition-delay: 0.2s;
+        transition-delay: 0.35s;
         padding: 8px 10px;
     }
 
