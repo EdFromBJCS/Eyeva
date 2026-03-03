@@ -3,7 +3,9 @@
     position: fixed;
     top: 20%;
     left: 30px;
-    width: 15vw;
+    width: 18vw;
+    min-width: 240px;
+    max-width: 320px;
     background: #ebe8e8;
     border: container("dropShadow");
     padding-left: 20px;
@@ -16,7 +18,15 @@
 }
 
 .blog-filter-box h3 {
-    margin-top: 20px;
+    margin: 10px 0;
+}
+
+.blog-filter-header {
+    display: block;
+}
+
+.blog-filter-close {
+    display: none;
 }
 
 .filter-heading {
@@ -26,6 +36,14 @@
 }
 
 .filter-heading:hover {
+    text-decoration: underline;
+}
+
+.filter-heading:focus-visible,
+.filter-content li a:focus-visible,
+#blog-filter-content .filter-heading a:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
     text-decoration: underline;
 }
 
@@ -55,19 +73,252 @@
     display: inline-block;
 }
 
+#blog-filter .filter-toggle-control {
+    display: none;
+}
+
 #blog-filter-content .filter-heading a:hover {
     text-decoration: underline;
     color: inherit;
 }
 
+/* Blog filter: show dropdown contents on hover for desktop */
+@include breakpoint("medium") {
+    .blog-filter-box {
+        overflow: visible;
+        z-index: 120;
+    }
+
+    #blog-filter .filter-heading {
+        cursor: pointer;
+        margin: 0;
+        padding: 6px 8px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        vertical-align: middle;
+        width: 100%;
+        border-radius: 4px;
+    }
+
+    #blog-filter .filter-heading.has-submenu {
+        position: relative;
+        padding-right: 22px;
+    }
+
+    #blog-filter .filter-heading.has-submenu::after {
+        content: "";
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        width: 7px;
+        height: 7px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: translateY(-50%) rotate(-45deg);
+        opacity: 0.75;
+    }
+
+    #blog-filter #blog-filter-content > div,
+    #blog-filter .filter-content > div {
+        position: relative;
+        padding-bottom: 2px;
+    }
+
+    #blog-filter .filter-content {
+        display: block !important;
+        position: absolute;
+        top: 0;
+        left: calc(100% + 8px);
+        z-index: 130;
+        min-width: 220px;
+        max-width: 320px;
+        max-height: 60vh;
+        overflow: visible;
+        background: #ebe8e8;
+        border-radius: 8px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateX(-6px);
+        transition: opacity 0.2s ease, transform 0.2s ease;
+        transition-delay: 0.2s;
+        padding: 8px 10px;
+    }
+
+    #blog-filter #blog-filter-content > div > .filter-content {
+        max-height: 60vh;
+        overflow-y: auto;
+        overflow-x: visible;
+    }
+
+    #blog-filter .filter-content > div > .filter-content {
+        max-height: none;
+        overflow: visible;
+        z-index: 140;
+    }
+
+    #blog-filter .filter-heading:hover + .filter-content,
+    #blog-filter .filter-heading:focus + .filter-content,
+    #blog-filter .filter-heading.open + .filter-content,
+    #blog-filter .filter-content:hover,
+    #blog-filter #blog-filter-content > div:hover > .filter-content,
+    #blog-filter #blog-filter-content > div:focus-within > .filter-content,
+    #blog-filter .filter-content > div:hover > .filter-content,
+    #blog-filter .filter-content > div:focus-within > .filter-content {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateX(0);
+        transition-delay: 0s;
+    }
+
+    #blog-filter .filter-content a {
+        display: inline-block;
+        padding: 4px 6px;
+    }
+
+    #blog-filter .filter-heading:hover,
+    #blog-filter .filter-heading:focus,
+    #blog-filter .filter-heading.open {
+        background: rgba(0, 0, 0, 0.04);
+        text-decoration: none;
+    }
+
+    #blog-filter .filter-heading .filter-arrow {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        line-height: 1;
+        transition: transform 0.25s ease;
+        transform-origin: center;
+        color: inherit;
+        margin-left: 6px;
+    }
+
+    #blog-filter .filter-heading .filter-arrow svg {
+        display: block;
+        width: 1em;
+        height: 1em;
+        fill: currentColor;
+    }
+
+    #blog-filter .filter-heading.open .filter-arrow {
+        transform: rotate(180deg);
+    }
+}
+
 @media (max-width: (screenSize("xxlarge") - 1px)) {
     .blog-filter-box {
         top: auto;
-        bottom: 0px;
-        right: 20px;
-        width: 80%;
+        bottom: 12px;
+        left: auto;
+        right: 12px;
+        width: calc(100vw - 24px);
+        max-width: 520px;
+        max-height: 78vh;
+        padding: 12px 14px;
+        border-radius: 12px;
         transform: translateY(120%);
-        z-index: 1;
+        z-index: 30;
+    }
+
+    .blog-filter-box {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #blog-filter .filter-heading {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+    }
+
+    .blog-filter-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 6px;
+    }
+
+    .blog-filter-header h2 {
+        margin: 0;
+    }
+
+    .blog-filter-close {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border: 0;
+        border-radius: 6px;
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+        font-size: 24px;
+        line-height: 1;
+        padding: 0;
+    }
+
+    #blog-filter .filter-heading.has-submenu::after {
+        display: none;
+    }
+
+    #blog-filter #blog-filter-content > div {
+        margin: 0;
+        padding: 0;
+    }
+
+    #blog-filter .filter-heading a {
+        display: block;
+        flex: 1;
+        padding: 10px 4px;
+        line-height: 1.35;
+    }
+
+    #blog-filter .filter-toggle-control {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border: 0;
+        border-radius: 6px;
+        background: transparent;
+        color: inherit;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    #blog-filter .filter-heading.open .filter-toggle-control .filter-arrow {
+        transform: rotate(180deg);
+    }
+
+    #blog-filter .filter-content {
+        display: none !important;
+        position: static;
+        top: auto;
+        left: auto;
+        min-width: 0;
+        max-width: none;
+        max-height: none;
+        overflow: visible;
+        background: transparent;
+        box-shadow: none;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        padding: 2px 0 8px 12px;
+        transition: none;
+        transition-delay: 0s;
+        z-index: 100;
     }
 
     .blog-filter-box.open {
@@ -78,13 +329,14 @@
         display: block;
     }
 
-    #blog-filter .filter-heading.open + .filter-content,
-    #blog-filter #blog-filter-content > div:focus-within > .filter-content {
-        opacity: 1;
-        visibility: visible;
-        max-height: 1000px;
-        pointer-events: auto;
-        transition-delay: 0s;
+    #blog-filter .filter-heading.open + .filter-content {
+        display: block !important;
+    }
+
+    #blog-filter .filter-content li a {
+        display: block;
+        padding: 8px 4px;
+        line-height: 1.35;
     }
 }
 

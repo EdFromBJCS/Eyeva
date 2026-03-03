@@ -23,7 +23,10 @@ blog:
     {{/unless}}
 
     <div class="blog-filter-box" id="blog-filter">
+      <div class="blog-filter-header">
         <h2>Blog Topics & Categories</h2>
+        <button type="button" class="blog-filter-close" id="blog-filter-close" aria-label="Close blog filters">×</button>
+      </div>
 
         <div id="blog-filter-content"></div>
     </div>
@@ -33,7 +36,7 @@ blog:
     {{/each}}
 
     {{> components/common/paginator pagination.blog}}
-    <p><button class="toc-toggle" id="blog-filter-toggle">☰ Blog Topics & Categories</button></p>
+    <p><button class="toc-toggle" id="blog-filter-toggle" aria-expanded="false">☰ Blog Topics & Categories</button></p>
 </main>
 
 {{/partial}}
@@ -43,26 +46,67 @@ blog:
 //Blog filters for tag pages
 window.blogFilters = {
   "Industry": ["Automotive", "Police", "EMS", "Fire", "Construction", "Field Work", "Field-Experiences"],
-  "Panasonic Toughbook": {
-    "Semi-Rugged": ["CF-53", "CF-54"],
-    "Fully-Rugged": ["CF-31", "CF-33", "CF-18", "CF-19", "FZ-G1", "FZ-G2"]
-  },
+  "Panasonic Toughbooks": ["CF-53", "CF-54","CF-31", "CF-33", "CF-18", "CF-19", "FZ-G1", "FZ-G2"],
   "Getac": ["V120", "V110", "S410"],
   "Dell": ["Dell"],
+  "Durabook": ["Durabook"],
   "Buying Guides": ["Buying-Guide"],
-  "Support": {
-    "Tech Support": ["Tech-Support"],
-    "Maintenance": ["Maintenance"],
-    "Software": ["Linux", "Windows 11"],
-    "BIOS": ["BIOS"],
-    "Ingress Protection Ratings": ["IP+Ratings"]
-  }
+  "Vehicle Mounts": ["Vehicle+Mounts"],
+  "Tech Support": ["Tech-Support"],
+  "Maintenance": ["Maintenance"],
+  "Software": ["Linux", "Windows 11"],
+  "BIOS": ["BIOS"],
+  "Ingress Protection Ratings": ["IP+Ratings"],
+  "Mobile Data": ["Mobile+Data"]
+  };
+
+// Edit these heading URLs as needed.
+window.blogFilterHeadingLinks = {
+  "Panasonic Toughbooks": "/blog/tag/Panasonic",
+  "Getac": "/blog/tag/Getac",
+  "Dell": "/blog/tag/Dell",
+  "Durabook": "/blog/tag/Durabook",
+  "Buying Guides": "/blog/tag/Buying-Guide",
+  "Vehicle Mounts": "/blog/tag/Vehicle+Mounts",
+  "Tech Support": "/blog/tag/Tech-Support",
+  "Maintenance": "/blog/tag/Maintenance",
+  "BIOS": "/blog/tag/BIOS",
+  "Ingress Protection Ratings": "/blog/tag/IP+Ratings",
+  "Mobile Data": "/blog/tag/Mobile+Data"
 };
 
 
 document.addEventListener("DOMContentLoaded", function() {
   const root = document.getElementById("blog-filter-content");
   const data = window.blogFilters;
+  const headingLinks = window.blogFilterHeadingLinks || {};
+  let filterIdCounter = 0;
+
+  function wireToggle(trigger, content, stateElement = trigger) {
+    const contentId = `blog-filter-panel-${++filterIdCounter}`;
+    content.id = contentId;
+    trigger.setAttribute("aria-controls", contentId);
+    trigger.setAttribute("aria-expanded", "false");
+
+    const toggleSection = () => {
+      const isHidden = content.style.display === "none" || !content.style.display;
+      content.style.display = isHidden ? "block" : "none";
+      stateElement.classList.toggle("open", isHidden);
+      trigger.setAttribute("aria-expanded", String(isHidden));
+    };
+
+    trigger.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      toggleSection();
+    });
+    trigger.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleSection();
+      }
+    });
+  }
 
   function createCollapsible(title, tags) {
     const container = document.createElement("div");
@@ -74,32 +118,32 @@ document.addEventListener("DOMContentLoaded", function() {
     content.classList.add("filter-content");
     content.style.display = "none";
 
-    if (Array.isArray(tags) && tags.length === 1) {
-      // Make the heading a direct link if only one tag
-      const link = document.createElement("a");
-      link.href = `/blog/tag/${tags[0].replace(/ /g, "-")}`;
-      link.textContent = title;
-      heading.appendChild(link);
-      container.appendChild(heading);
-      // No collapsible content needed
-    } else {
-      heading.textContent = title;
-      const icon = document.createElement("i");
-      icon.className = "icon filter-arrow";
-      icon.setAttribute("aria-hidden", "true");
-      icon.innerHTML = '<svg><use href="#icon-chevron-down" /></svg>';
-      heading.appendChild(icon);
+    if (Array.isArray(tags)) {
+      if (Object.prototype.hasOwnProperty.call(headingLinks, title) && headingLinks[title]) {
+        const headingLink = document.createElement("a");
+        headingLink.href = headingLinks[title];
+        headingLink.textContent = title;
+        heading.appendChild(headingLink);
+      } else {
+        const headingText = document.createElement("span");
+        headingText.className = "filter-heading-text";
+        headingText.textContent = title;
+        heading.appendChild(headingText);
+      }
 
-      heading.addEventListener("click", () => {
-        const isHidden = content.style.display === "none" || !content.style.display;
-        content.style.display = isHidden ? "block" : "none";
-        heading.classList.toggle('open', isHidden);
-      });
+      if (tags.length > 1) {
+        heading.classList.add("has-submenu");
+        const headingToggle = document.createElement("button");
+        headingToggle.type = "button";
+        headingToggle.className = "filter-toggle-control";
+        headingToggle.setAttribute("aria-label", `Toggle ${title}`);
+        headingToggle.innerHTML = '<i class="icon filter-arrow" aria-hidden="true"><svg><use href="#icon-chevron-down" /></svg></i>';
+        heading.appendChild(headingToggle);
+        wireToggle(headingToggle, content, heading);
 
-      container.appendChild(heading);
-      container.appendChild(content);
+        container.appendChild(heading);
+        container.appendChild(content);
 
-      if (Array.isArray(tags)) {
         const ul = document.createElement("ul");
         tags.forEach(tag => {
           const li = document.createElement("li");
@@ -108,11 +152,26 @@ document.addEventListener("DOMContentLoaded", function() {
         });
         content.appendChild(ul);
       } else {
-        Object.keys(tags).forEach(sub => {
-          const { container: subContainer, content: subContent } = createCollapsible(sub, tags[sub]);
-          content.appendChild(subContainer);
-        });
+        container.appendChild(heading);
       }
+    } else {
+      heading.textContent = title;
+      const icon = document.createElement("i");
+      icon.className = "icon filter-arrow";
+      icon.setAttribute("aria-hidden", "true");
+      icon.innerHTML = '<svg><use href="#icon-chevron-down" /></svg>';
+      heading.appendChild(icon);
+      heading.setAttribute("role", "button");
+      heading.setAttribute("tabindex", "0");
+      wireToggle(heading, content);
+
+      container.appendChild(heading);
+      container.appendChild(content);
+
+      Object.keys(tags).forEach(sub => {
+        const { container: subContainer, content: subContent } = createCollapsible(sub, tags[sub]);
+        content.appendChild(subContainer);
+      });
     }
 
     return { container, content };
@@ -125,13 +184,25 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-  const toggleButton = document.getElementById("toggleFilters");
+  const toggleButton = document.getElementById("blog-filter-toggle");
+  const closeButton = document.getElementById("blog-filter-close");
   const filterBox = document.querySelector(".blog-filter-box");
+
+  if (!toggleButton || !filterBox) {
+    return;
+  }
 
   toggleButton.addEventListener("click", () => {
     const isOpen = filterBox.classList.toggle("open");
-    toggleButton.textContent = isOpen ? "Hide Filters" : "Show Filters";
+    toggleButton.setAttribute("aria-expanded", String(isOpen));
   });
+
+  if (closeButton) {
+    closeButton.addEventListener("click", () => {
+      filterBox.classList.remove("open");
+      toggleButton.setAttribute("aria-expanded", "false");
+    });
+  }
 });
 
 // Smooth scroll
@@ -146,8 +217,4 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
 
-    // TOC toggle for mobile
-    document.getElementById('blog-filter-toggle').addEventListener('click', () => {
-      document.getElementById('blog-filter').classList.toggle('open');
-    });
 </script>
