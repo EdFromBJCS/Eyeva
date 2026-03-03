@@ -370,10 +370,10 @@ button.expandfaq.button-alt::after {
 .navPages-action--autoselect .navPages-label::before {
     content: "";
     display: inline-block;
-    width: 15px;
-    height: 15px;
+    width: 17px;
+    height: 17px;
     margin-right: 8px;
-    background: url("../icons/autoselect-magnifying-glass.svg") no-repeat center;
+    background: url("../icons/autoselect-lightbulb.svg") no-repeat center;
     background-size: contain;
 }
 
@@ -456,84 +456,6 @@ button.expandfaq.button-alt::after {
 //Blog Image Center
 .blog-img-center {
     text-align: center;
-}
-
-/* Blog filter: show dropdown contents on hover for desktop */
-@include breakpoint("medium") {
-    /* Blog filter: animate visibility and keep open slightly longer when leaving
-       Use opacity/visibility/max-height so we can apply a hide delay (300ms)
-       to make moving between headings feel natural (matches info-panel timing). */
-
-    /* heading styles */
-    #blog-filter .filter-heading {
-        cursor: pointer;
-        margin: 0;
-        padding: 6px 0;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        vertical-align: middle;
-    }
-
-    /* Force content to be block (JS may set inline display:none) but keep it visually hidden by default */
-    #blog-filter .filter-content {
-        display: block !important;
-        opacity: 0;
-        visibility: hidden;
-        max-height: 0;
-        overflow: hidden;
-        pointer-events: none;
-        transition: opacity 0.3s ease, max-height 0.3s ease;
-        /* default delay before hiding starts (gives user brief grace to move mouse) */
-        transition-delay: 0.45s;
-        padding: 4px 0 8px 0;
-    }
-
-    /* When heading or content is hovered/focused, show immediately with no delay */
-    #blog-filter .filter-heading:hover+.filter-content,
-    #blog-filter .filter-heading:focus+.filter-content,
-    #blog-filter .filter-heading.open+.filter-content,
-    #blog-filter .filter-content:hover,
-    #blog-filter #blog-filter-content>div:hover>.filter-content,
-    #blog-filter #blog-filter-content>div:focus-within>.filter-content {
-        opacity: 1;
-        visibility: visible;
-        max-height: 1000px;
-        pointer-events: auto;
-        transition-delay: 0s;
-    }
-
-    /* Make links easier to hit and avoid losing hover when moving between items */
-    #blog-filter .filter-content a {
-        display: inline-block;
-        padding: 4px 6px;
-    }
-
-    /* Arrow icon styling for filter headings */
-    #blog-filter .filter-heading .filter-arrow {
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        line-height: 1;
-        transition: transform 0.25s ease;
-        transform-origin: center;
-        color: inherit;
-        /* make icon match text color */
-        margin-left: 6px;
-    }
-
-    /* ensure the SVG inside uses the current text color */
-    #blog-filter .filter-heading .filter-arrow svg {
-        display: block;
-        width: 1em;
-        height: 1em;
-        fill: currentColor;
-    }
-
-    /* rotate when open */
-    #blog-filter .filter-heading.open .filter-arrow {
-        transform: rotate(180deg);
-    }
 }
 
 // Specs Table for Toughbook Model Numbers For Nerds
