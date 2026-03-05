@@ -33,8 +33,8 @@ const questions = [
     {
         key: 'touchscreen',
         question: 'Do you need a touch screen?',
-        options: ['yes', 'no', 'no preference'],
-        skipValues: ['no preference'],
+        options: ['yes', 'no'],
+        skipValues: ['no'],
     },
         {
         key: 'ports',
