@@ -88,6 +88,7 @@ const quizHistory = [];
 const budgetState = { min: null, max: null };
 let portCountRequirements = {};
 const selectionsState = {};
+let lastLimitingCriteria = [];
 
 const questionContainer = document.getElementById('question-container');
 const optionsContainer = document.getElementById('options-container');
@@ -293,6 +294,13 @@ function formatMatchCount(count) {
     return `<span class="quiz-match-count__number">${count}</span> product${count === 1 ? '' : 's'} match so far`;
 }
 
+function updateMatchCountValue(count) {
+    const matchCount = document.getElementById('quiz-match-count');
+    if (matchCount) {
+        matchCount.innerHTML = formatMatchCount(count);
+    }
+}
+
 function getMultiSelectMatchCount(question, selections, baseProducts) {
     const mappedValues = selections.map(value =>
         question.valueMap && question.valueMap[value]
@@ -355,6 +363,226 @@ function getPortCountMatchCount(requirements, baseProducts) {
     }).length;
 }
 
+function applyPortCountFilter(products, requirements) {
+    const keys = Object.keys(requirements || {});
+    if (!keys.length) {
+        return products;
+    }
+    return products.filter(result => {
+        const countMap = result.portCounts || {};
+        return keys.every(key => {
+            const required = requirements[key];
+            const actual = countMap[key];
+            if (typeof actual === 'undefined' || actual === null) {
+                return true;
+            }
+            return actual >= required;
+        });
+    });
+}
+
+function applySingleSelectFilter(products, key, selectedValue) {
+    const normalizedValue = normalizeValue(selectedValue);
+    return products.filter(result => {
+        const resultValue = result[key];
+        if (resultValue === null || typeof resultValue === 'undefined') {
+            return ALLOW_UNKNOWN_FILTERS;
+        }
+        if (Array.isArray(resultValue)) {
+            return resultValue.map(item => normalizeValue(item)).includes(normalizedValue);
+        }
+        return normalizeValue(resultValue) === normalizedValue;
+    });
+}
+
+function applyMultiSelectFilter(products, question, selections) {
+    const mappedValues = selections.map(value =>
+        question.valueMap && question.valueMap[value]
+            ? question.valueMap[value]
+            : value
+    );
+    const normalizedValues = mappedValues.map(value => normalizeValue(value));
+    const skipValues = (question.skipValues || []).map(item => normalizeValue(item));
+
+    if (normalizedValues.length === 0 || normalizedValues.some(value => skipValues.includes(value))) {
+        return products;
+    }
+
+    return products.filter(result => {
+        const resultValue = result[question.key];
+        if (resultValue === null || typeof resultValue === 'undefined') {
+            return ALLOW_UNKNOWN_FILTERS;
+        }
+        if (Array.isArray(resultValue)) {
+            const normalizedResult = resultValue.map(item => normalizeValue(item));
+            return normalizedValues.every(value => normalizedResult.includes(value));
+        }
+        return normalizedValues.includes(normalizeValue(resultValue));
+    });
+}
+
+function applyBudgetFilter(products, minBudget, maxBudget) {
+    return products.filter(result => {
+        if (result.price === null) {
+            return true;
+        }
+        if (minBudget !== null && result.price < minBudget) {
+            return false;
+        }
+        if (maxBudget !== null && result.price > maxBudget) {
+            return false;
+        }
+        return true;
+    });
+}
+
+function recomputeFilteredProducts() {
+    let products = [...recommendedProducts];
+
+    questions.forEach(question => {
+        const selection = selectionsState[question.key];
+        if (typeof selection === 'undefined') {
+            return;
+        }
+
+        if (question.type === 'range') {
+            products = applyBudgetFilter(products, budgetState.min, budgetState.max);
+            return;
+        }
+
+        if (question.type === 'portCounts') {
+            products = applyPortCountFilter(products, portCountRequirements);
+            return;
+        }
+
+        if (question.multiSelect) {
+            products = applyMultiSelectFilter(products, question, selection || []);
+            return;
+        }
+
+        const normalizedValue = normalizeValue(selection);
+        const skipValues = (question.skipValues || []).map(item => normalizeValue(item));
+        if (!skipValues.includes(normalizedValue)) {
+            products = applySingleSelectFilter(products, question.key, selection);
+        }
+    });
+
+    filteredProducts = products;
+}
+
+function clearSelectionFilter(key) {
+    const question = questions.find(item => item.key === key);
+
+    if (key === 'ports') {
+        if (multiSelectState.ports) {
+            multiSelectState.ports.clear();
+        }
+        delete selectionsState.ports;
+        portCountRequirements = {};
+        delete selectionsState.portCounts;
+    } else if (key === 'portCounts') {
+        portCountRequirements = {};
+        delete selectionsState.portCounts;
+    } else if (question && question.type === 'range') {
+        budgetState.min = null;
+        budgetState.max = null;
+        delete selectionsState.price;
+    } else if (question && question.multiSelect) {
+        if (multiSelectState[key]) {
+            multiSelectState[key].clear();
+        }
+        delete selectionsState[key];
+    } else if (question) {
+        delete selectionsState[key];
+    }
+
+    recomputeFilteredProducts();
+    updateMatchCountValue(filteredProducts.length);
+    updateSummary();
+    displayResults();
+}
+
+function getLimitingCriteria() {
+    const selections = selectionsState || {};
+    const results = [];
+    const questionMap = questions.reduce((acc, question) => {
+        acc[question.key] = question;
+        return acc;
+    }, {});
+
+    const applyAllExcept = ignoreKey => {
+        let products = [...recommendedProducts];
+
+        questions.forEach(question => {
+            if (question.key === ignoreKey) {
+                return;
+            }
+            if (ignoreKey === 'ports' && question.key === 'portCounts') {
+                return;
+            }
+            const selection = selections[question.key];
+            if (typeof selection === 'undefined') {
+                return;
+            }
+
+            if (question.type === 'range') {
+                const minValue = selection && typeof selection.min !== 'undefined' ? selection.min : null;
+                const maxValue = selection && typeof selection.max !== 'undefined' ? selection.max : null;
+                products = applyBudgetFilter(products, minValue, maxValue);
+                return;
+            }
+
+            if (question.type === 'portCounts') {
+                products = applyPortCountFilter(products, portCountRequirements);
+                return;
+            }
+
+            if (question.multiSelect) {
+                products = applyMultiSelectFilter(products, question, selection || []);
+                return;
+            }
+
+            const normalizedValue = normalizeValue(selection);
+            const skipValues = (question.skipValues || []).map(item => normalizeValue(item));
+            if (!skipValues.includes(normalizedValue)) {
+                products = applySingleSelectFilter(products, question.key, selection);
+            }
+        });
+
+        return products;
+    };
+
+    Object.keys(selections).forEach(key => {
+        const question = questionMap[key];
+        if (!question) {
+            return;
+        }
+        const selection = selections[key];
+        if (typeof selection === 'undefined') {
+            return;
+        }
+        if (question.multiSelect && Array.isArray(selection) && selection.length === 0) {
+            return;
+        }
+        const skipValues = (question.skipValues || []).map(item => normalizeValue(item));
+        if (skipValues.includes(normalizeValue(selection))) {
+            return;
+        }
+        if (question.type === 'portCounts' && Object.keys(portCountRequirements || {}).length === 0) {
+            return;
+        }
+
+        const remaining = applyAllExcept(key);
+        results.push({
+            key,
+            label: `${question.question} (${formatSelectionLabel(question, selection)})`,
+            count: remaining.length,
+        });
+    });
+
+    return results.sort((a, b) => b.count - a.count);
+}
+
 function updateSummary() {
     const summary = document.getElementById('quiz-summary');
     if (!summary) {
@@ -402,6 +630,60 @@ function updateSummary() {
     summary.appendChild(list);
 }
 
+function updateLimitingSelectionsList(items) {
+    const container = document.getElementById('quiz-limiting');
+    const toggle = document.getElementById('quiz-limiting-toggle');
+    if (!container || !toggle) {
+        return;
+    }
+
+    container.innerHTML = '';
+
+    if (!items || items.length === 0) {
+        toggle.classList.add('is-hidden');
+        container.classList.add('is-collapsed');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.textContent = 'View limiting selections';
+        return;
+    }
+
+    toggle.classList.remove('is-hidden');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.textContent = 'View limiting selections';
+
+    const hint = document.createElement('div');
+    hint.classList.add('quiz-no-results-hint');
+    hint.textContent = 'Likely limiting selection(s):';
+    container.appendChild(hint);
+
+    const list = document.createElement('ul');
+    list.classList.add('quiz-no-results-list');
+    items.forEach(item => {
+        const entry = document.createElement('li');
+        const label = document.createElement('span');
+        label.textContent = item.label;
+
+        const count = document.createElement('span');
+        count.classList.add('quiz-no-results-count');
+        count.innerHTML = `<span class="quiz-match-count__number">${item.count}</span> match${item.count === 1 ? '' : 'es'} without this`;
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.classList.add('quiz-no-results-clear', 'button', 'button--secondary');
+        button.textContent = 'Remove filter';
+        button.addEventListener('click', () => {
+            clearSelectionFilter(item.key);
+        });
+
+        entry.appendChild(label);
+        entry.appendChild(count);
+        entry.appendChild(button);
+        list.appendChild(entry);
+    });
+    container.appendChild(list);
+    container.classList.add('is-collapsed');
+}
+
 function initSummaryToggle() {
     const toggle = document.getElementById('quiz-summary-toggle');
     const summary = document.getElementById('quiz-summary');
@@ -418,6 +700,26 @@ function initSummaryToggle() {
             summary.classList.add('is-collapsed');
             toggle.setAttribute('aria-expanded', 'false');
             toggle.textContent = 'View selections';
+        }
+    });
+}
+
+function initLimitingToggle() {
+    const toggle = document.getElementById('quiz-limiting-toggle');
+    const container = document.getElementById('quiz-limiting');
+    if (!toggle || !container) {
+        return;
+    }
+    toggle.addEventListener('click', () => {
+        const isCollapsed = container.classList.contains('is-collapsed');
+        if (isCollapsed) {
+            container.classList.remove('is-collapsed');
+            toggle.setAttribute('aria-expanded', 'true');
+            toggle.textContent = 'Hide limiting selections';
+        } else {
+            container.classList.add('is-collapsed');
+            toggle.setAttribute('aria-expanded', 'false');
+            toggle.textContent = 'View limiting selections';
         }
     });
 }
@@ -916,6 +1218,12 @@ async function loadProducts() {
 function displayResults() {
     questionContainer.textContent = 'Your recommended product(s):';
     optionsContainer.innerHTML = '';
+    resultContainer.innerHTML = '';
+
+    updateMatchCountValue(filteredProducts.length);
+
+    const limiting = getLimitingCriteria();
+    lastLimitingCriteria = limiting;
 	
     if (filteredProducts.length > 0) {
         filteredProducts.forEach(result => {
@@ -964,10 +1272,50 @@ function displayResults() {
             `;
             optionsContainer.appendChild(productElement);
         });
+        updateLimitingSelectionsList(lastLimitingCriteria);
     } else {
         const noProductMatch = document.createElement("li");
+        noProductMatch.classList.add('quiz-no-results-message');
         noProductMatch.textContent = "No products match your criteria. Please try a different set of options or increase your budget and try again! Alternatively, fill out our Selection Assistance form for a free quote!";
         optionsContainer.appendChild(noProductMatch);
+
+        if (lastLimitingCriteria.length > 0) {
+            const box = document.createElement('div');
+            box.classList.add('quiz-no-results-box');
+
+            const hint = document.createElement('div');
+            hint.classList.add('quiz-no-results-hint');
+            hint.textContent = 'Likely limiting selection(s):';
+            box.appendChild(hint);
+
+            const list = document.createElement('ul');
+            list.classList.add('quiz-no-results-list');
+            lastLimitingCriteria.forEach(item => {
+                const entry = document.createElement('li');
+                const label = document.createElement('span');
+                label.textContent = item.label;
+
+                const count = document.createElement('span');
+                count.classList.add('quiz-no-results-count');
+                count.innerHTML = `<span class="quiz-match-count__number">${item.count}</span> match${item.count === 1 ? '' : 'es'} without this`;
+
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.classList.add('quiz-no-results-clear', 'button', 'button--secondary');
+                button.textContent = 'Remove filter';
+                button.addEventListener('click', () => {
+                    clearSelectionFilter(item.key);
+                });
+
+                entry.appendChild(label);
+                entry.appendChild(count);
+                entry.appendChild(button);
+                list.appendChild(entry);
+            });
+            box.appendChild(list);
+            optionsContainer.appendChild(box);
+        }
+        updateLimitingSelectionsList(lastLimitingCriteria);
 	}
 
     const restartButton = document.createElement("button");
@@ -999,6 +1347,8 @@ function restartQuiz() {
     budgetState.min = null;
     budgetState.max = null;
     portCountRequirements = {};
+    lastLimitingCriteria = [];
+    updateLimitingSelectionsList([]);
     displayQuestion();
 }
 
@@ -1380,6 +1730,7 @@ async function initQuiz() {
     try {
         await loadProducts();
         initSummaryToggle();
+        initLimitingToggle();
         displayQuestion();
     } catch (error) {
         questionContainer.textContent = 'Unable to load products at this time.';
