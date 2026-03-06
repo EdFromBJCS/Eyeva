@@ -1331,6 +1331,11 @@ function displayResults() {
         limitingToggle.classList.add('is-hidden');
     }
 
+    const summary = document.getElementById('quiz-summary');
+    if (summary && filteredProducts.length > 0) {
+        summary.classList.add('is-collapsed');
+    }
+
     const limitingVisible = limitingToggle && !limitingToggle.classList.contains('is-hidden');
     setSummaryToggleVisibility(filteredProducts.length === 0 || !limitingVisible);
 
