@@ -684,6 +684,14 @@ function updateLimitingSelectionsList(items) {
     container.classList.add('is-collapsed');
 }
 
+function setSummaryToggleVisibility(shouldShow) {
+    const toggle = document.getElementById('quiz-summary-toggle');
+    if (!toggle) {
+        return;
+    }
+    toggle.classList.toggle('is-hidden', !shouldShow);
+}
+
 function initSummaryToggle() {
     const toggle = document.getElementById('quiz-summary-toggle');
     const summary = document.getElementById('quiz-summary');
@@ -1318,6 +1326,14 @@ function displayResults() {
         updateLimitingSelectionsList(lastLimitingCriteria);
 	}
 
+    const limitingToggle = document.getElementById('quiz-limiting-toggle');
+    if (limitingToggle && filteredProducts.length === 0) {
+        limitingToggle.classList.add('is-hidden');
+    }
+
+    const limitingVisible = limitingToggle && !limitingToggle.classList.contains('is-hidden');
+    setSummaryToggleVisibility(filteredProducts.length === 0 || !limitingVisible);
+
     const restartButton = document.createElement("button");
     restartButton.textContent = "Restart";
     restartButton.addEventListener("click", restartQuiz);
@@ -1360,6 +1376,8 @@ function displayQuestion() {
     }
 
     const currentQuestion = questions[currentQuestionIndex];
+
+    setSummaryToggleVisibility(true);
 
     questionContainer.textContent = currentQuestion.question;
     optionsContainer.innerHTML = '';
