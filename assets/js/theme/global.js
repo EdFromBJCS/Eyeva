@@ -12,6 +12,7 @@ import foundation from './global/foundation';
 import cartPreview from './global/cart-preview';
 // import carousel from './common/carousel'; papathemes-eva disabled as not used in this theme
 import svgInjector from './global/svg-injector';
+import initTradeInTables from './global/trade-in-table';
 import papathemes from '../papathemes/global';
 
 export default class Global extends PageManager {
@@ -26,6 +27,7 @@ export default class Global extends PageManager {
         // menu();
         // mobileMenuToggle();
         svgInjector();
+        initTradeInTables();
 
         // papathemes-eyeva: Load papathemes functionality
         papathemes(this.context);
