@@ -89,6 +89,8 @@ const budgetState = { min: null, max: null };
 let portCountRequirements = {};
 const selectionsState = {};
 let lastLimitingCriteria = [];
+let skippedFromIndex = null;
+let isMatchCountHovered = false;
 
 const questionContainer = document.getElementById('question-container');
 const optionsContainer = document.getElementById('options-container');
@@ -297,8 +299,75 @@ function formatMatchCount(count) {
 function updateMatchCountValue(count) {
     const matchCount = document.getElementById('quiz-match-count');
     if (matchCount) {
-        matchCount.innerHTML = formatMatchCount(count);
+        matchCount.dataset.count = String(count);
+        if (isMatchCountHovered) {
+            matchCount.innerHTML = `<span class="quiz-match-count__number">${count}</span> Click to see your results.`;
+        } else {
+            matchCount.innerHTML = formatMatchCount(count);
+        }
     }
+}
+
+function captureCurrentAnswerForPreview() {
+    if (currentQuestionIndex >= questions.length) {
+        return;
+    }
+
+    const question = questions[currentQuestionIndex];
+    if (!question) {
+        return;
+    }
+
+    if (question.type === 'range') {
+        const minValue = document.getElementById('budget-min-input')?.value || '';
+        const maxValue = document.getElementById('budget-max-input')?.value || '';
+        const minBudget = parseBudgetValue(minValue) ?? null;
+        const maxBudget = parseBudgetValue(maxValue);
+        budgetState.min = minBudget;
+        budgetState.max = maxBudget;
+        selectionsState.price = { min: minBudget, max: maxBudget };
+        return;
+    }
+
+    if (question.type === 'portCounts') {
+        const portsQuestion = questions.find(item => item.key === 'ports');
+        const requirements = {};
+        const displayRequirements = {};
+        const inputs = document.querySelectorAll('input[data-port-option]');
+        for (const input of inputs) {
+            const option = input.getAttribute('data-port-option');
+            const rawValue = input.value.trim();
+            if (!rawValue) {
+                continue;
+            }
+            const count = parseInt(rawValue, 10);
+            if (Number.isNaN(count) || count <= 0) {
+                continue;
+            }
+            const mapped = portsQuestion && portsQuestion.valueMap && portsQuestion.valueMap[option]
+                ? portsQuestion.valueMap[option]
+                : option;
+            requirements[normalizeValue(mapped)] = count;
+            displayRequirements[option] = count;
+        }
+        portCountRequirements = { ...requirements };
+        selectionsState.portCounts = { ...displayRequirements };
+        return;
+    }
+
+    if (question.multiSelect) {
+        selectionsState[question.key] = Array.from(multiSelectState[question.key] || []);
+    }
+}
+
+function skipToResults() {
+    if (skippedFromIndex === null) {
+        skippedFromIndex = currentQuestionIndex;
+    }
+    captureCurrentAnswerForPreview();
+    recomputeFilteredProducts();
+    currentQuestionIndex = questions.length;
+    displayResults();
 }
 
 function getMultiSelectMatchCount(question, selections, baseProducts) {
@@ -1345,6 +1414,19 @@ function displayResults() {
     restartButton.classList.add("restart", "button", "button--primary");
     resultContainer.appendChild(restartButton);
 
+    if (skippedFromIndex !== null) {
+        const resumeButton = document.createElement("button");
+        resumeButton.textContent = "Continue quiz";
+        resumeButton.addEventListener("click", () => {
+            currentQuestionIndex = skippedFromIndex;
+            skippedFromIndex = null;
+            resultContainer.innerHTML = '';
+            displayQuestion();
+        });
+        resumeButton.classList.add("button", "button--secondary");
+        resultContainer.appendChild(resumeButton);
+    }
+
     updateSummary();
 }
 
@@ -1369,6 +1451,7 @@ function restartQuiz() {
     budgetState.max = null;
     portCountRequirements = {};
     lastLimitingCriteria = [];
+    skippedFromIndex = null;
     updateLimitingSelectionsList([]);
     displayQuestion();
 }
@@ -1379,6 +1462,8 @@ function displayQuestion() {
         displayResults();
         return;
     }
+
+    resultContainer.innerHTML = '';
 
     const currentQuestion = questions[currentQuestionIndex];
 
@@ -1394,9 +1479,7 @@ function displayQuestion() {
         ? getMultiSelectMatchCount(currentQuestion, currentSelections, filteredProducts)
         : filteredProducts.length;
     const matchCount = document.getElementById('quiz-match-count');
-    if (matchCount) {
-        matchCount.innerHTML = formatMatchCount(matchCountValue);
-    }
+    updateMatchCountValue(matchCountValue);
 
     if (currentQuestion.type === 'range') {
         const minInput = document.createElement('input');
@@ -1412,7 +1495,7 @@ function displayQuestion() {
             event.target.value = formatBudgetInput(event.target.value);
             if (matchCount) {
                 const maxValue = document.getElementById('budget-max-input')?.value || '';
-                matchCount.innerHTML = formatMatchCount(getBudgetMatchCount(event.target.value, maxValue, filteredProducts));
+                updateMatchCountValue(getBudgetMatchCount(event.target.value, maxValue, filteredProducts));
             }
         });
 
@@ -1429,7 +1512,7 @@ function displayQuestion() {
             event.target.value = formatBudgetInput(event.target.value);
             if (matchCount) {
                 const minValue = document.getElementById('budget-min-input')?.value || '';
-                matchCount.innerHTML = formatMatchCount(getBudgetMatchCount(minValue, event.target.value, filteredProducts));
+                updateMatchCountValue(getBudgetMatchCount(minValue, event.target.value, filteredProducts));
             }
         });
 
@@ -1488,7 +1571,7 @@ function displayQuestion() {
                     : option;
                 requirements[normalizeValue(mapped)] = count;
             }
-            matchCount.innerHTML = formatMatchCount(getPortCountMatchCount(requirements, filteredProducts));
+            updateMatchCountValue(getPortCountMatchCount(requirements, filteredProducts));
         };
 
         selections.forEach(option => {
@@ -1754,6 +1837,20 @@ async function initQuiz() {
         await loadProducts();
         initSummaryToggle();
         initLimitingToggle();
+        const matchCount = document.getElementById('quiz-match-count');
+        if (matchCount) {
+            matchCount.addEventListener('click', skipToResults);
+            matchCount.addEventListener('mouseenter', () => {
+                isMatchCountHovered = true;
+                const count = parseInt(matchCount.dataset.count || '0', 10) || 0;
+                matchCount.innerHTML = `<span class="quiz-match-count__number">${count}</span> Click to see your results.`;
+            });
+            matchCount.addEventListener('mouseleave', () => {
+                isMatchCountHovered = false;
+                const count = parseInt(matchCount.dataset.count || '0', 10) || 0;
+                matchCount.innerHTML = formatMatchCount(count);
+            });
+        }
         displayQuestion();
     } catch (error) {
         questionContainer.textContent = 'Unable to load products at this time.';

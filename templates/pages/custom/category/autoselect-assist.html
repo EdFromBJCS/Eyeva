@@ -155,6 +155,23 @@ category:
                 position: sticky;
                 top: 0;
                 z-index: 2;
+                cursor: pointer;
+                border: 3px solid #dc3522;
+                appearance: none;
+            }
+
+            .quiz-match-count:hover,
+            .quiz-match-count:focus {
+                background: #dc3522;
+                color: #fff;
+                border-color: #dc3522;
+            }
+
+            .quiz-match-count:hover .quiz-match-count__number,
+            .quiz-match-count:focus .quiz-match-count__number {
+                background: #fff;
+                color: #dc3522;
+                box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.1), 0 6px 12px rgba(255, 255, 255, 0.2);
             }
 
             .quiz-match-count__number {
@@ -814,7 +831,7 @@ category:
                                         <ul id="options-container" class="productGrid"></ul>
                                     </div>
                                     <aside class="quiz-summary-panel">
-                                        <div id="quiz-match-count" class="quiz-match-count"></div>
+                                        <button type="button" id="quiz-match-count" class="quiz-match-count"></button>
                                         <button type="button" id="quiz-summary-toggle"
                                             class="button button--secondary quiz-summary-toggle" aria-expanded="false">
                                             View selections
