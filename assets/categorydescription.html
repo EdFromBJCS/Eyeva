@@ -1,0 +1,104 @@
+<div class="category-description">
+
+    <h2 class="faqtitle">Frequently Asked Questions</h2>
+    <hr class="faqdivider" />
+
+    <div class="faq1">
+        <div class="expandfaq" onclick="toggleAnswer('answer1')">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h3 class="faqplus"><img class="faqicon"
+                                    src="https://www.bobjohnson.com/product_images/uploaded_images/favicon.png"
+                                    alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" /></h3>
+                        </td>
+                        <td>
+                            <h3></h3>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="answer1" class="answer">We sort our computers into three categories:<ul>
+                                    <li>Grade A: Best cosmetic and functional condition.</li>
+                                    <li>Grade B: Fully functional, but with more noticeable cosmetic blemishes (“scratch
+                                        & dent”).</li>
+                                    <li>Parts: Not fully functional, used for spare components.</li>
+                                </ul></div>
+    </div>
+
+    <div class="faq2">
+        <div class="expandfaq" onclick="toggleAnswer('answer2')">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h3 class="faqplus"><img class="faqicon"
+                                    src="https://www.bobjohnson.com/product_images/uploaded_images/favicon.png"
+                                    alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" /></h3>
+                        </td>
+                        <td>
+                            <h3>Will I receive the exact computer shown on your website?</h3>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="answer2" class="answer">Yes! For each listing, we photograph the actual unit you’ll receive, or in most
+            cases, you'll get a better looking one. What you see is exactly what you get.</div>
+    </div>
+
+    <div class="faq3">
+        <div class="expandfaq" onclick="toggleAnswer('answer3')">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h3 class="faqplus"><img class="faqicon"
+                                    src="https://www.bobjohnson.com/product_images/uploaded_images/favicon.png"
+                                    alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" /></h3>
+                        </td>
+                        <td>
+                            <h3>How will I track my shipment?</h3>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="answer3" class="answer">As soon as FedEx collects your package, you’ll receive a tracking number by
+            email so you can monitor your computer’s journey to your doorstep.</div>
+    </div>
+    <div class="faq4">
+        <div class="expandfaq" onclick="toggleAnswer('answer4')">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h3 class="faqplus"><img class="faqicon"
+                                    src="https://www.bobjohnson.com/product_images/uploaded_images/favicon.png"
+                                    alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" /></h3>
+                        </td>
+                        <td>
+                            <h3>Do you offer international shipping?</h3>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="answer4" class="answer">Yes, we offer international shipping to many countries. If you’re located
+            outside the United States, you can place your order online as usual. Shipping rates and delivery times will
+            be calculated at checkout based on your location and the shipping method selected. Please note that
+            international customers are responsible for any customs duties, taxes, or import fees required by their
+            country. If you have questions about shipping to your specific location or need a custom quote, feel free to
+            contact our team before ordering—we’re happy to help you with the details.</div>
+    </div>
+</div>
+<script>
+    function toggleAnswer(id) {
+        const answer = document.getElementById(id);
+        if (answer) {
+            answer.classList.toggle('open');
+        }
+    }
+</script>
