@@ -194,12 +194,13 @@
         <div class="mobile-inventory-specs-btn-container">
             {{#if product.condition '===' 'New'}}
             {{else}}
+            <a href="https://www.bobjohnson.com/blog/preparing-your-rugged-computer/" class="button picturesActualInventory" target="_blank">Order Fulfillment Process</a>
             <a href="https://www.bobjohnson.com/blog/real-honest-photos-of-real-honest-toughbooks/"
                 class="button button--outline picturesActualInventory" target="_blank">Pictures Of Actual Inventory!
                 Learn More Here!</a>
             {{/if}}
             {{#all product.custom_fields theme_settings.show_custom_fields_tabs}}
-            <a href="#website-specifications" class="button button--primary" id="skipToSpecs">Skip To Specs</a>
+            <a href="#website-specifications" class="button button--primary" id="skipToSpecs">Computer Specifications</a>
             {{/all}}
         </div>
 

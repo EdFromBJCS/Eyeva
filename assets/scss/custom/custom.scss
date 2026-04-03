@@ -449,6 +449,7 @@ button.expandfaq.button-alt::after {
         background-color: #ffffff;
         padding-top: 15px;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         gap: 15px;
     }
