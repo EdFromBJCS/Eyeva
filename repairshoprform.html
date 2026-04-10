@@ -1,3 +1,44 @@
+<style type='text/css'>
+        .rs-widget-container {
+                --repair-form-frame-height: clamp(1500px, 90vh, 2100px);
+                --repair-form-crop-top: 70px;
+                --repair-form-crop-bottom: 165px;
+                overflow: hidden;
+                height: calc(var(--repair-form-frame-height) - var(--repair-form-crop-top) - var(--repair-form-crop-bottom));
+                min-height: calc(var(--repair-form-frame-height) - var(--repair-form-crop-top) - var(--repair-form-crop-bottom));
+        }
+
+        .rs-widget-container iframe {
+                display: block;
+                width: 100%;
+                height: var(--repair-form-frame-height);
+                min-height: var(--repair-form-frame-height);
+                margin-top: calc(var(--repair-form-crop-top) * -1);
+                border: 0;
+        }
+
+        /*@media screen and (min-width: 801px) {
+                .rs-widget-container {
+                        --repair-form-crop-top: 100px;
+                }
+        }
+
+        @media screen and (max-width: 801px) {
+                .rs-widget-container {
+                        --repair-form-frame-height: clamp(1600px, 100vh, 2500px);
+                        --repair-form-crop-top: 70px;
+                        --repair-form-crop-bottom: 200px;
+                }
+        }
+
+                @media screen and (max-width: 470px) {
+                .rs-widget-container {
+                        --repair-form-frame-height: clamp(2000px, 150vh, 2500px);
+                        --repair-form-crop-top: 120px;
+                        --repair-form-crop-bottom: 200px;
+                }
+        }*/
+</style>
 <div class="main-content">
         <div class="dual-form-container">
                 <h2 style="text-align: left; margin-top: 0.5em; margin-bottom: 0.5em;"><span>Do you need technical
@@ -6,20 +47,29 @@
                                 you need below and complete the appropriate form:</span></div>
                 <ul>
                         <li style="text-align: left;"><span>Use the <b>Technical Support form</b> if you're experiencing
-                                        operating system issues, have questions about how to use your device, or need
+                                        operating system issues, have questions about using your device, or need
                                         troubleshooting assistance. (We do not support 3rd party software.)</span></li>
                         <li style="text-align: left;"><span>Use the <b>Repair form</b> if your device is physically
                                         damaged, malfunctioning, or requires hardware service. <u>Filling out this form
-                                                requires you to send your computer to our repair department.</u></span>
+                                                will require you to send your computer to our repair
+                                                department.</u></span>
                         </li>
+                        <li style="text-align: left;"><span>Use the <b>Repair Portal</b> if you have an existing repair
+                                        with us and would like to check the status of your repair. Our repair
+                                        technicians do their best to keep tickets up to date in the portal as they work
+                                        on it, so you can check back there for updates.</span></li>
                 </ul>
                 <div style="text-align: left; margin-top: 0.5em; margin-bottom: 0.5em;"><span>If you&rsquo;re not sure
                                 which form to use, start with Technical Support. Our team will review your issue and let
                                 you know if a repair is necessary.</span></div>
                 <div align="center" class="support-switcher"><label><input type="radio" name="formChoice"
-                                        value="tech" /> Technical Support Form</label> <label><input type="radio"
-                                        name="formChoice" value="repairs" /> Repair Form (<b>Computer Mail In
-                                        Required</b>)</label></div>
+                                        value="tech" />
+                                Technical Support Form</label> <label><input type="radio" name="formChoice"
+                                        value="repairs" />
+                                Repair Form (<b>Computer Mail In
+                                        Required</b>)</label> <label><input type="radio" name="formChoice"
+                                        value="portal" /> Repair
+                                Portal (<b>Leaves Page</b>)</label></div>
                 <div class="form-wrapper">
                         <div class="form-panel is-hidden" data-form="tech">
                                 <h2>Technical Support Form</h2>
@@ -38,9 +88,10 @@
                                                 name="infusionsoft_version" value="1.70.0.65079" />
                                         <div>&nbsp;</div>
                                         <div class="form-field"><label class="form-label"
-                                                        for="inf_field_FirstName">First Name *</label> <input
-                                                        id="inf_field_FirstName" class="form-input" type="text"
-                                                        name="inf_field_FirstName" /></div>
+                                                        for="inf_field_FirstName">First Name *</label>
+                                                <input id="inf_field_FirstName" class="form-input" type="text"
+                                                        name="inf_field_FirstName" />
+                                        </div>
                                         <div class="form-field"><label class="form-label" for="inf_field_LastName">Last
                                                         Name *</label> <input id="inf_field_LastName" class="form-input"
                                                         type="text" name="inf_field_LastName" /></div>
@@ -52,7 +103,8 @@
                                                         id="inf_field_Phone1" class="form-input" type="text"
                                                         name="inf_field_Phone1" /></div>
                                         <div class="form-field"><label class="form-label"
-                                                        for="inf_option_ModelToughbookyouown">Model Toughbook you
+                                                        for="inf_option_ModelToughbookyouown">Model
+                                                        Toughbook you
                                                         own</label>
                                                 <div class="infusion-radio">
                                                         <div class="options-container"><span class="infusion-option">
@@ -155,7 +207,8 @@
                                                 </div>
                                         </div>
                                         <div class="form-field"><label class="form-label"
-                                                        for="inf_custom_ModelNumber">Model Number *(Example:
+                                                        for="inf_custom_ModelNumber">Model Number
+                                                        *(Example:
                                                         FZ-55A0718VM | Refer To <a
                                                                 href="/blog/a-note-on-model-numbers-for-toughbook-nerds/"
                                                                 target="_blank" rel="noopener">Toughbook Model Number
@@ -171,23 +224,27 @@
                                                                         <input id="inf_option_Doyoupurchasethislaptopfromus_263"
                                                                                 class="form-radio" type="radio"
                                                                                 name="inf_option_Doyoupurchasethislaptopfromus"
-                                                                                value="263" /> <label class="form-label"
+                                                                                value="263" />
+                                                                        <label class="form-label"
                                                                                 for="inf_option_Doyoupurchasethislaptopfromus_263">Yes</label>
                                                                 </span> <span class="infusion-option"> <input
                                                                                 id="inf_option_Doyoupurchasethislaptopfromus_265"
                                                                                 class="form-radio" type="radio"
                                                                                 name="inf_option_Doyoupurchasethislaptopfromus"
-                                                                                value="265" /> <label class="form-label"
+                                                                                value="265" />
+                                                                        <label class="form-label"
                                                                                 for="inf_option_Doyoupurchasethislaptopfromus_265">No</label>
                                                                 </span></div>
                                                 </div>
                                         </div>
                                         <div class="form-field"><label class="form-label"
-                                                        for="inf_custom_ContactUsComments">Tech Support Question
+                                                        for="inf_custom_ContactUsComments">Tech
+                                                        Support Question
                                                         *</label> <textarea id="inf_custom_ContactUsComments"
                                                         style="padding: .75rem 1rem;"
                                                         name="inf_custom_ContactUsComments" rows="5" cols="40"
-                                                        data-gramm="false"></textarea></div>
+                                                        data-gramm="false"></textarea>
+                                        </div>
                                         <div class="form-field"><span class="infusion-option"> <input
                                                                 id="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy_tech"
                                                                 class="form-checkbox" type="checkbox"
@@ -252,27 +309,12 @@
                                         <table class="tab-table-repair-mobile">
                                                 <tbody></tbody>
                                         </table>
-                                        <div id="tab1" class="tab-content active-tab-button">
-                                                <style type='text/css'>
-                                                        .rs-widget-container {
-                                                                position: relative;
-                                                                padding-bottom: 56.25%;
-                                                                padding-top: 35px;
-                                                                height: 100%;
-                                                        }
-
-                                                        .rs-widget-container iframe {
-                                                                position: absolute;
-                                                                top: 0;
-                                                                left: 0;
-                                                                width: 100%;
-                                                                height: 100%;
-                                                        }
-                                                </style>
-                                                <div class='rs-widget-container'>
-                                                        <script
-                                                                src='https://bobjohnson.repairshopr.com/wf/service-form/includr.js?height=800px&scrolling=auto'></script>
-                                                </div>
+                                        <div id="tab1" class="tab-content rs-widget-container active-tab-button">
+                                                <iframe
+                                                        src="https://bobjohnson.repairshopr.com/wf/repair-form-testing/start?headless=true"
+                                                        title="Repair form"
+                                                        loading="lazy"
+                                                        referrerpolicy="strict-origin-when-cross-origin"></iframe>
                                         </div>
                                         <div id="tab2" class="tab-content">
                                                 <h3>Full-Service Rugged Laptop Repair Department</h3>
@@ -315,9 +357,10 @@
                                                         your entire repair is covered, including parts, labor, and
                                                         return shipping. If you want to purchase an extended warranty,
                                                         call us at <a href="tel:877-202-7788" target="_blank"
-                                                                rel="noopener">877-202-7788</a> or e-mail us at <a
-                                                                href="mailto:parts@bobjohnson.com" target="_blank"
-                                                                rel="noopener">parts@bobjohnson.com</a>.</p>
+                                                                rel="noopener">877-202-7788</a> or
+                                                        e-mail us at <a href="mailto:parts@bobjohnson.com"
+                                                                target="_blank" rel="noopener">parts@bobjohnson.com</a>.
+                                                </p>
                                                 <h4>How Does the Repair Process Work?</h4>
                                                 <p>After we receive your computer, our technician will conduct a
                                                         thorough diagnostic to identify any issues. Knowing the
@@ -695,6 +738,23 @@
                                         </div>
                                 </div>
                         </div>
+                        <div class="form-panel is-hidden" data-form="portal">
+                                <h3 class="center">Repair Portal Login</h3>
+                                <p>For security reasons, the Repair Portal login cannot be embedded on this page.</p>
+                                <p style="margin-top: 1rem;">
+                                        Continue to the direct login page:
+                                        <a class="button button--primary"
+                                                href="https://bobjohnson.repairshopr.com/portal/user_login"
+                                                rel="noopener">Open Repair Portal Login</a>
+                                </p>
+                                <noscript>
+                                        <p>
+                                                Use this direct link:
+                                                <a href="https://bobjohnson.repairshopr.com/portal/user_login"
+                                                        rel="noopener">Repair Portal Login</a>
+                                        </p>
+                                </noscript>
+                        </div>
                         <script type="text/javascript">// <![CDATA[
                                 function toggleAnswer(id) {
                                         const answer = document.getElementById(id);
@@ -749,8 +809,19 @@
         </div>
         <script>
                 const formChoiceInputs = document.querySelectorAll('input[name="formChoice"]');
+                const portalLoginUrl = 'https://bobjohnson.repairshopr.com/portal/user_login';
 
                 function syncPanels(choice) {
+                        if (choice === 'portal') {
+                                window.location.href = portalLoginUrl;
+                                return;
+                        }
+
+                        if (choice === 'repairs' && isMobileViewport()) {
+                                window.location.href = repairFormUrl;
+                                return;
+                        }
+
                         document.querySelectorAll('.form-panel').forEach(panel => {
                                 panel.classList.toggle('is-hidden', panel.dataset.form !== choice);
                         });

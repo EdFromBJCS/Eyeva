@@ -8,6 +8,7 @@
                 <a class="navBar-action" href="{{urls.account.returns}}">{{lang 'account.nav.returns'}}</a>
             </li>
         {{/if}}
+        <li class="navBar-item"><a class="navBar-action" href="https://bobjohnson.repairshopr.com/portal/user_login">Repairs</a></li>
         <li class="navBar-item {{#if account_page '===' 'messages'}}is-active{{/if}}">
             <a class="navBar-action" href="{{urls.account.inbox}}">{{lang 'account.nav.messages' num_new_messages=customer.num_new_messages}}</a>
         </li>

@@ -1,0 +1,482 @@
+<div class="form-panel is-hidden" data-form="repairs">
+    <div class="tab-container">
+        <div class="tab-buttons">
+            <div class="tab-cell">
+                <div class="tab-button" onclick="showTab(0)">
+                    <div class="tab-text">
+                        <h3 class="tabs-title">Repair Form</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-cell">
+                <div class="tab-button" onclick="showTab(1)">
+                    <div class="tab-text">
+                        <h3 class="tabs-title">Repair Information</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-cell">
+                <div class="tab-button" onclick="showTab(2)">
+                    <div class="tab-text">
+                        <h3 class="tabs-title">Shipping Guide</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-text"></div>
+        <table class="tab-table-repair-mobile">
+            <tbody></tbody>
+        </table>
+        <div id="tab1" class="tab-content active-tab-button">
+            <form name="repairForm" onsubmit="aggData()">
+
+                <!-- REQUIRED: Your API Key -->
+                <!-- <input type="hidden" name="api_key" value="T361e180a85ec98f6f-ec386aadffd5dae1ec5f8d44d55f1ba1"> -->
+
+                <h2>Repair Form</h2>
+                <p">Please complete this form as accurately
+                    and thoroughly as possible. Providing detailed
+                    information helps our technicians replicate the issue
+                    and properly diagnose your laptop.</p>
+                    <p">After you submit the form and we receive
+                        your computer, our technicians will diagnose the
+                        issue
+                        and contact you with the next steps.</p>
+
+                        <div class="form-field"><label class="form-label">First
+                                Name</label>
+                            <input class="form-input" type="text" name="first_name" style="display:block" required>
+                        </div>
+                        <div class="form-field"><label class="form-label">Last
+                                Name</label>
+                            <input class="form-input" type="text" name="last_name" style="display:block" required>
+                        </div>
+                        <div class="form-field"><label class="form-label">Model
+                                Number</label>
+                            <input class="form-input" type="text" name="model_number" style="display:block" required>
+                        </div>
+                        <div class="form-field"><label class="form-label">Serial
+                                Number</label>
+                            <input class="form-input" type="text" name="serial_number" style="display:block" required>
+                        </div>
+                        <div class="form-field"><label class="form-label">Purchased
+                                from BJCS?</label>
+                            <input class="" type="checkbox" name="purchased" style="display:block"
+                                onclick="showFields()">
+                        </div>
+                        <div class="form-field"><label class="form-label" style="display:none" name="inv_label"
+                                id="invLabel">Invoice
+                                Number</label>
+                            <input class="form-input" style="display:none" type="text" name="invoice_number"
+                                id="invNumber">
+                        </div>
+                        <div class="form-field"><label class="form-label">Problem
+                                Summary</label>
+                            <input class="form-input" type="text" name="subject" style="display:block" required>
+                        </div>
+                        <div class="form-field"><label class="form-label">Issue
+                                Description</label>
+                            <textarea class="RS_form_textarea" name="description" rows="4" style="display:block"
+                                required></textarea>
+                        </div>
+                        <div class="infusion-submit">
+                            <button class="button button--primary" type="submit">Submit
+                                Repair Form</button>
+                        </div>
+            </form>
+            <!-- action="https://bobjohnson.repairshopr.com/api/v1/leads" method="POST" -->
+        </div>
+        <div id="tab2" class="tab-content">
+            <h3>Full-Service Rugged Laptop Repair Department</h3>
+            <p>We specialize in repairing rugged laptops, and our repair center is
+                one of the few in the area with the expertise to handle such
+                repairs. Our in-house technicians are certified and can complete
+                even the most challenging repairs. We have been refurbishing
+                computers for 29 years and have seen almost every rugged laptop
+                and tablet released. The following are the brands of laptops we
+                work on:</p>
+            <ul>
+                <li>Panasonic Toughbooks and Toughpads</li>
+                <li>Getac rugged laptops and tablets</li>
+                <li>Dell rugged laptops and tablets</li>
+            </ul>
+            <p>We maintain a large inventory of spare parts for many of the makes
+                and models of each brand of rugged notebooks and tablets listed
+                above. This helps us minimize the wait time during the repair
+                process. If we don't have the required spare parts, we have a
+                network of distributors who can quickly ship us the correct
+                parts needed for the repair, minimizing repair time. Our primary
+                goal is to get your computer back in working order in a timely
+                and organized manner.</p>
+            <h4>What is Included in the Cost of A Repair?</h4>
+            <p>If you send in your computer for repair, which isn&rsquo;t under our
+                limited lifetime warranty, you&rsquo;ll be expected to pay a
+                $150 repair fee and return shipping. If your computer needs any
+                replacement parts or you wish to upgrade it while it is here for
+                repair, you&rsquo;ll also be paying for the parts used in the
+                repair process. You are responsible for backing up your data; we
+                are not responsible for data loss if it is to occur. However,
+                there is a data backup fee of $75 if a backup is required.</p>
+            <h4>Limited Lifetime Warranty</h4>
+            <p>If you purchased your computer from us, you fall under our limited
+                lifetime warranty, which means you don&rsquo;t pay the $150
+                repair fee when you send your computer in for repair. You only
+                pay for parts and return shipping when applicable. If you
+                purchased an extended warranty or are still under the first six
+                months of the original purchase date of your laptop or tablet,
+                your entire repair is covered, including parts, labor, and
+                return shipping. If you want to purchase an extended warranty,
+                call us at <a href="tel:877-202-7788" target="_blank" rel="noopener">877-202-7788</a> or
+                e-mail us at <a href="mailto:parts@bobjohnson.com" target="_blank"
+                    rel="noopener">parts@bobjohnson.com</a>.
+            </p>
+            <h4>How Does the Repair Process Work?</h4>
+            <p>After we receive your computer, our technician will conduct a
+                thorough diagnostic to identify any issues. Knowing the
+                problems, the technician will analyze the repair's cost. You
+                will be contacted by the tech either via phone or email with a
+                comprehensive breakdown of the repair and its cost. Once you
+                approve the repair, our technician will fix the problem. If you
+                decide not to repair your rugged computer, a $75 diagnostic fee
+                may be charged.</p>
+            <p>Thanks to our extensive inventory of rugged computer parts, we can
+                complete these repairs quickly. In some cases, it may not be
+                worth repairing your computer. If the repair cost exceeds the
+                unit's value, we suggest replacing the computer instead of
+                repairing it. In most cases, we can offer store credit for your
+                older unit.</p>
+            <h2 class="faqtitle">Frequently Asked Questions</h2>
+            <hr class="faqdivider" />
+            <div class="faq1">
+                <div class="expandfaq" onclick="toggleAnswer('answer1')">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h3 class="faqplus"><img class="faqicon"
+                                            src="/product_images/uploaded_images/favicon.png"
+                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3>Are laptops worth
+                                        repairing?</h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="answer1" class="answer">Nearly all laptops and tablets
+                    can be fixed in one manner or another. However, not all
+                    laptops are worth repairing. Generally, if the computer
+                    was working smoothly before it was in for repair and the
+                    cost to repair is cheaper than purchasing a replacement,
+                    we recommend repairing the computer. Unfortunately, not
+                    every repair is as straightforward and as simple as
+                    that. If we foresee any problems fixing the computer,
+                    we&rsquo;ll let you know beforehand and offer the best
+                    options for your situation. If you send a laptop or
+                    tablet to us for repair, we will- let you know all costs
+                    upfront before fixing the computer so there will be no
+                    surprises. If you decide fixing the laptop is not the
+                    best option, we have a trade-in program where you can
+                    get credit for a replacement laptop instead.</div>
+            </div>
+            <div class="faq2">
+                <div class="expandfaq" onclick="toggleAnswer('answer2')">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h3 class="faqplus"><img class="faqicon"
+                                            src="/product_images/uploaded_images/favicon.png"
+                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3>When is it not worth
+                                        repairing a
+                                        laptop?</h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="answer2" class="answer">As a refurbisher of rugged
+                    laptops, it&rsquo;s hard to say that a device is too old
+                    to fix, especially when we know that some of the most
+                    indispensable and integral pieces of software only run
+                    on legacy hardware. On the other hand, if you
+                    aren&rsquo;t running legacy software meant for legacy
+                    hardware but are still operating a machine grasping
+                    every last thread of its existence, it might be time to
+                    consider upgrading to something more modern. While we
+                    cannot decide whether to repair or replace your laptop
+                    or tablet, we can recommend the most cost-effective
+                    method to get a working laptop or tablet back in your
+                    hands as swiftly as possible.</div>
+            </div>
+            <div class="faq3">
+                <div class="expandfaq" onclick="toggleAnswer('answer3')">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h3 class="faqplus"><img class="faqicon"
+                                            src="/product_images/uploaded_images/favicon.png"
+                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3>How long does a
+                                        rugged computer
+                                        repair take?
+                                    </h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="answer3" class="answer">Once your computer arrives at
+                    our location, we strive to get all repairs diagonosed
+                    within two to three days of their arrival. This may not
+                    be feasible for every repair, so this is just a goal,
+                    not a guarantee, but we will do our best to get all
+                    repairs out as quickly as possible and as close to that
+                    time frame as possible. With that said, our lead time on
+                    repairs can be up to 2-4 weeks depending on how many we
+                    have. If our technicians run into any problems with the
+                    repair that would cause it to ship late, they will reach
+                    out. And you can always call 302-659-2727 to get an
+                    update on your repair.</div>
+            </div>
+            <div class="faq4">
+                <div class="expandfaq" onclick="toggleAnswer('answer4')">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h3 class="faqplus"><img class="faqicon"
+                                            src="/product_images/uploaded_images/favicon.png"
+                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3>I think my repair is
+                                        pretty simple.
+                                        Can you tell me
+                                        how to do it
+                                        myself?</h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="answer4" class="answer">We can't diagnose your computer
+                    without seeing it in person, and we can't give you
+                    instructions via telephone or email for a computer we
+                    haven't diagnosed, but if you are sure you know what the
+                    problem is, you are welcome to take a swing at it (at
+                    your own risk, of course). If you need a little
+                    guidance, feel free to check out some of the many
+                    tutorials on our <a href="https://www.youtube.com/@Bobjohnson">YouTube
+                        Channel.</a></div>
+            </div>
+            <div class="faq5">
+                <div class="expandfaq" onclick="toggleAnswer('answer5')">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h3 class="faqplus"><img class="faqicon"
+                                            src="/product_images/uploaded_images/favicon.png"
+                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3>What types of
+                                        repairs are
+                                        available?</h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="answer5" class="answer">Our technicians provide a
+                    full-range of Rugged Computer repairs, including, but
+                    not limited to:
+                    <ul>
+                        <li>Touchscreen replacement</li>
+                        <li>Hard drive replacement</li>
+                        <li>Operating system re-install</li>
+                        <li>Motherboard replacement</li>
+                        <li>Memory/RAM upgrades</li>
+                    </ul>
+                    If you have a question about whether or not we repair a
+                    specific issue, please give us a call at 302-659-2727 or
+                    send us an email at <a href="mailto:repair@bobjohnson.com">repair@bobjohnson.com</a>.
+                </div>
+            </div>
+        </div>
+        <div id="tab3" class="tab-content">
+            <h3>How to Ship Your Rugged Computer Safely</h3>
+            <p>Rugged Computers are tough, but sometimes even the toughest of the
+                tough break down and must be sent in for repair. That is why you
+                need a safe and reliable way to get your computer to a trained
+                Bob Johnson Computer Stuff technician. We understand how
+                disappointing and frustrating it can be to find out your package
+                has gotten damaged during the shipping process. We&rsquo;ve
+                compiled a <a href="https://www.fedex.com/en-us/shipping/how-to-ship-computers.html" target="_blank"
+                    rel="noopener">guide to help you package
+                    your computer effectively</a>, minimizing the risk of
+                damage during shipping. From protecting your computer from rough
+                handling to safeguarding against environmental variables, this
+                guide will cover everything you need to know to make you a
+                packing expert.</p>
+            <h4>Packing the Box Correctly</h4>
+            <p>The two most important factors that will help ensure your computer
+                arrives intact are the box you pack it in and the padded
+                materials you use to package it. They are crucial to keeping
+                your computer safe for the journey to the repair shop. No matter
+                which carrier you ship with, the voyage is unpredictable and out
+                of your control once it ships. The box and the packing materials
+                are the only things keeping your computer safe from a
+                potentially bumpy trip ahead.</p>
+            <p>When you are packing your computer in the box, we recommend:</p>
+            <ul>
+                <li>A box with at least 1-2 inches on the top, bottom, and both
+                    sides of the computer</li>
+                <li>About an inch of packaging materials on each side of the
+                    computer.</li>
+                <li>We suggest genuine packaging materials to avoid screen
+                    damage when packing a tablet.</li>
+                <li>Some good packaging materials to use are:</li>
+                <ul>
+                    <li>Packing Peanuts</li>
+                    <li>Bubble Wrap</li>
+                </ul>
+                <li>To wrap each unit</li>
+                <ul>
+                    <li>Foam</li>
+                    <li>Cardboard</li>
+                    <li>Newspaper</li>
+                    <li>If you use newspaper, fluff it up for more support.
+                    </li>
+                </ul>
+            </ul>
+            <ul>
+                <li>It may cost $5-$10 more, but it&rsquo;s better than damaging
+                    the computer.</li>
+                <li>Line the box corners with cardboard sheets bent roughly 90
+                    degrees.</li>
+                <li>Include some information to help us identify your repair
+                    when it gets to us.
+                    <ul>
+                        <li>Print out a copy of the repair form</li>
+                        <li>A piece of paper with your name and number
+                        </li>
+                        <li>A business card taped to the computer</li>
+                    </ul>
+                </li>
+            </ul>
+            <ul>
+                <li>If we don't have your information, it will delay your
+                    repair.</li>
+                <li>Give the box a light shake to ensure the computer is not
+                    moving too much.</li>
+                <li>Properly seal the box with plenty of tape.</li>
+            </ul>
+            <p>If you need assistance <a href="https://www.youtube.com/watch?v=23-b0n5LsOk" target="_blank"
+                    rel="noopener">preparing the box for
+                    shipping</a>, here is a good video from FedEx to help
+                walk you through the steps.</p>
+            <h4>Preparing to Ship</h4>
+            <p>Next, you&rsquo;ll need to schedule to have your package shipped. You
+                can schedule to pick up your package or go to one of their
+                physical locations and have them ship it for you. You can also
+                have them pack your computer for you in a special box if you
+                don&rsquo;t have the supplies yourself. It doesn&rsquo;t
+                particularly matter which shipping carrier you choose. The
+                important part of the process is when you get to the point where
+                you have the option to insure your package, you should. If
+                something unexpected happens during shipping and your computer
+                breaks or is lost, this will cover you. With your box packed and
+                your computer insured, you can ship your box out!</p>
+            <h4>The DON&rsquo;Ts of Shipping Your Computer</h4>
+            <ul>
+                <li>Don&rsquo;t use a box too small or too large for the
+                    computer.</li>
+                <li>Don&rsquo;t leave space in your box for your computer to
+                    shift around in.</li>
+                <li>Don&rsquo;t reuse old, worn-down boxes that already have
+                    wear and tear on them.</li>
+                <li>Don&rsquo;t leave your power adapter plugged into your
+                    computer in the box.</li>
+                <li>Don&rsquo;t ship your computer without insuring it.</li>
+                <li>Don&rsquo;t ship your computer using the post office.</li>
+            </ul>
+            <h5>Ship All Repairs to:</h5>
+            <p style="margin-bottom: 0;">Bob Johnson's Computer Stuff, Inc.</p>
+            <p style="margin: 0;">ATTN: Repairs</p>
+            <p style="margin: 0;">133 N. Dupont Blvd. Ste. 103</p>
+            <p style="margin-top: 0;">Smyrna, DE 19977-1545</p>
+            <p>For more information about shipping and returns, click <a href="/shipping-returns/" target="_blank"
+                    rel="noopener">here</a>.</p>
+            <h2 class="faqtitle">Frequently Asked Questions</h2>
+            <hr class="faqdivider" />
+            <div class="faq6">
+                <div class="expandfaq" onclick="toggleAnswer('answer6')">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h3 class="faqplus"><img class="faqicon"
+                                            src="/product_images/uploaded_images/favicon.png"
+                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3>How Long Does
+                                        Shipping Take?
+                                    </h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="answer6" class="answer">Unfortunately, we have no
+                    control over the shipping. Depending on your chosen
+                    shipping provider and how far away you are from us. We
+                    only control how long your rugged laptop is in our
+                    repair shop. For estimated shipping arrival times, refer
+                    to our <a href="/shipping-costs-and-arrival-times/" target="_blank" rel="noopener">Shipping &amp;
+                        Arrival Times Page</a></div>
+            </div>
+            <div class="faq7">
+                <div class="expandfaq" onclick="toggleAnswer('answer7')">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <h3 class="faqplus"><img class="faqicon"
+                                            src="/product_images/uploaded_images/favicon.png"
+                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
+                                    </h3>
+                                </td>
+                                <td>
+                                    <h3>Who Is the Best
+                                        Shipping
+                                        Provider?</h3>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="answer7" class="answer">This is more of a personal
+                    preference. We typically get deliveries from every one
+                    of the carriers, but we use FedEx primarily to ship out
+                    our products and to ship the repairs back to you.</div>
+            </div>
+        </div>
+    </div>
+</div>

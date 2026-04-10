@@ -87,7 +87,7 @@
     }
 
     .support-switcher label {
-        display: inline-flex;
+        display: block;
         align-items: center;
         gap: 8px;
         padding: 10px 14px;
@@ -98,6 +98,13 @@
         font-weight: 400;
         color: var(--text-strong);
         box-shadow: 0 4px 10px rgba(15, 23, 42, 0.06);
+    }
+
+    @include breakpoint("medium") {
+        .support-switcher label {
+            display: inline-flex;
+        }
+        
     }
 
     .support-switcher input[type="radio"] {
