@@ -30,6 +30,54 @@
 
 {{{ checkout.checkout_content }}}
 
+<script nonce="{{nonce}}">
+    (function () {
+        var COUPON_MESSAGE = 'Coupons cannot be applied to parts, new computers, or computers that are already on sale.';
+        var SHIPPING_MESSAGE = 'We include shipping insurance on every order at no cost, so you can shop with total confidence and security.';
+
+        function insertMessage(target, key, text) {
+            if (!target) {
+                return;
+            }
+
+            var existing = document.querySelector('.cart-info-text[data-cart-info-key="' + key + '"]');
+
+            if (existing) {
+                return;
+            }
+
+            var message = document.createElement('p');
+            message.className = 'cart-info-text';
+            message.setAttribute('data-cart-info-key', key);
+            message.textContent = text;
+            target.insertAdjacentElement('afterend', message);
+        }
+
+        function addCheckoutInfoText() {
+            var couponContainer = document.querySelector('#coupon-form-collapsable');
+            var shippingRow = document.querySelector('[data-test="cart-shipping"]');
+
+            insertMessage(couponContainer, 'coupon', COUPON_MESSAGE);
+            insertMessage(shippingRow, 'shipping', SHIPPING_MESSAGE);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', addCheckoutInfoText);
+        } else {
+            addCheckoutInfoText();
+        }
+
+        var observer = new MutationObserver(function () {
+            addCheckoutInfoText();
+        });
+
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+        });
+    })();
+</script>
+
 {{{ footer.scripts }}}
 
 {{/partial}}

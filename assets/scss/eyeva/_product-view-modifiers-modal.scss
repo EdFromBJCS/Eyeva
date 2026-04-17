@@ -150,18 +150,8 @@ body:has(.eyeva__productView-modifiersModal-overlay) {
     }
 
     .eyeva__productView-option-tooltip {
-        color: $color-textSecondary;
-        font-family: $body-font-family;
-        font-size: fontSize("smaller");
-        font-weight: $body-font-weight;
-        line-height: $eyeva-body-line-height;
-        margin-bottom: 0;
-        margin-top: spacing("third");
-
-        @include breakpoint("medium") {
-            font-size: fontSize("base");
-            margin-top: spacing("base");
-        }
+        margin-left: spacing("half");
+        margin-top: 0;
     }
 }
 
@@ -530,24 +520,107 @@ body:has(.eyeva__productView-modifiersModal-overlay) {
 }
 
 .eyeva__productView-option-tooltip {
-    color: $color-textSecondary;
-    font-size: fontSize("smaller");
-    margin-bottom: spacing("third");
-
-    @include breakpoint("medium") {
-        font-size: fontSize("base");
-        margin-bottom: spacing("base");
-    }
+    margin-left: spacing("half");
 }
 
 .eyeva__productView-value-tooltip {
-    color: $color-textSecondary;
-    font-size: fontSize("smaller");
-    margin-bottom: spacing("single");
-    margin-left: spacing("base");
+    margin-left: spacing("half");
+}
 
-    @include breakpoint("medium") {
-        font-size: fontSize("base");
+.eyeva__productView-option-tooltip,
+.eyeva__productView-value-tooltip {
+    display: inline-flex;
+    position: relative;
+    vertical-align: middle;
+
+    .eyeva__productView-tooltip-trigger {
+        align-items: center;
+        background-color: rgba(stencilColor("color-textBase"), 0.12);
+        border-radius: 50%;
+        color: stencilColor("color-textBase");
+        cursor: help;
+        display: inline-flex;
+        font-family: $header-font-family;
+        font-size: 11px;
+        font-style: normal;
+        font-weight: $header-font-weight;
+        height: 18px;
+        justify-content: center;
+        line-height: 1;
+        transition: background-color 180ms ease, color 180ms ease;
+        user-select: none;
+        width: 18px;
+
+        &:focus-visible {
+            box-shadow: 0 0 0 2px rgba(stencilColor("color-primary"), 0.3);
+            outline: none;
+        }
+    }
+
+    .eyeva__productView-tooltip-bubble {
+        background-color: stencilColor("color-textBase");
+        border-radius: 10px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        color: stencilColor("color-white");
+        font-family: $body-font-family;
+        font-size: fontSize("smaller");
+        font-style: normal;
+        font-weight: $body-font-weight;
+        left: 50%;
+        line-height: $eyeva-body-line-height;
+        margin-top: 0;
+        max-width: 80vw;
+        min-width: 60vw;
+        opacity: 0;
+        padding: spacing("half") spacing("base");
+        position: fixed;
+        right: auto;
+        bottom: calc(env(safe-area-inset-bottom, 0px) + #{spacing("double")} + 72px);
+        top: auto;
+        transform: translateX(-50%) translateY(6px);
+        transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
+        visibility: hidden;
+        z-index: zIndex("high");
+
+        @include breakpoint("medium") {
+            font-size: fontSize("base");
+            max-width: 20vw;
+            min-width: 15vw;
+            left: calc(100% + #{spacing("quarter")});
+            position: absolute;
+            right: auto;
+            top: 50%;
+            bottom: auto;
+            transform: translateX(-6px) translateY(-50%);
+        }
+
+        @media (min-width: 801px) and (max-width: 1366px) {
+            left: auto;
+            right: calc(100% + #{spacing("quarter")});
+            transform: translateX(6px) translateY(-50%);
+
+        }
+    }
+    &:hover,
+    &:focus-within {
+        .eyeva__productView-tooltip-trigger {
+            background-color: stencilColor("color-primary");
+            color: stencilColor("color-white");
+        }
+
+        .eyeva__productView-tooltip-bubble {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+            visibility: visible;
+
+            @include breakpoint("medium") {
+                transform: translateX(0) translateY(-50%);
+            }
+
+            @media (min-width: 801px) and (max-width: 1366px) {
+                transform: translateX(0) translateY(-50%);
+            }
+        }
     }
 }
 

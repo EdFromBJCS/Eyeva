@@ -335,7 +335,7 @@ $card-preview-zoom-bottom-offset:       6rem;
 .cart-total {
     @include clearfix;
     border-bottom: 0;
-
+    font-size: fontSize("small");
     @include breakpoint("medium") {
         + .cart-total {
             border-top: container("border");
@@ -413,7 +413,13 @@ $card-preview-zoom-bottom-offset:       6rem;
     }
 }
 
-
+.cart-drawer-info-text {
+    color: stencilColor("color-textSecondary");
+    font-size: fontSize("smaller");
+    font-style: italic;
+    margin-top: 0;
+    margin-bottom: 0;
+}
 // Cart actions
 // -----------------------------------------------------------------------------
 

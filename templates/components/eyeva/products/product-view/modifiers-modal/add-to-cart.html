@@ -1,13 +1,14 @@
 {{#if (getVar 'enableModifiersModal')}}
     <button type="button" class="button button--primary eyeva__productView-openModifiersModalBtn" data-eyeva-product-option-open>{{getVar 'txtSelectModifiers'}}</button>
     <div class="eyeva__productView-productAttributes-message-wrapper" data-eyeva-product-attributes-message></div>
-    <script type="application/json" data-eyeva-product-custom-fields nonce="{{nonce}}">
-        {{{json product.custom_fields}}}
-    </script>
-    <script type="application/json" data-eyeva-product-options nonce="{{nonce}}">
-        {{{json product.options}}}
-    </script>
 {{/if}}
+
+<script type="application/json" data-eyeva-product-custom-fields nonce="{{nonce}}">
+    {{{json product.custom_fields}}}
+</script>
+<script type="application/json" data-eyeva-product-options nonce="{{nonce}}">
+    {{{json product.options}}}
+</script>
 
 <div data-eyeva-add-to-cart-wrapper {{#if (getVar 'enableModifiersModal')}}style="display:none"{{/if}}>
     {{> components/products/add-to-cart with_wallet_buttons=false}}

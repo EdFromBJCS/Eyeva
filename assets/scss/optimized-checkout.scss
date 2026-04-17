@@ -201,10 +201,19 @@ a {
     background-color: stencilColor("optimizedCheckout-orderSummary-backgroundColor");
     border-color: stencilColor("optimizedCheckout-orderSummary-borderColor");
     box-shadow: 0 4px 8px transparentize(stencilColor("optimizedCheckout-orderSummary-borderColor"), 0.5);
+    font-size: fontSize("large");
 }
 
 .optimizedCheckout-orderSummary-cartSection {
     border-color: stencilColor("optimizedCheckout-orderSummary-borderColor");
+}
+
+.cart-info-text {
+    color: stencilColor("color-textSecondary");
+    font-size: fontSize("small");
+    font-style: italic;
+    margin-top: spacing("half");
+    margin-bottom: 0;
 }
 
 .optimizedCheckout-checkoutStep {
@@ -378,4 +387,53 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px transparentize(stencilColor("
 .optimizedCheckout-loadingToaster {
     background-color: stencilColor("optimizedCheckout-loadingToaster-backgroundColor");
     color: stencilColor("optimizedCheckout-loadingToaster-textColor");
+}
+
+//
+// Wide Desktop Layout + Order Summary Typography
+// Expands both checkout columns and improves readability in the summary panel.
+// -----------------------------------------------------------------------------
+
+@media (min-width: 1280px) {
+    .layout.optimizedCheckout-contentPrimary {
+        max-width: 1520px;
+        width: calc(100% - 56px);
+    }
+
+    .layout-main {
+        flex: 1 1 70%;
+        max-width: 70%;
+    }
+
+    .layout-cart {
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
+
+    .optimizedCheckout-orderSummary {
+        font-size: 1.0625rem;
+    }
+
+    .optimizedCheckout-orderSummary .cart-title {
+        font-size: 1.45rem;
+        line-height: 1.2;
+    }
+
+    .optimizedCheckout-orderSummary .product-title {
+        font-size: 1.2rem;
+        line-height: 1.35;
+    }
+
+    .optimizedCheckout-orderSummary .product-options {
+        font-size: 1rem;
+        line-height: 1.45;
+    }
+
+    .optimizedCheckout-orderSummary .cart-priceItem,
+    .optimizedCheckout-orderSummary .redeemable-label,
+    .optimizedCheckout-orderSummary .cart-header-link,
+    .optimizedCheckout-orderSummary .coupon-input,
+    .optimizedCheckout-orderSummary .coupon-button {
+        font-size: 1rem;
+    }
 }

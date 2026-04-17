@@ -40,6 +40,7 @@
             </div>
             {{> components/cart/shipping-estimator cart.shipping_handling}}
         </li>
+        <li class="cart-drawer-info-text">We include shipping insurance on every order at no additional cost, so you can shop with total confidence and security.</li>
     {{/if}}
     {{#each cart.taxes}}
         {{#unless included}}
@@ -82,6 +83,7 @@
             </div>
             {{> components/cart/coupon-input}}
         </li>
+        <li class="cart-drawer-info-text">Coupons cannot be applied to parts, new computers, or computers that are already on sale.</li>
     {{/if}}
     {{#if settings.gift_certificates_enabled}}
         {{#each cart.gift_certificates}}

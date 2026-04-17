@@ -101,6 +101,7 @@ export default class ProductDetails extends ProductDetailsBase {
             utils.api.productAttributes.optionChange($productId, $form.serialize(), 'products/bulk-discount-rates', optionChangeCallback);
         } else {
             this.updateProductAttributes(productAttributesData);
+            this.updateView(productAttributesData);
             bannerUtils.dispatchProductBannerEvent(productAttributesData);
         }
 
