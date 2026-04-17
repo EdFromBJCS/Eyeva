@@ -123,6 +123,11 @@
                     </div>
 
                     {{product.detail_messages}}
+                    {{#filter product.custom_fields '__@page_tooltip' property='name'}}
+                    <div class="productView-pageTooltip">
+                        <div class="eyeva__productView-option-tooltip">{{{sanitize value}}}</div>
+                    </div>
+                    {{/filter}}
                     <dl class="productView-info">
                         {{#all product.weight theme_settings.show_product_weight}}
                         <dt class="productView-info-name">{{lang 'products.weight'}}</dt>

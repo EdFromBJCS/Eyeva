@@ -126,11 +126,17 @@ export default class ProductDetails extends CornerstoneProductDetails {
     `;
 
     optionTooltipTemplate = `
-        <div class="eyeva__productView-option-tooltip"><%tooltip%></div>
+        <div class="eyeva__productView-option-tooltip">
+            <span class="eyeva__productView-tooltip-trigger" role="button" tabindex="0" aria-label="More information" title="More information">i</span>
+            <span class="eyeva__productView-tooltip-bubble"><%tooltip%></span>
+        </div>
     `;
 
     optionValueTooltipTemplate = `
-        <div class="eyeva__productView-value-tooltip"><%tooltip%></div>
+        <div class="eyeva__productView-value-tooltip">
+            <span class="eyeva__productView-tooltip-trigger" role="button" tabindex="0" aria-label="More information" title="More information">i</span>
+            <span class="eyeva__productView-tooltip-bubble"><%tooltip%></span>
+        </div>
     `;
 
     optionValueTooltipHeadingTemplate = `
@@ -240,22 +246,48 @@ export default class ProductDetails extends CornerstoneProductDetails {
          * @type {number}
          */
         this.productId = Number($form.find('[name="product_id"]').val());
+        this.refreshProductMetadata($form);
+
+        /**
+         * Enable or disable modifiers modal feature
+         * @type {boolean}
+         */
+        // enable modifiers modal if our choose options button appears in the product details
+        this.enableModifiersModal = $chooseOptionsBtn.length > 0;
+
+        if (this.enableModifiersModal) {
+            this.createModifiersModal();
+        }
+
+        this.bindProductEditEvents();
+        this.bindStickyAddToCartEvents();
+        this.bindModalDestroy();
+        this.initOptionStepper();
+        this.syncProductCardQty();
+        this.initSaleCountdown();
+        this.renderInlineOptionTooltips();
+        $('body').trigger('update-wishlist-buttons', [this.$scope]);
+    }
+
+    refreshProductMetadata($form = this.$scope.find('[data-cart-item-add]').first()) {
+        const parseMetadata = selector => {
+            const text = $form.find(selector).first().text();
+
+            if (text) {
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    // Ignore invalid metadata payloads.
+                }
+            }
+
+            return [];
+        };
 
         /**
          * @type {Array<{name: string, value: string}>}
          */
-        this.customFields = (() => {
-            const customFieldsText = $form.find('[data-eyeva-product-custom-fields]').text();
-            if (customFieldsText) {
-                try {
-                    return JSON.parse(customFieldsText);
-                } catch (e) {
-                    // console.error('Invalid JSON for custom fields');
-                }
-            }
-            return [];
-        })();
-        this.console.log('ProductDetails.customFields:', this.customFields);
+        this.customFields = parseMetadata('[data-eyeva-product-custom-fields]');
 
         /**
          * @type {Array<{
@@ -282,56 +314,11 @@ export default class ProductDetails extends CornerstoneProductDetails {
          *     data: string | Array<string>
          *   }>
          * }>}
-         *
-         * - id: Option ID
-         * - display_name: Display name of the option
-         * - state: Type of option state, either 'modifier' or 'variant_option'
-         * - required: Indicates if this option is required
-         * - prefill: Optional prefill value, available for text based fields only
-         * - selected_date: Optional selected date object, available for date field only:
-         *   - day: Day part of the date
-         *   - month: Month part of the date
-         *   - year: Year part of the date
-         * - checked: Optional checked status for the option, available for checkbox field only
-         * - noValue: Optional value for "no selection" (if applicable), available for checkbox field only
-         * - value: Optional numeric value assigned to the option, available for checkbox field only
-         * - values: Optional array of possible values, available for radio, select, swatch, product pick-list fields only:
-         *   - id: Unique identifier for each value
-         *   - label: Display label for the value
-         *   - selected: Indicates if this value is selected
-         *   - data: Additional data for the value, can be a string or array of strings
          */
-        this.productOptions = (() => {
-            const productOptionsText = $form.find('[data-eyeva-product-options]').text();
-            if (productOptionsText) {
-                try {
-                    return JSON.parse(productOptionsText);
-                } catch (e) {
-                    // console.error('Invalid JSON for product options');
-                }
-            }
-            return [];
-        })();
+        this.productOptions = parseMetadata('[data-eyeva-product-options]');
+
+        this.console.log('ProductDetails.customFields:', this.customFields);
         this.console.log('ProductDetails.productOptions:', this.productOptions);
-
-        /**
-         * Enable or disable modifiers modal feature
-         * @type {boolean}
-         */
-        // enable modifiers modal if our choose options button appears in the product details
-        this.enableModifiersModal = $chooseOptionsBtn.length > 0;
-
-        if (this.enableModifiersModal) {
-            this.createModifiersModal();
-        }
-
-        this.bindProductEditEvents();
-        this.bindStickyAddToCartEvents();
-        this.bindModalDestroy();
-        this.initOptionStepper();
-        this.syncProductCardQty();
-        this.initSaleCountdown();
-        $('body').trigger('update-wishlist-buttons', [this.$scope]);
     }
 
     get $updateProductWrapper() {
@@ -628,6 +615,8 @@ export default class ProductDetails extends CornerstoneProductDetails {
 
     updateView(data, ...args) {
         super.updateView(data, ...args);
+        this.refreshProductMetadata();
+        this.renderInlineOptionTooltips();
 
         this.updateSalePercent(data);
         this.updateShippingCountdown(data);
@@ -1924,6 +1913,127 @@ export default class ProductDetails extends CornerstoneProductDetails {
                     $value.append($tooltipHeading);
                 });
             });
+    }
+
+    renderInlineOptionTooltips() {
+        const $productOptionsEl = this.$scope.find('[data-product-option-change]').first();
+
+        if (!$productOptionsEl.length) {
+            return;
+        }
+
+        $productOptionsEl.find('[data-eyeva-product-option-tooltip-id], [data-eyeva-product-option-tooltip-heading-id]').remove();
+
+        if (!this.productOptions.length || !this.customFields.length) {
+            return;
+        }
+
+        const optionIds = $productOptionsEl.find('[data-product-attribute-id]')
+            .map((_index, el) => Number($(el).data('product-attribute-id')))
+            .get();
+        const tooltips = {};
+        const tooltipHeadings = {};
+
+        this.productOptions
+            .filter(({ id }) => optionIds.includes(id))
+            .forEach(option => {
+                this.customFields.forEach(customField => {
+                    const tooltipMatch = this.customFieldMatchTooltip({ customField, option });
+                    if (tooltipMatch) {
+                        tooltips[option.id] = Object.assign({}, tooltips[option.id], {
+                            tooltip: tooltipMatch.tooltip || tooltips[option.id]?.tooltip,
+                            valueTooltips: Object.assign({}, tooltips[option.id]?.valueTooltips, tooltipMatch.valueTooltips),
+                        });
+                    }
+
+                    const valueTooltipHeadings = this.customFieldMatchTooltipHeading({ customField, option });
+                    if (valueTooltipHeadings) {
+                        tooltipHeadings[option.id] = Object.assign({}, tooltipHeadings[option.id], valueTooltipHeadings);
+                    }
+                });
+            });
+
+        this.showInlineOptionTooltips($productOptionsEl, tooltips, tooltipHeadings);
+    }
+
+    showInlineOptionTooltips($productOptionsEl, tooltips, tooltipHeadings) {
+        Object.entries(tooltips).forEach(([optionId, { tooltip, valueTooltips = {} }]) => {
+            const $option = $productOptionsEl.find(`[data-product-attribute-id="${optionId}"]`);
+
+            if (!$option.length) {
+                return;
+            }
+
+            if (tooltip) {
+                const $tooltip = $(this.optionTooltipTemplate.replace('<%tooltip%>', tooltip))
+                    .attr('data-eyeva-product-option-tooltip-id', optionId);
+                const $label = $option.find('label').first();
+
+                if ($label.length > 0) {
+                    $label.append($tooltip);
+                } else {
+                    $option.prepend($tooltip);
+                }
+            }
+
+            Object.entries(valueTooltips).forEach(([valueId, valueTooltip]) => {
+                const $value = $option.find(`[data-product-attribute-value="${valueId}"]`).first();
+
+                if (!$value.length) {
+                    return;
+                }
+
+                const $tooltip = $(this.optionValueTooltipTemplate.replace('<%tooltip%>', valueTooltip))
+                    .attr('data-eyeva-product-option-tooltip-id', `${optionId}-${valueId}`);
+
+                if ($value.is('option')) {
+                    if ($value.is(':selected')) {
+                        const $select = $option.find('select').first();
+
+                        if ($select.length > 0) {
+                            $select.after($tooltip);
+                        } else {
+                            $option.append($tooltip);
+                        }
+                    }
+                } else {
+                    $value.after($tooltip);
+                }
+            });
+        });
+
+        Object.entries(tooltipHeadings).forEach(([optionId, valueTooltipHeadings]) => {
+            const $option = $productOptionsEl.find(`[data-product-attribute-id="${optionId}"]`);
+
+            if (!$option.length) {
+                return;
+            }
+
+            Object.entries(valueTooltipHeadings).forEach(([valueId, valueTooltipHeading]) => {
+                const $value = $option.find(`[data-product-attribute-value="${valueId}"]`).first();
+
+                if (!$value.length) {
+                    return;
+                }
+
+                const $tooltipHeading = $(this.optionValueTooltipHeadingTemplate.replace('<%heading%>', valueTooltipHeading))
+                    .attr('data-eyeva-product-option-tooltip-heading-id', `${optionId}-${valueId}`);
+
+                if ($value.is('option')) {
+                    if ($value.is(':selected')) {
+                        const $select = $option.find('select').first();
+
+                        if ($select.length > 0) {
+                            $select.after($tooltipHeading);
+                        } else {
+                            $option.append($tooltipHeading);
+                        }
+                    }
+                } else {
+                    $value.append($tooltipHeading);
+                }
+            });
+        });
     }
 
     /**
