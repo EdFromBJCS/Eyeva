@@ -1,482 +1,893 @@
-<div class="form-panel is-hidden" data-form="repairs">
-    <div class="tab-container">
-        <div class="tab-buttons">
-            <div class="tab-cell">
-                <div class="tab-button" onclick="showTab(0)">
-                    <div class="tab-text">
-                        <h3 class="tabs-title">Repair Form</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-cell">
-                <div class="tab-button" onclick="showTab(1)">
-                    <div class="tab-text">
-                        <h3 class="tabs-title">Repair Information</h3>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-cell">
-                <div class="tab-button" onclick="showTab(2)">
-                    <div class="tab-text">
-                        <h3 class="tabs-title">Shipping Guide</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tab-text"></div>
-        <table class="tab-table-repair-mobile">
-            <tbody></tbody>
-        </table>
-        <div id="tab1" class="tab-content active-tab-button">
-            <form name="repairForm" onsubmit="aggData()">
+{{#partial "page"}}
 
-                <!-- REQUIRED: Your API Key -->
-                <!-- <input type="hidden" name="api_key" value="T361e180a85ec98f6f-ec386aadffd5dae1ec5f8d44d55f1ba1"> -->
+{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
 
-                <h2>Repair Form</h2>
-                <p">Please complete this form as accurately
-                    and thoroughly as possible. Providing detailed
-                    information helps our technicians replicate the issue
-                    and properly diagnose your laptop.</p>
-                    <p">After you submit the form and we receive
-                        your computer, our technicians will diagnose the
-                        issue
-                        and contact you with the next steps.</p>
+<style>
+    .RS_form_textarea {
+        width: 100%;
+        padding: 12px 14px;
+        background: #f8fafc;
+        border: 1px solid;
+        border-color: #e5e7eb;
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: border-color .18s;
+    }
+</style>
+<div class="main-content">
+    <div class="dual-form-container">
+        <h2 style="text-align: left; margin-top: 0.5em; margin-bottom: 0.5em;"><span>Do you need technical
+                support or to send your rugged computer in for repair? </span></h2>
+        <div style="text-align: left; margin-top: 0.5em; margin-bottom: 0.5em;"><span>Simply choose the service
+                you need below and complete the appropriate form:</span></div>
+        <ul>
+            <li style="text-align: left;"><span>Use the <b>Technical Support form</b> if you're experiencing
+                    operating system issues, have questions about using your device, or need
+                    troubleshooting assistance. (We do not support 3rd party software.)</span></li>
+            <li style="text-align: left;"><span>Use the <b>Repair form</b> if your device is physically
+                    damaged, malfunctioning, or requires hardware service. <u>Filling out this form
+                        will require you to send your computer to our repair
+                        department.</u></span>
+            </li>
+            <li style="text-align: left;"><span>Use the <b>Repair Portal</b> if you have an existing repair
+                    with us and would like to check the status of your repair. Our repair
+                    technicians do their best to keep tickets up to date in the portal as they work
+                    on it, so you can check back there for updates.</span></li>
+        </ul>
+        <div style="text-align: left; margin-top: 0.5em; margin-bottom: 0.5em;"><span>If you&rsquo;re not sure
+                which form to use, start with Technical Support. Our team will review your issue and let
+                you know if a repair is necessary.</span></div>
+        <div align="center" class="support-switcher"><label><input type="radio" name="formChoice" value="tech" />
+                Technical Support Form</label> <label><input type="radio" name="formChoice" value="repairs" />
+                Repair Form (<b>Computer Mail In
+                    Required</b>)</label> <label><input type="radio" name="formChoice" value="portal" /> Repair
+                Portal (<b>Leaves Page</b>)</label></div>
+        <div class="form-wrapper">
+            <div class="form-panel is-hidden" data-form="tech">
+                <h2>Technical Support Form</h2>
+                <p>Please fill out the form below with as much detail as possible regarding your
+                    technical issue. Once submitted, a member of our technical support team will
+                    reach out to you as soon as possible to assist you with your issue. Please keep
+                    in mind that response times may vary depending on office hours. Our hours of
+                    operation are from 9 AM to 5 PM, Monday through Friday.</p>
+                <p>Filling out more than one request will not expedite the process. Thank you for your
+                    understanding.</p>
+                <form id="inf_form_fa38e6916142c70dec293922f11521b4" class="infusion-form"
+                    action="https://gc200.infusionsoft.com/app/form/process/fa38e6916142c70dec293922f11521b4"
+                    method="POST" accept-charset="UTF-8"><input type="hidden" name="inf_form_xid"
+                        value="fa38e6916142c70dec293922f11521b4" /> <input type="hidden" name="inf_form_name"
+                        value="Request information" /> <input type="hidden" name="infusionsoft_version"
+                        value="1.70.0.65079" />
+                    <div>&nbsp;</div>
+                    <div class="form-field"><label class="form-label" for="inf_field_FirstName">First Name *</label>
+                        <input id="inf_field_FirstName" class="form-input" type="text" name="inf_field_FirstName" />
+                    </div>
+                    <div class="form-field"><label class="form-label" for="inf_field_LastName">Last
+                            Name *</label> <input id="inf_field_LastName" class="form-input" type="text"
+                            name="inf_field_LastName" /></div>
+                    <div class="form-field"><label class="form-label" for="inf_field_Email">Email
+                            *</label> <input id="inf_field_Email" class="form-input" type="text"
+                            name="inf_field_Email" /></div>
+                    <div class="form-field"><label class="form-label" for="inf_field_Phone1">Phone</label> <input
+                            id="inf_field_Phone1" class="form-input" type="text" name="inf_field_Phone1" /></div>
+                    <div class="form-field"><label class="form-label" for="inf_option_ModelToughbookyouown">Model
+                            Toughbook you
+                            own</label>
+                        <div class="infusion-radio">
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_245"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="245" /> <label
+                                        for="inf_option_ModelToughbookyouown_245">CF-31</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_247"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="247" /> <label
+                                        for="inf_option_ModelToughbookyouown_247">CF-30</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_249"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="249" /> <label
+                                        for="inf_option_ModelToughbookyouown_249">CF-29</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_251"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="251" /> <label
+                                        for="inf_option_ModelToughbookyouown_251">CF-18</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_253"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="253" /> <label
+                                        for="inf_option_ModelToughbookyouown_253">CF-19</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_5584"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="5584" /> <label
+                                        for="inf_option_ModelToughbookyouown_5584">CF-20</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_732"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="732" /> <label
+                                        for="inf_option_ModelToughbookyouown_732">CF-52</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_734"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="734" /> <label
+                                        for="inf_option_ModelToughbookyouown_734">CF-53</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_4804"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="4804" /> <label
+                                        for="inf_option_ModelToughbookyouown_4804">CF-54</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_5586"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="5586" /> <label
+                                        for="inf_option_ModelToughbookyouown_5586">CF-33</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_6024"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="6024" /> <label
+                                        for="inf_option_ModelToughbookyouown_6024">FZ-55</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_6026"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="6026" /> <label
+                                        for="inf_option_ModelToughbookyouown_6026">FZ-G1</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_6028"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="6028" /> <label
+                                        for="inf_option_ModelToughbookyouown_6028">FZ-G2</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_6030"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="6030" /> <label
+                                        for="inf_option_ModelToughbookyouown_6030">FZ-40</label>
+                                </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_6068"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="6068" /> <label
+                                        for="inf_option_ModelToughbookyouown_6068">Getac,
+                                        Durabook, Dell</label> </span></div>
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_ModelToughbookyouown_255"
+                                        name="inf_option_ModelToughbookyouown" type="radio" value="255" /> <label
+                                        for="inf_option_ModelToughbookyouown_255">Other
+                                        (Please Indicate below)</label> </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-field"><label class="form-label" for="inf_custom_ModelNumber">Model Number
+                            *(Example:
+                            FZ-55A0718VM | Refer To <a href="/blog/a-note-on-model-numbers-for-toughbook-nerds/"
+                                target="_blank" rel="noopener">Toughbook Model Number
+                                For Nerds</a> for assistance)</label> <input id="inf_custom_ModelNumber"
+                            class="form-input" type="text" name="inf_custom_ModelNumber" required=""
+                            aria-required="true" /></div>
+                    <div class="form-field"><label class="form-label" for="inf_option_Doyoupurchasethislaptopfromus">Did
+                            you purchase
+                            this laptop from us?</label>
+                        <div class="infusion-radio">
+                            <div class="options-container"><span class="infusion-option">
+                                    <input id="inf_option_Doyoupurchasethislaptopfromus_263" class="form-radio"
+                                        type="radio" name="inf_option_Doyoupurchasethislaptopfromus" value="263" />
+                                    <label class="form-label"
+                                        for="inf_option_Doyoupurchasethislaptopfromus_263">Yes</label>
+                                </span> <span class="infusion-option"> <input
+                                        id="inf_option_Doyoupurchasethislaptopfromus_265" class="form-radio"
+                                        type="radio" name="inf_option_Doyoupurchasethislaptopfromus" value="265" />
+                                    <label class="form-label"
+                                        for="inf_option_Doyoupurchasethislaptopfromus_265">No</label>
+                                </span></div>
+                        </div>
+                    </div>
+                    <div class="form-field"><label class="form-label" for="inf_custom_ContactUsComments">Tech
+                            Support Question
+                            *</label> <textarea id="inf_custom_ContactUsComments" style="padding: .75rem 1rem;"
+                            name="inf_custom_ContactUsComments" rows="5" cols="40" data-gramm="false"></textarea>
+                    </div>
+                    <div class="form-field"><span class="infusion-option"> <input
+                                id="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy_tech"
+                                class="form-checkbox" type="checkbox"
+                                name="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy"
+                                value="4706" /> <label class="form-label"
+                                for="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy_tech">I
+                                give consent to use this information to send additional
+                                emails and communication as described in your Privacy
+                                Policy *</label> </span></div>
+                    <div class="infusion-submit">
+                        <div class="grecaptcha-badge"
+                            style="width: 256px; height: 60px; transition: right 0.3s ease 0s; position: fixed; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px;"
+                            data-style="bottomright">
+                            <div class="grecaptcha-logo"><iframe
+                                    src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6Le4bx0UAAAAANeDRNRCRSCL2O-zB5Lf5yUUmxXQ&amp;co=aHR0cHM6Ly93d3cuYm9iam9obnNvbi5jb206NDQz&amp;hl=en&amp;v=v1537165899310&amp;size=invisible&amp;cb=uc84kvvgilbw"
+                                    width="256" height="60" name="a-t3cui3m05h1v" frameborder="0"></iframe></div>
+                            <div class="grecaptcha-error">&nbsp;</div>
+                            <textarea id="g-recaptcha-response" class="g-recaptcha-response"
+                                style="width: 250px; height: 40px; border: 1px solid #c1c1c1; margin: 10px 25px; padding: 0px; resize: none; display: none;"
+                                name="g-recaptcha-response" data-gramm="false"></textarea>
+                        </div>
+                        <button id="recaptcha_fa38e6916142c70dec293922f11521b4"
+                            class="infusion-recaptcha button button--primary" type="submit">Submit</button>
+                    </div>
+                </form>
+                <p>
+                    <script type="text/javascript"
+                        src="https://gc200.infusionsoft.com/app/webTracking/getTrackingCode"></script>
+                </p>
+                <script type="text/javascript"
+                    src="https://YOUR-APP-ID.infusionsoft.com/app/form/iframe/TECH_FORM_ID"></script>
+            </div>
+            <div class="form-panel is-hidden" data-form="repairs">
+                <div class="tab-container">
+                    <div class="tab-buttons">
+                        <div class="tab-cell">
+                            <div class="tab-button" onclick="showTab(0)">
+                                <div class="tab-text">
+                                    <h3 class="tabs-title">Repair Form</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-cell">
+                            <div class="tab-button" onclick="showTab(1)">
+                                <div class="tab-text">
+                                    <h3 class="tabs-title">Repair Information</h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-cell">
+                            <div class="tab-button" onclick="showTab(2)">
+                                <div class="tab-text">
+                                    <h3 class="tabs-title">Shipping Guide</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-text"></div>
+                    <table class="tab-table-repair-mobile">
+                        <tbody></tbody>
+                    </table>
+                    <div id="tab1" class="tab-content active-tab-button">
+                        <form name="repairForm" onsubmit="createLead()">
 
-                        <div class="form-field"><label class="form-label">First
-                                Name</label>
+                            <!-- REQUIRED: Your API Key -->
+                            <!-- <input type="hidden" name="api_key" value="T361e180a85ec98f6f-ec386aadffd5dae1ec5f8d44d55f1ba1"> -->
+
+                            <h3>Repair Form</h3>
+                            <br>
+                            <p class="RS_form_text">Please complete this form as accurately and thoroughly as possible.
+                                Providing detailed information helps our technicians replicate the issue and properly
+                                diagnose your laptop.</p>
+                            <p class="RS_form_text">After you submit the form and we receive your computer, our
+                                technicians will diagnose the issue and contact you with the next steps.</p>
+
+                            <label class="form-label">First Name</label>
                             <input class="form-input" type="text" name="first_name" style="display:block" required>
-                        </div>
-                        <div class="form-field"><label class="form-label">Last
-                                Name</label>
+                            <br>
+                            <label class="form-label">Last Name</label>
                             <input class="form-input" type="text" name="last_name" style="display:block" required>
-                        </div>
-                        <div class="form-field"><label class="form-label">Model
-                                Number</label>
-                            <input class="form-input" type="text" name="model_number" style="display:block" required>
-                        </div>
-                        <div class="form-field"><label class="form-label">Serial
-                                Number</label>
-                            <input class="form-input" type="text" name="serial_number" style="display:block" required>
-                        </div>
-                        <div class="form-field"><label class="form-label">Purchased
-                                from BJCS?</label>
+                            <br>
+                            <label class="form-label">Business Name</label>
+                            <input class="form-input" type="text" name="business_name" style="display:block">
+                            <br>
+                            <label class="form-label">Email</label>
+                            <input class="form-input" type="email" name="email" style="display:block" required>
+                            <br>
+                            <label class="form-label">Phone</label>
+                            <input class="form-input" type="text" name="phone" style="display:block" required>
+                            <br>
+                            <label class="form-label">Extension</label>
+                            <input class="form-input" type="text" name="extension" style="display:block">
+                            <br>
+                            <label class="form-label">Street Address</label>
+                            <input class="form-input" type="text" name="address_line1" required>
+                            <br>
+                            <label class="form-label">Address Line 2</label>
+                            <input class="form-input" type="text" name="address_line2">
+                            <br>
+                            <label class="form-label">City</label>
+                            <input class="form-input" type="text" name="city" required>
+                            <br>
+                            <label class="form-label">State</label>
+                            <input class="form-input" type="text" name="state" required>
+                            <br>
+                            <label class="form-label">Postal / Zip Code</label>
+                            <input class="form-input" type="text" name="zip_code" required>
+                            <br>
+
+                            <hr>
+                            <h1>Information About Your Computer</h1>
+                            <p>Please make sure the information you provide is as accurate and detailed as possible.</p>
+                            <br>
+                            <label class="form-label">Brand</label>
+                            <br>
+                            <select name="brand">
+                                <option value="Panasonic">Panasonic</option>
+                                <option value="Getac">Getac</option>
+                                <option value="Dell">Dell</option>
+                                <option value="Other">Other (Specify Below)</option>
+                            </select>
+                            <br>
+                            <br>
+                            <label class="form-label">Full Model Number</label>
+                            <input class="form-input" type="text" name="model_number" style="display:block">
+                            <p>ex: CF-31WALAX1M | FZ-55CD-002M | V110 G5 | Latitude 5420</p>
+                            <br>
+                            <label class="form-label">Serial Number</label>
+                            <input class="form-input" type="text" name="serial_number" style="display:block">
+                            <br>
+                            <label class="form-label">Purchased from BJCS?</label>
                             <input class="" type="checkbox" name="purchased" style="display:block"
                                 onclick="showFields()">
-                        </div>
-                        <div class="form-field"><label class="form-label" style="display:none" name="inv_label"
-                                id="invLabel">Invoice
+                            <br>
+                            <label class="form-label" style="display:none" name="inv_label" id="invLabel">Invoice
                                 Number</label>
                             <input class="form-input" style="display:none" type="text" name="invoice_number"
                                 id="invNumber">
+                            <br>
+                            <label class="form-label" style="display:none" name="warr_label" id="warrLabel">Warranty
+                                Status</label>
+                            <select style="display:none" name="warranty" id="warrLen">
+                                <option value="6 Months">6 Months (Default)</option>
+                                <option value="1 Year">1 Year</option>
+                                <option value="2 Years">2 Years</option>
+                                <option value="3 Years">3 Years</option>
+                            </select>
+                            <br>
+                            <label class="form-label">Problem Summary</label>
+                            <input class="form-input" type="text" name="subject" style="display:block">
+                            <br>
+                            <label class="form-label">Issue Description</label>
+                            <textarea class="RS_form_textarea" name="description" rows="4"
+                                style="display:block"></textarea>
+                            <br>
+                            <label class="form-label"></label>
+                            <br>
+                            <div class="infusion-submit">
+                                <button class="button button--primary" type="submit">Submit
+                                    Repair Form</button>
+                            </div>
+
+
+                        </form>
+                        <script>
+                            function showFields() {
+                                console.log("click")
+                                let isPurchased = document.forms['repairForm'].elements["purchased"].checked
+                                let invLabel = document.getElementById("invLabel");
+                                let invNumber = document.getElementById('invNumber');
+                                let warrLabel = document.getElementById('warrLabel');
+                                let warrLen = document.getElementById('warrLen');
+                                if (isPurchased == true) {
+                                    invLabel.style.display = "block";
+                                    invNumber.style.display = "block";
+                                    warrLabel.style.display = "block";
+                                    warrLen.style.display = "block";
+                                } else {
+                                    invLabel.style.display = "none";
+                                    invNumber.style.display = "none";
+                                    warrLabel.style.display = "none";
+                                    warrLen.style.display = "none";
+                                }
+                            }
+                            function aggData() {
+
+
+                                alert(boxString);
+                                return boxString;
+                            }
+                            async function createLead() {
+                                event.preventDefault();
+                                const apiKey = 'T361e180a85ec98f6f-ec386aadffd5dae1ec5f8d44d55f1ba1';
+                                const url = `https://bobjohnson.repairshopr.com/api/v1/leads`;
+                                let formInfo = document.forms['repairForm'];
+
+                                // console.log(repairInfo.elements["first_name"].value);
+
+
+                                let boxString = formInfo.elements["description"].value;
+                                boxString += "\nBrand: " + formInfo.elements['brand'].value;
+                                boxString += "\nM/N: " + formInfo.elements["model_number"].value;
+                                boxString += "\nS/N: " + formInfo.elements["serial_number"].value;
+                                boxString += "\nPurchased from BJCS?: " + formInfo.elements["purchased"].checked;
+                                boxString += "\nInvoice Number: " + formInfo.elements["invoice_number"].value;
+                                boxString += "\nWarranty Length: " + formInfo.elements["warranty"].value;
+                                let unitInfoString = boxString;
+
+                                let combAddress = formInfo.elements['address_line1'].value + ", " + formInfo.elements['address_line2'].value;
+
+                                const payload = {
+                                    lead: {
+                                        first_name: formInfo.elements['first_name'].value,              // You can adjust fields as needed
+                                        last_name: formInfo.elements['last_name'].value,
+                                        business_name: formInfo.elements['business_name'].value,
+                                        email: formInfo.elements['email'].value,
+                                        phone: formInfo.elements['phone'].value,
+                                        // add extension somehow
+                                        address: combAddress,
+                                        city: formInfo.elements['city'].value,
+                                        state: formInfo.elements['state'].value,
+                                        zip: formInfo.elements['zip_code'].value,
+                                        ticket_subject: formInfo.elements['subject'].value,
+                                        ticket_description: unitInfoString
+                                    }
+                                };
+
+                                try {
+                                    const response = await fetch(url, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Authorization': `Bearer ${apiKey}`
+                                        },
+                                        body: JSON.stringify(payload)
+                                    });
+
+                                    if (!response.ok) {
+                                        const errorText = await response.text();
+                                        throw new Error(`API error: ${response.status} - ${errorText}`);
+                                    }
+
+                                    const data = await response.json();
+                                    console.log('Lead created:', data);
+                                    return data;
+
+                                } catch (error) {
+                                    console.error('Error creating lead:', error);
+                                    throw error;
+                                }
+                            }
+                        </script>
+                    </div>
+                    <div id="tab2" class="tab-content">
+                        <h3>Full-Service Rugged Laptop Repair Department</h3>
+                        <p>We specialize in repairing rugged laptops, and our repair center is one of the few in the
+                            area with the expertise to handle such repairs. Our in-house technicians are certified and
+                            can complete even the most challenging repairs. We have been refurbishing computers for 29
+                            years and have seen almost every rugged laptop and tablet released. The following are the
+                            brands of laptops we work on:</p>
+                        <ul>
+                            <li>Panasonic Toughbooks and Toughpads</li>
+                            <li>Getac rugged laptops and tablets</li>
+                            <li>Dell rugged laptops and tablets</li>
+                        </ul>
+                        <p>We maintain a large inventory of spare parts for many of the makes and models of each brand
+                            of rugged notebooks and tablets listed above. This helps us minimize the wait time during
+                            the repair process. If we don't have the required spare parts, we have a network of
+                            distributors who can quickly ship us the correct parts needed for the repair, minimizing
+                            repair time. Our primary goal is to get your computer back in working order in a timely and
+                            organized manner.</p>
+                        <h4>What is Included in the Cost of A Repair?</h4>
+                        <p>If you send in your computer for repair, which isn&rsquo;t under our limited lifetime
+                            warranty, you&rsquo;ll be expected to pay a $150 repair fee and return shipping. If your
+                            computer needs any replacement parts or you wish to upgrade it while it is here for repair,
+                            you&rsquo;ll also be paying for the parts used in the repair process. You are responsible
+                            for backing up your data; we are not responsible for data loss if it is to occur. However,
+                            there is a data backup fee of $75 if a backup is required.</p>
+                        <h4>Limited Lifetime Warranty</h4>
+                        <p>If you purchased your computer from us, you fall under our limited lifetime warranty, which
+                            means you don&rsquo;t pay the $150 repair fee when you send your computer in for repair. You
+                            only pay for parts and return shipping when applicable. If you purchased an extended
+                            warranty or are still under the first six months of the original purchase date of your
+                            laptop or tablet, your entire repair is covered, including parts, labor, and return
+                            shipping. If you want to purchase an extended warranty, call us at <a
+                                href="tel:877-202-7788" target="_blank" rel="noopener">877-202-7788</a> or e-mail us at
+                            <a href="mailto:parts@bobjohnson.com" target="_blank"
+                                rel="noopener">parts@bobjohnson.com</a>.
+                        </p>
+                        <h4>How Does the Repair Process Work?</h4>
+                        <p>After we receive your computer, our technician will conduct a thorough diagnostic to identify
+                            any issues. Knowing the problems, the technician will analyze the repair's cost. You will be
+                            contacted by the tech either via phone or email with a comprehensive breakdown of the repair
+                            and its cost. Once you approve the repair, our technician will fix the problem. If you
+                            decide not to repair your rugged computer, a $75 diagnostic fee may be charged.</p>
+                        <p>Thanks to our extensive inventory of rugged computer parts, we can complete these repairs
+                            quickly. In some cases, it may not be worth repairing your computer. If the repair cost
+                            exceeds the unit's value, we suggest replacing the computer instead of repairing it. In most
+                            cases, we can offer store credit for your older unit.</p>
+                        <h2 class="faqtitle">Frequently Asked Questions</h2>
+                        <hr class="faqdivider" />
+                        <div class="faq1">
+                            <div class="expandfaq" onclick="toggleAnswer('answer1')">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h3 class="faqplus"><img class="faqicon"
+                                                        src="/product_images/uploaded_images/favicon.png"
+                                                        alt="Frequently Asked Questions Dropdown Arrow" width="15"
+                                                        height="15" /></h3>
+                                            </td>
+                                            <td>
+                                                <h3>Are laptops worth repairing?</h3>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="answer1" class="answer">Nearly all laptops and tablets can be fixed in one manner
+                                or another. However, not all laptops are worth repairing. Generally, if the computer was
+                                working smoothly before it was in for repair and the cost to repair is cheaper than
+                                purchasing a replacement, we recommend repairing the computer. Unfortunately, not every
+                                repair is as straightforward and as simple as that. If we foresee any problems fixing
+                                the computer, we&rsquo;ll let you know beforehand and offer the best options for your
+                                situation. If you send a laptop or tablet to us for repair, we will- let you know all
+                                costs upfront before fixing the computer so there will be no surprises. If you decide
+                                fixing the laptop is not the best option, we have a trade-in program where you can get
+                                credit for a replacement laptop instead.</div>
                         </div>
-                        <div class="form-field"><label class="form-label">Problem
-                                Summary</label>
-                            <input class="form-input" type="text" name="subject" style="display:block" required>
+                        <div class="faq2">
+                            <div class="expandfaq" onclick="toggleAnswer('answer2')">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h3 class="faqplus"><img class="faqicon"
+                                                        src="/product_images/uploaded_images/favicon.png"
+                                                        alt="Frequently Asked Questions Dropdown Arrow" width="15"
+                                                        height="15" /></h3>
+                                            </td>
+                                            <td>
+                                                <h3>When is it not worth repairing a laptop?</h3>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="answer2" class="answer">As a refurbisher of rugged laptops, it&rsquo;s hard to say
+                                that a device is too old to fix, especially when we know that some of the most
+                                indispensable and integral pieces of software only run on legacy hardware. On the other
+                                hand, if you aren&rsquo;t running legacy software meant for legacy hardware but are
+                                still operating a machine grasping every last thread of its existence, it might be time
+                                to consider upgrading to something more modern. While we cannot decide whether to repair
+                                or replace your laptop or tablet, we can recommend the most cost-effective method to get
+                                a working laptop or tablet back in your hands as swiftly as possible.</div>
                         </div>
-                        <div class="form-field"><label class="form-label">Issue
-                                Description</label>
-                            <textarea class="RS_form_textarea" name="description" rows="4" style="display:block"
-                                required></textarea>
+                        <div class="faq3">
+                            <div class="expandfaq" onclick="toggleAnswer('answer3')">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h3 class="faqplus"><img class="faqicon"
+                                                        src="/product_images/uploaded_images/favicon.png"
+                                                        alt="Frequently Asked Questions Dropdown Arrow" width="15"
+                                                        height="15" /></h3>
+                                            </td>
+                                            <td>
+                                                <h3>How long does a rugged computer repair take?</h3>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="answer3" class="answer">Once your computer arrives at our location, we strive to
+                                get all repairs diagonosed within two to three days of their arrival. This may not be
+                                feasible for every repair, so this is just a goal, not a guarantee, but we will do our
+                                best to get all repairs out as quickly as possible and as close to that time frame as
+                                possible. With that said, our lead time on repairs can be up to 2-4 weeks depending on
+                                how many we have. If our technicians run into any problems with the repair that would
+                                cause it to ship late, they will reach out. And you can always call 302-659-2727 to get
+                                an update on your repair.</div>
                         </div>
-                        <div class="infusion-submit">
-                            <button class="button button--primary" type="submit">Submit
-                                Repair Form</button>
+                        <div class="faq4">
+                            <div class="expandfaq" onclick="toggleAnswer('answer4')">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h3 class="faqplus"><img class="faqicon"
+                                                        src="/product_images/uploaded_images/favicon.png"
+                                                        alt="Frequently Asked Questions Dropdown Arrow" width="15"
+                                                        height="15" /></h3>
+                                            </td>
+                                            <td>
+                                                <h3>I think my repair is pretty simple. Can you tell me how to do it
+                                                    myself?</h3>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="answer4" class="answer">We can't diagnose your computer without seeing it in
+                                person, and we can't give you instructions via telephone or email for a computer we
+                                haven't diagnosed, but if you are sure you know what the problem is, you are welcome to
+                                take a swing at it (at your own risk, of course). If you need a little guidance, feel
+                                free to check out some of the many tutorials on our <a
+                                    href="https://www.youtube.com/@Bobjohnson">YouTube Channel.</a></div>
                         </div>
-            </form>
-            <!-- action="https://bobjohnson.repairshopr.com/api/v1/leads" method="POST" -->
-        </div>
-        <div id="tab2" class="tab-content">
-            <h3>Full-Service Rugged Laptop Repair Department</h3>
-            <p>We specialize in repairing rugged laptops, and our repair center is
-                one of the few in the area with the expertise to handle such
-                repairs. Our in-house technicians are certified and can complete
-                even the most challenging repairs. We have been refurbishing
-                computers for 29 years and have seen almost every rugged laptop
-                and tablet released. The following are the brands of laptops we
-                work on:</p>
-            <ul>
-                <li>Panasonic Toughbooks and Toughpads</li>
-                <li>Getac rugged laptops and tablets</li>
-                <li>Dell rugged laptops and tablets</li>
-            </ul>
-            <p>We maintain a large inventory of spare parts for many of the makes
-                and models of each brand of rugged notebooks and tablets listed
-                above. This helps us minimize the wait time during the repair
-                process. If we don't have the required spare parts, we have a
-                network of distributors who can quickly ship us the correct
-                parts needed for the repair, minimizing repair time. Our primary
-                goal is to get your computer back in working order in a timely
-                and organized manner.</p>
-            <h4>What is Included in the Cost of A Repair?</h4>
-            <p>If you send in your computer for repair, which isn&rsquo;t under our
-                limited lifetime warranty, you&rsquo;ll be expected to pay a
-                $150 repair fee and return shipping. If your computer needs any
-                replacement parts or you wish to upgrade it while it is here for
-                repair, you&rsquo;ll also be paying for the parts used in the
-                repair process. You are responsible for backing up your data; we
-                are not responsible for data loss if it is to occur. However,
-                there is a data backup fee of $75 if a backup is required.</p>
-            <h4>Limited Lifetime Warranty</h4>
-            <p>If you purchased your computer from us, you fall under our limited
-                lifetime warranty, which means you don&rsquo;t pay the $150
-                repair fee when you send your computer in for repair. You only
-                pay for parts and return shipping when applicable. If you
-                purchased an extended warranty or are still under the first six
-                months of the original purchase date of your laptop or tablet,
-                your entire repair is covered, including parts, labor, and
-                return shipping. If you want to purchase an extended warranty,
-                call us at <a href="tel:877-202-7788" target="_blank" rel="noopener">877-202-7788</a> or
-                e-mail us at <a href="mailto:parts@bobjohnson.com" target="_blank"
-                    rel="noopener">parts@bobjohnson.com</a>.
-            </p>
-            <h4>How Does the Repair Process Work?</h4>
-            <p>After we receive your computer, our technician will conduct a
-                thorough diagnostic to identify any issues. Knowing the
-                problems, the technician will analyze the repair's cost. You
-                will be contacted by the tech either via phone or email with a
-                comprehensive breakdown of the repair and its cost. Once you
-                approve the repair, our technician will fix the problem. If you
-                decide not to repair your rugged computer, a $75 diagnostic fee
-                may be charged.</p>
-            <p>Thanks to our extensive inventory of rugged computer parts, we can
-                complete these repairs quickly. In some cases, it may not be
-                worth repairing your computer. If the repair cost exceeds the
-                unit's value, we suggest replacing the computer instead of
-                repairing it. In most cases, we can offer store credit for your
-                older unit.</p>
-            <h2 class="faqtitle">Frequently Asked Questions</h2>
-            <hr class="faqdivider" />
-            <div class="faq1">
-                <div class="expandfaq" onclick="toggleAnswer('answer1')">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <h3 class="faqplus"><img class="faqicon"
-                                            src="/product_images/uploaded_images/favicon.png"
-                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
-                                    </h3>
-                                </td>
-                                <td>
-                                    <h3>Are laptops worth
-                                        repairing?</h3>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="answer1" class="answer">Nearly all laptops and tablets
-                    can be fixed in one manner or another. However, not all
-                    laptops are worth repairing. Generally, if the computer
-                    was working smoothly before it was in for repair and the
-                    cost to repair is cheaper than purchasing a replacement,
-                    we recommend repairing the computer. Unfortunately, not
-                    every repair is as straightforward and as simple as
-                    that. If we foresee any problems fixing the computer,
-                    we&rsquo;ll let you know beforehand and offer the best
-                    options for your situation. If you send a laptop or
-                    tablet to us for repair, we will- let you know all costs
-                    upfront before fixing the computer so there will be no
-                    surprises. If you decide fixing the laptop is not the
-                    best option, we have a trade-in program where you can
-                    get credit for a replacement laptop instead.</div>
-            </div>
-            <div class="faq2">
-                <div class="expandfaq" onclick="toggleAnswer('answer2')">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <h3 class="faqplus"><img class="faqicon"
-                                            src="/product_images/uploaded_images/favicon.png"
-                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
-                                    </h3>
-                                </td>
-                                <td>
-                                    <h3>When is it not worth
-                                        repairing a
-                                        laptop?</h3>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="answer2" class="answer">As a refurbisher of rugged
-                    laptops, it&rsquo;s hard to say that a device is too old
-                    to fix, especially when we know that some of the most
-                    indispensable and integral pieces of software only run
-                    on legacy hardware. On the other hand, if you
-                    aren&rsquo;t running legacy software meant for legacy
-                    hardware but are still operating a machine grasping
-                    every last thread of its existence, it might be time to
-                    consider upgrading to something more modern. While we
-                    cannot decide whether to repair or replace your laptop
-                    or tablet, we can recommend the most cost-effective
-                    method to get a working laptop or tablet back in your
-                    hands as swiftly as possible.</div>
-            </div>
-            <div class="faq3">
-                <div class="expandfaq" onclick="toggleAnswer('answer3')">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <h3 class="faqplus"><img class="faqicon"
-                                            src="/product_images/uploaded_images/favicon.png"
-                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
-                                    </h3>
-                                </td>
-                                <td>
-                                    <h3>How long does a
-                                        rugged computer
-                                        repair take?
-                                    </h3>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="answer3" class="answer">Once your computer arrives at
-                    our location, we strive to get all repairs diagonosed
-                    within two to three days of their arrival. This may not
-                    be feasible for every repair, so this is just a goal,
-                    not a guarantee, but we will do our best to get all
-                    repairs out as quickly as possible and as close to that
-                    time frame as possible. With that said, our lead time on
-                    repairs can be up to 2-4 weeks depending on how many we
-                    have. If our technicians run into any problems with the
-                    repair that would cause it to ship late, they will reach
-                    out. And you can always call 302-659-2727 to get an
-                    update on your repair.</div>
-            </div>
-            <div class="faq4">
-                <div class="expandfaq" onclick="toggleAnswer('answer4')">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <h3 class="faqplus"><img class="faqicon"
-                                            src="/product_images/uploaded_images/favicon.png"
-                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
-                                    </h3>
-                                </td>
-                                <td>
-                                    <h3>I think my repair is
-                                        pretty simple.
-                                        Can you tell me
-                                        how to do it
-                                        myself?</h3>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="answer4" class="answer">We can't diagnose your computer
-                    without seeing it in person, and we can't give you
-                    instructions via telephone or email for a computer we
-                    haven't diagnosed, but if you are sure you know what the
-                    problem is, you are welcome to take a swing at it (at
-                    your own risk, of course). If you need a little
-                    guidance, feel free to check out some of the many
-                    tutorials on our <a href="https://www.youtube.com/@Bobjohnson">YouTube
-                        Channel.</a></div>
-            </div>
-            <div class="faq5">
-                <div class="expandfaq" onclick="toggleAnswer('answer5')">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <h3 class="faqplus"><img class="faqicon"
-                                            src="/product_images/uploaded_images/favicon.png"
-                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
-                                    </h3>
-                                </td>
-                                <td>
-                                    <h3>What types of
-                                        repairs are
-                                        available?</h3>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="answer5" class="answer">Our technicians provide a
-                    full-range of Rugged Computer repairs, including, but
-                    not limited to:
-                    <ul>
-                        <li>Touchscreen replacement</li>
-                        <li>Hard drive replacement</li>
-                        <li>Operating system re-install</li>
-                        <li>Motherboard replacement</li>
-                        <li>Memory/RAM upgrades</li>
-                    </ul>
-                    If you have a question about whether or not we repair a
-                    specific issue, please give us a call at 302-659-2727 or
-                    send us an email at <a href="mailto:repair@bobjohnson.com">repair@bobjohnson.com</a>.
+                        <div class="faq5">
+                            <div class="expandfaq" onclick="toggleAnswer('answer5')">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h3 class="faqplus"><img class="faqicon"
+                                                        src="/product_images/uploaded_images/favicon.png"
+                                                        alt="Frequently Asked Questions Dropdown Arrow" width="15"
+                                                        height="15" /></h3>
+                                            </td>
+                                            <td>
+                                                <h3>What types of repairs are available?</h3>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="answer5" class="answer">Our technicians provide a full-range of Rugged Computer
+                                repairs, including, but not limited to:
+                                <ul>
+                                    <li>Touchscreen replacement</li>
+                                    <li>Hard drive replacement</li>
+                                    <li>Operating system re-install</li>
+                                    <li>Motherboard replacement</li>
+                                    <li>Memory/RAM upgrades</li>
+                                </ul>
+                                If you have a question about whether or not we repair a specific issue, please give us a
+                                call at 302-659-2727 or send us an email at <a
+                                    href="mailto:repair@bobjohnson.com">repair@bobjohnson.com</a>.
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tab3" class="tab-content">
+                        <h3>How to Ship Your Rugged Computer Safely</h3>
+                        <p>Rugged Computers are tough, but sometimes even the toughest of the tough break down and must
+                            be sent in for repair. That is why you need a safe and reliable way to get your computer to
+                            a trained Bob Johnson Computer Stuff technician. We understand how disappointing and
+                            frustrating it can be to find out your package has gotten damaged during the shipping
+                            process. We&rsquo;ve compiled a <a
+                                href="https://www.fedex.com/en-us/shipping/how-to-ship-computers.html" target="_blank"
+                                rel="noopener">guide to help you package your computer effectively</a>, minimizing the
+                            risk of damage during shipping. From protecting your computer from rough handling to
+                            safeguarding against environmental variables, this guide will cover everything you need to
+                            know to make you a packing expert.</p>
+                        <h4>Packing the Box Correctly</h4>
+                        <p>The two most important factors that will help ensure your computer arrives intact are the box
+                            you pack it in and the padded materials you use to package it. They are crucial to keeping
+                            your computer safe for the journey to the repair shop. No matter which carrier you ship
+                            with, the voyage is unpredictable and out of your control once it ships. The box and the
+                            packing materials are the only things keeping your computer safe from a potentially bumpy
+                            trip ahead.</p>
+                        <p>When you are packing your computer in the box, we recommend:</p>
+                        <ul>
+                            <li>A box with at least 1-2 inches on the top, bottom, and both sides of the computer</li>
+                            <li>About an inch of packaging materials on each side of the computer.</li>
+                            <li>We suggest genuine packaging materials to avoid screen damage when packing a tablet.
+                            </li>
+                            <li>Some good packaging materials to use are:</li>
+                            <ul>
+                                <li>Packing Peanuts</li>
+                                <li>Bubble Wrap</li>
+                            </ul>
+                            <li>To wrap each unit</li>
+                            <ul>
+                                <li>Foam</li>
+                                <li>Cardboard</li>
+                                <li>Newspaper</li>
+                                <li>If you use newspaper, fluff it up for more support.</li>
+                            </ul>
+                        </ul>
+                        <ul>
+                            <li>It may cost $5-$10 more, but it&rsquo;s better than damaging the computer.</li>
+                            <li>Line the box corners with cardboard sheets bent roughly 90 degrees.</li>
+                            <li>Include some information to help us identify your repair when it gets to us.
+                                <ul>
+                                    <li>Print out a copy of the repair form</li>
+                                    <li>A piece of paper with your name and number</li>
+                                    <li>A business card taped to the computer</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul>
+                            <li>If we don't have your information, it will delay your repair.</li>
+                            <li>Give the box a light shake to ensure the computer is not moving too much.</li>
+                            <li>Properly seal the box with plenty of tape.</li>
+                        </ul>
+                        <p>If you need assistance <a href="https://www.youtube.com/watch?v=23-b0n5LsOk" target="_blank"
+                                rel="noopener">preparing the box for shipping</a>, here is a good video from FedEx to
+                            help walk you through the steps.</p>
+                        <h4>Preparing to Ship</h4>
+                        <p>Next, you&rsquo;ll need to schedule to have your package shipped. You can schedule to pick up
+                            your package or go to one of their physical locations and have them ship it for you. You can
+                            also have them pack your computer for you in a special box if you don&rsquo;t have the
+                            supplies yourself. It doesn&rsquo;t particularly matter which shipping carrier you choose.
+                            The important part of the process is when you get to the point where you have the option to
+                            insure your package, you should. If something unexpected happens during shipping and your
+                            computer breaks or is lost, this will cover you. With your box packed and your computer
+                            insured, you can ship your box out!</p>
+                        <h4>The DON&rsquo;Ts of Shipping Your Computer</h4>
+                        <ul>
+                            <li>Don&rsquo;t use a box too small or too large for the computer.</li>
+                            <li>Don&rsquo;t leave space in your box for your computer to shift around in.</li>
+                            <li>Don&rsquo;t reuse old, worn-down boxes that already have wear and tear on them.</li>
+                            <li>Don&rsquo;t leave your power adapter plugged into your computer in the box.</li>
+                            <li>Don&rsquo;t ship your computer without insuring it.</li>
+                            <li>Don&rsquo;t ship your computer using the post office.</li>
+                        </ul>
+                        <h5>Ship All Repairs to:</h5>
+                        <p style="margin-bottom: 0;">Bob Johnson's Computer Stuff, Inc.</p>
+                        <p style="margin: 0;">ATTN: Repairs</p>
+                        <p style="margin: 0;">133 N. Dupont Blvd. Ste. 103</p>
+                        <p style="margin-top: 0;">Smyrna, DE 19977-1545</p>
+                        <p>For more information about shipping and returns, click <a href="/shipping-returns/"
+                                target="_blank" rel="noopener">here</a>.</p>
+                        <h2 class="faqtitle">Frequently Asked Questions</h2>
+                        <hr class="faqdivider" />
+                        <div class="faq6">
+                            <div class="expandfaq" onclick="toggleAnswer('answer6')">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h3 class="faqplus"><img class="faqicon"
+                                                        src="/product_images/uploaded_images/favicon.png"
+                                                        alt="Frequently Asked Questions Dropdown Arrow" width="15"
+                                                        height="15" /></h3>
+                                            </td>
+                                            <td>
+                                                <h3>How Long Does Shipping Take?</h3>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="answer6" class="answer">Unfortunately, we have no control over the shipping.
+                                Depending on your chosen shipping provider and how far away you are from us. We only
+                                control how long your rugged laptop is in our repair shop. For estimated shipping
+                                arrival times, refer to our <a href="/shipping-costs-and-arrival-times/" target="_blank"
+                                    rel="noopener">Shipping &amp; Arrival Times Page</a></div>
+                        </div>
+                        <div class="faq7">
+                            <div class="expandfaq" onclick="toggleAnswer('answer7')">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h3 class="faqplus"><img class="faqicon"
+                                                        src="/product_images/uploaded_images/favicon.png"
+                                                        alt="Frequently Asked Questions Dropdown Arrow" width="15"
+                                                        height="15" /></h3>
+                                            </td>
+                                            <td>
+                                                <h3>Who Is the Best Shipping Provider?</h3>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div id="answer7" class="answer">This is more of a personal preference. We typically get
+                                deliveries from every one of the carriers, but we use FedEx primarily to ship out our
+                                products and to ship the repairs back to you.</div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div id="tab3" class="tab-content">
-            <h3>How to Ship Your Rugged Computer Safely</h3>
-            <p>Rugged Computers are tough, but sometimes even the toughest of the
-                tough break down and must be sent in for repair. That is why you
-                need a safe and reliable way to get your computer to a trained
-                Bob Johnson Computer Stuff technician. We understand how
-                disappointing and frustrating it can be to find out your package
-                has gotten damaged during the shipping process. We&rsquo;ve
-                compiled a <a href="https://www.fedex.com/en-us/shipping/how-to-ship-computers.html" target="_blank"
-                    rel="noopener">guide to help you package
-                    your computer effectively</a>, minimizing the risk of
-                damage during shipping. From protecting your computer from rough
-                handling to safeguarding against environmental variables, this
-                guide will cover everything you need to know to make you a
-                packing expert.</p>
-            <h4>Packing the Box Correctly</h4>
-            <p>The two most important factors that will help ensure your computer
-                arrives intact are the box you pack it in and the padded
-                materials you use to package it. They are crucial to keeping
-                your computer safe for the journey to the repair shop. No matter
-                which carrier you ship with, the voyage is unpredictable and out
-                of your control once it ships. The box and the packing materials
-                are the only things keeping your computer safe from a
-                potentially bumpy trip ahead.</p>
-            <p>When you are packing your computer in the box, we recommend:</p>
-            <ul>
-                <li>A box with at least 1-2 inches on the top, bottom, and both
-                    sides of the computer</li>
-                <li>About an inch of packaging materials on each side of the
-                    computer.</li>
-                <li>We suggest genuine packaging materials to avoid screen
-                    damage when packing a tablet.</li>
-                <li>Some good packaging materials to use are:</li>
-                <ul>
-                    <li>Packing Peanuts</li>
-                    <li>Bubble Wrap</li>
-                </ul>
-                <li>To wrap each unit</li>
-                <ul>
-                    <li>Foam</li>
-                    <li>Cardboard</li>
-                    <li>Newspaper</li>
-                    <li>If you use newspaper, fluff it up for more support.
-                    </li>
-                </ul>
-            </ul>
-            <ul>
-                <li>It may cost $5-$10 more, but it&rsquo;s better than damaging
-                    the computer.</li>
-                <li>Line the box corners with cardboard sheets bent roughly 90
-                    degrees.</li>
-                <li>Include some information to help us identify your repair
-                    when it gets to us.
-                    <ul>
-                        <li>Print out a copy of the repair form</li>
-                        <li>A piece of paper with your name and number
-                        </li>
-                        <li>A business card taped to the computer</li>
-                    </ul>
-                </li>
-            </ul>
-            <ul>
-                <li>If we don't have your information, it will delay your
-                    repair.</li>
-                <li>Give the box a light shake to ensure the computer is not
-                    moving too much.</li>
-                <li>Properly seal the box with plenty of tape.</li>
-            </ul>
-            <p>If you need assistance <a href="https://www.youtube.com/watch?v=23-b0n5LsOk" target="_blank"
-                    rel="noopener">preparing the box for
-                    shipping</a>, here is a good video from FedEx to help
-                walk you through the steps.</p>
-            <h4>Preparing to Ship</h4>
-            <p>Next, you&rsquo;ll need to schedule to have your package shipped. You
-                can schedule to pick up your package or go to one of their
-                physical locations and have them ship it for you. You can also
-                have them pack your computer for you in a special box if you
-                don&rsquo;t have the supplies yourself. It doesn&rsquo;t
-                particularly matter which shipping carrier you choose. The
-                important part of the process is when you get to the point where
-                you have the option to insure your package, you should. If
-                something unexpected happens during shipping and your computer
-                breaks or is lost, this will cover you. With your box packed and
-                your computer insured, you can ship your box out!</p>
-            <h4>The DON&rsquo;Ts of Shipping Your Computer</h4>
-            <ul>
-                <li>Don&rsquo;t use a box too small or too large for the
-                    computer.</li>
-                <li>Don&rsquo;t leave space in your box for your computer to
-                    shift around in.</li>
-                <li>Don&rsquo;t reuse old, worn-down boxes that already have
-                    wear and tear on them.</li>
-                <li>Don&rsquo;t leave your power adapter plugged into your
-                    computer in the box.</li>
-                <li>Don&rsquo;t ship your computer without insuring it.</li>
-                <li>Don&rsquo;t ship your computer using the post office.</li>
-            </ul>
-            <h5>Ship All Repairs to:</h5>
-            <p style="margin-bottom: 0;">Bob Johnson's Computer Stuff, Inc.</p>
-            <p style="margin: 0;">ATTN: Repairs</p>
-            <p style="margin: 0;">133 N. Dupont Blvd. Ste. 103</p>
-            <p style="margin-top: 0;">Smyrna, DE 19977-1545</p>
-            <p>For more information about shipping and returns, click <a href="/shipping-returns/" target="_blank"
-                    rel="noopener">here</a>.</p>
-            <h2 class="faqtitle">Frequently Asked Questions</h2>
-            <hr class="faqdivider" />
-            <div class="faq6">
-                <div class="expandfaq" onclick="toggleAnswer('answer6')">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <h3 class="faqplus"><img class="faqicon"
-                                            src="/product_images/uploaded_images/favicon.png"
-                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
-                                    </h3>
-                                </td>
-                                <td>
-                                    <h3>How Long Does
-                                        Shipping Take?
-                                    </h3>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="answer6" class="answer">Unfortunately, we have no
-                    control over the shipping. Depending on your chosen
-                    shipping provider and how far away you are from us. We
-                    only control how long your rugged laptop is in our
-                    repair shop. For estimated shipping arrival times, refer
-                    to our <a href="/shipping-costs-and-arrival-times/" target="_blank" rel="noopener">Shipping &amp;
-                        Arrival Times Page</a></div>
+            <div class="form-panel is-hidden" data-form="portal">
+                <h3 class="center">Repair Portal Login</h3>
+                <p>For security reasons, the Repair Portal login cannot be embedded on this page.</p>
+                <p style="margin-top: 1rem;">
+                    Continue to the direct login page:
+                    <a class="button button--primary" href="https://bobjohnson.repairshopr.com/portal/user_login"
+                        rel="noopener">Open
+                        Repair Portal Login</a>
+                </p>
+                <noscript>
+                    <p>
+                        Use this direct link:
+                        <a href="https://bobjohnson.repairshopr.com/portal/user_login" rel="noopener">Repair Portal
+                            Login</a>
+                    </p>
+                </noscript>
             </div>
-            <div class="faq7">
-                <div class="expandfaq" onclick="toggleAnswer('answer7')">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <h3 class="faqplus"><img class="faqicon"
-                                            src="/product_images/uploaded_images/favicon.png"
-                                            alt="Frequently Asked Questions Dropdown Arrow" width="15" height="15" />
-                                    </h3>
-                                </td>
-                                <td>
-                                    <h3>Who Is the Best
-                                        Shipping
-                                        Provider?</h3>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div id="answer7" class="answer">This is more of a personal
-                    preference. We typically get deliveries from every one
-                    of the carriers, but we use FedEx primarily to ship out
-                    our products and to ship the repairs back to you.</div>
-            </div>
+            <script type="text/javascript">// <![CDATA[
+                function toggleAnswer(id) {
+                    const answer = document.getElementById(id);
+                    answer.classList.toggle('open');
+                }
+
+                const tabs = document.querySelectorAll('.tab-content');
+                const tabButtons = document.querySelectorAll('.tab-button');
+
+                // Function to get URL parameters
+                function getURLParam(parameter) {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    return urlParams.get(parameter);
+                }
+
+                // Check if there's a 'tab' parameter in the URL
+                const tabParam = getURLParam('tab');
+
+                // If 'tab' parameter is not present or invalid, default to tab 0
+                const initialTabIndex = tabParam !== null ? parseInt(tabParam) : 0;
+
+                // Function to show the selected tab
+
+                function showTab(tabIndex) {
+                    tabs.forEach((tab, index) => {
+                        if (index === tabIndex) {
+                            tab.style.display = 'block';
+                        } else {
+                            tab.style.display = 'none';
+                        }
+                    });
+
+                    tabButtons.forEach((button, index) => {
+                        if (index === tabIndex) {
+                            button.classList.add('active-tab', 'underline');
+                        } else {
+                            button.classList.remove('active-tab', 'underline');
+                        }
+                    });
+
+                    // Update URL with the selected tab index
+                    history.pushState(null, null, `?tab=${tabIndex}`);
+                }
+
+                // Show the initial tab when the page loads
+                showTab(initialTabIndex);
+
+                const formChoiceInputs = document.querySelectorAll('input[name="formChoice"]');
+                const portalLoginUrl = 'https://bobjohnson.repairshopr.com/portal/user_login';
+
+                function syncPanels(choice) {
+                    if (choice === 'portal') {
+                        window.location.href = portalLoginUrl;
+                        return;
+                    }
+
+                    document.querySelectorAll('.form-panel').forEach(panel => {
+                        panel.classList.toggle('is-hidden', panel.dataset.form !== choice);
+                    });
+                }
+
+                formChoiceInputs.forEach(input => {
+                    input.addEventListener('change', () => {
+                        syncPanels(input.value);
+                    });
+                });
+
+                // Ensure neither form shows on page open
+                document.addEventListener('DOMContentLoaded', () => {
+                    formChoiceInputs.forEach(input => { input.checked = false; });
+                    document.querySelectorAll('.form-panel').forEach(panel => panel.classList.add('is-hidden'));
+                });
+
+                // RepairShopr repair form JavaScript//
+                function showFields() {
+                    console.log("click")
+                    let isPurchased = document.forms['repairForm'].elements["purchased"].checked
+                    console.log(isPurchased);
+                    let invLabel = document.getElementById("invLabel");
+                    console.log(invLabel);
+                    let invNumber = document.getElementById('invNumber');
+                    console.log(invNumber);
+                    if (isPurchased == true) {
+                        invLabel.style.display = "block";
+                        invNumber.style.display = "block";
+                    } else {
+                        invLabel.style.display = "none";
+                        invNumber.style.display = "none";
+                    }
+                }
+                function aggData() {
+                    let repairInfo = document.forms['repairForm'];
+                    // console.log(repairInfo.elements["first_name"].value);
+                    let boxString = repairInfo.elements["description"].value;
+                    boxString += "\n M/N:" + repairInfo.elements["model_number"].value;
+                    boxString += "\n S/N:" + repairInfo.elements["serial_number"].value;
+
+
+                    alert(boxString);
+
+                }
+
+                // ]]></script>
+            <script type="text/javascript"
+                src="https://YOUR-APP-ID.infusionsoft.com/app/form/iframe/REPAIRS_FORM_ID"></script>
         </div>
     </div>
 </div>
+
+{{/partial}}
+
+{{> layout/base}}
