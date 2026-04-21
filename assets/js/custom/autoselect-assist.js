@@ -1,6 +1,9 @@
 const LAPTOP_MODELS = ['FZ-55', 'CF-54', 'CF-31', 'CF-19', 'S410', 'V110', '5420', '5424', '5430', 'S14I', 'S15', 'Z14I', 'S510', 'B360'];
 const TABLET_MODELS = ['CF-20', 'CF-33', 'FZ-G1', 'FZ-G2', 'F110', 'K120', '7220', 'R8', 'R11', 'U11'];
 const ALLOW_UNKNOWN_FILTERS = true;
+const AUTO_RECOVERY_MIN_RESULTS = 3;
+const BUDGET_ELASTICITY_FACTOR = 1.15;
+const BUDGET_ELASTICITY_STEP = 50;
 
 const questions = [
     {
@@ -37,43 +40,60 @@ const questions = [
         skipValues: ['no'],
     },
         {
-        key: 'ports',
-        question: 'Do you need any specific ports? (Select all that apply)',
-        options: ['USB-C', 'USB-A', 'HDMI', 'DisplayPort', 'Serial', 'RJ-45', 'SD', 'microSD', 'Docking', 'VGA', 'Audio'],
-        skipValues: [],
-            multiSelect: true,
-        valueMap: {
-            'USB-C': 'usb-c',
-            'USB-A': 'usb-a',
-            HDMI: 'hdmi',
-            DisplayPort: 'display',
-            Serial: 'serial',
-            'RJ-45': 'rj-45',
-            SD: 'sd',
-            microSD: 'microsd',
-            Docking: 'docking',
-            VGA: 'vga',
-            Audio: 'audio',
+            key: 'portsNeeded',
+            question: 'Do you need any specific ports?',
+            options: ['yes', 'no'],
+            type: 'gate',
+            followupKeys: ['ports', 'portCounts'],
         },
-    },
+        {
+            key: 'ports',
+            question: 'Which specific ports do you need? (Select all that apply)',
+            options: ['USB-C', 'USB-A', 'HDMI', 'DisplayPort', 'Serial', 'RJ-45', 'SD', 'microSD', 'Docking', 'VGA', 'Audio'],
+            skipValues: [],
+            multiSelect: true,
+            parentGateKey: 'portsNeeded',
+            valueMap: {
+                'USB-C': 'usb-c',
+                'USB-A': 'usb-a',
+                HDMI: 'hdmi',
+                DisplayPort: 'display',
+                Serial: 'serial',
+                'RJ-45': 'rj-45',
+                SD: 'sd',
+                microSD: 'microsd',
+                Docking: 'docking',
+                VGA: 'vga',
+                Audio: 'audio',
+            },
+        },
         {
             key: 'portCounts',
             question: 'How many of each selected port do you need? (Minimum)',
             type: 'portCounts',
+            parentGateKey: 'portsNeeded',
         },
         {
-        key: 'modules',
-        question: 'Do you need any built-in modules? (Select all that apply)',
-        options: ['GPS', 'Barcode', 'Smart Card', 'Fingerprint'],
-        skipValues: [],
-            multiSelect: true,
-        valueMap: {
-            GPS: 'gps',
-            Barcode: 'barcode',
-            'Smart Card': 'smart card',
-            Fingerprint: 'fingerprint',
+            key: 'modulesNeeded',
+            question: 'Do you need any built-in modules?',
+            options: ['yes', 'no'],
+            type: 'gate',
+            followupKeys: ['modules'],
         },
-      },
+        {
+            key: 'modules',
+            question: 'Which built-in modules do you need? (Select all that apply)',
+            options: ['GPS', 'Barcode', 'Smart Card', 'Fingerprint'],
+            skipValues: [],
+            multiSelect: true,
+            parentGateKey: 'modulesNeeded',
+            valueMap: {
+                GPS: 'gps',
+                Barcode: 'barcode',
+                'Smart Card': 'smart card',
+                Fingerprint: 'fingerprint',
+            },
+        },
 
     {
         key: 'price', question: 'What is your budget range?', type: 'range',
@@ -91,6 +111,147 @@ const selectionsState = {};
 let lastLimitingCriteria = [];
 let skippedFromIndex = null;
 let isMatchCountHovered = false;
+let lastRecoveryContext = null;
+let zeroMatchModalResolver = null;
+
+function ensureZeroMatchModalStyles() {
+    if (document.getElementById('quiz-zero-match-modal-styles')) {
+        return;
+    }
+
+    const style = document.createElement('style');
+    style.id = 'quiz-zero-match-modal-styles';
+    style.textContent = `
+        .quiz-zero-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 16px;
+        }
+
+        .quiz-zero-modal-overlay.is-open {
+            display: flex;
+        }
+
+        .quiz-zero-modal {
+            width: 100%;
+            max-width: 560px;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25);
+            border: 1px solid #ddd;
+            overflow: hidden;
+        }
+
+        .quiz-zero-modal__header {
+            background: linear-gradient(135deg, #dc3522, #b92b1e);
+            color: #fff;
+            padding: 14px 16px;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.01em;
+        }
+
+        .quiz-zero-modal__body {
+            padding: 16px;
+            color: #222;
+            line-height: 1.45;
+            font-size: 0.95rem;
+        }
+
+        .quiz-zero-modal__actions {
+            display: grid;
+            gap: 10px;
+            padding: 0 16px 16px;
+            grid-template-columns: 1fr;
+        }
+
+        .quiz-zero-modal__actions .button {
+            width: 100%;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .quiz-zero-modal__actions .button--danger {
+            background: #dc3522;
+            border-color: #dc3522;
+            color: #fff;
+        }
+
+        .quiz-zero-modal__actions .button--danger:hover,
+        .quiz-zero-modal__actions .button--danger:focus {
+            background: #b92b1e;
+            border-color: #b92b1e;
+            color: #fff;
+        }
+    `;
+
+    document.head.appendChild(style);
+}
+
+function ensureZeroMatchModal() {
+    ensureZeroMatchModalStyles();
+
+    let overlay = document.getElementById('quiz-zero-match-modal');
+    if (overlay) {
+        return overlay;
+    }
+
+    overlay = document.createElement('div');
+    overlay.id = 'quiz-zero-match-modal';
+    overlay.className = 'quiz-zero-modal-overlay';
+    overlay.innerHTML = `
+        <div class="quiz-zero-modal" role="dialog" aria-modal="true" aria-labelledby="quiz-zero-modal-title">
+            <div id="quiz-zero-modal-title" class="quiz-zero-modal__header">This choice results in 0 matches</div>
+            <div class="quiz-zero-modal__body">
+                You can keep this requirement, jump to closest matches now, or skip this question and continue the quiz.
+            </div>
+            <div class="quiz-zero-modal__actions">
+                <button type="button" class="button button--danger" data-zero-decision="keep">Keep this strict requirement</button>
+                <button type="button" class="button button--primary" data-zero-decision="closest">Show closest matches now</button>
+                <button type="button" class="button button--secondary" data-zero-decision="skip">Skip this question</button>
+            </div>
+        </div>
+    `;
+
+    overlay.addEventListener('click', event => {
+        if (event.target === overlay) {
+            closeZeroMatchModal('skip');
+        }
+    });
+
+    overlay.querySelectorAll('[data-zero-decision]').forEach(button => {
+        button.addEventListener('click', () => {
+            const decision = button.getAttribute('data-zero-decision') || 'skip';
+            closeZeroMatchModal(decision);
+        });
+    });
+
+    document.body.appendChild(overlay);
+    return overlay;
+}
+
+function openZeroMatchModal() {
+    const overlay = ensureZeroMatchModal();
+    overlay.classList.add('is-open');
+}
+
+function closeZeroMatchModal(decision) {
+    const overlay = document.getElementById('quiz-zero-match-modal');
+    if (overlay) {
+        overlay.classList.remove('is-open');
+    }
+
+    if (zeroMatchModalResolver) {
+        const resolve = zeroMatchModalResolver;
+        zeroMatchModalResolver = null;
+        resolve(decision || 'skip');
+    }
+}
 
 const questionContainer = document.getElementById('question-container');
 const optionsContainer = document.getElementById('options-container');
@@ -464,6 +625,16 @@ function applySingleSelectFilter(products, key, selectedValue) {
     });
 }
 
+function mapSingleSelectValue(question, selection) {
+    if (!question || typeof selection === 'undefined' || selection === null) {
+        return selection;
+    }
+    if (question.valueMap && question.valueMap[selection]) {
+        return question.valueMap[selection];
+    }
+    return selection;
+}
+
 function applyMultiSelectFilter(products, question, selections) {
     const mappedValues = selections.map(value =>
         question.valueMap && question.valueMap[value]
@@ -505,7 +676,27 @@ function applyBudgetFilter(products, minBudget, maxBudget) {
     });
 }
 
-function recomputeFilteredProducts() {
+function roundBudgetUp(value) {
+    if (value === null || typeof value === 'undefined') {
+        return null;
+    }
+    return Math.ceil(value / BUDGET_ELASTICITY_STEP) * BUDGET_ELASTICITY_STEP;
+}
+
+function getExpandedBudgetMax() {
+    if (budgetState.max === null || typeof budgetState.max === 'undefined') {
+        return null;
+    }
+    const expanded = roundBudgetUp(budgetState.max * BUDGET_ELASTICITY_FACTOR);
+    if (expanded <= budgetState.max) {
+        return roundBudgetUp(budgetState.max + BUDGET_ELASTICITY_STEP);
+    }
+    return expanded;
+}
+
+function computeProductsFromSelections(options = {}) {
+    const ignoreKeys = options.ignoreKeys || new Set();
+    const budgetMaxOverride = typeof options.budgetMaxOverride === 'number' ? options.budgetMaxOverride : null;
     let products = [...recommendedProducts];
 
     questions.forEach(question => {
@@ -513,9 +704,24 @@ function recomputeFilteredProducts() {
         if (typeof selection === 'undefined') {
             return;
         }
+        if (ignoreKeys.has(question.key)) {
+            return;
+        }
+        if (ignoreKeys.has('ports') && question.key === 'portCounts') {
+            return;
+        }
+        if (question.parentGateKey && normalizeValue(selectionsState[question.parentGateKey]) !== 'yes') {
+            return;
+        }
 
         if (question.type === 'range') {
-            products = applyBudgetFilter(products, budgetState.min, budgetState.max);
+            const minBudget = budgetState.min;
+            const maxBudget = budgetMaxOverride !== null ? budgetMaxOverride : budgetState.max;
+            products = applyBudgetFilter(products, minBudget, maxBudget);
+            return;
+        }
+
+        if (question.type === 'gate') {
             return;
         }
 
@@ -529,14 +735,256 @@ function recomputeFilteredProducts() {
             return;
         }
 
-        const normalizedValue = normalizeValue(selection);
+        const mappedSelection = mapSingleSelectValue(question, selection);
+        const normalizedValue = normalizeValue(mappedSelection);
         const skipValues = (question.skipValues || []).map(item => normalizeValue(item));
         if (!skipValues.includes(normalizedValue)) {
-            products = applySingleSelectFilter(products, question.key, selection);
+            products = applySingleSelectFilter(products, question.key, mappedSelection);
         }
     });
 
-    filteredProducts = products;
+    return products;
+}
+
+function buildRecoveryContext() {
+    if (filteredProducts.length > 0 || recommendedProducts.length === 0) {
+        return null;
+    }
+
+    const limiting = getLimitingCriteria();
+    const removedFilters = [];
+    const ignoreKeys = new Set();
+    let budgetExpandedTo = null;
+    let recoveredProducts = [];
+
+    const hasBudgetSelection = typeof selectionsState.price !== 'undefined';
+    const budgetRemovalMatches = hasBudgetSelection
+        ? computeProductsFromSelections({ ignoreKeys: new Set(['price']) }).length
+        : 0;
+    const shouldTryBudgetExpansion = hasBudgetSelection && budgetRemovalMatches > filteredProducts.length;
+
+    const expandedBudget = getExpandedBudgetMax();
+    if (shouldTryBudgetExpansion && expandedBudget !== null) {
+        recoveredProducts = computeProductsFromSelections({ budgetMaxOverride: expandedBudget });
+        if (recoveredProducts.length > 0) {
+            budgetExpandedTo = expandedBudget;
+            if (recoveredProducts.length >= AUTO_RECOVERY_MIN_RESULTS) {
+                return {
+                    products: recoveredProducts,
+                    removedFilters,
+                    budgetExpandedTo,
+                };
+            }
+        }
+    }
+
+    for (const criterion of limiting) {
+        ignoreKeys.add(criterion.key);
+        removedFilters.push(criterion.label);
+        recoveredProducts = computeProductsFromSelections({
+            ignoreKeys,
+            budgetMaxOverride: budgetExpandedTo !== null ? budgetExpandedTo : expandedBudget,
+        });
+
+        if (recoveredProducts.length >= AUTO_RECOVERY_MIN_RESULTS || recoveredProducts.length > 0) {
+            if (budgetExpandedTo === null && expandedBudget !== null) {
+                budgetExpandedTo = expandedBudget;
+            }
+            break;
+        }
+    }
+
+    if (recoveredProducts.length === 0) {
+        return null;
+    }
+
+    return {
+        products: recoveredProducts,
+        removedFilters,
+        budgetExpandedTo,
+    };
+}
+
+function promptZeroResultChoice() {
+    if (zeroMatchModalResolver) {
+        return Promise.resolve('skip');
+    }
+
+    return new Promise(resolve => {
+        zeroMatchModalResolver = resolve;
+        openZeroMatchModal();
+    });
+}
+
+function goToResultsAfterCurrentStep() {
+    if (skippedFromIndex === null) {
+        skippedFromIndex = currentQuestionIndex;
+    }
+    currentQuestionIndex = questions.length;
+    displayResults();
+}
+
+function formatSelectionsForAssistance() {
+    const lines = ['Auto Selection Assistance summary:'];
+
+    questions.forEach(question => {
+        const selection = selectionsState[question.key];
+        if (typeof selection === 'undefined') {
+            return;
+        }
+        lines.push(`- ${question.question}: ${formatSelectionLabel(question, selection)}`);
+    });
+
+    lines.push(`- Strict matches found: ${filteredProducts.length}`);
+    if (lastRecoveryContext && lastRecoveryContext.products) {
+        lines.push(`- Closest matches shown: ${lastRecoveryContext.products.length}`);
+        if (lastRecoveryContext.budgetExpandedTo !== null) {
+            lines.push(`- Budget expanded to: $${lastRecoveryContext.budgetExpandedTo}`);
+        }
+        if (lastRecoveryContext.removedFilters.length > 0) {
+            lines.push(`- Filters relaxed: ${lastRecoveryContext.removedFilters.join(' | ')}`);
+        }
+    }
+
+    lines.push(`- Replay quiz: ${buildReplayLink()}`);
+    lines.push(`- Page URL: ${window.location.href}`);
+    return lines.join('\n');
+}
+
+function toBase64Url(value) {
+    const encoded = btoa(unescape(encodeURIComponent(String(value || ''))));
+    return encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+}
+
+function fromBase64Url(value) {
+    const normalized = String(value || '').replace(/-/g, '+').replace(/_/g, '/');
+    const padding = '='.repeat((4 - (normalized.length % 4 || 4)) % 4);
+    return decodeURIComponent(escape(atob(normalized + padding)));
+}
+
+function buildReplayStatePayload() {
+    return {
+        v: 1,
+        selections: cloneSelectionsState(selectionsState),
+        budgetMin: budgetState.min,
+        budgetMax: budgetState.max,
+        portCounts: { ...portCountRequirements },
+        currentQuestionIndex,
+        skippedFromIndex,
+    };
+}
+
+function buildReplayLink() {
+    const payload = buildReplayStatePayload();
+    const serialized = JSON.stringify(payload);
+    const encoded = toBase64Url(serialized);
+    const url = new URL(window.location.href);
+    url.searchParams.set('quizState', encoded);
+    return url.toString();
+}
+
+function restoreStateFromQueryParam() {
+    const params = new URLSearchParams(window.location.search);
+    const encodedState = params.get('quizState');
+    if (!encodedState) {
+        return false;
+    }
+
+    try {
+        const parsed = JSON.parse(fromBase64Url(encodedState));
+        if (!parsed || typeof parsed !== 'object') {
+            return false;
+        }
+
+        Object.keys(multiSelectState).forEach(key => {
+            delete multiSelectState[key];
+        });
+        Object.keys(selectionsState).forEach(key => {
+            delete selectionsState[key];
+        });
+
+        Object.assign(selectionsState, parsed.selections || {});
+        budgetState.min = parsed.budgetMin === null || typeof parsed.budgetMin === 'undefined'
+            ? null
+            : parsed.budgetMin;
+        budgetState.max = parsed.budgetMax === null || typeof parsed.budgetMax === 'undefined'
+            ? null
+            : parsed.budgetMax;
+        portCountRequirements = { ...(parsed.portCounts || {}) };
+        skippedFromIndex = typeof parsed.skippedFromIndex === 'number' ? parsed.skippedFromIndex : null;
+
+        questions.forEach(question => {
+            if (!question.multiSelect) {
+                return;
+            }
+            const selection = selectionsState[question.key];
+            if (Array.isArray(selection)) {
+                multiSelectState[question.key] = new Set(selection);
+            }
+        });
+
+        filteredProducts = [...recommendedProducts];
+        recomputeFilteredProducts();
+
+        if (typeof parsed.currentQuestionIndex === 'number') {
+            currentQuestionIndex = Math.max(0, Math.min(parsed.currentQuestionIndex, questions.length));
+        } else {
+            currentQuestionIndex = questions.length;
+        }
+
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+function emailSelectionsSummary() {
+    const recipients = [
+        'djaneka@bobjohnson.com',
+        'webmaster@bobjohnson.com',
+    ];
+    const subject = 'AutoSelection Form Converted to Selection Assistance Summary';
+    const timestamp = new Date().toLocaleString();
+    const body = `Submitted: ${timestamp}\n\n${formatSelectionsForAssistance()}`;
+    const mailto = `mailto:${recipients.join(',')}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+}
+
+function recomputeFilteredProducts() {
+    filteredProducts = computeProductsFromSelections();
+}
+
+function clearGateFollowups(question) {
+    const followupKeys = (question && question.followupKeys) || [];
+    followupKeys.forEach(key => {
+        delete selectionsState[key];
+        if (multiSelectState[key]) {
+            multiSelectState[key].clear();
+        }
+        if (key === 'ports') {
+            portCountRequirements = {};
+            delete selectionsState.portCounts;
+        }
+        if (key === 'portCounts') {
+            portCountRequirements = {};
+        }
+    });
+}
+
+function getNextQuestionIndex(fromIndex) {
+    let nextIndex = fromIndex + 1;
+    while (nextIndex < questions.length) {
+        const candidate = questions[nextIndex];
+        if (!candidate.parentGateKey) {
+            break;
+        }
+        const gateAnswer = normalizeValue(selectionsState[candidate.parentGateKey]);
+        if (gateAnswer === 'yes') {
+            break;
+        }
+        nextIndex++;
+    }
+    return nextIndex;
 }
 
 function clearSelectionFilter(key) {
@@ -593,11 +1041,18 @@ function getLimitingCriteria() {
             if (typeof selection === 'undefined') {
                 return;
             }
+            if (question.parentGateKey && normalizeValue(selectionsState[question.parentGateKey]) !== 'yes') {
+                return;
+            }
 
             if (question.type === 'range') {
                 const minValue = selection && typeof selection.min !== 'undefined' ? selection.min : null;
                 const maxValue = selection && typeof selection.max !== 'undefined' ? selection.max : null;
                 products = applyBudgetFilter(products, minValue, maxValue);
+                return;
+            }
+
+            if (question.type === 'gate') {
                 return;
             }
 
@@ -611,10 +1066,11 @@ function getLimitingCriteria() {
                 return;
             }
 
-            const normalizedValue = normalizeValue(selection);
+            const mappedSelection = mapSingleSelectValue(question, selection);
+            const normalizedValue = normalizeValue(mappedSelection);
             const skipValues = (question.skipValues || []).map(item => normalizeValue(item));
             if (!skipValues.includes(normalizedValue)) {
-                products = applySingleSelectFilter(products, question.key, selection);
+                products = applySingleSelectFilter(products, question.key, mappedSelection);
             }
         });
 
@@ -635,6 +1091,12 @@ function getLimitingCriteria() {
         }
         const skipValues = (question.skipValues || []).map(item => normalizeValue(item));
         if (skipValues.includes(normalizeValue(selection))) {
+            return;
+        }
+        if (question.type === 'gate') {
+            return;
+        }
+        if (question.parentGateKey && normalizeValue(selectionsState[question.parentGateKey]) !== 'yes') {
             return;
         }
         if (question.type === 'portCounts' && Object.keys(portCountRequirements || {}).length === 0) {
@@ -1297,13 +1759,52 @@ function displayResults() {
     optionsContainer.innerHTML = '';
     resultContainer.innerHTML = '';
 
-    updateMatchCountValue(filteredProducts.length);
+    const existingHeadingNote = document.getElementById('quiz-recovery-heading-note');
+    if (existingHeadingNote) {
+        existingHeadingNote.remove();
+    }
+
+    lastRecoveryContext = buildRecoveryContext();
+    const displayProducts = lastRecoveryContext && lastRecoveryContext.products && lastRecoveryContext.products.length > 0
+        ? lastRecoveryContext.products
+        : filteredProducts;
+
+    updateMatchCountValue(displayProducts.length);
 
     const limiting = getLimitingCriteria();
     lastLimitingCriteria = limiting;
 	
-    if (filteredProducts.length > 0) {
-        filteredProducts.forEach(result => {
+    if (displayProducts.length > 0) {
+        if (filteredProducts.length === 0 && lastRecoveryContext) {
+            const recoveryBox = document.createElement('div');
+            recoveryBox.id = 'quiz-recovery-heading-note';
+            recoveryBox.classList.add('quiz-no-results-box');
+
+            const recoveryTitle = document.createElement('div');
+            recoveryTitle.classList.add('quiz-no-results-hint');
+            recoveryTitle.textContent = 'Closest matches shown by relaxing a few constraints:';
+            recoveryBox.appendChild(recoveryTitle);
+
+            const recoveryList = document.createElement('ul');
+            recoveryList.classList.add('quiz-no-results-list');
+
+            if (lastRecoveryContext.budgetExpandedTo !== null) {
+                const budgetItem = document.createElement('li');
+                budgetItem.textContent = `Budget max was expanded to $${lastRecoveryContext.budgetExpandedTo}.`;
+                recoveryList.appendChild(budgetItem);
+            }
+
+            (lastRecoveryContext.removedFilters || []).forEach(label => {
+                const item = document.createElement('li');
+                item.textContent = `Relaxed: ${label}`;
+                recoveryList.appendChild(item);
+            });
+
+            recoveryBox.appendChild(recoveryList);
+            questionContainer.insertAdjacentElement('afterend', recoveryBox);
+        }
+
+        displayProducts.forEach(result => {
             const sourceNode = productDomMap.get(result.id);
             if (sourceNode) {
                 const clone = sourceNode.cloneNode(true);
@@ -1395,18 +1896,24 @@ function displayResults() {
         updateLimitingSelectionsList(lastLimitingCriteria);
 	}
 
+    const rescueButton = document.createElement('button');
+    rescueButton.type = 'button';
+    rescueButton.classList.add('button', 'button--secondary');
+    rescueButton.textContent = 'Email these answers to our team';
+    rescueButton.addEventListener('click', emailSelectionsSummary);
+
     const limitingToggle = document.getElementById('quiz-limiting-toggle');
     if (limitingToggle && filteredProducts.length === 0) {
         limitingToggle.classList.add('is-hidden');
     }
 
     const summary = document.getElementById('quiz-summary');
-    if (summary && filteredProducts.length > 0) {
+    if (summary && displayProducts.length > 0) {
         summary.classList.add('is-collapsed');
     }
 
     const limitingVisible = limitingToggle && !limitingToggle.classList.contains('is-hidden');
-    setSummaryToggleVisibility(filteredProducts.length === 0 || !limitingVisible);
+    setSummaryToggleVisibility(displayProducts.length === 0 || !limitingVisible);
 
     const restartButton = document.createElement("button");
     restartButton.textContent = "Restart";
@@ -1415,6 +1922,9 @@ function displayResults() {
     resultContainer.appendChild(restartButton);
 
     if (skippedFromIndex !== null) {
+        const actionRow = document.createElement('div');
+        actionRow.classList.add('quiz-actions', 'quiz-actions--full');
+
         const resumeButton = document.createElement("button");
         resumeButton.textContent = "Continue quiz";
         resumeButton.addEventListener("click", () => {
@@ -1424,7 +1934,12 @@ function displayResults() {
             displayQuestion();
         });
         resumeButton.classList.add("button", "button--secondary");
-        resultContainer.appendChild(resumeButton);
+
+        actionRow.appendChild(resumeButton);
+        actionRow.appendChild(rescueButton);
+        resultContainer.appendChild(actionRow);
+    } else {
+        resultContainer.appendChild(rescueButton);
     }
 
     updateSummary();
@@ -1437,6 +1952,11 @@ function showAllResults() {
 }
 
 function restartQuiz() {
+    const existingHeadingNote = document.getElementById('quiz-recovery-heading-note');
+    if (existingHeadingNote) {
+        existingHeadingNote.remove();
+    }
+
     filteredProducts = [...recommendedProducts];
     currentQuestionIndex = 0;
     resultContainer.innerHTML = "";
@@ -1452,11 +1972,18 @@ function restartQuiz() {
     portCountRequirements = {};
     lastLimitingCriteria = [];
     skippedFromIndex = null;
+    lastRecoveryContext = null;
     updateLimitingSelectionsList([]);
     displayQuestion();
 }
 
 function displayQuestion() {
+    const existingHeadingNote = document.getElementById('quiz-recovery-heading-note');
+    if (existingHeadingNote) {
+        existingHeadingNote.remove();
+    }
+    lastRecoveryContext = null;
+
     updateProgressBar();
     if (currentQuestionIndex >= questions.length /* || filteredProducts.length === 1*/) {
         displayResults();
@@ -1466,6 +1993,12 @@ function displayQuestion() {
     resultContainer.innerHTML = '';
 
     const currentQuestion = questions[currentQuestionIndex];
+
+    if (currentQuestion.parentGateKey && normalizeValue(selectionsState[currentQuestion.parentGateKey]) !== 'yes') {
+        currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex);
+        displayQuestion();
+        return;
+    }
 
     setSummaryToggleVisibility(true);
 
@@ -1542,7 +2075,7 @@ function displayQuestion() {
     } else if (currentQuestion.type === 'portCounts') {
         const selections = Array.from(multiSelectState.ports || []);
         if (selections.length === 0) {
-            currentQuestionIndex++;
+            currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex);
             displayQuestion();
             return;
         }
@@ -1663,7 +2196,7 @@ function displayQuestion() {
             }
 
             pushHistory();
-            currentQuestionIndex++;
+            currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex);
             displayQuestion();
         });
         actions.appendChild(continueButton);
@@ -1753,7 +2286,7 @@ function displayQuestion() {
     }*/
 }
 
-function handleMultiAnswer(key, values) {
+async function handleMultiAnswer(key, values) {
     const currentQuestion = questions[currentQuestionIndex];
     const mappedValues = values.map(value =>
         currentQuestion.valueMap && currentQuestion.valueMap[value]
@@ -1763,8 +2296,9 @@ function handleMultiAnswer(key, values) {
     const normalizedValues = mappedValues.map(value => normalizeValue(value));
     const skipValues = (currentQuestion.skipValues || []).map(item => normalizeValue(item));
 
+    let prospectiveProducts = [...filteredProducts];
     if (normalizedValues.length > 0 && !normalizedValues.some(value => skipValues.includes(value))) {
-        filteredProducts = filteredProducts.filter(result => {
+        prospectiveProducts = filteredProducts.filter(result => {
             const resultValue = result[key];
             if (resultValue === null || typeof resultValue === 'undefined') {
                 return ALLOW_UNKNOWN_FILTERS;
@@ -1776,25 +2310,63 @@ function handleMultiAnswer(key, values) {
             return normalizedValues.includes(normalizeValue(resultValue));
         });
     }
+
+    if (prospectiveProducts.length === 0 && filteredProducts.length > 0) {
+        const decision = await promptZeroResultChoice();
+        if (decision === 'skip') {
+            pushHistory();
+            currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex);
+            displayQuestion();
+            return;
+        }
+        if (decision === 'closest') {
+            filteredProducts = prospectiveProducts;
+            selectionsState[key] = values;
+            if (key === 'ports') {
+                portCountRequirements = {};
+                selectionsState.portCounts = {};
+            }
+            pushHistory();
+            currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex);
+            goToResultsAfterCurrentStep();
+            return;
+        }
+    }
+
+    filteredProducts = prospectiveProducts;
     selectionsState[key] = values;
     if (key === 'ports') {
         portCountRequirements = {};
         selectionsState.portCounts = {};
     }
     pushHistory();
-    currentQuestionIndex++;
+    currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex);
     displayQuestion();
 }
 
-function handleAnswer(key, value) {
+async function handleAnswer(key, value) {
     const currentQuestion = questions[currentQuestionIndex];
     const mappedValue = currentQuestion.valueMap && currentQuestion.valueMap[value]
         ? currentQuestion.valueMap[value]
         : value;
     const normalizedValue = normalizeValue(mappedValue);
     const skipValues = (currentQuestion.skipValues || []).map(item => normalizeValue(item));
+
+    if (currentQuestion.type === 'gate') {
+        selectionsState[key] = value;
+        if (normalizedValue === 'no') {
+            clearGateFollowups(currentQuestion);
+            recomputeFilteredProducts();
+        }
+        pushHistory();
+        currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex);
+        displayQuestion();
+        return;
+    }
+
+    let prospectiveProducts = [...filteredProducts];
     if (!skipValues.includes(normalizedValue)) {
-        filteredProducts = filteredProducts.filter(result => {
+        prospectiveProducts = filteredProducts.filter(result => {
             const resultValue = result[key];
             if (resultValue === null || typeof resultValue === 'undefined') {
                 return ALLOW_UNKNOWN_FILTERS;
@@ -1805,14 +2377,34 @@ function handleAnswer(key, value) {
             return normalizeValue(resultValue) === normalizedValue;
         });
     }
+
+    if (prospectiveProducts.length === 0 && filteredProducts.length > 0) {
+        const decision = await promptZeroResultChoice();
+        if (decision === 'skip') {
+            pushHistory();
+            currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex);
+            displayQuestion();
+            return;
+        }
+        if (decision === 'closest') {
+            filteredProducts = prospectiveProducts;
+            selectionsState[key] = value;
+            pushHistory();
+            currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex);
+            goToResultsAfterCurrentStep();
+            return;
+        }
+    }
+
+    filteredProducts = prospectiveProducts;
     selectionsState[key] = value;
     pushHistory();
-    currentQuestionIndex++;
+    currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex);
     displayQuestion();
 }
 
-function handleBudgetAnswer(minBudget, maxBudget) {
-    filteredProducts = filteredProducts.filter(result => {
+async function handleBudgetAnswer(minBudget, maxBudget) {
+    const prospectiveProducts = filteredProducts.filter(result => {
         if (result.price === null) {
             return true;
         }
@@ -1824,11 +2416,33 @@ function handleBudgetAnswer(minBudget, maxBudget) {
         }
         return true;
     });
+
+    if (prospectiveProducts.length === 0 && filteredProducts.length > 0) {
+        const decision = await promptZeroResultChoice();
+        if (decision === 'skip') {
+            pushHistory();
+            currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex);
+            displayQuestion();
+            return;
+        }
+        if (decision === 'closest') {
+            filteredProducts = prospectiveProducts;
+            budgetState.min = minBudget;
+            budgetState.max = maxBudget;
+            selectionsState.price = { min: minBudget, max: maxBudget };
+            pushHistory();
+            currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex);
+            goToResultsAfterCurrentStep();
+            return;
+        }
+    }
+
+    filteredProducts = prospectiveProducts;
     budgetState.min = minBudget;
     budgetState.max = maxBudget;
     selectionsState.price = { min: minBudget, max: maxBudget };
     pushHistory();
-    currentQuestionIndex++;
+    currentQuestionIndex = getNextQuestionIndex(currentQuestionIndex);
     displayQuestion();
 }
 
@@ -1850,6 +2464,15 @@ async function initQuiz() {
                 const count = parseInt(matchCount.dataset.count || '0', 10) || 0;
                 matchCount.innerHTML = formatMatchCount(count);
             });
+        }
+
+        if (restoreStateFromQueryParam()) {
+            if (currentQuestionIndex >= questions.length) {
+                displayResults();
+            } else {
+                displayQuestion();
+            }
+            return;
         }
         displayQuestion();
     } catch (error) {
