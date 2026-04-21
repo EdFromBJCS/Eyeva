@@ -228,7 +228,11 @@ export default class ProductDetailsBase {
     updateView(data, content = null) {
         const viewModel = this.getViewModel(this.$scope);
 
-        this.showMessageBox(data.stock_message || data.purchasing_message);
+        const message = !data.instock
+            ? (data.stock_message || data.out_of_stock_message || this.context.outOfStockDefaultMessage)
+            : (data.stock_message || data.purchasing_message);
+
+        this.showMessageBox(message);
 
         if (data.price instanceof Object) {
             this.updatePriceView(viewModel, data.price);
