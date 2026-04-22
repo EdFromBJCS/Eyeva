@@ -753,6 +753,7 @@ function buildRecoveryContext() {
 
     const limiting = getLimitingCriteria();
     const removedFilters = [];
+    const removedFilterKeys = [];
     const ignoreKeys = new Set();
     let budgetExpandedTo = null;
     let recoveredProducts = [];
@@ -781,6 +782,7 @@ function buildRecoveryContext() {
     for (const criterion of limiting) {
         ignoreKeys.add(criterion.key);
         removedFilters.push(criterion.label);
+        removedFilterKeys.push(criterion.key);
         recoveredProducts = computeProductsFromSelections({
             ignoreKeys,
             budgetMaxOverride: budgetExpandedTo !== null ? budgetExpandedTo : expandedBudget,
@@ -801,8 +803,17 @@ function buildRecoveryContext() {
     return {
         products: recoveredProducts,
         removedFilters,
+        removedFilterKeys,
         budgetExpandedTo,
     };
+}
+
+function shouldShowBudgetExpansion(context) {
+    if (!context || context.budgetExpandedTo === null || typeof context.budgetExpandedTo === 'undefined') {
+        return false;
+    }
+
+    return !(context.removedFilterKeys || []).includes('price');
 }
 
 function promptZeroResultChoice() {
@@ -838,7 +849,7 @@ function formatSelectionsForAssistance() {
     lines.push(`- Strict matches found: ${filteredProducts.length}`);
     if (lastRecoveryContext && lastRecoveryContext.products) {
         lines.push(`- Closest matches shown: ${lastRecoveryContext.products.length}`);
-        if (lastRecoveryContext.budgetExpandedTo !== null) {
+        if (shouldShowBudgetExpansion(lastRecoveryContext)) {
             lines.push(`- Budget expanded to: $${lastRecoveryContext.budgetExpandedTo}`);
         }
         if (lastRecoveryContext.removedFilters.length > 0) {
@@ -1788,7 +1799,7 @@ function displayResults() {
             const recoveryList = document.createElement('ul');
             recoveryList.classList.add('quiz-no-results-list');
 
-            if (lastRecoveryContext.budgetExpandedTo !== null) {
+            if (shouldShowBudgetExpansion(lastRecoveryContext)) {
                 const budgetItem = document.createElement('li');
                 budgetItem.textContent = `Budget max was expanded to $${lastRecoveryContext.budgetExpandedTo}.`;
                 recoveryList.appendChild(budgetItem);
