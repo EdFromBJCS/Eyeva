@@ -1,0 +1,103 @@
+<div class="inventory-specs-btn-container">
+    {{#if product.condition '===' 'New'}}
+    {{else}}
+    <a href="https://www.bobjohnson.com/blog/preparing-your-rugged-computer/" class="button picturesActualInventory" target="_blank">Order Fulfillment Process</a>
+    <a href="https://www.bobjohnson.com/blog/real-honest-photos-of-real-honest-toughbooks/" class="button button--outline picturesActualInventory" target="_blank">Pictures Of Actual Inventory</a>
+    {{/if}}
+
+</div>
+{{#unless quickview}}
+    {{#if product.description}}
+        <p class="productView-collapsible-title">
+            <button class="button button--plain _animation-on {{#unless theme_settings.collapse_description}}is-open{{/unless}}" data-collapsible="productView-collapsible-description-{{product.id}}" type="button" aria-expanded="{{#if theme_settings.collapse_description}}false{{else}}true{{/if}}" aria-controls="productView-collapsible-description-{{product.id}}">
+                <span>{{lang 'products.description'}}</span>
+                <i class="icon" aria-hidden="true"><svg><use href="#icon-chevron-down-light"></use></svg></i>
+            </button>
+        </p>
+        <div class="productView-collapsible-content _description {{#unless theme_settings.collapse_description}}is-open{{/unless}}" id="productView-collapsible-description-{{product.id}}" aria-hidden="{{#if theme_settings.collapse_description}}true{{else}}false{{/if}}" data-event-type="product">
+            {{{product.description}}}
+            {{#if in_development}}
+                {{#unless product.description}}
+                    <p>Demo content visible for localhost development only: <code>templates/components/eyeva/products/demo-product-description.html</code></p>
+                    {{> components/eyeva/products/demo-product-description}}
+                {{/unless}}
+            {{/if}}
+        </div>
+    {{/if}}
+{{/unless}}
+
+{{#all product.custom_fields theme_settings.show_custom_fields_tabs}}
+    <div class="productView-customFields" id="productView-customFields-{{product.id}}">
+        <p class="productView-collapsible-title">
+            <button class="button button--plain _animation-on {{#unless theme_settings.collapse_custom_fields}}is-open{{/unless}}" data-collapsible="productView-collapsible-customFields-{{product.id}}" type="button" aria-expanded="{{#if theme_settings.collapse_custom_fields}}false{{else}}true{{/if}}" aria-controls="productView-collapsible-customFields-{{product.id}}">
+                <span>Part Specifications</span>
+                <i class="icon" aria-hidden="true"><svg><use href="#icon-chevron-down-light"></use></svg></i>
+            </button>
+        </p>
+        <div class="productView-collapsible-content _customFields {{#unless theme_settings.collapse_custom_fields}}is-open{{/unless}}" id="productView-collapsible-customFields-{{product.id}}" aria-hidden="{{#if theme_settings.collapse_custom_fields}}true{{else}}false{{/if}}">
+            <dl class="productView-info">
+                {{> components/products/custom-fields}}
+            </dl>
+        </div>
+    </div>
+    {{#unless product._visible_custom_fields_count}}
+        <script nonce="{{nonce}}">document.getElementById('productView-customFields-{{product.id}}').style="display:none";</script>
+    {{/unless}}
+{{/all}}
+{{#unless quickview}}
+    {{#if product.warranty}}
+        <p class="productView-collapsible-title">
+            <button class="button button--plain _animation-on {{#unless theme_settings.collapse_warranty}}is-open{{/unless}}" data-collapsible="productView-collapsible-warranty-{{product.id}}" type="button" aria-expanded="{{#if theme_settings.collapse_warranty}}false{{else}}true{{/if}}" aria-controls="productView-collapsible-warranty-{{product.id}}">
+                <span>{{lang 'products.warranty'}}</span>
+                <i class="icon" aria-hidden="true"><svg><use href="#icon-chevron-down-light"></use></svg></i>
+            </button>
+        </p>
+        <div class="productView-collapsible-content _warranty {{#unless theme_settings.collapse_warranty}}is-open{{/unless}}" id="productView-collapsible-warranty-{{product.id}}" aria-hidden="{{#if theme_settings.collapse_warranty}}true{{else}}false{{/if}}">
+            {{{product.warranty}}}
+        </div>
+    {{/if}}
+{{/unless}}
+<script>
+    //Hides the "Skip To Specs button if there is no specifications section"
+document.addEventListener("DOMContentLoaded", function() {
+    var specsSection = document.getElementById("website-specifications");
+    var skipButton = document.getElementById("skipToSpecs");
+
+    if (specsSection && skipButton) {
+        skipButton.style.display = "block";
+
+        skipButton.addEventListener("click", function(e) {
+            e.preventDefault();
+            specsSection.scrollIntoView({ behavior: "smooth" });
+        });
+    } else if (skipButton) {
+        skipButton.style.display = "none";
+    }
+});
+
+//Checks to see if the products are new so that the "Pictures Of Actual Inventory! Learn More Here!" link hides on new products
+document.addEventListener("DOMContentLoaded", function() {
+    var picturesLink = document.querySelector(".picturesActualInventory");
+    if (!picturesLink) return;
+
+    var dtElements = document.querySelectorAll(".productView-info dt");
+
+    dtElements.forEach(function(dt) {
+        var dtText = dt.textContent.trim().toLowerCase();
+
+        if (dtText.includes("condition")) {
+            var dd = dt.nextElementSibling;
+            if (dd) {
+                var conditionText = dd.textContent.trim().toLowerCase();
+
+                if (conditionText === "new") {
+                    picturesLink.style.display = "none";
+                } else {
+                    picturesLink.style.display = "block";
+                }
+            }
+        }
+    });
+});
+
+</script>
