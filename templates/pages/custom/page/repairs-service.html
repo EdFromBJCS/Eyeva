@@ -13,6 +13,139 @@
         font-size: 1rem;
         transition: border-color .18s;
     }
+
+    .repair-confirmation {
+        margin: 1rem 0 1.25rem;
+        padding: 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+    }
+
+    .repair-confirmation-header {
+        margin: 0 0 .75rem;
+        padding-bottom: .65rem;
+        border-bottom: 1px solid #e5e7eb;
+        font-size: 1.2rem;
+        line-height: 1.3;
+    }
+
+    .repair-confirmation-section {
+        margin-top: .85rem;
+        padding-top: .85rem;
+        border-top: 1px dashed #d1d5db;
+    }
+
+    .repair-confirmation-section:first-of-type {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: 0;
+    }
+
+    .repair-confirmation-title {
+        margin: 0 0 .65rem;
+        font-size: .9rem;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+        color: #475569;
+    }
+
+    .repair-confirmation-row {
+        display: grid;
+        grid-template-columns: minmax(140px, 220px) 1fr;
+        gap: .5rem;
+        margin-bottom: .4rem;
+    }
+
+    .repair-confirmation-label {
+        color: #334155;
+        font-weight: 600;
+    }
+
+    .repair-confirmation-value {
+        color: #0f172a;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    .repair-confirmation-description {
+        margin: .25rem 0 0;
+        padding: .75rem;
+        border-radius: 10px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        color: #0f172a;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    @media (max-width: 768px) {
+        .repair-confirmation-row {
+            grid-template-columns: 1fr;
+            gap: .1rem;
+        }
+    }
+
+    .repair-success-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 1100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background: rgba(15, 23, 42, 0.55);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .18s ease, visibility .18s ease;
+    }
+
+    .repair-success-overlay.is-open {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .repair-success-modal {
+        width: min(560px, 100%);
+        border-radius: 14px;
+        border: 1px solid #dbe3ed;
+        background: #fff;
+        box-shadow: 0 24px 48px rgba(15, 23, 42, 0.2);
+        overflow: hidden;
+        transform: translateY(8px);
+        transition: transform .18s ease;
+    }
+
+    .repair-success-overlay.is-open .repair-success-modal {
+        transform: translateY(0);
+    }
+
+    .repair-success-head {
+        margin: 0;
+        padding: .95rem 1.1rem;
+        font-size: 1.12rem;
+        color: #fff;
+        background: linear-gradient(135deg, #dc3522 0%, #c4301f 100%);
+    }
+
+    .repair-success-body {
+        padding: 1rem 1.1rem 1.15rem;
+        color: #0f172a;
+    }
+
+    .repair-success-actions {
+        margin-top: .9rem;
+        display: flex;
+        justify-content: flex-end;
+        gap: .6rem;
+    }
+
+    .repair-success-message {
+        margin: 0;
+        line-height: 1.5;
+    }
 </style>
 <div class="main-content">
     <div class="dual-form-container">
@@ -252,200 +385,160 @@
                             information helps our technicians replicate the issue and properly diagnose your laptop.</p>
                         <p>After you submit the form and we receive your computer, our technicians will diagnose the
                             issue and contact you with the next steps.</p>
-                        <form accept-charset="UTF-8"
-                            action="https://gc200.infusionsoft.com/app/form/process/faf70a004736076dcebf9e220791dd67"
-                            class="infusion-form" id="inf_form_faf70a004736076dcebf9e220791dd67" method="POST"><input
-                                name="inf_form_xid" type="hidden" value="faf70a004736076dcebf9e220791dd67" /> <input
-                                name="inf_form_name" type="hidden" value="Repair form" /> <input
-                                name="infusionsoft_version" type="hidden" value="1.70.0.891957" />
-                            <div class="form-field"><label class="form-label" for="inf_field_FirstName">First Name
-                                    *</label> <input class="form-input" id="inf_field_FirstName"
-                                    name="inf_field_FirstName" placeholder="First Name *" type="text" /></div>
-                            <div class="form-field"><label class="form-label" for="inf_field_LastName">Last Name
-                                    *</label> <input class="form-input" id="inf_field_LastName"
-                                    name="inf_field_LastName" placeholder="Last Name *" type="text" /></div>
-                            <div class="form-field"><label class="form-label" for="inf_field_Email">Email *</label>
-                                <input class="form-input" id="inf_field_Email" name="inf_field_Email"
-                                    placeholder="Email *" type="text" />
+                        <form name="repairForm" onsubmit="showConfirmation(event)">
+                            <!-- REQUIRED: Your API Key -->
+                            <!-- <input type="hidden" name="api_key" value="T361e180a85ec98f6f-ec386aadffd5dae1ec5f8d44d55f1ba1"> -->
+                            <div class="form-field">
+                            <label class="form-label">First Name</label>
+                            <input class="form-input" type="text" name="first_name" style="display:block" required>
                             </div>
-                            <div class="form-field"><label class="form-label"
-                                    for="inf_field_Company">Organization</label> <input class="form-input"
-                                    id="inf_field_Company" name="inf_field_Company" placeholder="Organization"
-                                    type="text" /></div>
-                            <div class="form-field"><label class="form-label" for="inf_field_Phone1Type">Phone 1
-                                    Type</label>
-                                <div class="infusion-field-input-container"><select id="inf_field_Phone1Type"
-                                        name="inf_field_Phone1Type">
-                                        <option value="">Please select one</option>
-                                        <option value="Work">Work</option>
-                                        <option value="Home">Home</option>
-                                        <option value="Mobile">Mobile</option>
-                                        <option value="Other">Other</option>
-                                    </select></div>
+                            <div class="form-field">
+                                <label class="form-label">Last Name</label>
+                                <input class="form-input" type="text" name="last_name" style="display:block" required>
                             </div>
-                            <div class="form-field"><label class="form-label" for="inf_field_Phone1">Phone *</label>
-                                <input class="form-input" id="inf_field_Phone1" name="inf_field_Phone1"
-                                    placeholder="Phone *" type="text" />
+                            <div class="form-field">
+                                <label class="form-label">Business Name</label>
+                                <input class="form-input" type="text" name="business_name" style="display:block">
                             </div>
-                            <div class="form-field"><label class="form-label" for="inf_field_Phone1Ext">Ext</label>
-                                <input class="form-input" id="inf_field_Phone1Ext" name="inf_field_Phone1Ext"
-                                    placeholder="Ext" type="text" />
+                            <div class="form-field">
+                                <label class="form-label">Email</label>
+                                <input class="form-input" type="email" name="email" style="display:block" required>
                             </div>
-                            <div class="form-field"><label class="form-label" for="inf_field_Fax1">Fax</label> <input
-                                    class="form-input" id="inf_field_Fax1" name="inf_field_Fax1" placeholder="Fax"
-                                    type="text" /></div>
-                            <div class="form-field"><label class="form-label" for="inf_field_StreetAddress1">Street
-                                    Address</label> <input class="form-input" id="inf_field_StreetAddress1"
-                                    name="inf_field_StreetAddress1" placeholder="Street Address" type="text" /></div>
-                            <div class="form-field"><label class="form-label" for="inf_field_StreetAddress2">Address
-                                    Line 2 (optional)</label> <input class="form-input" id="inf_field_StreetAddress2"
-                                    name="inf_field_StreetAddress2" placeholder="Address Line 2 (optional)"
-                                    type="text" /></div>
-                            <div class="form-field"><label class="form-label" for="inf_field_City">City</label> <input
-                                    class="form-input" id="inf_field_City" name="inf_field_City" placeholder="City"
-                                    type="text" /></div>
-                            <div class="form-field"><label class="form-label" for="inf_field_State">State</label> <input
-                                    class="form-input" id="inf_field_State" name="inf_field_State" placeholder="State"
-                                    type="text" /></div>
-                            <div class="form-field"><label class="form-label" for="inf_field_PostalCode">Postal / Zip
-                                    Code</label> <input class="form-input" id="inf_field_PostalCode"
-                                    name="inf_field_PostalCode" placeholder="Postal / Zip Code" type="text" /></div>
-                            <hr />
-                            <div>
-                                <div class="text">
-                                    <div class="text" contentid="paragraph" data-gramm="false" wt-ignore-input="true">
-                                        <div>
-                                            <h3>Information About Your Computer</h3>
-                                            <div>Please make sure the information you provide is as accurate and
-                                                detailed as possible.</div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="form-field">
+                                <label class="form-label">Phone</label>
+                                <input class="form-input" type="text" name="phone" style="display:block" required>
                             </div>
-                            <div>
-                                <div>&nbsp;</div>
+                            <div class="form-field">
+                                <label class="form-label">Extension</label>
+                                <input class="form-input" type="text" name="extension" style="display:block">
                             </div>
-                            <div class="form-field"><label class="form-label" for="inf_custom_ModelNumber">Full Model
-                                    Number</label> <input class="form-input" id="inf_custom_ModelNumber"
-                                    name="inf_custom_ModelNumber" placeholder="Full Model Number" type="text" /></div>
-                            <div>
-                                <div class="text">
-                                    <div class="text" contentid="paragraph" data-gramm="false" wt-ignore-input="true">
-                                        <div>(ex: CF-30CTQAZBM)</div>
-                                    </div>
-                                </div>
+                            <div class="form-field">
+                                <label class="form-label">Street Address</label>
+                                <input class="form-input" type="text" name="address_line1" required>
                             </div>
-                            <div>
-                                <div>&nbsp;</div>
+                            <div class="form-field">
+                                <label class="form-label">Address Line 2</label>
+                                <input class="form-input" type="text" name="address_line2">
                             </div>
-                            <div class="form-field"><label class="form-label" for="inf_custom_serialnumber">Serial
-                                    Number</label> <input class="form-input" id="inf_custom_serialnumber"
-                                    name="inf_custom_serialnumber" placeholder="Serial Number" type="text" /></div>
-                            <div>
-                                <div class="text">
-                                    <div class="text" contentid="paragraph" data-gramm="false" wt-ignore-input="true">
-                                        <div>(ex: 8BKSA32997)</div>
-                                    </div>
-                                </div>
+                            <div class="form-field">
+                                <label class="form-label">City</label>
+                                <input class="form-input" type="text" name="city" required>
                             </div>
-                            <div>
-                                <div>&nbsp;</div>
+                            <div class="form-field">
+                                <label class="form-label">State</label>
+                                <input class="form-input" type="text" name="state" required>
                             </div>
-                            <div class="form-field"><label class="form-label" for="inf_option_WarrantyStatus">Warranty
+                            <div class="form-field">
+                                <label class="form-label">Postal / Zip Code</label>
+                                <input class="form-input" type="text" name="zip_code" required>
+                            </div>
+
+                            <hr>
+                            <h1>Information About Your Computer</h1>
+                            <p>Please make sure the information you provide is as accurate and detailed as possible.</p>
+                            <div class="form-field">
+                                <label class="form-label">Brand</label>
+                                <select class="form-dropdown" name="brand">
+                                    <option value="Panasonic">Panasonic</option>
+                                    <option value="Getac">Getac</option>
+                                    <option value="Dell">Dell</option>
+                                    <option value="Other">Other (Specify Below)</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label">Full Model Number</label>
+                                <input class="form-input" type="text" name="model_number" style="display:block">
+                                <p>ex: CF-31WALAX1M | FZ-55CD-002M | V110 G5 | Latitude 5420</p>
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label">Serial Number</label>
+                                <input class="form-input" type="text" name="serial_number" style="display:block">
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label">Purchased from BJCS?</label>
+                                <input class="" type="checkbox" name="purchased" style="display:block"
+                                    onclick="showFields()">
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label" id="recentLabel" style="display:none">Was this computer purchased
+                                    in the last 6
+                                    months?</label>
+                                <input type="checkbox" name="recent" style="display:none" id="recentBox">
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label" style="display:none" name="inv_label" id="invLabel">Invoice
+                                    Number</label>
+                                <input class="form-input" style="display:none" type="text" name="invoice_number"
+                                    id="invNumber">
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label" style="display:none" name="warr_label" id="warrLabel">Warranty
                                     Status</label>
-                                <div class="infusion-radio">
-                                    <div class="options-container"><span class="infusion-option"> <input
-                                                class="form-radio" id="inf_option_WarrantyStatus_995"
-                                                name="inf_option_WarrantyStatus" type="radio" value="995" /> <label
-                                                class="form-label" for="inf_option_WarrantyStatus_995">My Computer is
-                                                under an extended warranty.</label> </span> <span
-                                            class="infusion-option"> <input class="form-radio"
-                                                id="inf_option_WarrantyStatus_997" name="inf_option_WarrantyStatus"
-                                                type="radio" value="997" /> <label class="form-label"
-                                                for="inf_option_WarrantyStatus_997">My computer is not under an extended
-                                                warranty, but I bought it from you guys.</label> </span> <span
-                                            class="infusion-option"> <input class="form-radio"
-                                                id="inf_option_WarrantyStatus_999" name="inf_option_WarrantyStatus"
-                                                type="radio" value="999" /> <label class="form-label"
-                                                for="inf_option_WarrantyStatus_999">I bought my computer somewhere
-                                                else.</label> </span></div>
-                                </div>
+                                <select style="display:none" class="form-dropdown" name="warranty" id="warrLen">
+                                    <option value="6 Months">6 Months (Default)</option>
+                                    <option value="1 Year">1 Year</option>
+                                    <option value="2 Years">2 Years</option>
+                                    <option value="3 Years">3 Years</option>
+                                </select>
                             </div>
-                            <div class="form-field"><label class="form-label"
-                                    for="inf_custom_RepairServiceRequired">Repair/Service Required</label> <textarea
-                                    cols="24" id="inf_custom_RepairServiceRequired"
-                                    name="inf_custom_RepairServiceRequired" placeholder="Repair/Service Required"
-                                    rows="5"></textarea></div>
-                            <div class="form-field"><span class="infusion-checkbox"> <input class="form-checkbox"
-                                        id="inf_option_InstallWindows10Professional"
-                                        name="inf_option_InstallWindows10Professional" type="checkbox" value="4742" />
-                                    <label class="form-label" for="inf_option_InstallWindows10Professional">Install
-                                        Windows 10 Professional</label> </span></div>
-                            <div class="form-field"><span class="infusion-checkbox"> <input class="form-checkbox"
-                                        id="inf_option_InstallWindows11Professional"
-                                        name="inf_option_InstallWindows11Professional" type="checkbox" value="5718" />
-                                    <label class="form-label" for="inf_option_InstallWindows11Professional">Install
-                                        Windows 11 Professional</label> </span></div>
-                            <hr />
-                            <div class="text">
-                                <div class="text" contentid="paragraph" data-gramm="false" wt-ignore-input="true">
-                                    <div>
-                                        <h3>Communication Preferences</h3>
+                            <div class="form-field">
+                                <label class="form-label">Problem Summary</label>
+                                <input class="form-input" type="text" name="subject" style="display:block">
+                            </div>
+                            <div class="form-field">
+                                <label class="form-label">Issue Description</label>
+                                <textarea class="RS_form_textarea" name="description" rows="4"
+                                    style="display:block"></textarea>
+                            </div>
+
+                            <hr>
+                            <h1>Communication Preferences</h1>
+                            <div class="form-field">
+                                <input type="checkbox" name="printcopy" required>
+                                <label for="printcopy">I will print out and pack up a copy of the e-mail sent in response to
+                                    this form.
+                                    *</label>
+                            </div>
+                            <div class="form-field">
+                                <input type="checkbox" name="commsconsent" required>
+                                <label for="commsconsent">I give consent to use this information to send additional emails
+                                    and communication as
+                                    described in our Privacy Policy. *</label>
+                            </div>
+                            <div class="infusion-submit">
+                            <button class="button button--primary" type="submit">Submit Repair Form</button>
+                            </div>
+
+
+                        </form>
+                        <div id="confirmationPage" style="display:none;">
+                            <h1>Confirm Your Submission</h1>
+                            <div id="confirmText" class="repair-confirmation"></div>
+                            <button class="button button--primary" onclick="createLead()">Confirm & Submit</button>
+                            <button class="button button--alt"onclick="goBack()">Go Back</button>
+                        </div>
+                        <div id="repairSuccessPopup" class="repair-success-overlay" aria-hidden="true">
+                            <div class="repair-success-modal" role="dialog" aria-modal="true"
+                                aria-labelledby="repairSuccessTitle">
+                                <h2 id="repairSuccessTitle" class="repair-success-head">Submission Complete</h2>
+                                <div class="repair-success-body">
+                                    <p id="repairSuccessMessage" class="repair-success-message"></p>
+                                    <div class="repair-success-actions">
+                                        <button id="repairDownloadPdfButton" class="button button--alt" type="button"
+                                            onclick="handleManualPdfDownload()">Download PDF</button>
+                                        <button class="button button--primary" type="button"
+                                            onclick="closeRepairSuccessPopup()">Close</button>
                                     </div>
                                 </div>
                             </div>
-                            <div>&nbsp;</div>
-                            <div class="form-field"><span class="infusion-checkbox"> <input class="form-checkbox"
-                                        id="inf_option_IconsenttoreceiveSMSmessagesregardingmyrepairstatusCellPhonerequiredabove"
-                                        name="inf_option_IconsenttoreceiveSMSmessagesregardingmyrepairstatusCellPhonerequiredabove"
-                                        type="checkbox" value="6155" /> <label class="form-label"
-                                        for="inf_option_IconsenttoreceiveSMSmessagesregardingmyrepairstatusCellPhonerequiredabove">I
-                                        consent to receive SMS messages regarding my repair status. (Cell Phone required
-                                        above)</label> </span></div>
-                            <div class="form-field"><span class="infusion-checkbox"> <input class="form-checkbox"
-                                        id="inf_option_Iwillprintoutandpackupacopyoftheemailsentinresponsetothisform"
-                                        is-required="true"
-                                        name="inf_option_Iwillprintoutandpackupacopyoftheemailsentinresponsetothisform"
-                                        type="checkbox" value="5778" /> <label class="form-label"
-                                        for="inf_option_Iwillprintoutandpackupacopyoftheemailsentinresponsetothisform">I
-                                        will print out and pack up a copy of the e-mail sent in response to this form.
-                                        *</label> </span></div>
-                            <div class="form-field"><span class="infusion-checkbox"> <input class="form-checkbox"
-                                        id="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy"
-                                        is-required="true"
-                                        name="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy"
-                                        type="checkbox" value="4704" /> <label class="form-label"
-                                        for="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy">I
-                                        give consent to use this information to send additional emails and communication
-                                        as described in your Privacy Policy *</label> </span></div>
-                            <div class="form-field"><span class="infusion-checkbox"> <input class="form-checkbox"
-                                        id="inf_option_IwouldliketosignupforBobJohnsonsBiweeklyNewsletter"
-                                        name="inf_option_IwouldliketosignupforBobJohnsonsBiweeklyNewsletter"
-                                        type="checkbox" value="6140" /> <label class="form-label"
-                                        for="inf_option_IwouldliketosignupforBobJohnsonsBiweeklyNewsletter">I would like
-                                        to sign up for Bob Johnson's Biweekly Newsletter. </label> </span></div>
-                            <div class="infusion-submit"><button class="infusion-recaptcha button button--primary"
-                                    id="recaptcha_faf70a004736076dcebf9e220791dd67" type="submit">Submit</button></div>
-                        </form>
-                        <script type="text/javascript"
-                            src="https://gc200.infusionsoft.app/app/webTracking/getTrackingCode"></script>
-                        <script type="text/javascript"
-                            src="https://gc200.infusionsoft.com/resources/external/recaptcha/production/recaptcha.js?b=1.70.0.891957-hf-202601201743"></script>
-                        <script
-                            src="https://www.google.com/recaptcha/api.js?onload=onloadInfusionRecaptchaCallback&amp;render=explicit"
-                            async="async" defer="defer"></script>
-                        <script type="text/javascript"
-                            src="https://gc200.infusionsoft.com/app/timezone/timezoneInputJs?xid=faf70a004736076dcebf9e220791dd67"></script>
-                        <script type="text/javascript"
-                            src="https://gc200.infusionsoft.com/js/jquery/jquery-3.3.1.js"></script>
-                        <script type="text/javascript"
-                            src="https://gc200.infusionsoft.app/app/webform/overwriteRefererJs"></script>
+                        </div>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
                     </div>
                     <div id="tab2" class="tab-content">
                         <h3>Full-Service Rugged Laptop Repair Department</h3>
                         <p>We specialize in repairing rugged laptops, and our repair center is one of the few in the
                             area with the expertise to handle such repairs. Our in-house technicians are certified and
-                            can complete even the most challenging repairs. We have been refurbishing computers for 29
+                            can complete even the most challenging repairs. We have been refurbishing computers for 30
                             years and have seen almost every rugged laptop and tablet released. The following are the
                             brands of laptops we work on:</p>
                         <ul>
@@ -829,60 +922,478 @@
                 showTab(initialTabIndex);
 
                 const formChoiceInputs = document.querySelectorAll('input[name="formChoice"]');
-        const portalLoginUrl = 'https://bobjohnson.repairshopr.com/portal/user_login';
+                const portalLoginUrl = 'https://bobjohnson.repairshopr.com/portal/user_login';
 
-        function syncPanels(choice) {
-            if (choice === 'portal') {
-                window.location.href = portalLoginUrl;
+                function syncPanels(choice) {
+                    if (choice === 'portal') {
+                        window.location.href = portalLoginUrl;
+                        return;
+                    }
+
+                    document.querySelectorAll('.form-panel').forEach(panel => {
+                        panel.classList.toggle('is-hidden', panel.dataset.form !== choice);
+                    });
+                }
+
+                formChoiceInputs.forEach(input => {
+                    input.addEventListener('change', () => {
+                        syncPanels(input.value);
+                    });
+                });
+
+                // Ensure neither form shows on page open
+                document.addEventListener('DOMContentLoaded', () => {
+                    formChoiceInputs.forEach(input => { input.checked = false; });
+                    document.querySelectorAll('.form-panel').forEach(panel => panel.classList.add('is-hidden'));
+                });
+
+                // RepairShopr repair form JavaScript//
+                let savedFormData = {};
+
+        function escapeHtml(value) {
+            return String(value)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        function valueOrDash(value) {
+            const text = value === undefined || value === null ? "" : String(value).trim();
+            return text ? escapeHtml(text) : "-";
+        }
+
+        function renderConfirmSection(title, rows) {
+            const content = rows.map(row => `
+                <div class="repair-confirmation-row">
+                    <div class="repair-confirmation-label">${escapeHtml(row.label)}</div>
+                    <div class="repair-confirmation-value">${valueOrDash(row.value)}</div>
+                </div>
+            `).join("");
+
+            return `
+                <section class="repair-confirmation-section">
+                    <h3 class="repair-confirmation-title">${escapeHtml(title)}</h3>
+                    ${content}
+                </section>
+            `;
+        }
+
+        function renderConfirmationHTML() {
+            const sections = [];
+
+            sections.push(renderConfirmSection("Customer", [
+                { label: "Name", value: savedFormData.customer.name },
+                { label: "Business", value: savedFormData.customer.business },
+                { label: "Email", value: savedFormData.customer.email },
+                { label: "Phone", value: savedFormData.customer.phone }
+            ]));
+
+            sections.push(renderConfirmSection("Address", [
+                { label: "Address Line 1", value: savedFormData.address.line1 },
+                { label: "Address Line 2", value: savedFormData.address.line2 },
+                { label: "City", value: savedFormData.address.city },
+                { label: "State", value: savedFormData.address.state },
+                { label: "Postal / Zip", value: savedFormData.address.zip }
+            ]));
+
+            const computerRows = [
+                { label: "Brand", value: savedFormData.computer.brand },
+                { label: "Model", value: savedFormData.computer.model },
+                { label: "Serial", value: savedFormData.computer.serial },
+                { label: "Purchased from BJCS", value: savedFormData.computer.purchased ? "Yes" : "No" }
+            ];
+
+            if (savedFormData.computer.purchased) {
+                computerRows.push({ label: "Recent Purchase", value: savedFormData.computer.recent ? "Yes" : "No" });
+                computerRows.push({ label: "Invoice", value: savedFormData.computer.invoice });
+                computerRows.push({ label: "Warranty", value: savedFormData.computer.warranty });
+            }
+
+            sections.push(renderConfirmSection("Computer", computerRows));
+
+            sections.push(renderConfirmSection("Issue", [
+                { label: "Subject", value: savedFormData.issue.subject }
+            ]));
+
+            sections.push(`
+                <section class="repair-confirmation-section">
+                    <h3 class="repair-confirmation-title">Description</h3>
+                    <div class="repair-confirmation-description">${valueOrDash(savedFormData.issue.description)}</div>
+                </section>
+            `);
+
+            return `
+                <h2 class="repair-confirmation-header">Repair Form Submission</h2>
+                ${sections.join("")}
+            `;
+        }
+
+        function showConfirmation(event) {
+            event.preventDefault();
+
+            let form = document.forms['repairForm'];
+
+            // Structured data for PDF
+            savedFormData = {
+                customer: {
+                    name: `${form.first_name.value} ${form.last_name.value}`,
+                    business: form.business_name.value,
+                    email: form.email.value,
+                    phone: form.phone.value
+                },
+                address: {
+                    line1: form.address_line1.value,
+                    line2: form.address_line2.value,
+                    city: form.city.value,
+                    state: form.state.value,
+                    zip: form.zip_code.value
+                },
+                computer: {
+                    brand: form.brand.value,
+                    model: form.model_number.value,
+                    serial: form.serial_number.value,
+                    purchased: form.purchased.checked,
+                    recent: form.recent.checked,
+                    invoice: form.invoice_number.value,
+                    warranty: form.warranty.value
+                },
+                issue: {
+                    subject: form.subject.value,
+                    description: form.description.value
+                }
+            };
+
+            document.getElementById("confirmText").innerHTML = renderConfirmationHTML();
+
+            document.forms['repairForm'].style.display = "none";
+            document.getElementById("confirmationPage").style.display = "block";
+        }
+
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            const pageWidth = doc.internal.pageSize.getWidth();
+
+            // ===== HEADER =====
+            doc.setFillColor(25, 25, 25);
+            doc.rect(0, 0, pageWidth, 30, "F");
+
+            doc.setTextColor(255, 255, 255);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(22);
+            doc.text("Repair Service Form", 14, 20);
+
+            doc.setTextColor(0, 0, 0);
+
+            let y = 42;
+
+            // ===== HELPERS =====
+            function section(title) {
+                doc.setFillColor(235, 235, 235);
+                doc.rect(10, y - 6, 190, 8, "F");
+
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(13);
+                doc.text(title, 12, y);
+
+                y += 10;
+            }
+
+            function field(label, value) {
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(11);
+                doc.text(`${label}:`, 12, y);
+
+                doc.setFont("helvetica", "normal");
+
+                let wrapped = doc.splitTextToSize(
+                    value ? String(value) : "-",
+                    125
+                );
+
+                doc.text(wrapped, 60, y);
+
+                y += wrapped.length * 6 + 2;
+            }
+
+            // ===== CUSTOMER =====
+            section("Customer Information");
+
+            field("Customer Name", savedFormData.customer.name);
+            field("Business Name", savedFormData.customer.business);
+            field("Email Address", savedFormData.customer.email);
+            field("Phone Number", savedFormData.customer.phone);
+
+            // ===== ADDRESS =====
+            section("Address");
+
+            field("Address Line 1", savedFormData.address.line1);
+            field("Address Line 2", savedFormData.address.line2);
+
+            field(
+                "City / State / ZIP",
+                `${savedFormData.address.city}, ${savedFormData.address.state} ${savedFormData.address.zip}`
+            );
+
+            // ===== COMPUTER =====
+            section("Computer Information");
+
+            field("Brand", savedFormData.computer.brand);
+            field("Model Number", savedFormData.computer.model);
+            field("Serial Number", savedFormData.computer.serial);
+
+            field(
+                "Purchased from BJCS",
+                savedFormData.computer.purchased ? "Yes" : "No"
+            );
+
+            if (savedFormData.computer.purchased) {
+                field(
+                    "Recent Purchase",
+                    savedFormData.computer.recent ? "Yes" : "No"
+                );
+
+                field("Invoice Number", savedFormData.computer.invoice);
+                field("Warranty", savedFormData.computer.warranty);
+            }
+
+            // ===== ISSUE =====
+            section("Issue Details");
+
+            field("Subject", savedFormData.issue.subject);
+
+            doc.setFont("helvetica", "bold");
+            doc.text("Description:", 12, y);
+
+            doc.setFont("helvetica", "normal");
+
+            let descriptionLines = doc.splitTextToSize(
+                savedFormData.issue.description || "-",
+                175
+            );
+
+            doc.text(descriptionLines, 12, y + 8);
+
+            y += descriptionLines.length * 6 + 18;
+
+            // ===== FOOTER =====
+            doc.setDrawColor(180);
+            doc.line(10, 280, 200, 280);
+
+            doc.setFontSize(9);
+            doc.setTextColor(120);
+
+            doc.text(
+                `Generated: ${new Date().toLocaleString()}`,
+                12,
+                286
+            );
+
+            doc.text(
+                "Please include this form inside the repair box.",
+                110,
+                286
+            );
+
+            // ===== SAVE =====
+            doc.save("repair-form.pdf");
+        }
+
+        // let savedFormData = "";
+
+        // function showConfirmation(event) {
+        //     event.preventDefault();
+
+        //     let form = document.forms['repairForm'];
+
+        //     let text = `
+        // Repair Form Submission
+
+        // Name: ${form.first_name.value} ${form.last_name.value}
+        // Business: ${form.business_name.value}
+        // Email: ${form.email.value}
+        // Phone: ${form.phone.value}
+
+        // Address:
+        // ${form.address_line1.value}
+        // ${form.address_line2.value}
+        // ${form.city.value}, ${form.state.value} ${form.zip_code.value}
+
+        // --- Computer Info ---
+        // Brand: ${form.brand.value}
+        // Model: ${form.model_number.value}
+        // Serial: ${form.serial_number.value}
+        // Purchased from BJCS: ${form.purchased.checked}
+        // ${form.purchased.checked ? `Recent Purchase: ${form.recent.checked}` : ""}
+        // ${form.purchased.checked ? `Invoice: ${form.invoice_number.value}` : ""}
+        // ${form.purchased.checked ? `Warranty: ${form.warranty.value}` : ""}
+
+        // --- Issue ---
+        // Subject: ${form.subject.value}
+        // Description:
+        // ${form.description.value}
+        // `;
+
+        //     savedFormData = text;
+
+        //     document.getElementById("confirmText").textContent = text;
+
+        //     document.forms['repairForm'].style.display = "none";
+        //     document.getElementById("confirmationPage").style.display = "block";
+        // }
+        // function downloadPDF() {
+        //     const { jsPDF } = window.jspdf;
+        //     const doc = new jsPDF();
+
+        //     let lines = doc.splitTextToSize(savedFormData, 180);
+
+        //     doc.text(lines, 10, 10);
+        //     doc.save("repair-form.pdf");
+        // }
+        function goBack() {
+            document.getElementById("confirmationPage").style.display = "none";
+            document.forms['repairForm'].style.display = "block";
+        }
+
+        function handleManualPdfDownload() {
+            downloadPDF();
+        }
+
+        function showRepairSuccessPopup(message) {
+            const popup = document.getElementById('repairSuccessPopup');
+            const messageNode = document.getElementById('repairSuccessMessage');
+            if (!popup || !messageNode) {
                 return;
             }
 
-            document.querySelectorAll('.form-panel').forEach(panel => {
-                panel.classList.toggle('is-hidden', panel.dataset.form !== choice);
-            });
+            messageNode.textContent = message;
+            popup.classList.add('is-open');
+            popup.setAttribute('aria-hidden', 'false');
         }
 
-        formChoiceInputs.forEach(input => {
-            input.addEventListener('change', () => {
-                syncPanels(input.value);
-            });
+        function closeRepairSuccessPopup() {
+            const popup = document.getElementById('repairSuccessPopup');
+            if (!popup) {
+                return;
+            }
+
+            popup.classList.remove('is-open');
+            popup.setAttribute('aria-hidden', 'true');
+        }
+
+        document.addEventListener('click', (event) => {
+            const popup = document.getElementById('repairSuccessPopup');
+            if (!popup || !popup.classList.contains('is-open')) {
+                return;
+            }
+
+            if (event.target === popup) {
+                closeRepairSuccessPopup();
+            }
         });
 
-        // Ensure neither form shows on page open
-        document.addEventListener('DOMContentLoaded', () => {
-            formChoiceInputs.forEach(input => { input.checked = false; });
-            document.querySelectorAll('.form-panel').forEach(panel => panel.classList.add('is-hidden'));
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                closeRepairSuccessPopup();
+            }
         });
 
-        // RepairShopr repair form JavaScript//
         function showFields() {
             console.log("click")
-            let isPurchased = document.forms['repairForm'].elements["purchased"].checked
-            console.log(isPurchased);
+            let isPurchased = document.forms['repairForm'].elements["purchased"].checked;
+            let isRecent = document.getElementById("recentBox");
+            let recentLabel = document.getElementById("recentLabel");
             let invLabel = document.getElementById("invLabel");
-            console.log(invLabel);
             let invNumber = document.getElementById('invNumber');
-            console.log(invNumber);
+            let warrLabel = document.getElementById('warrLabel');
+            let warrLen = document.getElementById('warrLen');
             if (isPurchased == true) {
+                isRecent.style.display = "block";
+                recentLabel.style.display = "block";
                 invLabel.style.display = "block";
                 invNumber.style.display = "block";
+                warrLabel.style.display = "block";
+                warrLen.style.display = "block";
             } else {
+                isRecent.style.display = "none";
+                recentLabel.style.display = "none";
                 invLabel.style.display = "none";
                 invNumber.style.display = "none";
+                warrLabel.style.display = "none";
+                warrLen.style.display = "none";
             }
         }
         function aggData() {
-            let repairInfo = document.forms['repairForm'];
-            // console.log(repairInfo.elements["first_name"].value);
-            let boxString = repairInfo.elements["description"].value;
-            boxString += "\n M/N:" + repairInfo.elements["model_number"].value;
-            boxString += "\n S/N:" + repairInfo.elements["serial_number"].value;
 
 
             alert(boxString);
-
+            return boxString;
         }
+        async function createLead() {
+            const apiKey = 'Tb0a2aa1d6c9fbccf2-58c2dc0b1fdcb182cb692f31dc294f47';
+            const url = `https://bobjohnson.repairshopr.com/api/v1/leads`;
+            let formInfo = document.forms['repairForm'];
 
+            // console.log(repairInfo.elements["first_name"].value);
+
+
+            let boxString = formInfo.elements["description"].value;
+            boxString += "\nBrand: " + formInfo.elements['brand'].value;
+            boxString += "\nM/N: " + formInfo.elements["model_number"].value;
+            boxString += "\nS/N: " + formInfo.elements["serial_number"].value;
+            boxString += "\nPurchased from BJCS?: " + formInfo.elements["purchased"].checked;
+            boxString += "\nRecent Purchase? (6 Months): " + formInfo.elements["recent"].checked;
+            boxString += "\nInvoice Number: " + formInfo.elements["invoice_number"].value;
+            boxString += "\nWarranty Length: " + formInfo.elements["warranty"].value;
+            let unitInfoString = boxString;
+
+            let combAddress = formInfo.elements['address_line1'].value + ", " + formInfo.elements['address_line2'].value;
+
+            const payload = {
+                lead: {
+                    first_name: formInfo.elements['first_name'].value,              // You can adjust fields as needed
+                    last_name: formInfo.elements['last_name'].value,
+                    business_name: formInfo.elements['business_name'].value,
+                    email: formInfo.elements['email'].value,
+                    phone: formInfo.elements['phone'].value,
+                    // add extension somehow
+                    address: combAddress,
+                    city: formInfo.elements['city'].value,
+                    state: formInfo.elements['state'].value,
+                    zip: formInfo.elements['zip_code'].value,
+                    ticket_subject: formInfo.elements['subject'].value,
+                    ticket_description: unitInfoString
+                }
+            };
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`API error: ${response.status} - ${errorText}`);
+                }
+
+                const data = await response.json();
+                console.log('Lead created:', data);
+                showRepairSuccessPopup("Form submitted successfully. Review your details, then click Download PDF to print and include it in the box.");
+                return data;
+
+            } catch (error) {
+                console.error('Error creating lead:', error);
+                throw error;
+            }
+        }
                 // ]]></script>
             <script type="text/javascript"
                 src="https://YOUR-APP-ID.infusionsoft.com/app/form/iframe/REPAIRS_FORM_ID"></script>
