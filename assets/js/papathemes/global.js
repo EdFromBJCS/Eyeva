@@ -363,7 +363,7 @@ function initBannerCarousel(context) {
                 data-blaze-slider='{
                     "all": {
                         "enablePagination": true,
-                        "enableAutoplay": false,
+                        "enableAutoplay": true,
                         "autoplayInterval": 5000,
                         "stopAutoplayOnInteraction": true,
                         "transitionDuration": 100,
@@ -404,21 +404,35 @@ function initBannerCarousel(context) {
         initBlazeSlider($slider);
 
         const slider = $slider.data('blazeSliderInstance');
+        const setBannerDirection = (direction, isManual = false) => {
+            $slider.removeClass('_next _prev _manual _animate');
+
+            // Force reflow so same-direction keyframes can retrigger on repeated clicks.
+            void $slider.get(0).offsetWidth;
+
+            $slider.addClass(`${direction} _animate`);
+            if (isManual) {
+                $slider.addClass('_manual');
+            }
+        };
 
         slider.onSlide(() => {
-            if ($slider.hasClass('_manual')) {
-                $slider.removeClass('_next');
-            } else {
-                $slider.removeClass('_prev');
-                $slider.addClass('_next');
+            if (!$slider.hasClass('_manual')) {
+                setBannerDirection('_next');
             }
 
-            $slider.removeClass('_manual');
+            const ms = slider?.config?.transitionDuration || 100;
+            setTimeout(() => {
+                $slider.removeClass('_next _prev _manual _animate');
+            }, ms + 20);
         });
 
-
         $slider.find('.blaze-prev').on('click', () => {
-            $slider.addClass('_prev _manual');
+            setBannerDirection('_prev', true);
+        });
+
+        $slider.find('.blaze-next').on('click', () => {
+            setBannerDirection('_next', true);
         });
 
         $carousel.find('._close-btn').on('click', (event) => {
