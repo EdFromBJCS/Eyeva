@@ -460,7 +460,7 @@ export default class ProductDetails extends CornerstoneProductDetails {
     }
 
     bindStickyAddToCartEvents() {
-        this.$scope.on('click', '#sticky-add-to-cart', event => {
+        const handleStickyAddToCartClick = event => {
             event.preventDefault();
 
             const $button = $(event.currentTarget);
@@ -473,8 +473,43 @@ export default class ProductDetails extends CornerstoneProductDetails {
                 return;
             }
 
+            const $stickyQty = $button.siblings('.productView-sticky-add-to-cart')
+                .find('.mobile-increment input[name="qty[]"]')
+                .first();
+            const $formQty = $form.find('[data-quantity-change] input[name="qty[]"]').first();
+
+            if ($stickyQty.length && $formQty.length && $formQty.val() !== $stickyQty.val()) {
+                $formQty.val($stickyQty.val()).trigger('change');
+            }
+
+            const form = $form[0];
+
+            if (form && !form.checkValidity()) {
+                const invalidField = form.querySelector(':invalid');
+
+                if (invalidField?.scrollIntoView) {
+                    invalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+
+                if (invalidField?.focus) {
+                    invalidField.focus();
+                }
+
+                if (typeof form.reportValidity === 'function') {
+                    form.reportValidity();
+                } else if (invalidField?.reportValidity) {
+                    invalidField.reportValidity();
+                }
+
+                return;
+            }
+
             $form.trigger('submit');
-        });
+        };
+
+        this.$scope.find('#sticky-add-to-cart')
+            .off('click.eyevaStickyAddToCart')
+            .on('click.eyevaStickyAddToCart', handleStickyAddToCartClick);
     }
 
     bindModalDestroy() {
