@@ -355,6 +355,56 @@
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const stickyBtn = document.getElementById('sticky-add-to-cart');
+        const productForm = document.querySelector('.productView form[data-cart-item-add]');
+
+        if (stickyBtn && productForm && !stickyBtn.dataset.eyevaStickyBound) {
+            stickyBtn.dataset.eyevaStickyBound = 'true';
+
+            stickyBtn.addEventListener('click', function (event) {
+                event.preventDefault();
+
+                if (stickyBtn.disabled || stickyBtn.getAttribute('aria-disabled') === 'true') {
+                    return;
+                }
+
+                const stickyQty = stickyBtn.closest('.productView-sticky-flexbox')
+                    ?.querySelector('.mobile-increment input[name="qty[]"]');
+                const formQty = productForm.querySelector('[data-quantity-change] input[name="qty[]"]');
+
+                if (stickyQty && formQty && formQty.value !== stickyQty.value) {
+                    formQty.value = stickyQty.value;
+                    formQty.dispatchEvent(new Event('change', { bubbles: true }));
+                }
+
+                if (!productForm.checkValidity()) {
+                    const invalidField = productForm.querySelector(':invalid');
+                    if (invalidField) {
+                        invalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        invalidField.focus();
+
+                        if (typeof invalidField.reportValidity === 'function') {
+                            invalidField.reportValidity();
+                        }
+                    }
+
+                    return;
+                }
+
+                const submitBtn = productForm.querySelector('#form-action-addToCart');
+
+                if (submitBtn && !submitBtn.disabled) {
+                    submitBtn.click();
+                } else if (typeof productForm.requestSubmit === 'function') {
+                    productForm.requestSubmit();
+                } else if (window.jQueryTheme) {
+                    window.jQueryTheme(productForm).trigger('submit');
+                } else {
+                    productForm.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+                }
+            });
+        }
+
         const root = document.documentElement;
         const header = document.querySelector('.header');
         const productView = document.querySelector('.productView');
