@@ -1,0 +1,45 @@
+# Seasonal Theme Notes
+
+Use these query params to preview each holiday style on any storefront page.
+
+Example:
+- `http://localhost:3000/?season=valentines`
+- `http://localhost:3000/products/example-item?season=christmas`
+
+Note:
+- Season override is stored in localStorage (`eyevaSeasonOverride`).
+- To clear override, open a page with `?season=default`.
+
+## Holiday Date Rules + Preview Links
+
+| Season | Live Date Rule | Preview Link |
+|---|---|---|
+| Valentines | Feb 14 only | `?season=valentines` |
+| St. Patrick's Day | Mar 17 only | `?season=stpatricks` |
+| Easter Weekend | Good Friday through Easter Sunday | `?season=easter-weekend` |
+| Mother's Day Weekend | Weekend containing 2nd Sunday in May (US) | `?season=mothers-day-weekend` |
+| Father's Day Weekend | Weekend containing 3rd Sunday in June (US) | `?season=fathers-day-weekend` |
+| Independence Day Weekend | Weekend containing July 4 | `?season=independence-day-weekend` |
+| Halloween | Oct 31 only | `?season=halloween` |
+| Breast Cancer Awareness Day | Oct 1 only | `?season=breast-cancer-awareness-day` |
+| Black Friday Sale | Monday-Sunday week containing Black Friday | `?season=black-friday-sale` |
+| Cyber Monday Sale | Monday-Sunday week immediately after Black Friday week | `?season=cyber-monday-sale` |
+| Christmas | Dec 22 through Dec 26 | `?season=christmas` |
+| Default (no holiday) | Any other date | `?season=default` |
+
+## Quick Copy/Paste Preview URLs
+
+Replace `http://localhost:3000/` with your actual storefront URL.
+
+- `http://localhost:3000/?season=default`
+- `http://localhost:3000/?season=valentines`
+- `http://localhost:3000/?season=stpatricks`
+- `http://localhost:3000/?season=easter-weekend`
+- `http://localhost:3000/?season=mothers-day-weekend`
+- `http://localhost:3000/?season=fathers-day-weekend`
+- `http://localhost:3000/?season=independence-day-weekend`
+- `http://localhost:3000/?season=halloween`
+- `http://localhost:3000/?season=breast-cancer-awareness-day`
+- `http://localhost:3000/?season=black-friday-sale`
+- `http://localhost:3000/?season=cyber-monday-sale`
+- `http://localhost:3000/?season=christmas`

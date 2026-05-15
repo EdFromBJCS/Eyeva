@@ -1,3 +1,5 @@
+// FAQ Notes
+
 <h2 class="faqtitle">Frequently Asked Questions</h2>
 <hr class="faqdivider" />
 
@@ -90,3 +92,37 @@
 - **Button format**: `<button class="expandfaq button-alt" onclick="...">`
 - **Div format**: `<div class="expandfaq" onclick="...">`
 - Everything else is identical!
+
+// Tool Tip Notes
+### Option List Tool Tip
+__@tooltip Mobile [Option Display Name] | Tool Tip Text
+
+### Base Specifications Tool Tip
+__@spec_tooltip [Custom Field Name] | Tool Tip Text
+ 
+
+### Insertable Tool Tip
+<span class="eyeva__productView-option-tooltip" style="display:inline-flex;">
+  <span class="eyeva__productView-tooltip-trigger" role="button" tabindex="0" aria-label="More information" title="More information">i</span>
+  <span class="eyeva__productView-tooltip-bubble">Your tooltip text here</span>
+</span>
+
+---
+
+### Master Spec Tooltips (Site-Wide)
+**Location**: `assets/js/papathemes/eyeva/product-details.js` → `renderSpecTooltips()` method → `masterTooltips` object (around line 1997)
+
+**Purpose**: Add a tooltip to the same spec row on every product page automatically without needing a custom field per product.
+
+**How to Use**: 
+Edit the `masterTooltips` object and uncomment or add entries like:
+```js
+const masterTooltips = {
+    'Memory': 'DDR4 RAM — upgradeable to 32GB',
+    'Storage': 'SSD for faster boot and file access',
+};
+```
+
+**Per-Product Override**: Individual `__@spec_tooltip Memory` custom fields in BigCommerce will override the master value if present.
+
+**Spec Spec Table**: The matching `<dd>` elements in `templates/components/eyeva/products/custom-fields.html` use `data-spec-name` attribute for JS targeting.
