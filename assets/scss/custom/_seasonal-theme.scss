@@ -1,0 +1,715 @@
+body.season-christmas {
+    --season-decor-opacity: 1;
+}
+
+body[class*='season-']:not(.season-christmas) {
+    --season-decor-opacity: 0;
+}
+
+body[class*='season-'] .card-countdown ._day,
+body[class*='season-'] .card-countdown ._hour,
+body[class*='season-'] .card-countdown ._minute,
+body[class*='season-'] .card-countdown ._second {
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown ._day,
+body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown ._hour,
+body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown ._minute,
+body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown ._second,
+body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-day-value],
+body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-hour-value],
+body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-minute-value],
+body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-second-value],
+body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-day-label],
+body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-hour-label],
+body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-minute-label],
+body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-second-label] {
+    background: transparent !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+body.season-preview-brown {
+    --preview-brown-1: #8b5a3c;
+    --preview-brown-2: #74462f;
+    --preview-brown-3: #5f3724;
+    --preview-brown-4: #4e2c1d;
+    --season-icon-filter: sepia(1) hue-rotate(330deg) saturate(2.0) brightness(0.92) contrast(1.02);
+}
+
+body.season-valentines {
+    --preview-brown-1: #e4559c;
+    --preview-brown-2: #cf3f89;
+    --preview-brown-3: #b43374;
+    --preview-brown-4: #91285d;
+    --season-icon-filter: sepia(1) hue-rotate(300deg) saturate(2.5) brightness(1.02) contrast(1.04);
+}
+
+body.season-stpatricks {
+    --preview-brown-1: #2f7f3e;
+    --preview-brown-2: #286b34;
+    --preview-brown-3: #20562a;
+    --preview-brown-4: #194421;
+    --season-icon-filter: sepia(1) hue-rotate(85deg) saturate(2.3) brightness(0.95) contrast(1.04);
+}
+
+body.season-easter-weekend {
+    --preview-brown-1: #7c4dff;
+    --preview-brown-2: #673de6;
+    --preview-brown-3: #532fc0;
+    --preview-brown-4: #41269a;
+    --season-icon-filter: sepia(1) hue-rotate(220deg) saturate(2.4) brightness(1.00) contrast(1.04);
+}
+
+body.season-mothers-day-weekend {
+    --preview-brown-1: #de6aa8;
+    --preview-brown-2: #c95695;
+    --preview-brown-3: #aa467d;
+    --preview-brown-4: #8b3967;
+    --season-icon-filter: sepia(1) hue-rotate(292deg) saturate(2.3) brightness(0.98) contrast(1.04);
+}
+
+body.season-fathers-day-weekend {
+    --preview-brown-1: #2f5a88;
+    --preview-brown-2: #274a71;
+    --preview-brown-3: #203c5c;
+    --preview-brown-4: #19304a;
+    --season-icon-filter: sepia(1) hue-rotate(188deg) saturate(2.2) brightness(0.94) contrast(1.05);
+}
+
+body.season-independence-day-weekend {
+    --preview-brown-1: #b53b42;
+    --preview-brown-2: #1f4c9a;
+    --preview-brown-3: #8f2f36;
+    --preview-brown-4: #183c79;
+    --season-icon-filter: sepia(1) hue-rotate(342deg) saturate(2.5) brightness(0.97) contrast(1.06);
+}
+
+body.season-halloween {
+    --preview-brown-1: #bf651f;
+    --preview-brown-2: #9f5419;
+    --preview-brown-3: #824413;
+    --preview-brown-4: #68360f;
+    --season-icon-filter: sepia(1) hue-rotate(14deg) saturate(2.6) brightness(0.96) contrast(1.05);
+}
+
+body.season-breast-cancer-awareness-day {
+    --preview-brown-1: #cf4d95;
+    --preview-brown-2: #b14180;
+    --preview-brown-3: #923569;
+    --preview-brown-4: #762b55;
+    --season-icon-filter: sepia(1) hue-rotate(296deg) saturate(2.5) brightness(1.00) contrast(1.04);
+}
+
+body.season-black-friday-sale {
+    --preview-brown-1: #2b2b2b;
+    --preview-brown-2: #1d1d1d;
+    --preview-brown-3: #121212;
+    --preview-brown-4: #0a0a0a;
+    --blackfriday-gold: #c6a44b;
+    --season-icon-filter: grayscale(1) brightness(0.55) contrast(1.12);
+}
+
+body.season-cyber-monday-sale {
+    --preview-brown-1: #7c4dff;
+    --preview-brown-2: #673de6;
+    --preview-brown-3: #532fc0;
+    --preview-brown-4: #41269a;
+    --season-icon-filter: sepia(1) hue-rotate(220deg) saturate(2.4) brightness(1.00) contrast(1.04);
+}
+
+body.season-christmas {
+    --preview-brown-1: #2f7a46;
+    --preview-brown-2: #b64242;
+    --preview-brown-3: #245d36;
+    --preview-brown-4: #8f3333;
+    --season-icon-filter: sepia(1) hue-rotate(90deg) saturate(2.3) brightness(0.92) contrast(1.05);
+}
+
+body.season-preview-brown .header {
+    background-color: var(--preview-brown-1) !important;
+    border-bottom-color: var(--preview-brown-3) !important;
+}
+
+body.season-preview-brown .header .navPages-action,
+body.season-preview-brown .header .navUser-action {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .eyeva__banners-carousel,
+body.season-preview-brown .banners--top,
+body.season-preview-brown .banners--top .banner,
+body.season-preview-brown [data-content-region='header_top--global'] {
+    background-color: var(--preview-brown-2) !important;
+    border-color: var(--preview-brown-3) !important;
+    color: #ffffff !important;
+}
+
+body.season-preview-brown [data-content-region='header_top--global'] a {
+    color: #ffffff !important;
+}
+
+
+body.season-preview-brown input[type='submit'],
+body.season-preview-brown .button--primary,
+body.season-preview-brown ._choose-options,
+body.season-preview-brown .btn,
+body.season-preview-brown [class*='buttonPrimary'] {
+    background-color: var(--preview-brown-1) !important;
+    border-color: var(--preview-brown-2) !important;
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .button:hover,
+body.season-preview-brown button:hover,
+body.season-preview-brown input[type='submit']:hover,
+body.season-preview-brown .button--primary:hover,
+body.season-preview-brown ._choose-options:hover,
+body.season-preview-brown .btn:hover,
+body.season-preview-brown [class*='buttonPrimary']:hover {
+    background-color: var(--preview-brown-2) !important;
+    border-color: var(--preview-brown-3) !important;
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .productView-collapsible-title .button--plain:hover,
+body.season-preview-brown .productView-collapsible-title .button--plain:focus,
+body.season-preview-brown .productView-collapsible-title .button--plain:active {
+    background: none !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    border-color: transparent !important;
+    color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .productView-collapsible-title .button--plain:hover svg,
+body.season-preview-brown .productView-collapsible-title .button--plain:focus svg,
+body.season-preview-brown .productView-collapsible-title .button--plain:active svg {
+    fill: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .main-content .infusion-submit .button,
+body.season-preview-brown .blogpost .infusion-submit .button {
+    background: linear-gradient(135deg, var(--preview-brown-1), var(--preview-brown-2)) !important;
+    border-color: var(--preview-brown-2) !important;
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .main-content .infusion-submit .button:hover,
+body.season-preview-brown .blogpost .infusion-submit .button:hover {
+    background: linear-gradient(135deg, var(--preview-brown-2), var(--preview-brown-3)) !important;
+    border-color: var(--preview-brown-3) !important;
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .button a,
+body.season-preview-brown .button--primary a,
+body.season-preview-brown ._choose-options a,
+body.season-preview-brown .btn a,
+body.season-preview-brown [class*='buttonPrimary'] a {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .button a:hover,
+body.season-preview-brown .button--primary a:hover,
+body.season-preview-brown ._choose-options a:hover,
+body.season-preview-brown .btn a:hover,
+body.season-preview-brown [class*='buttonPrimary'] a:hover,
+body.season-preview-brown .button a:focus,
+body.season-preview-brown .button--primary a:focus,
+body.season-preview-brown ._choose-options a:focus,
+body.season-preview-brown .btn a:focus,
+body.season-preview-brown [class*='buttonPrimary'] a:focus {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .page a.button,
+body.season-preview-brown .page a.button--primary,
+body.season-preview-brown .page a._choose-options,
+body.season-preview-brown .page a.btn,
+body.season-preview-brown .page a[class*='buttonPrimary'] {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .page a.button:hover,
+body.season-preview-brown .page a.button--primary:hover,
+body.season-preview-brown .page a._choose-options:hover,
+body.season-preview-brown .page a.btn:hover,
+body.season-preview-brown .page a[class*='buttonPrimary']:hover,
+body.season-preview-brown .page a.button:focus,
+body.season-preview-brown .page a.button--primary:focus,
+body.season-preview-brown .page a._choose-options:focus,
+body.season-preview-brown .page a.btn:focus,
+body.season-preview-brown .page a[class*='buttonPrimary']:focus {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .sale-flag-side {
+    background-color: var(--preview-brown-1) !important;
+    border-color: var(--preview-brown-2) !important;
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .sale-flag-side:first-child::before {
+    border-color: var(--preview-brown-2) transparent transparent transparent !important;
+}
+
+body.season-preview-brown .navList-action--checkbox.is-selected::before,
+body.season-preview-brown .form-checkbox:checked + .form-label::before,
+body.season-preview-brown .form-radio:checked + .form-label::before {
+    background-color: var(--preview-brown-2) !important;
+    border-color: var(--preview-brown-3) !important;
+}
+
+body.season-preview-brown .pagination-item--current,
+body.season-preview-brown .pagination-item--current .pagination-link {
+    background-color: var(--preview-brown-1) !important;
+    border-color: var(--preview-brown-2) !important;
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .name-plate {
+    border-color: var(--preview-brown-2) !important;
+    outline-color: var(--preview-brown-2) !important;
+}
+
+body.season-preview-brown .faqplus,
+body.season-preview-brown #faqplus {
+    color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .expandfaq a,
+body.season-preview-brown .answer a,
+body.season-preview-brown .faq1 a,
+body.season-preview-brown .faq2 a,
+body.season-preview-brown .faq3 a,
+body.season-preview-brown .faq4 a,
+body.season-preview-brown .faq5 a,
+body.season-preview-brown .faq6 a,
+body.season-preview-brown .faq7 a,
+body.season-preview-brown .faq8 a,
+body.season-preview-brown .faq9 a {
+    color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .expandfaq a:hover,
+body.season-preview-brown .answer a:hover,
+body.season-preview-brown .faq1 a:hover,
+body.season-preview-brown .faq2 a:hover,
+body.season-preview-brown .faq3 a:hover,
+body.season-preview-brown .faq4 a:hover,
+body.season-preview-brown .faq5 a:hover,
+body.season-preview-brown .faq6 a:hover,
+body.season-preview-brown .faq7 a:hover,
+body.season-preview-brown .faq8 a:hover,
+body.season-preview-brown .faq9 a:hover {
+    color: var(--preview-brown-3) !important;
+}
+
+body.season-preview-brown .faqplus .faqicon,
+body.season-preview-brown #faqplus .faqicon {
+    filter: var(--season-icon-filter) !important;
+}
+
+body.season-preview-brown [data-sale-countdown-day-value],
+body.season-preview-brown [data-sale-countdown-hour-value],
+body.season-preview-brown [data-sale-countdown-minute-value],
+body.season-preview-brown [data-sale-countdown-second-value] {
+    background-color: var(--preview-brown-1) !important;
+    border-color: var(--preview-brown-2) !important;
+    color: #ffffff !important;
+}
+
+body.season-preview-brown [data-sale-countdown-day-label],
+body.season-preview-brown [data-sale-countdown-hour-label],
+body.season-preview-brown [data-sale-countdown-minute-label],
+body.season-preview-brown [data-sale-countdown-second-label],
+body.season-preview-brown [data-sale-countdown-day] ._label,
+body.season-preview-brown [data-sale-countdown-hour] ._label,
+body.season-preview-brown [data-sale-countdown-minute] ._label,
+body.season-preview-brown [data-sale-countdown-second] ._label {
+    background-color: var(--preview-brown-1) !important;
+    border-color: var(--preview-brown-2) !important;
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .productView ._countdown ._day,
+body.season-preview-brown .productView ._countdown ._hour,
+body.season-preview-brown .productView ._countdown ._minute,
+body.season-preview-brown .productView ._countdown ._second,
+body.season-preview-brown .productView ._countdown [data-sale-countdown-day-value],
+body.season-preview-brown .productView ._countdown [data-sale-countdown-hour-value],
+body.season-preview-brown .productView ._countdown [data-sale-countdown-minute-value],
+body.season-preview-brown .productView ._countdown [data-sale-countdown-second-value],
+body.season-preview-brown .productView ._countdown [data-sale-countdown-day-label],
+body.season-preview-brown .productView ._countdown [data-sale-countdown-hour-label],
+body.season-preview-brown .productView ._countdown [data-sale-countdown-minute-label],
+body.season-preview-brown .productView ._countdown [data-sale-countdown-second-label],
+body.season-preview-brown .productView ._countdown [data-sale-countdown-day] ._label,
+body.season-preview-brown .productView ._countdown [data-sale-countdown-hour] ._label,
+body.season-preview-brown .productView ._countdown [data-sale-countdown-minute] ._label,
+body.season-preview-brown .productView ._countdown [data-sale-countdown-second] ._label {
+    background: transparent !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    color: #555 !important;
+}
+
+body.season-preview-brown .card-title > a,
+body.season-preview-brown .page a,
+body.season-preview-brown .footer a {
+    color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .form-field a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']) {
+    color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .tab-content a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']) {
+    color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .productView-description a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']) {
+    color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .categoryGrid-item a {
+    color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .categoryGrid-item .topCategories-name,
+body.season-preview-brown .categoryGrid-item .topCategories-link .topCategories-name {
+    color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .card-title > a:hover,
+body.season-preview-brown .page a:hover,
+body.season-preview-brown .footer a:hover {
+    color: var(--preview-brown-3) !important;
+}
+
+body.season-preview-brown .form-field a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']):hover,
+body.season-preview-brown .form-field a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']):focus {
+    color: var(--preview-brown-3) !important;
+}
+
+body.season-preview-brown .tab-content a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']):hover,
+body.season-preview-brown .tab-content a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']):focus {
+    color: var(--preview-brown-3) !important;
+}
+
+body.season-preview-brown .productView-description a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']):hover,
+body.season-preview-brown .productView-description a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']):focus {
+    color: var(--preview-brown-3) !important;
+}
+
+body.season-preview-brown .categoryGrid-item a:hover,
+body.season-preview-brown .categoryGrid-item a:focus {
+    color: var(--preview-brown-3) !important;
+}
+
+body.season-preview-brown .categoryGrid-item .topCategories-name:hover,
+body.season-preview-brown .categoryGrid-item .topCategories-name:focus,
+body.season-preview-brown .categoryGrid-item .topCategories-link:hover .topCategories-name,
+body.season-preview-brown .categoryGrid-item .topCategories-link:focus .topCategories-name {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .data-banner-carousel-link,
+body.season-preview-brown .data-banner-carousel-link:hover {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .navPages-childList .navPages-label,
+body.season-preview-brown .navPages-megaMenu .navPages-label {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .navPages-childList .navPages-label:hover,
+body.season-preview-brown .navPages-megaMenu .navPages-label:hover {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .navPages-childList-action._mega,
+body.season-preview-brown .navPages-item .navPages-childList-action._mega {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .navPages-childList-action._mega:hover,
+body.season-preview-brown .navPages-childList-action._mega:focus,
+body.season-preview-brown .navPages-childList-action._mega:active,
+body.season-preview-brown .navPages-item .navPages-childList-action._mega:hover,
+body.season-preview-brown .navPages-item .navPages-childList-action._mega:focus,
+body.season-preview-brown .navPages-item .navPages-childList-action._mega:active {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .header .navPages .navPages-action,
+body.season-preview-brown .header .navPages .navPages-label,
+body.season-preview-brown .header .navPages .navPages-item a,
+body.season-preview-brown .header .navPages .navPages-childList-action._mega,
+body.season-preview-brown .header .navPages .navPages-childList-action._mega .navPages-label {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .header .navPages .navPages-megaMenu.is-open,
+body.season-preview-brown .header .navPages .navPages-megaMenu.is-open[data-menu-dropdown],
+body.season-preview-brown .header .navPages .navPages-subMenu.is-open[data-menu-dropdown] {
+    background: var(--preview-brown-2) !important;
+    border-color: var(--preview-brown-3) !important;
+}
+
+body.season-preview-brown [data-menu-dropdown].is-open,
+body.season-preview-brown .navPages-megaMenu.is-open,
+body.season-preview-brown .navPages-subMenu.is-open,
+body.season-preview-brown [id^='navPages-subMenu'].is-open {
+    background: var(--preview-brown-2) !important;
+    border-color: var(--preview-brown-3) !important;
+}
+
+body.season-preview-brown .navPages-item.info-panel.is-open,
+body.season-preview-brown .navPages-item.info-panel.is-open .info-submenu,
+body.season-preview-brown .info-panel.is-open,
+body.season-preview-brown .info-panel.is-open .info-submenu {
+    background: var(--preview-brown-2) !important;
+    border-color: var(--preview-brown-3) !important;
+}
+
+body.season-preview-brown .header .navPages .navPages-action:hover,
+body.season-preview-brown .header .navPages .navPages-action:focus,
+body.season-preview-brown .header .navPages .navPages-action:active,
+body.season-preview-brown .header .navPages .navPages-item a:hover,
+body.season-preview-brown .header .navPages .navPages-item a:focus,
+body.season-preview-brown .header .navPages .navPages-item a:active,
+body.season-preview-brown .header .navPages .navPages-childList-action._mega:hover,
+body.season-preview-brown .header .navPages .navPages-childList-action._mega:focus,
+body.season-preview-brown .header .navPages .navPages-childList-action._mega:active,
+body.season-preview-brown .header .navPages .navPages-childList-action._mega:hover .navPages-label,
+body.season-preview-brown .header .navPages .navPages-childList-action._mega:focus .navPages-label,
+body.season-preview-brown .header .navPages .navPages-childList-action._mega:active .navPages-label {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .header .navPages .navPages-action--autoselect {
+    background-color: var(--preview-brown-2) !important;
+    border-color: var(--preview-brown-3) !important;
+    color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .header .navPages .navPages-action--autoselect .navPages-label {
+    color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .header .navPages .navPages-action--autoselect:hover,
+body.season-preview-brown .header .navPages .navPages-action--autoselect:focus,
+body.season-preview-brown .header .navPages .navPages-action--autoselect:active {
+    background-color: var(--preview-brown-3) !important;
+    border-color: var(--preview-brown-4) !important;
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .header .navPages .navPages-action--autoselect:hover .navPages-label,
+body.season-preview-brown .header .navPages .navPages-action--autoselect:focus .navPages-label,
+body.season-preview-brown .header .navPages .navPages-action--autoselect:active .navPages-label {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .support-switcher input[type='radio'] {
+    accent-color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .support-switcher label:hover {
+    border-color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .tab-buttons .tab-button {
+    background: var(--preview-brown-1) !important;
+    border-color: var(--preview-brown-2) !important;
+}
+
+body.season-preview-brown .tab-buttons .tab-button:hover,
+body.season-preview-brown .tab-buttons .tab-button.active-tab {
+    background: var(--preview-brown-3) !important;
+    border-color: var(--preview-brown-4) !important;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2) !important;
+}
+
+body.season-preview-brown .section--brands {
+    background: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .topCategories {
+    background-color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .section--brands .section-heading,
+body.season-preview-brown .section--brands .brandCarousel-link,
+body.season-preview-brown .section--brands .brandCarousel-name-alt,
+body.season-preview-brown .section--brands .brandCarousel-more {
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .papathemes-eyeva-hero-carousel-59be897b-6f5f-40e4-b665-5759d68a5d7f {
+    --papathemes-eyeva-hero-carousel-dot-color-active: var(--preview-brown-2);
+}
+
+body[class*='season-']:not(.season-default) .repair-container img.nav-icon[src$='.png'],
+body[class*='season-']:not(.season-default) .repair-container img.nav-icon[src$='.PNG'] {
+    filter: var(--season-icon-filter) !important;
+}
+
+body.season-black-friday-sale.season-preview-brown input[type='submit'],
+body.season-black-friday-sale.season-preview-brown .button--primary,
+body.season-black-friday-sale.season-preview-brown ._choose-options,
+body.season-black-friday-sale.season-preview-brown .btn,
+body.season-black-friday-sale.season-preview-brown [class*='buttonPrimary'],
+body.season-black-friday-sale.season-preview-brown .main-content .infusion-submit .button,
+body.season-black-friday-sale.season-preview-brown .blogpost .infusion-submit .button,
+body.season-black-friday-sale.season-preview-brown .pagination-item--current,
+body.season-black-friday-sale.season-preview-brown .pagination-item--current .pagination-link,
+body.season-black-friday-sale.season-preview-brown .sale-flag-side {
+    border-color: var(--blackfriday-gold) !important;
+    box-shadow: inset 0 0 0 1px rgba(198, 164, 75, 0.65) !important;
+}
+
+body.season-black-friday-sale.season-preview-brown .sale-flag-side:first-child::before,
+body.season-black-friday-sale.season-preview-brown [data-menu-dropdown].is-open,
+body.season-black-friday-sale.season-preview-brown .navPages-megaMenu.is-open,
+body.season-black-friday-sale.season-preview-brown .navPages-subMenu.is-open,
+body.season-black-friday-sale.season-preview-brown [id^='navPages-subMenu'].is-open,
+body.season-black-friday-sale.season-preview-brown .navPages-item.info-panel.is-open,
+body.season-black-friday-sale.season-preview-brown .navPages-item.info-panel.is-open .info-submenu,
+body.season-black-friday-sale.season-preview-brown .info-panel.is-open,
+body.season-black-friday-sale.season-preview-brown .info-panel.is-open .info-submenu {
+    border-color: var(--blackfriday-gold) !important;
+}
+
+body.season-valentines .header {
+    overflow: hidden;
+}
+
+body.season-valentines .hero-banner,
+body.season-valentines .heroCarousel {
+    position: relative;
+    overflow: hidden;
+}
+
+body.season-valentines .header::before,
+body.season-valentines .hero-banner::before,
+body.season-valentines .heroCarousel::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 14px;
+    z-index: 2;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='14' viewBox='0 0 42 14'%3E%3Ctext x='2' y='11' font-size='10' fill='%23ffd1e6'%3E%E2%99%A5%3C/text%3E%3Ctext x='16' y='11' font-size='10' fill='%23ff8fbe'%3E%E2%99%A5%3C/text%3E%3Ctext x='30' y='11' font-size='10' fill='%23cf3f89'%3E%E2%99%A5%3C/text%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 42px 14px;
+}
+
+body.season-stpatricks .header {
+    overflow: hidden;
+}
+
+body.season-stpatricks .hero-banner,
+body.season-stpatricks .heroCarousel {
+    position: relative;
+    overflow: hidden;
+}
+
+body.season-stpatricks .header::before,
+body.season-stpatricks .hero-banner::before,
+body.season-stpatricks .heroCarousel::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 14px;
+    z-index: 2;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='14' viewBox='0 0 42 14'%3E%3Ccircle cx='8' cy='4.5' r='2.6' fill='%2393df8f'/%3E%3Ccircle cx='13' cy='4.5' r='2.6' fill='%2372c96d'/%3E%3Ccircle cx='10.5' cy='8.2' r='2.6' fill='%234da44b'/%3E%3Crect x='9.8' y='8.5' width='1.4' height='3.8' fill='%233b7f38'/%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 42px 14px;
+}
+
+body.season-independence-day-weekend .header {
+    overflow: hidden;
+}
+body.season-independence-day-weekend .hero-banner,
+body.season-independence-day-weekend .heroCarousel {
+    position: relative;
+    overflow: hidden;
+}
+
+body.season-independence-day-weekend .header::before,
+body.season-independence-day-weekend .hero-banner::before,
+body.season-independence-day-weekend .heroCarousel::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -4px;
+    height: 22px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.85;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='22' viewBox='0 0 88 22'%3E%3Crect width='88' height='22' fill='%23fff'/%3E%3Crect y='0' width='88' height='3' fill='%23b53b42'/%3E%3Crect y='6' width='88' height='3' fill='%23b53b42'/%3E%3Crect y='12' width='88' height='3' fill='%23b53b42'/%3E%3Crect y='18' width='88' height='3' fill='%23b53b42'/%3E%3Crect width='24' height='12' fill='%23183c79'/%3E%3Cg fill='%23fff'%3E%3Ccircle cx='3.5' cy='3' r='1'/%3E%3Ccircle cx='7.5' cy='3' r='1'/%3E%3Ccircle cx='11.5' cy='3' r='1'/%3E%3Ccircle cx='15.5' cy='3' r='1'/%3E%3Ccircle cx='19.5' cy='3' r='1'/%3E%3Ccircle cx='5.5' cy='6' r='1'/%3E%3Ccircle cx='9.5' cy='6' r='1'/%3E%3Ccircle cx='13.5' cy='6' r='1'/%3E%3Ccircle cx='17.5' cy='6' r='1'/%3E%3Ccircle cx='3.5' cy='9' r='1'/%3E%3Ccircle cx='7.5' cy='9' r='1'/%3E%3Ccircle cx='11.5' cy='9' r='1'/%3E%3Ccircle cx='15.5' cy='9' r='1'/%3E%3Ccircle cx='19.5' cy='9' r='1'/%3E%3C/g%3E%3C/svg%3E");
+    background-repeat: repeat-x;
+    background-size: 88px 22px;
+}
+
+body.season-christmas .header {
+    overflow: hidden;
+}
+
+body.season-christmas .header::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 14px;
+    z-index: 1;
+    pointer-events: none;
+    opacity: var(--season-decor-opacity);
+    background-image: radial-gradient(circle, #d94949 0 4px, transparent 5px),
+        radial-gradient(circle, #efcf6f 0 4px, transparent 5px),
+        radial-gradient(circle, #5ea770 0 4px, transparent 5px);
+    background-size: 40px 14px;
+    background-position: 0 0, 13px 0, 26px 0;
+    background-repeat: repeat-x;
+}
+
+body.season-christmas .hero-banner,
+body.season-christmas .heroCarousel {
+    position: relative;
+    overflow: hidden;
+}
+
+body.season-christmas .hero-banner::before,
+body.season-christmas .heroCarousel::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 14px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: var(--season-decor-opacity);
+    background-image: radial-gradient(circle, #d94949 0 4px, transparent 5px),
+        radial-gradient(circle, #efcf6f 0 4px, transparent 5px),
+        radial-gradient(circle, #5ea770 0 4px, transparent 5px);
+    background-size: 40px 14px;
+    background-position: 0 0, 13px 0, 26px 0;
+    background-repeat: repeat-x;
+}
