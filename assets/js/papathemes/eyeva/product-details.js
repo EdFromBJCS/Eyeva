@@ -266,6 +266,7 @@ export default class ProductDetails extends CornerstoneProductDetails {
         this.syncProductCardQty();
         this.initSaleCountdown();
         this.renderInlineOptionTooltips();
+        this.renderSpecTooltips();
         $('body').trigger('update-wishlist-buttons', [this.$scope]);
     }
 
@@ -1989,6 +1990,54 @@ export default class ProductDetails extends CornerstoneProductDetails {
             });
 
         this.showInlineOptionTooltips($productOptionsEl, tooltips, tooltipHeadings);
+    }
+
+    renderSpecTooltips() {
+        const prefix = '__@spec_tooltip ';
+
+        // ---------------------------------------------------------------
+        // MASTER SPEC TOOLTIPS
+        // Add entries here to show a tooltip on every product page for
+        // that spec row automatically. No custom field needed per product.
+        // Per-product custom fields (e.g. __@spec_tooltip Memory) will
+        // override these values if present.
+        // ---------------------------------------------------------------
+        const masterTooltips = {
+            'Memory': 'Not sure if this is the right amount of memory for your needs? Refer to our blog on <a href="https://www.bobjohnson.com/blog/how-much-ram-do-you-actually-need-in-a-rugged-laptop/" target="_blank">RAM Needs in a rugged laptop</a>.',
+            // 'Storage': 'The drive where your files and OS are stored.',
+            // 'Processor': 'The CPU is the brain of the computer.',
+        };
+
+        // Remove any previously injected spec tooltips
+        this.$scope.find('[data-eyeva-spec-tooltip]').remove();
+
+        // Build final map: start with master defaults, override with per-product custom fields
+        const resolvedTooltips = { ...masterTooltips };
+
+        this.customFields.forEach(({ name, value }) => {
+            if (!name.startsWith(prefix)) {
+                return;
+            }
+
+            const specName = name.slice(prefix.length).trim();
+
+            if (specName && value) {
+                resolvedTooltips[specName] = value;
+            }
+        });
+
+        Object.entries(resolvedTooltips).forEach(([specName, tooltipText]) => {
+            const $dd = this.$scope.find(`[data-spec-name="${specName}"]`).first();
+
+            if (!$dd.length) {
+                return;
+            }
+
+            const $tooltip = $(this.optionTooltipTemplate.replace('<%tooltip%>', tooltipText))
+                .attr('data-eyeva-spec-tooltip', specName);
+
+            $dd.append($tooltip);
+        });
     }
 
     showInlineOptionTooltips($productOptionsEl, tooltips, tooltipHeadings) {

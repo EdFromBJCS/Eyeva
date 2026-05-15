@@ -2,7 +2,7 @@
     {{#startsWith '__' name}}
     {{else}}
         <dt class="productView-info-name">{{{name}}}:</dt>
-        <dd class="productView-info-value">{{{value}}}</dd>
+        <dd class="productView-info-value" data-spec-name="{{{name}}}">{{{value}}}</dd>
         {{#if (merge ../product _visible_custom_fields_count=(add (default ../product._visible_custom_fields_count 0) 1))}}{{/if}}
     {{/startsWith}}
 {{/each}}

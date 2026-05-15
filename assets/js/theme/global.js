@@ -13,11 +13,14 @@ import cartPreview from './global/cart-preview';
 // import carousel from './common/carousel'; papathemes-eva disabled as not used in this theme
 import svgInjector from './global/svg-injector';
 import initTradeInTables from './global/trade-in-table';
+import initRamTables from './global/ram-table';
+import initSeasonalTheme from './global/seasonal-theme';
 import papathemes from '../papathemes/global';
 
 export default class Global extends PageManager {
     onReady() {
         const { cartId, secureBaseUrl } = this.context;
+        initSeasonalTheme();
         cartPreview(secureBaseUrl, cartId);
         // quickSearch(); // papathemes-eyeva edited disabled as loaded in papathemes/global.js
         currencySelector(cartId);
@@ -28,6 +31,7 @@ export default class Global extends PageManager {
         // mobileMenuToggle();
         svgInjector();
         initTradeInTables();
+        initRamTables();
 
         // papathemes-eyeva: Load papathemes functionality
         papathemes(this.context);
