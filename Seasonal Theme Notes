@@ -31,15 +31,15 @@ Note:
 
 Replace `http://localhost:3000/` with your actual storefront URL.
 
-- `http://localhost:3000/?season=default`
-- `http://localhost:3000/?season=valentines`
-- `http://localhost:3000/?season=stpatricks`
-- `http://localhost:3000/?season=easter-weekend`
-- `http://localhost:3000/?season=mothers-day-weekend`
-- `http://localhost:3000/?season=fathers-day-weekend`
-- `http://localhost:3000/?season=independence-day-weekend`
-- `http://localhost:3000/?season=halloween`
-- `http://localhost:3000/?season=breast-cancer-awareness-day`
-- `http://localhost:3000/?season=black-friday-sale`
-- `http://localhost:3000/?season=cyber-monday-sale`
-- `http://localhost:3000/?season=christmas`
+- `https://www.bobjohnson.com/?season=default`
+- `https://www.bobjohnson.com/?season=valentines`
+- `https://www.bobjohnson.com/?season=stpatricks`
+- `https://www.bobjohnson.com/?season=easter-weekend`
+- `https://www.bobjohnson.com/?season=mothers-day-weekend`
+- `https://www.bobjohnson.com/?season=fathers-day-weekend`
+- `https://www.bobjohnson.com/?season=independence-day-weekend`
+- `https://www.bobjohnson.com/?season=halloween`
+- `https://www.bobjohnson.com/?season=breast-cancer-awareness-day`
+- `https://www.bobjohnson.com/?season=black-friday-sale`
+- `https://www.bobjohnson.com/?season=cyber-monday-sale`
+- `https://www.bobjohnson.com/?season=christmas`
