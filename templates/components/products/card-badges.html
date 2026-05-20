@@ -61,4 +61,12 @@
             </div>
         {{/filter}}
     {{/if}}
+
+    {{#each category_breadcrumbs}}
+        {{#if (lowercase name) '===' 'parts'}}
+            <div class="sale-flag-side sale-flag-side--custom sale-flag-side--free-shipping">
+                <span class="sale-text">Free Shipping! (USA only)</span>
+            </div>
+        {{/if}}
+    {{/each}}
 </div>

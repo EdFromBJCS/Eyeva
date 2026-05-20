@@ -77,6 +77,11 @@
                         <div class="_badge _custom">{{value}}</div>
                         {{/if}}
                         {{/each}}
+                            {{#each product.category}}
+                            {{#if (lowercase this) '===' 'parts'}}
+                            <div class="free-shipping-flag-side">Free Shipping! (USA only)</div>
+                            {{/if}}
+                            {{/each}}
                     </div>
 
                     <div class="_group-price-bulk-rating">

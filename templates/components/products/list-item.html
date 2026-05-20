@@ -16,7 +16,7 @@
     {{else}}
         {{lang 'common.login_for_pricing'}}
     {{/or}}">
-    {{> components/products/list-badges}}
+    {{> components/products/list-badges category_breadcrumbs=category_breadcrumbs}}
     <figure class="listItem-figure">
         <a href="{{url}}" class="listItem-figure__link" aria-label="{{> components/products/product-info}}"
             data-event-type="product-click">

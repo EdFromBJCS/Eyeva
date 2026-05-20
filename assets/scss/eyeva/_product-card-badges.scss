@@ -37,6 +37,18 @@
     .sale-text {
         display: flex;
     }
+
+    &.sale-flag-side--free-shipping {
+        background-color: #222222;
+        color: #fff;
+
+        &:first-child {
+            &::before {
+                border-right-color: #222222;
+                border-top-color: #222222;
+            }
+        }
+    }
 }
 
 .sold-out-flag-side {
@@ -47,6 +59,35 @@
         &::before {
             border-right-color: stencilColor("color_badge_product_sold_out_badges");
             border-top-color: stencilColor("color_badge_product_sold_out_badges");
+        }
+    }
+}
+
+// Free Shipping flag for parts category
+.free-shipping-flag-side {
+    background-color: #222222;
+    color: #fff;
+    font-weight: 700;
+    border-radius: remCalc(fontSize("smallest")) * $eyeva-body-line-height / 2 + spacing("third") / 4;
+    font-size: fontSize("smallest");
+    padding: spacing("third") / 4 spacing("third");
+    position: relative;
+    display: inline-block;
+    margin-bottom: 4px;
+
+    &:first-child {
+        border-bottom-left-radius: 0;
+        margin-left: -4px;
+        &::before {
+            border: 3px solid;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            border-right-color: #222222;
+            border-top-color: #222222;
+            content: "";
+            left: 0;
+            position: absolute;
+            top: 100%;
         }
     }
 }
