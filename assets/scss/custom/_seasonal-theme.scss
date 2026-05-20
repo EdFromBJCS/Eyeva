@@ -1,3 +1,27 @@
+/* Meet the Team: Seasonalize bio-pic and modal borders */
+body[class*='season-'] .bio-pic {
+    border-color: var(--preview-brown-2, #c4301f) !important;
+}
+
+body[class*='season-'] .team-modal-content {
+    border-color: var(--preview-brown-2, #c4301f) !important;
+}
+/* Meet the Team: Seasonalize name-plate and moreInfo button */
+body[class*='season-'] .name-plate {
+    background-color: var(--preview-brown-1, #dc3522) !important;
+    border: 5px solid var(--preview-brown-2, #a82a1d) !important;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+body[class*='season-'] .moreInfo {
+    background-color: var(--preview-brown-2, #dc3522) !important;
+    color: #fff !important;
+    transition: background 0.3s, background-color 0.3s;
+}
+
+body[class*='season-'] .moreInfo:hover {
+    background-color: var(--preview-brown-3, #a82a1d) !important;
+}
 body.season-christmas {
     --season-decor-opacity: 1;
 }
@@ -15,6 +39,7 @@ body[class*='season-'] .card-countdown ._second {
     box-shadow: none !important;
 }
 
+/* Product page sale countdown: keep timer chips backgroundless for every holiday theme. */
 body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown ._day,
 body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown ._hour,
 body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown ._minute,
@@ -32,6 +57,8 @@ body[class*='season-']:not(.season-default) .productView-details .product-option
     border-color: transparent !important;
     box-shadow: none !important;
 }
+
+/* Seasonal palette tokens: all holiday themes reuse the same preview-target surfaces. */
 
 body.season-preview-brown {
     --preview-brown-1: #8b5a3c;
@@ -82,6 +109,22 @@ body.season-fathers-day-weekend {
 }
 
 body.season-independence-day-weekend {
+    --preview-brown-1: #b53b42;
+    --preview-brown-2: #1f4c9a;
+    --preview-brown-3: #8f2f36;
+    --preview-brown-4: #183c79;
+    --season-icon-filter: sepia(1) hue-rotate(342deg) saturate(2.5) brightness(0.97) contrast(1.06);
+}
+
+body.season-memorial-day-weekend {
+    --preview-brown-1: #b53b42;
+    --preview-brown-2: #1f4c9a;
+    --preview-brown-3: #8f2f36;
+    --preview-brown-4: #183c79;
+    --season-icon-filter: sepia(1) hue-rotate(342deg) saturate(2.5) brightness(0.97) contrast(1.06);
+}
+
+body.season-labor-day-weekend {
     --preview-brown-1: #b53b42;
     --preview-brown-2: #1f4c9a;
     --preview-brown-3: #8f2f36;
@@ -337,6 +380,7 @@ body.season-preview-brown [data-sale-countdown-second] ._label {
     color: #ffffff !important;
 }
 
+/* Product page exception: keep countdown chips transparent even in active seasonal themes. */
 body.season-preview-brown .productView ._countdown ._day,
 body.season-preview-brown .productView ._countdown ._hour,
 body.season-preview-brown .productView ._countdown ._minute,
@@ -498,6 +542,7 @@ body.season-preview-brown .header .navPages .navPages-childList-action._mega:act
 body.season-preview-brown .header .navPages .navPages-action--autoselect {
     background-color: var(--preview-brown-2) !important;
     border-color: var(--preview-brown-3) !important;
+    box-shadow: 0 2px 8px var(--preview-brown-3) !important;
     color: var(--preview-brown-1) !important;
 }
 
@@ -505,11 +550,16 @@ body.season-preview-brown .header .navPages .navPages-action--autoselect .navPag
     color: var(--preview-brown-1) !important;
 }
 
+body.season-preview-brown .header .navPages .navPages-action--autoselect .navPages-label::before {
+    filter: var(--season-icon-filter) !important;
+}
+
 body.season-preview-brown .header .navPages .navPages-action--autoselect:hover,
 body.season-preview-brown .header .navPages .navPages-action--autoselect:focus,
 body.season-preview-brown .header .navPages .navPages-action--autoselect:active {
     background-color: var(--preview-brown-3) !important;
     border-color: var(--preview-brown-4) !important;
+    box-shadow: 0 4px 12px var(--preview-brown-4) !important;
     color: #ffffff !important;
 }
 
@@ -519,6 +569,13 @@ body.season-preview-brown .header .navPages .navPages-action--autoselect:active 
     color: #ffffff !important;
 }
 
+body.season-preview-brown .header .navPages .navPages-action--autoselect:hover .navPages-label::before,
+body.season-preview-brown .header .navPages .navPages-action--autoselect:focus .navPages-label::before,
+body.season-preview-brown .header .navPages .navPages-action--autoselect:active .navPages-label::before {
+    filter: var(--season-icon-filter) !important;
+}
+
+/* Repair form seasonal accents: support switcher radios and tab buttons. */
 body.season-preview-brown .support-switcher input[type='radio'] {
     accent-color: var(--preview-brown-1) !important;
 }
@@ -558,6 +615,7 @@ body.season-preview-brown .papathemes-eyeva-hero-carousel-59be897b-6f5f-40e4-b66
     --papathemes-eyeva-hero-carousel-dot-color-active: var(--preview-brown-2);
 }
 
+/* Tint all PNG icons in desktop repair container for every active season. */
 body[class*='season-']:not(.season-default) .repair-container img.nav-icon[src$='.png'],
 body[class*='season-']:not(.season-default) .repair-container img.nav-icon[src$='.PNG'] {
     filter: var(--season-icon-filter) !important;
@@ -590,6 +648,7 @@ body.season-black-friday-sale.season-preview-brown .info-panel.is-open .info-sub
 }
 
 body.season-valentines .header {
+    /* Keep native header positioning so sticky/fixed behavior is preserved. */
     overflow: hidden;
 }
 
@@ -616,6 +675,7 @@ body.season-valentines .heroCarousel::before {
 }
 
 body.season-stpatricks .header {
+    /* Keep native header positioning so sticky/fixed behavior is preserved. */
     overflow: hidden;
 }
 
@@ -642,6 +702,7 @@ body.season-stpatricks .heroCarousel::before {
 }
 
 body.season-independence-day-weekend .header {
+    /* Do not override position, so sticky/fixed works as normal */
     overflow: hidden;
 }
 body.season-independence-day-weekend .hero-banner,
@@ -650,24 +711,28 @@ body.season-independence-day-weekend .heroCarousel {
     overflow: hidden;
 }
 
-body.season-independence-day-weekend .header::before,
-body.season-independence-day-weekend .hero-banner::before,
-body.season-independence-day-weekend .heroCarousel::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: -4px;
-    height: 22px;
-    z-index: 2;
-    pointer-events: none;
-    opacity: 0.85;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='88' height='22' viewBox='0 0 88 22'%3E%3Crect width='88' height='22' fill='%23fff'/%3E%3Crect y='0' width='88' height='3' fill='%23b53b42'/%3E%3Crect y='6' width='88' height='3' fill='%23b53b42'/%3E%3Crect y='12' width='88' height='3' fill='%23b53b42'/%3E%3Crect y='18' width='88' height='3' fill='%23b53b42'/%3E%3Crect width='24' height='12' fill='%23183c79'/%3E%3Cg fill='%23fff'%3E%3Ccircle cx='3.5' cy='3' r='1'/%3E%3Ccircle cx='7.5' cy='3' r='1'/%3E%3Ccircle cx='11.5' cy='3' r='1'/%3E%3Ccircle cx='15.5' cy='3' r='1'/%3E%3Ccircle cx='19.5' cy='3' r='1'/%3E%3Ccircle cx='5.5' cy='6' r='1'/%3E%3Ccircle cx='9.5' cy='6' r='1'/%3E%3Ccircle cx='13.5' cy='6' r='1'/%3E%3Ccircle cx='17.5' cy='6' r='1'/%3E%3Ccircle cx='3.5' cy='9' r='1'/%3E%3Ccircle cx='7.5' cy='9' r='1'/%3E%3Ccircle cx='11.5' cy='9' r='1'/%3E%3Ccircle cx='15.5' cy='9' r='1'/%3E%3Ccircle cx='19.5' cy='9' r='1'/%3E%3C/g%3E%3C/svg%3E");
-    background-repeat: repeat-x;
-    background-size: 88px 22px;
+body.season-memorial-day-weekend .header {
+    /* Do not override position, so sticky/fixed works as normal */
+    overflow: hidden;
+}
+body.season-memorial-day-weekend .hero-banner,
+body.season-memorial-day-weekend .heroCarousel {
+    position: relative;
+    overflow: hidden;
+}
+
+body.season-labor-day-weekend .header {
+    /* Do not override position, so sticky/fixed works as normal */
+    overflow: hidden;
+}
+body.season-labor-day-weekend .hero-banner,
+body.season-labor-day-weekend .heroCarousel {
+    position: relative;
+    overflow: hidden;
 }
 
 body.season-christmas .header {
+    /* Keep native header positioning so sticky/fixed behavior is preserved. */
     overflow: hidden;
 }
 

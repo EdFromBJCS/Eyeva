@@ -77,6 +77,35 @@ function getWeekBoundsFromDate(anchorDate) {
     return { monday, sunday };
 }
 
+function getLastWeekdayOfMonth(year, monthZeroBased, weekday) {
+    const lastDayOfMonth = new Date(year, monthZeroBased + 1, 0);
+    const lastDay = lastDayOfMonth.getDate();
+    let lastOccurrence = new Date(year, monthZeroBased, lastDay);
+    while (lastOccurrence.getDay() !== weekday) {
+        lastOccurrence.setDate(lastOccurrence.getDate() - 1);
+    }
+    return lastOccurrence;
+}
+
+function getFridayMondayBoundsAround(anchorDate) {
+    const anchor = startOfDay(anchorDate);
+    const day = anchor.getDay();
+    const friday = new Date(anchor);
+    const monday = new Date(anchor);
+
+    const fridayOffset = (day - 5 + 7) % 7;
+    friday.setDate(anchor.getDate() - fridayOffset);
+
+    const mondayOffset = (1 - day + 7) % 7;
+    if (mondayOffset === 0) {
+        monday.setDate(anchor.getDate() + 7);
+    } else {
+        monday.setDate(anchor.getDate() + mondayOffset);
+    }
+
+    return { friday, monday };
+}
+
 function resolveSeasonFromDate(now) {
     const { month, day } = getMonthDay(now);
     const year = now.getFullYear();
@@ -108,10 +137,22 @@ function resolveSeasonFromDate(now) {
         return 'fathers-day-weekend';
     }
 
+    const memorialDay = getLastWeekdayOfMonth(year, 4, 1);
+    const memorialDayWeekend = getFridayMondayBoundsAround(memorialDay);
+    if (isBetweenInclusive(now, memorialDayWeekend.friday, memorialDayWeekend.monday)) {
+        return 'memorial-day-weekend';
+    }
+
     const independenceDay = new Date(year, 6, 4);
-    const independenceWeekend = getWeekendBoundsAround(independenceDay);
-    if (isBetweenInclusive(now, independenceWeekend.saturday, independenceWeekend.sunday)) {
+    const independenceDayWeekend = getFridayMondayBoundsAround(independenceDay);
+    if (isBetweenInclusive(now, independenceDayWeekend.friday, independenceDayWeekend.monday)) {
         return 'independence-day-weekend';
+    }
+
+    const laborDay = getNthWeekdayOfMonth(year, 8, 1, 1);
+    const laborDayWeekend = getFridayMondayBoundsAround(laborDay);
+    if (isBetweenInclusive(now, laborDayWeekend.friday, laborDayWeekend.monday)) {
+        return 'labor-day-weekend';
     }
 
     if (month === 10 && day === 31) {
@@ -296,7 +337,9 @@ export default function initSeasonalTheme() {
         'easter-weekend',
         'mothers-day-weekend',
         'fathers-day-weekend',
+        'memorial-day-weekend',
         'independence-day-weekend',
+        'labor-day-weekend',
         'halloween',
         'breast-cancer-awareness-day',
         'black-friday-sale',
