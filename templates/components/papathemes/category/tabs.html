@@ -18,14 +18,16 @@
 }'>
     <ul class="categoryTabs-list">
         {{#each categories}}
-            {{#if @index '>=' 3}}
-                <li class="categoryTabs-item force-hide-desktop" data-category-tabs-item-hide>
-                    <a class="categoryTabs-link" href="{{url}}" data-category-tabs-url="{{url}}" data-category-tabs-id="{{id}}"><span>{{name}}</span></a>
-                </li>
-            {{else}}
-                <li class="categoryTabs-item">
-                    <a class="categoryTabs-link" href="{{url}}" data-category-tabs-url="{{url}}" data-category-tabs-id="{{id}}"><span>{{name}}</span></a>
-                </li>
+            {{#if id '!=' 302}}
+                {{#if @index '>=' 3}}
+                    <li class="categoryTabs-item force-hide-desktop" data-category-tabs-item-hide>
+                        <a class="categoryTabs-link" href="{{url}}" data-category-tabs-url="{{url}}" data-category-tabs-id="{{id}}"><span>{{name}}</span></a>
+                    </li>
+                {{else}}
+                    <li class="categoryTabs-item">
+                        <a class="categoryTabs-link" href="{{url}}" data-category-tabs-url="{{url}}" data-category-tabs-id="{{id}}"><span>{{name}}</span></a>
+                    </li>
+                {{/if}}
             {{/if}}
         {{/each}}
     </ul>
