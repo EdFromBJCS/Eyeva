@@ -97,11 +97,7 @@ function getFridayMondayBoundsAround(anchorDate) {
     friday.setDate(anchor.getDate() - fridayOffset);
 
     const mondayOffset = (1 - day + 7) % 7;
-    if (mondayOffset === 0) {
-        monday.setDate(anchor.getDate() + 7);
-    } else {
-        monday.setDate(anchor.getDate() + mondayOffset);
-    }
+    monday.setDate(anchor.getDate() + mondayOffset);
 
     return { friday, monday };
 }

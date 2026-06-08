@@ -189,6 +189,30 @@ body.season-preview-brown .header .navUser-action .countPill {
     color: #ffffff !important;
 }
 
+body.season-preview-brown .quiz-match-count {
+    border-color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .quiz-match-count__number {
+    background: var(--preview-brown-1) !important;
+    background-image: none !important;
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.18), 0 6px 12px rgba(0, 0, 0, 0.18) !important;
+}
+
+body.season-preview-brown .quiz-match-count:hover,
+body.season-preview-brown .quiz-match-count:focus {
+    background: var(--preview-brown-2) !important;
+    border-color: var(--preview-brown-2) !important;
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .quiz-match-count:hover .quiz-match-count__number,
+body.season-preview-brown .quiz-match-count:focus .quiz-match-count__number {
+    background: #ffffff !important;
+    color: var(--preview-brown-1) !important;
+    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.1), 0 6px 12px rgba(255, 255, 255, 0.2) !important;
+}
+
 body.season-preview-brown .eyeva__banners-carousel,
 body.season-preview-brown .banners--top,
 body.season-preview-brown .banners--top .banner,
@@ -210,6 +234,27 @@ body.season-preview-brown .btn,
 body.season-preview-brown [class*='buttonPrimary'] {
     background-color: var(--preview-brown-1) !important;
     border-color: var(--preview-brown-2) !important;
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .option.button.button--primary,
+body.season-preview-brown .option.button.button--primary:focus,
+body.season-preview-brown .option.button.button--primary:active {
+    background-color: var(--preview-brown-1) !important;
+    border-color: var(--preview-brown-2) !important;
+    color: #ffffff !important;
+}
+
+body.season-preview-brown .option.button.button--primary.is-selected,
+body.season-preview-brown .option.button.button--primary.is-selected:hover {
+    background-color: #ffffff !important;
+    border-color: var(--preview-brown-1) !important;
+    color: var(--preview-brown-1) !important;
+}
+
+body.season-preview-brown .option.button.button--primary:hover {
+    background-color: var(--preview-brown-2) !important;
+    border-color: var(--preview-brown-3) !important;
     color: #ffffff !important;
 }
 
@@ -659,6 +704,67 @@ body.season-black-friday-sale.season-preview-brown .navPages-item.info-panel.is-
 body.season-black-friday-sale.season-preview-brown .info-panel.is-open,
 body.season-black-friday-sale.season-preview-brown .info-panel.is-open .info-submenu {
     border-color: var(--blackfriday-gold) !important;
+}
+
+body.season-black-friday-sale.season-preview-brown .option.button.button--primary:hover {
+    background-color: var(--blackfriday-gold) !important;
+    border-color: var(--blackfriday-gold) !important;
+    color: #1d1d1d !important;
+}
+
+body[class*='season-'] .quiz-zero-modal {
+    background: #ffffff !important;
+    border: 1px solid var(--preview-brown-2) !important;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25) !important;
+}
+
+body[class*='season-'] .quiz-zero-modal__header {
+    background: var(--preview-brown-1) !important;
+    background-image: none !important;
+    color: #ffffff !important;
+}
+
+body[class*='season-'] .quiz-zero-modal__body {
+    color: #222222 !important;
+}
+
+body[class*='season-'] .quiz-zero-modal__actions .button--danger {
+    background: var(--preview-brown-1) !important;
+    border-color: var(--preview-brown-1) !important;
+    color: #ffffff !important;
+}
+
+body[class*='season-'] .quiz-zero-modal__actions .button--danger:hover,
+body[class*='season-'] .quiz-zero-modal__actions .button--danger:focus {
+    background: var(--preview-brown-2) !important;
+    border-color: var(--preview-brown-2) !important;
+    color: #ffffff !important;
+}
+
+body[class*='season-'] .quiz-zero-modal__actions .button--primary {
+    background: var(--preview-brown-2) !important;
+    border-color: var(--preview-brown-3) !important;
+    color: #ffffff !important;
+}
+
+body[class*='season-'] .quiz-zero-modal__actions .button--primary:hover,
+body[class*='season-'] .quiz-zero-modal__actions .button--primary:focus {
+    background: var(--preview-brown-3) !important;
+    border-color: var(--preview-brown-4) !important;
+    color: #ffffff !important;
+}
+
+body[class*='season-'] .quiz-zero-modal__actions .button--secondary {
+    background: #ffffff !important;
+    border-color: var(--preview-brown-1) !important;
+    color: var(--preview-brown-1) !important;
+}
+
+body[class*='season-'] .quiz-zero-modal__actions .button--secondary:hover,
+body[class*='season-'] .quiz-zero-modal__actions .button--secondary:focus {
+    background: var(--preview-brown-1) !important;
+    border-color: var(--preview-brown-2) !important;
+    color: #ffffff !important;
 }
 
 body.season-valentines .header {
