@@ -146,6 +146,27 @@
         margin: 0;
         line-height: 1.5;
     }
+
+    .infusion-option {
+        cursor: pointer;
+        transition: background-color .15s, color .15s;
+    }
+
+    .infusion-option:has(input[name="inf_option_ModelToughbookyouown"]:checked) {
+        background-color: #dc3522;
+        color: #fff;
+        border-radius: 4px;
+    }
+
+    .infusion-option:has(input[name="inf_option_ModelToughbookyouown"]:checked) label {
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .infusion-option label {
+        cursor: pointer;
+    }
+
 </style>
 <div class="main-content">
     <div class="dual-form-container">
@@ -184,171 +205,173 @@
                     operation are from 9 AM to 5 PM, Monday through Friday.</p>
                 <p>Filling out more than one request will not expedite the process. Thank you for your
                     understanding.</p>
-                <form id="inf_form_fa38e6916142c70dec293922f11521b4" class="infusion-form"
-                    action="https://gc200.infusionsoft.com/app/form/process/fa38e6916142c70dec293922f11521b4"
-                    method="POST" accept-charset="UTF-8"><input type="hidden" name="inf_form_xid"
-                        value="fa38e6916142c70dec293922f11521b4" /> <input type="hidden" name="inf_form_name"
-                        value="Request information" /> <input type="hidden" name="infusionsoft_version"
-                        value="1.70.0.65079" />
-                    <div>&nbsp;</div>
-                    <div class="form-field"><label class="form-label" for="inf_field_FirstName">First Name *</label>
-                        <input id="inf_field_FirstName" class="form-input" type="text" name="inf_field_FirstName" />
-                    </div>
-                    <div class="form-field"><label class="form-label" for="inf_field_LastName">Last
-                            Name *</label> <input id="inf_field_LastName" class="form-input" type="text"
-                            name="inf_field_LastName" /></div>
-                    <div class="form-field"><label class="form-label" for="inf_field_Email">Email
-                            *</label> <input id="inf_field_Email" class="form-input" type="text"
-                            name="inf_field_Email" /></div>
-                    <div class="form-field"><label class="form-label" for="inf_field_Phone1">Phone</label> <input
-                            id="inf_field_Phone1" class="form-input" type="text" name="inf_field_Phone1" /></div>
-                    <div class="form-field"><label class="form-label" for="inf_option_ModelToughbookyouown">Model
-                            Toughbook you
-                            own</label>
-                        <div class="infusion-radio">
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_245"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="245" /> <label
-                                        for="inf_option_ModelToughbookyouown_245">CF-31</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_247"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="247" /> <label
-                                        for="inf_option_ModelToughbookyouown_247">CF-30</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_249"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="249" /> <label
-                                        for="inf_option_ModelToughbookyouown_249">CF-29</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_251"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="251" /> <label
-                                        for="inf_option_ModelToughbookyouown_251">CF-18</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_253"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="253" /> <label
-                                        for="inf_option_ModelToughbookyouown_253">CF-19</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_5584"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="5584" /> <label
-                                        for="inf_option_ModelToughbookyouown_5584">CF-20</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_732"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="732" /> <label
-                                        for="inf_option_ModelToughbookyouown_732">CF-52</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_734"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="734" /> <label
-                                        for="inf_option_ModelToughbookyouown_734">CF-53</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_4804"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="4804" /> <label
-                                        for="inf_option_ModelToughbookyouown_4804">CF-54</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_5586"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="5586" /> <label
-                                        for="inf_option_ModelToughbookyouown_5586">CF-33</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_6024"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="6024" /> <label
-                                        for="inf_option_ModelToughbookyouown_6024">FZ-55</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_6026"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="6026" /> <label
-                                        for="inf_option_ModelToughbookyouown_6026">FZ-G1</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_6028"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="6028" /> <label
-                                        for="inf_option_ModelToughbookyouown_6028">FZ-G2</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_6030"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="6030" /> <label
-                                        for="inf_option_ModelToughbookyouown_6030">FZ-40</label>
-                                </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_6068"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="6068" /> <label
-                                        for="inf_option_ModelToughbookyouown_6068">Getac,
-                                        Durabook, Dell</label> </span></div>
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_ModelToughbookyouown_255"
-                                        name="inf_option_ModelToughbookyouown" type="radio" value="255" /> <label
-                                        for="inf_option_ModelToughbookyouown_255">Other
-                                        (Please Indicate below)</label> </span>
+                <form accept-charset="UTF-8"
+                        action="https://gc200.infusionsoft.com/app/form/process/fa38e6916142c70dec293922f11521b4"
+                        class="infusion-form" id="inf_form_fa38e6916142c70dec293922f11521b4" method="POST">
+                        <input name="inf_form_xid" type="hidden" value="fa38e6916142c70dec293922f11521b4" />
+                        <input name="inf_form_name" type="hidden" value="Request information" />
+                        <input name="infusionsoft_version" type="hidden" value="1.70.0.953056" />
+                        <div class="infusion-field form-field">
+                            <label class="form-label" for="inf_field_FirstName">First Name *</label>
+                            <input class="form-input" id="inf_field_FirstName" name="inf_field_FirstName"
+                                placeholder="First Name *" type="text" />
+                        </div>
+                        <div class="infusion-field form-field">
+                            <label class="form-label" for="inf_field_LastName">Last Name *</label>
+                            <input class="form-input" id="inf_field_LastName" name="inf_field_LastName"
+                                placeholder="Last Name *" type="text" />
+                        </div>
+                        <div class="infusion-field form-field">
+                            <label class="form-label" for="inf_field_Email">Email *</label>
+                            <input class="form-input" id="inf_field_Email" name="inf_field_Email" placeholder="Email *"
+                                type="text" />
+                        </div>
+                        <div class="infusion-field form-field">
+                            <label class="form-label" for="inf_field_Phone1">Phone</label>
+                            <input class="form-input" id="inf_field_Phone1" name="inf_field_Phone1" placeholder="Phone"
+                                type="text" />
+                        </div>
+                        <div class="infusion-field form-field">
+                            <label class="form-label" for="inf_option_ModelToughbookyouown">Model Toughbook you own</label>
+                            <div class="infusion-radio">
+                                <div class="options-container">
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_245"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="245" />
+                                        <label for="inf_option_ModelToughbookyouown_245">CF-31</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_247"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="247" />
+                                        <label for="inf_option_ModelToughbookyouown_247">CF-30</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_249"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="249" />
+                                        <label for="inf_option_ModelToughbookyouown_249">CF-29</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_251"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="251" />
+                                        <label for="inf_option_ModelToughbookyouown_251">CF-18</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_253"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="253" />
+                                        <label for="inf_option_ModelToughbookyouown_253">CF-19</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_5584"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="5584" />
+                                        <label for="inf_option_ModelToughbookyouown_5584">CF-20</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_732"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="732" />
+                                        <label for="inf_option_ModelToughbookyouown_732">CF-52</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_734"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="734" />
+                                        <label for="inf_option_ModelToughbookyouown_734">CF-53</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_4804"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="4804" />
+                                        <label for="inf_option_ModelToughbookyouown_4804">CF-54</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_5586"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="5586" />
+                                        <label for="inf_option_ModelToughbookyouown_5586">CF-33</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_6024"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="6024" />
+                                        <label for="inf_option_ModelToughbookyouown_6024">FZ-55</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_6026"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="6026" />
+                                        <label for="inf_option_ModelToughbookyouown_6026">FZ-G1</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_6028"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="6028" />
+                                        <label for="inf_option_ModelToughbookyouown_6028">FZ-G2</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_6030"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="6030" />
+                                        <label for="inf_option_ModelToughbookyouown_6030">FZ-40</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_6068"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="6068" />
+                                        <label for="inf_option_ModelToughbookyouown_6068">Getac, Durabook, Dell</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_ModelToughbookyouown_255"
+                                            name="inf_option_ModelToughbookyouown" type="radio" value="255" />
+                                        <label for="inf_option_ModelToughbookyouown_255">Other (Please Indicate
+                                            below)</label>
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-field"><label class="form-label" for="inf_custom_ModelNumber">Model Number
-                            *(Example:
-                            FZ-55A0718VM | Refer To <a href="/blog/a-note-on-model-numbers-for-toughbook-nerds/"
-                                target="_blank" rel="noopener">Toughbook Model Number
-                                For Nerds</a> for assistance)</label> <input id="inf_custom_ModelNumber"
-                            class="form-input" type="text" name="inf_custom_ModelNumber" required=""
-                            aria-required="true" /></div>
-                    <div class="form-field"><label class="form-label" for="inf_option_Doyoupurchasethislaptopfromus">Did
-                            you purchase
-                            this laptop from us?</label>
-                        <div class="infusion-radio">
-                            <div class="options-container"><span class="infusion-option">
-                                    <input id="inf_option_Doyoupurchasethislaptopfromus_263" class="form-radio"
-                                        type="radio" name="inf_option_Doyoupurchasethislaptopfromus" value="263" />
-                                    <label class="form-label"
-                                        for="inf_option_Doyoupurchasethislaptopfromus_263">Yes</label>
-                                </span> <span class="infusion-option"> <input
-                                        id="inf_option_Doyoupurchasethislaptopfromus_265" class="form-radio"
-                                        type="radio" name="inf_option_Doyoupurchasethislaptopfromus" value="265" />
-                                    <label class="form-label"
-                                        for="inf_option_Doyoupurchasethislaptopfromus_265">No</label>
-                                </span></div>
+                        <div class="infusion-field form-field">
+                            <label class="form-label" for="inf_custom_ModelNumber">Model Number</label>
+                            <input class="form-input" id="inf_custom_ModelNumber" name="inf_custom_ModelNumber"
+                                placeholder="Model Number" type="text" />
                         </div>
-                    </div>
-                    <div class="form-field"><label class="form-label" for="inf_custom_ContactUsComments">Tech
-                            Support Question
-                            *</label> <textarea id="inf_custom_ContactUsComments" style="padding: .75rem 1rem;"
-                            name="inf_custom_ContactUsComments" rows="5" cols="40" data-gramm="false"></textarea>
-                    </div>
-                    <div class="form-field"><span class="infusion-option"> <input
-                                id="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy_tech"
-                                class="form-checkbox" type="checkbox"
-                                name="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy"
-                                value="4706" /> <label class="form-label"
-                                for="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy_tech">I
-                                give consent to use this information to send additional
-                                emails and communication as described in your Privacy
-                                Policy *</label> </span></div>
-                    <div class="infusion-submit">
-                        <div class="grecaptcha-badge"
-                            style="width: 256px; height: 60px; transition: right 0.3s ease 0s; position: fixed; bottom: 14px; right: -186px; box-shadow: gray 0px 0px 5px;"
-                            data-style="bottomright">
-                            <div class="grecaptcha-logo"><iframe
-                                    src="https://www.google.com/recaptcha/api2/anchor?ar=1&amp;k=6Le4bx0UAAAAANeDRNRCRSCL2O-zB5Lf5yUUmxXQ&amp;co=aHR0cHM6Ly93d3cuYm9iam9obnNvbi5jb206NDQz&amp;hl=en&amp;v=v1537165899310&amp;size=invisible&amp;cb=uc84kvvgilbw"
-                                    width="256" height="60" name="a-t3cui3m05h1v" frameborder="0"></iframe></div>
-                            <div class="grecaptcha-error">&nbsp;</div>
-                            <textarea id="g-recaptcha-response" class="g-recaptcha-response"
-                                style="width: 250px; height: 40px; border: 1px solid #c1c1c1; margin: 10px 25px; padding: 0px; resize: none; display: none;"
-                                name="g-recaptcha-response" data-gramm="false"></textarea>
+                        <div class="infusion-field form-field">
+                            <label class="form-label" for="inf_option_Didyoupurchasethislaptopfromus">Did you purchase
+                                this laptop from us?</label>
+                            <div class="infusion-radio">
+                                <div class="options-container">
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_Didyoupurchasethislaptopfromus_263"
+                                            name="inf_option_Didyoupurchasethislaptopfromus" type="radio" value="263" />
+                                        <label class="form-label" for="inf_option_Didyoupurchasethislaptopfromus_263">Yes</label>
+                                    </span>
+                                    <span class="infusion-option">
+                                        <input class="form-radio" id="inf_option_Didyoupurchasethislaptopfromus_265"
+                                            name="inf_option_Didyoupurchasethislaptopfromus" type="radio" value="265" />
+                                        <label class="form-label" for="inf_option_Didyoupurchasethislaptopfromus_265">No</label>
+                                    </span>
+                                </div>
+                            </div>
                         </div>
-                        <button id="recaptcha_fa38e6916142c70dec293922f11521b4"
-                            class="infusion-recaptcha button button--primary" type="submit">Submit</button>
-                    </div>
-                </form>
-                <p>
-                    <script type="text/javascript"
-                        src="https://gc200.infusionsoft.com/app/webTracking/getTrackingCode"></script>
-                </p>
-                <script type="text/javascript"
-                    src="https://YOUR-APP-ID.infusionsoft.com/app/form/iframe/TECH_FORM_ID"></script>
+                        <div class="infusion-field form-field">
+                            <label class="form-label" for="inf_custom_ContactUsComments">Tech Support Question *</label>
+                            <textarea class="RS_form_textarea" cols="24" id="inf_custom_ContactUsComments"
+                                name="inf_custom_ContactUsComments" placeholder="Tech Support Question *" rows="5"></textarea>
+                        </div>
+                        <div class="infusion-field form-field">
+                            <span class="infusion-checkbox">
+                                <input class="form-checkbox"
+                                    id="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy"
+                                    is-required="true"
+                                    name="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy"
+                                    type="checkbox" value="4706" />
+                                <label class="form-label infusion-field-label-container infusion-label-checkbox"
+                                    for="inf_option_IgiveconsenttousethisinformationtosendadditionalemailsandcommunicationasdescribedinyourPrivacyPolicy">I
+                                    give consent to use this information to send additional emails and communication as
+                                    described in your Privacy Policy *</label>
+                            </span>
+                        </div>
+                        <div class="infusion-submit">
+                            <button class="infusion-recaptcha button button--primary"
+                                id="recaptcha_fa38e6916142c70dec293922f11521b4" type="submit">Submit</button>
+                        </div>
+                        <input type="text" name="inf-sbt" style="display:none !important;">
+                    </form>
+                <script type="text/javascript" src="https://gc200.infusionsoft.app/app/webTracking/getTrackingCode"></script>
+                <script type="text/javascript" src="https://gc200.infusionsoft.com/resources/external/recaptcha/production/recaptcha.js?b=1.70.0.953056"></script>
+                <script type="text/javascript" src="https://gc200.infusionsoft.com/resources/external/recaptcha/production/enterpriseRecaptcha.js?b=1.70.0.953056"></script>
+                <script type="text/javascript" src="https://gc200.infusionsoft.com/app/timezone/timezoneInputJs?xid=fa38e6916142c70dec293922f11521b4"></script>
+                <script type="text/javascript" src="https://gc200.infusionsoft.com/js/jquery/jquery-3.3.1.js"></script>
+                <script type="text/javascript" src="https://gc200.infusionsoft.app/app/webform/overwriteRefererJs"></script>
             </div>
             <div class="form-panel is-hidden" data-form="repairs">
                 <div class="tab-container">
