@@ -265,6 +265,7 @@ export default class ProductDetails extends CornerstoneProductDetails {
         this.initOptionStepper();
         this.syncProductCardQty();
         this.initSaleCountdown();
+        this.bindRenewingDataPlanVisibility();
         this.renderInlineOptionTooltips();
         this.renderSpecTooltips();
         $('body').trigger('update-wishlist-buttons', [this.$scope]);
@@ -649,9 +650,88 @@ export default class ProductDetails extends CornerstoneProductDetails {
         SaleCountdown.add($el);
     }
 
+    bindRenewingDataPlanVisibility() {
+        this.$scope.off('change.eyevaRenewingDataPlan', '[name="attribute[13303]"]');
+        this.$scope.on('change.eyevaRenewingDataPlan', '[name="attribute[13303]"]', () => {
+            this.toggleRenewingDataPlanFields();
+        });
+
+        this.toggleRenewingDataPlanFields();
+    }
+
+    toggleRenewingDataPlanFields() {
+        const $form = this.$scope.find('[data-cart-item-add]').first();
+        const $productOptionsEl = $form.find('[data-product-option-change]').first();
+
+        if ($productOptionsEl.length === 0) {
+            return;
+        }
+
+        const $renewingRadio = $productOptionsEl
+            .find('[name="attribute[13303]"][value="1698"]')
+            .first();
+
+        if ($renewingRadio.length === 0) {
+            return;
+        }
+
+        const shouldHideFields = $renewingRadio.is(':checked');
+        const fieldIds = [13304, 13305, 13306];
+
+        fieldIds.forEach(fieldId => {
+            const $field = $productOptionsEl.find(`[data-product-attribute-id="${fieldId}"]`).first();
+            if ($field.length === 0) {
+                return;
+            }
+
+            if (shouldHideFields) {
+                this.disableHiddenModifierField($field);
+                $field.css('display', 'none').attr('aria-hidden', 'true').removeClass('form-field--error');
+            } else {
+                this.enableShownModifierField($field);
+                $field.css('display', '').attr('aria-hidden', 'false');
+            }
+        });
+    }
+
+    disableHiddenModifierField($field) {
+        $field.find('input:not([type="hidden"]), select, textarea').each((_i, el) => {
+            const $el = $(el);
+
+            if (!$el.is('[data-eyeva-original-required]')) {
+                $el.attr('data-eyeva-original-required', $el.prop('required') ? 'true' : 'false');
+            }
+
+            $el.prop('required', false).removeAttr('required');
+
+            if ($el.is(':checkbox, :radio')) {
+                $el.prop('checked', false);
+            } else if ($el.is('select')) {
+                $el.prop('selectedIndex', 0);
+            } else {
+                $el.val('');
+            }
+        });
+    }
+
+    enableShownModifierField($field) {
+        $field.find('input:not([type="hidden"]), select, textarea').each((_i, el) => {
+            const $el = $(el);
+            const originalRequired = $el.attr('data-eyeva-original-required') === 'true';
+
+            $el.prop('required', originalRequired);
+            if (originalRequired) {
+                $el.attr('required', '');
+            } else {
+                $el.removeAttr('required');
+            }
+        });
+    }
+
     updateView(data, ...args) {
         super.updateView(data, ...args);
         this.refreshProductMetadata();
+        this.toggleRenewingDataPlanFields();
         this.renderInlineOptionTooltips();
 
         this.updateSalePercent(data);

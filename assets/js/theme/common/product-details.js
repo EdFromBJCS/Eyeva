@@ -41,6 +41,7 @@ export default class ProductDetails extends ProductDetailsBase {
         });
 
         const $productOptionsElement = $('[data-product-option-change]', $form);
+        this.bindRenewingDataPlanVisibility($productOptionsElement);
         const hasOptions = $productOptionsElement.html().trim().length;
         const hasDefaultOptions = $productOptionsElement.find('[data-default]').length;
         const $productSwatchGroup = $('[id*="attribute_swatch"]', $form);
@@ -82,6 +83,7 @@ export default class ProductDetails extends ProductDetailsBase {
         $productOptionsElement.on('change', event => {
             this.productOptionsChanged(event);
             this.setProductVariant();
+            this.toggleRenewingDataPlanFields($productOptionsElement);
         });
 
         $form.on('submit', event => {
@@ -138,6 +140,10 @@ export default class ProductDetails extends ProductDetailsBase {
         const options = [];
 
         $.each($('[data-product-attribute]'), (index, value) => {
+            if ($(value).is(':hidden') || value.getAttribute('aria-hidden') === 'true') {
+                return;
+            }
+
             const optionLabel = value.children[0].innerText;
             const optionTitle = optionLabel.split(':')[0].trim();
             const required = optionLabel.toLowerCase().includes('required');
@@ -235,6 +241,81 @@ export default class ProductDetails extends ProductDetailsBase {
         }
     }
 
+    bindRenewingDataPlanVisibility($productOptionsElement) {
+        $productOptionsElement.off('change.renewingDataPlan', '[name="attribute[13303]"]');
+        $productOptionsElement.on('change.renewingDataPlan', '[name="attribute[13303]"]', () => {
+            this.toggleRenewingDataPlanFields($productOptionsElement);
+        });
+
+        this.toggleRenewingDataPlanFields($productOptionsElement);
+    }
+
+    toggleRenewingDataPlanFields($productOptionsElement) {
+        if (!$productOptionsElement || $productOptionsElement.length === 0) {
+            return;
+        }
+
+        const $renewingRadio = $productOptionsElement
+            .find('[name="attribute[13303]"][value="1698"]')
+            .first();
+
+        if ($renewingRadio.length === 0) {
+            return;
+        }
+
+        const shouldHideFields = $renewingRadio.is(':checked');
+        const fieldIds = [13304, 13305, 13306];
+
+        fieldIds.forEach(fieldId => {
+            const $field = $productOptionsElement.find(`[data-product-attribute-id="${fieldId}"]`).first();
+            if ($field.length === 0) {
+                return;
+            }
+
+            if (shouldHideFields) {
+                this.disableHiddenModifierField($field);
+                $field.css('display', 'none').attr('aria-hidden', 'true').removeClass('form-field--error');
+            } else {
+                this.enableShownModifierField($field);
+                $field.css('display', '').attr('aria-hidden', 'false');
+            }
+        });
+    }
+
+    disableHiddenModifierField($field) {
+        $field.find('input:not([type="hidden"]), select, textarea').each((_i, el) => {
+            const $el = $(el);
+
+            if (!$el.is('[data-original-required]')) {
+                $el.attr('data-original-required', $el.prop('required') ? 'true' : 'false');
+            }
+
+            $el.prop('required', false).removeAttr('required');
+
+            if ($el.is(':checkbox, :radio')) {
+                $el.prop('checked', false);
+            } else if ($el.is('select')) {
+                $el.prop('selectedIndex', 0);
+            } else {
+                $el.val('');
+            }
+        });
+    }
+
+    enableShownModifierField($field) {
+        $field.find('input:not([type="hidden"]), select, textarea').each((_i, el) => {
+            const $el = $(el);
+            const wasRequired = $el.attr('data-original-required') === 'true';
+
+            $el.prop('required', wasRequired);
+            if (wasRequired) {
+                $el.attr('required', '');
+            } else {
+                $el.removeAttr('required');
+            }
+        });
+    }
+
     /**
      * Checks if the current window is being run inside an iframe
      * @returns {boolean}
@@ -267,6 +348,7 @@ export default class ProductDetails extends ProductDetailsBase {
             const productAttributesContent = response.content || {};
             this.updateProductAttributes(productAttributesData);
             this.updateView(productAttributesData, productAttributesContent);
+            this.toggleRenewingDataPlanFields($form.find('[data-product-option-change]'));
             this.updateProductDetailsData();
             bannerUtils.dispatchProductBannerEvent(productAttributesData);
 
