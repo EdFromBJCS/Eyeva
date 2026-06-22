@@ -634,6 +634,13 @@ body.season-preview-brown .header .navPages .navPages-action--autoselect:active 
     filter: var(--season-icon-filter) !important;
 }
 
+@media screen and (max-width: 800px) {
+    body[class*='season-']:not(.season-default) .navPages-list,
+    body[class*='season-']:not(.season-default) .navPages-megaMenu-childList {
+        background-color: var(--preview-brown-1) !important;
+    }
+}
+
 /* Repair form seasonal accents: support switcher radios and tab buttons. */
 body.season-preview-brown .support-switcher input[type='radio'] {
     accent-color: var(--preview-brown-1) !important;
