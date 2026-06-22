@@ -169,7 +169,7 @@
         color: #222;
         font-weight: 700;
     }
-    
+
     .ram-table td.cell-checked {
         background-color: #ebe8e8;
         color: #222;
@@ -297,6 +297,7 @@
         border-bottom: 0;
     }
 }
+
 // Frequently Asked Questions
 .faqtitle {
     margin: 1.5rem 0 1rem;
@@ -806,12 +807,12 @@ button.expandfaq.button-alt::after {
 
         tr {
             td {
-                
+
                 vertical-align: baseline;
             }
 
             th {
-                
+
                 font-size: 1em;
                 font-weight: 700;
                 padding: 1rem;
@@ -1135,25 +1136,25 @@ button.expandfaq.button-alt::after {
 
 @include breakpoint("xxsmall") {
 
-.navPages-childList-item {
-    .navPages-childList-action {
-        .navPages-label {
-            color: #dedcdc;
+    .navPages-childList-item {
+        .navPages-childList-action {
+            .navPages-label {
+                color: #dedcdc;
+            }
         }
     }
-}
 }
 
 @include breakpoint("medium") {
 
-.navPages-childList-item {
-    .navPages-childList-action {
-        .navPages-label {
-            color: #fff;
-            text-decoration: none;
+    .navPages-childList-item {
+        .navPages-childList-action {
+            .navPages-label {
+                color: #fff;
+                text-decoration: none;
+            }
         }
     }
-}
 }
 
 .navPages-childList-action {
@@ -1164,7 +1165,7 @@ button.expandfaq.button-alt::after {
 
 .navPages-childList-item:has(.navPages-childList) .navPages-label,
 .navPages-childList-action._mega:has(+ .navPages-megaMenu-subMenu) .navPages-label,
-.navPages-megaMenu-column:has(.navPages-megaMenu-subMenu) > .navPages-childList-action .navPages-label {
+.navPages-megaMenu-column:has(.navPages-megaMenu-subMenu)>.navPages-childList-action .navPages-label {
     text-decoration: underline !important;
 }
 
@@ -1218,19 +1219,80 @@ button.expandfaq.button-alt::after {
     border-right: 0;
 }
 
-@media (max-width: (screenSize("medium") - 1px)){ 
+@media (max-width: (screenSize("medium") - 1px)) {
     .simTable-container {
-    flex-direction: column;
-    align-items: center;
+        flex-direction: column;
+        align-items: center;
     }
 
-.simTable-FlexColumn {
-    margin: 20px 0 20px 0;
-}
+    .simTable-FlexColumn {
+        margin: 20px 0 20px 0;
+    }
 }
 
-@media (max-width: (screenSize("xsmall") - 1px)){ 
-.simTable {
-    min-width: 90%;
+@media (max-width: (screenSize("xsmall") - 1px)) {
+    .simTable {
+        min-width: 90%;
+    }
 }
+
+// Model Number Breakdown Blog
+
+.md-tab-container {
+    margin: 28px 0;
+}
+
+.md-tab-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0 15px 0;
+}
+
+.md-tab-cell {
+    display: inline-flex;
+}
+
+.md-tab-button {
+    border: 1px solid #dc3522;
+    border-radius: 999px;
+    background: #dc3522;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.md-tab-button:hover {
+    border-color: #c4301f;
+    background: #c4301f;
+}
+
+.md-tab-button.active-tab,
+.md-tab-button.underline {
+    background: #fff;
+    border-color: #dc3522;
+    color: #dc3522;
+
+    .md-tabs-title {
+        color: #dc3522;
+    }
+}
+
+.md-tabs-title {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.md-tab-content {
+    display: none;
+}
+
+.mnd-multi-column-text {
+    display: flex;
+    gap: 40px;
 }
