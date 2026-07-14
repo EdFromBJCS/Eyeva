@@ -107,22 +107,45 @@
         grid-area: repair;
     }
 
-    .papathemes-eyeva-hero-carousel-content {
-        top: unset;
-        bottom: 25px;
-        max-width: 100%;
-        left: 0;
-        transform: translate(0%, -40%);
-
-        @media (max-width: (screenSize("xlarge") - 1px)) {
-            transform: translate(0%, 0%);
+    .papathemes-eyeva-hero-carousel-slide {
+        > div[role="link"] {
+            position: relative;
         }
+
+        .papathemes-eyeva-hero-carousel-content._align-center {
+            top: auto;
+            bottom: 25px;
+            left: 50%;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            padding: 0 5% 0 5%;
+            transform: translateX(-50%);
+
+            @media (max-width: (screenSize("medium") - 1px)) {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 12px;
+                transform: none;
+                padding: 0 spacing("single");
+                z-index: 2;
+            }
+        }
+
+        @media (max-width: (screenSize("small") - 1px)) {
+        .papathemes-eyeva-hero-carousel-title,
+            .papathemes-eyeva-hero-carousel-description {
+                display: none;
+                color: #ffffff;
+            }
+}
 
         @media (max-width: (screenSize("medium") - 1px)) {
 
             .papathemes-eyeva-hero-carousel-title,
             .papathemes-eyeva-hero-carousel-description {
-                color: #222222;
+                color: #ffffff;
             }
         }
 
