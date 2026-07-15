@@ -466,6 +466,111 @@ function detectBCAdminBar() {
     }
 }
 
+function suppressKnownHeroCarouselMediaRejection() {
+    if (window.__eyevaHeroCarouselRejectionHandled) return;
+
+    window.__eyevaHeroCarouselRejectionHandled = true;
+
+    const HERO_CAROUSEL_WIDGET_FILE = 'eyeva-hero-carousel.js';
+    const MEDIA_NOT_SUITABLE_TEXT = 'media resource indicated by the src attribute';
+
+    const isHeroCarouselMediaElement = (el) => {
+        if (!el || !(el instanceof window.HTMLMediaElement)) return false;
+        const $carouselParent = $(el).closest('.papathemes-eyeva-hero-carousel, [class*="eyeva-hero-carousel"], [class*="hero-carousel"]');
+        return $carouselParent.length > 0;
+    };
+
+    const isKnownMediaNotSuitableError = ({ message = '', stack = '', filename = '' }) => {
+        const normalizedMessage = String(message).toLowerCase();
+        const normalizedStack = String(stack).toLowerCase();
+        const normalizedFilename = String(filename).toLowerCase();
+        if (!normalizedMessage.includes(MEDIA_NOT_SUITABLE_TEXT)) return false;
+
+        const matchedWidgetFile = normalizedStack.includes(HERO_CAROUSEL_WIDGET_FILE)
+            || normalizedFilename.includes(HERO_CAROUSEL_WIDGET_FILE);
+
+        if (matchedWidgetFile) return true;
+
+        // Some cross-origin promise rejections omit stack/filename.
+        // Fallback: only suppress when a hero carousel media element exists on page.
+        return document.querySelector('.papathemes-eyeva-hero-carousel video, .papathemes-eyeva-hero-carousel audio, [class*="eyeva-hero-carousel"] video, [class*="eyeva-hero-carousel"] audio') !== null;
+    };
+
+    const blockMediaElement = (el) => {
+        if (!isHeroCarouselMediaElement(el)) return;
+        if (el.dataset) {
+            el.dataset.eyevaMediaBlocked = '1';
+        }
+        el.removeAttribute('autoplay');
+        try {
+            el.pause();
+        } catch (e) {
+            // Ignore pause errors for detached or invalid media elements.
+        }
+    };
+
+    if (window.HTMLMediaElement && window.HTMLMediaElement.prototype.play && !window.__eyevaHeroCarouselPlayPatched) {
+        window.__eyevaHeroCarouselPlayPatched = true;
+        const originalPlay = window.HTMLMediaElement.prototype.play;
+
+        window.HTMLMediaElement.prototype.play = function patchedPlay(...args) {
+            if (this.dataset && this.dataset.eyevaMediaBlocked === '1' && isHeroCarouselMediaElement(this)) {
+                return Promise.resolve();
+            }
+
+            const playResult = originalPlay.apply(this, args);
+            if (!playResult || typeof playResult.catch !== 'function' || !isHeroCarouselMediaElement(this)) {
+                return playResult;
+            }
+
+            return playResult.catch((error) => {
+                const message = error && error.message ? String(error.message) : '';
+                const stack = error && error.stack ? String(error.stack) : '';
+
+                if (isKnownMediaNotSuitableError({ message, stack })) {
+                    blockMediaElement(this);
+                    return Promise.resolve();
+                }
+
+                return Promise.reject(error);
+            });
+        };
+    }
+
+    // Capture media element load errors early and block repeated autoplay attempts.
+    document.addEventListener('error', (event) => {
+        const target = event && event.target;
+        if (isHeroCarouselMediaElement(target)) {
+            blockMediaElement(target);
+        }
+    }, true);
+
+    window.addEventListener('unhandledrejection', (event) => {
+        const reason = event && event.reason;
+        const message = reason && reason.message ? String(reason.message) : '';
+        const stack = reason && reason.stack ? String(reason.stack) : '';
+
+        // Third-party widget may attempt autoplay for unsupported media sources.
+        // Swallow only this specific rejection to keep the console signal clean.
+        if (isKnownMediaNotSuitableError({ message, stack })) {
+            event.preventDefault();
+        }
+    });
+
+    // Some browsers surface this case as a window error instead of unhandledrejection.
+    window.addEventListener('error', (event) => {
+        const message = event && event.message ? String(event.message) : '';
+        const filename = event && event.filename ? String(event.filename) : '';
+
+        if (isKnownMediaNotSuitableError({ message, filename })) {
+            event.preventDefault();
+        }
+    }, true);
+}
+
+// Run immediately so the guard is active even if third-party widgets start before page init.
+suppressKnownHeroCarouselMediaRejection();
+
 function initLaptopBannersResize() {
     // Chỉ thiết lập event listeners nếu section tồn tại
     const $grid = $('.section--laptop-banners._theme-styled > ._grid');
