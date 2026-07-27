@@ -12,161 +12,22 @@
     width: 50%;
 }
 
-/* Banner css and medias*/
+.myhomepage-hero-banner {
+    .papathemes-eyeva-hero-carousel {
+        
+        .blaze-prev {
+            background: none;
+        }
 
-.myhomepage-banner {
-    background-image: url("https://www.bobjohnson.com/product_images/uploaded_images/myhomepagebanner9-5-2025-1500-x-400.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    box-sizing: border-box;
-    left: 0;
-    right: 0;
-    margin-top: -15px;
-    padding: 0;
-    position: absolute;
-    width: 110vw;
-    cursor: pointer;
-}
+        .blaze-next {
+            background: none;
+        }
 
-.myhomepage-banner-text {
-    color: white;
-    height: 450px;
-    left: 20px;
-    padding-left: 35%;
-    padding-right: 5%;
-    padding-top: 3%;
-    text-align: left;
-    top: 30px;
-}
+        .blaze-pause {
+            background: none;
+        }
 
-.myhomepage-banner-text h1 {
-    color: white;
-    font-size: 45px;
-}
 
-.myhomepage-banner-text p {
-    font-size: 18px;
-}
-
-@media screen and (max-width: 2200px) {
-    .myhomepage-banner-text {
-        height: 400;
-    }
-}
-
-@media screen and (max-width: 1696px) {
-    .myhomepage-banner {
-        left: 0 !important;
-        margin-left: 0;
-    }
-
-    .myhomepage-banner-text h1 {
-        font-size: 40px;
-    }
-
-    .myhomepage-banner-text p {
-        font-size: 16px;
-    }
-}
-
-@media screen and (max-width: 1300px) {
-    .myhomepage-banner-text {
-        height: 350px;
-    }
-
-    .myhomepage-banner-text h1 {
-        font-size: 35px;
-    }
-
-    .myhomepage-banner-text p {
-        font-size: 14px;
-    }
-
-    .myhomepage-banner-text .button {
-        font-size: 14px;
-        padding: 14px 25px;
-    }
-}
-
-@media screen and (max-width: 1000px) {
-
-    .myhomepage-banner-text {
-        height: 250px;
-    }
-
-    .myhomepage-banner-text h1 {
-        font-size: 30px;
-    }
-
-    .myhomepage-banner-text p {
-        font-size: 12px;
-    }
-
-    .myhomepage-banner-text .button {
-        font-size: 12px;
-        padding: 12px 20px;
-    }
-}
-
-@media screen and (max-width: 700px) {
-
-    .myhomepage-banner {
-        margin-top: -10px;
-        top: 0;
-    }
-
-    .myhomepage-banner-text {
-        height: 175px;
-        padding-top: 0.1%;
-    }
-
-    .myhomepage-banner-text h1 {
-        font-size: 20px;
-    }
-
-    .myhomepage-banner-text p {
-        font-size: 10px;
-    }
-
-    .myhomepage-banner-text .button {
-        font-size: 10px;
-        padding: 10px 15px;
-    }
-}
-
-@media screen and (max-width: 500px) {
-    .myhomepage-banner {
-        background-image: url("https://www.bobjohnson.com/product_images/uploaded_images/myhomepagebanner9-5-2025-750-x-600.jpg");
-        background-position: center;
-        background-size: cover;
-        margin-top: 0;
-        top: 0;
-    }
-
-    .myhomepage-banner-text {
-        height: 400px;
-        padding-left: 10%;
-        padding-right: 10%;
-        padding-top: 40%;
-        text-align: center;
-    }
-}
-
-@media screen and (max-width: 400px) {
-    .myhomepage-banner-text {
-        padding-top: 50%;
-    }
-}
-
-@media screen and (max-width: 320px) {
-    .myhomepage-banner {
-        margin-top: 0;
-    }
-
-    .myhomepage-banner-text {
-        height: 300px;
-        padding-top: 35%;
     }
 }
 
@@ -328,9 +189,9 @@ ul#custom-control2 {
 .home-grid1 {
     display: grid;
     grid-template-areas:
-        "home-warranty-card home-warranty-card home-repair-card"
-        "home-video-card home-video-card mobile-data-card"        
-        "home-trade-in-card home-trade-in-card home-trade-in-card";
+        "home-trade-in-card home-trade-in-card home-warranty-card"
+        "home-video-card home-video-card home-connect-card"
+        "home-video-card home-video-card mobile-data-card";
     grid-template-columns: 1fr 1fr 1fr;
     justify-content: space-evenly;
     padding-top: 10px;
@@ -423,6 +284,7 @@ ul#custom-control2 {
 
 .home-connect-card {
     grid-area: home-connect-card;
+    width: 100%;
 }
 
 /*social cards*/
@@ -451,7 +313,7 @@ ul#custom-control2 {
 }
 
 .home-card {
-    background-color: #dedcdc;
+    background-color: #ebe8e8;
     margin: .5rem;
 }
 
@@ -623,4 +485,178 @@ ul#custom-control2 {
 
 .trade-in-btn-container {
     text-align: center;
+}
+
+
+.myhomepage-hero-layout {
+    background-color: #E5E5E5;
+
+    .myhomepage-hero-banner {
+        grid-area: banner;
+    }
+
+    .myhomepage-hero-video {
+        grid-area: video;
+    }
+
+    .myhomepage-hero-carousel {
+        grid-area: carousel;
+    }
+
+    .myhomepage-hero-repair {
+        grid-area: repair;
+    }
+
+    .papathemes-eyeva-hero-carousel-slide {
+        > div[role="link"] {
+            position: relative;
+        }
+
+        .papathemes-eyeva-hero-carousel-content._align-center {
+            top: auto;
+            bottom: 25px;
+            left: 50%;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            padding: 0 5% 0 5%;
+            transform: translateX(-50%);
+
+            @media (max-width: (screenSize("medium") - 1px)) {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 12px;
+                transform: none;
+                padding: 0 spacing("single");
+                z-index: 2;
+            }
+        }
+
+        @media (max-width: (screenSize("small") - 1px)) {
+        .papathemes-eyeva-hero-carousel-title,
+            .papathemes-eyeva-hero-carousel-description {
+                display: none;
+                color: #ffffff;
+            }
+}
+
+        @media (max-width: (screenSize("medium") - 1px)) {
+
+            .papathemes-eyeva-hero-carousel-title,
+            .papathemes-eyeva-hero-carousel-description {
+                color: #ffffff;
+            }
+        }
+
+        @include breakpoint("medium") {
+
+            .papathemes-eyeva-hero-carousel-title,
+            .papathemes-eyeva-hero-carousel-description {
+                color: #ffffff;
+            }
+        }
+    }
+}
+
+@include breakpoint("small") {
+    .myhomepage-hero-layout {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-areas:
+            "banner banner"
+            "carousel carousel"
+            "video repair";
+    }
+
+    .hero-video {
+        display: block;
+    }
+
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(1, 1fr);
+    }
+}
+
+@include breakpoint("medium") {
+    .myhomepage-hero-layout {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-template-areas:
+            "banner banner"
+            "carousel carousel"
+            "video repair";
+    }
+
+    .desktop-repair {
+        display: none;
+    }
+
+    .hero-video {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 1100px) {
+    .myhomepage-hero-layout {
+        display: grid;
+        grid-template-columns: 60% 40%;
+        grid-template-areas:
+            "banner video"
+            "banner repair"
+            "carousel carousel";
+    }
+
+    .desktop-repair {
+        display: none;
+    }
+
+    .mobile-repair {
+        display: block;
+    }
+}
+
+@include breakpoint("xlarge") {
+    .myhomepage-hero-layout {
+        display: grid;
+        grid-template-columns: 55% 45%;
+        grid-template-areas:
+            "banner video"
+            "banner repair"
+            "carousel carousel";
+    }
+
+    .nav-icon {
+        width: 20%;
+        height: 20%;
+    }
+
+    .grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(1, 1fr);
+    }
+
+    .desktop-repair {
+        display: block;
+    }
+
+    .mobile-repair {
+        display: none;
+    }
+}
+    
+.myhomepage-hero-layout {
+
+    .papathemes-eyeva-hero-carousel-slide {
+
+        .papathemes-eyeva-hero-carousel-content._align-center {
+            bottom: 10%;
+        }
+    }
+}
+
+.tech-repair-card { 
+    margin: 20px 10px 20px 10px;
+    padding: 20px;
 }

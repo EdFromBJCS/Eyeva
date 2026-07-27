@@ -25,21 +25,137 @@ blog:
 
 {{#partial "page"}}
 
-<div class="main full _child-region-fullwidth">
-    {{> components/eyeva/section section=theme_settings.home_s6}}
-</div>
+<div class="myhomepage-hero-layout">
+        <div class="myhomepage-hero-banner">{{{region name="home_above_sections"}}}</div>
+        <div class="myhomepage-hero-video">
+            <div class="video-container">
+        <div class="iframe-container">
+        <iframe src="https://www.youtube.com/embed/videoseries?si=ppHogZ8NEJY_Qjdz&amp;list=PL_ntP3EI-k2RyITyOwF5_7YcmUYSlaLsD"></iframe>
+        </div>
+    </div>
+        </div>
+        <div class="myhomepage-hero-carousel">
+                <div class="carousel-container">
+        <button class="homeblaze-prev" type="button" aria-label="Previous Slide">
+            <svg class="icon">
+                <use xlink:href="#icon-arrow-left-long"></use>
+            </svg>
+        </button>
+        <div class="carousel" id="carousel">
+            <div class="slide">
+                <div class="grid">
+                    <a href="https://www.bobjohnson.com/warranty-registration/">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/register2.png?t=1766596862"
+                                    alt="Warranty" /></div>
+                            <h3 class="icon-heading">Register Your Warranty Today!</h3>
+                            <p class="icon-description">Only pay for parts on repairs when you purchase from us.</p>
+                        </div>
+                    </a>
+                     <a href="https://www.bobjohnson.com/parts/">
+                    <div class="icon-item">
+                        <div class="heroBannerIcon"><img
+                                src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/shipping.png?t=1766596883"
+                                alt="Sales Tax" /></div>
+                        <h3 class="icon-heading">Free Shipping On Parts!</h3>
+                        <p class="icon-description">Any parts order shipping in the continental United States is free.</p>
+                    </div>
+                    <a href="tel:3026592727">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/phone.png?t=1766596843"
+                                    alt="Call" /></div>
+                            <h3 class="icon-heading">We're Here To Help!</h3>
+                            <p class="icon-description">Call (302)659-2727 for assistance.</p>
+                        </div>
+                    </a>
+                    <a href="https://www.bobjohnson.com/mobile-data-plans/">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/cellular.png?t=1766596934"
+                                    alt="Mobile Data Plans" /></div>
+                            <h3 class="icon-heading">Mobile Data Plans</h3>
+                            <p class="icon-description">Check out our mobile data plans designed for rugged computers!</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="grid">
+                    <a href="https://www.youtube.com/@Bobjohnson">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/review.png?t=1766596915"
+                                    alt="YouTube" /></div>
+                            <h3 class="icon-heading">YouTube & Repair Videos</h3>
+                            <p class="icon-description">Checkout Bob's reviews and repair videos on YouTube!</p>
+                        </div>
+                    </a>
+                    <a href="https://www.bobjohnson.com/blog/tag/Maintenance">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/guide.png?t=1766596941"
+                                    alt="Buyers Guide" /></div>
+                            <h3 class="icon-heading">Toughbook Maintenance Guides</h3>
+                            <p class="icon-description">Our blog provides detailed guides on the rugged computers we provide serivce for.
+                            </p>
+                        </div>
+                    </a>
+                    <a href="https://www.bobjohnson.com/toughbook-trade-in-program/?tab=0">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/tradein.png?t=1766596862"
+                                    alt="Selection Assistance" /></div>
+                            <h3 class="icon-heading">Trade In Program</h3>
+                            <p class="icon-description">Trade in your old device for credit towards a new one!</p>
+                        </div>
+                    </a>
+                    <a href="https://gc200.infusionsoft.app/app/form/homepage-banner">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/newsletter.png?t=1766596934"
+                                    alt="Newsletter" /></div>
+                            <h3 class="icon-heading">5% Off Coupon!</h3>
+                            <p class="icon-description">Sign up for our newsletter to get 5% off your next order!</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <button class="homeblaze-next" type="button" aria-label="Next Slide">
+            <svg class="icon">
+                <use xlink:href="#icon-arrow-right-long"></use>
+            </svg>
+        </button>
+    </div>
 
+        </div>
+        <div class="myhomepage-hero-repair">
+                    <div class="tech-repair-card">
+                    <h2>Tech Support & Repair Services</h2>
+                    <img src="{{cdn 'img/GearCross.svg'}}" class="img-center">
+                    <p>Talk to one of our techs over-the-phone or through email to solve your issue. Have a more serious
+                        problem? Send your rugged computer to our full-service repair department where we can diagnose,
+                        repair, or even upgrade your machine.</p>
+                    <div class="repair-card-btn-menu">
+                        <a href="https://www.bobjohnson.com/repairs-service/?tab=0"
+                            class="button button--primary">Tech Support & Repair Services</a>
+                    </div>
+                </div>
+        </div>
+    </div>
      <div class="myhome-container">
             <div class="home-grid1">
                 <div class="home-card-alt home-trade-in-card">
                     <h2>Upgrade To Another Rugged Computer</h2>
                     <ul class="control" id="custom-control">
-                        <button class="blaze-prev" onclick="prevSlide()">
+                        <button class="blaze-prev" type="button">
                 <svg class="icon">
                     <use xlink:href="#icon-arrow-left-long"></use>
                 </svg>
             </button>
-            <button class="blaze-next" onclick="nextSlide()">
+            <button class="blaze-next" type="button">
                 <svg class="icon">
                     <use xlink:href="#icon-arrow-right-long"></use>
                 </svg>
@@ -67,13 +183,13 @@ blog:
                 <a href="https://www.bobjohnson.com/cf-54/"
                     class="homepage-category-button button button--primary">Panasonic CF-54</a>
             </div>
-            <div class="item">
+            <!-- <div class="item">
                 <a href="https://www.bobjohnson.com/toughbook-cf-20/"><img
                         src="https://www.bobjohnson.com/product_images/uploaded_images/cf20category.jpg"
                         alt="Fully-Rugged Panasonic CF-20 Toughbook Tablets" width="250" height="250"></a>
                 <a href="https://www.bobjohnson.com/toughbook-cf-20/"
                     class="homepage-category-button button button--primary">Panasonic CF-20</a>
-            </div>
+            </div> -->
             <div class="item">
                 <a href="https://www.bobjohnson.com/refurbished-dell-laptops/"><img
                         src="https://www.bobjohnson.com/product_images/uploaded_images/dellltcategory2.jpg"
@@ -146,21 +262,6 @@ blog:
                         Computer</a>
                     </div>
                 </div>
-
-                <div class="home-card home-repair-card">
-                    <h2>Tech Support & Repair Services</h2>
-                    <img src="{{cdn 'img/GearCross.svg'}}" class="img-center">
-                    <p>Talk to one of our techs over-the-phone or through email to solve your issue. Have a more serious
-                        problem? Send your rugged computer to our full-service repair department where we can diagnose,
-                        repair, or even upgrade your machine.</p>
-                    <div class="repair-card-btn-menu">
-                        <a href="https://www.bobjohnson.com/tech-support-form/" class="button button--primary">Tech
-                            Support</a>
-                        <a href="https://www.bobjohnson.com/repairs-service/?tab=0"
-                            class="button button--primary">Repair Services</a>
-                    </div>
-                </div>
-
                 <div class="home-card home-warranty-card">
                     <h2>Extended Warranties</h2>
                     <div class="warranty-imgs">
@@ -178,7 +279,7 @@ blog:
                     </div>
                 </div>
 
-                <!--<div class="home-card home-connect">
+                <div class="home-card home-connect">
                     <h2>Connect With Us!</h2>
                     <div class="myhomepage-socials">
                         <a href="https://www.youtube.com/@Bobjohnson"><img src="{{cdn 'img/YouTube.svg'}}"
@@ -188,18 +289,18 @@ blog:
                         <a href="https://www.facebook.com/BobJohnsonsComputerStuff"><img
                                 src="{{cdn 'img/Facebook.svg'}}" class="home-social-logo"></a>
                     </div>
-                </div>-->
+                </div>
 
                 <div class="home-card-alt home-video-card">
                     <h2>Watch Our YouTube Videos on All Rugged Computer Models!</h2>
                     <div class="video-stack">
                         <ul class="control2" id="custom-control2">
-<button class="blaze-prev" onclick="prevSlide()">
+<button class="blaze-prev" type="button">
                 <svg class="icon">
                     <use xlink:href="#icon-arrow-left-long"></use>
                 </svg>
             </button>
-            <button class="blaze-next" onclick="nextSlide()">
+            <button class="blaze-next" type="button">
                 <svg class="icon">
                     <use xlink:href="#icon-arrow-right-long"></use>
                 </svg>
@@ -288,139 +389,204 @@ blog:
                     </div>
                 </div>
             </div>
-
+                <div class="main full _child-region-fullwidth">
+    {{> components/eyeva/section section=theme_settings.home_s6}}
+</div>
 
         </div>
 {{/partial}}
 {{> layout/base}}
 
-<script type="module">
-                var slider = tns({
-                    container: '.home-carousel',
-                    items: 5,
-                    slideBy: '1',
-                    autoplay: false,
-                    controlsContainer: "#custom-control",
-                    navPosition: "bottom",
-                    controlsPosition: "bottom",
-                    responsive: {
-                        0: {
-                            items: 1,
-                            slideBy: '1',
-                            nav: false
-                        },
-                        800: {
-                            items: 2,
-                            slideBy: '1',
-                            nav: true
-                        },
-                        830: {
-                            items: 3,
-                            slideBy: '1',
-                            nav: true
-                        },
-                        1001: {
-                            items: 4,
-                            slideBy: '1',
-                            nav: true
-                        },
-                        1200: {
-                            items: 5,
-                            slideBy: '1',
-                            nav: true
-                        }
-                    }
-                });
-            </script>
-            <script type="module">
-                var slider = tns({
-                    container: '.blog-slider',
-                    items: 4,
-                    slideBy: '1',
-                    autoplay: false,
-                    controlsContainer: "#custom-control3",
-                    navPosition: "bottom",
-                    controlsPosition: "bottom",
-                    responsive: {
-                        0: {
-                            items: 1,
-                            slideBy: '1',
-                            nav: false
-                        },
-                        770: {
-                            items: 2,
-                            slideBy: '1',
-                            nav: true
-                        },
-                        1000: {
-                            items: 3,
-                            slideBy: '1',
-                            nav: true
-                        },
-                        1330: {
-                            items: 4,
-                            slideBy: '1',
-                            nav: true
-                        }
-                    }
-                });
-            </script>
-            <script type="module">
-                var slider = tns({
-                    container: '.vertical-slider',
-                    items: 1,
-                    slideBy: '1',
-                    autoplay: true,
-                    autoplayButton: false,
-                    autoplayButtonOutput: false,
-                    autoplayHoverPause: true,
-                    controlsContainer: "#custom-control2",
-                    navPosition: "bottom",
-                    controlsPosition: "bottom",
-                    axis: "horizontal",
-                    navContainer: "#vert-nav",
-                    responsive: {
-                        0: {
-                            items: 1,
-                            slideBy: '1',
-                            nav: false
-                        },
-                        820: {
-                            items: 1,
-                            slideBy: '1',
-                            nav: true
-                        }
-                    }
-                });
-            </script>
-            <script>
-                function centerBanner() {
-                    var banner = document.querySelector('.myhomepage-banner');
-                    var content = document.querySelector('.myhomepage-banner-text');
-
-                    var bannerWidth = banner.offsetWidth;  // Get the width of the banner
-                    var contentWidth = content.offsetWidth; // Get the width of the content (could be different than the banner if you want to center content inside)
-                    var windowWidth = window.innerWidth;   // Get the viewport width
-
-                    if (windowWidth > 1696) {
-                        // Calculate horizontal centering (with a negative margin-left adjustment)
-                        var horizontalCenter = (1696 - windowWidth) / 2;
-                        //  console.log(horizontalCenter, windowWidth)
-
-                        // Calculate negative margin-left (adjust to your needs)
-                        var negativeMargin = 0;  // Example of a negative margin you might want to apply
-
-                        // Apply the centering with the negative margin
-                        banner.style.marginLeft = negativeMargin + horizontalCenter + 'px';
-                    } else {
-                        banner.style.marginLeft = '';
-                        content.style.marginLeft = '';
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var homeCarousel = document.querySelector('.home-carousel');
+        if (homeCarousel) {
+            tns({
+                container: '.home-carousel',
+                items: 4,
+                slideBy: '1',
+                autoplay: false,
+                controlsContainer: '#custom-control',
+                navPosition: 'bottom',
+                controlsPosition: 'bottom',
+                responsive: {
+                    0: {
+                        items: 1,
+                        slideBy: '1',
+                        nav: false
+                    },
+                    800: {
+                        items: 2,
+                        slideBy: '1',
+                        nav: true
+                    },
+                    830: {
+                        items: 3,
+                        slideBy: '1',
+                        nav: true
+                    },
+                    1001: {
+                        items: 4,
+                        slideBy: '1',
+                        nav: true
                     }
                 }
+            });
+        }
 
-                // Call the function when the page loads
-                centerBanner();
+        var blogSlider = document.querySelector('.blog-slider');
+        if (blogSlider) {
+            tns({
+                container: '.blog-slider',
+                items: 4,
+                slideBy: '1',
+                autoplay: false,
+                controlsContainer: '#custom-control3',
+                navPosition: 'bottom',
+                controlsPosition: 'bottom',
+                responsive: {
+                    0: {
+                        items: 1,
+                        slideBy: '1',
+                        nav: false
+                    },
+                    770: {
+                        items: 2,
+                        slideBy: '1',
+                        nav: true
+                    },
+                    1000: {
+                        items: 3,
+                        slideBy: '1',
+                        nav: true
+                    },
+                    1330: {
+                        items: 4,
+                        slideBy: '1',
+                        nav: true
+                    }
+                }
+            });
+        }
 
-                // Adjust the position when the window is resized
-                window.addEventListener('resize', centerBanner);
-            </script>
+        var verticalSlider = document.querySelector('.vertical-slider');
+        if (verticalSlider) {
+            tns({
+                container: '.vertical-slider',
+                items: 1,
+                slideBy: '1',
+                autoplay: true,
+                autoplayButton: false,
+                autoplayButtonOutput: false,
+                autoplayHoverPause: true,
+                controlsContainer: '#custom-control2',
+                navPosition: 'bottom',
+                controlsPosition: 'bottom',
+                axis: 'horizontal',
+                navContainer: '#vert-nav',
+                responsive: {
+                    0: {
+                        items: 1,
+                        slideBy: '1',
+                        nav: false
+                    },
+                    820: {
+                        items: 1,
+                        slideBy: '1',
+                        nav: true
+                    }
+                }
+            });
+        }
+
+        function centerBanner() {
+            var banner = document.querySelector('.myhomepage-banner');
+            var content = document.querySelector('.myhomepage-banner-text');
+
+            if (!banner || !content) {
+                return;
+            }
+
+            var windowWidth = window.innerWidth;
+
+            if (windowWidth > 1696) {
+                var horizontalCenter = (1696 - windowWidth) / 2;
+                var negativeMargin = 0;
+
+                banner.style.marginLeft = negativeMargin + horizontalCenter + 'px';
+            } else {
+                banner.style.marginLeft = '';
+                content.style.marginLeft = '';
+            }
+        }
+
+        centerBanner();
+        window.addEventListener('resize', centerBanner);
+
+        var carousel = document.getElementById('carousel');
+        var heroPrevButton = document.querySelector('.homeblaze-prev');
+        var heroNextButton = document.querySelector('.homeblaze-next');
+
+        if (carousel) {
+            var slides = carousel.querySelectorAll('.slide');
+
+            if (slides.length > 0) {
+                var firstClone = slides[0].cloneNode(true);
+                carousel.appendChild(firstClone);
+                slides = carousel.querySelectorAll('.slide');
+            }
+
+            var totalSlides = slides.length;
+            var currentSlide = 0;
+            var slideWidth = 100;
+
+            function moveToSlide(index) {
+                carousel.style.transition = 'transform 0.5s ease';
+                carousel.style.transform = 'translateX(-' + (index * slideWidth) + '%)';
+            }
+
+            function goToNextHeroSlide() {
+                currentSlide++;
+                moveToSlide(currentSlide);
+
+                if (currentSlide === totalSlides - 1) {
+                    setTimeout(function () {
+                        carousel.style.transition = 'none';
+                        currentSlide = 0;
+                        carousel.style.transform = 'translateX(0%)';
+                    }, 500);
+                }
+            }
+
+            function goToPreviousHeroSlide() {
+                if (currentSlide === 0) {
+                    carousel.style.transition = 'none';
+                    currentSlide = totalSlides - 1;
+                    carousel.style.transform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
+
+                    requestAnimationFrame(function () {
+                        requestAnimationFrame(function () {
+                            carousel.style.transition = 'transform 0.5s ease';
+                            currentSlide--;
+                            carousel.style.transform = 'translateX(-' + (currentSlide * slideWidth) + '%)';
+                        });
+                    });
+                } else {
+                    currentSlide--;
+                    moveToSlide(currentSlide);
+                }
+            }
+
+            if (heroNextButton) {
+                heroNextButton.addEventListener('click', goToNextHeroSlide);
+            }
+
+            if (heroPrevButton) {
+                heroPrevButton.addEventListener('click', goToPreviousHeroSlide);
+            }
+
+            setInterval(goToNextHeroSlide, 5000);
+            moveToSlide(0);
+        }
+    });
+</script>

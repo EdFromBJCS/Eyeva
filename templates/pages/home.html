@@ -41,9 +41,190 @@ blog:
 <div class="main full _child-region-fullwidth">
     <div class="home-page-hero-layout">
         <div class="hero-banner">{{{region name="home_above_sections"}}}</div>
-        <div class="hero-video">{{{region name="hero-video"}}}</div>
-        <div class="hero-carousel">{{{region name="hero-carousel"}}}</div>
-        <div class="hero-repair">{{{region name="mobile_repair"}}}</div>
+        <div class="hero-video">
+            <div class="video-container">
+                <div class="iframe-container">
+                <iframe src="https://www.youtube.com/embed/videoseries?si=ppHogZ8NEJY_Qjdz&amp;list=PL_ntP3EI-k2RyITyOwF5_7YcmUYSlaLsD"></iframe>
+                </div>
+            </div>
+            
+        </div>
+        <div class="hero-carousel">
+                <div class="carousel-container">
+        <button class="homeblaze-prev" alt="Previous Slide" onclick="prevSlide()">
+            <svg class="icon">
+                <use xlink:href="#icon-arrow-left-long"></use>
+            </svg>
+        </button>
+        <div class="carousel" id="carousel">
+            <div class="slide">
+                <div class="grid">
+                    <a href="https://www.bobjohnson.com/warranties/">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/warranty.png?t=1766596862"
+                                    alt="Warranty" /></div>
+                            <h3 class="icon-heading">Limited Lifetime Warranty!</h3>
+                            <p class="icon-description">Only pay for parts on repairs when you purchase from us.</p>
+                        </div>
+                    </a>
+                     <a href="https://www.bobjohnson.com/about-us/">
+                    <div class="icon-item">
+                        <div class="heroBannerIcon"><img
+                                src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/money.png?t=1766596883"
+                                alt="Sales Tax" /></div>
+                        <h3 class="icon-heading">Sales Tax Free!</h3>
+                        <p class="icon-description">Since we're based out of Delaware, never pay a sales tax!</p>
+                    </div>
+                    <a href="tel:3026592727">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/phone.png?t=1766596843"
+                                    alt="Call" /></div>
+                            <h3 class="icon-heading">We're Here To Help!</h3>
+                            <p class="icon-description">Call (302)659-2727 for assistance.</p>
+                        </div>
+                    </a>
+                    <a href="https://gc200.infusionsoft.app/app/form/homepage-banner">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/newsletter.png?t=1766596934"
+                                    alt="Newsletter" /></div>
+                            <h3 class="icon-heading">5% Off Coupon!</h3>
+                            <p class="icon-description">Sign up for our newsletter to get 5% off your next order!</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="grid">
+                    <a href="https://www.youtube.com/@Bobjohnson">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/review.png?t=1766596915"
+                                    alt="YouTube" /></div>
+                            <h3 class="icon-heading">YouTube Reviews</h3>
+                            <p class="icon-description">Bob reviews all of the computers that we sell on YouTube!</p>
+                        </div>
+                    </a>
+                    <a href="https://www.bobjohnson.com/blog/tag/Buying-Guide">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/guide.png?t=1766596941"
+                                    alt="Buyers Guide" /></div>
+                            <h3 class="icon-heading">Buyers Guides</h3>
+                            <p class="icon-description">Our blog provides detailed reviews on the rugged computers we
+                                sell.
+                            </p>
+                        </div>
+                    </a>
+                    <a href="https://www.bobjohnson.com/rugged-computer-selection-assistance/">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/warranty.png?t=1766596862"
+                                    alt="Selection Assistance" /></div>
+                            <h3 class="icon-heading">Selection Assistance</h3>
+                            <p class="icon-description">Fill out our form and we'll help you find the perfect option for
+                                you!
+                            </p>
+                        </div>
+                    </a>
+                    <a href="https://www.bobjohnson.com/testimonials/">
+                        <div class="icon-item">
+                            <div class="heroBannerIcon"><img
+                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/money.png?t=1766596883"
+                                    alt="Testimonials" /></div>
+                            <h3 class="icon-heading">Testimonials</h3>
+                            <p class="icon-description">See what our customers have said!</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <button class="homeblaze-next" alt="Next Slide" onclick="nextSlide()">
+            <svg class="icon">
+                <use xlink:href="#icon-arrow-right-long"></use>
+            </svg>
+        </button>
+    </div>
+
+    <script>
+    const carousel = document.getElementById('carousel');
+    let slides = document.querySelectorAll('.slide');
+
+    // Clone first slide and append it
+    const firstClone = slides[0].cloneNode(true);
+    carousel.appendChild(firstClone);
+
+    slides = document.querySelectorAll('.slide'); // refresh list
+    const totalSlides = slides.length;
+
+    let currentSlide = 0;
+    let slideWidth = 100;
+
+    function moveToSlide(index) {
+        carousel.style.transition = 'transform 0.5s ease';
+        carousel.style.transform = `translateX(-${index * slideWidth}%)`;
+    }
+
+    function nextSlide() {
+        currentSlide++;
+        moveToSlide(currentSlide);
+
+        // If we're on the clone, reset to real first slide
+        if (currentSlide === totalSlides - 1) {
+            setTimeout(() => {
+                carousel.style.transition = 'none';
+                currentSlide = 0;
+                carousel.style.transform = `translateX(0%)`;
+            }, 500);
+        }
+    }
+
+    function prevSlide() {
+        if (currentSlide === 0) {
+            // Jump instantly to clone (last slide)
+            carousel.style.transition = 'none';
+            currentSlide = totalSlides - 1;
+            carousel.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    carousel.style.transition = 'transform 0.5s ease';
+                    currentSlide--;
+                    carousel.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+                });
+            });
+        } else {
+            currentSlide--;
+            moveToSlide(currentSlide);
+        }
+    }
+
+    // Autoplay (always moves left)
+    setInterval(nextSlide, 5000);
+
+    // Init
+    moveToSlide(0);
+</script>
+        </div>
+        <div class="hero-repair">
+<div class="repair-container">
+        <a class="card-link" href="https://www.bobjohnson.com/repairs-service/?tab=0">
+            <h3>Full Service Rugged Computer Repair</h3>
+            <p>Industry leading rugged Dell, Durabook, Getac, and Panasonic rugged computers.</p>
+            <ul class="desktop-repair">
+            <li><img src="https://www.bobjohnson.com/product_images/uploaded_images/cost-red.png" alt="Repair Cost" class="nav-icon" />
+                $150 repair fee + part pricing
+            </li>
+            <li><img src="https://www.bobjohnson.com/product_images/uploaded_images/turn-around-red.png" alt="Turn Around" class="nav-icon" />
+                2-4 Week Turnaround
+            </li>
+        </ul>
+        </a>
+        <a class="button button--primary" href="https://www.bobjohnson.com/repairs-service/?tab=0">Fill Out Our Repair Form</a>
+    </div>
+        </div>
     </div>
     <div class="popular-rugged-laptops-card-background">
     <div class="popular-rugged-laptops-card">

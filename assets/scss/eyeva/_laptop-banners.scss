@@ -240,22 +240,33 @@
 @include breakpoint("xlarge") {
     .home-page-hero-layout {
         display: grid;
-        grid-template-columns: 50% 25% 25%;
+        grid-template-columns: 55% 45%;
         grid-template-areas:
-            "banner video repair"
-            "banner carousel repair";
+            "banner video"
+            "banner repair"
+            "carousel carousel";
     }
 
     .grid {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(1, 1fr);
     }
 
     .desktop-repair {
-        display: block;
+        display: none;
     }
 
     .mobile-repair {
-        display: none;
+        display: block;
     }
+
+    .home-page-hero-layout {
+
+    .papathemes-eyeva-hero-carousel-slide {
+
+        .papathemes-eyeva-hero-carousel-content._align-center {
+            bottom: 10%;
+        }
+    }
+}
 }
