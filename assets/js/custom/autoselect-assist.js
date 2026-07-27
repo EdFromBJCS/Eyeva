@@ -41,7 +41,7 @@ const questions = [
     },
         {
             key: 'portsNeeded',
-            question: 'Do you need any specific ports?',
+            question: 'Do you need any specific ports? (USB, Serial, HDMI, etc.)',
             options: ['yes', 'no'],
             type: 'gate',
             followupKeys: ['ports', 'portCounts'],
@@ -75,7 +75,7 @@ const questions = [
         },
         {
             key: 'modulesNeeded',
-            question: 'Do you need any built-in modules?',
+            question: 'Do you need any built-in modules? (GPS, Barcode, Smart Card, ect)',
             options: ['yes', 'no'],
             type: 'gate',
             followupKeys: ['modules'],
@@ -83,7 +83,7 @@ const questions = [
         {
             key: 'modules',
             question: 'Which built-in modules do you need? (Select all that apply)',
-            options: ['GPS', 'Barcode', 'Smart Card', 'Fingerprint'],
+            options: ['GPS', 'Barcode', 'Smart Card'],
             skipValues: [],
             multiSelect: true,
             parentGateKey: 'modulesNeeded',
@@ -260,6 +260,18 @@ const resultContainer = document.getElementById('result-container');
 function updateProgressBar() {
     const progressPercentage = (currentQuestionIndex / questions.length) * 100;
     document.getElementById('progress-bar').style.width = `${progressPercentage}%`;
+    updateQuestionCounter();
+}
+
+function updateQuestionCounter() {
+    const counterElement = document.getElementById('quiz-question-counter');
+    if (!counterElement) {
+        return;
+    }
+
+    const totalQuestions = questions.length;
+    const displayIndex = Math.min(currentQuestionIndex + 1, totalQuestions);
+    counterElement.textContent = `Question ${displayIndex} of ${totalQuestions}`;
 }
 
 function normalizeValue(value) {
@@ -1766,6 +1778,7 @@ async function loadProducts() {
 }
 
 function displayResults() {
+    updateProgressBar();
     questionContainer.textContent = 'Your recommended product(s):';
     optionsContainer.innerHTML = '';
     resultContainer.innerHTML = '';
