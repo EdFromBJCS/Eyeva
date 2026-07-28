@@ -21,20 +21,14 @@
                 .blog-column {
                         column-count: 3;
                         column-gap: 30px;
-                        /* Optional vertical line */
                         column-fill: balance;
                 }
 
                 .category-block {
-                        /* Forces the entire block to stay together in one column */
                         break-inside: avoid;
-
-                        /* Optional: Prevents margin collapse issues between columns */
                         display: inline-block;
                         width: 100%;
-
                         margin-bottom: 20px;
-                        /* Adds clean spacing between alphabetical sections */
                 }
 
                 @media screen and (max-width: 600px) {

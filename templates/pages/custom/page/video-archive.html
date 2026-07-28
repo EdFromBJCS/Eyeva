@@ -19,15 +19,16 @@
                 }
 
                 .blog-column {
-                        float: left;
-                        padding: 10px;
-                        width: calc(100% / 3);
+                        column-count: 3;
+                        column-gap: 30px;
+                        column-fill: balance;
                 }
 
-                .blog-row:after {
-                        clear: both;
-                        content: "";
-                        display: table;
+                .category-block {
+                        break-inside: avoid;
+                        display: inline-block;
+                        width: 100%;
+                        margin-bottom: 20px;
                 }
 
                 @media screen and (max-width: 600px) {
@@ -38,70 +39,212 @@
         </style>
         <div class="blog-row">
                 <div class="blog-column">
-                <!--<h3>Most Popular Transcripts</h3>
+                        <!--<h3>Most Popular Transcripts</h3>
                 <ul></ul>-->
+                        <div class="category-block">
+                                <h3>A</h3>
+                                <ul>
+                                        <li><a href="http://localhost:3000/concealed-mode-fzg2/">Activating Concealed
+                                                        Mode On The Panasonic Toughbook FZ-G2</a></li>
+                                </ul>
+                        </div>
+                        <div class="category-block">
+                                <h3>B</h3>
+                                <ul>
+                                        <li><a href="https://www.bobjohnson.com/panasonic-toughpad-fz-g1-features/">Best
+                                                        Panasonic ToughPad FZ-G1 Features</a></li>
+                                </ul>
+                        </div>
+                        <div class="category-block">
+                                <h3>C</h3>
+                                <ul>
+                                        <li><a href="https://www.bobjohnson.com/auto-mechanics-best-laptops/">Choosing
+                                                        the Right Laptop for Your Auto Shop: Bob's Expert
+                                                        Recommendations</a></li>
+                                        <li><a href="https://www.bobjohnson.com/panasonic-toughbook-cf-31-common-issues/">Common
+                                                        Issues with the Panasonic Toughbook CF-31</a></li>
+                                        <li><a href="https://www.bobjohnson.com/panasonic-toughbook-cf-53-common-issues/">Common
+                                                        Issues with the Panasonic Toughbook CF-53</a></li>
+                                        <li><a href="https://www.bobjohnson.com/panasonic-toughbook-cf-54-common-issues/">Common
+                                                        Issues with the Panasonic Toughbook CF-54</a></li>
+                                        <li><a href="https://www.bobjohnson.com/panasonic-toughpad-fz-g1-common-issues/">Common
+                                                        Issues with the Panasonic Toughpad FZ-G1</a></li>
+                                        <li><a href="https://www.bobjohnson.com/dell-7220-vs-getac-f110/">Comparing The
+                                                        Dell 7220 to the Getac F110</a></li>
+                                        <li><a href="https://www.bobjohnson.com/dell-latitude-5430-vs-cf33/">Comparison
+                                                        of Dell Latitude 5430 vs. Panasonic Toughbook CF-33</a></li>
+                                </ul>
+                        </div>
+                        <div class="category-block">
+                                <h3>D</h3>
+                                <ul>
+                                        <li><a href="https://www.bobjohnson.com/dell-latitude-5430-review/">Dell
+                                                        Latitude 5430 Semi-Rugged Laptop: A Hands-On Review</a></li>
+                                        <li><a href="https://www.bobjohnson.com/different-keyboard-options-for-the-panasonic-cf-33-tablet/">Different
+                                                        Keyboard Options For The Panasonic CF-33 Tablet</a></li>
+                                </ul>
+                        </div>
+                        <div class="category-block">
+                                <h3>E</h3>
+                                <ul>
+                                        <li><a href="https://www.bobjohnson.com/essential-panasonic-toughbook-cf-53-replacement-parts/">Essential
+                                                        Rugged Computer Specs for 2026</a></li>
+                                </ul>
+                        </div>
+                        <!--                         <div class="category-block">
+                                <h3>F</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!-- <div class="category-block">
+                                <h3>G</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>H</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>I</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>J</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>K</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>L</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>M</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>N</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>O</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <div class="category-block">
+                                <h3>P</h3>
+                                <ul>
+                                        <li><a href="https://www.bobjohnson.com/panasonic-cf-20-cf-19-fz-g1-comparison/">Panasonic
+                                                        CF-20, CF-19, and FZ-G1 Comparison</a></li>
+                                        <li><a href="https://www.bobjohnson.com/panasonic-cf-53-vs-cf-54/">Panasonic
+                                                        CF-53 vs Panasonic CF-54</a></li>
+                                        <li><a href="https://www.bobjohnson.com/panasonic-toughbook-cf-31-walkthrough-review/">Panasonic
+                                                        Toughbook CF-31 Walkthrough Review</a></li>
+                                        <li><a href="https://www.bobjohnson.com/panasonic-toughbook-cf-53-review/">Panasonic
+                                                        Toughbook CF-53 Walkthrough Review</a></li>
+                                        <li><a href="https://www.bobjohnson.com/panasonic-toughpad-fz-g1-vs-getac-f110/">Panasonic
+                                                        Toughpad FZ-G1 vs. Getac F110</a></li>
+                                        <li><a href="https://www.bobjohnson.com/panasonic-lets-note-fv4-vs-cfsx2/">Panasonic
+                                                        Let's Note FV4 vs Panasonic CF-SX2</a></li>
+                                        <li><a href="https://www.bobjohnson.com/progression-panasonic-50-series-laptops/">The
+                                                        Progression of Panasonic's 50 Series Rugged Laptops</a></li>
 
-                <h3>A</h3>
-                        <ul>
-                            <li><a href="http://localhost:3000/concealed-mode-fzg2/">Activating Concealed Mode On The Panasonic Toughbook FZ-G2</a></li>
-                        </ul>
-
-                        <h3>B</h3>
-                        <ul>
-                            <li><a href="https://www.bobjohnson.com/panasonic-toughpad-fz-g1-features/">Best Panasonic ToughPad FZ-G1 Features</a></li>
-                            <li><a href="https://www.bobjohnson.com/panasonic-toughbook-cf-20-features/">Best Features of the Panasonic Toughbook CF-20</a></li>
-                        </ul>
-                        <h3>C</h3>
-                        <ul>
-                            <li><a href="https://www.bobjohnson.com/auto-mechanics-best-laptops/">Choosing the Right Laptop for Your Auto Shop: Bob's Expert Recommendations</a></li>
-                            <li><a href="https://www.bobjohnson.com/panasonic-toughbook-cf-31-common-issues/">Common Issues with the Panasonic Toughbook CF-31</a></li>
-                            <li><a href="https://www.bobjohnson.com/panasonic-toughbook-cf-53-common-issues/">Common Issues with the Panasonic Toughbook CF-53</a></li>
-                            <li><a href="https://www.bobjohnson.com/panasonic-toughbook-cf-54-common-issues/">Common Issues with the Panasonic Toughbook CF-54</a></li>
-                            <li><a href="https://www.bobjohnson.com/panasonic-toughpad-fz-g1-common-issues/">Common Issues with the Panasonic Toughpad FZ-G1</a></li>
-                            <li><a href="https://www.bobjohnson.com/dell-latitude-5430-vs-cf33/">Comparison of Dell Latitude 5430 vs. Panasonic Toughbook CF-33</a></li>
-                        </ul>
-                        <h3>D</h3>
-                        <ul>
-                            <li><a href="https://www.bobjohnson.com/dell-latitude-5430-review/">Dell Latitude 5430 Semi-Rugged Laptop: A Hands-On Review</a></li>
-                            <li><a href="https://www.bobjohnson.com/different-keyboard-options-for-the-panasonic-cf-33-tablet/">Different Keyboard Options For The Panasonic CF-33 Tablet</a></li>
-                        </ul>
-                        <h3>E</h3>
-                        <ul>
-                            <li><a href="https://www.bobjohnson.com/essential-panasonic-toughbook-cf-53-replacement-parts/">Essential Rugged Computer Specs for 2026</a></li>
-                        <h3>G</h3>
-                        <ul>
-                            <li><a href="https://www.bobjohnson.com/getac-s400-rugged-laptop-review/">Getac S400 Rugged Laptop Review</a></li>
-                        </ul>
+                                </ul>
+                        </div>
+                        <!--                         <div class="category-block">
+                                <h3>Q</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>R</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>S</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <div class="category-block">
+                                <h3>T</h3>
+                                <ul>
+                                        <li><a href="https://www.bobjohnson.com/panasonic-toughbook-cf-54-features/">Top
+                                                        Features of the Panasonic Toughbook CF-54</a></li>
+                                        <li><a href="https://www.bobjohnson.com/tg3-electronics-keyboards-review/">TG3
+                                                        Electronics Mechanical & Rubber Keyboards Review</a></li>
+                                </ul>
+                        </div>
+                        <!--                         <div class="category-block">
+                                <h3>U</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>V</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>W</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>X</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>Y</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
+                        <!--                         <div class="category-block">
+                                <h3>Z</h3>
+                                <ul>
+                                        <li></li>
+                                </ul>
+                        </div> -->
                 </div>
-                <div class="blog-column">
-                        <h3>P</h3>
-                        <ul>
-                            <li><a href="https://www.bobjohnson.com/panasonic-cf-20-cf-19-fz-g1-comparison/">Panasonic CF-20, CF-19, and FZ-G1 Comparison</a></li>
-                            <li><a href="https://www.bobjohnson.com/panasonic-cf-53-vs-cf-54/">Panasonic CF-53 vs Panasonic CF-54</a></li>
-                            <li><a href="https://www.bobjohnson.com/panasonic-toughbook-cf-31-walkthrough-review/">Panasonic Toughbook CF-31 Walkthrough Review</a></li>
-                            <li><a href="https://www.bobjohnson.com/panasonic-toughbook-cf-53-review/">Panasonic Toughbook CF-53 Walkthrough Review</a></li>
-                            <li><a href="https://www.bobjohnson.com/panasonic-toughpad-fz-g1-vs-getac-f110/">Panasonic Toughpad FZ-G1 vs. Getac F110</a></li>
-                            <li><a href="https://www.bobjohnson.com/panasonic-lets-note-fv4-vs-cfsx2/">Panasonic Let's Note FV4 vs Panasonic CF-SX2</a></li>
-                            <li><a href="https://www.bobjohnson.com/progression-panasonic-50-series-laptops/">The Progression of Panasonic's 50 Series Rugged Laptops</a></li>
-
-                        </ul>
-                        <h3>T</h3>
-                        <ul>
-                            <li><a href="https://www.bobjohnson.com/panasonic-toughbook-cf-54-features/">Top Features of the Panasonic Toughbook CF-54</a></li>
-                        </ul>
-                </div>
-                <!--<div class="blog-column">
-                </div>-->
-        {{#if page.feed}}
-        <ul>
-                {{#each page.feed}}
-                <li>
-                        <h6><a href="{{url}}" target="_blank">{{title}}</a></h6>
-                        <p>{{content}}</p>
-                </li>
-                {{/each}}
-        </ul>
-        {{/if}}
+                {{#if page.feed}}
+                <ul>
+                        {{#each page.feed}}
+                        <li>
+                                <h6><a href="{{url}}" target="_blank">{{title}}</a></h6>
+                                <p>{{content}}</p>
+                        </li>
+                        {{/each}}
+                </ul>
+                {{/if}}
 </main>
 
 {{/partial}}
