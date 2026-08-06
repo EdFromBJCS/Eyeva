@@ -64,7 +64,7 @@
 
     @include breakpoint("large") {
         .dual-form-container {
-            max-width: 90%;
+            max-width: 80%;
         }
     }
 
@@ -78,7 +78,7 @@
         display: flex;
         gap: 12px;
         flex-wrap: wrap;
-        margin: 12px 0 24px;
+        margin: 30px 0 30px;
         padding: 10px;
         background: #f4f6fb;
         border: 1px solid var(--card-border);
@@ -130,7 +130,8 @@
         border: 1px solid var(--card-border);
         border-radius: 18px;
         box-shadow: var(--shadow);
-        padding: 24px 20px 28px;
+        padding: 24px 20px 0;
+        margin-bottom: 30px;
     }
 
     .form-panel.is-hidden {
