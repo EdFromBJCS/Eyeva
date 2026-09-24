@@ -1,5 +1,20 @@
 // Random Assortment of Custom Styles
 
+// Greyed-out button with a "not-allowed" cursor, e.g. for disabled/unavailable actions
+.button--deactivated {
+    background-color: #e0e0e0;
+    border-color: #cccccc;
+    color: #999999;
+    cursor: not-allowed;
+
+    &:hover,
+    &:focus {
+        background-color: #d5d5d5;
+        color: #999999;
+        cursor: not-allowed;
+    }
+}
+
 //About Us Page
 .iframe-container {
     position: relative;
@@ -565,6 +580,55 @@ button.expandfaq.button-alt::after {
     .mobile-inventory-specs-btn-container {
         display: none;
     }
+
+       .product-triple-card-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        .product-triple-card {
+            width: 33%;
+            text-align: center;
+        }
+    }
+
+    .mobile-product-triple-card-container {
+        display: none;
+    }
+
+    .sales-contact-card {
+        display: flex;
+        flex-direction: row;
+        gap: 5%;
+        width: 100%;
+        justify-content: center;
+
+
+        .sales-contact-card-pic {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 10px solid #c4301f;
+        }
+
+        .sales-contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sales-contact-card-button-row,
+        .sales-contact-card-salerep {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+    }
+
+    .mobile-sales-contact-card {
+        display: none;
+    }
 }
 
 @media (max-width: (screenSize("medium") - 1px)) {
@@ -580,6 +644,101 @@ button.expandfaq.button-alt::after {
         justify-content: center;
         gap: 15px;
     }
+
+     .product-triple-card-container {
+        display: none;
+    }
+
+    .mobile-product-triple-card-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .product-triple-card {
+            width: 95%;
+            text-align: center;
+        }
+    }
+
+    .sales-contact-card {
+        display: none;
+    }
+
+    .mobile-sales-contact-card {
+        width: 95%;
+
+        .mobile-sales-contact-card-flex-box {
+            display: flex;
+            flex-direction: row;
+            gap: 5%;
+
+        }
+
+        .sales-contact-card-pic {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 10px solid #c4301f;
+        }
+
+        .sales-contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sales-contact-card-salerep {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sales-contact-card-button-row {
+            display: flex;
+            flex-direction: row;
+            padding-top: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 5px;
+        }
+    }
+}
+
+.under-pic-card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+@media screen and (min-width: 1100px) {
+
+ 
+}
+
+@media screen and (max-width: 1101px) {
+   
+}
+
+.product-triple-card,
+.sales-contact-card,
+.mobile-sales-contact-card {
+    background: #ffffff;
+    border: 2px solid #dedcdc;
+    border-radius: 8px;
+    padding: 28px 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    margin: 10px;
+}
+
+.product-triple-card:hover,
+.sales-contact-card:hover,
+.mobile-sales-contact-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    z-index: 1;
 }
 
 .quickView {

@@ -189,7 +189,7 @@
                         {{/if}}
                         {{/if}}
                         {{/if}}
-                        <dd class="productView-info-value">Sales Tax: <b>Delaware, Home To Tax Free Shopping!</b></dd>
+                        <!-- <dd class="productView-info-value">Sales Tax: <b>Delaware, Home To Tax Free Shopping!</b></dd> -->
                     </dl>
                 </div>
                 {{{region name="product_below_shipping"}}}
@@ -207,6 +207,33 @@
             {{#all product.custom_fields theme_settings.show_custom_fields_tabs}}
             <a href="#website-specifications" class="button button--primary" id="skipToSpecs">Computer Specifications</a>
             {{/all}}
+        </div>
+        <div class="under-pic-card-container">
+            <div class="mobile-product-triple-card-container">
+                <div class="product-triple-card">
+                    <h4>Warranty & Support
+                        <span class="eyeva__productView-option-tooltip" style="display:inline-flex;">
+                        <span class="eyeva__productView-tooltip-trigger" role="button" tabindex="0" aria-label="More information" title="More information">i</span>
+                        <span class="eyeva__productView-tooltip-bubble">You can extend this warranty with our warranty options in the options menu.</span>
+                        </span>                
+                    </h4>
+                    <p><a href="https://www.bobjohnson.com/warranties/" target="_blank">Limited Lifetime Warranty Included.</a></p>
+                </div>
+                <div class="product-triple-card">
+                    <h4>Condition
+                        <span class="eyeva__productView-option-tooltip" style="display:inline-flex;">
+                        <span class="eyeva__productView-tooltip-trigger" role="button" tabindex="0" aria-label="More information" title="More information">i</span>
+                        <span class="eyeva__productView-tooltip-bubble">We have 5 grades on our products: New, Refurbished, Low Hour, Scratch & Dent, and Open Box. </span>
+                        </span>
+                    </h4>
+                    <p id="product-condition">{{product.condition}}</p>
+                    <div id="product-condition-badge"></div>
+                </div>
+                <div class="product-triple-card">
+                    <h4>Sales Tax Free!</h4>
+                    <p>Since we're based in Delaware, we do not charge any sales tax.</p>
+                </div>                
+            </div>
         </div>
 
         <section class="productView-details product-options">

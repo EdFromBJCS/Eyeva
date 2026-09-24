@@ -624,6 +624,34 @@ body:has(.eyeva__productView-modifiersModal-overlay) {
     }
 }
 
+// Keep the tooltip's own look when it's nested inside an <a>/button, instead of blending with the link/button background
+.eyeva__productView-option-tooltip,
+.eyeva__productView-value-tooltip {
+    a & {
+        .eyeva__productView-tooltip-trigger,
+        .eyeva__productView-tooltip-bubble {
+            text-decoration: none;
+        }
+
+        .eyeva__productView-tooltip-trigger {
+            background-color: stencilColor("color-white");
+            color: stencilColor("color-primary");
+        }
+
+        .eyeva__productView-tooltip-bubble {
+            color: stencilColor("color-white");
+        }
+
+        &:hover,
+        &:focus-within {
+            .eyeva__productView-tooltip-trigger {
+                background-color: #222222;
+                color: #fff;
+            }
+        }
+    }
+}
+
 .eyeva__productView-value-tooltip-heading {
     color: $color-textSecondary;
     display: inline-block;
