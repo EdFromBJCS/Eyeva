@@ -268,6 +268,7 @@ export default class ProductDetails extends CornerstoneProductDetails {
         this.bindRenewingDataPlanVisibility();
         this.renderInlineOptionTooltips();
         this.renderSpecTooltips();
+        this.initInlineOptionPriceHints();
         $('body').trigger('update-wishlist-buttons', [this.$scope]);
     }
 
@@ -726,6 +727,13 @@ export default class ProductDetails extends CornerstoneProductDetails {
                 $el.removeAttr('required');
             }
         });
+    }
+
+    updateProductAttributes(data) {
+        super.updateProductAttributes(data);
+        this.$scope.find('label.unavailable, option.unavailable')
+            .find('[data-eyeva-product-option-price-id]')
+            .remove();
     }
 
     updateView(data, ...args) {
@@ -1809,37 +1817,32 @@ export default class ProductDetails extends CornerstoneProductDetails {
                 const optionEntityId = Number(m[1]);
                 const valueEntityId = Number(value);
 
-                if (valueEntityId && !showOptions.find(({ id }) => id === optionEntityId)) {
-                    selectedOptionValueIds.push({ optionEntityId, valueEntityId });
+                if (valueEntityId) {
+                    if (!showOptions.find(({ id }) => id === optionEntityId)) {
+                        selectedOptionValueIds.push({ optionEntityId, valueEntityId });
+                    }
                 }
             }
         });
 
-        const promises = [
-            // fetch already selected options' prices
-            () => this.fetchOptionPrice(selectedOptionValueIds),
-        ];
+        // combos[0] is the baseline (already selected options); the rest are one candidate value each
+        const combos = [selectedOptionValueIds];
+        const combosMeta = [null];
 
         showOptions.forEach(option => {
             const values = option.values || (option.value ? [{ id: option.value }] : []);
+
             values.forEach(value => {
-                // fetch current option value's prices
-                promises.push(() =>
-                    this.fetchOptionPrice([
-                        ...selectedOptionValueIds,
-                        {
-                            optionEntityId: option.id,
-                            valueEntityId: value.id,
-                        },
-                    ]).then(product => ({
-                        optionId: option.id,
-                        valueId: value.id,
-                        ...product,
-                    })));
+                combos.push([
+                    ...selectedOptionValueIds,
+                    { optionEntityId: option.id, valueEntityId: value.id },
+                ]);
+                combosMeta.push({ optionId: option.id, valueId: value.id });
             });
         });
 
-        const [prev, ...selections] = await handlePromisesWithLimit(promises);
+        const products = await this.fetchOptionPricesBatch(combos);
+        const [prev, ...selections] = products.map((product, i) => (i === 0 ? product : { ...combosMeta[i], ...product }));
 
         selections.forEach(selection => {
             if (selection.pricesWithTax) {
@@ -1905,65 +1908,109 @@ export default class ProductDetails extends CornerstoneProductDetails {
      * Fetch product price from specific options
      *
      * @param {Array<{ optionEntityId: number, valueEntityId: number}>} optionValueIds
+     * @param {boolean} isVariant fetch the matching SKU/variant's own price instead of the base product + modifiers
      * @returns {Promise<{ pricesWithTax: { basePrice: { value: number, currencyCode: string }, price: { value: number, currencyCode: string }, salePrice: { value: number, currencyCode: string } }, pricesWithoutTax: { basePrice: { value: number, currencyCode: string }, price: { value: number, currencyCode: string }, salePrice: { value: number, currencyCode: string } } }>
      */
     async fetchOptionPrice(optionValueIds) {
-        const cacheKey = JSON.stringify(optionValueIds);
+        const [product] = await this.fetchOptionPricesBatch([optionValueIds]);
+        return product;
+    }
 
-        if (!this.fetchOptionPriceCache[cacheKey]) {
-            const resp = await $.ajax({
-                url: '/graphql',
-                method: 'POST',
-                contentType: 'application/json',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${this.context.graphQLToken}`,
-                },
-                xhrFields: {
-                    withCredentials: true,
-                },
-                data: JSON.stringify({
-                    query: `
-                        query ($productId: Int!, $optionValueIds: [OptionValueId!], $currencyCode: currencyCode!) {
-                            site {
-                                product(entityId: $productId, optionValueIds: $optionValueIds) {
-                                    pricesWithTax: prices(currencyCode: $currencyCode, includeTax: true) {
-                                        ...PriceFields
-                                    }
-                                    pricesWithoutTax: prices(currencyCode: $currencyCode, includeTax: false) {
-                                        ...PriceFields
-                                    }
-                                }
-                            }
-                        }
-                        fragment MoneyFields on Money {
-                            value
-                            currencyCode
-                        }
-                        fragment PriceFields on Prices {
-                            basePrice {
-                                ...MoneyFields
-                            }
-                            price {
-                                ...MoneyFields
-                            }
-                            salePrice {
-                                ...MoneyFields
-                            }
-                        }
-                    `,
-                    variables: {
-                        currencyCode: this.context.active_currency_code,
-                        productId: this.productId,
-                        optionValueIds,
-                    },
-                }),
-            });
+    /**
+     * Fetch prices for multiple option-value combinations, merging as many as possible into a
+     * single GraphQL request (via aliases) instead of one request per combination, to cut down
+     * on the number of network round-trips (the main cost, not payload size).
+     *
+     * @param {Array<Array<{ optionEntityId: number, valueEntityId: number}>>} combos
+     * @param {Array<boolean>} isVariantFlags per-combo: look up the matching variant/SKU price
+     *   (needed for "variant option" attributes, which define separate SKUs) instead of the
+     *   base product price + modifier adjustment
+     * @returns {Promise<Array<{ pricesWithTax: object, pricesWithoutTax: object }>>} results, same order/length as `combos`
+     */
+    async fetchOptionPricesBatch(combos) {
+        const BATCH_CHUNK_SIZE = 8;
+        const cacheKeys = combos.map(combo => `product:${JSON.stringify(combo)}`);
+        const uncachedIndexes = cacheKeys
+            .map((key, index) => (this.fetchOptionPriceCache[key] ? null : index))
+            .filter(index => index !== null);
 
-            this.fetchOptionPriceCache[cacheKey] = resp.data.site.product;
+        const chunks = [];
+        for (let i = 0; i < uncachedIndexes.length; i += BATCH_CHUNK_SIZE) {
+            chunks.push(uncachedIndexes.slice(i, i + BATCH_CHUNK_SIZE));
         }
 
-        return this.fetchOptionPriceCache[cacheKey];
+        await handlePromisesWithLimit(chunks.map(chunkIndexes => async () => {
+            const variableDefs = chunkIndexes.map(i => `$optionValueIds${i}: [OptionValueId!]`).join(', ');
+            const aliasFields = chunkIndexes.map(i => `
+                f${i}: product(entityId: $productId, optionValueIds: $optionValueIds${i}) {
+                    pricesWithTax: prices(currencyCode: $currencyCode, includeTax: true) {
+                        ...PriceFields
+                    }
+                    pricesWithoutTax: prices(currencyCode: $currencyCode, includeTax: false) {
+                        ...PriceFields
+                    }
+                }
+            `).join('\n');
+
+            const variables = {
+                productId: this.productId,
+                currencyCode: this.context.active_currency_code,
+            };
+            chunkIndexes.forEach(i => {
+                variables[`optionValueIds${i}`] = combos[i];
+            });
+
+            try {
+                const resp = await $.ajax({
+                    url: '/graphql',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${this.context.graphQLToken}`,
+                    },
+                    xhrFields: {
+                        withCredentials: true,
+                    },
+                    data: JSON.stringify({
+                        query: `
+                            query ($productId: Int!, $currencyCode: currencyCode!, ${variableDefs}) {
+                                site {
+                                    ${aliasFields}
+                                }
+                            }
+                            fragment MoneyFields on Money {
+                                value
+                                currencyCode
+                            }
+                            fragment PriceFields on Prices {
+                                basePrice {
+                                    ...MoneyFields
+                                }
+                                price {
+                                    ...MoneyFields
+                                }
+                                salePrice {
+                                    ...MoneyFields
+                                }
+                            }
+                        `,
+                        variables,
+                    }),
+                });
+
+                chunkIndexes.forEach(i => {
+                    const result = resp.data?.site?.[`f${i}`];
+                    this.fetchOptionPriceCache[cacheKeys[i]] = result;
+                });
+            } catch (err) {
+                // don't let one bad chunk (e.g. an unsupported variant pricing query on this
+                // store) take down pricing for every other option on the page
+                this.console.log('ProductDetails - fetchOptionPricesBatch chunk failed: ', err);
+            }
+        }), 4);
+
+        return cacheKeys.map(key => this.fetchOptionPriceCache[key]);
     }
 
     /**
@@ -2361,6 +2408,26 @@ export default class ProductDetails extends CornerstoneProductDetails {
      * @param {{ [optionId: number]: { [valueId: number]: number } }} noneSales option values with non-sale prices
      * @param {boolean} [ignoreUpdateSubtotal=false] ignore update subtotal
      */
+    /**
+     * Auto-calculate and display each option value's price adjustment (e.g. "(+$100.00)")
+     * next to its label on the plain (non-modal) option list, so admins no longer need to
+     * manually type the price difference into the option value name.
+     */
+    initInlineOptionPriceHints() {
+        if (this.enableModifiersModal) return;
+
+        const $form = this.$scope.find('[data-cart-item-add]').first();
+        const $productOptionsEl = $form.find('[data-product-option-change]').first();
+
+        if ($productOptionsEl.length === 0 || !this.productOptions?.length) return;
+
+        const formData = new FormData($form[0]);
+        const showOptionIds = this.productOptions.map(({ id }) => id);
+
+        this.showOptionPrices($productOptionsEl, $(), showOptionIds, formData, {}, true)
+            .catch(err => this.console.log('ProductDetails - initInlineOptionPriceHints failed: ', err));
+    }
+
     async showOptionPrices($modifiersModalOptions, $modifiersModalSubtotal, showOptionIds, formData, noneSales, ignoreUpdateSubtotal = false) {
         const [settings, [prev, ...selections]] = await Promise.all([
             this.fetchSettings(),
@@ -2371,12 +2438,7 @@ export default class ProductDetails extends CornerstoneProductDetails {
         ]);
 
         const showPrice = value => {
-            if (value === 0) {
-                if (this.showPriceFree) {
-                    return this.context.txtPriceFree;
-                } else if (this.showPriceZero) {
-                    return this.formatPrice(value, true);
-                }
+            if (value == null || Math.abs(Number(value)) < 0.005) {
                 return '';
             }
             return this.formatPrice(value, true);
@@ -2426,7 +2488,23 @@ export default class ProductDetails extends CornerstoneProductDetails {
                 const priceText = mustache.render(this.optionPricePlainTemplate, params, null, ['<%', '%>']);
                 const $price = $(priceHtml).attr('data-eyeva-product-option-price-id', `${optionId}-${valueId}`);
                 const $option = $modifiersModalOptions.find(`[data-product-attribute-id="${optionId}"]`);
-                const $value = $option.find(`[data-product-attribute-value="${valueId}"]`);
+                // scope to the label only: some layouts (e.g. image list items) also put
+                // data-product-attribute-value on the surrounding <li>, which would otherwise
+                // match too and duplicate the price
+                const $value = $option.find(`label[data-product-attribute-value="${valueId}"], option[data-product-attribute-value="${valueId}"]`);
+
+                // don't show a price for out-of-stock/unavailable values
+                if ($value.hasClass('unavailable')) {
+                    $value.find(`[data-eyeva-product-option-price-id="${optionId}-${valueId}"]`).remove();
+                    return;
+                }
+
+                const priceSelector = `[data-eyeva-product-option-price-id="${optionId}-${valueId}"]`;
+
+                if (!params.priceWithTax && !params.priceWithoutTax) {
+                    $value.find(priceSelector).remove();
+                    return;
+                }
 
                 if ($value.is('option')) {
                     if (!$value.data('originalText')) {
@@ -2435,7 +2513,7 @@ export default class ProductDetails extends CornerstoneProductDetails {
                     $value.text(`${$value.data('originalText')} ${priceText}`);
                     $value.data('priceHtml', priceHtml);
                 } else {
-                    $value.find(`[data-eyeva-product-option-price-id="${optionId}-${valueId}"]`).remove();
+                    $value.find(priceSelector).remove();
                     const $placeholder = $value.find('[data-eyeva-product-option-price-placeholder]');
                     if ($placeholder.length > 0) {
                         $placeholder.html($price);

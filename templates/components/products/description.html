@@ -13,6 +13,28 @@
 <div class="under-pic-card-container">
     <div class="product-triple-card-container">
         <div class="product-triple-card">
+            {{#and (if product.brand.name '===' 'Durabook') (if product.condition '===' 'New')}}
+            <h4>Warranty & Support
+                <span class="eyeva__productView-option-tooltip" style="display:inline-flex;">
+                    <span class="eyeva__productView-tooltip-trigger" role="button" tabindex="0"
+                        aria-label="More information" title="More information">i</span>
+                    <span class="eyeva__productView-tooltip-bubble">Any Durabook products warranty are provided from Durabook themselves. Follow the link to their warranty page to learn more.</span>
+                </span>
+            </h4>
+            <p><a href="https://www.durabook.com/us/support/warranty/" target="_blank">Durabook's Accidental Damage & Standard Limited Warranty Information</a>
+            </p>
+            {{else}}
+            {{#and (if product.brand.name '===' 'Getac') (if product.condition '===' 'New')}}
+            <h4>Warranty & Support
+                <span class="eyeva__productView-option-tooltip" style="display:inline-flex;">
+                    <span class="eyeva__productView-tooltip-trigger" role="button" tabindex="0"
+                        aria-label="More information" title="More information">i</span>
+                    <span class="eyeva__productView-tooltip-bubble">Any Getac products warranty are provided from Getac themselves. Follow the link to their warranty page to learn more.</span>
+                </span>
+            </h4>
+            <p><a href="https://support.getac.com/Portal/Page/810" target="_blank">Getac Manufacturer Warranty Information</a>
+            </p>
+            {{else}}
             <h4>Warranty & Support
                 <span class="eyeva__productView-option-tooltip" style="display:inline-flex;">
                     <span class="eyeva__productView-tooltip-trigger" role="button" tabindex="0"
@@ -23,6 +45,8 @@
             </h4>
             <p><a href="https://www.bobjohnson.com/warranties/" target="_blank">Limited Lifetime Warranty Included.</a>
             </p>
+            {{/and}}
+            {{/and}}
         </div>
         <div class="product-triple-card">
             <h4>Condition
@@ -33,8 +57,8 @@
                         Low Hour, Scratch & Dent, and Open Box. </span>
                 </span>
             </h4>
-            <p id="product-condition">{{product.condition}}</p>
-            <div id="product-condition-badge"></div>
+            <p class="product-condition">{{product.condition}}</p>
+            <div class="product-condition-badge"></div>
         </div>
         <div class="product-triple-card">
             <h4>Sales Tax Free!</h4>
@@ -186,18 +210,23 @@
     document.addEventListener("DOMContentLoaded", function () {
         var picturesLink = document.querySelector(".picturesActualInventory");
         var conditionValue = document.querySelector('[data-spec-name="Condition"]');
-        var conditionCard = document.getElementById("product-condition");
-        var conditionBadge = document.getElementById("product-condition-badge");
+        var conditionCards = document.querySelectorAll(".product-condition");
+        var conditionBadges = document.querySelectorAll(".product-condition-badge");
 
-        if (conditionValue && conditionCard) {
+        if (conditionValue && conditionCards.length) {
             var conditionText = conditionValue.textContent.trim();
-            conditionCard.textContent = conditionText;
 
-            if (conditionText === "Refurbished (Low Hour)" && conditionBadge) {
+            conditionCards.forEach(function (conditionCard) {
+                conditionCard.textContent = conditionText;
+            });
+
+            if (conditionText === "Refurbished (Low Hour)" && conditionBadges.length) {
                 var customBadge = document.querySelector("._eyeva-badges ._badge._custom");
 
                 if (customBadge) {
-                    conditionBadge.appendChild(customBadge.cloneNode(true));
+                    conditionBadges.forEach(function (conditionBadge) {
+                        conditionBadge.appendChild(customBadge.cloneNode(true));
+                    });
                 }
             }
         }

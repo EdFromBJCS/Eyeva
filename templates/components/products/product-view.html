@@ -211,6 +211,24 @@
         <div class="under-pic-card-container">
             <div class="mobile-product-triple-card-container">
                 <div class="product-triple-card">
+                    {{#and (if product.brand.name '===' 'Durabook') (if product.condition '===' 'New')}}
+                    <h4>Warranty & Support
+                        <span class="eyeva__productView-option-tooltip" style="display:inline-flex;">
+                        <span class="eyeva__productView-tooltip-trigger" role="button" tabindex="0" aria-label="More information" title="More information">i</span>
+                        <span class="eyeva__productView-tooltip-bubble">TODO: Durabook New warranty tooltip filler text.</span>
+                        </span>                
+                    </h4>
+                    <p><a href="https://www.bobjohnson.com/warranties/" target="_blank">TODO: Durabook New warranty body filler text.</a></p>
+                    {{else}}
+                    {{#and (if product.brand.name '===' 'Getac') (if product.condition '===' 'New')}}
+                    <h4>Warranty & Support
+                        <span class="eyeva__productView-option-tooltip" style="display:inline-flex;">
+                        <span class="eyeva__productView-tooltip-trigger" role="button" tabindex="0" aria-label="More information" title="More information">i</span>
+                        <span class="eyeva__productView-tooltip-bubble">TODO: Getac New warranty tooltip filler text.</span>
+                        </span>                
+                    </h4>
+                    <p><a href="https://www.bobjohnson.com/warranties/" target="_blank">TODO: Getac New warranty body filler text.</a></p>
+                    {{else}}
                     <h4>Warranty & Support
                         <span class="eyeva__productView-option-tooltip" style="display:inline-flex;">
                         <span class="eyeva__productView-tooltip-trigger" role="button" tabindex="0" aria-label="More information" title="More information">i</span>
@@ -218,6 +236,8 @@
                         </span>                
                     </h4>
                     <p><a href="https://www.bobjohnson.com/warranties/" target="_blank">Limited Lifetime Warranty Included.</a></p>
+                    {{/and}}
+                    {{/and}}
                 </div>
                 <div class="product-triple-card">
                     <h4>Condition
@@ -226,8 +246,8 @@
                         <span class="eyeva__productView-tooltip-bubble">We have 5 grades on our products: New, Refurbished, Low Hour, Scratch & Dent, and Open Box. </span>
                         </span>
                     </h4>
-                    <p id="product-condition">{{product.condition}}</p>
-                    <div id="product-condition-badge"></div>
+                    <p class="product-condition">{{product.condition}}</p>
+                    <div class="product-condition-badge"></div>
                 </div>
                 <div class="product-triple-card">
                     <h4>Sales Tax Free!</h4>

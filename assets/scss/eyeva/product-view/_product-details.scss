@@ -490,6 +490,41 @@
     margin-bottom: spacing("half");
     text-align: unset;
 
+    // Auto-calculated option price hints (see `initInlineOptionPriceHints` in product-details.js).
+    // Only applies outside the modifiers modal, which styles its own copy separately.
+    &:not(._enableModifiersModal) {
+        .eyeva__productView-option-price-group {
+            color: $color-primary;
+            display: inline-block;
+            float: none;
+            font-size: fontSize("smaller");
+            font-weight: $eyeva-body-font-bold;
+            margin-left: spacing("third");
+            vertical-align: middle;
+        }
+
+        .eyeva__productView-option-price {
+            display: inline;
+        }
+
+        .eyeva__productView-option-price-now {
+            font-weight: inherit;
+        }
+
+        .eyeva__productView-option-price-old {
+            margin-right: spacing("quarter");
+        }
+
+        // Cornerstone justifies wrapped radio labels (`.form-radio + .form-label { text-align: justify; }`),
+        // which stretches word/letter spacing on wrapped lines now that the price hint adds extra content
+        .form-label {
+            text-align: left !important;
+            text-align-last: auto !important;
+            word-spacing: normal !important;
+            letter-spacing: normal !important;
+        }
+    }
+
     input[type="file"] {
         font-size: fontSize("smaller");
 
