@@ -69,7 +69,43 @@
                 {{#if settings.show_newsletter_box}}
                 <section class="eyeva__newsletter">
                     <div class="container">
-                        {{> components/common/subscription-form}}
+                        <form accept-charset="UTF-8"
+                            action="https://gc200.infusionsoft.com/app/form/process/49ae20af288b628f025255c2f9286c93"
+                            class="infusion-form form eyeva__newsletter-form"
+                            id="inf_form_49ae20af288b628f025255c2f9286c93" method="POST">
+                            <h3 class="eyeva__newsletter-heading">Subscribe to our newsletter</h3>
+                            <input name="inf_form_xid" type="hidden" value="49ae20af288b628f025255c2f9286c93" />
+                            <input name="inf_form_name" type="hidden" value="Footer Newsletter Signup" />
+                            <input name="infusionsoft_version" type="hidden" value="1.70.0.1013798" />
+                            <div class="infusion-field">
+                                <input id="inf_field_FirstName " class="form-input" name="inf_field_FirstName"
+                                    placeholder="Your Name *" type="text" />
+                            </div>
+                            <div class="infusion-field">
+                                <input id="inf_field_Email" class="form-input" name="inf_field_Email"
+                                    placeholder="Your Email *" type="text" />
+                            </div>
+                            <div>
+                                <div>&nbsp;</div>
+                            </div>
+                            <div class="infusion-submit">
+                                <button class="infusion-recaptcha button button--primary"
+                                    id="recaptcha_49ae20af288b628f025255c2f9286c93" type="submit">Sign Up</button>
+                            </div>
+                            <input type="text" name="inf-sbt" style="display:none !important;">
+                        </form>
+                        <script type="text/javascript"
+                            src="https://gc200.infusionsoft.app/app/webTracking/getTrackingCode"></script>
+                        <script type="text/javascript"
+                            src="https://gc200.infusionsoft.com/resources/external/recaptcha/production/recaptcha.js?b=1.70.0.1013798-hf-202609211108"></script>
+                        <script type="text/javascript"
+                            src="https://gc200.infusionsoft.com/resources/external/recaptcha/production/enterpriseRecaptcha.js?b=1.70.0.1013798-hf-202609211108"></script>
+                        <script type="text/javascript"
+                            src="https://gc200.infusionsoft.com/app/timezone/timezoneInputJs?xid=49ae20af288b628f025255c2f9286c93"></script>
+                        <script type="text/javascript"
+                            src="https://gc200.infusionsoft.com/js/jquery/jquery-3.3.1.js"></script>
+                        <script type="text/javascript"
+                            src="https://gc200.infusionsoft.app/app/webform/overwriteRefererJs"></script>
                     </div>
                 </section>
                 {{/if}}
@@ -101,7 +137,8 @@
                             <i class="icon" aria-hidden="true">
                                 <img src="{{cdn 'assets/icons/messages.svg'}}" alt="" loading="lazy">
                             </i>
-                                Technical Support</a></p>
+                            Technical Support</a>
+                    </p>
                     {{/if}}
 
                     {{#if theme_settings.social_icon_placement_bottom '!==' 'bottom_none'}}
