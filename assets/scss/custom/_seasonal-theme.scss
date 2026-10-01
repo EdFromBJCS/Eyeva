@@ -681,6 +681,121 @@ body.season-preview-brown .papathemes-eyeva-hero-carousel-59be897b-6f5f-40e4-b66
     --papathemes-eyeva-hero-carousel-dot-color-active: var(--preview-brown-2);
 }
 
+/* Seasonal accents for product prices, contact cards, repair icons, and steps. */
+body[class*='season-']:not(.season-default) .eyeva__productView-option-price,
+body[class*='season-']:not(.season-default) .eyeva__productView-option-price-now,
+body[class*='season-']:not(.season-default) .eyeva__productView-option-price .price,
+body[class*='season-']:not(.season-default) .price-section--salePercent .price--percent {
+    color: var(--preview-brown-1) !important;
+}
+
+body[class*='season-']:not(.season-default) .eyeva__productView-tooltip-trigger,
+body[class*='season-']:not(.season-default) .shipping-estimate-show,
+body[class*='season-']:not(.season-default) .shipping-estimate-show__btn-name,
+body[class*='season-']:not(.season-default) .coupon-code-add,
+body[class*='season-']:not(.season-default) .cart-drawer-header,
+body[class*='season-']:not(.season-default) .cart-drawer-header .cart-page-heading,
+body[class*='season-']:not(.season-default) .cart-drawer-header .icon,
+body[class*='season-']:not(.season-default) .cart-drawer-header .icon svg,
+body[class*='season-']:not(.season-default) [data-item-edit],
+body[class*='season-']:not(.season-default) .cart-header-link.body-cta {
+    color: var(--preview-brown-1) !important;
+}
+
+body[class*='season-']:not(.season-default) .eyeva__productView-tooltip-trigger:hover,
+body[class*='season-']:not(.season-default) .eyeva__productView-tooltip-trigger:focus,
+body[class*='season-']:not(.season-default) label[data-product-attribute-value]:hover,
+body[class*='season-']:not(.season-default) label[data-product-attribute-value]:focus,
+body[class*='season-']:not(.season-default) label[data-product-attribute-value]:hover ._label,
+body[class*='season-']:not(.season-default) label[data-product-attribute-value]:focus ._label,
+body[class*='season-']:not(.season-default) label[data-product-attribute-value]:hover .eyeva__productView-option-price,
+body[class*='season-']:not(.season-default) label[data-product-attribute-value]:focus .eyeva__productView-option-price,
+body[class*='season-']:not(.season-default) label[data-product-attribute-value]:hover .eyeva__productView-option-price-now,
+body[class*='season-']:not(.season-default) label[data-product-attribute-value]:focus .eyeva__productView-option-price-now,
+body[class*='season-']:not(.season-default) .shipping-estimate-show:hover,
+body[class*='season-']:not(.season-default) .shipping-estimate-show:focus,
+body[class*='season-']:not(.season-default) .shipping-estimate-show:hover .shipping-estimate-show__btn-name,
+body[class*='season-']:not(.season-default) .shipping-estimate-show:focus .shipping-estimate-show__btn-name,
+body[class*='season-']:not(.season-default) .coupon-code-add:hover,
+body[class*='season-']:not(.season-default) .coupon-code-add:focus,
+body[class*='season-']:not(.season-default) .cart-drawer-header:hover,
+body[class*='season-']:not(.season-default) .cart-drawer-header:focus,
+body[class*='season-']:not(.season-default) .cart-drawer-header:hover .cart-page-heading,
+body[class*='season-']:not(.season-default) .cart-drawer-header:focus .cart-page-heading,
+body[class*='season-']:not(.season-default) .cart-drawer-header:hover .icon,
+body[class*='season-']:not(.season-default) .cart-drawer-header:focus .icon,
+body[class*='season-']:not(.season-default) .cart-drawer-header:hover .icon svg,
+body[class*='season-']:not(.season-default) .cart-drawer-header:focus .icon svg,
+body[class*='season-']:not(.season-default) [data-item-edit]:hover,
+body[class*='season-']:not(.season-default) [data-item-edit]:focus,
+body[class*='season-']:not(.season-default) .cart-header-link.body-cta:hover,
+body[class*='season-']:not(.season-default) .cart-header-link.body-cta:focus {
+    color: var(--preview-brown-2) !important;
+}
+
+body[class*='season-']:not(.season-default) .cart-drawer-header .icon svg {
+    fill: currentColor !important;
+}
+
+body[class*='season-']:not(.season-default) .cart-remove.icon:hover,
+body[class*='season-']:not(.season-default) .cart-remove.icon:focus,
+body[class*='season-']:not(.season-default) .cart-remove.icon:hover svg,
+body[class*='season-']:not(.season-default) .cart-remove.icon:focus svg {
+    color: #ffffff !important;
+    fill: #ffffff !important;
+}
+
+body[class*='season-']:not(.season-default) .shipping-estimate-show:hover,
+body[class*='season-']:not(.season-default) .shipping-estimate-show:focus,
+body[class*='season-']:not(.season-default) .shipping-estimate-show:active,
+body[class*='season-']:not(.season-default) .coupon-code-add:hover,
+body[class*='season-']:not(.season-default) .coupon-code-add:focus,
+body[class*='season-']:not(.season-default) .coupon-code-add:active {
+    background: transparent !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+}
+
+body[class*='season-']:not(.season-default) .shipping-estimate-value,
+body[class*='season-']:not(.season-default) .shipping-estimate-value span {
+    color: var(--preview-brown-1) !important;
+}
+
+body[class*='season-']:not(.season-default) .shipping-estimate-value:hover,
+body[class*='season-']:not(.season-default) .shipping-estimate-value:focus,
+body[class*='season-']:not(.season-default) .shipping-estimate-value:hover span,
+body[class*='season-']:not(.season-default) .shipping-estimate-value:focus span {
+    color: var(--preview-brown-2) !important;
+}
+
+body[class*='season-']:not(.season-default) .optimizedCheckout-header {
+    background-color: var(--preview-brown-1) !important;
+    border-color: var(--preview-brown-2) !important;
+}
+
+body[class*='season-']:not(.season-default) .step-circle {
+    background-color: var(--preview-brown-1) !important;
+    border-color: var(--preview-brown-2) !important;
+}
+body[class*='season-']:not(.season-default) .step-circle {
+    color: #ffffff !important;
+}
+
+body[class*='season-']:not(.season-default) .sales-contact-card-pic {
+    border-color: var(--preview-brown-2) !important;
+}
+
+body[class*='season-']:not(.season-default) .repairicon img {
+    filter: var(--season-icon-filter) !important;
+}
+
+body[class*='season-']:not(.season-default) .step-circle:hover,
+body[class*='season-']:not(.season-default) .step-circle:focus {
+    background-color: var(--preview-brown-3) !important;
+    border-color: var(--preview-brown-4) !important;
+}
+
 /* Tint all PNG icons in desktop repair container for every active season. */
 body[class*='season-']:not(.season-default) .repair-container img.nav-icon[src$='.png'],
 body[class*='season-']:not(.season-default) .repair-container img.nav-icon[src$='.PNG'] {

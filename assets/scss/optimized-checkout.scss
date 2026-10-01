@@ -437,3 +437,51 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px transparentize(stencilColor("
         font-size: 1rem;
     }
 }
+
+body[class*='season-']:not(.season-default) .optimizedCheckout-header {
+    background-color: var(--preview-brown-1) !important;
+    border-color: var(--preview-brown-2) !important;
+}
+
+body[class*='season-']:not(.season-default) .redeemable-label,
+body[class*='season-']:not(.season-default) .cart-header-link.body-cta,
+body[class*='season-']:not(.season-default) .checkout-customer-login,
+body[class*='season-']:not(.season-default) .forgot-password-link,
+body[class*='season-']:not(.season-default) .change-email,
+body[class*='season-']:not(.season-default) .shipping-estimate-value,
+body[class*='season-']:not(.season-default) .shipping-estimate-value span {
+    color: var(--preview-brown-1) !important;
+}
+
+body[class*='season-']:not(.season-default) .redeemable-label:hover,
+body[class*='season-']:not(.season-default) .redeemable-label:focus,
+body[class*='season-']:not(.season-default) .cart-header-link.body-cta:hover,
+body[class*='season-']:not(.season-default) .cart-header-link.body-cta:focus,
+body[class*='season-']:not(.season-default) .checkout-customer-login:hover,
+body[class*='season-']:not(.season-default) .checkout-customer-login:focus,
+body[class*='season-']:not(.season-default) .forgot-password-link:hover,
+body[class*='season-']:not(.season-default) .forgot-password-link:focus,
+body[class*='season-']:not(.season-default) .change-email:hover,
+body[class*='season-']:not(.season-default) .change-email:focus,
+body[class*='season-']:not(.season-default) .shipping-estimate-value:hover,
+body[class*='season-']:not(.season-default) .shipping-estimate-value:focus,
+body[class*='season-']:not(.season-default) .shipping-estimate-value:hover span,
+body[class*='season-']:not(.season-default) .shipping-estimate-value:focus span {
+    color: var(--preview-brown-2) !important;
+}
+
+body[class*='season-']:not(.season-default) .optimizedCheckout-form-checklist-checkbox:checked ~ .optimizedCheckout-form-label::before,
+body[class*='season-']:not(.season-default) .optimizedCheckout-form-checkbox:checked + .optimizedCheckout-form-label::before {
+    background-color: #ffffff !important;
+    border-color: var(--preview-brown-1) !important;
+}
+
+body[class*='season-']:not(.season-default) .optimizedCheckout-form-checklist-checkbox:checked ~ .optimizedCheckout-form-label::after,
+body[class*='season-']:not(.season-default) .optimizedCheckout-form-checkbox:checked + .optimizedCheckout-form-label::after {
+    background-color: var(--preview-brown-1) !important;
+}
+
+.product-option .body-bold {
+    font-weight: 400 !important;
+}
+

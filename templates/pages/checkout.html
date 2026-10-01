@@ -13,6 +13,56 @@
 {{/partial}}
 
 {{#partial "page"}}
+<script nonce="{{nonce}}">
+    (function initCheckoutSeason() {
+        var palettes = {
+            valentines: ['#e4559c', '#cf3f89'],
+            stpatricks: ['#2f7f3e', '#286b34'],
+            'easter-weekend': ['#7c4dff', '#673de6'],
+            'mothers-day-weekend': ['#de6aa8', '#c95695'],
+            'fathers-day-weekend': ['#2f5a88', '#274a71'],
+            'independence-day-weekend': ['#b53b42', '#1f4c9a'],
+            'memorial-day-weekend': ['#b53b42', '#1f4c9a'],
+            'labor-day-weekend': ['#b53b42', '#1f4c9a'],
+            halloween: ['#bf651f', '#9f5419'],
+            'breast-cancer-awareness-day': ['#cf4d95', '#b14180'],
+            'black-friday-sale': ['#2b2b2b', '#1d1d1d'],
+            'cyber-monday-sale': ['#7c4dff', '#673de6'],
+            christmas: ['#2f7a46', '#b64242'],
+        };
+        var params = new URLSearchParams(window.location.search);
+        var season = params.get('season');
+
+        if (season) {
+            season = season.toLowerCase();
+            try { window.localStorage.setItem('eyevaSeasonOverride', season); } catch (error) { }
+        } else {
+            try { season = window.localStorage.getItem('eyevaSeasonOverride'); } catch (error) { season = null; }
+        }
+
+        if (!season) {
+            var now = new Date();
+            var month = now.getMonth() + 1;
+            var day = now.getDate();
+            if (month === 2 && day === 14) season = 'valentines';
+            else if (month === 3 && day === 17) season = 'stpatricks';
+            else if (month === 10 && day === 1) season = 'breast-cancer-awareness-day';
+            else if (month === 10 && day === 31) season = 'halloween';
+            else if (month === 12 && day >= 22 && day <= 26) season = 'christmas';
+            else season = 'default';
+        }
+
+        if (!palettes[season]) season = 'default';
+        document.body.classList.add('season-' + season);
+        document.body.setAttribute('data-season', season);
+
+        if (palettes[season]) {
+            document.body.classList.add('season-preview-brown');
+            document.body.style.setProperty('--preview-brown-1', palettes[season][0]);
+            document.body.style.setProperty('--preview-brown-2', palettes[season][1]);
+        }
+    }());
+</script>
 <header class="checkoutHeader optimizedCheckout-header">
     <div class="checkoutHeader-content">
         <h1 class="is-srOnly">{{lang 'checkout.title'}}</h1>

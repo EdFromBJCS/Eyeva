@@ -249,7 +249,9 @@ function applySeasonalLogo(season) {
 }
 
 function applyRepairIconTint() {
-    const icons = document.querySelectorAll(".repair-container img.nav-icon[src$='.png' i]");
+    const icons = document.querySelectorAll(
+        ".repair-container img.nav-icon[src$='.png' i], .repairicon img[src$='.svg' i], .checkoutHeader-logo[src$='.png' i]",
+    );
 
     if (!icons.length) {
         return;
@@ -275,6 +277,31 @@ function applyRepairIconTint() {
 
         if (icon.dataset.tintedColor === tintColor) {
             icon.style.setProperty('filter', 'none', 'important');
+            return;
+        }
+
+        if (/\.svg(?:[?#].*)?$/i.test(icon.dataset.originalSrc)) {
+            fetch(icon.dataset.originalSrc)
+                .then(response => response.ok ? response.text() : '')
+                .then(source => {
+                    if (!source) {
+                        return;
+                    }
+
+                    const tintedSource = source.replace(
+                        /(\b(?:fill|stroke)\s*=\s*["'])(?!none|transparent)([^"']+)(["'])/gi,
+                        `$1${tintColor}$3`,
+                    );
+
+                    icon.setAttribute(
+                        'src',
+                        `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(tintedSource)}`,
+                    );
+                    icon.dataset.tintedColor = tintColor;
+                    icon.style.setProperty('filter', 'none', 'important');
+                })
+                .catch(() => {});
+
             return;
         }
 
