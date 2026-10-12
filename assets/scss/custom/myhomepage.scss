@@ -534,12 +534,39 @@ ul#custom-control2 {
         }
 
         @media (max-width: (screenSize("small") - 1px)) {
-        .papathemes-eyeva-hero-carousel-title,
-            .papathemes-eyeva-hero-carousel-description {
-                display: none;
-                color: #ffffff;
+            > div[role="link"] {
+                display: flex;
+                flex-direction: column;
             }
-}
+
+            .papathemes-eyeva-hero-carousel-content._align-center {
+                position: relative;
+                top: auto;
+                right: auto;
+                bottom: auto;
+                left: auto;
+                width: 100%;
+                padding: spacing("single");
+                transform: none;
+                background-color: #ffffff;
+            }
+
+            .papathemes-eyeva-hero-carousel-title {
+                display: block;
+                color: #222222;
+            }
+
+            .papathemes-eyeva-hero-carousel-description {
+                display: block;
+                color: #222222;
+                background-color: transparent;
+                font-size: 0.8rem;
+                line-height: 1.35;
+                margin: 0 0 0.5rem;
+                max-width: none;
+                padding: 0;
+            }
+        }
 
         @media (max-width: (screenSize("medium") - 1px)) {
 
@@ -547,13 +574,35 @@ ul#custom-control2 {
             .papathemes-eyeva-hero-carousel-description {
                 color: #ffffff;
             }
+
+            @media (max-width: (screenSize("small") - 1px)) {
+                .papathemes-eyeva-hero-carousel-title,
+                .papathemes-eyeva-hero-carousel-description {
+                    color: #222222;
+                }
+            }
         }
 
         @include breakpoint("medium") {
+            .papathemes-eyeva-hero-carousel-content._align-center {
+                bottom: 3%;
+            }
 
             .papathemes-eyeva-hero-carousel-title,
             .papathemes-eyeva-hero-carousel-description {
                 color: #ffffff;
+                background-color: transparent;
+                mix-blend-mode: normal;
+
+                &.light-text,
+                & .light-text {
+                    color: #ffffff;
+                }
+
+                &.dark-text,
+                & .dark-text {
+                    color: #222222;
+                }
             }
         }
     }
