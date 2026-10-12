@@ -14,6 +14,15 @@
         transition: border-color .18s;
     }
 
+    .RS_form_label-row {
+        align-items: center;
+        display: flex;
+    }
+
+    .RS_form_label-row .form-label {
+        margin-bottom: 0;
+    }
+
     .repair-confirmation {
         margin: 1rem 0 1.25rem;
         padding: 1rem;
@@ -595,11 +604,22 @@
                         </div>
                     </div>
                     <div class="infusion-field form-field">
-                        <label class="form-label" for="inf_custom_ContactUsComments">Tech Support Question *</label>
+                        <div class="RS_form_label-row">
+                            <label class="form-label" for="inf_custom_ContactUsComments">Tech Support Question *
+                            </label>
+                            <span class="eyeva__productView-option-tooltip" style="display:inline-flex;">
+                                <span class="eyeva__productView-tooltip-trigger" role="button" tabindex="0" aria-label="More information" title="More information">i</span>
+                                <span class="eyeva__productView-tooltip-bubble">Briefly describe your issue, including any error messages and what you’ve tried so far. Please keep your message concise—there’s a 500-character limit. The more clearly you explain, the faster we can assist!</span>
+                            </span>
+                        </div>
                         <textarea class="RS_form_textarea" cols="24" id="inf_custom_ContactUsComments"
                             name="inf_custom_ContactUsComments" placeholder="Tech Support Question *"
-                            rows="5"></textarea>
+                            rows="5" maxlength="500"></textarea>
+                        <div id="char-counter" style="font-size: 0.85em; color: #666; text-align: right; margin-top: 4px;">
+                            <span id="current-count">0</span> / 500 characters
+                        </div>
                     </div>
+
                     <div class="infusion-field form-field">
                         <span class="infusion-checkbox">
                             <input class="form-checkbox"
@@ -1939,6 +1959,18 @@
 </div>
 
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const textarea = document.getElementById("inf_custom_ContactUsComments");
+    const currentCount = document.getElementById("current-count");
+
+    textarea.addEventListener("input", function () {
+        // Updates the counter text with the current length of the textarea value
+        currentCount.textContent = textarea.value.length;
+    });
+    });
+</script>
 
 {{/partial}}
 
