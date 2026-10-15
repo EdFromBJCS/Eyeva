@@ -207,6 +207,165 @@
                     return { monday: monday, sunday: sunday };
                 }
 
+                function getLastWeekdayOfMonth(year, monthZeroBased, weekday) {
+                    var last = new Date(year, monthZeroBased + 1, 0);
+                    while (last.getDay() !== weekday) {
+                        last.setDate(last.getDate() - 1);
+                    }
+                    return last;
+                }
+
+                function getFridayMondayBoundsAround(anchorDate) {
+                    var anchor = startOfDay(anchorDate);
+                    var day = anchor.getDay();
+                    var friday = new Date(anchor);
+                    var monday = new Date(anchor);
+
+                    friday.setDate(anchor.getDate() - ((day - 5 + 7) % 7));
+                    monday.setDate(anchor.getDate() + ((1 - day + 7) % 7));
+
+                    return { friday: friday, monday: monday };
+                }
+
+                function getSundaySaturdayWeekAround(anchorDate) {
+                    var anchor = startOfDay(anchorDate);
+                    var sunday = new Date(anchor);
+                    var saturday = new Date(anchor);
+
+                    sunday.setDate(anchor.getDate() - anchor.getDay());
+                    saturday.setDate(sunday.getDate() + 6);
+
+                    return { sunday: sunday, saturday: saturday };
+                }
+
+                // Company anniversary (gold theme). Set the month (1-12) and day; leave both 0 to disable.
+                var COMPANY_ANNIVERSARY = { month: 9, day: 17 };
+
+                // Keep in sync with resolveSeasonFromDate in assets/js/theme/global/seasonal-theme.js.
+                function resolveSeasonFromDate(now) {
+                    var month = now.getMonth() + 1;
+                    var day = now.getDate();
+                    var year = now.getFullYear();
+
+                    if ((month === 12 && day === 31) || (month === 1 && day === 1)) {
+                        return 'new-years';
+                    }
+
+                    if (COMPANY_ANNIVERSARY.month === month && COMPANY_ANNIVERSARY.day === day) {
+                        return 'anniversary';
+                    }
+
+                    if (month === 2 && day === 14) {
+                        return 'valentines';
+                    }
+
+                    if (month === 3 && day === 17) {
+                        return 'stpatricks';
+                    }
+
+                    var easterSunday = getEasterSunday(year);
+                    var goodFriday = new Date(easterSunday);
+                    goodFriday.setDate(easterSunday.getDate() - 2);
+                    if (isBetweenInclusive(now, goodFriday, easterSunday)) {
+                        return 'easter-weekend';
+                    }
+
+                    if (month === 4 && day === 2) {
+                        return 'autism-awareness-day';
+                    }
+
+                    if (month === 4 && day === 22) {
+                        return 'earth-day';
+                    }
+
+                    var mothersDay = getNthWeekdayOfMonth(year, 4, 0, 2);
+                    var mothersWeekend = getWeekendBoundsAround(mothersDay);
+                    if (isBetweenInclusive(now, mothersWeekend.saturday, mothersWeekend.sunday)) {
+                        return 'mothers-day-weekend';
+                    }
+
+                    var memorialDay = getLastWeekdayOfMonth(year, 4, 1);
+                    var memorialWeekend = getFridayMondayBoundsAround(memorialDay);
+                    if (isBetweenInclusive(now, memorialWeekend.friday, memorialWeekend.monday)) {
+                        return 'memorial-day-weekend';
+                    }
+
+                    if (month === 5 && day === 4) {
+                        return 'firefighters-day';
+                    }
+
+                    var armedForcesDay = getNthWeekdayOfMonth(year, 4, 6, 3);
+                    if (isBetweenInclusive(now, armedForcesDay, armedForcesDay)) {
+                        return 'armed-forces-day';
+                    }
+
+                    var policeWeek = getSundaySaturdayWeekAround(new Date(year, 4, 15));
+                    if (isBetweenInclusive(now, policeWeek.sunday, policeWeek.saturday)) {
+                        return 'police-week';
+                    }
+
+                    var emsWeekStart = getNthWeekdayOfMonth(year, 4, 0, 3);
+                    var emsWeekEnd = new Date(emsWeekStart);
+                    emsWeekEnd.setDate(emsWeekStart.getDate() + 6);
+                    if (isBetweenInclusive(now, emsWeekStart, emsWeekEnd)) {
+                        return 'ems-week';
+                    }
+
+                    var fathersDay = getNthWeekdayOfMonth(year, 5, 0, 3);
+                    var fathersWeekend = getWeekendBoundsAround(fathersDay);
+                    if (isBetweenInclusive(now, fathersWeekend.saturday, fathersWeekend.sunday)) {
+                        return 'fathers-day-weekend';
+                    }
+
+                    var independenceDay = new Date(year, 6, 4);
+                    var independenceWeekend = getFridayMondayBoundsAround(independenceDay);
+                    if (isBetweenInclusive(now, independenceWeekend.friday, independenceWeekend.monday)) {
+                        return 'independence-day-weekend';
+                    }
+
+                    var laborDay = getNthWeekdayOfMonth(year, 8, 1, 1);
+                    var laborWeekend = getFridayMondayBoundsAround(laborDay);
+                    if (isBetweenInclusive(now, laborWeekend.friday, laborWeekend.monday)) {
+                        return 'labor-day-weekend';
+                    }
+
+                    if ((month === 10 && day >= 30) || (month === 11 && day <= 2)) {
+                        return 'halloween';
+                    }
+
+                    if (month === 10 && day === 1) {
+                        return 'breast-cancer-awareness-day';
+                    }
+
+                    if (month === 11 && day === 11) {
+                        return 'veterans-day';
+                    }
+
+                    var thanksgiving = getNthWeekdayOfMonth(year, 10, 4, 4);
+                    if (isBetweenInclusive(now, thanksgiving, thanksgiving)) {
+                        return 'thanksgiving';
+                    }
+
+                    var blackFridayWeek = getWeekBoundsFromDate(getBlackFriday(year));
+                    if (isBetweenInclusive(now, blackFridayWeek.monday, blackFridayWeek.sunday)) {
+                        return 'black-friday-sale';
+                    }
+
+                    var cyberStart = new Date(blackFridayWeek.monday);
+                    var cyberEnd = new Date(blackFridayWeek.sunday);
+                    cyberStart.setDate(cyberStart.getDate() + 7);
+                    cyberEnd.setDate(cyberEnd.getDate() + 7);
+                    if (isBetweenInclusive(now, cyberStart, cyberEnd)) {
+                        return 'cyber-monday-sale';
+                    }
+
+                    if (month === 12 && day >= 22 && day <= 26) {
+                        return 'christmas';
+                    }
+
+                    return 'default';
+                }
+
                 var params = new URLSearchParams(window.location.search);
                 var override = params.get('season');
                 var season = 'default';
@@ -232,66 +391,7 @@
                     if (storedSeason) {
                         season = String(storedSeason).toLowerCase();
                     } else {
-                        var now = new Date();
-                        var month = now.getMonth() + 1;
-                        var day = now.getDate();
-                        var year = now.getFullYear();
-
-                        // Holiday season detection.
-                        if (month === 2 && day === 14) {
-                            season = 'valentines';
-                        } else if (month === 3 && day === 17) {
-                            season = 'stpatricks';
-                        } else {
-                            var easterSunday = getEasterSunday(year);
-                            var goodFriday = new Date(easterSunday);
-                            goodFriday.setDate(easterSunday.getDate() - 2);
-
-                            if (isBetweenInclusive(now, goodFriday, easterSunday)) {
-                                season = 'easter-weekend';
-                            } else {
-                                var mothersDay = getNthWeekdayOfMonth(year, 4, 0, 2);
-                                var mothersWeekend = getWeekendBoundsAround(mothersDay);
-
-                                if (isBetweenInclusive(now, mothersWeekend.saturday, mothersWeekend.sunday)) {
-                                    season = 'mothers-day-weekend';
-                                } else {
-                                    var fathersDay = getNthWeekdayOfMonth(year, 5, 0, 3);
-                                    var fathersWeekend = getWeekendBoundsAround(fathersDay);
-
-                                    if (isBetweenInclusive(now, fathersWeekend.saturday, fathersWeekend.sunday)) {
-                                        season = 'fathers-day-weekend';
-                                    } else {
-                                        var independenceDay = new Date(year, 6, 4);
-                                        var independenceWeekend = getWeekendBoundsAround(independenceDay);
-
-                                        if (isBetweenInclusive(now, independenceWeekend.saturday, independenceWeekend.sunday)) {
-                                            season = 'independence-day-weekend';
-                                        } else if (month === 10 && day === 31) {
-                                            season = 'halloween';
-                                        } else if (month === 10 && day === 1) {
-                                            season = 'breast-cancer-awareness-day';
-                                        } else {
-                                            var blackFriday = getBlackFriday(year);
-                                            var blackFridayWeek = getWeekBoundsFromDate(blackFriday);
-                                            var cyberMondayWeekStart = new Date(blackFridayWeek.monday);
-                                            var cyberMondayWeekEnd = new Date(blackFridayWeek.sunday);
-
-                                            cyberMondayWeekStart.setDate(cyberMondayWeekStart.getDate() + 7);
-                                            cyberMondayWeekEnd.setDate(cyberMondayWeekEnd.getDate() + 7);
-
-                                            if (isBetweenInclusive(now, blackFridayWeek.monday, blackFridayWeek.sunday)) {
-                                                season = 'black-friday-sale';
-                                            } else if (isBetweenInclusive(now, cyberMondayWeekStart, cyberMondayWeekEnd)) {
-                                                season = 'cyber-monday-sale';
-                                            } else if (month === 12 && day >= 22 && day <= 26) {
-                                                season = 'christmas';
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        season = resolveSeasonFromDate(new Date());
                     }
                 }
 
@@ -302,12 +402,24 @@
                     'easter-weekend': true,
                     'mothers-day-weekend': true,
                     'fathers-day-weekend': true,
+                    'memorial-day-weekend': true,
                     'independence-day-weekend': true,
+                    'labor-day-weekend': true,
                     'halloween': true,
                     'breast-cancer-awareness-day': true,
                     'black-friday-sale': true,
                     'cyber-monday-sale': true,
                     'christmas': true,
+                    'veterans-day': true,
+                    'thanksgiving': true,
+                    'new-years': true,
+                    'earth-day': true,
+                    'autism-awareness-day': true,
+                    'firefighters-day': true,
+                    'armed-forces-day': true,
+                    'police-week': true,
+                    'ems-week': true,
+                    'anniversary': true,
                 };
 
                 if (!valid[season]) {

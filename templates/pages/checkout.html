@@ -29,7 +29,19 @@
             'black-friday-sale': ['#2b2b2b', '#1d1d1d'],
             'cyber-monday-sale': ['#7c4dff', '#673de6'],
             christmas: ['#2f7a46', '#b64242'],
+            'veterans-day': ['#b53b42', '#1f4c9a'],
+            'armed-forces-day': ['#b53b42', '#1f4c9a'],
+            thanksgiving: ['#a8531c', '#8a4317'],
+            'new-years': ['#1f2a44', '#b8943a'],
+            'earth-day': ['#2f7f3e', '#286b34'],
+            'autism-awareness-day': ['#2d7fc1', '#246aa3'],
+            'firefighters-day': ['#b22a2a', '#8f2020'],
+            'police-week': ['#2a4a9c', '#213c80'],
+            'ems-week': ['#1a78b5', '#15639a'],
+            anniversary: ['#a67c1a', '#8a6817'],
         };
+        // Company anniversary (gold theme). Set the month (1-12) and day; leave both 0 to disable.
+        var anniversary = { month: 9, day: 17 };
         var params = new URLSearchParams(window.location.search);
         var season = params.get('season');
 
@@ -44,10 +56,16 @@
             var now = new Date();
             var month = now.getMonth() + 1;
             var day = now.getDate();
-            if (month === 2 && day === 14) season = 'valentines';
+            if ((month === 12 && day === 31) || (month === 1 && day === 1)) season = 'new-years';
+            else if (anniversary.month === month && anniversary.day === day) season = 'anniversary';
+            else if (month === 2 && day === 14) season = 'valentines';
             else if (month === 3 && day === 17) season = 'stpatricks';
+            else if (month === 4 && day === 2) season = 'autism-awareness-day';
+            else if (month === 4 && day === 22) season = 'earth-day';
+            else if (month === 5 && day === 4) season = 'firefighters-day';
             else if (month === 10 && day === 1) season = 'breast-cancer-awareness-day';
-            else if (month === 10 && day === 31) season = 'halloween';
+            else if ((month === 10 && day >= 30) || (month === 11 && day <= 2)) season = 'halloween';
+            else if (month === 11 && day === 11) season = 'veterans-day';
             else if (month === 12 && day >= 22 && day <= 26) season = 'christmas';
             else season = 'default';
         }

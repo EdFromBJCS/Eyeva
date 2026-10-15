@@ -392,6 +392,18 @@ function initBannerCarousel(context) {
 
     $('[data-banner-carousel]').each((_, el) => {
         const $carousel = $(el);
+
+        // Seasonal wrapper must not be a slide itself: keep only the active message as a slide, drop the wrapper otherwise.
+        $carousel.find('.seasonal-banner-messages').each((__, wrapper) => {
+            const $active = $(wrapper).children('.seasonal-message').filter((___, msg) => window.getComputedStyle(msg).display !== 'none');
+
+            if ($active.length) {
+                $(wrapper).replaceWith($active.first());
+            } else {
+                $(wrapper).remove();
+            }
+        });
+
         const html = template({
             content: $carousel.html(),
             ...context,
@@ -416,24 +428,28 @@ function initBannerCarousel(context) {
             }
         };
 
+        // Direction is applied after the slide moves (not on click) so the outgoing slide never replays an animation.
+        let pendingDirection = '_next';
+        let cleanupTimer;
+
         slider.onSlide(() => {
-            if (!$slider.hasClass('_manual')) {
-                setBannerDirection('_next');
-            }
+            setBannerDirection(pendingDirection, pendingDirection === '_prev');
+            pendingDirection = '_next';
 
-            const ms = slider?.config?.transitionDuration || 100;
-            setTimeout(() => {
+            clearTimeout(cleanupTimer);
+            cleanupTimer = setTimeout(() => {
                 $slider.removeClass('_next _prev _manual _animate');
-            }, ms + 20);
+            }, 400);
         });
 
-        $slider.find('.blaze-prev').on('click', () => {
-            setBannerDirection('_prev', true);
-        });
+        // Capture phase so the direction is recorded before blaze's own click handler slides.
+        $slider.find('.blaze-prev').get(0).addEventListener('click', () => {
+            pendingDirection = '_prev';
+        }, true);
 
-        $slider.find('.blaze-next').on('click', () => {
-            setBannerDirection('_next', true);
-        });
+        $slider.find('.blaze-next').get(0).addEventListener('click', () => {
+            pendingDirection = '_next';
+        }, true);
 
         $carousel.find('._close-btn').on('click', (event) => {
             event.preventDefault();

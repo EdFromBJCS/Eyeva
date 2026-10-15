@@ -102,9 +102,31 @@ function getFridayMondayBoundsAround(anchorDate) {
     return { friday, monday };
 }
 
+function getSundaySaturdayWeekAround(anchorDate) {
+    const anchor = startOfDay(anchorDate);
+    const sunday = new Date(anchor);
+    const saturday = new Date(anchor);
+
+    sunday.setDate(anchor.getDate() - anchor.getDay());
+    saturday.setDate(sunday.getDate() + 6);
+
+    return { sunday, saturday };
+}
+
+// Company anniversary (gold theme). Set the month (1-12) and day; leave both 0 to disable.
+const COMPANY_ANNIVERSARY = { month: 9, day: 17 };
+
 function resolveSeasonFromDate(now) {
     const { month, day } = getMonthDay(now);
     const year = now.getFullYear();
+
+    if ((month === 12 && day === 31) || (month === 1 && day === 1)) {
+        return 'new-years';
+    }
+
+    if (COMPANY_ANNIVERSARY.month === month && COMPANY_ANNIVERSARY.day === day) {
+        return 'anniversary';
+    }
 
     if (month === 2 && day === 14) {
         return 'valentines';
@@ -121,22 +143,51 @@ function resolveSeasonFromDate(now) {
         return 'easter-weekend';
     }
 
+    if (month === 4 && day === 2) {
+        return 'autism-awareness-day';
+    }
+
+    if (month === 4 && day === 22) {
+        return 'earth-day';
+    }
+
     const mothersDay = getNthWeekdayOfMonth(year, 4, 0, 2);
     const mothersWeekend = getWeekendBoundsAround(mothersDay);
     if (isBetweenInclusive(now, mothersWeekend.saturday, mothersWeekend.sunday)) {
         return 'mothers-day-weekend';
     }
 
-    const fathersDay = getNthWeekdayOfMonth(year, 5, 0, 3);
-    const fathersWeekend = getWeekendBoundsAround(fathersDay);
-    if (isBetweenInclusive(now, fathersWeekend.saturday, fathersWeekend.sunday)) {
-        return 'fathers-day-weekend';
-    }
-
     const memorialDay = getLastWeekdayOfMonth(year, 4, 1);
     const memorialDayWeekend = getFridayMondayBoundsAround(memorialDay);
     if (isBetweenInclusive(now, memorialDayWeekend.friday, memorialDayWeekend.monday)) {
         return 'memorial-day-weekend';
+    }
+
+    if (month === 5 && day === 4) {
+        return 'firefighters-day';
+    }
+
+    const armedForcesDay = getNthWeekdayOfMonth(year, 4, 6, 3);
+    if (isBetweenInclusive(now, armedForcesDay, armedForcesDay)) {
+        return 'armed-forces-day';
+    }
+
+    const policeWeek = getSundaySaturdayWeekAround(new Date(year, 4, 15));
+    if (isBetweenInclusive(now, policeWeek.sunday, policeWeek.saturday)) {
+        return 'police-week';
+    }
+
+    const emsWeekStart = getNthWeekdayOfMonth(year, 4, 0, 3);
+    const emsWeekEnd = new Date(emsWeekStart);
+    emsWeekEnd.setDate(emsWeekStart.getDate() + 6);
+    if (isBetweenInclusive(now, emsWeekStart, emsWeekEnd)) {
+        return 'ems-week';
+    }
+
+    const fathersDay = getNthWeekdayOfMonth(year, 5, 0, 3);
+    const fathersWeekend = getWeekendBoundsAround(fathersDay);
+    if (isBetweenInclusive(now, fathersWeekend.saturday, fathersWeekend.sunday)) {
+        return 'fathers-day-weekend';
     }
 
     const independenceDay = new Date(year, 6, 4);
@@ -151,12 +202,23 @@ function resolveSeasonFromDate(now) {
         return 'labor-day-weekend';
     }
 
-    if (month === 10 && day === 31) {
+    //if (month === 10 && day === 31) {
+    if (isBetweenInclusive(now, new Date(year, 9, 30), new Date(year, 10, 2))) {
         return 'halloween';
     }
 
-    if (month === 10 && day === 1) {
+    if (month === 10 && day === 13) {
         return 'breast-cancer-awareness-day';
+    }
+
+    if (month === 11 && day === 11) {
+        return 'veterans-day';
+    }
+
+    // Thanksgiving Day itself wins over the Black Friday week that contains it.
+    const thanksgiving = getNthWeekdayOfMonth(year, 10, 4, 4);
+    if (isBetweenInclusive(now, thanksgiving, thanksgiving)) {
+        return 'thanksgiving';
     }
 
     const blackFriday = getBlackFriday(year);
@@ -368,6 +430,16 @@ export default function initSeasonalTheme() {
         'black-friday-sale',
         'cyber-monday-sale',
         'christmas',
+        'veterans-day',
+        'thanksgiving',
+        'new-years',
+        'earth-day',
+        'autism-awareness-day',
+        'firefighters-day',
+        'armed-forces-day',
+        'police-week',
+        'ems-week',
+        'anniversary',
     ];
 
     const selectedSeason = validSeasons.includes(season) ? season : 'default';

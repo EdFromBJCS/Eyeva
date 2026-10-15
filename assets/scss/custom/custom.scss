@@ -76,7 +76,7 @@
 }
 
 .trade-in-table th {
-    background: #dc3522;
+    background: var(--preview-brown-1, #dc3522);
     color: #ffffff;
     font-weight: 700;
 }
@@ -142,14 +142,14 @@
         display: block;
         font-size: 12px;
         font-weight: 700;
-        color: #dc3522;
+        color: var(--preview-brown-1, #dc3522);
         margin-bottom: 2px;
         text-transform: uppercase;
         letter-spacing: 0.03em;
     }
 
     .trade-in-table td:first-child {
-        background: #dc3522;
+        background: var(--preview-brown-1, #DC3522);
         border-radius: 8px 8px 0 0;
         color: #ffffff;
         font-size: 16px;
@@ -226,7 +226,7 @@
 }
 
 .ram-table th {
-    background: #dc3522;
+    background-color: var(--preview-brown-1, #DC3522);
     color: #ffffff;
     font-weight: 700;
 }
@@ -287,14 +287,14 @@
         display: block;
         font-size: 12px;
         font-weight: 700;
-        color: #dc3522;
+        color: var(--preview-brown-1, #dc3522);
         margin-bottom: 2px;
         text-transform: uppercase;
         letter-spacing: 0.03em;
     }
 
     .ram-table td:first-child {
-        background: #dc3522;
+        background: var(--preview-brown-1, #dc3522);
         border-radius: 8px 8px 0 0;
         color: #ffffff;
         font-size: 16px;
@@ -803,9 +803,14 @@ button.expandfaq.button-alt::after {
 }
 
 .map {
-    background: url("../img/bjcs-location-map.svg") no-repeat;
-    background-size: contain;
     margin-bottom: spacing("half");
+
+    .bjcs-map {
+        display: block;
+        height: 100%;
+        width: 100%;
+    }
+
     min-height: 20rem;
     min-width: 20rem;
     transition: 0.5s;
@@ -1113,12 +1118,21 @@ button.expandfaq.button-alt::after {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    border: none;
-    padding: 10px;
+    display: block;
+    width: 3.125rem;
+    height: 3.125rem;
+    padding: 15px;
     cursor: pointer;
     z-index: 1;
     border: 1px solid #222;
-    border-radius: 50%;
+    border-radius: 25px;
+    transition: border-color 0.15s ease, color 0.15s ease;
+
+    .icon {
+        display: block;
+        width: 20px;
+        height: 20px;
+    }
 }
 
 .homeblaze-prev {

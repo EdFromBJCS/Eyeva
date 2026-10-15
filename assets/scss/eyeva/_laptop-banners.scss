@@ -206,7 +206,7 @@
 
                 &.red-text,
                 & .red-text {
-                    color: #DC3522;
+                    color: var(--preview-brown-1, #DC3522);
                 }
                 
                 &.dark-background,
@@ -221,7 +221,7 @@
                 
                 &.red-background,
                 & .red-background {
-                    background-color: #DC3522;
+                    background-color: var(--preview-brown-1, #DC3522);
                 }                  
             }
         }
