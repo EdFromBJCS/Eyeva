@@ -70,6 +70,19 @@
         --slide-to-show: 1;
         --slide-gap: 0px; /* stylelint-disable-line */
 
+
+
+        // Animations only run while a direction class is present, so removing it never replays them.
+        &._next .blaze-track > * {
+            &:first-child {
+                animation-name: eyeva__move-up-from-40;
+            }
+
+            &:last-child {
+                animation-name: eyeva__move-up-40;
+            }
+        }
+
         &._prev .blaze-track > * {
             &:first-child {
                 animation-name: eyeva__move-down-from-40;
@@ -112,13 +125,8 @@
             }
 
             &:first-child {
-                animation-name: eyeva__move-up-from-40;
                 opacity: 1;
                 pointer-events: auto;
-            }
-
-            &:last-child {
-                animation-name: eyeva__move-up-40;
             }
         }
     }

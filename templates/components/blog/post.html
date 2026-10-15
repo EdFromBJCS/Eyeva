@@ -35,11 +35,11 @@
             <div class="content">
             {{{post.body}}}
             </div>
-             <nav class="toc" id="toc">
-        <h3>Table of Contents</h3>
-        <ul id="toc-list"></ul>
-        </nav>
-        <p><button class="toc-toggle" id="toc-toggle">☰ ToC</button></p>
+            <nav class="toc" id="toc" aria-label="On this page">
+                <h3>On this page</h3>
+                <ul id="toc-list"></ul>
+            </nav>
+            <p><button class="toc-toggle" id="toc-toggle" type="button" aria-controls="toc" aria-expanded="false">☰ On this page</button></p>
             {{else}}
             {{{post.summary}}}&hellip;
             {{/if}}
@@ -157,13 +157,12 @@
         function buildToc() {
             tocList.innerHTML = '';
 
-            const headers = Array.from(contentRoot.querySelectorAll('h2, h3')).filter(isHeaderVisible);
+            const headers = Array.from(contentRoot.querySelectorAll('h2')).filter(isHeaderVisible);
             headers.forEach((header, index) => {
                 const id = header.id || `section-${index}`;
                 header.setAttribute('id', id);
 
                 const li = document.createElement('li');
-                li.style.marginLeft = header.tagName === 'H3' ? '15px' : '0';
 
                 const link = document.createElement('a');
                 link.href = `#${id}`;
@@ -187,6 +186,7 @@
             rebuildTocFrame = window.requestAnimationFrame(() => {
                 rebuildTocFrame = null;
                 buildToc();
+                updateActiveToc();
             });
         }
 
@@ -194,6 +194,42 @@
 
         window.blogTocOffset = window.blogTocOffset ?? 120;
         const tocActiveOffset = window.blogTocOffset;
+
+        function updateActiveToc() {
+            const links = Array.from(tocList.querySelectorAll('a'));
+            let activeLink = links[0] || null;
+
+            links.forEach((link) => {
+                const section = document.querySelector(link.hash);
+                if (section && section.getBoundingClientRect().top <= tocActiveOffset) {
+                    activeLink = link;
+                }
+            });
+
+            links.forEach((link) => {
+                const isActive = link === activeLink;
+                link.classList.toggle('active', isActive);
+                if (isActive) {
+                    link.setAttribute('aria-current', 'location');
+                } else {
+                    link.removeAttribute('aria-current');
+                }
+            });
+        }
+
+        let activeTocFrame = null;
+        function scheduleActiveTocUpdate() {
+            if (activeTocFrame !== null) {
+                return;
+            }
+
+            activeTocFrame = window.requestAnimationFrame(() => {
+                activeTocFrame = null;
+                updateActiveToc();
+            });
+        }
+
+        updateActiveToc();
 
         // Smooth scroll
         tocList.addEventListener('click', (event) => {
@@ -211,29 +247,25 @@
             const top = target.getBoundingClientRect().top + window.pageYOffset - tocActiveOffset;
             window.scrollTo({ top, behavior: 'smooth' });
             toc.classList.remove('open');
+            tocToggle.setAttribute('aria-expanded', 'false');
         });
 
-        // Highlight active section
-        window.addEventListener('scroll', () => {
-            const fromTop = window.scrollY + tocActiveOffset;
-
-            document.querySelectorAll('.toc a').forEach((link) => {
-                const section = document.querySelector(link.hash);
-                if (!section) {
-                    return;
-                }
-
-                if (section.offsetTop <= fromTop && section.offsetTop + section.offsetHeight > fromTop) {
-                    link.classList.add('active');
-                } else {
-                    link.classList.remove('active');
-                }
-            });
-        });
+        // Keep one TOC entry active at the heading nearest the top reading position.
+        window.addEventListener('scroll', scheduleActiveTocUpdate, { passive: true });
+        window.addEventListener('resize', scheduleActiveTocUpdate, { passive: true });
 
         // TOC toggle for mobile
         tocToggle.addEventListener('click', () => {
-            toc.classList.toggle('open');
+            const isOpen = toc.classList.toggle('open');
+            tocToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && toc.classList.contains('open')) {
+                toc.classList.remove('open');
+                tocToggle.setAttribute('aria-expanded', 'false');
+                tocToggle.focus();
+            }
         });
 
         const tabVisibilityObserver = new MutationObserver((mutations) => {
@@ -246,7 +278,7 @@
                     return false;
                 }
 
-                return target.matches('.md-tab-content, h2, h3');
+                return target.matches('.md-tab-content, h2');
             });
 
             if (shouldRebuild) {

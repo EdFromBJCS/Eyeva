@@ -603,6 +603,26 @@ ul#custom-control2 {
                 & .dark-text {
                     color: #222222;
                 }
+
+                &.red-text,
+                & .red-text {
+                    color: var(--preview-brown-1, #DC3522);
+                }
+                
+                &.dark-background,
+                & .dark-background {
+                    background-color: #222222;
+                }
+                
+                &.light-background,
+                & .light-background {
+                    background-color: #e5e5e5;
+                }
+                
+                &.red-background,
+                & .red-background {
+                    background-color: var(--preview-brown-1, #DC3522);
+                }                  
             }
         }
     }
