@@ -3,71 +3,54 @@
 Use these query params to preview each holiday style on any storefront page.
 
 Example:
+
 - `http://localhost:3000/?season=valentines`
 - `http://localhost:3000/products/example-item?season=christmas`
 
 Note:
+
 - Season override is stored in localStorage (`eyevaSeasonOverride`).
 - To clear override, open a page with `?season=default`.
 
 ## Holiday Date Rules + Preview Links
 
-| Season | Live Date Rule | Preview Link |
-|---|---|---|
-| Valentines | Feb 14 only | `?season=valentines` |
-| St. Patrick's Day | Mar 17 only | `?season=stpatricks` |
-| Easter Weekend | Good Friday through Easter Sunday | `?season=easter-weekend` |
-| Mother's Day Weekend | Weekend containing 2nd Sunday in May (US) | `?season=mothers-day-weekend` |
-| Father's Day Weekend | Weekend containing 3rd Sunday in June (US) | `?season=fathers-day-weekend` |
-| Independence Day Weekend | Friday-Monday containing July 4 | `?season=independence-day-weekend` |
-| Memorial Day Weekend | Friday-Monday around the last Monday in May (Independence Day colors) | `?season=memorial-day-weekend` |
-| Labor Day Weekend | Friday-Monday around the first Monday in September (Independence Day colors) | `?season=labor-day-weekend` |
-| Halloween | Oct 30 through Nov 2 | `?season=halloween` |
-| Breast Cancer Awareness Day | Oct 1 only | `?season=breast-cancer-awareness-day` |
-| Veterans Day | Nov 11 only (Independence Day colors) | `?season=veterans-day` |
-| Thanksgiving | 4th Thursday in November, that day only (wins over Black Friday week) | `?season=thanksgiving` |
-| Black Friday Sale | Monday-Sunday week containing Black Friday | `?season=black-friday-sale` |
-| Cyber Monday Sale | Monday-Sunday week immediately after Black Friday week | `?season=cyber-monday-sale` |
-| Christmas | Dec 22 through Dec 26 | `?season=christmas` |
-| New Year's | Dec 31 and Jan 1 | `?season=new-years` |
-| Autism Awareness Day | Apr 2 only (World Autism Awareness Day) | `?season=autism-awareness-day` |
-| Earth Day | Apr 22 only (St. Patrick's Day colors) | `?season=earth-day` |
-| Firefighters Day | May 4 only (International Firefighters' Day) | `?season=firefighters-day` |
-| Armed Forces Day | 3rd Saturday in May (Independence Day colors) | `?season=armed-forces-day` |
-| Police Week | Sunday-Saturday week containing May 15 | `?season=police-week` |
-| EMS Week | Sunday-Saturday week starting the 3rd Sunday in May | `?season=ems-week` |
-| Company Anniversary | Sept 17 (`COMPANY_ANNIVERSARY` in the three files below) | `?season=anniversary` |
-| Default (no holiday) | Any other date | `?season=default` |
+| Season                      | Live Date Rule                                                               | Preview Link                          |
+| --------------------------- | ---------------------------------------------------------------------------- | ------------------------------------- |
+| Valentines                  | Feb 14 only                                                                  | `?season=valentines`                  |
+| St. Patrick's Day           | Mar 17 only                                                                  | `?season=stpatricks`                  |
+| Easter Weekend              | Good Friday through Easter Sunday                                            | `?season=easter-weekend`              |
+| Mother's Day Weekend        | Weekend containing 2nd Sunday in May (US)                                    | `?season=mothers-day-weekend`         |
+| Father's Day Weekend        | Weekend containing 3rd Sunday in June (US)                                   | `?season=fathers-day-weekend`         |
+| Independence Day Weekend    | Friday-Monday containing July 4                                              | `?season=independence-day-weekend`    |
+| Memorial Day Weekend        | Friday-Monday around the last Monday in May (Independence Day colors)        | `?season=memorial-day-weekend`        |
+| Labor Day Weekend           | Friday-Monday around the first Monday in September (Independence Day colors) | `?season=labor-day-weekend`           |
+| Halloween                   | Oct 30 through Nov 2                                                         | `?season=halloween`                   |
+| Breast Cancer Awareness Day | Oct 1 only                                                                   | `?season=breast-cancer-awareness-day` |
+| Veterans Day                | Nov 11 only (Independence Day colors)                                        | `?season=veterans-day`                |
+| Thanksgiving                | 4th Thursday in November, that day only (wins over Black Friday week)        | `?season=thanksgiving`                |
+| Black Friday Sale           | Monday-Sunday week containing Black Friday                                   | `?season=black-friday-sale`           |
+| Cyber Monday Sale           | Monday-Sunday week immediately after Black Friday week                       | `?season=cyber-monday-sale`           |
+| Christmas                   | Dec 22 through Dec 26                                                        | `?season=christmas`                   |
+| New Year's                  | Dec 31 and Jan 1                                                             | `?season=new-years`                   |
+| Autism Awareness Day        | Apr 2 only (World Autism Awareness Day)                                      | `?season=autism-awareness-day`        |
+| Earth Day                   | Apr 22 only (St. Patrick's Day colors)                                       | `?season=earth-day`                   |
+| Firefighters Day            | May 4 only (International Firefighters' Day)                                 | `?season=firefighters-day`            |
+| Armed Forces Day            | 3rd Saturday in May (Independence Day colors)                                | `?season=armed-forces-day`            |
+| Police Week                 | Sunday-Saturday week containing May 15                                       | `?season=police-week`                 |
+| EMS Week                    | Sunday-Saturday week starting the 3rd Sunday in May                          | `?season=ems-week`                    |
+| Company Anniversary         | Sept 17 (`COMPANY_ANNIVERSARY` in the three files below)                     | `?season=anniversary`                 |
+| Default (no holiday)        | Any other date                                                               | `?season=default`                     |
 
 If two rules overlap, the one listed first in `resolveSeasonFromDate` wins (single days beat weeks, and Mother's Day and Memorial Day weekends beat Police and EMS Week).
 
 Date rules live in three places that must be kept in sync: `assets/js/theme/global/seasonal-theme.js`, the inline script in `templates/layout/base.html`, and `templates/pages/checkout.html` (fixed dates only, no weekend/week rules).
 
-## Quick Copy/Paste Preview URLs
+## Seasonal Home Hero Carousel
 
-Replace `http://localhost:3000/` with your actual storefront URL.
+Build the seasonal carousel in the BigCommerce Page Builder in the **home_above_sections_holiday** region (home.html). It is hidden by default and shown (replacing the regular **home_above_sections** carousel) only while `body.season-halloween` is set, so it follows the same date rules/preview link (`?season=halloween`). To add another season, add its `season-*` class to the `body.season-halloween` selector in `assets/scss/eyeva/_laptop-banners.scss`.
 
-- `https://www.bobjohnson.com/?season=default`
-- `https://www.bobjohnson.com/?season=valentines`
-- `https://www.bobjohnson.com/?season=stpatricks`
-- `https://www.bobjohnson.com/?season=easter-weekend`
-- `https://www.bobjohnson.com/?season=mothers-day-weekend`
-- `https://www.bobjohnson.com/?season=fathers-day-weekend`
-- `https://www.bobjohnson.com/?season=independence-day-weekend`
-- `https://www.bobjohnson.com/?season=memorial-day-weekend`
-- `https://www.bobjohnson.com/?season=labor-day-weekend`
-- `https://www.bobjohnson.com/?season=halloween`
-- `https://www.bobjohnson.com/?season=breast-cancer-awareness-day`
-- `https://www.bobjohnson.com/?season=veterans-day`
-- `https://www.bobjohnson.com/?season=thanksgiving`
-- `https://www.bobjohnson.com/?season=black-friday-sale`
-- `https://www.bobjohnson.com/?season=cyber-monday-sale`
-- `https://www.bobjohnson.com/?season=christmas`
-- `https://www.bobjohnson.com/?season=new-years`
-- `https://www.bobjohnson.com/?season=autism-awareness-day`
-- `https://www.bobjohnson.com/?season=earth-day`
-- `https://www.bobjohnson.com/?season=firefighters-day`
-- `https://www.bobjohnson.com/?season=armed-forces-day`
-- `https://www.bobjohnson.com/?season=police-week`
-- `https://www.bobjohnson.com/?season=ems-week`
-- `https://www.bobjohnson.com/?season=anniversary`
+**Removing it:** delete the widget from the `home_above_sections_holiday` region in Page Builder. With the region empty, the regular banner shows automatically; no code changes needed.
+
+## Seasonal Top Banner
+
+Same pattern for the top banner: build it in Page Builder in the **header_top--global_holiday** region (templates/components/common/header.html). It replaces **header_top--global** only while `body.season-halloween` is set and a widget is in the region. Remove it by deleting the widget. Add other seasons' `season-*` classes to the `body.season-halloween` block in `assets/scss/eyeva/_banners.scss` (and the one in `_laptop-banners.scss`).

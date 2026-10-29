@@ -296,13 +296,15 @@ body.season-preview-brown .quiz-no-results-count {
 body.season-preview-brown .eyeva__banners-carousel,
 body.season-preview-brown .banners--top,
 body.season-preview-brown .banners--top .banner,
-body.season-preview-brown [data-content-region='header_top--global'] {
+body.season-preview-brown [data-content-region='header_top--global'],
+body.season-preview-brown [data-content-region='header_top--global_holiday'] {
     background-color: var(--preview-brown-2) !important;
     border-color: var(--preview-brown-3) !important;
     color: #ffffff !important;
 }
 
-body.season-preview-brown [data-content-region='header_top--global'] a {
+body.season-preview-brown [data-content-region='header_top--global'] a,
+body.season-preview-brown [data-content-region='header_top--global_holiday'] a {
     color: #ffffff !important;
 }
 
@@ -1276,6 +1278,7 @@ body.season-valentines .header {
 }
 
 body.season-valentines .hero-banner,
+body.season-valentines .hero-banner-holiday,
 body.season-valentines .heroCarousel {
     position: relative;
     overflow: hidden;
@@ -1283,6 +1286,7 @@ body.season-valentines .heroCarousel {
 
 body.season-valentines .header::before,
 body.season-valentines .hero-banner::before,
+body.season-valentines .hero-banner-holiday::before,
 body.season-valentines .heroCarousel::before {
     content: '';
     position: absolute;
@@ -1303,6 +1307,7 @@ body.season-stpatricks .header {
 }
 
 body.season-stpatricks .hero-banner,
+body.season-stpatricks .hero-banner-holiday,
 body.season-stpatricks .heroCarousel {
     position: relative;
     overflow: hidden;
@@ -1310,6 +1315,7 @@ body.season-stpatricks .heroCarousel {
 
 body.season-stpatricks .header::before,
 body.season-stpatricks .hero-banner::before,
+body.season-stpatricks .hero-banner-holiday::before,
 body.season-stpatricks .heroCarousel::before {
     content: '';
     position: absolute;
@@ -1329,6 +1335,7 @@ body.season-independence-day-weekend .header {
     overflow: hidden;
 }
 body.season-independence-day-weekend .hero-banner,
+body.season-independence-day-weekend .hero-banner-holiday,
 body.season-independence-day-weekend .heroCarousel {
     position: relative;
     overflow: hidden;
@@ -1339,6 +1346,7 @@ body.season-memorial-day-weekend .header {
     overflow: hidden;
 }
 body.season-memorial-day-weekend .hero-banner,
+body.season-memorial-day-weekend .hero-banner-holiday,
 body.season-memorial-day-weekend .heroCarousel {
     position: relative;
     overflow: hidden;
@@ -1349,6 +1357,7 @@ body.season-labor-day-weekend .header {
     overflow: hidden;
 }
 body.season-labor-day-weekend .hero-banner,
+body.season-labor-day-weekend .hero-banner-holiday,
 body.season-labor-day-weekend .heroCarousel {
     position: relative;
     overflow: hidden;
@@ -1378,12 +1387,14 @@ body.season-christmas .header::before {
 }
 
 body.season-christmas .hero-banner,
+body.season-christmas .hero-banner-holiday,
 body.season-christmas .heroCarousel {
     position: relative;
     overflow: hidden;
 }
 
 body.season-christmas .hero-banner::before,
+body.season-christmas .hero-banner-holiday::before,
 body.season-christmas .heroCarousel::before {
     content: '';
     position: absolute;

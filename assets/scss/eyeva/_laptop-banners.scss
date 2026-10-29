@@ -95,8 +95,45 @@
         grid-area: banner;
     }
 
+    // Seasonal hero carousel (region "home_above_sections_holiday"), swapped in by body.season-* class.
+    // To add another season, append its body class to the selector lists below.
+    .hero-banner-holiday {
+        display: none;
+        grid-area: banner;
+    }
+}
+
+body.season-halloween {
+    .home-page-hero-layout {
+        // Only swap when a widget is placed in the holiday region; empty region = regular banner stays.
+        .hero-banner-holiday:has([data-widget-id]) {
+            display: block;
+        }
+
+        &:has(.hero-banner-holiday [data-widget-id]) .hero-banner {
+            display: none;
+        }
+    }
+}
+
+.home-page-hero-layout {
+
     .hero-video {
         grid-area: video;
+    }
+
+    // Keep title typography identical across the regular and seasonal carousels,
+    // regardless of per-widget font settings in Page Builder.
+    .papathemes-eyeva-hero-carousel-title {
+        font-family: inherit;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 1.15;
+        margin-bottom: 0.75rem;
+
+        @include breakpoint("small") {
+            font-size: 24px;
+        }
     }
 
     .hero-carousel {
@@ -133,7 +170,7 @@
             }
         }
 
-        @media (max-width: (screenSize("small") - 1px)) {
+        @media (max-width: (screenSize("medium") - 1px)) {
             > div[role="link"] {
                 display: flex;
                 flex-direction: column;
@@ -172,14 +209,7 @@
 
             .papathemes-eyeva-hero-carousel-title,
             .papathemes-eyeva-hero-carousel-description {
-                color: #ffffff;
-            }
-
-            @media (max-width: (screenSize("small") - 1px)) {
-                .papathemes-eyeva-hero-carousel-title,
-                .papathemes-eyeva-hero-carousel-description {
-                    color: #222222;
-                }
+                color: #222222;
             }
         }
 

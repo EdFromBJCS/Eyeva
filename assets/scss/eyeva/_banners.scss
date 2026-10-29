@@ -51,8 +51,25 @@
 
 [data-content-region="header_top"],
 [data-content-region="header_top--global"],
+[data-content-region="header_top--global_holiday"],
 .banners--top {
     @extend %eyeva-top-banners;
+}
+
+// Seasonal top banner (region "header_top--global_holiday"): hidden unless a widget is placed in it
+// during the season, in which case it replaces the regular global top banner.
+.header-top-holiday {
+    display: none;
+}
+
+body.season-halloween {
+    .header-top-holiday:has([data-widget-id]) {
+        display: block;
+    }
+
+    &:has(.header-top-holiday [data-widget-id]) [data-content-region="header_top--global"] {
+        display: none;
+    }
 }
 
 .banners--top {
