@@ -729,13 +729,6 @@ export default class ProductDetails extends CornerstoneProductDetails {
         });
     }
 
-    updateProductAttributes(data) {
-        super.updateProductAttributes(data);
-        this.$scope.find('label.unavailable, option.unavailable')
-            .find('[data-eyeva-product-option-price-id]')
-            .remove();
-    }
-
     updateView(data, ...args) {
         super.updateView(data, ...args);
         this.refreshProductMetadata();
@@ -1829,32 +1822,79 @@ export default class ProductDetails extends CornerstoneProductDetails {
         const combos = [selectedOptionValueIds];
         const combosMeta = [null];
 
+        // Variant options (those that create a SKU) only return the SKU's price when every variant option is specified
+        const variantIds = new Set(
+            this.$scope.find('[data-product-attribute-state="variant_option"]')
+                .map((_i, el) => Number($(el).attr('data-product-attribute-id')))
+                .get(),
+        );
+        const selectedVariantValueIds = [];
+
+        formData.entries().forEach(([key, value]) => {
+            const m = key.match(/^attribute\[(\d+)\]$/);
+            if (m && variantIds.has(Number(m[1])) && Number(value)) {
+                selectedVariantValueIds.push({ optionEntityId: Number(m[1]), valueEntityId: Number(value) });
+            }
+        });
+
+        // per variant option: SKU of the other selected variants + this option's first (standard) value
+        const variantBaselineIndexes = {};
+        const candidates = [];
+
         showOptions.forEach(option => {
             const values = option.values || (option.value ? [{ id: option.value }] : []);
+            const isVariant = variantIds.has(option.id);
+            const otherVariants = isVariant
+                ? selectedVariantValueIds.filter(({ optionEntityId }) => optionEntityId !== option.id)
+                : [];
+
+            if (isVariant && values.length > 0) {
+                variantBaselineIndexes[option.id] = combos.length;
+                combos.push([...otherVariants, { optionEntityId: option.id, valueEntityId: values[0].id }]);
+                combosMeta.push(null);
+            }
 
             values.forEach(value => {
-                combos.push([
-                    ...selectedOptionValueIds,
-                    { optionEntityId: option.id, valueEntityId: value.id },
-                ]);
-                combosMeta.push({ optionId: option.id, valueId: value.id });
+                candidates.push({
+                    combo: [
+                        ...selectedOptionValueIds,
+                        ...otherVariants,
+                        { optionEntityId: option.id, valueEntityId: value.id },
+                    ],
+                    meta: { optionId: option.id, valueId: value.id },
+                });
             });
         });
 
+        candidates.forEach(({ combo, meta }) => {
+            combos.push(combo);
+            combosMeta.push(meta);
+        });
+
         const products = await this.fetchOptionPricesBatch(combos);
-        const [prev, ...selections] = products.map((product, i) => (i === 0 ? product : { ...combosMeta[i], ...product }));
+        const prev = products[0];
+        const variantBaselines = {};
+        Object.entries(variantBaselineIndexes).forEach(([optionId, index]) => {
+            variantBaselines[optionId] = products[index];
+        });
+        const selections = products
+            .map((product, i) => (combosMeta[i] ? { ...combosMeta[i], ...product } : null))
+            .filter(Boolean);
 
         selections.forEach(selection => {
+            // variant options need the full SKU combination, so they compare against their own baseline
+            const base = variantBaselines[selection.optionId] || prev;
+
             if (selection.pricesWithTax) {
                 // calculate the non-sale price based on the previous price and the current price
                 // consider all now price and regular price
-                let nonSalePriceWithTax = selection.pricesWithTax?.price.value - prev.pricesWithTax?.price.value
-                    || selection.pricesWithTax?.basePrice.value - prev.pricesWithTax?.basePrice.value
+                let nonSalePriceWithTax = selection.pricesWithTax?.price.value - base.pricesWithTax?.price.value
+                    || selection.pricesWithTax?.basePrice.value - base.pricesWithTax?.basePrice.value
                     // || selection.pricesWithTax?.price.value - selection.pricesWithTax?.basePrice.value
                     || null;
 
                 // remove non-sale price if it's less than the current price
-                if (nonSalePriceWithTax <= selection.pricesWithTax.price.value - prev.pricesWithTax.price.value) {
+                if (nonSalePriceWithTax <= selection.pricesWithTax.price.value - base.pricesWithTax.price.value) {
                     nonSalePriceWithTax = null;
                 }
 
@@ -1862,11 +1902,11 @@ export default class ProductDetails extends CornerstoneProductDetails {
                 selection.adjustedPricesWithTax = {
                     basePrice: {
                         ...selection.pricesWithTax.basePrice,
-                        value: selection.pricesWithTax.basePrice.value - prev.pricesWithTax.basePrice.value,
+                        value: selection.pricesWithTax.basePrice.value - base.pricesWithTax.basePrice.value,
                     },
                     price: {
                         ...selection.pricesWithTax.price,
-                        value: selection.pricesWithTax.price.value - prev.pricesWithTax.price.value,
+                        value: selection.pricesWithTax.price.value - base.pricesWithTax.price.value,
                     },
                     nonSalePriceValue: nonSalePriceWithTax,
                 };
@@ -1875,13 +1915,13 @@ export default class ProductDetails extends CornerstoneProductDetails {
             if (selection.pricesWithoutTax) {
                 // calculate the non-sale price based on the previous price and the current price
                 // consider all now price and regular price
-                let nonSalePriceWithoutTax = selection.pricesWithoutTax?.price.value - prev.pricesWithoutTax?.price.value
-                    || selection.pricesWithoutTax?.basePrice.value - prev.pricesWithoutTax?.basePrice.value
+                let nonSalePriceWithoutTax = selection.pricesWithoutTax?.price.value - base.pricesWithoutTax?.price.value
+                    || selection.pricesWithoutTax?.basePrice.value - base.pricesWithoutTax?.basePrice.value
                     // || selection.pricesWithoutTax?.price.value - selection.pricesWithoutTax?.basePrice.value
                     || null;
 
                 // remove non-sale price if it's less than the current price
-                if (nonSalePriceWithoutTax <= selection.pricesWithoutTax.price.value - prev.pricesWithoutTax.price.value) {
+                if (nonSalePriceWithoutTax <= selection.pricesWithoutTax.price.value - base.pricesWithoutTax.price.value) {
                     nonSalePriceWithoutTax = null;
                 }
 
@@ -1889,11 +1929,11 @@ export default class ProductDetails extends CornerstoneProductDetails {
                 selection.adjustedPricesWithoutTax = {
                     basePrice: {
                         ...selection.pricesWithoutTax.basePrice,
-                        value: selection.pricesWithoutTax.basePrice.value - prev.pricesWithoutTax.basePrice.value,
+                        value: selection.pricesWithoutTax.basePrice.value - base.pricesWithoutTax.basePrice.value,
                     },
                     price: {
                         ...selection.pricesWithoutTax.price,
-                        value: selection.pricesWithoutTax.price.value - prev.pricesWithoutTax.price.value,
+                        value: selection.pricesWithoutTax.price.value - base.pricesWithoutTax.price.value,
                     },
                     nonSalePriceValue: nonSalePriceWithoutTax,
                 };
@@ -2492,12 +2532,6 @@ export default class ProductDetails extends CornerstoneProductDetails {
                 // data-product-attribute-value on the surrounding <li>, which would otherwise
                 // match too and duplicate the price
                 const $value = $option.find(`label[data-product-attribute-value="${valueId}"], option[data-product-attribute-value="${valueId}"]`);
-
-                // don't show a price for out-of-stock/unavailable values
-                if ($value.hasClass('unavailable')) {
-                    $value.find(`[data-eyeva-product-option-price-id="${optionId}-${valueId}"]`).remove();
-                    return;
-                }
 
                 const priceSelector = `[data-eyeva-product-option-price-id="${optionId}-${valueId}"]`;
 
