@@ -7,18 +7,23 @@ Input:
 
 {{#if (getVar '_saleCountdownDate')}}
 {{!-- only display sale countdown if product has custom field '__countdown_date' --}}
-<div class="productView-saleCountdown" {{#unless (getVar '_salePercent' )}}style="display:none" {{/unless}}>
+<div class="productView-saleCountdown">
     <i class="icon" aria-hidden="true"><svg>
             <use href="#icon-badge-percent"></use>
         </svg></i>
     <div class="_content">
         {{#if theme_settings.product_sale_badges '===' 'percent'}}
+        {{#if (getVar '_salePercent')}}
         {{#replace '{percent}' (getVar '_saleCountdownLabel')}}
         {{getVar '_salePercent'}}%
         {{else}}
         <span class="_label">{{getVar '_saleCountdownLabel'}}</span>
         <span class="_salePercent">{{getVar '_salePercent'}}%</span>
         {{/replace}}
+        {{else}}
+        {{!-- No percent (price equals retail price): show the label only --}}
+        {{getVar '_saleCountdownLabel'}}
+        {{/if}}
         {{else}}
         {{getVar '_saleCountdownLabel'}}
         {{/if}}

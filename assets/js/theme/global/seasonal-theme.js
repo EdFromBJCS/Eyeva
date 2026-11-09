@@ -203,7 +203,7 @@ function resolveSeasonFromDate(now) {
     }
 
     //if (month === 10 && day === 31) {
-    if (isBetweenInclusive(now, new Date(year, 9, 30), new Date(year, 10, 2))) {
+    if (isBetweenInclusive(now, new Date(year, 9, 30), new Date(year, 10, 3))) {
         return 'halloween';
     }
 
@@ -246,11 +246,17 @@ function resolveSeasonFromQuery() {
     const params = new URLSearchParams(window.location.search);
     const season = params.get('season');
 
+    // Legacy persistent overrides are cleared so visitors always get the date-based season.
+    try {
+        window.localStorage.removeItem(SEASON_STORAGE_KEY);
+    } catch (error) {
+    }
+
     if (season) {
         const normalized = season.toLowerCase();
 
         try {
-            window.localStorage.setItem(SEASON_STORAGE_KEY, normalized);
+            window.sessionStorage.setItem(SEASON_STORAGE_KEY, normalized);
         } catch (error) {
         }
 
@@ -258,7 +264,7 @@ function resolveSeasonFromQuery() {
     }
 
     try {
-        const storedSeason = window.localStorage.getItem(SEASON_STORAGE_KEY);
+        const storedSeason = window.sessionStorage.getItem(SEASON_STORAGE_KEY);
         return storedSeason ? storedSeason.toLowerCase() : null;
     } catch (error) {
         return null;

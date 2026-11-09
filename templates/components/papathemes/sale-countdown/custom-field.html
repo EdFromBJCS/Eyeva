@@ -14,6 +14,12 @@
     {{assignVar '_saleCountdownLabel' (get 'string' (lang 'sale_countdown.sale'))}}
     {{assignVar '_saleCountdownEndLabel' 0}}
 
+    {{!-- A retail/non-sale price counts as a sale value even if it equals the price (percent 0) --}}
+    {{assignVar '_hasSaleValue' 0}}
+    {{#or product.price.rrp_without_tax product.price.rrp_with_tax product.price.non_sale_price_without_tax product.price.non_sale_price_with_tax}}
+        {{assignVar '_hasSaleValue' 1}}
+    {{/or}}
+
     {{#if product.price.rrp_without_tax}}
         {{assignVar '_salePercent' (round (multiply (subtract 1 (divide product.price.without_tax.value product.price.rrp_without_tax.value)) 100))}}
     {{else if product.price.rrp_with_tax}}
@@ -31,5 +37,10 @@
     {{else if name '===' '__countdown_label'}}
         {{assignVar '_saleCountdownLabel' (get 'string' (first (split value '|')))}}
         {{assignVar '_saleCountdownEndLabel' (get 'string' (last (split value '|')))}}
+    {{else if name '===' '__cart_discount_percent'}}
+        {{!-- For discounts applied in the cart (no sale price on the product): use this percent when no price-based percent exists --}}
+        {{#unless (getVar '_salePercent')}}
+            {{assignVar '_salePercent' value}}
+        {{/unless}}
     {{/if}}
 {{/if}}

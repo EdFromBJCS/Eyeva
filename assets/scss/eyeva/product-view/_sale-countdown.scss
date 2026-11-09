@@ -17,6 +17,12 @@ $_include_countdown_css: if(stencilColor("card_show_countdown"), true, false);
         display: flex;
         flex-wrap: wrap;
 
+        // Hidden (but still laid out, so the countdown JS treats it as visible) until the timer starts.
+        &.sale-flag-side--countdown-only:not(:has(.card-countdown._active)) {
+            position: absolute;
+            visibility: hidden;
+        }
+
         &:has(.card-countdown._active) {
             flex-wrap: nowrap;
             gap: spacing("quarter");

@@ -51,12 +51,12 @@
 
 [data-content-region="header_top"],
 [data-content-region="header_top--global"],
-[data-content-region="header_top--global_holiday"],
+[data-content-region="header_top_holiday--global"],
 .banners--top {
     @extend %eyeva-top-banners;
 }
 
-// Seasonal top banner (region "header_top--global_holiday"): hidden unless a widget is placed in it
+// Seasonal top banner (region "header_top_holiday--global"): hidden unless a widget is placed in it
 // during the season, in which case it replaces the regular global top banner.
 .header-top-holiday {
     display: none;

@@ -52,6 +52,15 @@
                 </div>
             {{/if}}
         {{/or}}
+        {{!-- Not on sale: still render a countdown-only badge (shown only if the product has __countdown_date) --}}
+        {{#or price.non_sale_price_with_tax price.non_sale_price_without_tax price.rrp_with_tax price.rrp_without_tax}}
+        {{else}}
+            {{#if theme_settings.card_show_countdown}}
+                <div class="sale-flag-side sale-flag-side--countdown-only">
+                    <span class="card-countdown"></span>
+                </div>
+            {{/if}}
+        {{/or}}
     {{/if}}
 
     {{#if theme_settings.product_custom_badges}}

@@ -297,14 +297,14 @@ body.season-preview-brown .eyeva__banners-carousel,
 body.season-preview-brown .banners--top,
 body.season-preview-brown .banners--top .banner,
 body.season-preview-brown [data-content-region='header_top--global'],
-body.season-preview-brown [data-content-region='header_top--global_holiday'] {
+body.season-preview-brown [data-content-region='header_top_holiday--global'] {
     background-color: var(--preview-brown-2) !important;
     border-color: var(--preview-brown-3) !important;
     color: #ffffff !important;
 }
 
 body.season-preview-brown [data-content-region='header_top--global'] a,
-body.season-preview-brown [data-content-region='header_top--global_holiday'] a {
+body.season-preview-brown [data-content-region='header_top_holiday--global'] a {
     color: #ffffff !important;
 }
 

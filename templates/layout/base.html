@@ -371,11 +371,18 @@
                 var season = 'default';
                 var storageKey = 'eyevaSeasonOverride';
 
+                // Legacy persistent overrides are cleared so visitors always get the date-based season.
+                try {
+                    window.localStorage.removeItem(storageKey);
+                } catch (error) {
+                    // Ignore storage errors.
+                }
+
                 if (override) {
                     season = String(override).toLowerCase();
 
                     try {
-                        window.localStorage.setItem(storageKey, season);
+                        window.sessionStorage.setItem(storageKey, season);
                     } catch (error) {
                         // Ignore storage errors and keep URL override behavior.
                     }
@@ -383,7 +390,7 @@
                     var storedSeason = null;
 
                     try {
-                        storedSeason = window.localStorage.getItem(storageKey);
+                        storedSeason = window.sessionStorage.getItem(storageKey);
                     } catch (error) {
                         storedSeason = null;
                     }

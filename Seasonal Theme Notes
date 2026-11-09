@@ -9,7 +9,7 @@ Example:
 
 Note:
 
-- Season override is stored in localStorage (`eyevaSeasonOverride`).
+- Season override is stored in sessionStorage (`eyevaSeasonOverride`), so it lasts only for that browser tab; old localStorage overrides are cleared automatically.
 - To clear override, open a page with `?season=default`.
 
 ## Holiday Date Rules + Preview Links
@@ -53,4 +53,4 @@ Build the seasonal carousel in the BigCommerce Page Builder in the **home_above_
 
 ## Seasonal Top Banner
 
-Same pattern for the top banner: build it in Page Builder in the **header_top--global_holiday** region (templates/components/common/header.html). It replaces **header_top--global** only while `body.season-halloween` is set and a widget is in the region. Remove it by deleting the widget. Add other seasons' `season-*` classes to the `body.season-halloween` block in `assets/scss/eyeva/_banners.scss` (and the one in `_laptop-banners.scss`).
+Same pattern for the top banner: build it in Page Builder in the **header_top_holiday--global** region (the `--global` suffix must be at the end for BigCommerce to treat it as a global region). It replaces **header_top--global** only while `body.season-halloween` is set and a widget is in the region. Remove it by deleting the widget. Add other seasons' `season-*` classes to the `body.season-halloween` block in `assets/scss/eyeva/_banners.scss` (and the one in `_laptop-banners.scss`).

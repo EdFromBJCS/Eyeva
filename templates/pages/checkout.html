@@ -45,11 +45,13 @@
         var params = new URLSearchParams(window.location.search);
         var season = params.get('season');
 
+        try { window.localStorage.removeItem('eyevaSeasonOverride'); } catch (error) { }
+
         if (season) {
             season = season.toLowerCase();
-            try { window.localStorage.setItem('eyevaSeasonOverride', season); } catch (error) { }
+            try { window.sessionStorage.setItem('eyevaSeasonOverride', season); } catch (error) { }
         } else {
-            try { season = window.localStorage.getItem('eyevaSeasonOverride'); } catch (error) { season = null; }
+            try { season = window.sessionStorage.getItem('eyevaSeasonOverride'); } catch (error) { season = null; }
         }
 
         if (!season) {
