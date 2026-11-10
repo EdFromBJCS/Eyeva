@@ -93,6 +93,39 @@
             "image image" auto
             "details details" auto
             "quantity price" auto / max-content 1fr;
+
+        @include eyeva-screen-mobile-tablet {
+            grid-template:
+                "image" auto
+                "details" auto
+                "price" auto
+                "quantity" auto / minmax(0, 1fr);
+        }
+    }
+
+    @include eyeva-screen-mobile-tablet {
+        .cart-item-total {
+            align-items: center;
+            min-width: 0;
+            padding-block: spacing("base") 0;
+        }
+
+        .cart-item-total-details-toggle {
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 100%;
+        }
+
+        .cart-item-total-details {
+            max-width: 100%;
+            padding-right: 0;
+        }
+
+        .cart-item-quantity {
+            flex-wrap: wrap;
+            justify-content: center;
+            min-width: 0;
+        }
     }
 
     .cart-actions-wrapper {
