@@ -72,3 +72,8 @@
         </div>
     {{/or}}
 </div>
+{{#if (getVar '_productPromoSupported')}}
+{{#if (getVar '_saleCountdownDate')}}
+<div class="eyeva-sale-promo__countdown _countdown" data-sale-countdown-date="{{getVar '_saleCountdownDate'}}"></div>
+{{/if}}
+{{/if}}

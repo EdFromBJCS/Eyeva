@@ -1,0 +1,48 @@
+{{#if init}}
+{{assignVar '_productPromoSupported' 0}}
+{{/if}}
+{{#if (getVar '_productPromo')}}
+{{assignVar '_productPromoType' (lowercase (trim (getVar '_productPromo')))}}
+{{#or (if (getVar '_productPromoType') '===' 'black friday') (if (getVar '_productPromoType') '===' 'black friday sale!')}}
+{{#if init}}
+{{assignVar '_productPromoSupported' 1}}
+{{else}}
+<div class="eyeva-sale-promo__content">
+  <span class="eyeva-sale-promo__icon" aria-hidden="true">
+    <svg><use href="#icon-badge-percent"></use></svg>
+  </span>
+  <div class="eyeva-sale-promo__copy">
+    <div class="eyeva-sale-promo__headline">
+      <strong>10% OFF</strong>
+      <span>BLACK FRIDAY SALE!</span>
+    </div>
+    <span class="eyeva-sale-promo__description">Add to your cart to see the discount.</span>
+    {{#if (getVar '_saleCountdownDate')}}
+    <div class="eyeva-sale-promo__countdown _countdown" data-sale-countdown-date="{{getVar '_saleCountdownDate'}}"></div>
+    {{/if}}
+  </div>
+</div>
+{{/if}}
+{{/or}}
+{{#if (getVar '_productPromoType') '===' 'fz55 promo'}}
+{{#if init}}
+{{assignVar '_productPromoSupported' 1}}
+{{else}}
+<div class="eyeva-sale-promo__content">
+  <span class="eyeva-sale-promo__icon" aria-hidden="true">
+    <svg><use href="#icon-badge-percent"></use></svg>
+  </span>
+  <div class="eyeva-sale-promo__copy">
+    <div class="eyeva-sale-promo__headline">
+      <strong>$150+ OFF</strong>
+      <span>PANASONIC TOUGHBOOK FZ-55S!</span>
+    </div>
+    <span class="eyeva-sale-promo__description">Only available while supplies last! </span>
+    {{#if (getVar '_saleCountdownDate')}}
+    <div class="eyeva-sale-promo__countdown _countdown" data-sale-countdown-date="{{getVar '_saleCountdownDate'}}"></div>
+    {{/if}}
+  </div>
+</div>
+{{/if}}
+{{/if}}
+{{/if}}

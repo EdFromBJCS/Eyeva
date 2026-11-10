@@ -10,6 +10,14 @@ __countdown_label = [Name of the sale]
 
 __countdown_date = [Date of the sale end in format: YYYY-MM-DD HH:MM:SS]
 
+__product_promo = black friday
+- Selects the Black Friday 10% off promo. The value is case-insensitive; the previous value BLACK FRIDAY SALE! also works.
+__product_promo = test promo
+- Selects a placeholder promo for testing; replace its title and description before using it for an actual sale.
+- Add future promo designs and their matching field values in [sale-promo-message.html](./templates/components/eyeva/sale-promo-message.html). For each matching value, set `_productPromoSupported` to 1 when `init` is true and render the design otherwise.
+- Add __countdown_date to show the promo countdown.
+- This field only displays a message; configure the actual discount separately.
+
 __@360 = [Need a source for the video, upload to Image Manager, [Link]]
 
 __@tooltip Option Name = option-level tooltip text

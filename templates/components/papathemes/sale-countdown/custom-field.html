@@ -1,6 +1,6 @@
 {{!--
     Input:
-    - reset: boolean - reset `_saleCountdownDate`, `_saleCountdownLabel`, `_saleCountdownEndLabel`, `_salePercent`
+    - reset: boolean - reset `_saleCountdownDate`, `_saleCountdownLabel`, `_saleCountdownEndLabel`, `_salePercent`, `_productPromo`
     - name: string - custom field name.
         if custom field name is `__countdown_date`, it will set `_saleCountdownDate` value.
         if custom field name is `__countdown_label`, it will set `_saleCountdownLabel` and `_saleCountdownEndLabel` value.
@@ -13,6 +13,7 @@
     {{assignVar '_saleCountdownDate' 0}}
     {{assignVar '_saleCountdownLabel' (get 'string' (lang 'sale_countdown.sale'))}}
     {{assignVar '_saleCountdownEndLabel' 0}}
+    {{assignVar '_productPromo' 0}}
 
     {{!-- A retail/non-sale price counts as a sale value even if it equals the price (percent 0) --}}
     {{assignVar '_hasSaleValue' 0}}
@@ -34,6 +35,8 @@
 {{else}}
     {{#if name '===' '__countdown_date'}}
         {{assignVar '_saleCountdownDate' value}}
+    {{else if name '===' '__product_promo'}}
+        {{assignVar '_productPromo' value}}
     {{else if name '===' '__countdown_label'}}
         {{assignVar '_saleCountdownLabel' (get 'string' (first (split value '|')))}}
         {{assignVar '_saleCountdownEndLabel' (get 'string' (last (split value '|')))}}

@@ -24,6 +24,8 @@
     {{/if}}
     {{/each}}
 
+    {{> components/eyeva/products/product-view/modifiers-modal/init}}
+
     {{> components/eyeva/products/product-view/image-gallery}}
 
     <div class="_eyeva-sticky-col">
@@ -95,6 +97,9 @@
                             {{> components/common/login-for-pricing}}
                             {{/or}}
                         </div>
+                        {{#if (getVar '_productPromoSupported')}}
+                        {{> components/eyeva/sale-promo-message}}
+                        {{/if}}
 
                         {{#if settings.bulk_discount_enabled}}
                         {{#or customer (unless settings.hide_price_from_guests)}}
@@ -215,8 +220,6 @@
         </div>
 
         <section class="productView-details product-options">
-            {{> components/eyeva/products/product-view/modifiers-modal/init}}
-
             <div
                 class="productView-options eyeva__productView-options {{#if (getVar 'enableModifiersModal')}}_enableModifiersModal{{/if}}">
                 {{#if product.release_date }}

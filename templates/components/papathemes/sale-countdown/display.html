@@ -6,6 +6,7 @@ Input:
 --}}
 
 {{#if (getVar '_saleCountdownDate')}}
+{{#unless (getVar '_productPromoSupported')}}
 {{!-- only display sale countdown if product has custom field '__countdown_date' --}}
 <div class="productView-saleCountdown">
     <i class="icon" aria-hidden="true"><svg>
@@ -31,4 +32,5 @@ Input:
         <!-- Removed "data-sale-countdown-label="{{getVar '_saleCountdownEndLabel'}}"" from this line to eliminate unnecessary attribute-->
     </div>
 </div>
+{{/unless}}
 {{/if}}
