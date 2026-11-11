@@ -315,7 +315,7 @@ body.season-preview-brown ._choose-options,
 body.season-preview-brown .btn,
 body.season-preview-brown [class*='buttonPrimary'] {
     background-color: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-2) !important;
+    border-color: var(--preview-brown-1) !important;
     color: #ffffff !important;
 }
 
@@ -347,7 +347,7 @@ body.season-preview-brown .button--primary:hover,
 body.season-preview-brown ._choose-options:hover,
 body.season-preview-brown .btn:hover,
 body.season-preview-brown [class*='buttonPrimary']:hover {
-    background-color: var(--preview-brown-2) !important;
+    background-color: var(--preview-brown-3) !important;
     border-color: var(--preview-brown-3) !important;
     color: #ffffff !important;
 }
@@ -546,12 +546,6 @@ body.season-preview-brown .productView ._countdown [data-sale-countdown-second] 
     color: #555 !important;
 }
 
-body.season-preview-brown .card-title > a,
-body.season-preview-brown .page a,
-body.season-preview-brown .footer a {
-    color: var(--preview-brown-1) !important;
-}
-
 body.season-preview-brown .form-field a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']) {
     color: var(--preview-brown-1) !important;
 }
@@ -649,6 +643,15 @@ body.season-preview-brown .navUser-subMenu,
 body.season-preview-brown .info-panel {
     background: var(--preview-brown-2) !important;
     border-color: var(--preview-brown-3) !important;
+}
+
+body.season-preview-brown .navUser-action:hover .icon svg {
+    fill: var(--preview-brown-4)
+}
+
+body.season-preview-brown .navUser-action._hasLabel:hover {
+    border-color: var(--preview-brown-4) !important;
+    color: var(--preview-brown-4) !important;
 }
 
 body.season-preview-brown .header .navPages .navPages-megaMenu.is-open,
@@ -1169,6 +1172,18 @@ body[class*='season-']:not(.season-default) .sales-contact-card-pic {
     border-color: var(--preview-brown-2) !important;
 }
 
+body[class*='season-']:not(.season-default) .eyeva-sale-promo__headline {
+    strong {
+        color: var(--preview-brown-1) !important;
+    }
+}
+
+body[class*='season-']:not(.season-default) .eyeva-sale-promo__icon {
+    svg {
+        fill: var(--preview-brown-2) !important;
+    }
+}
+
 body[class*='season-']:not(.season-default) .repairicon img {
     filter: var(--season-icon-filter) !important;
 }
@@ -1209,6 +1224,15 @@ body.season-black-friday-sale.season-preview-brown .navPages-item.info-panel.is-
 body.season-black-friday-sale.season-preview-brown .info-panel.is-open,
 body.season-black-friday-sale.season-preview-brown .info-panel.is-open .info-submenu {
     border-color: var(--blackfriday-gold) !important;
+}
+
+body.season-black-friday-sale.season-preview-brown .navUser-action:hover .icon svg {
+    fill: var(--blackfriday-gold);
+}
+
+body.season-black-friday-sale.season-preview-brown .navUser-action._hasLabel:hover {
+    border-color: var(--blackfriday-gold) !important;
+    color: var(--blackfriday-gold) !important;
 }
 
 body.season-black-friday-sale.season-preview-brown .option.button.button--primary:hover {
