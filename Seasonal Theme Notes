@@ -16,29 +16,29 @@ Note:
 
 | Season                      | Live Date Rule                                                               | Preview Link                          |
 | --------------------------- | ---------------------------------------------------------------------------- | ------------------------------------- |
+| New Year's                  | Dec 31 and Jan 1                                                             | `?season=new-years`                   |
 | Valentines                  | Feb 14 only                                                                  | `?season=valentines`                  |
 | St. Patrick's Day           | Mar 17 only                                                                  | `?season=stpatricks`                  |
+| Autism Awareness Day        | Apr 2 only (World Autism Awareness Day)                                      | `?season=autism-awareness-day`        |
+| Earth Day                   | Apr 22 only (St. Patrick's Day colors)                                       | `?season=earth-day`                   |
 | Easter Weekend              | Good Friday through Easter Sunday                                            | `?season=easter-weekend`              |
+| Firefighters Day            | May 4 only (International Firefighters' Day)                                 | `?season=firefighters-day`            |
 | Mother's Day Weekend        | Weekend containing 2nd Sunday in May (US)                                    | `?season=mothers-day-weekend`         |
+| Armed Forces Day            | 3rd Saturday in May (Independence Day colors)                                | `?season=armed-forces-day`            |
+| Police Week                 | Sunday-Saturday week containing May 15                                       | `?season=police-week`                 |
+| EMS Week                    | Sunday-Saturday week starting the 3rd Sunday in May                          | `?season=ems-week`                    |
+| Memorial Day Weekend        | Friday-Monday around the last Monday in May (Independence Day colors)        | `?season=memorial-day-weekend`        |
 | Father's Day Weekend        | Weekend containing 3rd Sunday in June (US)                                   | `?season=fathers-day-weekend`         |
 | Independence Day Weekend    | Friday-Monday containing July 4                                              | `?season=independence-day-weekend`    |
-| Memorial Day Weekend        | Friday-Monday around the last Monday in May (Independence Day colors)        | `?season=memorial-day-weekend`        |
 | Labor Day Weekend           | Friday-Monday around the first Monday in September (Independence Day colors) | `?season=labor-day-weekend`           |
-| Halloween                   | Oct 30 through Nov 2                                                         | `?season=halloween`                   |
+| Company Anniversary         | Sept 17 (`COMPANY_ANNIVERSARY` in the three files below)                     | `?season=anniversary`                 |
 | Breast Cancer Awareness Day | Oct 1 only                                                                   | `?season=breast-cancer-awareness-day` |
+| Halloween                   | Oct 30 through Nov 2                                                         | `?season=halloween`                   |
 | Veterans Day                | Nov 11 only (Independence Day colors)                                        | `?season=veterans-day`                |
 | Thanksgiving                | 4th Thursday in November, that day only (wins over Black Friday week)        | `?season=thanksgiving`                |
 | Black Friday Sale           | Monday-Sunday week containing Black Friday                                   | `?season=black-friday-sale`           |
 | Cyber Monday Sale           | Monday-Sunday week immediately after Black Friday week                       | `?season=cyber-monday-sale`           |
 | Christmas                   | Dec 22 through Dec 26                                                        | `?season=christmas`                   |
-| New Year's                  | Dec 31 and Jan 1                                                             | `?season=new-years`                   |
-| Autism Awareness Day        | Apr 2 only (World Autism Awareness Day)                                      | `?season=autism-awareness-day`        |
-| Earth Day                   | Apr 22 only (St. Patrick's Day colors)                                       | `?season=earth-day`                   |
-| Firefighters Day            | May 4 only (International Firefighters' Day)                                 | `?season=firefighters-day`            |
-| Armed Forces Day            | 3rd Saturday in May (Independence Day colors)                                | `?season=armed-forces-day`            |
-| Police Week                 | Sunday-Saturday week containing May 15                                       | `?season=police-week`                 |
-| EMS Week                    | Sunday-Saturday week starting the 3rd Sunday in May                          | `?season=ems-week`                    |
-| Company Anniversary         | Sept 17 (`COMPANY_ANNIVERSARY` in the three files below)                     | `?season=anniversary`                 |
 | Default (no holiday)        | Any other date                                                               | `?season=default`                     |
 
 If two rules overlap, the one listed first in `resolveSeasonFromDate` wins (single days beat weeks, and Mother's Day and Memorial Day weekends beat Police and EMS Week).

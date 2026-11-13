@@ -9,6 +9,48 @@ export default class Home extends PageManager {
     onReady() {
         this.initCategoryTabs();
         this.initBrandCarousel();
+        this.initMobileCarouselScrollbars();
+    }
+
+    initMobileCarouselScrollbars(scope) {
+        const $sliders = scope || $('.productCarousel, .popular-rugged-laptops-card .categoryCarousel');
+
+        $sliders.each((_i, el) => {
+            const $slider = $(el);
+            const slider = $slider.data('blazeSliderInstance');
+
+            if (!slider) return;
+
+            const existingUpdate = $slider.data('mobileCarouselScrollbarUpdate');
+            if (existingUpdate) {
+                existingUpdate();
+                return;
+            }
+
+            const scrollbar = document.createElement('div');
+            scrollbar.className = 'mobile-carousel-scrollbar';
+            scrollbar.setAttribute('aria-hidden', 'true');
+
+            const thumb = document.createElement('span');
+            scrollbar.appendChild(thumb);
+            el.appendChild(scrollbar);
+
+            const updateScrollbar = (firstSlideIndex = slider.states[slider.stateIndex].page[0]) => {
+                const totalSlides = Math.max(slider.totalSlides, 1);
+                const maxStart = Math.max(totalSlides - slider.config.slidesToShow, 0);
+                const thumbWidth = Math.min((slider.config.slidesToShow / totalSlides) * 100, 100);
+                const thumbOffset = maxStart ? (firstSlideIndex / maxStart) * (100 - thumbWidth) : 0;
+
+                scrollbar.style.display = maxStart ? '' : 'none';
+                thumb.style.width = `${thumbWidth}%`;
+                thumb.style.left = `${thumbOffset}%`;
+            };
+
+            $slider.data('mobileCarouselScrollbarUpdate', updateScrollbar);
+            slider.onSlide((_page, firstSlideIndex) => updateScrollbar(firstSlideIndex));
+            $(window).on('resize', throttle(() => updateScrollbar(), 300));
+            updateScrollbar();
+        });
     }
 
     /**
@@ -56,6 +98,8 @@ export default class Home extends PageManager {
                         } else {
                             $blaze.data('blazeSliderInstance', new BlazeSlider($blaze.get(0), $blaze.data('blazeSlider')));
                         }
+
+                        this.initMobileCarouselScrollbars($scope.find('.productCarousel'));
                     }
                 }
             };

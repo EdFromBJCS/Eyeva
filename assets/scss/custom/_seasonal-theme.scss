@@ -1,461 +1,473 @@
 /* Meet the Team: Seasonalize bio-pic and modal borders */
-body[class*='season-'] .bio-pic {
-    border-color: var(--preview-brown-2, #c4301f) !important;
+body[class*="season-"] .bio-pic {
+  border-color: var(--preview-brown-2, #c4301f) !important;
 }
 
-body[class*='season-'] .team-modal-content {
-    border-color: var(--preview-brown-2, #c4301f) !important;
+body[class*="season-"] .team-modal-content {
+  border-color: var(--preview-brown-2, #c4301f) !important;
 }
 /* Meet the Team: Seasonalize name-plate and moreInfo button */
-body[class*='season-'] .name-plate {
-    background-color: var(--preview-brown-1, #dc3522) !important;
-    border: 5px solid var(--preview-brown-2, #a82a1d) !important;
-    transition: background-color 0.3s, border-color 0.3s;
+body[class*="season-"] .name-plate {
+  background-color: var(--preview-brown-1, #dc3522) !important;
+  border: 5px solid var(--preview-brown-2, #a82a1d) !important;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
 }
 
-body[class*='season-'] .moreInfo {
-    background-color: var(--preview-brown-2, #dc3522) !important;
-    color: #fff !important;
-    transition: background 0.3s, background-color 0.3s;
+body[class*="season-"] .moreInfo {
+  background-color: var(--preview-brown-2, #dc3522) !important;
+  color: #fff !important;
+  transition:
+    background 0.3s,
+    background-color 0.3s;
 }
 
-body[class*='season-'] .moreInfo:hover {
-    background-color: var(--preview-brown-3, #a82a1d) !important;
+body[class*="season-"] .moreInfo:hover {
+  background-color: var(--preview-brown-3, #a82a1d) !important;
 }
 body.season-christmas {
-    --season-decor-opacity: 1;
+  --season-decor-opacity: 1;
 }
 
-body[class*='season-']:not(.season-christmas) {
-    --season-decor-opacity: 0;
+body[class*="season-"]:not(.season-christmas) {
+  --season-decor-opacity: 0;
 }
 
-body[class*='season-'] .card-countdown ._day,
-body[class*='season-'] .card-countdown ._hour,
-body[class*='season-'] .card-countdown ._minute,
-body[class*='season-'] .card-countdown ._second {
-    background: transparent !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
+body[class*="season-"] .card-countdown ._day,
+body[class*="season-"] .card-countdown ._hour,
+body[class*="season-"] .card-countdown ._minute,
+body[class*="season-"] .card-countdown ._second {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 /* Product page sale countdown: keep timer chips backgroundless for every holiday theme. */
-body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown ._day,
-body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown ._hour,
-body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown ._minute,
-body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown ._second,
-body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-day-value],
-body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-hour-value],
-body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-minute-value],
-body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-second-value],
-body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-day-label],
-body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-hour-label],
-body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-minute-label],
-body[class*='season-']:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-second-label] {
-    background: transparent !important;
-    background-color: transparent !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
+body[class*="season-"]:not(.season-default) .productView-details .product-options ._countdown ._day,
+body[class*="season-"]:not(.season-default) .productView-details .product-options ._countdown ._hour,
+body[class*="season-"]:not(.season-default) .productView-details .product-options ._countdown ._minute,
+body[class*="season-"]:not(.season-default) .productView-details .product-options ._countdown ._second,
+body[class*="season-"]:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-day-value],
+body[class*="season-"]:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-hour-value],
+body[class*="season-"]:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-minute-value],
+body[class*="season-"]:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-second-value],
+body[class*="season-"]:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-day-label],
+body[class*="season-"]:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-hour-label],
+body[class*="season-"]:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-minute-label],
+body[class*="season-"]:not(.season-default) .productView-details .product-options ._countdown [data-sale-countdown-second-label] {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 /* Seasonal palette tokens: all holiday themes reuse the same preview-target surfaces. */
 
 body.season-preview-brown {
-    --preview-brown-1: #8b5a3c;
-    --preview-brown-2: #74462f;
-    --preview-brown-3: #5f3724;
-    --preview-brown-4: #4e2c1d;
-    --season-icon-filter: sepia(1) hue-rotate(330deg) saturate(2.0) brightness(0.92) contrast(1.02);
+  --preview-brown-1: #8b5a3c;
+  --preview-brown-2: #74462f;
+  --preview-brown-3: #5f3724;
+  --preview-brown-4: #4e2c1d;
+  --season-icon-filter: sepia(1) hue-rotate(330deg) saturate(2) brightness(0.92) contrast(1.02);
 }
 
 body.season-valentines {
-    --preview-brown-1: #e4559c;
-    --preview-brown-2: #cf3f89;
-    --preview-brown-3: #b43374;
-    --preview-brown-4: #91285d;
-    --season-icon-filter: sepia(1) hue-rotate(300deg) saturate(2.5) brightness(1.02) contrast(1.04);
+  --preview-brown-1: #e4559c;
+  --preview-brown-2: #cf3f89;
+  --preview-brown-3: #b43374;
+  --preview-brown-4: #91285d;
+  --season-icon-filter: sepia(1) hue-rotate(300deg) saturate(2.5) brightness(1.02) contrast(1.04);
 }
 
 body.season-stpatricks,
 body.season-earth-day {
-    --preview-brown-1: #2f7f3e;
-    --preview-brown-2: #286b34;
-    --preview-brown-3: #20562a;
-    --preview-brown-4: #194421;
-    --season-icon-filter: sepia(1) hue-rotate(85deg) saturate(2.3) brightness(0.95) contrast(1.04);
+  --preview-brown-1: #2f7f3e;
+  --preview-brown-2: #286b34;
+  --preview-brown-3: #20562a;
+  --preview-brown-4: #194421;
+  --season-icon-filter: sepia(1) hue-rotate(85deg) saturate(2.3) brightness(0.95) contrast(1.04);
 }
 
 body.season-easter-weekend {
-    --preview-brown-1: #7c4dff;
-    --preview-brown-2: #673de6;
-    --preview-brown-3: #532fc0;
-    --preview-brown-4: #41269a;
-    --season-icon-filter: sepia(1) hue-rotate(220deg) saturate(2.4) brightness(1.00) contrast(1.04);
+  --preview-brown-1: #7c4dff;
+  --preview-brown-2: #673de6;
+  --preview-brown-3: #532fc0;
+  --preview-brown-4: #41269a;
+  --season-icon-filter: sepia(1) hue-rotate(220deg) saturate(2.4) brightness(1) contrast(1.04);
 }
 
 body.season-mothers-day-weekend {
-    --preview-brown-1: #de6aa8;
-    --preview-brown-2: #c95695;
-    --preview-brown-3: #aa467d;
-    --preview-brown-4: #8b3967;
-    --season-icon-filter: sepia(1) hue-rotate(292deg) saturate(2.3) brightness(0.98) contrast(1.04);
+  --preview-brown-1: #de6aa8;
+  --preview-brown-2: #c95695;
+  --preview-brown-3: #aa467d;
+  --preview-brown-4: #8b3967;
+  --season-icon-filter: sepia(1) hue-rotate(292deg) saturate(2.3) brightness(0.98) contrast(1.04);
 }
 
 body.season-fathers-day-weekend {
-    --preview-brown-1: #2f5a88;
-    --preview-brown-2: #274a71;
-    --preview-brown-3: #203c5c;
-    --preview-brown-4: #19304a;
-    --season-icon-filter: sepia(1) hue-rotate(188deg) saturate(2.2) brightness(0.94) contrast(1.05);
+  --preview-brown-1: #2f5a88;
+  --preview-brown-2: #274a71;
+  --preview-brown-3: #203c5c;
+  --preview-brown-4: #19304a;
+  --season-icon-filter: sepia(1) hue-rotate(188deg) saturate(2.2) brightness(0.94) contrast(1.05);
 }
 
 body.season-independence-day-weekend,
 body.season-veterans-day,
 body.season-armed-forces-day {
-    --preview-brown-1: #b53b42;
-    --preview-brown-2: #1f4c9a;
-    --preview-brown-3: #8f2f36;
-    --preview-brown-4: #183c79;
-    --season-icon-filter: sepia(1) hue-rotate(342deg) saturate(2.5) brightness(0.97) contrast(1.06);
+  --preview-brown-1: #b53b42;
+  --preview-brown-2: #1f4c9a;
+  --preview-brown-3: #8f2f36;
+  --preview-brown-4: #183c79;
+  --season-icon-filter: sepia(1) hue-rotate(342deg) saturate(2.5) brightness(0.97) contrast(1.06);
 }
 
 body.season-memorial-day-weekend {
-    --preview-brown-1: #b53b42;
-    --preview-brown-2: #1f4c9a;
-    --preview-brown-3: #8f2f36;
-    --preview-brown-4: #183c79;
-    --season-icon-filter: sepia(1) hue-rotate(342deg) saturate(2.5) brightness(0.97) contrast(1.06);
+  --preview-brown-1: #b53b42;
+  --preview-brown-2: #1f4c9a;
+  --preview-brown-3: #8f2f36;
+  --preview-brown-4: #183c79;
+  --season-icon-filter: sepia(1) hue-rotate(342deg) saturate(2.5) brightness(0.97) contrast(1.06);
 }
 
 body.season-labor-day-weekend {
-    --preview-brown-1: #b53b42;
-    --preview-brown-2: #1f4c9a;
-    --preview-brown-3: #8f2f36;
-    --preview-brown-4: #183c79;
-    --season-icon-filter: sepia(1) hue-rotate(342deg) saturate(2.5) brightness(0.97) contrast(1.06);
+  --preview-brown-1: #b53b42;
+  --preview-brown-2: #1f4c9a;
+  --preview-brown-3: #8f2f36;
+  --preview-brown-4: #183c79;
+  --season-icon-filter: sepia(1) hue-rotate(342deg) saturate(2.5) brightness(0.97) contrast(1.06);
 }
 
 body.season-halloween {
-    --preview-brown-1: #EB6123;
-    --preview-brown-2: #DA4200;
-    --preview-brown-3: #B14424;
-    --preview-brown-4: #7B2C13;
-    --season-icon-filter: sepia(1) hue-rotate(14deg) saturate(2.6) brightness(0.96) contrast(1.05);
+  --preview-brown-1: #eb6123;
+  --preview-brown-2: #da4200;
+  --preview-brown-3: #b14424;
+  --preview-brown-4: #7b2c13;
+  --season-icon-filter: sepia(1) hue-rotate(14deg) saturate(2.6) brightness(0.96) contrast(1.05);
 }
 
 body.season-breast-cancer-awareness-day {
-    --preview-brown-1: #cf4d95;
-    --preview-brown-2: #b14180;
-    --preview-brown-3: #923569;
-    --preview-brown-4: #762b55;
-    --season-icon-filter: sepia(1) hue-rotate(296deg) saturate(2.5) brightness(1.00) contrast(1.04);
+  --preview-brown-1: #cf4d95;
+  --preview-brown-2: #b14180;
+  --preview-brown-3: #923569;
+  --preview-brown-4: #762b55;
+  --season-icon-filter: sepia(1) hue-rotate(296deg) saturate(2.5) brightness(1) contrast(1.04);
 }
 
 body.season-black-friday-sale {
-    --preview-brown-1: #2b2b2b;
-    --preview-brown-2: #1d1d1d;
-    --preview-brown-3: #121212;
-    --preview-brown-4: #0a0a0a;
-    --blackfriday-gold: #c6a44b;
-    --season-icon-filter: grayscale(1) brightness(0.55) contrast(1.12);
+  --preview-brown-1: #2b2b2b;
+  --preview-brown-2: #1d1d1d;
+  --preview-brown-3: #121212;
+  --preview-brown-4: #0a0a0a;
+  --blackfriday-gold: #c6a44b;
+  --season-icon-filter: grayscale(1) brightness(0.55) contrast(1.12);
 }
 
 body.season-cyber-monday-sale {
-    --preview-brown-1: #7c4dff;
-    --preview-brown-2: #673de6;
-    --preview-brown-3: #532fc0;
-    --preview-brown-4: #41269a;
-    --season-icon-filter: sepia(1) hue-rotate(220deg) saturate(2.4) brightness(1.00) contrast(1.04);
+  --preview-brown-1: #7c4dff;
+  --preview-brown-2: #673de6;
+  --preview-brown-3: #532fc0;
+  --preview-brown-4: #41269a;
+  --season-icon-filter: sepia(1) hue-rotate(220deg) saturate(2.4) brightness(1) contrast(1.04);
 }
 
 body.season-christmas {
-    --preview-brown-1: #2f7a46;
-    --preview-brown-2: #b64242;
-    --preview-brown-3: #245d36;
-    --preview-brown-4: #8f3333;
-    --season-icon-filter: sepia(1) hue-rotate(90deg) saturate(2.3) brightness(0.92) contrast(1.05);
+  --preview-brown-1: #2f7a46;
+  --preview-brown-2: #b64242;
+  --preview-brown-3: #245d36;
+  --preview-brown-4: #8f3333;
+  --season-icon-filter: sepia(1) hue-rotate(90deg) saturate(2.3) brightness(0.92) contrast(1.05);
 }
 
 body.season-thanksgiving {
-    --preview-brown-1: #a8531c;
-    --preview-brown-2: #8a4317;
-    --preview-brown-3: #6e360f;
-    --preview-brown-4: #552a0b;
-    --season-icon-filter: sepia(1) hue-rotate(5deg) saturate(2.4) brightness(0.9) contrast(1.05);
+  --preview-brown-1: #a8531c;
+  --preview-brown-2: #8a4317;
+  --preview-brown-3: #6e360f;
+  --preview-brown-4: #552a0b;
+  --season-icon-filter: sepia(1) hue-rotate(5deg) saturate(2.4) brightness(0.9) contrast(1.05);
 }
 
 body.season-new-years {
-    --preview-brown-1: #1f2a44;
-    --preview-brown-2: #b8943a;
-    --preview-brown-3: #151d31;
-    --preview-brown-4: #8a6d27;
-    --season-icon-filter: sepia(1) hue-rotate(185deg) saturate(1.8) brightness(0.6) contrast(1.05);
+  --preview-brown-1: #1f2a44;
+  --preview-brown-2: #b8943a;
+  --preview-brown-3: #151d31;
+  --preview-brown-4: #8a6d27;
+  --season-icon-filter: sepia(1) hue-rotate(185deg) saturate(1.8) brightness(0.6) contrast(1.05);
 }
 
 body.season-autism-awareness-day {
-    --preview-brown-1: #2d7fc1;
-    --preview-brown-2: #246aa3;
-    --preview-brown-3: #1d5785;
-    --preview-brown-4: #17466b;
-    --season-icon-filter: sepia(1) hue-rotate(185deg) saturate(2.4) brightness(1) contrast(1.04);
+  --preview-brown-1: #2d7fc1;
+  --preview-brown-2: #246aa3;
+  --preview-brown-3: #1d5785;
+  --preview-brown-4: #17466b;
+  --season-icon-filter: sepia(1) hue-rotate(185deg) saturate(2.4) brightness(1) contrast(1.04);
 }
 
 body.season-firefighters-day {
-    --preview-brown-1: #b22a2a;
-    --preview-brown-2: #8f2020;
-    --preview-brown-3: #741a1a;
-    --preview-brown-4: #5a1414;
-    --season-icon-filter: sepia(1) hue-rotate(335deg) saturate(2.6) brightness(0.85) contrast(1.05);
+  --preview-brown-1: #b22a2a;
+  --preview-brown-2: #8f2020;
+  --preview-brown-3: #741a1a;
+  --preview-brown-4: #5a1414;
+  --season-icon-filter: sepia(1) hue-rotate(335deg) saturate(2.6) brightness(0.85) contrast(1.05);
 }
 
 body.season-police-week {
-    --preview-brown-1: #2a4a9c;
-    --preview-brown-2: #213c80;
-    --preview-brown-3: #1a3066;
-    --preview-brown-4: #14254f;
-    --season-icon-filter: sepia(1) hue-rotate(200deg) saturate(2.4) brightness(0.85) contrast(1.05);
+  --preview-brown-1: #2a4a9c;
+  --preview-brown-2: #213c80;
+  --preview-brown-3: #1a3066;
+  --preview-brown-4: #14254f;
+  --season-icon-filter: sepia(1) hue-rotate(200deg) saturate(2.4) brightness(0.85) contrast(1.05);
 }
 
 body.season-ems-week {
-    --preview-brown-1: #1a78b5;
-    --preview-brown-2: #15639a;
-    --preview-brown-3: #115080;
-    --preview-brown-4: #0d3f66;
-    --season-icon-filter: sepia(1) hue-rotate(175deg) saturate(2.4) brightness(0.95) contrast(1.04);
+  --preview-brown-1: #1a78b5;
+  --preview-brown-2: #15639a;
+  --preview-brown-3: #115080;
+  --preview-brown-4: #0d3f66;
+  --season-icon-filter: sepia(1) hue-rotate(175deg) saturate(2.4) brightness(0.95) contrast(1.04);
 }
 
 body.season-anniversary {
-    --preview-brown-1: #d79e2b;
-    --preview-brown-2: #be8019;
-    --preview-brown-3: #6f5312;
-    --preview-brown-4: #55400d;
-    --season-icon-filter: sepia(1) hue-rotate(5deg) saturate(2.2) brightness(0.85) contrast(1.05);
+  --preview-brown-1: #d79e2b;
+  --preview-brown-2: #be8019;
+  --preview-brown-3: #6f5312;
+  --preview-brown-4: #55400d;
+  --season-icon-filter: sepia(1) hue-rotate(5deg) saturate(2.2) brightness(0.85) contrast(1.05);
 }
 
 body.season-preview-brown .header {
-    background-color: var(--preview-brown-1) !important;
-    border-bottom-color: var(--preview-brown-3) !important;
+  background-color: var(--preview-brown-1) !important;
+  border-bottom-color: var(--preview-brown-3) !important;
 }
 
 body.season-preview-brown .header .navPages-action,
 body.season-preview-brown .header .navUser-action {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .header .navUser-action .countPill {
-    background-color: var(--preview-brown-2) !important;
-    border-color: var(--preview-brown-3) !important;
-    color: #ffffff !important;
+  background-color: var(--preview-brown-2) !important;
+  border-color: var(--preview-brown-3) !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .quiz-match-count {
-    border-color: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .quiz-match-count__number {
-    background: var(--preview-brown-1) !important;
-    background-image: none !important;
-    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.18), 0 6px 12px rgba(0, 0, 0, 0.18) !important;
+  background: var(--preview-brown-1) !important;
+  background-image: none !important;
+  box-shadow:
+    inset 0 -2px 0 rgba(0, 0, 0, 0.18),
+    0 6px 12px rgba(0, 0, 0, 0.18) !important;
 }
 
 body.season-preview-brown .quiz-match-count:hover,
 body.season-preview-brown .quiz-match-count:focus {
-    background: var(--preview-brown-2) !important;
-    border-color: var(--preview-brown-2) !important;
-    color: #ffffff !important;
+  background: var(--preview-brown-2) !important;
+  border-color: var(--preview-brown-2) !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .quiz-match-count:hover .quiz-match-count__number,
 body.season-preview-brown .quiz-match-count:focus .quiz-match-count__number {
-    background: #ffffff !important;
-    color: var(--preview-brown-1) !important;
-    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.1), 0 6px 12px rgba(255, 255, 255, 0.2) !important;
+  background: #ffffff !important;
+  color: var(--preview-brown-1) !important;
+  box-shadow:
+    inset 0 -2px 0 rgba(0, 0, 0, 0.1),
+    0 6px 12px rgba(255, 255, 255, 0.2) !important;
 }
 
 /* Quiz "limiting selections" toggle, "matches without this" pill, and "Remove filter" button. */
 body.season-preview-brown .quiz-limiting-toggle,
 body.season-preview-brown .quiz-no-results-clear {
-    background: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-1) !important;
-    color: #ffffff !important;
+  background: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-1) !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .quiz-limiting-toggle:hover,
 body.season-preview-brown .quiz-limiting-toggle:focus,
 body.season-preview-brown .quiz-no-results-clear:hover,
 body.season-preview-brown .quiz-no-results-clear:focus {
-    background: var(--preview-brown-3) !important;
-    border-color: var(--preview-brown-3) !important;
-    color: #ffffff !important;
+  background: var(--preview-brown-3) !important;
+  border-color: var(--preview-brown-3) !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .quiz-no-results-count {
-    border-color: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .eyeva__banners-carousel,
 body.season-preview-brown .banners--top,
 body.season-preview-brown .banners--top .banner,
-body.season-preview-brown [data-content-region='header_top--global'],
-body.season-preview-brown [data-content-region='header_top_holiday--global'] {
-    background-color: var(--preview-brown-2) !important;
-    border-color: var(--preview-brown-3) !important;
-    color: #ffffff !important;
+body.season-preview-brown [data-content-region="header_top--global"],
+body.season-preview-brown [data-content-region="header_top_holiday--global"] {
+  background-color: var(--preview-brown-2) !important;
+  border-color: var(--preview-brown-3) !important;
+  color: #ffffff !important;
 }
 
-body.season-preview-brown [data-content-region='header_top--global'] a,
-body.season-preview-brown [data-content-region='header_top_holiday--global'] a {
-    color: #ffffff !important;
+body.season-preview-brown [data-content-region="header_top--global"] a,
+body.season-preview-brown [data-content-region="header_top_holiday--global"] a {
+  color: #ffffff !important;
 }
 
-
-body.season-preview-brown input[type='submit'],
+body.season-preview-brown input[type="submit"],
 body.season-preview-brown .button--primary,
 body.season-preview-brown ._choose-options,
 body.season-preview-brown .btn,
-body.season-preview-brown [class*='buttonPrimary'] {
-    background-color: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-1) !important;
-    color: #ffffff !important;
+body.season-preview-brown [class*="buttonPrimary"] {
+  background-color: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-1) !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .option.button.button--primary,
 body.season-preview-brown .option.button.button--primary:focus,
 body.season-preview-brown .option.button.button--primary:active {
-    background-color: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-2) !important;
-    color: #ffffff !important;
+  background-color: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-2) !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .option.button.button--primary.is-selected,
 body.season-preview-brown .option.button.button--primary.is-selected:hover {
-    background-color: #ffffff !important;
-    border-color: var(--preview-brown-1) !important;
-    color: var(--preview-brown-1) !important;
+  background-color: #ffffff !important;
+  border-color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .option.button.button--primary:hover {
-    background-color: var(--preview-brown-2) !important;
-    border-color: var(--preview-brown-3) !important;
-    color: #ffffff !important;
+  background-color: var(--preview-brown-2) !important;
+  border-color: var(--preview-brown-3) !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .button:hover,
 body.season-preview-brown button:hover,
-body.season-preview-brown input[type='submit']:hover,
+body.season-preview-brown input[type="submit"]:hover,
 body.season-preview-brown .button--primary:hover,
 body.season-preview-brown ._choose-options:hover,
 body.season-preview-brown .btn:hover,
-body.season-preview-brown [class*='buttonPrimary']:hover {
-    background-color: var(--preview-brown-3) !important;
-    border-color: var(--preview-brown-3) !important;
-    color: #ffffff !important;
+body.season-preview-brown .cart-remove:hover,
+body.season-preview-brown [class*="buttonPrimary"]:hover {
+  background-color: var(--preview-brown-3) !important;
+  border-color: var(--preview-brown-3) !important;
+  color: #ffffff !important;
+}
+
+body.season-preview-brown button:hover {
+  background-color: transparent !important;
 }
 
 body.season-preview-brown .productView-collapsible-title .button--plain:hover,
 body.season-preview-brown .productView-collapsible-title .button--plain:focus,
 body.season-preview-brown .productView-collapsible-title .button--plain:active {
-    background: none !important;
-    background-color: transparent !important;
-    border: 0 !important;
-    border-color: transparent !important;
-    color: var(--preview-brown-1) !important;
+  background: none !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-color: transparent !important;
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .productView-collapsible-title .button--plain:hover svg,
 body.season-preview-brown .productView-collapsible-title .button--plain:focus svg,
 body.season-preview-brown .productView-collapsible-title .button--plain:active svg {
-    fill: var(--preview-brown-1) !important;
+  fill: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .main-content .infusion-submit .button,
 body.season-preview-brown .blogpost .infusion-submit .button {
-    background: linear-gradient(135deg, var(--preview-brown-1), var(--preview-brown-2)) !important;
-    border-color: var(--preview-brown-2) !important;
-    color: #ffffff !important;
+  background: linear-gradient(135deg, var(--preview-brown-1), var(--preview-brown-2)) !important;
+  border-color: var(--preview-brown-2) !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .main-content .infusion-submit .button:hover,
 body.season-preview-brown .blogpost .infusion-submit .button:hover {
-    background: linear-gradient(135deg, var(--preview-brown-2), var(--preview-brown-3)) !important;
-    border-color: var(--preview-brown-3) !important;
-    color: #ffffff !important;
+  background: linear-gradient(135deg, var(--preview-brown-2), var(--preview-brown-3)) !important;
+  border-color: var(--preview-brown-3) !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .button a,
 body.season-preview-brown .button--primary a,
 body.season-preview-brown ._choose-options a,
 body.season-preview-brown .btn a,
-body.season-preview-brown [class*='buttonPrimary'] a {
-    color: #ffffff !important;
+body.season-preview-brown [class*="buttonPrimary"] a {
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .button a:hover,
 body.season-preview-brown .button--primary a:hover,
 body.season-preview-brown ._choose-options a:hover,
 body.season-preview-brown .btn a:hover,
-body.season-preview-brown [class*='buttonPrimary'] a:hover,
+body.season-preview-brown [class*="buttonPrimary"] a:hover,
 body.season-preview-brown .button a:focus,
 body.season-preview-brown .button--primary a:focus,
 body.season-preview-brown ._choose-options a:focus,
 body.season-preview-brown .btn a:focus,
-body.season-preview-brown [class*='buttonPrimary'] a:focus {
-    color: #ffffff !important;
+body.season-preview-brown [class*="buttonPrimary"] a:focus {
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .page a.button,
 body.season-preview-brown .page a.button--primary,
 body.season-preview-brown .page a._choose-options,
 body.season-preview-brown .page a.btn,
-body.season-preview-brown .page a[class*='buttonPrimary'] {
-    color: #ffffff !important;
+body.season-preview-brown .page a[class*="buttonPrimary"] {
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .page a.button:hover,
 body.season-preview-brown .page a.button--primary:hover,
 body.season-preview-brown .page a._choose-options:hover,
 body.season-preview-brown .page a.btn:hover,
-body.season-preview-brown .page a[class*='buttonPrimary']:hover,
+body.season-preview-brown .page a[class*="buttonPrimary"]:hover,
 body.season-preview-brown .page a.button:focus,
 body.season-preview-brown .page a.button--primary:focus,
 body.season-preview-brown .page a._choose-options:focus,
 body.season-preview-brown .page a.btn:focus,
-body.season-preview-brown .page a[class*='buttonPrimary']:focus {
-    color: #ffffff !important;
+body.season-preview-brown .page a[class*="buttonPrimary"]:focus {
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .sale-flag-side {
-    background-color: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-2) !important;
-    color: #ffffff !important;
+  background-color: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-2) !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .sale-flag-side:first-child::before {
-    border-color: var(--preview-brown-2) transparent transparent transparent !important;
+  border-color: var(--preview-brown-2) transparent transparent transparent !important;
 }
 
 body.season-preview-brown .navList-action--checkbox.is-selected::before,
 body.season-preview-brown .form-checkbox:checked + .form-label::before,
 body.season-preview-brown .form-radio:checked + .form-label::before {
-    background-color: var(--preview-brown-2) !important;
-    border-color: var(--preview-brown-3) !important;
+  background-color: var(--preview-brown-2) !important;
+  border-color: var(--preview-brown-3) !important;
 }
 
 body.season-preview-brown .pagination-item--current,
 body.season-preview-brown .pagination-item--current .pagination-link {
-    background-color: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-2) !important;
-    color: #ffffff !important;
+  background-color: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-2) !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .name-plate {
-    border-color: var(--preview-brown-2) !important;
-    outline-color: var(--preview-brown-2) !important;
+  border-color: var(--preview-brown-2) !important;
+  outline-color: var(--preview-brown-2) !important;
 }
 
 body.season-preview-brown .faqplus,
 body.season-preview-brown #faqplus {
-    color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .expandfaq a,
@@ -469,7 +481,7 @@ body.season-preview-brown .faq6 a,
 body.season-preview-brown .faq7 a,
 body.season-preview-brown .faq8 a,
 body.season-preview-brown .faq9 a {
-    color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .expandfaq a:hover,
@@ -483,30 +495,30 @@ body.season-preview-brown .faq6 a:hover,
 body.season-preview-brown .faq7 a:hover,
 body.season-preview-brown .faq8 a:hover,
 body.season-preview-brown .faq9 a:hover {
-    color: var(--preview-brown-3) !important;
+  color: var(--preview-brown-3) !important;
 }
 
 body.season-preview-brown .faqplus .faqicon,
 body.season-preview-brown #faqplus .faqicon {
-    filter: none !important;
-    background-color: var(--preview-brown-1) !important;
-    -webkit-mask: url('/product_images/uploaded_images/favicon.png') center / contain no-repeat;
-    mask: url('/product_images/uploaded_images/favicon.png') center / contain no-repeat;
-    object-position: -9999px 0; /* hide the original pixels; only the tinted mask shows */
+  filter: none !important;
+  background-color: var(--preview-brown-1) !important;
+  -webkit-mask: url("/product_images/uploaded_images/favicon.png") center / contain no-repeat;
+  mask: url("/product_images/uploaded_images/favicon.png") center / contain no-repeat;
+  object-position: -9999px 0; /* hide the original pixels; only the tinted mask shows */
 }
 
 body.season-black-friday-sale.season-preview-brown .faqplus .faqicon,
 body.season-black-friday-sale.season-preview-brown #faqplus .faqicon {
-    background-color: var(--blackfriday-gold) !important;
+  background-color: var(--blackfriday-gold) !important;
 }
 
 body.season-preview-brown [data-sale-countdown-day-value],
 body.season-preview-brown [data-sale-countdown-hour-value],
 body.season-preview-brown [data-sale-countdown-minute-value],
 body.season-preview-brown [data-sale-countdown-second-value] {
-    background-color: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-2) !important;
-    color: #ffffff !important;
+  background-color: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-2) !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown [data-sale-countdown-day-label],
@@ -517,9 +529,9 @@ body.season-preview-brown [data-sale-countdown-day] ._label,
 body.season-preview-brown [data-sale-countdown-hour] ._label,
 body.season-preview-brown [data-sale-countdown-minute] ._label,
 body.season-preview-brown [data-sale-countdown-second] ._label {
-    background-color: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-2) !important;
-    color: #ffffff !important;
+  background-color: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-2) !important;
+  color: #ffffff !important;
 }
 
 /* Product page exception: keep countdown chips transparent even in active seasonal themes. */
@@ -539,85 +551,85 @@ body.season-preview-brown .productView ._countdown [data-sale-countdown-day] ._l
 body.season-preview-brown .productView ._countdown [data-sale-countdown-hour] ._label,
 body.season-preview-brown .productView ._countdown [data-sale-countdown-minute] ._label,
 body.season-preview-brown .productView ._countdown [data-sale-countdown-second] ._label {
-    background: transparent !important;
-    background-color: transparent !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
-    color: #555 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: #555 !important;
 }
 
-body.season-preview-brown .form-field a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']) {
-    color: var(--preview-brown-1) !important;
+body.season-preview-brown .form-field a:not(.button):not(.button--primary):not(.btn):not([class*="buttonPrimary"]) {
+  color: var(--preview-brown-1) !important;
 }
 
-body.season-preview-brown .tab-content a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']) {
-    color: var(--preview-brown-1) !important;
+body.season-preview-brown .tab-content a:not(.button):not(.button--primary):not(.btn):not([class*="buttonPrimary"]) {
+  color: var(--preview-brown-1) !important;
 }
 
-body.season-preview-brown .productView-description a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']) {
-    color: var(--preview-brown-1) !important;
+body.season-preview-brown .productView-description a:not(.button):not(.button--primary):not(.btn):not([class*="buttonPrimary"]) {
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .categoryGrid-item a {
-    color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .categoryGrid-item .topCategories-name,
 body.season-preview-brown .categoryGrid-item .topCategories-link .topCategories-name {
-    color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .card-title > a:hover,
 body.season-preview-brown .page a:hover,
 body.season-preview-brown .footer a:hover {
-    color: var(--preview-brown-3) !important;
+  color: var(--preview-brown-3) !important;
 }
 
-body.season-preview-brown .form-field a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']):hover,
-body.season-preview-brown .form-field a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']):focus {
-    color: var(--preview-brown-3) !important;
+body.season-preview-brown .form-field a:not(.button):not(.button--primary):not(.btn):not([class*="buttonPrimary"]):hover,
+body.season-preview-brown .form-field a:not(.button):not(.button--primary):not(.btn):not([class*="buttonPrimary"]):focus {
+  color: var(--preview-brown-3) !important;
 }
 
-body.season-preview-brown .tab-content a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']):hover,
-body.season-preview-brown .tab-content a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']):focus {
-    color: var(--preview-brown-3) !important;
+body.season-preview-brown .tab-content a:not(.button):not(.button--primary):not(.btn):not([class*="buttonPrimary"]):hover,
+body.season-preview-brown .tab-content a:not(.button):not(.button--primary):not(.btn):not([class*="buttonPrimary"]):focus {
+  color: var(--preview-brown-3) !important;
 }
 
-body.season-preview-brown .productView-description a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']):hover,
-body.season-preview-brown .productView-description a:not(.button):not(.button--primary):not(.btn):not([class*='buttonPrimary']):focus {
-    color: var(--preview-brown-3) !important;
+body.season-preview-brown .productView-description a:not(.button):not(.button--primary):not(.btn):not([class*="buttonPrimary"]):hover,
+body.season-preview-brown .productView-description a:not(.button):not(.button--primary):not(.btn):not([class*="buttonPrimary"]):focus {
+  color: var(--preview-brown-3) !important;
 }
 
 body.season-preview-brown .categoryGrid-item a:hover,
 body.season-preview-brown .categoryGrid-item a:focus {
-    color: var(--preview-brown-3) !important;
+  color: var(--preview-brown-3) !important;
 }
 
 body.season-preview-brown .categoryGrid-item .topCategories-name:hover,
 body.season-preview-brown .categoryGrid-item .topCategories-name:focus,
 body.season-preview-brown .categoryGrid-item .topCategories-link:hover .topCategories-name,
 body.season-preview-brown .categoryGrid-item .topCategories-link:focus .topCategories-name {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .data-banner-carousel-link,
 body.season-preview-brown .data-banner-carousel-link:hover {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .navPages-childList .navPages-label,
 body.season-preview-brown .navPages-megaMenu .navPages-label {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .navPages-childList .navPages-label:hover,
 body.season-preview-brown .navPages-megaMenu .navPages-label:hover {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .navPages-childList-action._mega,
 body.season-preview-brown .navPages-item .navPages-childList-action._mega {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .navPages-childList-action._mega:hover,
@@ -626,7 +638,7 @@ body.season-preview-brown .navPages-childList-action._mega:active,
 body.season-preview-brown .navPages-item .navPages-childList-action._mega:hover,
 body.season-preview-brown .navPages-item .navPages-childList-action._mega:focus,
 body.season-preview-brown .navPages-item .navPages-childList-action._mega:active {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .header .navPages .navPages-action,
@@ -634,47 +646,47 @@ body.season-preview-brown .header .navPages .navPages-label,
 body.season-preview-brown .header .navPages .navPages-item a,
 body.season-preview-brown .header .navPages .navPages-childList-action._mega,
 body.season-preview-brown .header .navPages .navPages-childList-action._mega .navPages-label {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .navPages-megaMenu,
 body.season-preview-brown .navPages-subMenu,
 body.season-preview-brown .navUser-subMenu,
 body.season-preview-brown .info-panel {
-    background: var(--preview-brown-2) !important;
-    border-color: var(--preview-brown-3) !important;
+  background: var(--preview-brown-2) !important;
+  border-color: var(--preview-brown-3) !important;
 }
 
 body.season-preview-brown .navUser-action:hover .icon svg {
-    fill: var(--preview-brown-4)
+  fill: var(--preview-brown-4);
 }
 
 body.season-preview-brown .navUser-action._hasLabel:hover {
-    border-color: var(--preview-brown-4) !important;
-    color: var(--preview-brown-4) !important;
+  border-color: var(--preview-brown-4) !important;
+  color: var(--preview-brown-4) !important;
 }
 
 body.season-preview-brown .header .navPages .navPages-megaMenu.is-open,
 body.season-preview-brown .header .navPages .navPages-megaMenu.is-open[data-menu-dropdown],
 body.season-preview-brown .header .navPages .navPages-subMenu.is-open[data-menu-dropdown] {
-    background: var(--preview-brown-2) !important;
-    border-color: var(--preview-brown-3) !important;
+  background: var(--preview-brown-2) !important;
+  border-color: var(--preview-brown-3) !important;
 }
 
 body.season-preview-brown [data-menu-dropdown].is-open,
 body.season-preview-brown .navPages-megaMenu.is-open,
 body.season-preview-brown .navPages-subMenu.is-open,
-body.season-preview-brown [id^='navPages-subMenu'].is-open {
-    background: var(--preview-brown-2) !important;
-    border-color: var(--preview-brown-3) !important;
+body.season-preview-brown [id^="navPages-subMenu"].is-open {
+  background: var(--preview-brown-2) !important;
+  border-color: var(--preview-brown-3) !important;
 }
 
 body.season-preview-brown .navPages-item.info-panel.is-open,
 body.season-preview-brown .navPages-item.info-panel.is-open .info-submenu,
 body.season-preview-brown .info-panel.is-open,
 body.season-preview-brown .info-panel.is-open .info-submenu {
-    background: var(--preview-brown-2) !important;
-    border-color: var(--preview-brown-3) !important;
+  background: var(--preview-brown-2) !important;
+  border-color: var(--preview-brown-3) !important;
 }
 
 body.season-preview-brown .header .navPages .navPages-action:hover,
@@ -689,106 +701,106 @@ body.season-preview-brown .header .navPages .navPages-childList-action._mega:act
 body.season-preview-brown .header .navPages .navPages-childList-action._mega:hover .navPages-label,
 body.season-preview-brown .header .navPages .navPages-childList-action._mega:focus .navPages-label,
 body.season-preview-brown .header .navPages .navPages-childList-action._mega:active .navPages-label {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .header .navPages .navPages-action--autoselect {
-    background-color: var(--preview-brown-2) !important;
-    border-color: var(--preview-brown-3) !important;
-    box-shadow: 0 2px 8px var(--preview-brown-3) !important;
-    color: var(--preview-brown-1) !important;
+  background-color: var(--preview-brown-2) !important;
+  border-color: var(--preview-brown-3) !important;
+  box-shadow: 0 2px 8px var(--preview-brown-3) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .header .navPages .navPages-action--autoselect .navPages-label {
-    color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .header .navPages .navPages-action--autoselect .navPages-label::before {
-    filter: var(--season-icon-filter) !important;
+  filter: var(--season-icon-filter) !important;
 }
 
 body.season-preview-brown .header .navPages .navPages-action--autoselect:hover,
 body.season-preview-brown .header .navPages .navPages-action--autoselect:focus,
 body.season-preview-brown .header .navPages .navPages-action--autoselect:active {
-    background-color: var(--preview-brown-3) !important;
-    border-color: var(--preview-brown-4) !important;
-    box-shadow: 0 4px 12px var(--preview-brown-4) !important;
-    color: #ffffff !important;
+  background-color: var(--preview-brown-3) !important;
+  border-color: var(--preview-brown-4) !important;
+  box-shadow: 0 4px 12px var(--preview-brown-4) !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .header .navPages .navPages-action--autoselect:hover .navPages-label,
 body.season-preview-brown .header .navPages .navPages-action--autoselect:focus .navPages-label,
 body.season-preview-brown .header .navPages .navPages-action--autoselect:active .navPages-label {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .header .navPages .navPages-action--autoselect:hover .navPages-label::before,
 body.season-preview-brown .header .navPages .navPages-action--autoselect:focus .navPages-label::before,
 body.season-preview-brown .header .navPages .navPages-action--autoselect:active .navPages-label::before {
-    filter: var(--season-icon-filter) !important;
+  filter: var(--season-icon-filter) !important;
 }
 
 @media screen and (max-width: 800px) {
-    body[class*='season-']:not(.season-default) .navPages-list,
-    body[class*='season-']:not(.season-default) .navPages-megaMenu-childList {
-        background-color: var(--preview-brown-1) !important;
-    }
+  body[class*="season-"]:not(.season-default) .navPages-list,
+  body[class*="season-"]:not(.season-default) .navPages-megaMenu-childList {
+    background-color: var(--preview-brown-1) !important;
+  }
 }
 
 /* Repair form seasonal accents: support switcher radios and tab buttons. */
-body.season-preview-brown .support-switcher input[type='radio'] {
-    accent-color: var(--preview-brown-1) !important;
+body.season-preview-brown .support-switcher input[type="radio"] {
+  accent-color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .support-switcher label:hover {
-    border-color: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .tab-buttons .tab-button {
-    background: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-2) !important;
+  background: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-2) !important;
 }
 
 body.season-preview-brown .tab-buttons .tab-button:hover,
 body.season-preview-brown .tab-buttons .tab-button.active-tab {
-    background: var(--preview-brown-3) !important;
-    border-color: var(--preview-brown-4) !important;
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2) !important;
+  background: var(--preview-brown-3) !important;
+  border-color: var(--preview-brown-4) !important;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2) !important;
 }
 
 body.season-preview-brown .section--brands {
-    background: var(--preview-brown-1) !important;
+  background: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .topCategories {
-    background-color: var(--preview-brown-1) !important;
+  background-color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .section--brands .section-heading,
 body.season-preview-brown .section--brands .brandCarousel-link,
 body.season-preview-brown .section--brands .brandCarousel-name-alt,
 body.season-preview-brown .section--brands .brandCarousel-more {
-    color: #ffffff !important;
+  color: #ffffff !important;
 }
 
 body.season-preview-brown .papathemes-eyeva-hero-carousel-59be897b-6f5f-40e4-b665-5759d68a5d7f {
-    --papathemes-eyeva-hero-carousel-dot-color-active: var(--preview-brown-2);
+  --papathemes-eyeva-hero-carousel-dot-color-active: var(--preview-brown-2);
 }
 
 /* Hero carousel controls: dark backing + white icon stays visible over any banner and holiday color. */
 body .papathemes-eyeva-hero-carousel .blaze-prev,
 body .papathemes-eyeva-hero-carousel .blaze-next,
 body .papathemes-eyeva-hero-carousel .blaze-pause {
-    background-color: rgba(0, 0, 0, 0.6) !important;
-    border: 2px solid #ffffff !important;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45) !important;
-    color: #ffffff !important;
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.45) !important;
+  color: #ffffff !important;
 }
 
 body .papathemes-eyeva-hero-carousel .blaze-prev .icon svg,
 body .papathemes-eyeva-hero-carousel .blaze-next .icon svg,
 body .papathemes-eyeva-hero-carousel .blaze-pause .icon svg {
-    fill: #ffffff !important;
+  fill: #ffffff !important;
 }
 
 body .papathemes-eyeva-hero-carousel .blaze-prev:hover,
@@ -797,9 +809,9 @@ body .papathemes-eyeva-hero-carousel .blaze-next:hover,
 body .papathemes-eyeva-hero-carousel .blaze-next:focus-visible,
 body .papathemes-eyeva-hero-carousel .blaze-pause:hover,
 body .papathemes-eyeva-hero-carousel .blaze-pause:focus-visible {
-    background-color: #ffffff !important;
-    border-color: var(--preview-brown-2, #dc3522) !important;
-    color: var(--preview-brown-2, #dc3522) !important;
+  background-color: #ffffff !important;
+  border-color: var(--preview-brown-2, #dc3522) !important;
+  color: var(--preview-brown-2, #dc3522) !important;
 }
 
 body .papathemes-eyeva-hero-carousel .blaze-prev:hover .icon svg,
@@ -808,13 +820,13 @@ body .papathemes-eyeva-hero-carousel .blaze-next:hover .icon svg,
 body .papathemes-eyeva-hero-carousel .blaze-next:focus-visible .icon svg,
 body .papathemes-eyeva-hero-carousel .blaze-pause:hover .icon svg,
 body .papathemes-eyeva-hero-carousel .blaze-pause:focus-visible .icon svg {
-    fill: var(--preview-brown-2, #dc3522) !important;
+  fill: var(--preview-brown-2, #dc3522) !important;
 }
 
 /* Pause button reveals on hover/keyboard focus only; a mouse click must not leave it pinned open. */
 body .papathemes-eyeva-hero-carousel .blaze-pause:focus:not(:hover):not(:focus-visible):not(:active) {
-    left: calc(var(--papathemes-eyeva-button-height) * -1.5) !important;
-    opacity: 0 !important;
+  left: calc(var(--papathemes-eyeva-button-height) * -1.5) !important;
+  opacity: 0 !important;
 }
 
 /* Carousel arrows (home hero layout + all non-hero blaze sliders): black border/arrow, holiday color on hover. */
@@ -822,16 +834,16 @@ body .homeblaze-prev,
 body .homeblaze-next,
 body .blaze-slider:not(.papathemes-eyeva-hero-carousel) .blaze-container .blaze-prev,
 body .blaze-slider:not(.papathemes-eyeva-hero-carousel) .blaze-container .blaze-next {
-    background-color: transparent !important;
-    border: 1px solid #222222 !important;
-    color: #222222 !important;
+  background-color: transparent !important;
+  border: 1px solid #222222 !important;
+  color: #222222 !important;
 }
 
 body .homeblaze-prev svg,
 body .homeblaze-next svg,
 body .blaze-slider:not(.papathemes-eyeva-hero-carousel) .blaze-container .blaze-prev .icon svg,
 body .blaze-slider:not(.papathemes-eyeva-hero-carousel) .blaze-container .blaze-next .icon svg {
-    fill: #222222 !important;
+  fill: #222222 !important;
 }
 
 body[class] .homeblaze-prev:hover,
@@ -842,9 +854,9 @@ body[class] .blaze-slider:not(.papathemes-eyeva-hero-carousel) .blaze-container 
 body[class] .blaze-slider:not(.papathemes-eyeva-hero-carousel) .blaze-container .blaze-prev:focus-visible,
 body[class] .blaze-slider:not(.papathemes-eyeva-hero-carousel) .blaze-container .blaze-next:hover,
 body[class] .blaze-slider:not(.papathemes-eyeva-hero-carousel) .blaze-container .blaze-next:focus-visible {
-    background-color: transparent !important;
-    border-color: var(--preview-brown-1, #dc3522) !important;
-    color: var(--preview-brown-1, #dc3522) !important;
+  background-color: transparent !important;
+  border-color: var(--preview-brown-1, #dc3522) !important;
+  color: var(--preview-brown-1, #dc3522) !important;
 }
 
 body[class] .homeblaze-prev:hover svg,
@@ -855,7 +867,7 @@ body .blaze-slider:not(.papathemes-eyeva-hero-carousel) .blaze-container .blaze-
 body .blaze-slider:not(.papathemes-eyeva-hero-carousel) .blaze-container .blaze-prev:focus-visible .icon svg,
 body .blaze-slider:not(.papathemes-eyeva-hero-carousel) .blaze-container .blaze-next:hover .icon svg,
 body .blaze-slider:not(.papathemes-eyeva-hero-carousel) .blaze-container .blaze-next:focus-visible .icon svg {
-    fill: var(--preview-brown-1, #dc3522) !important;
+  fill: var(--preview-brown-1, #dc3522) !important;
 }
 
 /* Top announcement banner arrows: plain white arrow only (no circle/border/background). */
@@ -865,22 +877,22 @@ body .eyeva__banners-carousel .blaze-slider .blaze-container .blaze-prev:hover,
 body .eyeva__banners-carousel .blaze-slider .blaze-container .blaze-prev:focus-visible,
 body .eyeva__banners-carousel .blaze-slider .blaze-container .blaze-next:hover,
 body .eyeva__banners-carousel .blaze-slider .blaze-container .blaze-next:focus-visible {
-    background-color: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    color: #ffffff !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
 }
 
 body .eyeva__banners-carousel .blaze-slider .blaze-container .blaze-prev .icon svg,
 body .eyeva__banners-carousel .blaze-slider .blaze-container .blaze-next .icon svg {
-    fill: #ffffff !important;
+  fill: #ffffff !important;
 }
 
 body .eyeva__banners-carousel .blaze-slider .blaze-container .blaze-prev:hover .icon svg,
 body .eyeva__banners-carousel .blaze-slider .blaze-container .blaze-prev:focus-visible .icon svg,
 body .eyeva__banners-carousel .blaze-slider .blaze-container .blaze-next:hover .icon svg,
 body .eyeva__banners-carousel .blaze-slider .blaze-container .blaze-next:focus-visible .icon svg {
-    fill: rgba(255, 255, 255, 0.6) !important;
+  fill: rgba(255, 255, 255, 0.6) !important;
 }
 
 /* Outline buttons (e.g. blog "Read more"): holiday-colored border + text, transparent background. */
@@ -892,33 +904,33 @@ body.season-preview-brown a.button.button--outline:active,
 body.season-preview-brown button.button--outline:hover,
 body.season-preview-brown button.button--outline:focus,
 body.season-preview-brown button.button--outline:active {
-    background-color: transparent !important;
-    border-color: var(--preview-brown-1) !important;
-    color: var(--preview-brown-1) !important;
+  background-color: transparent !important;
+  border-color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown a.button.button--outline:hover,
 body.season-preview-brown a.button.button--outline:focus,
 body.season-preview-brown button.button--outline:hover,
 body.season-preview-brown button.button--outline:focus {
-    background-color: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-1) !important;
-    color: #ffffff !important;
+  background-color: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-1) !important;
+  color: #ffffff !important;
 }
 
 /* Card quantity +/- buttons: keep background transparent; hover tints the +/- icon with the holiday color. */
 body.season-preview-brown .card-qty .form-increment .button:hover,
 body.season-preview-brown .card-qty .form-increment .button:focus,
 body.season-preview-brown .card-qty .form-increment .button:active {
-    background-color: transparent !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 body.season-preview-brown .card-qty .form-increment .button:hover .icon svg,
 body.season-preview-brown .card-qty .form-increment .button:focus .icon svg,
 body.season-preview-brown .card-qty .form-increment .button:active .icon svg {
-    fill: var(--preview-brown-1) !important;
+  fill: var(--preview-brown-1) !important;
 }
 
 /* Facet sidebar headings (Price, etc.): no background fill on hover; only the text and arrow button take the holiday color. */
@@ -926,31 +938,31 @@ body.season-preview-brown .accordion--navList .accordion-navigation,
 body.season-preview-brown .accordion--navList .accordion-navigation:hover,
 body.season-preview-brown .accordion--navList .accordion-navigation:focus,
 body.season-preview-brown .accordion--navList .accordion-navigation:active {
-    background-color: transparent !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 body.season-preview-brown .accordion--navList .accordion-navigation:hover,
 body.season-preview-brown .accordion--navList .accordion-navigation:focus,
 body.season-preview-brown .accordion--navList .accordion-navigation:active {
-    color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .accordion--navList .accordion-navigation .icon,
 body.season-preview-brown .accordion--navList .accordion-navigation .icon svg {
-    border-color: var(--preview-brown-1) !important;
-    color: var(--preview-brown-1) !important;
-    fill: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
+  fill: var(--preview-brown-1) !important;
 }
 
 /* Blog filter box: headings, links, arrows and close button follow the holiday color. */
 body.season-preview-brown #blog-filter {
-    border-color: color-mix(in srgb, var(--preview-brown-1) 24%, #fff);
+  border-color: color-mix(in srgb, var(--preview-brown-1) 24%, #fff);
 }
 
 body.season-preview-brown #blog-filter .blog-filter-header {
-    border-bottom-color: color-mix(in srgb, var(--preview-brown-1) 24%, #fff);
+  border-bottom-color: color-mix(in srgb, var(--preview-brown-1) 24%, #fff);
 }
 
 body.season-preview-brown #blog-filter .filter-heading,
@@ -958,11 +970,11 @@ body.season-preview-brown #blog-filter .filter-heading .filter-heading-text,
 body.season-preview-brown #blog-filter .filter-content li a,
 body.season-preview-brown #blog-filter .filter-heading .filter-arrow,
 body.season-preview-brown #blog-filter .filter-heading .filter-arrow svg {
-    color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown #blog-filter .filter-heading .filter-arrow svg {
-    fill: var(--preview-brown-1) !important;
+  fill: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown #blog-filter .filter-content li a:hover,
@@ -970,8 +982,8 @@ body.season-preview-brown #blog-filter .filter-heading:hover,
 body.season-preview-brown #blog-filter .filter-heading:focus-visible,
 body.season-preview-brown #blog-filter .filter-heading.open,
 body.season-preview-brown #blog-filter .filter-heading:hover a {
-    background-color: color-mix(in srgb, var(--preview-brown-1) 8%, #fff);
-    color: var(--preview-brown-3) !important;
+  background-color: color-mix(in srgb, var(--preview-brown-1) 8%, #fff);
+  color: var(--preview-brown-3) !important;
 }
 
 body.season-preview-brown #blog-filter .filter-toggle-control,
@@ -980,459 +992,461 @@ body.season-preview-brown #blog-filter .filter-toggle-control:focus,
 body.season-preview-brown #blog-filter .blog-filter-close,
 body.season-preview-brown #blog-filter .blog-filter-close:hover,
 body.season-preview-brown #blog-filter .blog-filter-close:focus {
-    background-color: transparent !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
-    color: var(--preview-brown-1) !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  color: var(--preview-brown-1) !important;
 }
 
 /* Blog "Read more" arrow follows the holiday color. */
 body.season-preview-brown .blog-post-footer .read-more .icon svg {
-    fill: var(--preview-brown-1) !important;
+  fill: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .blog-post-footer .read-more:hover .icon svg,
 body.season-preview-brown .blog-post-footer .read-more:focus .icon svg {
-    fill: var(--preview-brown-3) !important;
+  fill: var(--preview-brown-3) !important;
 }
 
 /* Blog table of contents (and transcript TOC) follow the holiday color. */
 body.season-preview-brown .toc a,
 body.season-preview-brown .transcript-toc a {
-    color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .toc a:hover,
 body.season-preview-brown .transcript-toc a:hover {
-    color: var(--preview-brown-3) !important;
+  color: var(--preview-brown-3) !important;
 }
 
 body.season-preview-brown .toc a.active,
 body.season-preview-brown .blog-post-body .blog-post .toc a.active,
 body.season-preview-brown .transcript-toc a.active {
-    color: var(--preview-brown-3) !important;
+  color: var(--preview-brown-3) !important;
 }
 
 body.season-preview-brown .toc h3,
 body.season-preview-brown .transcript-toc h3 {
-    border-bottom-color: var(--preview-brown-1) !important;
+  border-bottom-color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .toc-toggle,
 body.season-preview-brown .toc-toggle:hover,
 body.season-preview-brown .toc-toggle:focus {
-    background-color: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-1) !important;
-    color: #fff !important;
+  background-color: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-1) !important;
+  color: #fff !important;
 }
 
 /* Blog title link: dark by default, holiday color on hover/focus. */
 body.season-preview-brown .blog-title a:hover,
 body.season-preview-brown .blog-title a:focus {
-    color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 /* Links inside blog post content follow the holiday color. */
 body.season-preview-brown .blog-post .content a:not(.button),
 body.season-preview-brown .blog-post-body .blog-post a:not(.button):not(.btn) {
-    color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .blog-post .content a:not(.button):hover,
 body.season-preview-brown .blog-post .content a:not(.button):focus,
 body.season-preview-brown .blog-post-body .blog-post a:not(.button):not(.btn):hover,
 body.season-preview-brown .blog-post-body .blog-post a:not(.button):not(.btn):focus {
-    color: var(--preview-brown-3) !important;
+  color: var(--preview-brown-3) !important;
 }
 
 /* Blog markdown tabs (model number decoder, etc.) follow the holiday color. */
 body.season-preview-brown .md-tab-button {
-    background: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-1) !important;
+  background: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .md-tab-button:hover {
-    background: var(--preview-brown-3) !important;
-    border-color: var(--preview-brown-3) !important;
+  background: var(--preview-brown-3) !important;
+  border-color: var(--preview-brown-3) !important;
 }
 
 body.season-preview-brown .md-tab-button.active-tab,
 body.season-preview-brown .md-tab-button.underline {
-    background: #fff !important;
-    border-color: var(--preview-brown-1) !important;
+  background: #fff !important;
+  border-color: var(--preview-brown-1) !important;
 }
 
 body.season-preview-brown .md-tab-button.active-tab .md-tabs-title,
 body.season-preview-brown .md-tab-button.underline .md-tabs-title {
-    color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
 /* Seasonal accents for product prices, contact cards, repair icons, and steps. */
-body[class*='season-']:not(.season-default) .eyeva__productView-option-price,
-body[class*='season-']:not(.season-default) .eyeva__productView-option-price-now,
-body[class*='season-']:not(.season-default) .eyeva__productView-option-price .price,
-body[class*='season-']:not(.season-default) .price-section--salePercent .price--percent {
+body[class*="season-"]:not(.season-default) .eyeva__productView-option-price,
+body[class*="season-"]:not(.season-default) .eyeva__productView-option-price-now,
+body[class*="season-"]:not(.season-default) .eyeva__productView-option-price .price,
+body[class*="season-"]:not(.season-default) .price-section--salePercent .price--percent {
+  color: var(--preview-brown-1) !important;
+}
+
+body[class*="season-"]:not(.season-default) .eyeva__productView-tooltip-trigger,
+body[class*="season-"]:not(.season-default) .shipping-estimate-show,
+body[class*="season-"]:not(.season-default) .shipping-estimate-show__btn-name,
+body[class*="season-"]:not(.season-default) .coupon-code-add,
+body[class*="season-"]:not(.season-default) .cart-drawer-header,
+body[class*="season-"]:not(.season-default) .cart-drawer-header .cart-page-heading,
+body[class*="season-"]:not(.season-default) .cart-drawer-header .icon,
+body[class*="season-"]:not(.season-default) .cart-drawer-header .icon svg,
+body[class*="season-"]:not(.season-default) [data-item-edit],
+body[class*="season-"]:not(.season-default) .cart-header-link.body-cta {
+  color: var(--preview-brown-1) !important;
+}
+
+body[class*="season-"]:not(.season-default) .eyeva__productView-tooltip-trigger:hover,
+body[class*="season-"]:not(.season-default) .eyeva__productView-tooltip-trigger:focus,
+body[class*="season-"]:not(.season-default) label[data-product-attribute-value]:hover,
+body[class*="season-"]:not(.season-default) label[data-product-attribute-value]:focus,
+body[class*="season-"]:not(.season-default) label[data-product-attribute-value]:hover ._label,
+body[class*="season-"]:not(.season-default) label[data-product-attribute-value]:focus ._label,
+body[class*="season-"]:not(.season-default) label[data-product-attribute-value]:hover .eyeva__productView-option-price,
+body[class*="season-"]:not(.season-default) label[data-product-attribute-value]:focus .eyeva__productView-option-price,
+body[class*="season-"]:not(.season-default) label[data-product-attribute-value]:hover .eyeva__productView-option-price-now,
+body[class*="season-"]:not(.season-default) label[data-product-attribute-value]:focus .eyeva__productView-option-price-now,
+body[class*="season-"]:not(.season-default) .shipping-estimate-show:hover,
+body[class*="season-"]:not(.season-default) .shipping-estimate-show:focus,
+body[class*="season-"]:not(.season-default) .shipping-estimate-show:hover .shipping-estimate-show__btn-name,
+body[class*="season-"]:not(.season-default) .shipping-estimate-show:focus .shipping-estimate-show__btn-name,
+body[class*="season-"]:not(.season-default) .coupon-code-add:hover,
+body[class*="season-"]:not(.season-default) .coupon-code-add:focus,
+body[class*="season-"]:not(.season-default) .cart-drawer-header:hover,
+body[class*="season-"]:not(.season-default) .cart-drawer-header:focus,
+body[class*="season-"]:not(.season-default) .cart-drawer-header:hover .cart-page-heading,
+body[class*="season-"]:not(.season-default) .cart-drawer-header:focus .cart-page-heading,
+body[class*="season-"]:not(.season-default) .cart-drawer-header:hover .icon,
+body[class*="season-"]:not(.season-default) .cart-drawer-header:focus .icon,
+body[class*="season-"]:not(.season-default) .cart-drawer-header:hover .icon svg,
+body[class*="season-"]:not(.season-default) .cart-drawer-header:focus .icon svg,
+body[class*="season-"]:not(.season-default) [data-item-edit]:hover,
+body[class*="season-"]:not(.season-default) [data-item-edit]:focus,
+body[class*="season-"]:not(.season-default) .cart-header-link.body-cta:hover,
+body[class*="season-"]:not(.season-default) .cart-header-link.body-cta:focus {
+  color: var(--preview-brown-2) !important;
+}
+
+body[class*="season-"]:not(.season-default) .cart-drawer-header .icon svg {
+  fill: currentColor !important;
+}
+
+body[class*="season-"]:not(.season-default) .cart-remove.icon:hover,
+body[class*="season-"]:not(.season-default) .cart-remove.icon:focus,
+body[class*="season-"]:not(.season-default) .cart-remove.icon:hover svg,
+body[class*="season-"]:not(.season-default) .cart-remove.icon:focus svg {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+body[class*="season-"]:not(.season-default) .shipping-estimate-show:hover,
+body[class*="season-"]:not(.season-default) .shipping-estimate-show:focus,
+body[class*="season-"]:not(.season-default) .shipping-estimate-show:active,
+body[class*="season-"]:not(.season-default) .coupon-code-add:hover,
+body[class*="season-"]:not(.season-default) .coupon-code-add:focus,
+body[class*="season-"]:not(.season-default) .coupon-code-add:active {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+body[class*="season-"]:not(.season-default) .shipping-estimate-value,
+body[class*="season-"]:not(.season-default) .shipping-estimate-value span {
+  color: var(--preview-brown-1) !important;
+}
+
+body[class*="season-"]:not(.season-default) .shipping-estimate-value:hover,
+body[class*="season-"]:not(.season-default) .shipping-estimate-value:focus,
+body[class*="season-"]:not(.season-default) .shipping-estimate-value:hover span,
+body[class*="season-"]:not(.season-default) .shipping-estimate-value:focus span {
+  color: var(--preview-brown-2) !important;
+}
+
+body[class*="season-"]:not(.season-default) .optimizedCheckout-header {
+  background-color: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-2) !important;
+}
+
+body[class*="season-"]:not(.season-default) .step-circle {
+  background-color: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-2) !important;
+}
+body[class*="season-"]:not(.season-default) .step-circle {
+  color: #ffffff !important;
+}
+
+body[class*="season-"]:not(.season-default) .sales-contact-card-pic {
+  border-color: var(--preview-brown-2) !important;
+}
+
+body[class*="season-"]:not(.season-default) .eyeva-sale-promo__headline {
+  strong {
     color: var(--preview-brown-1) !important;
+  }
 }
 
-body[class*='season-']:not(.season-default) .eyeva__productView-tooltip-trigger,
-body[class*='season-']:not(.season-default) .shipping-estimate-show,
-body[class*='season-']:not(.season-default) .shipping-estimate-show__btn-name,
-body[class*='season-']:not(.season-default) .coupon-code-add,
-body[class*='season-']:not(.season-default) .cart-drawer-header,
-body[class*='season-']:not(.season-default) .cart-drawer-header .cart-page-heading,
-body[class*='season-']:not(.season-default) .cart-drawer-header .icon,
-body[class*='season-']:not(.season-default) .cart-drawer-header .icon svg,
-body[class*='season-']:not(.season-default) [data-item-edit],
-body[class*='season-']:not(.season-default) .cart-header-link.body-cta {
-    color: var(--preview-brown-1) !important;
+body[class*="season-"]:not(.season-default) .eyeva-sale-promo__icon {
+  svg {
+    fill: var(--preview-brown-2) !important;
+  }
 }
 
-body[class*='season-']:not(.season-default) .eyeva__productView-tooltip-trigger:hover,
-body[class*='season-']:not(.season-default) .eyeva__productView-tooltip-trigger:focus,
-body[class*='season-']:not(.season-default) label[data-product-attribute-value]:hover,
-body[class*='season-']:not(.season-default) label[data-product-attribute-value]:focus,
-body[class*='season-']:not(.season-default) label[data-product-attribute-value]:hover ._label,
-body[class*='season-']:not(.season-default) label[data-product-attribute-value]:focus ._label,
-body[class*='season-']:not(.season-default) label[data-product-attribute-value]:hover .eyeva__productView-option-price,
-body[class*='season-']:not(.season-default) label[data-product-attribute-value]:focus .eyeva__productView-option-price,
-body[class*='season-']:not(.season-default) label[data-product-attribute-value]:hover .eyeva__productView-option-price-now,
-body[class*='season-']:not(.season-default) label[data-product-attribute-value]:focus .eyeva__productView-option-price-now,
-body[class*='season-']:not(.season-default) .shipping-estimate-show:hover,
-body[class*='season-']:not(.season-default) .shipping-estimate-show:focus,
-body[class*='season-']:not(.season-default) .shipping-estimate-show:hover .shipping-estimate-show__btn-name,
-body[class*='season-']:not(.season-default) .shipping-estimate-show:focus .shipping-estimate-show__btn-name,
-body[class*='season-']:not(.season-default) .coupon-code-add:hover,
-body[class*='season-']:not(.season-default) .coupon-code-add:focus,
-body[class*='season-']:not(.season-default) .cart-drawer-header:hover,
-body[class*='season-']:not(.season-default) .cart-drawer-header:focus,
-body[class*='season-']:not(.season-default) .cart-drawer-header:hover .cart-page-heading,
-body[class*='season-']:not(.season-default) .cart-drawer-header:focus .cart-page-heading,
-body[class*='season-']:not(.season-default) .cart-drawer-header:hover .icon,
-body[class*='season-']:not(.season-default) .cart-drawer-header:focus .icon,
-body[class*='season-']:not(.season-default) .cart-drawer-header:hover .icon svg,
-body[class*='season-']:not(.season-default) .cart-drawer-header:focus .icon svg,
-body[class*='season-']:not(.season-default) [data-item-edit]:hover,
-body[class*='season-']:not(.season-default) [data-item-edit]:focus,
-body[class*='season-']:not(.season-default) .cart-header-link.body-cta:hover,
-body[class*='season-']:not(.season-default) .cart-header-link.body-cta:focus {
-    color: var(--preview-brown-2) !important;
+body[class*="season-"]:not(.season-default) .repairicon img {
+  filter: var(--season-icon-filter) !important;
 }
 
-body[class*='season-']:not(.season-default) .cart-drawer-header .icon svg {
-    fill: currentColor !important;
-}
-
-body[class*='season-']:not(.season-default) .cart-remove.icon:hover,
-body[class*='season-']:not(.season-default) .cart-remove.icon:focus,
-body[class*='season-']:not(.season-default) .cart-remove.icon:hover svg,
-body[class*='season-']:not(.season-default) .cart-remove.icon:focus svg {
-    color: #ffffff !important;
-    fill: #ffffff !important;
-}
-
-body[class*='season-']:not(.season-default) .shipping-estimate-show:hover,
-body[class*='season-']:not(.season-default) .shipping-estimate-show:focus,
-body[class*='season-']:not(.season-default) .shipping-estimate-show:active,
-body[class*='season-']:not(.season-default) .coupon-code-add:hover,
-body[class*='season-']:not(.season-default) .coupon-code-add:focus,
-body[class*='season-']:not(.season-default) .coupon-code-add:active {
-    background: transparent !important;
-    background-color: transparent !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
-}
-
-body[class*='season-']:not(.season-default) .shipping-estimate-value,
-body[class*='season-']:not(.season-default) .shipping-estimate-value span {
-    color: var(--preview-brown-1) !important;
-}
-
-body[class*='season-']:not(.season-default) .shipping-estimate-value:hover,
-body[class*='season-']:not(.season-default) .shipping-estimate-value:focus,
-body[class*='season-']:not(.season-default) .shipping-estimate-value:hover span,
-body[class*='season-']:not(.season-default) .shipping-estimate-value:focus span {
-    color: var(--preview-brown-2) !important;
-}
-
-body[class*='season-']:not(.season-default) .optimizedCheckout-header {
-    background-color: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-2) !important;
-}
-
-body[class*='season-']:not(.season-default) .step-circle {
-    background-color: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-2) !important;
-}
-body[class*='season-']:not(.season-default) .step-circle {
-    color: #ffffff !important;
-}
-
-body[class*='season-']:not(.season-default) .sales-contact-card-pic {
-    border-color: var(--preview-brown-2) !important;
-}
-
-body[class*='season-']:not(.season-default) .eyeva-sale-promo__headline {
-    strong {
-        color: var(--preview-brown-1) !important;
-    }
-}
-
-body[class*='season-']:not(.season-default) .eyeva-sale-promo__icon {
-    svg {
-        fill: var(--preview-brown-2) !important;
-    }
-}
-
-body[class*='season-']:not(.season-default) .repairicon img {
-    filter: var(--season-icon-filter) !important;
-}
-
-body[class*='season-']:not(.season-default) .step-circle:hover,
-body[class*='season-']:not(.season-default) .step-circle:focus {
-    background-color: var(--preview-brown-3) !important;
-    border-color: var(--preview-brown-4) !important;
+body[class*="season-"]:not(.season-default) .step-circle:hover,
+body[class*="season-"]:not(.season-default) .step-circle:focus {
+  background-color: var(--preview-brown-3) !important;
+  border-color: var(--preview-brown-4) !important;
 }
 
 /* Tint all PNG icons in desktop repair container for every active season. */
-body[class*='season-']:not(.season-default) .repair-container img.nav-icon[src$='.png'],
-body[class*='season-']:not(.season-default) .repair-container img.nav-icon[src$='.PNG'] {
-    filter: var(--season-icon-filter) !important;
+body[class*="season-"]:not(.season-default) .repair-container img.nav-icon[src$=".png"],
+body[class*="season-"]:not(.season-default) .repair-container img.nav-icon[src$=".PNG"] {
+  filter: var(--season-icon-filter) !important;
 }
 
-body.season-black-friday-sale.season-preview-brown input[type='submit'],
+body.season-black-friday-sale.season-preview-brown input[type="submit"],
 body.season-black-friday-sale.season-preview-brown .button--primary,
 body.season-black-friday-sale.season-preview-brown ._choose-options,
 body.season-black-friday-sale.season-preview-brown .btn,
-body.season-black-friday-sale.season-preview-brown [class*='buttonPrimary'],
+body.season-black-friday-sale.season-preview-brown [class*="buttonPrimary"],
 body.season-black-friday-sale.season-preview-brown .main-content .infusion-submit .button,
 body.season-black-friday-sale.season-preview-brown .blogpost .infusion-submit .button,
 body.season-black-friday-sale.season-preview-brown .pagination-item--current,
 body.season-black-friday-sale.season-preview-brown .pagination-item--current .pagination-link,
 body.season-black-friday-sale.season-preview-brown .sale-flag-side {
-    border-color: var(--blackfriday-gold) !important;
-    box-shadow: inset 0 0 0 1px rgba(198, 164, 75, 0.65) !important;
+  border-color: var(--blackfriday-gold) !important;
+  box-shadow: inset 0 0 0 1px rgba(198, 164, 75, 0.65) !important;
 }
 
 body.season-black-friday-sale.season-preview-brown .sale-flag-side:first-child::before,
 body.season-black-friday-sale.season-preview-brown [data-menu-dropdown].is-open,
 body.season-black-friday-sale.season-preview-brown .navPages-megaMenu.is-open,
 body.season-black-friday-sale.season-preview-brown .navPages-subMenu.is-open,
-body.season-black-friday-sale.season-preview-brown [id^='navPages-subMenu'].is-open,
+body.season-black-friday-sale.season-preview-brown [id^="navPages-subMenu"].is-open,
 body.season-black-friday-sale.season-preview-brown .navPages-item.info-panel.is-open,
 body.season-black-friday-sale.season-preview-brown .navPages-item.info-panel.is-open .info-submenu,
 body.season-black-friday-sale.season-preview-brown .info-panel.is-open,
 body.season-black-friday-sale.season-preview-brown .info-panel.is-open .info-submenu {
-    border-color: var(--blackfriday-gold) !important;
+  border-color: var(--blackfriday-gold) !important;
 }
 
 body.season-black-friday-sale.season-preview-brown .navUser-action:hover .icon svg {
-    fill: var(--blackfriday-gold);
+  fill: var(--blackfriday-gold);
 }
 
 body.season-black-friday-sale.season-preview-brown .navUser-action._hasLabel:hover {
-    border-color: var(--blackfriday-gold) !important;
-    color: var(--blackfriday-gold) !important;
+  border-color: var(--blackfriday-gold) !important;
+  color: var(--blackfriday-gold) !important;
 }
 
 body.season-black-friday-sale.season-preview-brown .option.button.button--primary:hover {
-    background-color: var(--blackfriday-gold) !important;
-    border-color: var(--blackfriday-gold) !important;
-    color: #1d1d1d !important;
+  background-color: var(--blackfriday-gold) !important;
+  border-color: var(--blackfriday-gold) !important;
+  color: #1d1d1d !important;
 }
 
-body[class*='season-'] .quiz-zero-modal {
-    background: #ffffff !important;
-    border: 1px solid var(--preview-brown-2) !important;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25) !important;
+body[class*="season-"] .quiz-zero-modal {
+  background: #ffffff !important;
+  border: 1px solid var(--preview-brown-2) !important;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.25) !important;
 }
 
-body[class*='season-'] .quiz-zero-modal__header {
-    background: var(--preview-brown-1) !important;
-    background-image: none !important;
-    color: #ffffff !important;
+body[class*="season-"] .quiz-zero-modal__header {
+  background: var(--preview-brown-1) !important;
+  background-image: none !important;
+  color: #ffffff !important;
 }
 
-body[class*='season-'] .quiz-zero-modal__body {
-    color: #222222 !important;
+body[class*="season-"] .quiz-zero-modal__body {
+  color: #222222 !important;
 }
 
-body[class*='season-'] .quiz-zero-modal__actions .button--danger {
-    background: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-1) !important;
-    color: #ffffff !important;
+body[class*="season-"] .quiz-zero-modal__actions .button--danger {
+  background: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-1) !important;
+  color: #ffffff !important;
 }
 
-body[class*='season-'] .quiz-zero-modal__actions .button--danger:hover,
-body[class*='season-'] .quiz-zero-modal__actions .button--danger:focus {
-    background: var(--preview-brown-2) !important;
-    border-color: var(--preview-brown-2) !important;
-    color: #ffffff !important;
+body[class*="season-"] .quiz-zero-modal__actions .button--danger:hover,
+body[class*="season-"] .quiz-zero-modal__actions .button--danger:focus {
+  background: var(--preview-brown-2) !important;
+  border-color: var(--preview-brown-2) !important;
+  color: #ffffff !important;
 }
 
-body[class*='season-'] .quiz-zero-modal__actions .button--primary {
-    background: var(--preview-brown-2) !important;
-    border-color: var(--preview-brown-3) !important;
-    color: #ffffff !important;
+body[class*="season-"] .quiz-zero-modal__actions .button--primary {
+  background: var(--preview-brown-2) !important;
+  border-color: var(--preview-brown-3) !important;
+  color: #ffffff !important;
 }
 
-body[class*='season-'] .quiz-zero-modal__actions .button--primary:hover,
-body[class*='season-'] .quiz-zero-modal__actions .button--primary:focus {
-    background: var(--preview-brown-3) !important;
-    border-color: var(--preview-brown-4) !important;
-    color: #ffffff !important;
+body[class*="season-"] .quiz-zero-modal__actions .button--primary:hover,
+body[class*="season-"] .quiz-zero-modal__actions .button--primary:focus {
+  background: var(--preview-brown-3) !important;
+  border-color: var(--preview-brown-4) !important;
+  color: #ffffff !important;
 }
 
-body[class*='season-'] .quiz-zero-modal__actions .button--secondary {
-    background: #ffffff !important;
-    border-color: var(--preview-brown-1) !important;
-    color: var(--preview-brown-1) !important;
+body[class*="season-"] .quiz-zero-modal__actions .button--secondary {
+  background: #ffffff !important;
+  border-color: var(--preview-brown-1) !important;
+  color: var(--preview-brown-1) !important;
 }
 
-body[class*='season-'] .quiz-zero-modal__actions .button--secondary:hover,
-body[class*='season-'] .quiz-zero-modal__actions .button--secondary:focus {
-    background: var(--preview-brown-1) !important;
-    border-color: var(--preview-brown-2) !important;
-    color: #ffffff !important;
+body[class*="season-"] .quiz-zero-modal__actions .button--secondary:hover,
+body[class*="season-"] .quiz-zero-modal__actions .button--secondary:focus {
+  background: var(--preview-brown-1) !important;
+  border-color: var(--preview-brown-2) !important;
+  color: #ffffff !important;
 }
 
 body.season-valentines .header {
-    /* Keep native header positioning so sticky/fixed behavior is preserved. */
-    overflow: hidden;
+  /* Keep native header positioning so sticky/fixed behavior is preserved. */
+  overflow: hidden;
 }
 
 body.season-valentines .hero-banner,
 body.season-valentines .hero-banner-holiday,
 body.season-valentines .heroCarousel {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 body.season-valentines .header::before,
 body.season-valentines .hero-banner::before,
 body.season-valentines .hero-banner-holiday::before,
 body.season-valentines .heroCarousel::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 14px;
-    z-index: 2;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='14' viewBox='0 0 42 14'%3E%3Ctext x='2' y='11' font-size='10' fill='%23ffd1e6'%3E%E2%99%A5%3C/text%3E%3Ctext x='16' y='11' font-size='10' fill='%23ff8fbe'%3E%E2%99%A5%3C/text%3E%3Ctext x='30' y='11' font-size='10' fill='%23cf3f89'%3E%E2%99%A5%3C/text%3E%3C/svg%3E");
-    background-repeat: repeat-x;
-    background-size: 42px 14px;
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 14px;
+  z-index: 2;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='14' viewBox='0 0 42 14'%3E%3Ctext x='2' y='11' font-size='10' fill='%23ffd1e6'%3E%E2%99%A5%3C/text%3E%3Ctext x='16' y='11' font-size='10' fill='%23ff8fbe'%3E%E2%99%A5%3C/text%3E%3Ctext x='30' y='11' font-size='10' fill='%23cf3f89'%3E%E2%99%A5%3C/text%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 42px 14px;
 }
 
 body.season-stpatricks .header {
-    /* Keep native header positioning so sticky/fixed behavior is preserved. */
-    overflow: hidden;
+  /* Keep native header positioning so sticky/fixed behavior is preserved. */
+  overflow: hidden;
 }
 
 body.season-stpatricks .hero-banner,
 body.season-stpatricks .hero-banner-holiday,
 body.season-stpatricks .heroCarousel {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 body.season-stpatricks .header::before,
 body.season-stpatricks .hero-banner::before,
 body.season-stpatricks .hero-banner-holiday::before,
 body.season-stpatricks .heroCarousel::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 14px;
-    z-index: 2;
-    pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='14' viewBox='0 0 42 14'%3E%3Ccircle cx='8' cy='4.5' r='2.6' fill='%2393df8f'/%3E%3Ccircle cx='13' cy='4.5' r='2.6' fill='%2372c96d'/%3E%3Ccircle cx='10.5' cy='8.2' r='2.6' fill='%234da44b'/%3E%3Crect x='9.8' y='8.5' width='1.4' height='3.8' fill='%233b7f38'/%3E%3C/svg%3E");
-    background-repeat: repeat-x;
-    background-size: 42px 14px;
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 14px;
+  z-index: 2;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='14' viewBox='0 0 42 14'%3E%3Ccircle cx='8' cy='4.5' r='2.6' fill='%2393df8f'/%3E%3Ccircle cx='13' cy='4.5' r='2.6' fill='%2372c96d'/%3E%3Ccircle cx='10.5' cy='8.2' r='2.6' fill='%234da44b'/%3E%3Crect x='9.8' y='8.5' width='1.4' height='3.8' fill='%233b7f38'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 42px 14px;
 }
 
 body.season-independence-day-weekend .header {
-    /* Do not override position, so sticky/fixed works as normal */
-    overflow: hidden;
+  /* Do not override position, so sticky/fixed works as normal */
+  overflow: hidden;
 }
 body.season-independence-day-weekend .hero-banner,
 body.season-independence-day-weekend .hero-banner-holiday,
 body.season-independence-day-weekend .heroCarousel {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 body.season-memorial-day-weekend .header {
-    /* Do not override position, so sticky/fixed works as normal */
-    overflow: hidden;
+  /* Do not override position, so sticky/fixed works as normal */
+  overflow: hidden;
 }
 body.season-memorial-day-weekend .hero-banner,
 body.season-memorial-day-weekend .hero-banner-holiday,
 body.season-memorial-day-weekend .heroCarousel {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 body.season-labor-day-weekend .header {
-    /* Do not override position, so sticky/fixed works as normal */
-    overflow: hidden;
+  /* Do not override position, so sticky/fixed works as normal */
+  overflow: hidden;
 }
 body.season-labor-day-weekend .hero-banner,
 body.season-labor-day-weekend .hero-banner-holiday,
 body.season-labor-day-weekend .heroCarousel {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 body.season-christmas .header {
-    /* Keep native header positioning so sticky/fixed behavior is preserved. */
-    overflow: hidden;
+  /* Keep native header positioning so sticky/fixed behavior is preserved. */
+  overflow: hidden;
 }
 
 body.season-christmas .header::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 14px;
-    z-index: 1;
-    pointer-events: none;
-    opacity: var(--season-decor-opacity);
-    background-image: radial-gradient(circle, #d94949 0 4px, transparent 5px),
-        radial-gradient(circle, #efcf6f 0 4px, transparent 5px),
-        radial-gradient(circle, #5ea770 0 4px, transparent 5px);
-    background-size: 40px 14px;
-    background-position: 0 0, 13px 0, 26px 0;
-    background-repeat: repeat-x;
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 14px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: var(--season-decor-opacity);
+  background-image: radial-gradient(circle, #d94949 0 4px, transparent 5px), radial-gradient(circle, #efcf6f 0 4px, transparent 5px), radial-gradient(circle, #5ea770 0 4px, transparent 5px);
+  background-size: 40px 14px;
+  background-position:
+    0 0,
+    13px 0,
+    26px 0;
+  background-repeat: repeat-x;
 }
 
 body.season-christmas .hero-banner,
 body.season-christmas .hero-banner-holiday,
 body.season-christmas .heroCarousel {
-    position: relative;
-    overflow: hidden;
+  position: relative;
+  overflow: hidden;
 }
 
 body.season-christmas .hero-banner::before,
 body.season-christmas .hero-banner-holiday::before,
 body.season-christmas .heroCarousel::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 14px;
-    z-index: 2;
-    pointer-events: none;
-    opacity: var(--season-decor-opacity);
-    background-image: radial-gradient(circle, #d94949 0 4px, transparent 5px),
-        radial-gradient(circle, #efcf6f 0 4px, transparent 5px),
-        radial-gradient(circle, #5ea770 0 4px, transparent 5px);
-    background-size: 40px 14px;
-    background-position: 0 0, 13px 0, 26px 0;
-    background-repeat: repeat-x;
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 14px;
+  z-index: 2;
+  pointer-events: none;
+  opacity: var(--season-decor-opacity);
+  background-image: radial-gradient(circle, #d94949 0 4px, transparent 5px), radial-gradient(circle, #efcf6f 0 4px, transparent 5px), radial-gradient(circle, #5ea770 0 4px, transparent 5px);
+  background-size: 40px 14px;
+  background-position:
+    0 0,
+    13px 0,
+    26px 0;
+  background-repeat: repeat-x;
 }

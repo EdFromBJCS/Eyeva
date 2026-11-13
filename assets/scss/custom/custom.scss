@@ -1210,11 +1210,31 @@ button.expandfaq.button-alt::after {
   text-align: center;
 }
 
+.slide-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .slide-desktop {
+    display: none;
+  }
+
+  .slide-mobile {
+    display: block;
+  }
+}
+
 .grid {
   display: grid;
+  grid-template-columns: 1fr;
   gap: 10px;
   margin: 0;
   padding: 10px 2px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 0 50px 0 50px;
+  }
 }
 
 .icon-item {
@@ -1412,6 +1432,35 @@ button.expandfaq.button-alt::after {
     box-shadow: 0 2px 4px rgba(color("blacks"), 0.1);
     background: stencilColor("card-bgColor");
     border: rgba(229, 229, 229, 0.3) 1px solid;
+  }
+}
+
+.productCarousel .mobile-carousel-scrollbar,
+.popular-rugged-laptops-card .categoryCarousel .mobile-carousel-scrollbar {
+  display: none;
+  height: 3px;
+  margin: 20px 10px 10px 0px;
+  position: relative;
+  background: rgba(34, 34, 34, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+
+  span {
+    background: rgba(34, 34, 34, 0.45);
+    border-radius: inherit;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    transition:
+      left 0.25s ease,
+      width 0.25s ease;
+  }
+}
+
+@media (max-width: 800px) {
+  .productCarousel .mobile-carousel-scrollbar,
+  .popular-rugged-laptops-card .categoryCarousel .mobile-carousel-scrollbar {
+    display: block;
   }
 }
 
