@@ -1,239 +1,290 @@
 ---
 products:
-    new:
-        limit: {{theme_settings.new_count}}
-    featured:
-        limit: {{theme_settings.featured_count}}
-    top_sellers:
-        limit: {{theme_settings.bestselling_count}}
-carousel: {{theme_settings.homepage_show_carousel}}
+  new:
+    limit: { { theme_settings.new_count } }
+  featured:
+    limit: { { theme_settings.featured_count } }
+  top_sellers:
+    limit: { { theme_settings.bestselling_count } }
+carousel: { { theme_settings.homepage_show_carousel } }
 blog:
-    recent_posts:
-        limit: {{theme_settings.homepage_blog_posts_count}}
+  recent_posts:
+    limit: { { theme_settings.homepage_blog_posts_count } }
 ---
-{{~inject 'new_type' theme_settings.new_type}}
-{{~inject 'new_count' theme_settings.new_count}}
-{{~inject 'featured_type' theme_settings.featured_type}}
-{{~inject 'featured_count' theme_settings.featured_count}}
-{{~inject 'bestselling_type' theme_settings.bestselling_type}}
-{{~inject 'bestselling_count' theme_settings.bestselling_count}}
-{{~inject 'brand_size' theme_settings.brand_size}}
 
-{{#partial "head"}}
-    <link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.home.js' resourceHint='preload' as='script'}}" as="script">
-{{/partial}}
-
-{{#partial "hero"}}
-    {{{region name="home_below_menu"}}}
-    {{#and carousel carousel.slides.length}}
-        {{> components/eyeva/home-carousel}}
-        {{! > components/carousel arrows=theme_settings.homepage_show_carousel_arrows play_pause_button=theme_settings.homepage_show_carousel_play_pause_button}}
-    {{/and}}
-    {{{region name="home_below_carousel"}}}
-{{/partial}}
-
-{{#partial "page"}}
-
-    {{#each shipping_messages}}
-        {{> components/common/alert/alert-info message}}
-    {{/each}}
+{{~inject 'new_type' theme_settings.new_type}} {{~inject 'new_count' theme_settings.new_count}} {{~inject 'featured_type' theme_settings.featured_type}} {{~inject 'featured_count'
+theme_settings.featured_count}} {{~inject 'bestselling_type' theme_settings.bestselling_type}} {{~inject 'bestselling_count' theme_settings.bestselling_count}} {{~inject 'brand_size'
+theme_settings.brand_size}} {{#partial "head"}}
+<link rel="preload" href="{{cdn 'assets/dist/theme-bundle.chunk.home.js' resourceHint='preload' as='script'}}" as="script" />
+{{/partial}} {{#partial "hero"}} {{{region name="home_below_menu"}}} {{#and carousel carousel.slides.length}} {{> components/eyeva/home-carousel}} {{! > components/carousel
+arrows=theme_settings.homepage_show_carousel_arrows play_pause_button=theme_settings.homepage_show_carousel_play_pause_button}} {{/and}} {{{region name="home_below_carousel"}}} {{/partial}} {{#partial
+"page"}} {{#each shipping_messages}} {{> components/common/alert/alert-info message}} {{/each}}
 
 <div class="main full _child-region-fullwidth">
-    <div class="home-page-hero-layout">
-        <div class="hero-banner">{{{region name="home_above_sections"}}}</div>
-        <div class="hero-banner-holiday">{{{region name="home_above_sections_holiday"}}}</div>
-        <div class="hero-video">
-            <div class="video-container">
-                <div class="iframe-container">
-                <iframe src="https://www.youtube.com/embed/videoseries?si=ppHogZ8NEJY_Qjdz&amp;list=PL_ntP3EI-k2RyITyOwF5_7YcmUYSlaLsD"></iframe>
-                </div>
-            </div>
-            
+  <div class="home-page-hero-layout">
+    <div class="hero-banner">{{{region name="home_above_sections"}}}</div>
+    <div class="hero-banner-holiday">{{{region name="home_above_sections_holiday"}}}</div>
+    <div class="hero-video">
+      <div class="video-container">
+        <div class="iframe-container">
+          <iframe src="https://www.youtube.com/embed/videoseries?si=ppHogZ8NEJY_Qjdz&amp;list=PL_ntP3EI-k2RyITyOwF5_7YcmUYSlaLsD"></iframe>
         </div>
-        <div class="hero-carousel">
-                <div class="carousel-container">
+      </div>
+    </div>
+    <div class="hero-carousel">
+      <div class="carousel-container">
         <button class="homeblaze-prev" alt="Previous Slide" onclick="prevSlide()">
-            <svg class="icon">
-                <use xlink:href="#icon-arrow-left-long"></use>
-            </svg>
+          <svg class="icon">
+            <use xlink:href="#icon-arrow-left-long"></use>
+          </svg>
         </button>
         <div class="carousel" id="carousel">
-            <div class="slide">
-                <div class="grid">
-                    <a href="https://www.bobjohnson.com/warranties/">
-                        <div class="icon-item">
-                            <div class="heroBannerIcon"><img
-                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/warranty.png?t=1766596862"
-                                    alt="Warranty" /></div>
-                            <h3 class="icon-heading">Limited Lifetime Warranty!</h3>
-                            <p class="icon-description">Only pay for parts on repairs when you purchase from us.</p>
-                        </div>
-                    </a>
-                     <a href="https://www.bobjohnson.com/about-us/">
-                    <div class="icon-item">
-                        <div class="heroBannerIcon"><img
-                                src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/money.png?t=1766596883"
-                                alt="Sales Tax" /></div>
-                        <h3 class="icon-heading">Sales Tax Free!</h3>
-                        <p class="icon-description">Since we're based out of Delaware, never pay a sales tax!</p>
-                    </div>
-                    <a href="tel:3026592727">
-                        <div class="icon-item">
-                            <div class="heroBannerIcon"><img
-                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/phone.png?t=1766596843"
-                                    alt="Call" /></div>
-                            <h3 class="icon-heading">We're Here To Help!</h3>
-                            <p class="icon-description">Call (302)659-2727 for assistance.</p>
-                        </div>
-                    </a>
-                    <a href="https://gc200.infusionsoft.app/app/form/homepage-banner">
-                        <div class="icon-item">
-                            <div class="heroBannerIcon"><img
-                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/newsletter.png?t=1766596934"
-                                    alt="Newsletter" /></div>
-                            <h3 class="icon-heading">5% Off Coupon!</h3>
-                            <p class="icon-description">Sign up for our newsletter to get 5% off your next order!</p>
-                        </div>
-                    </a>
+          <div class="slide slide-desktop">
+            <div class="grid">
+              <a href="https://www.bobjohnson.com/warranties/">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/warranty.png?t=1766596862" alt="Warranty" /></div>
+                  <h3 class="icon-heading">Limited Lifetime Warranty!</h3>
+                  <p class="icon-description">Only pay for parts on repairs when you purchase from us.</p>
                 </div>
-            </div>
-            <div class="slide">
-                <div class="grid">
-                    <a href="https://www.youtube.com/@Bobjohnson">
-                        <div class="icon-item">
-                            <div class="heroBannerIcon"><img
-                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/review.png?t=1766596915"
-                                    alt="YouTube" /></div>
-                            <h3 class="icon-heading">YouTube Reviews</h3>
-                            <p class="icon-description">Bob reviews all of the computers that we sell on YouTube!</p>
-                        </div>
-                    </a>
-                    <a href="https://www.bobjohnson.com/blog/tag/Buying-Guide">
-                        <div class="icon-item">
-                            <div class="heroBannerIcon"><img
-                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/guide.png?t=1766596941"
-                                    alt="Buyers Guide" /></div>
-                            <h3 class="icon-heading">Buyers Guides</h3>
-                            <p class="icon-description">Our blog provides detailed reviews on the rugged computers we
-                                sell.
-                            </p>
-                        </div>
-                    </a>
-                    <a href="https://www.bobjohnson.com/rugged-computer-selection-assistance/">
-                        <div class="icon-item">
-                            <div class="heroBannerIcon"><img
-                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/warranty.png?t=1766596862"
-                                    alt="Selection Assistance" /></div>
-                            <h3 class="icon-heading">Selection Assistance</h3>
-                            <p class="icon-description">Fill out our form and we'll help you find the perfect option for
-                                you!
-                            </p>
-                        </div>
-                    </a>
-                    <a href="https://www.bobjohnson.com/testimonials/">
-                        <div class="icon-item">
-                            <div class="heroBannerIcon"><img
-                                    src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/money.png?t=1766596883"
-                                    alt="Testimonials" /></div>
-                            <h3 class="icon-heading">Testimonials</h3>
-                            <p class="icon-description">See what our customers have said!</p>
-                        </div>
-                    </a>
+              </a>
+              <a href="https://www.bobjohnson.com/about-us/">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/money.png?t=1766596883" alt="Sales Tax" /></div>
+                  <h3 class="icon-heading">Sales Tax Free!</h3>
+                  <p class="icon-description">Since we're based out of Delaware, never pay a sales tax!</p>
                 </div>
+              </a>
+              <a href="tel:3026592727">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/phone.png?t=1766596843" alt="Call" /></div>
+                  <h3 class="icon-heading">We're Here To Help!</h3>
+                  <p class="icon-description">Call (302)659-2727 for assistance.</p>
+                </div>
+              </a>
+              <a href="https://gc200.infusionsoft.app/app/form/homepage-banner">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/newsletter.png?t=1766596934" alt="Newsletter" /></div>
+                  <h3 class="icon-heading">5% Off Coupon!</h3>
+                  <p class="icon-description">Sign up for our newsletter to get 5% off your next order!</p>
+                </div>
+              </a>
             </div>
+          </div>
+          <div class="slide slide-mobile">
+            <div class="grid">
+              <a href="https://www.bobjohnson.com/warranties/">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/warranty.png?t=1766596862" alt="Warranty" /></div>
+                  <h3 class="icon-heading">Limited Lifetime Warranty!</h3>
+                  <p class="icon-description">Only pay for parts on repairs when you purchase from us.</p>
+                </div>
+              </a>
+              <a href="https://www.bobjohnson.com/about-us/">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/money.png?t=1766596883" alt="Sales Tax" /></div>
+                  <h3 class="icon-heading">Sales Tax Free!</h3>
+                  <p class="icon-description">Since we're based out of Delaware, never pay a sales tax!</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="slide slide-mobile">
+            <div class="grid">
+              <a href="tel:3026592727">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/phone.png?t=1766596843" alt="Call" /></div>
+                  <h3 class="icon-heading">We're Here To Help!</h3>
+                  <p class="icon-description">Call (302)659-2727 for assistance.</p>
+                </div>
+              </a>
+              <a href="https://gc200.infusionsoft.app/app/form/homepage-banner">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/newsletter.png?t=1766596934" alt="Newsletter" /></div>
+                  <h3 class="icon-heading">5% Off Coupon!</h3>
+                  <p class="icon-description">Sign up for our newsletter to get 5% off your next order!</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="slide slide-desktop">
+            <div class="grid">
+              <a href="https://www.youtube.com/@Bobjohnson">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/review.png?t=1766596915" alt="YouTube" /></div>
+                  <h3 class="icon-heading">YouTube Reviews</h3>
+                  <p class="icon-description">Bob reviews all of the computers that we sell on YouTube!</p>
+                </div>
+              </a>
+              <a href="https://www.bobjohnson.com/blog/tag/Buying-Guide">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/guide.png?t=1766596941" alt="Buyers Guide" /></div>
+                  <h3 class="icon-heading">Buyers Guides</h3>
+                  <p class="icon-description">Our blog provides detailed reviews on the rugged computers we sell.</p>
+                </div>
+              </a>
+              <a href="https://www.bobjohnson.com/rugged-computer-selection-assistance/">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/warranty.png?t=1766596862" alt="Selection Assistance" /></div>
+                  <h3 class="icon-heading">Selection Assistance</h3>
+                  <p class="icon-description">Fill out our form and we'll help you find the perfect option for you!</p>
+                </div>
+              </a>
+              <a href="https://www.bobjohnson.com/testimonials/">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/money.png?t=1766596883" alt="Testimonials" /></div>
+                  <h3 class="icon-heading">Testimonials</h3>
+                  <p class="icon-description">See what our customers have said!</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="slide slide-mobile">
+            <div class="grid">
+              <a href="https://www.youtube.com/@Bobjohnson">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/review.png?t=1766596915" alt="YouTube" /></div>
+                  <h3 class="icon-heading">YouTube Reviews</h3>
+                  <p class="icon-description">Bob reviews all of the computers that we sell on YouTube!</p>
+                </div>
+              </a>
+              <a href="https://www.bobjohnson.com/blog/tag/Buying-Guide">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/guide.png?t=1766596941" alt="Buyers Guide" /></div>
+                  <h3 class="icon-heading">Buyers Guides</h3>
+                  <p class="icon-description">Our blog provides detailed reviews on the rugged computers we sell.</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="slide slide-mobile">
+            <div class="grid">
+              <a href="https://www.bobjohnson.com/rugged-computer-selection-assistance/">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/warranty.png?t=1766596862" alt="Selection Assistance" /></div>
+                  <h3 class="icon-heading">Selection Assistance</h3>
+                  <p class="icon-description">Fill out our form and we'll help you find the perfect option for you!</p>
+                </div>
+              </a>
+              <a href="https://www.bobjohnson.com/testimonials/">
+                <div class="icon-item">
+                  <div class="heroBannerIcon"><img src="https://cdn11.bigcommerce.com/s-8lxh1/images/stencil/original/image-manager/money.png?t=1766596883" alt="Testimonials" /></div>
+                  <h3 class="icon-heading">Testimonials</h3>
+                  <p class="icon-description">See what our customers have said!</p>
+                </div>
+              </a>
+            </div>
+          </div>
         </div>
         <button class="homeblaze-next" alt="Next Slide" onclick="nextSlide()">
-            <svg class="icon">
-                <use xlink:href="#icon-arrow-right-long"></use>
-            </svg>
+          <svg class="icon">
+            <use xlink:href="#icon-arrow-right-long"></use>
+          </svg>
         </button>
-    </div>
+      </div>
 
-    <script>
-    const carousel = document.getElementById('carousel');
-    let slides = document.querySelectorAll('.slide');
+      <script>
+        const carousel = document.getElementById("carousel");
+        const mobileSlides = window.matchMedia("(max-width: 767px)");
+        let slides = [];
+        let firstClone;
+        let currentSlide = 0;
+        const slideWidth = 100;
 
-    // Clone first slide and append it
-    const firstClone = slides[0].cloneNode(true);
-    carousel.appendChild(firstClone);
+        function initializeCarousel() {
+          if (firstClone) {
+            firstClone.remove();
+          }
 
-    slides = document.querySelectorAll('.slide'); // refresh list
-    const totalSlides = slides.length;
+          const slideClass = mobileSlides.matches ? "slide-mobile" : "slide-desktop";
+          slides = Array.from(carousel.querySelectorAll(`.${slideClass}`));
+          firstClone = slides[0].cloneNode(true);
+          firstClone.classList.add("carousel-clone");
+          carousel.appendChild(firstClone);
 
-    let currentSlide = 0;
-    let slideWidth = 100;
-
-    function moveToSlide(index) {
-        carousel.style.transition = 'transform 0.5s ease';
-        carousel.style.transform = `translateX(-${index * slideWidth}%)`;
-    }
-
-    function nextSlide() {
-        currentSlide++;
-        moveToSlide(currentSlide);
-
-        // If we're on the clone, reset to real first slide
-        if (currentSlide === totalSlides - 1) {
-            setTimeout(() => {
-                carousel.style.transition = 'none';
-                currentSlide = 0;
-                carousel.style.transform = `translateX(0%)`;
-            }, 500);
+          currentSlide = 0;
+          carousel.style.transition = "none";
+          carousel.style.transform = "translateX(0%)";
+          requestAnimationFrame(() => {
+            carousel.style.transition = "transform 0.5s ease";
+          });
         }
-    }
 
-    function prevSlide() {
-        if (currentSlide === 0) {
-            // Jump instantly to clone (last slide)
-            carousel.style.transition = 'none';
-            currentSlide = totalSlides - 1;
+        function moveToSlide(index) {
+          carousel.style.transition = "transform 0.5s ease";
+          carousel.style.transform = `translateX(-${index * slideWidth}%)`;
+        }
+
+        function nextSlide() {
+          currentSlide++;
+          moveToSlide(currentSlide);
+
+          if (currentSlide === slides.length) {
+            setTimeout(() => {
+              carousel.style.transition = "none";
+              currentSlide = 0;
+              carousel.style.transform = `translateX(0%)`;
+            }, 500);
+          }
+        }
+
+        function prevSlide() {
+          if (currentSlide === 0) {
+            carousel.style.transition = "none";
+            currentSlide = slides.length;
             carousel.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
 
             requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    carousel.style.transition = 'transform 0.5s ease';
-                    currentSlide--;
-                    carousel.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
-                });
+              requestAnimationFrame(() => {
+                carousel.style.transition = "transform 0.5s ease";
+                currentSlide--;
+                carousel.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+              });
             });
-        } else {
+          } else {
             currentSlide--;
             moveToSlide(currentSlide);
+          }
         }
-    }
 
-    // Autoplay (always moves left)
-    setInterval(nextSlide, 5000);
+        if (mobileSlides.addEventListener) {
+          mobileSlides.addEventListener("change", initializeCarousel);
+        } else {
+          mobileSlides.addListener(initializeCarousel);
+        }
 
-    // Init
-    moveToSlide(0);
-</script>
-        </div>
-        <div class="hero-repair">
-<div class="repair-container">
+        initializeCarousel();
+        setInterval(nextSlide, 5000);
+      </script>
+    </div>
+    <div class="hero-repair">
+      <div class="repair-container">
         <a class="card-link" href="https://www.bobjohnson.com/repairs-service/?tab=0">
-            <h3>Full Service Rugged Computer Repair</h3>
-            <p>Industry leading rugged Dell, Durabook, Getac, and Panasonic rugged computers.</p>
-            <ul class="desktop-repair">
-            <li><img src="https://www.bobjohnson.com/product_images/uploaded_images/cost-red.png" alt="Repair Cost" class="nav-icon" />
-                $150 repair fee + part pricing
+          <h3>Full Service Rugged Computer Repair</h3>
+          <p>Industry leading rugged Dell, Durabook, Getac, and Panasonic rugged computers.</p>
+          <ul class="desktop-repair">
+            <li>
+              <img src="https://www.bobjohnson.com/product_images/uploaded_images/cost-red.png" alt="Repair Cost" class="nav-icon" />
+              $150 repair fee + part pricing
             </li>
-            <li><img src="https://www.bobjohnson.com/product_images/uploaded_images/turn-around-red.png" alt="Turn Around" class="nav-icon" />
-                2-4 Week Turnaround
+            <li>
+              <img src="https://www.bobjohnson.com/product_images/uploaded_images/turn-around-red.png" alt="Turn Around" class="nav-icon" />
+              2-4 Week Turnaround
             </li>
-        </ul>
+          </ul>
         </a>
         <a class="button button--primary" href="https://www.bobjohnson.com/repairs-service/?tab=0">Fill Out Our Repair Form</a>
+      </div>
     </div>
-        </div>
-    </div>
-    <div class="popular-rugged-laptops-card-background">
+  </div>
+  <div class="popular-rugged-laptops-card-background">
     <div class="popular-rugged-laptops-card">
-        <div class="section-header-wrapper">
-            <h2 class="section-heading">Popular Rugged Computers</h2>
-        </div>
-        <section class="categoryCarousel blaze-slider"
-            data-blaze-slider='{
+      <div class="section-header-wrapper">
+        <h2 class="section-heading">Popular Rugged Computers</h2>
+      </div>
+      <section
+        class="categoryCarousel blaze-slider"
+        data-blaze-slider='{
                 "all": {
                     "enablePagination": false,
                     "enableAutoplay": false,
@@ -265,128 +316,105 @@ blog:
                     "slideGap": "16px"
                 }
             }'
-        >
-            <div class="blaze-container">
-                <div class="blaze-track-container">
-                    <div class="blaze-track">
-                      <div class="item card card--boxed">
-                            <a href="https://www.bobjohnson.com/refurbished-dell-laptops/"><img
-                                    src="https://www.bobjohnson.com/product_images/uploaded_images/dellltcategory2.jpg"
-                                    alt="Dell Latitude Rugged Laptops and Tablets" width="250" height="250"></a>
-                            <a href="https://www.bobjohnson.com/refurbished-dell-laptops/"
-                                class="homepage-category-button button button--primary">Dell Rugged Laptops</a>
-                        </div>                        
-                        <div class="item card card--boxed">
-                            <a href="https://www.bobjohnson.com/toughbook-cf-33/"><img
-                                    src="https://www.bobjohnson.com/product_images/uploaded_images/cf33category2.jpg"
-                                    alt="Panasonic Toughbook Cf-33 Rugged Laptops" width="250" height="250"></a>
-                            <a href="https://www.bobjohnson.com/toughbook-cf-33/"
-                                class="homepage-category-button button button--primary">Panasonic CF-33</a>
-                        </div>
-                        <div class="item card card--boxed">
-                            <a href="https://www.bobjohnson.com/getac-v110/"><img
-                                    src="https://www.bobjohnson.com/product_images/uploaded_images/v110category2.jpg"
-                                    alt="Getac V110 Fully Rugged Laptops" width="250" height="250"></a>
-                            <a href="https://www.bobjohnson.com/getac-v110/"
-                                class="homepage-category-button button button--primary">Getac V110</a>
-                        </div>
-<!--                         <div class="item card card--boxed">
-                            <a href="https://www.bobjohnson.com/getac-rugged-laptops/?_bc_fsnf=1&Model=S410"><img
-                                    src="https://www.bobjohnson.com/product_images/uploaded_images/-compressed-frontfacinggetacs410g4gradea.jpg"
-                                    alt="Refurbished Getac Rugged Laptops" width="250" height="250"></a>
-                            <a href="https://www.bobjohnson.com/getac-rugged-laptops/?_bc_fsnf=1&Model=S410"
-                                class="homepage-category-button button button--primary">Getac S410</a>
-                        </div>-->
-                        <div class="item card card--boxed">
-                            <a href="https://www.bobjohnson.com/toughbook-cf-31/"><img
-                                    src="https://www.bobjohnson.com/product_images/uploaded_images/cf31category2.jpg"
-                                    alt="Fully Rugged Toughbook CF-31 Laptops" width="250" height="250"></a>
-                            <a href="https://www.bobjohnson.com/toughbook-cf-31/"
-                                class="homepage-category-button button button--primary">Panasonic CF-31</a>
-                        </div>
-                        <div class="item card card--boxed">
-                            <a href="https://www.bobjohnson.com/toughpad-FZ-G2/"><img
-                                    src="https://www.bobjohnson.com/product_images/uploaded_images/fzg2category.jpg"
-                                    alt="Fully-Rugged Panasonic FZ-G2 Toughpad Tablet" width="250" height="250"></a>
-                            <a href="https://www.bobjohnson.com/toughpad-FZ-G2/"
-                                class="homepage-category-button button button--primary">Panasonic FZ-G2</a>
-                        </div>
-                        <div class="item card card--boxed">
-                            <a href="https://www.bobjohnson.com/toughbook-fz-55/"><img
-                                    src="https://www.bobjohnson.com/product_images/uploaded_images/fz55category2.jpg"
-                                    alt="Semi-Rugged XPAK Modular Panasonic CF-55 Toughbook Laptops" width="250" height="250"></a>
-                            <a href="https://www.bobjohnson.com/toughbook-fz-55/"
-                                class="homepage-category-button button button--primary">Panasonic FZ-55</a>
-                        </div>
-                        <div class="item card card--boxed">
-                            <a href="https://www.bobjohnson.com/toughpad-FZ-G1/"><img
-                                    src="https://www.bobjohnson.com/product_images/uploaded_images/fzg1category2.jpg"
-                                    alt="Panasonic Toughpad FZ-G1 Tablets" width="250" height="250"></a>
-                            <a href="https://www.bobjohnson.com/toughpad-FZ-G1/"
-                                class="homepage-category-button button button--primary">Panasonic FZ-G1</a>
-                        </div>
-                        <div class="item card card--boxed">
-                            <a href="https://www.bobjohnson.com/cf-54/"><img
-                                    src="https://www.bobjohnson.com/product_images/uploaded_images/cf54category2.jpg"
-                                    alt="Semi-Rugged Toughbook CF-54 Laptops" width="250" height="250"></a>
-                            <a href="https://www.bobjohnson.com/cf-54/"
-                                class="homepage-category-button button button--primary">Panasonic CF-54</a>
-                        </div>                        
-                        <div class="item card card--boxed">
-                            <a href="https://www.bobjohnson.com/rugged-laptops/?_bc_fsnf=1&brand=51"><img
-                                    src="https://www.bobjohnson.com/product_images/uploaded_images/durabookltcategory.jpg"
-                                    alt="New Durabook Z14, S14, S15AB Rugged Laptops" width="250" height="250"></a>
-                            <a href="https://www.bobjohnson.com/rugged-laptops/?_bc_fsnf=1&brand=51"
-                                class="homepage-category-button button button--primary">Durabook Laptops</a>
-                        </div>
-                        <div class="item card card--boxed">
-                            <a href="https://www.bobjohnson.com/tablets/?_bc_fsnf=1&brand=51"><img
-                                    src="https://www.bobjohnson.com/product_images/uploaded_images/durabooktbltcategory.jpg"
-                                    alt="New U11, R11, and R8 Durabook Rugged Tablets" width="250" height="250"></a>
-                            <a href="https://www.bobjohnson.com/tablets/?_bc_fsnf=1&brand=51"
-                                class="homepage-category-button button button--primary">Durabook Tablets</a>
-                        </div>
-                        <div class="item card card--boxed">
-                            <a href="https://www.bobjohnson.com/vehicle-mounts/?_bc_fsnf=1&brand=39"><img
-                                    src="https://www.bobjohnson.com/product_images/uploaded_images/rammountcategory.jpg"
-                                    alt="No-Drill Vehicle RAM Mounts" width="250" height="250"></a>
-                            <a href="https://www.bobjohnson.com/vehicle-mounts/?_bc_fsnf=1&brand=39"
-                                class="homepage-category-button button button--primary">RAM Mounts</a>
-                        </div>
-                        <div class="item card card--boxed">
-                            <a href="https://www.bobjohnson.com/printers/?_bc_fsnf=1&brand=41"><img
-                                    src="https://www.bobjohnson.com/product_images/uploaded_images/brotherprintercategory.jpg"
-                                    alt="Mobile Printers by Brother" width="250" height="250"></a>
-                            <a href="https://www.bobjohnson.com/printers/?_bc_fsnf=1&brand=41"
-                                class="homepage-category-button button button--primary">Brother Printers</a>
-                        </div>
-                    </div>
-                </div>
-                <button class="blaze-prev" aria-label="Previous"><span class="icon"><svg><use href="#icon-arrow-left-long"></use></svg></span></button>
-                <button class="blaze-next" aria-label="Next"><span class="icon"><svg><use href="#icon-arrow-right-long"></use></svg></span></button>
+      >
+        <div class="blaze-container">
+          <div class="blaze-track-container">
+            <div class="blaze-track">
+              <div class="item card card--boxed">
+                <a href="https://www.bobjohnson.com/refurbished-dell-laptops/"
+                  ><img src="https://www.bobjohnson.com/product_images/uploaded_images/dellltcategory2.jpg" alt="Dell Latitude Rugged Laptops and Tablets" width="250" height="250"
+                /></a>
+                <a href="https://www.bobjohnson.com/refurbished-dell-laptops/" class="homepage-category-button button button--primary">Dell Rugged Laptops</a>
+              </div>
+              <div class="item card card--boxed">
+                <a href="https://www.bobjohnson.com/toughbook-cf-33/"
+                  ><img src="https://www.bobjohnson.com/product_images/uploaded_images/cf33category2.jpg" alt="Panasonic Toughbook Cf-33 Rugged Laptops" width="250" height="250"
+                /></a>
+                <a href="https://www.bobjohnson.com/toughbook-cf-33/" class="homepage-category-button button button--primary">Panasonic CF-33</a>
+              </div>
+              <div class="item card card--boxed">
+                <a href="https://www.bobjohnson.com/getac-v110/"
+                  ><img src="https://www.bobjohnson.com/product_images/uploaded_images/v110category2.jpg" alt="Getac V110 Fully Rugged Laptops" width="250" height="250"
+                /></a>
+                <a href="https://www.bobjohnson.com/getac-v110/" class="homepage-category-button button button--primary">Getac V110</a>
+              </div>
+              <div class="item card card--boxed">
+                <a href="https://www.bobjohnson.com/toughbook-cf-31/"
+                  ><img src="https://www.bobjohnson.com/product_images/uploaded_images/cf31category2.jpg" alt="Fully Rugged Toughbook CF-31 Laptops" width="250" height="250"
+                /></a>
+                <a href="https://www.bobjohnson.com/toughbook-cf-31/" class="homepage-category-button button button--primary">Panasonic CF-31</a>
+              </div>
+              <div class="item card card--boxed">
+                <a href="https://www.bobjohnson.com/toughpad-FZ-G2/"
+                  ><img src="https://www.bobjohnson.com/product_images/uploaded_images/fzg2category.jpg" alt="Fully-Rugged Panasonic FZ-G2 Toughpad Tablet" width="250" height="250"
+                /></a>
+                <a href="https://www.bobjohnson.com/toughpad-FZ-G2/" class="homepage-category-button button button--primary">Panasonic FZ-G2</a>
+              </div>
+              <div class="item card card--boxed">
+                <a href="https://www.bobjohnson.com/toughbook-fz-55/"
+                  ><img src="https://www.bobjohnson.com/product_images/uploaded_images/fz55category2.jpg" alt="Semi-Rugged XPAK Modular Panasonic CF-55 Toughbook Laptops" width="250" height="250"
+                /></a>
+                <a href="https://www.bobjohnson.com/toughbook-fz-55/" class="homepage-category-button button button--primary">Panasonic FZ-55</a>
+              </div>
+              <div class="item card card--boxed">
+                <a href="https://www.bobjohnson.com/toughpad-FZ-G1/"
+                  ><img src="https://www.bobjohnson.com/product_images/uploaded_images/fzg1category2.jpg" alt="Panasonic Toughpad FZ-G1 Tablets" width="250" height="250"
+                /></a>
+                <a href="https://www.bobjohnson.com/toughpad-FZ-G1/" class="homepage-category-button button button--primary">Panasonic FZ-G1</a>
+              </div>
+              <div class="item card card--boxed">
+                <a href="https://www.bobjohnson.com/cf-54/"
+                  ><img src="https://www.bobjohnson.com/product_images/uploaded_images/cf54category2.jpg" alt="Semi-Rugged Toughbook CF-54 Laptops" width="250" height="250"
+                /></a>
+                <a href="https://www.bobjohnson.com/cf-54/" class="homepage-category-button button button--primary">Panasonic CF-54</a>
+              </div>
+              <div class="item card card--boxed">
+                <a href="https://www.bobjohnson.com/new-rugged-durabook-laptops/"
+                  ><img src="https://www.bobjohnson.com/product_images/uploaded_images/durabookltcategory.jpg" alt="New Durabook S14, S15, and Z14 Rugged Laptops" width="250" height="250"
+                /></a>
+                <a href="https://www.bobjohnson.com/new-rugged-durabook-laptops/" class="homepage-category-button button button--primary">Durabook Laptops</a>
+              </div>
+              <div class="item card card--boxed">
+                <a href="https://www.bobjohnson.com/new-rugged-tablets/"
+                  ><img src="https://www.bobjohnson.com/product_images/uploaded_images/durabooktbltcategory.jpg" alt="New U11, R11, and R8 Durabook Rugged Tablets" width="250" height="250"
+                /></a>
+                <a href="https://www.bobjohnson.com/new-rugged-tablets/" class="homepage-category-button button button--primary">Durabook Tablets</a>
+              </div>
+              <div class="item card card--boxed">
+                <a href="https://www.bobjohnson.com/vehicle-mounts/?_bc_fsnf=1&brand=39"
+                  ><img src="https://www.bobjohnson.com/product_images/uploaded_images/rammountcategory.jpg" alt="No-Drill Vehicle RAM Mounts" width="250" height="250"
+                /></a>
+                <a href="https://www.bobjohnson.com/vehicle-mounts/?_bc_fsnf=1&brand=39" class="homepage-category-button button button--primary">RAM Mounts</a>
+              </div>
+              <div class="item card card--boxed">
+                <a href="https://www.bobjohnson.com/mobile-rugged-printers/"
+                  ><img src="https://www.bobjohnson.com/product_images/uploaded_images/brotherprintercategory.jpg" alt="Mobile Printers by Brother and Seiko" width="250" height="250"
+                /></a>
+                <a href="https://www.bobjohnson.com/mobile-rugged-printers/" class="homepage-category-button button button--primary">Rugged Mobile Printers</a>
+              </div>
             </div>
-
-        </section>
+          </div>
+          <button class="blaze-prev" aria-label="Previous">
+            <span class="icon"
+              ><svg><use href="#icon-arrow-left-long"></use></svg
+            ></span>
+          </button>
+          <button class="blaze-next" aria-label="Next">
+            <span class="icon"
+              ><svg><use href="#icon-arrow-right-long"></use></svg
+            ></span>
+          </button>
+        </div>
+      </section>
     </div>
-    </div>
-    {{> components/eyeva/section section=theme_settings.home_s2}}
-    {{{region name="home_below_section2"}}}
-    {{> components/eyeva/section section=theme_settings.home_s4}}
-    {{{region name="home_below_section4"}}}
-    {{> components/eyeva/section section=theme_settings.home_s5}}
-    {{{region name="home_below_section5"}}}
-    {{> components/eyeva/section section=theme_settings.home_s3}}
-    {{{region name="home_below_section3"}}}
-    <!--{{> components/eyeva/section section=theme_settings.home_s1}}-->    
+  </div>
+  {{> components/eyeva/section section=theme_settings.home_s2}} {{{region name="home_below_section2"}}} {{> components/eyeva/section section=theme_settings.home_s4}} {{{region
+  name="home_below_section4"}}} {{> components/eyeva/section section=theme_settings.home_s5}} {{{region name="home_below_section5"}}} {{> components/eyeva/section section=theme_settings.home_s3}}
+  {{{region name="home_below_section3"}}}
+  <!--{{> components/eyeva/section section=theme_settings.home_s1}}-->
 
-    {{> components/eyeva/section section=theme_settings.home_s6}}
-    {{{region name="home_below_section6"}}}
-    {{> components/eyeva/section section=theme_settings.home_s7}}
-    {{{region name="home_below_section7"}}}
-    {{> components/eyeva/section section=theme_settings.home_s8}}
-    {{{region name="home_below_section8"}}}
-    {{> components/eyeva/section section=theme_settings.home_s9}}
-    {{{region name="home_below_section9"}}}
+  {{> components/eyeva/section section=theme_settings.home_s6}} {{{region name="home_below_section6"}}} {{> components/eyeva/section section=theme_settings.home_s7}} {{{region
+  name="home_below_section7"}}} {{> components/eyeva/section section=theme_settings.home_s8}} {{{region name="home_below_section8"}}} {{> components/eyeva/section section=theme_settings.home_s9}}
+  {{{region name="home_below_section9"}}}
 </div>
-{{/partial}}
-{{> layout/base}}
+{{/partial}} {{> layout/base}}
