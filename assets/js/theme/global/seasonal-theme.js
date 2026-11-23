@@ -228,9 +228,8 @@ function resolveSeasonFromDate(now) {
     }
 
     const cyberMondayWeekStart = new Date(blackFridayWeek.monday);
-    const cyberMondayWeekEnd = new Date(blackFridayWeek.sunday);
     cyberMondayWeekStart.setDate(cyberMondayWeekStart.getDate() + 7);
-    cyberMondayWeekEnd.setDate(cyberMondayWeekEnd.getDate() + 7);
+    const cyberMondayWeekEnd = new Date(cyberMondayWeekStart);
     if (isBetweenInclusive(now, cyberMondayWeekStart, cyberMondayWeekEnd)) {
         return 'cyber-monday-sale';
     }

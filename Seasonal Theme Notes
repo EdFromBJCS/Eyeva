@@ -37,7 +37,7 @@ Note:
 | Veterans Day                | Nov 11 only (Independence Day colors)                                        | `?season=veterans-day`                |
 | Thanksgiving                | 4th Thursday in November, that day only (wins over Black Friday week)        | `?season=thanksgiving`                |
 | Black Friday Sale           | Monday-Sunday week containing Black Friday                                   | `?season=black-friday-sale`           |
-| Cyber Monday Sale           | Monday-Sunday week immediately after Black Friday week                       | `?season=cyber-monday-sale`           |
+| Cyber Monday Sale           | Monday immediately after Black Friday week                                   | `?season=cyber-monday-sale`           |
 | Christmas                   | Dec 22 through Dec 26                                                        | `?season=christmas`                   |
 | Default (no holiday)        | Any other date                                                               | `?season=default`                     |
 
