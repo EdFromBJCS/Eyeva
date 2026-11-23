@@ -52,13 +52,17 @@
 [data-content-region="header_top"],
 [data-content-region="header_top--global"],
 [data-content-region="header_top_holiday--global"],
+[data-content-region="header_top_holiday2--global"],
+[data-content-region="header_top_holiday3--global"],
 .banners--top {
   @extend %eyeva-top-banners;
 }
 
-// Seasonal top banner (region "header_top_holiday--global"): hidden unless a widget is placed in it
-// during the season, in which case it replaces the regular global top banner.
-.header-top-holiday {
+// Seasonal top banners: hidden unless a widget is placed in them
+// during the season, in which case they replace the regular global top banner.
+.header-top-holiday,
+.header-top-holiday2,
+.header-top-holiday3 {
   display: none;
 }
 
@@ -68,6 +72,26 @@ body.season-black-friday-sale {
   }
 
   &:has(.header-top-holiday [data-widget-id]) [data-content-region="header_top--global"] {
+    display: none;
+  }
+}
+
+body.season-thanksgiving {
+  .header-top-holiday2:has([data-widget-id]) {
+    display: block;
+  }
+
+  &:has(.header-top-holiday2 [data-widget-id]) [data-content-region="header_top--global"] {
+    display: none;
+  }
+}
+
+body.season-cyber-monday-sale {
+  .header-top-holiday3:has([data-widget-id]) {
+    display: block;
+  }
+
+  &:has(.header-top-holiday3 [data-widget-id]) [data-content-region="header_top--global"] {
     display: none;
   }
 }

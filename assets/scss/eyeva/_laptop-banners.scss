@@ -95,9 +95,19 @@
         grid-area: banner;
     }
 
-    // Seasonal hero carousel (region "home_above_sections_holiday"), swapped in by body.season-* class.
+    // Seasonal hero carousels (regions "home_above_sections_holiday", "home_above_sections_holiday2", "home_above_sections_holiday3"), swapped in by body.season-* class.
     // To add another season, append its body class to the selector lists below.
     .hero-banner-holiday {
+        display: none;
+        grid-area: banner;
+    }
+
+    .hero-banner-holiday2 {
+        display: none;
+        grid-area: banner;
+    }
+
+    .hero-banner-holiday3 {
         display: none;
         grid-area: banner;
     }
@@ -111,6 +121,32 @@ body.season-black-friday-sale {
         }
 
         &:has(.hero-banner-holiday [data-widget-id]) .hero-banner {
+            display: none;
+        }
+    }
+}
+
+body.season-thanksgiving {
+    .home-page-hero-layout {
+        // Only swap when a widget is placed in the holiday region; empty region = regular banner stays.
+        .hero-banner-holiday2:has([data-widget-id]) {
+            display: block;
+        }
+
+        &:has(.hero-banner-holiday2 [data-widget-id]) .hero-banner {
+            display: none;
+        }
+    }
+}
+
+body.season-cyber-monday-sale {
+    .home-page-hero-layout {
+        // Only swap when a widget is placed in the holiday region; empty region = regular banner stays.
+        .hero-banner-holiday3:has([data-widget-id]) {
+            display: block;
+        }
+
+        &:has(.hero-banner-holiday3 [data-widget-id]) .hero-banner {
             display: none;
         }
     }
